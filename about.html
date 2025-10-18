@@ -1,37 +1,113 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>About — Curated Design Studio</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script>tailwind.config = { theme: { extend: { colors: { primary:'#4f46e5', secondary:'#10b981' }}}}</script>
-<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" defer></script>
-<link rel="stylesheet" href="/assets/css/styles.css" />
-</head>
-<body class="bg-white font-inter">
-<nav class="bg-white/80 backdrop-blur border-b border-gray-100 sticky top-0 z-50">
-<div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-<a href="/" class="flex items-center"><i data-feather="box" class="text-primary h-6 w-6"></i><span class="ml-2 font-bold">Curated</span></a>
-<div class="hidden md:flex gap-4">
-<a href="/projects.html" class="nav-link">Projects</a>
-<a href="/about.html" class="nav-link active">About</a>
-</div>
-</div>
-</nav>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>About — Curated Design Studio</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: { colors: { ring: "rgba(255,255,255,.12)" } },
+                },
+            };
+        </script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"
+            defer
+        ></script>
+        <link rel="stylesheet" href="/assets/css/styles.css" />
+    </head>
+    <body class="bg-[#121212] text-[#f2f2f2] font-inter">
+        <!-- Shared header -->
+        <header
+            class="fixed inset-x-0 top-0 z-50 bg-black/50 backdrop-blur border-b border-white/10"
+        >
+            <nav class="max-w-7xl mx-auto px-4 h-16 flex items-center gap-6">
+                <a href="/" class="flex items-center"
+                    ><i data-feather="box" class="h-6 w-6"></i
+                    ><span class="ml-2 font-semibold">Curated</span></a
+                >
+                <ul class="ml-auto hidden md:flex items-center gap-1">
+                    <li class="group relative">
+                        <a class="nav-link-dark" href="#"
+                            >Work <span class="chev"></span
+                        ></a>
+                        <div class="dropdown-dark">
+                            <a
+                                class="dd-link-dark"
+                                href="/projects.html#residential"
+                                >Residential</a
+                            >
+                            <a
+                                class="dd-link-dark"
+                                href="/projects.html#hospitality"
+                                >Hospitality</a
+                            >
+                            <a
+                                class="dd-link-dark"
+                                href="/projects.html#commercial"
+                                >Commercial</a
+                            >
+                        </div>
+                    </li>
+                    <li class="group relative">
+                        <a class="nav-link-dark" href="#"
+                            >Studio <span class="chev"></span
+                        ></a>
+                        <div class="dropdown-dark">
+                            <a class="dd-link-dark" href="/about.html#about"
+                                >About</a
+                            >
+                            <a class="dd-link-dark" href="/about.html#approach"
+                                >Approach</a
+                            >
+                            <a class="dd-link-dark" href="/about.html#press"
+                                >Press</a
+                            >
+                        </div>
+                    </li>
+                    <li>
+                        <a
+                            class="nav-link-dark"
+                            href="mailto:hello@curateddesign.studio"
+                            >Contact</a
+                        >
+                    </li>
+                </ul>
+                <button
+                    id="menuBtn"
+                    class="md:hidden w-10 h-10 grid place-items-center rounded-xl border border-white/15"
+                >
+                    ≡
+                </button>
+            </nav>
+            <div id="mobileNav" class="mobile-panel-dark">
+                <a href="/projects.html#residential">Residential</a>
+                <a href="/projects.html#hospitality">Hospitality</a>
+                <a href="/projects.html#commercial">Commercial</a>
+                <hr class="border-white/10 my-1" />
+                <a href="/about.html#about">About</a>
+                <a href="/about.html#approach">Approach</a>
+                <a href="/about.html#press">Press</a>
+                <hr class="border-white/10 my-1" />
+                <a href="mailto:hello@curateddesign.studio">Contact</a>
+            </div>
+        </header>
 
+        <main class="max-w-3xl mx-auto px-4 pt-28 pb-24">
+            <h1 id="about" class="text-3xl font-extrabold">About</h1>
+            <p class="mt-4 text-white/80 leading-relaxed">
+                Curated Design Studio crafts interiors that balance function and
+                feeling. Replace this copy with your practice’s biography,
+                awards, and approach.
+            </p>
+        </main>
 
-<main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-<h1 class="text-3xl font-extrabold text-gray-900">About</h1>
-<p class="mt-4 text-gray-700 leading-relaxed">Curated Design Studio crafts interiors that balance function and feeling. Replace this copy with your practice’s biography, awards, and approach. Keep it concise; link to press or CV if needed.</p>
-</main>
+        <footer class="max-w-7xl mx-auto px-4 text-sm text-white/60 pb-16">
+            © <span id="year"></span> Curated Design Studio.
+        </footer>
 
-
-<footer class="bg-gray-50 mt-16">
-<div class="max-w-7xl mx-auto py-8 px-4 text-center text-sm text-gray-500">© <span id="year"></span> Curated Design Studio.</div>
-</footer>
-
-
-<script src="/assets/js/main.js" defer></script>
-</body>
+        <script src="/assets/js/main.js" defer></script>
+    </body>
 </html>

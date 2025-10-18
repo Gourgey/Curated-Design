@@ -1,52 +1,117 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Projects — Curated Design Studio</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script>tailwind.config = { theme: { extend: { colors: { primary:'#4f46e5', secondary:'#10b981' }}}}</script>
-<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" defer></script>
-<link rel="stylesheet" href="/assets/css/styles.css" />
-</head>
-<body class="bg-white font-inter">
-<nav class="bg-white/80 backdrop-blur border-b border-gray-100 sticky top-0 z-50">
-<div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-<a href="/" class="flex items-center"><i data-feather="box" class="text-primary h-6 w-6"></i><span class="ml-2 font-bold">Curated</span></a>
-<div class="hidden md:flex gap-4">
-<a href="/projects.html" class="nav-link active">Projects</a>
-<a href="/about.html" class="nav-link">About</a>
-</div>
-</div>
-</nav>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Projects — Curated Design Studio</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"
+            defer
+        ></script>
+        <link rel="stylesheet" href="/assets/css/styles.css" />
+    </head>
+    <body class="bg-[#121212] text-[#f2f2f2] font-inter">
+        <!-- Shared header -->
+        <header
+            class="fixed inset-x-0 top-0 z-50 bg-black/50 backdrop-blur border-b border-white/10"
+        >
+            <nav class="max-w-7xl mx-auto px-4 h-16 flex items-center gap-6">
+                <a href="/" class="flex items-center"
+                    ><i data-feather="box" class="h-6 w-6"></i
+                    ><span class="ml-2 font-semibold">Curated</span></a
+                >
+                <ul class="ml-auto hidden md:flex items-center gap-1">
+                    <li class="group relative">
+                        <a class="nav-link-dark" href="#"
+                            >Work <span class="chev"></span
+                        ></a>
+                        <div class="dropdown-dark">
+                            <a class="dd-link-dark" href="#residential"
+                                >Residential</a
+                            >
+                            <a class="dd-link-dark" href="#hospitality"
+                                >Hospitality</a
+                            >
+                            <a class="dd-link-dark" href="#commercial"
+                                >Commercial</a
+                            >
+                        </div>
+                    </li>
+                    <li class="group relative">
+                        <a class="nav-link-dark" href="#"
+                            >Studio <span class="chev"></span
+                        ></a>
+                        <div class="dropdown-dark">
+                            <a class="dd-link-dark" href="/about.html#about"
+                                >About</a
+                            >
+                            <a class="dd-link-dark" href="/about.html#approach"
+                                >Approach</a
+                            >
+                            <a class="dd-link-dark" href="/about.html#press"
+                                >Press</a
+                            >
+                        </div>
+                    </li>
+                    <li>
+                        <a
+                            class="nav-link-dark"
+                            href="mailto:hello@curateddesign.studio"
+                            >Contact</a
+                        >
+                    </li>
+                </ul>
+                <button
+                    id="menuBtn"
+                    class="md:hidden w-10 h-10 grid place-items-center rounded-xl border border-white/15"
+                >
+                    ≡
+                </button>
+            </nav>
+            <div id="mobileNav" class="mobile-panel-dark">
+                <a href="#residential">Residential</a>
+                <a href="#hospitality">Hospitality</a>
+                <a href="#commercial">Commercial</a>
+                <hr class="border-white/10 my-1" />
+                <a href="/about.html#about">About</a>
+                <a href="/about.html#approach">Approach</a>
+                <a href="/about.html#press">Press</a>
+                <hr class="border-white/10 my-1" />
+                <a href="mailto:hello@curateddesign.studio">Contact</a>
+            </div>
+        </header>
 
+        <main class="max-w-7xl mx-auto px-4 pt-28 pb-24">
+            <h1 class="text-3xl font-extrabold">Projects</h1>
+            <p class="mt-2 text-white/70">Selected interiors and objects.</p>
 
-<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-<h1 class="text-3xl font-extrabold text-gray-900">Projects</h1>
-<p class="mt-2 text-gray-600">Selected interiors and objects.</p>
+            <section
+                id="residential"
+                class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+            >
+                <article
+                    class="rounded-xl overflow-hidden bg-[#1b1b1b] border border-white/10"
+                >
+                    <a href="#"
+                        ><img
+                            src="https://picsum.photos/800/600?1"
+                            class="w-full h-56 object-cover"
+                            alt=""
+                        />
+                        <div class="p-5">
+                            <h2 class="text-lg font-semibold">Project Name</h2>
+                            <p class="text-sm text-white/60">Location · Year</p>
+                        </div></a
+                    >
+                </article>
+            </section>
+        </main>
 
+        <footer class="max-w-7xl mx-auto px-4 text-sm text-white/60 pb-16">
+            © <span id="year"></span> Curated Design Studio.
+        </footer>
 
-<section class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-<!-- Repeat these cards for each project -->
-<article class="card-hover bg-gray-50 rounded-xl overflow-hidden">
-<a href="#">
-<img src="https://picsum.photos/800/600" alt="Project cover" class="w-full h-56 object-cover" />
-<div class="p-5">
-<h2 class="text-lg font-semibold">Project Name</h2>
-<p class="text-sm text-gray-500">Location · Year</p>
-</div>
-</a>
-</article>
-<!-- /card -->
-</section>
-</main>
-
-
-<footer class="bg-gray-50 mt-16">
-<div class="max-w-7xl mx-auto py-8 px-4 text-center text-sm text-gray-500">© <span id="year"></span> Curated Design Studio.</div>
-</footer>
-
-
-<script src="/assets/js/main.js" defer></script>
-</body>
+        <script src="/assets/js/main.js" defer></script>
+    </body>
 </html>

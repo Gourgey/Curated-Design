@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Projects — Curated Design Studio</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config = { theme: { extend: { colors: { primary:'#4f46e5', secondary:'#10b981' }}}}</script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" defer></script>
+<link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body class="bg-white font-inter">
+<nav class="bg-white/80 backdrop-blur border-b border-gray-100 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+<a href="/" class="flex items-center"><i data-feather="box" class="text-primary h-6 w-6"></i><span class="ml-2 font-bold">Curated</span></a>
+<div class="hidden md:flex gap-4">
+<a href="/projects.html" class="nav-link active">Projects</a>
+<a href="/about.html" class="nav-link">About</a>
+</div>
+</div>
+</nav>
+
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<h1 class="text-3xl font-extrabold text-gray-900">Projects</h1>
+<p class="mt-2 text-gray-600">Selected interiors and objects.</p>
+
+
+<section class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+<!-- Repeat these cards for each project -->
+<article class="card-hover bg-gray-50 rounded-xl overflow-hidden">
+<a href="#">
+<img src="https://picsum.photos/800/600" alt="Project cover" class="w-full h-56 object-cover" />
+<div class="p-5">
+<h2 class="text-lg font-semibold">Project Name</h2>
+<p class="text-sm text-gray-500">Location · Year</p>
+</div>
+</a>
+</article>
+<!-- /card -->
+</section>
+</main>
+
+
+<footer class="bg-gray-50 mt-16">
+<div class="max-w-7xl mx-auto py-8 px-4 text-center text-sm text-gray-500">© <span id="year"></span> Curated Design Studio.</div>
+</footer>
+
+
+<script src="/assets/js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://curateddesign.studio/public/sitemap.xml

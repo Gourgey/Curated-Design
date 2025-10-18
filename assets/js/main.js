@@ -31,6 +31,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const dots = document.getElementById("dots");
   const prev = document.getElementById("prev");
   const next = document.getElementById("next");
+
   if (track && dots && prev && next) {
     const slides = Array.from(track.children);
     let index = 0;
@@ -81,4 +82,15 @@ window.addEventListener("DOMContentLoaded", () => {
       );
     });
   }
-});
+
+  // Header style on scroll (adds subtle line)
+  const header = document.getElementById("siteHeader");
+  if (header) {
+    const toggleHeader = () => {
+      if (window.scrollY > 8) header.classList.add("scrolled");
+      else header.classList.remove("scrolled");
+    };
+    toggleHeader();
+    window.addEventListener("scroll", toggleHeader, { passive: true });
+  }
+}); // end DOMContentLoaded

@@ -118,12 +118,27 @@ body {
 }
 
 /* Carousel dock */
-.dock-dark {
+/* Header (same color as page background, subtle line on scroll) */
+.site-header {
     position: fixed;
-    left: 50%;
-    bottom: 32px;
-    transform: translateX(-50%);
+    inset: 0 0 auto 0;
+    z-index: 50;
+    background: var(--bg);
+    border-bottom: 1px solid transparent;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+.site-header.scrolled {
+    border-color: var(--ring);
+    background: rgba(18, 18, 18, 0.92);
+    backdrop-filter: saturate(120%) blur(6px);
+}
+
+/* In-flow portfolio panel (Squarespace-style) */
+.dock-panel {
     width: min(1100px, calc(100% - 32px));
+    margin: clamp(20px, 6vh, 56px) auto 120px;
     background: linear-gradient(
         180deg,
         rgba(255, 255, 255, 0.03),
@@ -133,8 +148,17 @@ body {
     border-radius: 22px;
     padding: 14px;
     box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
-    z-index: 30;
 }
+
+/* On wider screens, overlap hero slightly */
+@media (min-width: 900px) {
+    .dock-panel {
+        margin-top: -60px;
+    }
+}
+
+/* Carousel (unchanged, you can keep your existing .track, .slide, .ctrl, .dots rules below this if you like) */
+
 .track {
     display: flex;
     transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);

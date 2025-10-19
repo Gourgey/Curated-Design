@@ -1,88 +1,192 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Curated Design Studio</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Curated Design Studio</title>
 
+        <!-- Tailwind (CDN) -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: { colors: { ring: "rgba(255,255,255,.12)" } },
+                },
+            };
+        </script>
 
-<!-- Tailwind (CDN) -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config = { theme: { extend: { colors: { ring:'rgba(255,255,255,.12)'}}}};
-</script>
-<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" defer></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/styles.css" />
-</head>
-<body class="min-h-screen bg-[#0e0e0e] text-[#f2f2f2] font-inter">
+        <!-- Icons + Fonts + Styles -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"
+            defer
+        ></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/assets/css/styles.css" />
+    </head>
+    <body class="min-h-screen bg-[#0e0e0e] text-[#f2f2f2] font-inter">
+        <!-- Header (transparent at top, blends on scroll) -->
+        <header id="siteHeader" class="site-header">
+            <nav class="max-w-7xl mx-auto px-4 h-16 flex items-center gap-6">
+                <a href="/" class="flex items-center">
+                    <i data-feather="box" class="h-6 w-6"></i
+                    ><span class="ml-2 font-semibold tracking-wide"
+                        >Curated</span
+                    >
+                </a>
 
+                <ul class="ml-auto hidden md:flex items-center gap-1">
+                    <li class="group relative">
+                        <a class="nav-link-dark" href="#"
+                            >Work <span class="chev"></span
+                        ></a>
+                        <div class="dropdown-dark">
+                            <a
+                                class="dd-link-dark"
+                                href="/projects.html#residential"
+                                >Residential</a
+                            >
+                            <a
+                                class="dd-link-dark"
+                                href="/projects.html#hospitality"
+                                >Hospitality</a
+                            >
+                            <a
+                                class="dd-link-dark"
+                                href="/projects.html#commercial"
+                                >Commercial</a
+                            >
+                        </div>
+                    </li>
+                    <li class="group relative">
+                        <a class="nav-link-dark" href="#"
+                            >Studio <span class="chev"></span
+                        ></a>
+                        <div class="dropdown-dark">
+                            <a class="dd-link-dark" href="/about.html#about"
+                                >About</a
+                            >
+                            <a class="dd-link-dark" href="/about.html#approach"
+                                >Approach</a
+                            >
+                            <a class="dd-link-dark" href="/about.html#press"
+                                >Press</a
+                            >
+                        </div>
+                    </li>
+                    <li>
+                        <a
+                            class="nav-link-dark"
+                            href="mailto:hello@curateddesign.studio"
+                            >Contact</a
+                        >
+                    </li>
+                </ul>
 
-<!-- Header: transparent at top, blends with bg -->
-<header id="siteHeader" class="site-header">
-<nav class="max-w-7xl mx-auto px-4 h-16 flex items-center gap-6">
-<a href="/" class="flex items-center"><i data-feather="box" class="h-6 w-6"></i><span class="ml-2 font-semibold tracking-wide">Curated</span></a>
-<ul class="ml-auto hidden md:flex items-center gap-1">
-<li class="group relative">
-<a class="nav-link-dark" href="#">Work <span class="chev"></span></a>
-<div class="dropdown-dark">
-<a class="dd-link-dark" href="/projects.html#residential">Residential</a>
-<a class="dd-link-dark" href="/projects.html#hospitality">Hospitality</a>
-<a class="dd-link-dark" href="/projects.html#commercial">Commercial</a>
-</div>
-</li>
-<li class="group relative">
-<a class="nav-link-dark" href="#">Studio <span class="chev"></span></a>
-<div class="dropdown-dark">
-<a class="dd-link-dark" href="/about.html#about">About</a>
-<a class="dd-link-dark" href="/about.html#approach">Approach</a>
-<a class="dd-link-dark" href="/about.html#press">Press</a>
-</div>
-</li>
-<li><a class="nav-link-dark" href="mailto:hello@curateddesign.studio">Contact</a></li>
-</ul>
-<button id="menuBtn" class="md:hidden w-10 h-10 grid place-items-center rounded-xl border border-white/15">≡</button>
-</nav>
-<div id="mobileNav" class="mobile-panel-dark">
-<a href="/projects.html#residential">Residential</a>
-<a href="/projects.html#hospitality">Hospitality</a>
-<a href="/projects.html#commercial">Commercial</a>
-<hr class="border-white/10 my-1">
-<a href="/about.html#about">About</a>
-<a href="/about.html#approach">Approach</a>
-<a href="/about.html#press">Press</a>
-<hr class="border-white/10 my-1">
-<a href="mailto:hello@curateddesign.studio">Contact</a>
-</div>
-</header>
+                <button
+                    id="menuBtn"
+                    class="md:hidden w-10 h-10 grid place-items-center rounded-xl border border-white/15"
+                >
+                    ≡
+                </button>
+            </nav>
 
+            <!-- Mobile -->
+            <div id="mobileNav" class="mobile-panel-dark">
+                <a href="/projects.html#residential">Residential</a>
+                <a href="/projects.html#hospitality">Hospitality</a>
+                <a href="/projects.html#commercial">Commercial</a>
+                <hr class="border-white/10 my-1" />
+                <a href="/about.html#about">About</a>
+                <a href="/about.html#approach">Approach</a>
+                <a href="/about.html#press">Press</a>
+                <hr class="border-white/10 my-1" />
+                <a href="mailto:hello@curateddesign.studio">Contact</a>
+            </div>
+        </header>
 
-<!-- Hero with vignette + soft noise overlay, light-weight type, fade-up -->
-<main class="pt-28 pb-24">
-<section class="hero">
-<div class="hero-overlay"></div>
-<div class="max-w-[1150px] mx-auto px-4 hero-inner">
-<p class="kicker">Websites</p>
-<h1 class="headline">Considered interiors<br/> crafted for how you live.</h1>
-<p class="subhead">A London‑based interior design studio shaping distinctive residential and hospitality spaces with calm palettes, tactile materials, and thoughtful details.</p>
-<p class="mt-12 text-white/50 text-sm">© <span id="year"></span> Curated Design Studio.</p>
-</div>
-</section>
+        <main class="pt-28 pb-24">
+            <!-- Hero (centered, light-weight type, vignette) -->
+            <section class="hero">
+                <div class="hero-overlay"></div>
+                <div class="max-w-[1150px] mx-auto px-4 hero-inner text-center">
+                    <h1 class="headline">
+                        Considered interiors crafted for how you live.
+                    </h1>
+                    <p class="subhead mx-auto">
+                        A London-based interior design studio shaping
+                        distinctive residential and hospitality spaces with calm
+                        palettes, tactile materials, and thoughtful details.
+                    </p>
+                </div>
+            </section>
 
+            <!-- Pill menu (above carousel) -->
+            <nav class="pillmenu-wrap">
+                <ul class="pillmenu" role="tablist" aria-label="Quick filters">
+                    <li>
+                        <a href="#portfolio" class="pill active" role="tab"
+                            >Templates</a
+                        >
+                    </li>
+                    <li>
+                        <a href="#portfolio" class="pill" role="tab"
+                            >Design Intelligence</a
+                        >
+                    </li>
+                    <li>
+                        <a href="#portfolio" class="pill" role="tab"
+                            >Creative Tools</a
+                        >
+                    </li>
+                    <li>
+                        <a href="#portfolio" class="pill" role="tab"
+                            >SEO &amp; Analytics</a
+                        >
+                    </li>
+                </ul>
+            </nav>
 
-<!-- In‑flow portfolio panel that kisses the hero bottom edge -->
-<section id="portfolio" class="dock-panel animate-in" aria-label="Portfolio carousel">
-<div class="flex items-center justify-between px-2 pb-2">
-<div class="text-white/70 text-sm font-medium">Selected projects</div>
-<div class="text-white/40 text-xs">Replace with your images</div>
-</div>
-<div class="relative overflow-hidden rounded-xl">
-<div class="track" id="track">
-<div class="slide"><img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1600&auto=format&fit=crop" alt="Living room"/></div>
-<div class="slide"><img src="https://images.unsplash.com/photo-1505691723518-36a5ac3b2d95?q=80&w=1600&auto=format&fit=crop" alt="Bedroom"/></div>
-<div class="slide"><img src="https://images.unsplash.com/photo-1549187774-b4e9b0445b41?q=80&w=1600&auto=format&fit=crop" alt="Kitchen"/></div>
-</div>
-<button class="ctrl prev" id="prev" aria-label="Previous">‹</button>
-<button class="ctrl next" id="next" aria-label="Next">›</button>
-</div>
+            <!-- Portfolio panel (narrower, lower, thin border, no labels inside) -->
+            <section
+                id="portfolio"
+                class="dock-panel narrow animate-in"
+                aria-label="Portfolio carousel"
+            >
+                <div class="relative overflow-hidden rounded-xl">
+                    <div class="track" id="track">
+                        <div class="slide">
+                            <img
+                                src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1600&auto=format&fit=crop"
+                                alt="Living room"
+                            />
+                        </div>
+                        <div class="slide">
+                            <img
+                                src="https://images.unsplash.com/photo-1505691723518-36a5ac3b2d95?q=80&w=1600&auto=format&fit=crop"
+                                alt="Bedroom"
+                            />
+                        </div>
+                        <div class="slide">
+                            <img
+                                src="https://images.unsplash.com/photo-1549187774-b4e9b0445b41?q=80&w=1600&auto=format&fit=crop"
+                                alt="Kitchen"
+                            />
+                        </div>
+                    </div>
+                    <button class="ctrl prev" id="prev" aria-label="Previous">
+                        ‹
+                    </button>
+                    <button class="ctrl next" id="next" aria-label="Next">
+                        ›
+                    </button>
+                </div>
+                <div id="dots" class="dots"></div>
+            </section>
+        </main>
+
+        <script src="/assets/js/main.js" defer></script>
+    </body>
 </html>

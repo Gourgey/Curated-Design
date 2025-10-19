@@ -30,7 +30,7 @@ a {
     text-decoration: none;
 }
 
-/* Header: transparent at top */
+/* Header */
 .site-header {
     position: fixed;
     inset: 0 0 auto 0;
@@ -39,8 +39,7 @@ a {
     border-bottom: 1px solid transparent;
     transition:
         background 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
+        border-color 0.3s ease;
 }
 .site-header.scrolled {
     background: rgba(14, 14, 14, 0.92);
@@ -48,7 +47,7 @@ a {
     border-color: var(--ring);
 }
 
-/* Nav building blocks */
+/* Nav */
 .nav-link-dark {
     display: flex;
     align-items: center;
@@ -56,7 +55,7 @@ a {
     padding: 10px 12px;
     border-radius: 12px;
     color: var(--ink);
-    transition: background 0.2s ease;
+    transition: background 0.2s;
 }
 .nav-link-dark:hover {
     background: rgba(255, 255, 255, 0.06);
@@ -67,7 +66,7 @@ a {
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 6px solid #9ca3af;
-    transition: transform 0.18s ease;
+    transition: transform 0.18s;
 }
 .group:hover .chev {
     transform: rotate(180deg);
@@ -86,8 +85,8 @@ a {
     visibility: hidden;
     transform: translateY(8px);
     transition:
-        opacity 0.2s ease,
-        transform 0.2s ease,
+        opacity 0.2s,
+        transform 0.2s,
         visibility 0.2s;
 }
 .group:hover .dropdown-dark,
@@ -133,19 +132,19 @@ a {
     display: block;
 }
 
-/* Hero: vignette + subtle noise + fade-up type */
+/* Hero (centered type, vignette & soft noise) */
 .hero {
     position: relative;
-    min-height: 56vh;
+    min-height: 58vh;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
 }
 .hero-overlay {
     position: absolute;
     inset: 0;
     background:
         radial-gradient(
-            120% 80% at 50% 10%,
+            120% 80% at 50% -10%,
             rgba(255, 255, 255, 0.06) 0%,
             rgba(255, 255, 255, 0.02) 35%,
             transparent 60%
@@ -157,7 +156,6 @@ a {
         );
     pointer-events: none;
 }
-/* optional soft noise using a gradient trick */
 .hero::after {
     content: "";
     position: absolute;
@@ -168,26 +166,20 @@ a {
         transparent 1px 2px
     );
     mix-blend-mode: overlay;
-    opacity: 0.35;
+    opacity: 0.25;
     pointer-events: none;
 }
-.kicker {
-    color: #9aa0a6;
-    text-transform: uppercase;
-    letter-spacing: 0.28em;
-    font-size: 0.78rem;
-    opacity: 0.9;
-}
 .headline {
-    margin: 0.4rem 0 0.6rem;
-    font-size: clamp(42px, 6vw, 92px);
+    margin: 0.4rem auto 0.6rem;
+    max-width: 16ch;
+    font-size: clamp(44px, 6.2vw, 96px);
     font-weight: 400;
     letter-spacing: -0.02em;
-    line-height: 1.05;
-    filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.3));
+    line-height: 1.06;
+    text-wrap: balance;
 }
 .subhead {
-    max-width: 820px;
+    max-width: 780px;
     color: #d0d0d0;
     font-size: clamp(16px, 1.2vw, 20px);
 }
@@ -203,26 +195,53 @@ a {
     }
 }
 
-/* In‑flow panel that kisses hero */
+/* Pill menu */
+.pillmenu-wrap {
+    display: grid;
+    place-items: center;
+    margin: 28px 0 18px;
+}
+.pillmenu {
+    display: flex;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--ring);
+    padding: 6px;
+    border-radius: 999px;
+}
+.pill {
+    display: block;
+    padding: 8px 14px;
+    border-radius: 999px;
+    color: #d9d9d9;
+}
+.pill:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--ink);
+}
+.pill.active {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--ink);
+}
+
+/* Portfolio panel (narrower, lower, thin border, no inner labels) */
 .dock-panel {
-    width: min(1100px, calc(100% - 32px));
-    margin: -40px auto 120px;
+    width: min(900px, calc(100% - 32px));
+    margin: 20px auto 120px;
     background: linear-gradient(
         180deg,
-        rgba(255, 255, 255, 0.03),
-        rgba(255, 255, 255, 0.015)
+        rgba(255, 255, 255, 0.02),
+        rgba(255, 255, 255, 0.01)
     );
     border: 1px solid var(--ring);
     border-radius: 22px;
     padding: 14px;
     box-shadow:
-        0 60px 120px rgba(0, 0, 0, 0.7),
+        0 50px 110px rgba(0, 0, 0, 0.65),
         0 1px 0 rgba(255, 255, 255, 0.03) inset;
 }
-@media (max-width: 900px) {
-    .dock-panel {
-        margin: 24px auto 96px;
-    }
+.dock-panel.narrow {
+    width: min(860px, calc(100% - 40px));
 }
 
 /* Carousel */
@@ -257,5 +276,42 @@ a {
     display: grid;
     place-items: center;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: background 0.2s;
+}
+.ctrl:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+.prev {
+    left: 10px;
+}
+.next {
+    right: 10px;
+}
+.dots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    padding: 10px;
+}
+.dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #6b6b6b;
+    border: 1px solid var(--ring);
+}
+.dots .dot.active {
+    background: #d9d9d9;
+}
+
+/* Utility */
+.font-inter {
+    font-family:
+        "Inter",
+        system-ui,
+        -apple-system,
+        Segoe UI,
+        Roboto,
+        Arial,
+        sans-serif;
 }

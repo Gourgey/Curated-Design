@@ -132,7 +132,7 @@ a {
     display: block;
 }
 
-/* Hero (centered type, vignette & soft noise) */
+/* Hero (centered, vignette, light texture) */
 .hero {
     position: relative;
     min-height: 58vh;
@@ -214,6 +214,9 @@ a {
     padding: 8px 14px;
     border-radius: 999px;
     color: #d9d9d9;
+    border: none;
+    background: transparent;
+    cursor: pointer;
 }
 .pill:hover {
     background: rgba(255, 255, 255, 0.07);
@@ -224,10 +227,10 @@ a {
     color: var(--ink);
 }
 
-/* Portfolio panel (narrower, lower, thin border, no inner labels) */
+/* Portfolio panel (narrower, lower, thin border, no inner text) */
 .dock-panel {
     width: min(900px, calc(100% - 32px));
-    margin: 20px auto 120px;
+    margin: 28px auto 120px;
     background: linear-gradient(
         180deg,
         rgba(255, 255, 255, 0.02),
@@ -241,10 +244,18 @@ a {
         0 1px 0 rgba(255, 255, 255, 0.03) inset;
 }
 .dock-panel.narrow {
-    width: min(860px, calc(100% - 40px));
+    width: min(820px, calc(100% - 40px));
 }
 
 /* Carousel */
+.carousel {
+    position: relative;
+}
+.viewport {
+    overflow: hidden;
+    border-radius: 14px;
+    position: relative;
+}
 .track {
     display: flex;
     transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -255,7 +266,6 @@ a {
     background: #0f0f0f;
     display: grid;
     place-items: center;
-    border-radius: 14px;
     overflow: hidden;
 }
 .slide img {
@@ -263,12 +273,15 @@ a {
     height: 100%;
     object-fit: cover;
     display: block;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 .ctrl {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
+    z-index: 5; /* ensure on top of image */
+    background: rgba(0, 0, 0, 0.55);
     border: 1px solid var(--ring);
     width: 44px;
     height: 44px;
@@ -279,7 +292,7 @@ a {
     transition: background 0.2s;
 }
 .ctrl:hover {
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.08);
 }
 .prev {
     left: 10px;

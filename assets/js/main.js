@@ -2,17 +2,6 @@ window.addEventListener("DOMContentLoaded", () => {
   // Icons
   if (window.feather && feather.replace) feather.replace();
 
-  // Smooth in-page anchors
-  document.querySelectorAll('a[href^="#"]').forEach((a) => {
-    a.addEventListener("click", (e) => {
-      const t = document.querySelector(a.getAttribute("href"));
-      if (t) {
-        e.preventDefault();
-        t.scrollIntoView({ behavior: "smooth" });
-      }
-    });
-  });
-
   // Mobile menu
   const menuBtn = document.getElementById("menuBtn");
   const mobileNav = document.getElementById("mobileNav");
@@ -20,11 +9,12 @@ window.addEventListener("DOMContentLoaded", () => {
     menuBtn.addEventListener("click", () => {
       const open = !mobileNav.classList.contains("open");
       mobileNav.classList.toggle("open", open);
+      mobileNav.setAttribute("aria-hidden", String(!open));
       menuBtn.setAttribute("aria-expanded", String(open));
     });
   }
 
-  // Carousel
+  // Carousel — robust wiring
   const track = document.getElementById("track");
   const dots = document.getElementById("dots");
   const prev = document.getElementById("prev");
@@ -41,7 +31,8 @@ window.addEventListener("DOMContentLoaded", () => {
         .forEach((d, i) => d.classList.toggle("active", i === index));
     }
 
-    // dots
+    // build dots
+    dots.innerHTML = "";
     slides.forEach((_, i) => {
       const s = document.createElement("span");
       s.className = "dot" + (i === 0 ? " active" : "");
@@ -64,22 +55,26 @@ window.addEventListener("DOMContentLoaded", () => {
     next.addEventListener("click", nextSlide);
     prev.addEventListener("click", prevSlide);
 
+    // keyboard
     document.addEventListener("keydown", (e) => {
       if (e.key === "ArrowRight") nextSlide();
       if (e.key === "ArrowLeft") prevSlide();
     });
 
+    // autoplay with hover pause
     let autoplay = setInterval(nextSlide, 6000);
-    [track, prev, next].forEach((el) => {
-      el.addEventListener("mouseenter", () => clearInterval(autoplay));
-      el.addEventListener(
-        "mouseleave",
+    ["mouseenter", "touchstart"].forEach((evt) =>
+      track.addEventListener(evt, () => clearInterval(autoplay)),
+    );
+    ["mouseleave", "touchend"].forEach((evt) =>
+      track.addEventListener(
+        evt,
         () => (autoplay = setInterval(nextSlide, 6000)),
-      );
-    });
+      ),
+    );
   }
 
-  // Header style on scroll (transparent at top; material after a few px)
+  // Header behavior (transparent at top; material after a few px)
   const header = document.getElementById("siteHeader");
   if (header) {
     const toggle = () => {

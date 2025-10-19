@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Curated Design Studio</title>
 
         <!-- Tailwind (CDN) -->
@@ -27,7 +27,7 @@
         <link rel="stylesheet" href="/assets/css/styles.css" />
     </head>
     <body class="min-h-screen bg-[#0e0e0e] text-[#f2f2f2] font-inter">
-        <!-- Header (transparent at top, blends on scroll) -->
+        <!-- Header (transparent at top; blends on scroll) -->
         <header id="siteHeader" class="site-header">
             <nav class="max-w-7xl mx-auto px-4 h-16 flex items-center gap-6">
                 <a href="/" class="flex items-center">
@@ -94,7 +94,7 @@
             </nav>
 
             <!-- Mobile -->
-            <div id="mobileNav" class="mobile-panel-dark">
+            <div id="mobileNav" class="mobile-panel-dark" aria-hidden="true">
                 <a href="/projects.html#residential">Residential</a>
                 <a href="/projects.html#hospitality">Hospitality</a>
                 <a href="/projects.html#commercial">Commercial</a>
@@ -108,7 +108,7 @@
         </header>
 
         <main class="pt-28 pb-24">
-            <!-- Hero (centered, light-weight type, vignette) -->
+            <!-- Hero (centered) -->
             <section class="hero">
                 <div class="hero-overlay"></div>
                 <div class="max-w-[1150px] mx-auto px-4 hero-inner text-center">
@@ -123,67 +123,75 @@
                 </div>
             </section>
 
-            <!-- Pill menu (above carousel) -->
-            <nav class="pillmenu-wrap">
-                <ul class="pillmenu" role="tablist" aria-label="Quick filters">
+            <!-- Pill menu (above panel) -->
+            <nav class="pillmenu-wrap" aria-label="Quick filters">
+                <ul class="pillmenu">
                     <li>
-                        <a href="#portfolio" class="pill active" role="tab"
-                            >Templates</a
-                        >
+                        <button class="pill active" type="button">
+                            Templates
+                        </button>
                     </li>
                     <li>
-                        <a href="#portfolio" class="pill" role="tab"
-                            >Design Intelligence</a
-                        >
+                        <button class="pill" type="button">
+                            Design Intelligence
+                        </button>
                     </li>
                     <li>
-                        <a href="#portfolio" class="pill" role="tab"
-                            >Creative Tools</a
-                        >
+                        <button class="pill" type="button">
+                            Creative Tools
+                        </button>
                     </li>
                     <li>
-                        <a href="#portfolio" class="pill" role="tab"
-                            >SEO &amp; Analytics</a
-                        >
+                        <button class="pill" type="button">
+                            SEO &amp; Analytics
+                        </button>
                     </li>
                 </ul>
             </nav>
 
-            <!-- Portfolio panel (narrower, lower, thin border, no labels inside) -->
+            <!-- Portfolio panel (narrower, lower, thin border, no inner labels) -->
             <section
                 id="portfolio"
                 class="dock-panel narrow animate-in"
                 aria-label="Portfolio carousel"
             >
-                <div class="relative overflow-hidden rounded-xl">
-                    <div class="track" id="track">
-                        <div class="slide">
-                            <img
-                                src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1600&auto=format&fit=crop"
-                                alt="Living room"
-                            />
-                        </div>
-                        <div class="slide">
-                            <img
-                                src="https://images.unsplash.com/photo-1505691723518-36a5ac3b2d95?q=80&w=1600&auto=format&fit=crop"
-                                alt="Bedroom"
-                            />
-                        </div>
-                        <div class="slide">
-                            <img
-                                src="https://images.unsplash.com/photo-1549187774-b4e9b0445b41?q=80&w=1600&auto=format&fit=crop"
-                                alt="Kitchen"
-                            />
-                        </div>
-                    </div>
+                <div class="carousel">
                     <button class="ctrl prev" id="prev" aria-label="Previous">
                         ‹
                     </button>
+
+                    <div class="viewport">
+                        <div class="track" id="track">
+                            <div class="slide" aria-label="1 of 3">
+                                <img
+                                    draggable="false"
+                                    src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1600&auto=format&fit=crop"
+                                    alt="Living room"
+                                />
+                            </div>
+                            <div class="slide" aria-label="2 of 3">
+                                <img
+                                    draggable="false"
+                                    src="https://images.unsplash.com/photo-1505691723518-36a5ac3b2d95?q=80&w=1600&auto=format&fit=crop"
+                                    alt="Bedroom"
+                                />
+                            </div>
+                            <div class="slide" aria-label="3 of 3">
+                                <img
+                                    draggable="false"
+                                    src="https://images.unsplash.com/photo-1549187774-b4e9b0445b41?q=80&w=1600&auto=format&fit=crop"
+                                    alt="Kitchen"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
                     <button class="ctrl next" id="next" aria-label="Next">
                         ›
                     </button>
                 </div>
-                <div id="dots" class="dots"></div>
+
+                <div id="dots" class="dots" aria-hidden="false"></div>
             </section>
         </main>
 

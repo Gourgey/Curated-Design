@@ -1,21 +1,21 @@
-// Feather icons + year + smooth anchors
 window.addEventListener("DOMContentLoaded", () => {
+  // feather + year
   if (window.feather && feather.replace) feather.replace();
-
   const y = document.getElementById("year");
   if (y) y.textContent = new Date().getFullYear();
 
+  // smooth anchors
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
     a.addEventListener("click", (e) => {
-      const target = document.querySelector(a.getAttribute("href"));
-      if (target) {
+      const t = document.querySelector(a.getAttribute("href"));
+      if (t) {
         e.preventDefault();
-        target.scrollIntoView({ behavior: "smooth" });
+        t.scrollIntoView({ behavior: "smooth" });
       }
     });
   });
 
-  // Mobile menu
+  // mobile menu
   const menuBtn = document.getElementById("menuBtn");
   const mobileNav = document.getElementById("mobileNav");
   if (menuBtn && mobileNav) {
@@ -26,24 +26,20 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Carousel
+  // carousel
   const track = document.getElementById("track");
   const dots = document.getElementById("dots");
   const prev = document.getElementById("prev");
   const next = document.getElementById("next");
-
   if (track && dots && prev && next) {
     const slides = Array.from(track.children);
     let index = 0;
-
     function update() {
       track.style.transform = `translateX(-${index * 100}%)`;
       dots
         .querySelectorAll(".dot")
         .forEach((d, i) => d.classList.toggle("active", i === index));
     }
-
-    // dots
     slides.forEach((_, i) => {
       const s = document.createElement("span");
       s.className = "dot" + (i === 0 ? " active" : "");
@@ -53,7 +49,6 @@ window.addEventListener("DOMContentLoaded", () => {
       });
       dots.appendChild(s);
     });
-
     function nextSlide() {
       index = (index + 1) % slides.length;
       update();
@@ -62,17 +57,12 @@ window.addEventListener("DOMContentLoaded", () => {
       index = (index - 1 + slides.length) % slides.length;
       update();
     }
-
     next.addEventListener("click", nextSlide);
     prev.addEventListener("click", prevSlide);
-
-    // keyboard
     document.addEventListener("keydown", (e) => {
       if (e.key === "ArrowRight") nextSlide();
       if (e.key === "ArrowLeft") prevSlide();
     });
-
-    // auto-advance (pause on hover)
     let autoplay = setInterval(nextSlide, 6000);
     [track, prev, next].forEach((el) => {
       el.addEventListener("mouseenter", () => clearInterval(autoplay));
@@ -83,14 +73,25 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Header style on scroll (adds subtle line)
+  // header behavior: transparent at top, material on scroll
   const header = document.getElementById("siteHeader");
   if (header) {
-    const toggleHeader = () => {
+    const toggle = () => {
       if (window.scrollY > 8) header.classList.add("scrolled");
       else header.classList.remove("scrolled");
     };
-    toggleHeader();
-    window.addEventListener("scroll", toggleHeader, { passive: true });
+    toggle();
+    window.addEventListener("scroll", toggle, { passive: true });
   }
-}); // end DOMContentLoaded
+
+  // animate panels when in view
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) e.target.classList.add("in");
+      });
+    },
+    { threshold: 0.1 },
+  );
+  document.querySelectorAll(".animate-in").forEach((el) => io.observe(el));
+});

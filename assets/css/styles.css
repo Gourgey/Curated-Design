@@ -1,7 +1,7 @@
 /* ================================
-   Curated — Dark + Parallax BG
+   Curated — Dark + Scroll-synced BG
    Replace this entire file.
-   Make sure your image exists at:
+   Background image path used:
    /assets/images/background.png
 ================================ */
 
@@ -33,28 +33,22 @@ body {
         Arial,
         sans-serif;
     color: var(--ink);
-
-    /* Fallback color (behind image layer) */
-    background: var(--bg);
-
-    /* Ensure the fixed ::before layer paints behind content reliably */
-    position: relative;
+    background: var(--bg); /* fallback */
     overflow-x: hidden;
 }
 
-/* FIXED, STATIC BACKGROUND IMAGE LAYER (cross-browser, incl. iOS) */
-body::before {
-    content: "";
-    position: fixed; /* stays put while content scrolls */
-    inset: 0; /* full-viewport */
-    z-index: -1; /* behind everything */
+/* Fixed background layer (JS will scroll its background-position) */
+#bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
     background:
-    /* optional dark overlay for readability; tweak alpha to taste */
         linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
-        url("/assets/images/background.png") center center / cover no-repeat;
-    /* performance hints for mobile Safari */
-    will-change: transform;
+        url("/assets/images/background.png") center 0 / auto 150vh no-repeat;
+    /* Smoothness hints */
+    will-change: background-position;
     transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 /* Links */
@@ -75,10 +69,13 @@ a {
     transition:
         background 0.3s ease,
         border-color 0.3s ease;
+    will-change: transform, opacity;
+    transform: translateZ(0);
 }
 .site-header.scrolled {
     background: rgba(14, 14, 14, 0.92);
-    backdrop-filter: blur(8px) saturate(120%);
+    /* comment out next line for max smoothness */
+    /* backdrop-filter:blur(8px) saturate(120%); */
     border-color: var(--ring);
 }
 
@@ -181,34 +178,21 @@ a {
     text-align: center;
 }
 
-/* Vignette + soft texture over the photo to help legibility */
+/* Simpler, cheaper vignette over the photo to help legibility */
 .hero::after {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background:
-        radial-gradient(
-            120% 80% at 50% -10%,
-            rgba(255, 255, 255, 0.06) 0%,
-            rgba(255, 255, 255, 0.02) 35%,
-            transparent 60%
-        ),
-        radial-gradient(
-            120% 120% at 50% 120%,
-            transparent 0%,
-            rgba(0, 0, 0, 0.55) 80%
-        ),
-        repeating-linear-gradient(
-            0deg,
-            rgba(255, 255, 255, 0.007) 0 1px,
-            transparent 1px 2px
-        );
-    mix-blend-mode: overlay;
-    opacity: 0.35;
+    background: radial-gradient(
+        120% 80% at 50% 0%,
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0.02) 30%,
+        rgba(0, 0, 0, 0.55) 85%
+    );
+    opacity: 0.28;
 }
 
-/* Headline + subhead */
 .headline {
     margin: 0.4rem auto 0.6rem;
     max-width: 16ch;
@@ -287,8 +271,10 @@ a {
     border-radius: 22px;
     padding: 14px;
     box-shadow:
-        0 50px 110px rgba(0, 0, 0, 0.65),
+        0 40px 80px rgba(0, 0, 0, 0.6),
         0 1px 0 rgba(255, 255, 255, 0.03) inset;
+    will-change: transform, opacity;
+    transform: translateZ(0);
 }
 .dock-panel.narrow {
     width: min(820px, calc(100% - 40px));
@@ -304,8 +290,6 @@ a {
     overflow: hidden;
     border-radius: 14px;
     position: relative;
-    /* If the background image is very light, uncomment to dim slides a touch */
-    /* box-shadow: inset 0 0 0 1px var(--ring); */
 }
 .track {
     display: flex;
@@ -333,7 +317,7 @@ a {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 5; /* sit above images */
+    z-index: 5;
     background: rgba(0, 0, 0, 0.55);
     border: 1px solid var(--ring);
     width: 44px;

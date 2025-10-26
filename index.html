@@ -5,17 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Curated Design Studio</title>
 
-        <!-- Tailwind (CDN) -->
+        <!-- Keep your original libs -->
         <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: { colors: { ring: "rgba(255,255,255,.12)" } },
-                },
-            };
-        </script>
-
-        <!-- Icons + Fonts + Styles -->
         <script
             src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"
             defer
@@ -24,18 +15,29 @@
             href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="/assets/css/styles.css" />
-    </head>
-    <body class="min-h-screen text-[#f2f2f2] font-inter">
-        <!-- Fixed, scroll-synced background layer -->
-        <div id="bg" aria-hidden="true"></div>
 
-        <!-- Header (transparent at top; blends on scroll) -->
+        <!-- Your site stylesheet -->
+        <link rel="stylesheet" href="./assets/css/styles.css" />
+    </head>
+
+    <body class="min-h-screen text-[#f2f2f2] font-inter">
+        <!-- Background image layer (parallax) -->
+        <div id="bg" aria-hidden="true">
+            <img
+                id="bgImg"
+                src="./assets/images/background.png"
+                alt=""
+                decoding="async"
+            />
+            <div class="bg-dim"></div>
+        </div>
+
+        <!-- ===== HEADER (kept) ===== -->
         <header id="siteHeader" class="site-header">
             <nav class="max-w-7xl mx-auto px-4 h-16 flex items-center gap-6">
-                <a href="/" class="flex items-center">
-                    <i data-feather="box" class="h-6 w-6"></i
-                    ><span class="ml-2 font-semibold tracking-wide"
+                <a href="./" class="flex items-center">
+                    <i data-feather="box" class="h-6 w-6"></i>
+                    <span class="ml-2 font-semibold tracking-wide"
                         >Curated</span
                     >
                 </a>
@@ -48,17 +50,17 @@
                         <div class="dropdown-dark">
                             <a
                                 class="dd-link-dark"
-                                href="/projects.html#residential"
+                                href="./projects.html#residential"
                                 >Residential</a
                             >
                             <a
                                 class="dd-link-dark"
-                                href="/projects.html#hospitality"
+                                href="./projects.html#hospitality"
                                 >Hospitality</a
                             >
                             <a
                                 class="dd-link-dark"
-                                href="/projects.html#commercial"
+                                href="./projects.html#commercial"
                                 >Commercial</a
                             >
                         </div>
@@ -68,13 +70,13 @@
                             >Studio <span class="chev"></span
                         ></a>
                         <div class="dropdown-dark">
-                            <a class="dd-link-dark" href="/about.html#about"
+                            <a class="dd-link-dark" href="./about.html#about"
                                 >About</a
                             >
-                            <a class="dd-link-dark" href="/about.html#approach"
+                            <a class="dd-link-dark" href="./about.html#approach"
                                 >Approach</a
                             >
-                            <a class="dd-link-dark" href="/about.html#press"
+                            <a class="dd-link-dark" href="./about.html#press"
                                 >Press</a
                             >
                         </div>
@@ -91,27 +93,28 @@
                 <button
                     id="menuBtn"
                     class="md:hidden w-10 h-10 grid place-items-center rounded-xl border border-white/15"
+                    aria-expanded="false"
+                    aria-controls="mobileNav"
                 >
                     ≡
                 </button>
             </nav>
 
-            <!-- Mobile -->
             <div id="mobileNav" class="mobile-panel-dark" aria-hidden="true">
-                <a href="/projects.html#residential">Residential</a>
-                <a href="/projects.html#hospitality">Hospitality</a>
-                <a href="/projects.html#commercial">Commercial</a>
+                <a href="./projects.html#residential">Residential</a>
+                <a href="./projects.html#hospitality">Hospitality</a>
+                <a href="./projects.html#commercial">Commercial</a>
                 <hr class="border-white/10 my-1" />
-                <a href="/about.html#about">About</a>
-                <a href="/about.html#approach">Approach</a>
-                <a href="/about.html#press">Press</a>
+                <a href="./about.html#about">About</a>
+                <a href="./about.html#approach">Approach</a>
+                <a href="./about.html#press">Press</a>
                 <hr class="border-white/10 my-1" />
                 <a href="mailto:hello@curateddesign.studio">Contact</a>
             </div>
         </header>
 
         <main class="pt-28 pb-24">
-            <!-- Hero (centered) -->
+            <!-- ===== HERO (kept) ===== -->
             <section class="hero">
                 <div class="max-w-[1150px] mx-auto px-4 hero-inner text-center">
                     <h1 class="headline">
@@ -125,7 +128,7 @@
                 </div>
             </section>
 
-            <!-- Pill menu (above panel) -->
+            <!-- ===== PILL MENU (kept) ===== -->
             <nav class="pillmenu-wrap" aria-label="Quick filters">
                 <ul class="pillmenu">
                     <li>
@@ -151,52 +154,56 @@
                 </ul>
             </nav>
 
-            <!-- Portfolio panel (narrower, lower, thin border, no inner labels) -->
+            <!-- ===== CAROUSEL PANEL with even border + bottom notch ===== -->
             <section
                 id="portfolio"
-                class="dock-panel narrow animate-in"
+                class="dock-panel narrow"
                 aria-label="Portfolio carousel"
             >
+                <!-- Carousel -->
                 <div class="carousel">
                     <button class="ctrl prev" id="prev" aria-label="Previous">
                         ‹
                     </button>
 
                     <div class="viewport">
-                        <div class="track" id="track">
-                            <div class="slide" aria-label="1 of 3">
-                                <img
-                                    draggable="false"
-                                    src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=1280&auto=format&fit=crop"
-                                    alt="Living room"
-                                    width="1280"
-                                    height="720"
-                                    fetchpriority="high"
-                                    loading="eager"
-                                    decoding="async"
-                                />
-                            </div>
-                            <div class="slide" aria-label="2 of 3">
-                                <img
-                                    draggable="false"
-                                    src="https://images.unsplash.com/photo-1505691723518-36a5ac3b2d95?q=80&w=1280&auto=format&fit=crop"
-                                    alt="Bedroom"
-                                    width="1280"
-                                    height="720"
-                                    loading="lazy"
-                                    decoding="async"
-                                />
-                            </div>
-                            <div class="slide" aria-label="3 of 3">
-                                <img
-                                    draggable="false"
-                                    src="https://images.unsplash.com/photo-1549187774-b4e9b0445b41?q=80&w=1280&auto=format&fit=crop"
-                                    alt="Kitchen"
-                                    width="1280"
-                                    height="720"
-                                    loading="lazy"
-                                    decoding="async"
-                                />
+                        <!-- This inner clip ensures only ONE slide is visible -->
+                        <div class="viewport-clip">
+                            <div class="track" id="track">
+                                <div class="slide" aria-label="1 of 3">
+                                    <img
+                                        src="./assets/images/monet-bedroom.png"
+                                        alt="Bedroom interior"
+                                        width="1600"
+                                        height="900"
+                                        fetchpriority="high"
+                                        loading="eager"
+                                        decoding="async"
+                                        draggable="false"
+                                    />
+                                </div>
+                                <div class="slide" aria-label="2 of 3">
+                                    <img
+                                        src="./assets/images/monet-living.png"
+                                        alt="Living room interior"
+                                        width="1600"
+                                        height="900"
+                                        loading="lazy"
+                                        decoding="async"
+                                        draggable="false"
+                                    />
+                                </div>
+                                <div class="slide" aria-label="3 of 3">
+                                    <img
+                                        src="./assets/images/monet-terrace.png"
+                                        alt="Terrace interior"
+                                        width="1600"
+                                        height="900"
+                                        loading="lazy"
+                                        decoding="async"
+                                        draggable="false"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -206,10 +213,82 @@
                     </button>
                 </div>
 
-                <div id="dots" class="dots" aria-hidden="false"></div>
+                <div id="dots" class="dots" aria-label="Slide indicators"></div>
             </section>
         </main>
 
-        <script src="/assets/js/main.js" defer></script>
+        <!-- Your original JS can stay; the small helpers below won’t conflict -->
+        <!-- <script src="./assets/js/main.js" defer></script> -->
+
+        <script>
+            // ===== Parallax background (restores smooth scroll movement) =====
+            (function () {
+                const img = document.getElementById("bgImg");
+                if (!img) return;
+                const speed = 0.25; // lower = slower
+                const scale = 1.12; // oversize so edges never show
+                function update() {
+                    img.style.transform = `translate3d(0, ${-window.scrollY * speed}px, 0) scale(${scale})`;
+                }
+                update();
+                addEventListener("scroll", update, { passive: true });
+                addEventListener("resize", update);
+            })();
+
+            // ===== Minimal carousel logic (one slide at a time) =====
+            (function () {
+                const track = document.getElementById("track");
+                const slides = Array.from(track.children);
+                const prev = document.getElementById("prev");
+                const next = document.getElementById("next");
+                const dotsWrap = document.getElementById("dots");
+                let index = 0;
+
+                // Build dots
+                slides.forEach((_, i) => {
+                    const b = document.createElement("button");
+                    b.className = "dot" + (i === 0 ? " active" : "");
+                    b.setAttribute("aria-label", "Go to slide " + (i + 1));
+                    b.addEventListener("click", () => go(i));
+                    dotsWrap.appendChild(b);
+                });
+
+                function go(i) {
+                    index = (i + slides.length) % slides.length;
+                    track.style.transform = "translateX(" + -index * 100 + "%)";
+                    [...dotsWrap.children].forEach((d, di) =>
+                        d.classList.toggle("active", di === index),
+                    );
+                }
+
+                prev.addEventListener("click", () => go(index - 1));
+                next.addEventListener("click", () => go(index + 1));
+
+                // Touch swipe
+                let startX = null;
+                track.addEventListener(
+                    "touchstart",
+                    (e) => (startX = e.touches[0].clientX),
+                    { passive: true },
+                );
+                track.addEventListener("touchend", (e) => {
+                    if (startX == null) return;
+                    const dx = e.changedTouches[0].clientX - startX;
+                    if (Math.abs(dx) > 40) go(index + (dx < 0 ? 1 : -1));
+                    startX = null;
+                });
+            })();
+
+            // Mobile menu toggle (kept simple)
+            (function () {
+                const btn = document.getElementById("menuBtn");
+                const panel = document.getElementById("mobileNav");
+                if (!btn || !panel) return;
+                btn.addEventListener("click", () => {
+                    const open = panel.classList.toggle("open");
+                    btn.setAttribute("aria-expanded", open ? "true" : "false");
+                });
+            })();
+        </script>
     </body>
 </html>

@@ -1,20 +1,13 @@
-/* ================================
-   Curated — Dark + Scroll-synced BG
-   Replace this entire file.
-   Background image path used:
-   /assets/images/background.png
-================================ */
-
-/* Theme tokens */
+/* -------- Theme tokens -------- */
 :root {
     --bg: #0e0e0e;
     --panel: #171717;
     --ink: #f2f2f2;
     --muted: #bdbdbd;
-    --ring: rgba(255, 255, 255, 0.12);
+    --ring: rgba(255, 255, 255, 0.12); /* semi-transparent frame line */
 }
 
-/* Base */
+/* -------- Base -------- */
 * {
     box-sizing: border-box;
 }
@@ -22,8 +15,12 @@ html,
 body {
     height: 100%;
 }
+html {
+    background: var(--bg);
+}
 body {
     margin: 0;
+    color: var(--ink);
     font-family:
         "Inter",
         system-ui,
@@ -32,53 +29,53 @@ body {
         Roboto,
         Arial,
         sans-serif;
-    color: var(--ink);
-    background: var(--bg); /* fallback */
+    background: transparent;
     overflow-x: hidden;
 }
 
-/* Fixed background layer (JS will scroll its background-position) */
+/* ===== Parallax background ===== */
 #bg {
     position: fixed;
     inset: 0;
-    z-index: -1;
-    background:
-        linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
-        url("/assets/images/background.png") center 0 / auto 150vh no-repeat;
-    /* Smoothness hints */
-    will-change: background-position;
-    transform: translateZ(0);
-    backface-visibility: hidden;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+#bgImg {
+    position: absolute;
+    top: -15vh;
+    left: 0;
+    width: 100vw;
+    height: 170vh;
+    object-fit: cover;
+    transform: translate3d(0, 0, 0) scale(1.12); /* JS updates translateY */
+    will-change: transform;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+.bg-dim {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.36);
 }
 
-/* Links */
+/* -------- Links -------- */
 a {
     color: inherit;
     text-decoration: none;
 }
 
-/* =================
-   Header + Nav
-================= */
+/* ===== Header + Navigation (kept) ===== */
 .site-header {
     position: fixed;
     inset: 0 0 auto 0;
     z-index: 50;
-    background: transparent;
-    border-bottom: 1px solid transparent;
-    transition:
-        background 0.3s ease,
-        border-color 0.3s ease;
-    will-change: transform, opacity;
-    transform: translateZ(0);
-}
-.site-header.scrolled {
-    background: rgba(14, 14, 14, 0.92);
-    /* comment out next line for max smoothness */
-    /* backdrop-filter:blur(8px) saturate(120%); */
-    border-color: var(--ring);
+    background: rgba(14, 14, 14, 0.62);
+    border-bottom: 1px solid var(--ring);
+    backdrop-filter: blur(4px);
 }
 
+/* nav styles compatible with your Tailwind classes */
 .nav-link-dark {
     display: flex;
     align-items: center;
@@ -86,19 +83,18 @@ a {
     padding: 10px 12px;
     border-radius: 12px;
     color: var(--ink);
-    transition: background 0.2s;
+    transition: background 0.2s ease;
 }
 .nav-link-dark:hover {
     background: rgba(255, 255, 255, 0.06);
 }
-
 .chev {
     width: 0;
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 6px solid #9ca3af;
-    transition: transform 0.18s;
+    transition: transform 0.18s ease;
 }
 .group:hover .chev {
     transform: rotate(180deg);
@@ -118,8 +114,8 @@ a {
     visibility: hidden;
     transform: translateY(8px);
     transition:
-        opacity 0.2s,
-        transform 0.2s,
+        opacity 0.2s ease,
+        transform 0.2s ease,
         visibility 0.2s;
 }
 .group:hover .dropdown-dark,
@@ -128,7 +124,6 @@ a {
     visibility: visible;
     transform: translateY(0);
 }
-
 .dd-link-dark {
     display: block;
     padding: 12px;
@@ -167,9 +162,7 @@ a {
     display: block;
 }
 
-/* =========
-   Hero
-========= */
+/* ===== Hero ===== */
 .hero {
     position: relative;
     min-height: 58vh;
@@ -177,26 +170,17 @@ a {
     align-items: center;
     text-align: center;
 }
-
-/* Simpler, cheaper vignette over the photo to help legibility */
 .hero::after {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: radial-gradient(
-        120% 80% at 50% 0%,
-        rgba(255, 255, 255, 0.05) 0%,
-        rgba(255, 255, 255, 0.02) 30%,
-        rgba(0, 0, 0, 0.55) 85%
-    );
     opacity: 0.28;
 }
-
 .headline {
     margin: 0.4rem auto 0.6rem;
-    max-width: 16ch;
-    font-size: clamp(44px, 6.2vw, 96px);
+    max-width: 86ch;
+    font-size: clamp(24px, 3.2vw, 76px);
     font-weight: 400;
     letter-spacing: -0.02em;
     line-height: 1.06;
@@ -208,8 +192,6 @@ a {
     color: #d0d0d0;
     font-size: clamp(16px, 1.2vw, 20px);
 }
-
-/* Gentle fade-up on load */
 .hero-inner {
     opacity: 0;
     transform: translateY(22px);
@@ -222,10 +204,10 @@ a {
     }
 }
 
-/* ===============
-   Pill menu
-=============== */
+/* ===== Pill menu (kept) ===== */
 .pillmenu-wrap {
+    position: relative;
+    z-index: 1;
     display: grid;
     place-items: center;
     margin: 28px 0 18px;
@@ -256,57 +238,113 @@ a {
     color: var(--ink);
 }
 
-/* =========================
-   Portfolio panel (narrow)
-========================= */
+/* ===== Portfolio panel + seamless notch ===== */
 .dock-panel {
-    width: min(900px, calc(100% - 32px));
-    margin: 28px auto 120px;
-    background: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.02),
-        rgba(255, 255, 255, 0.01)
-    );
-    border: 1px solid var(--ring);
-    border-radius: 22px;
-    padding: 14px;
+    position: relative;
+    width: min(1000px, calc(100% - 40px));
+    margin: 28px auto 140px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 22px; /* rounds content; SVG draws border */
+    padding: 16px 16px 24px; /* even offset */
     box-shadow:
         0 40px 80px rgba(0, 0, 0, 0.6),
         0 1px 0 rgba(255, 255, 255, 0.03) inset;
-    will-change: transform, opacity;
-    transform: translateZ(0);
-}
-.dock-panel.narrow {
-    width: min(820px, calc(100% - 40px));
+    overflow: visible;
 }
 
-/* ============
-   Carousel
-=========== */
+/* Border stroke that includes the notch */
+.panel-frame {
+    position: absolute;
+    left: -1px;
+    right: -1px;
+    top: -1px;
+    height: calc(100% + 42px); /* extra area for notch below */
+    pointer-events: none;
+    z-index: 2; /* under dots, over panel bg */
+}
+.panel-stroke {
+    fill: none;
+    stroke: var(--ring);
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+    stroke-linejoin: round;
+}
+
+/* Glow hugging the same geometry (so the “lightened” strip never stops) */
+.panel-glow {
+    position: absolute;
+    left: -10px;
+    right: -10px;
+    top: -10px;
+    height: calc(100% + 60px); /* reaches the notch area */
+    pointer-events: none;
+    z-index: 1; /* under the crisp stroke, above panel bg */
+}
+
+.panel-glow-stroke {
+    fill: none;
+    stroke: #ffffff;
+    stroke-opacity: 0.28; /* overall glow strength */
+    stroke-width: 10; /* thickness of the glow band */
+    filter: blur(14px); /* softness */
+}
+
+/* Dots centered inside the notch */
+.dots {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -16px;
+    display: flex;
+    gap: 8px;
+    padding: 0;
+    z-index: 3;
+}
+.dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #6f6f6f;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    cursor: pointer;
+}
+.dots .dot.active {
+    background: #e6e6e6;
+}
+
+/* ===== Carousel ===== */
 .carousel {
     position: relative;
 }
 .viewport {
-    overflow: hidden;
-    border-radius: 14px;
     position: relative;
+    width: 100%;
 }
+.viewport-clip {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 18px;
+} /* KEY: clip */
 .track {
     display: flex;
     transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform;
 }
 .slide {
+    position: relative;
     min-width: 100%;
     aspect-ratio: 16/9;
     background: #0f0f0f;
-    display: grid;
-    place-items: center;
     overflow: hidden;
 }
 .slide img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     display: block;
     user-select: none;
     -webkit-user-drag: none;
@@ -326,37 +364,20 @@ a {
     display: grid;
     place-items: center;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s ease;
+    color: #e8e8e8;
 }
 .ctrl:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.1);
 }
 .prev {
-    left: 10px;
+    left: 12px;
 }
 .next {
-    right: 10px;
+    right: 12px;
 }
 
-/* Dots */
-.dots {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    padding: 10px;
-}
-.dots .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 999px;
-    background: #6b6b6b;
-    border: 1px solid var(--ring);
-}
-.dots .dot.active {
-    background: #d9d9d9;
-}
-
-/* Utility */
+/* -------- Utility -------- */
 .font-inter {
     font-family:
         "Inter",

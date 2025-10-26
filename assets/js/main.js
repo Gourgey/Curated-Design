@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Carousel — robust wiring
+  // Carousel
   const track = document.getElementById("track");
   const dots = document.getElementById("dots");
   const prev = document.getElementById("prev");
@@ -56,20 +56,27 @@ window.addEventListener("DOMContentLoaded", () => {
     prev.addEventListener("click", prevSlide);
 
     // keyboard
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight") nextSlide();
-      if (e.key === "ArrowLeft") prevSlide();
-    });
+    document.addEventListener(
+      "keydown",
+      (e) => {
+        if (e.key === "ArrowRight") nextSlide();
+        if (e.key === "ArrowLeft") prevSlide();
+      },
+      { passive: true },
+    );
 
     // autoplay with hover pause
     let autoplay = setInterval(nextSlide, 6000);
     ["mouseenter", "touchstart"].forEach((evt) =>
-      track.addEventListener(evt, () => clearInterval(autoplay)),
+      track.addEventListener(evt, () => clearInterval(autoplay), {
+        passive: true,
+      }),
     );
     ["mouseleave", "touchend"].forEach((evt) =>
       track.addEventListener(
         evt,
         () => (autoplay = setInterval(nextSlide, 6000)),
+        { passive: true },
       ),
     );
   }
@@ -77,11 +84,28 @@ window.addEventListener("DOMContentLoaded", () => {
   // Header behavior (transparent at top; material after a few px)
   const header = document.getElementById("siteHeader");
   if (header) {
-    const toggle = () => {
+    const toggleHeader = () => {
       if (window.scrollY > 8) header.classList.add("scrolled");
       else header.classList.remove("scrolled");
     };
-    toggle();
-    window.addEventListener("scroll", toggle, { passive: true });
+    toggleHeader();
+    window.addEventListener("scroll", toggleHeader, { passive: true });
   }
+
+  // Scroll-sync background: image is 150vh tall; reveal it top->bottom as page scrolls
+  const bgImg = document.getElementById("bgImg");
+  function updateBg() {
+    if (!bgImg) return;
+    const vh = window.innerHeight;
+    const extra = Math.max(0, vh * 1.5 - vh); // 50% of viewport height
+    const doc = document.documentElement;
+    const maxScroll = Math.max(1, doc.scrollHeight - vh); // avoid divide-by-zero
+    const p = Math.min(1, Math.max(0, window.scrollY / maxScroll)); // 0..1
+    const y = -(p * extra); // translate up to show lower part
+    // Use translate3d for compositor-only movement
+    bgImg.style.transform = `translate3d(0, ${y}px, 0)`;
+  }
+  updateBg();
+  window.addEventListener("scroll", updateBg, { passive: true });
+  window.addEventListener("resize", updateBg);
 });

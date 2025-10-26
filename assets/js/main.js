@@ -1,111 +1,170 @@
+// All page behavior moved here from index.html
 window.addEventListener("DOMContentLoaded", () => {
-  // Icons
+  // Feather icons
   if (window.feather && feather.replace) feather.replace();
 
-  // Mobile menu
-  const menuBtn = document.getElementById("menuBtn");
-  const mobileNav = document.getElementById("mobileNav");
-  if (menuBtn && mobileNav) {
-    menuBtn.addEventListener("click", () => {
-      const open = !mobileNav.classList.contains("open");
-      mobileNav.classList.toggle("open", open);
-      mobileNav.setAttribute("aria-hidden", String(!open));
-      menuBtn.setAttribute("aria-expanded", String(open));
-    });
-  }
+  // ===== Parallax background (smooth scroll movement) =====
+  (function () {
+    const img = document.getElementById("bgImg");
+    if (!img) return;
+    const speed = 0.4; // from 0.25 → 0.3
+    const scale = 1.12; // oversize so edges never show
+    function update() {
+      img.style.transform = `translate3d(0, ${-window.scrollY * speed}px, 0) scale(${scale})`;
+    }
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+  })();
 
-  // Carousel
-  const track = document.getElementById("track");
-  const dots = document.getElementById("dots");
-  const prev = document.getElementById("prev");
-  const next = document.getElementById("next");
+  // ===== Minimal carousel logic (one slide at a time) =====
+  (function () {
+    const track = document.getElementById("track");
+    const slides = track ? Array.from(track.children) : [];
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+    const dotsWrap = document.getElementById("dots");
+    if (!track || !prev || !next || !dotsWrap || slides.length === 0) return;
 
-  if (track && dots && prev && next) {
-    const slides = Array.from(track.children);
     let index = 0;
 
-    function update() {
-      track.style.transform = `translateX(-${index * 100}%)`;
-      dots
-        .querySelectorAll(".dot")
-        .forEach((d, i) => d.classList.toggle("active", i === index));
-    }
-
-    // build dots
-    dots.innerHTML = "";
+    // Build dots
+    dotsWrap.innerHTML = "";
     slides.forEach((_, i) => {
-      const s = document.createElement("span");
-      s.className = "dot" + (i === 0 ? " active" : "");
-      s.addEventListener("click", () => {
-        index = i;
-        update();
-      });
-      dots.appendChild(s);
+      const b = document.createElement("button");
+      b.className = "dot" + (i === 0 ? " active" : "");
+      b.setAttribute("aria-label", "Go to slide " + (i + 1));
+      b.addEventListener("click", () => go(i));
+      dotsWrap.appendChild(b);
     });
 
-    function nextSlide() {
-      index = (index + 1) % slides.length;
-      update();
-    }
-    function prevSlide() {
-      index = (index - 1 + slides.length) % slides.length;
-      update();
+    function go(i) {
+      index = (i + slides.length) % slides.length;
+      track.style.transform = "translateX(" + -index * 100 + "%)";
+      [...dotsWrap.children].forEach((d, di) =>
+        d.classList.toggle("active", di === index),
+      );
     }
 
-    next.addEventListener("click", nextSlide);
-    prev.addEventListener("click", prevSlide);
+    prev.addEventListener("click", () => go(index - 1));
+    next.addEventListener("click", () => go(index + 1));
 
-    // keyboard
-    document.addEventListener(
-      "keydown",
-      (e) => {
-        if (e.key === "ArrowRight") nextSlide();
-        if (e.key === "ArrowLeft") prevSlide();
-      },
+    // Touch swipe
+    let startX = null;
+    track.addEventListener(
+      "touchstart",
+      (e) => (startX = e.touches[0].clientX),
       { passive: true },
     );
+    track.addEventListener("touchend", (e) => {
+      if (startX == null) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) go(index + (dx < 0 ? 1 : -1));
+      startX = null;
+    });
+  })();
 
-    // autoplay with hover pause
-    let autoplay = setInterval(nextSlide, 6000);
-    ["mouseenter", "touchstart"].forEach((evt) =>
-      track.addEventListener(evt, () => clearInterval(autoplay), {
-        passive: true,
-      }),
-    );
-    ["mouseleave", "touchend"].forEach((evt) =>
-      track.addEventListener(
-        evt,
-        () => (autoplay = setInterval(nextSlide, 6000)),
-        { passive: true },
-      ),
-    );
-  }
+  // ===== Mobile menu toggle =====
+  (function () {
+    const btn = document.getElementById("menuBtn");
+    const panel = document.getElementById("mobileNav");
+    if (!btn || !panel) return;
+    btn.addEventListener("click", () => {
+      const open = panel.classList.toggle("open");
+      panel.setAttribute("aria-hidden", String(!open));
+      btn.setAttribute("aria-expanded", String(open));
+    });
+  })();
+  // ===== Pill menu → section scroll =====
+  (function () {
+    const header = document.getElementById("siteHeader");
+    const pills = document.querySelectorAll(".pillmenu .pill");
 
-  // Header behavior (transparent at top; material after a few px)
-  const header = document.getElementById("siteHeader");
-  if (header) {
-    const toggleHeader = () => {
-      if (window.scrollY > 8) header.classList.add("scrolled");
-      else header.classList.remove("scrolled");
+    // Map pill labels → section IDs on this page
+    const targetMap = {
+      "Featured Projects": "#portfolio",
+      "Curated Services": "#services",
+      Collections: "#selected-work",
+      "Design Philosophy": "#about",
     };
-    toggleHeader();
-    window.addEventListener("scroll", toggleHeader, { passive: true });
-  }
 
-  // Scroll-sync background: image is 150vh tall; reveal it top->bottom as page scrolls
-  const bgImg = document.getElementById("bgImg");
-  function updateBg() {
-    if (!bgImg) return;
-    const vh = window.innerHeight;
-    const extra = Math.max(0, vh * 1.5 - vh); // 50% of viewport height
-    const doc = document.documentElement;
-    const maxScroll = Math.max(1, doc.scrollHeight - vh); // avoid divide-by-zero
-    const p = Math.min(1, Math.max(0, window.scrollY / maxScroll)); // 0..1
-    const y = -(p * extra); // translate up to show lower part
-    // Use translate3d for compositor-only movement
-    bgImg.style.transform = `translate3d(0, ${y}px, 0)`;
-  }
-  updateBg();
-  window.addEventListener("scroll", updateBg, { passive: true });
-  window.addEventListener("resize", updateBg);
+    // Helper: smooth scroll with fixed-header offset
+    function scrollToTarget(sel) {
+      const el = document.querySelector(sel);
+      if (!el) return;
+      const headerH = header ? header.offsetHeight : 0;
+      const y = el.getBoundingClientRect().top + window.scrollY - headerH;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+
+    // Click → scroll
+    pills.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const label = btn.textContent.trim();
+        const target = targetMap[label];
+        if (target) {
+          scrollToTarget(target);
+          // active state styling for pills
+          pills.forEach((p) => p.classList.remove("active"));
+          btn.classList.add("active");
+        }
+      });
+    });
+
+    // Optional: update active pill while scrolling
+    const sections = ["#portfolio", "#services", "#selected-work", "#about"]
+      .map((sel) => document.querySelector(sel))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) return;
+        const id = "#" + visible.target.id;
+        const label = Object.entries(targetMap).find(
+          ([, sel]) => sel === id,
+        )?.[0];
+        if (!label) return;
+        pills.forEach((p) =>
+          p.classList.toggle("active", p.textContent.trim() === label),
+        );
+      },
+      { rootMargin: "-50% 0px -50% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
+    );
+
+    sections.forEach((sec) => observer.observe(sec));
+  })();
+
+  // ===== Sticky pills just under the header =====
+  (function () {
+    const header = document.getElementById("siteHeader");
+    const pills = document.getElementById("pills");
+    if (!header || !pills) return;
+
+    // Keep CSS var in sync with real header height
+    function setHeaderVar() {
+      const h = header.offsetHeight || 64;
+      document.documentElement.style.setProperty("--header-h", h + "px");
+    }
+    setHeaderVar();
+    window.addEventListener("resize", setHeaderVar);
+
+    // Add a 'stuck' class when the pills are actually docked
+    const gap = 8; // matches --pills-gap
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const e = entries[0];
+        // When the element can no longer be fully seen (because it’s stuck),
+        // intersectionRatio drops < 1 — toggle the class.
+        pills.classList.toggle("stuck", e.intersectionRatio < 1);
+      },
+      {
+        threshold: [1],
+        rootMargin: `-${header.offsetHeight + gap}px 0px 0px 0px`,
+      },
+    );
+    observer.observe(pills);
+  })();
 });

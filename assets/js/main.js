@@ -1,34 +1,46 @@
 // All page behavior moved here from index.html
 window.addEventListener("DOMContentLoaded", () => {
-  // Feather icons
-  if (window.feather && feather.replace) feather.replace();
-
   // ===== Parallax background (smooth scroll movement) =====
+  // This IIFE controls the background image movement for a parallax effect.
+  // It moves the background image slower than scroll so the content appears
+  // to glide over it.
   (function () {
     const img = document.getElementById("bgImg");
     if (!img) return;
-    const speed = 0.4; // from 0.25 → 0.3
-    const scale = 1.12; // oversize so edges never show
+
+    // speed controls how much the image moves relative to the scroll.
+    const speed = 0.4;
+    // scale keeps the image slightly zoomed so edges are never exposed when moved.
+    const scale = 1.12;
+
     function update() {
       img.style.transform = `translate3d(0, ${-window.scrollY * speed}px, 0) scale(${scale})`;
     }
+
+    // Run once on load and again on scroll/resize.
     update();
     window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
   })();
 
   // ===== Minimal carousel logic (one slide at a time) =====
+  // This IIFE powers the image carousel:
+  // - Moves the horizontal track of slides.
+  // - Connects previous/next buttons.
+  // - Creates dot indicators and enables click + touch swipe.
   (function () {
     const track = document.getElementById("track");
     const slides = track ? Array.from(track.children) : [];
     const prev = document.getElementById("prev");
     const next = document.getElementById("next");
     const dotsWrap = document.getElementById("dots");
+
+    // If any key element is missing, abort safely.
     if (!track || !prev || !next || !dotsWrap || slides.length === 0) return;
 
-    let index = 0;
+    let index = 0; // current slide index
 
-    // Build dots
+    // --- Build dots dynamically based on number of slides ---
     dotsWrap.innerHTML = "";
     slides.forEach((_, i) => {
       const b = document.createElement("button");
@@ -38,6 +50,7 @@ window.addEventListener("DOMContentLoaded", () => {
       dotsWrap.appendChild(b);
     });
 
+    // Move the carousel to slide i, wrap-around supported.
     function go(i) {
       index = (i + slides.length) % slides.length;
       track.style.transform = "translateX(" + -index * 100 + "%)";
@@ -46,10 +59,11 @@ window.addEventListener("DOMContentLoaded", () => {
       );
     }
 
+    // Hook up previous/next buttons.
     prev.addEventListener("click", () => go(index - 1));
     next.addEventListener("click", () => go(index + 1));
 
-    // Touch swipe
+    // --- Touch swipe support for mobile ---
     let startX = null;
     track.addEventListener(
       "touchstart",
@@ -59,28 +73,21 @@ window.addEventListener("DOMContentLoaded", () => {
     track.addEventListener("touchend", (e) => {
       if (startX == null) return;
       const dx = e.changedTouches[0].clientX - startX;
+      // If swipe distance is big enough, move to next/previous slide.
       if (Math.abs(dx) > 40) go(index + (dx < 0 ? 1 : -1));
       startX = null;
     });
   })();
 
-  // ===== Mobile menu toggle =====
-  (function () {
-    const btn = document.getElementById("menuBtn");
-    const panel = document.getElementById("mobileNav");
-    if (!btn || !panel) return;
-    btn.addEventListener("click", () => {
-      const open = panel.classList.toggle("open");
-      panel.setAttribute("aria-hidden", String(!open));
-      btn.setAttribute("aria-expanded", String(open));
-    });
-  })();
   // ===== Pill menu → section scroll =====
+  // This block makes each pill in the main pill menu scroll smoothly
+  // to its corresponding section on the page, taking the fixed header
+  // and pill bar height into account.
   (function () {
     const header = document.getElementById("siteHeader");
     const pills = document.querySelectorAll(".pillmenu .pill");
 
-    // Map pill labels → section IDs on this page
+    // Map human-readable pill labels to section IDs on the page.
     const targetMap = {
       "Featured Projects": "#portfolio",
       "Curated Services": "#services",
@@ -88,83 +95,85 @@ window.addEventListener("DOMContentLoaded", () => {
       "Design Philosophy": "#about",
     };
 
-    // Helper: smooth scroll with fixed-header offset
+    // Helper: scroll to a given selector, adjusting for fixed header + pill bar
+    // so that the section top lines up neatly under the pills.
     function scrollToTarget(sel) {
       const el = document.querySelector(sel);
       if (!el) return;
       const headerH = header ? header.offsetHeight : 0;
-      const y = el.getBoundingClientRect().top + window.scrollY - headerH;
+      const pillsBar = document.getElementById("pills");
+      const pillsH = pillsBar ? pillsBar.offsetHeight : 0;
+      const y =
+        el.getBoundingClientRect().top + window.scrollY - headerH - pillsH - 8; // same gap as CSS
       window.scrollTo({ top: y, behavior: "smooth" });
     }
 
-    // Click → scroll
+    // For each pill, prevent the default anchor behavior and use the
+    // custom smooth scrolling. Also update the active state immediately
+    // on click.
     pills.forEach((btn) => {
-      btn.addEventListener("click", () => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
         const label = btn.textContent.trim();
         const target = targetMap[label];
         if (target) {
           scrollToTarget(target);
-          // active state styling for pills
           pills.forEach((p) => p.classList.remove("active"));
           btn.classList.add("active");
         }
       });
     });
-
-    // Optional: update active pill while scrolling
-    const sections = ["#portfolio", "#services", "#selected-work", "#about"]
-      .map((sel) => document.querySelector(sel))
-      .filter(Boolean);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (!visible) return;
-        const id = "#" + visible.target.id;
-        const label = Object.entries(targetMap).find(
-          ([, sel]) => sel === id,
-        )?.[0];
-        if (!label) return;
-        pills.forEach((p) =>
-          p.classList.toggle("active", p.textContent.trim() === label),
-        );
-      },
-      { rootMargin: "-50% 0px -50% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
-    );
-
-    sections.forEach((sec) => observer.observe(sec));
   })();
 
-  // ===== Sticky pills just under the header =====
+  // ---- Active pill highlight on scroll (top-of-window logic) ----
+  // This IIFE updates which pill is marked .active as you scroll,
+  // based on which section is currently at/near the top under the pill bar.
   (function () {
     const header = document.getElementById("siteHeader");
-    const pills = document.getElementById("pills");
-    if (!header || !pills) return;
+    const pillsBar = document.getElementById("pills");
 
-    // Keep CSS var in sync with real header height
-    function setHeaderVar() {
-      const h = header.offsetHeight || 64;
-      document.documentElement.style.setProperty("--header-h", h + "px");
-    }
-    setHeaderVar();
-    window.addEventListener("resize", setHeaderVar);
-
-    // Add a 'stuck' class when the pills are actually docked
-    const gap = 8; // matches --pills-gap
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const e = entries[0];
-        // When the element can no longer be fully seen (because it’s stuck),
-        // intersectionRatio drops < 1 — toggle the class.
-        pills.classList.toggle("stuck", e.intersectionRatio < 1);
-      },
-      {
-        threshold: [1],
-        rootMargin: `-${header.offsetHeight + gap}px 0px 0px 0px`,
-      },
+    // All pill links inside the main pill bar.
+    const links = Array.from(
+      document.querySelectorAll("#pills .pillmenu a.pill"),
     );
-    observer.observe(pills);
+
+    // Build an array of the corresponding section elements (skipping any missing).
+    const sections = links
+      .map((a) => document.querySelector(a.getAttribute("href")))
+      .filter(Boolean);
+
+    // Helper: mark one pill active by its target section ID.
+    function setActiveById(id) {
+      links.forEach((a) =>
+        a.classList.toggle("active", a.getAttribute("href") === `#${id}`),
+      );
+    }
+
+    // Determine which section is currently “active” based on scroll:
+    // We look at the scroll position plus header + pill heights and pick
+    // the last section whose top is above that line.
+    function currentSectionId() {
+      const headerH = header ? header.offsetHeight : 0;
+      const pillsH = pillsBar ? pillsBar.offsetHeight : 0;
+      const offset = headerH + pillsH + 8; // align with CSS gap
+      const y = window.scrollY + offset + 1; // +1 so it flips cleanly
+      let current = sections[0]?.id || "";
+      for (const sec of sections) {
+        if (sec.offsetTop <= y) current = sec.id;
+        else break;
+      }
+      return current;
+    }
+
+    // Recalculate and update the active pill.
+    function updateActive() {
+      const id = currentSectionId();
+      if (id) setActiveById(id);
+    }
+
+    // Run once on load and again on scroll/resize.
+    updateActive();
+    window.addEventListener("scroll", updateActive, { passive: true });
+    window.addEventListener("resize", updateActive);
   })();
 });

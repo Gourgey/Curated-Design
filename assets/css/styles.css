@@ -1,12 +1,17 @@
 /* -------- Theme tokens -------- */
+/*
+   Global design variables:
+   - Define colours, spacing, and layout constants used across the site.
+   - Makes it easy to adjust the overall theme in one place.
+*/
 :root {
     --bg: #0e0e0e;
     --panel: #171717;
     --ink: #f2f2f2;
     --muted: #bdbdbd;
     --ring: rgba(255, 255, 255, 0.12); /* semi-transparent frame line */
-    --header-h: 64px; /* JS updates this to your real header height */
-    --pills-gap: 8px; /* the small space you wanted */
+    --header-h: 0px; /* JS updates this to your real header height */
+    --pills-gap: 10px; /* the small space you wanted */
 
     /* New band colours (adjust to taste) */
     --band-1: #0f1012; /* slightly different from hero */
@@ -15,7 +20,13 @@
     --accent: #d1f365; /* gentle lime accent for buttons/links */
 }
 
-/* -------- Base -------- */
+/* -------- Base reset & typography -------- */
+/*
+   Basic reset / global defaults:
+   - Ensure consistent box sizing.
+   - Set full-height for layout calculations.
+   - Apply default background and typography.
+*/
 * {
     box-sizing: border-box;
 }
@@ -41,7 +52,29 @@ body {
     overflow-x: hidden;
 }
 
+/*
+   Utility class to explicitly force Inter font.
+   Helpful when combined with Tailwind or other utilities.
+*/
+.font-inter {
+    font-family:
+        "Inter",
+        system-ui,
+        -apple-system,
+        Segoe UI,
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+}
+
 /* ===== Parallax background ===== */
+/*
+   Fixed full-screen background wrapper:
+   - Stays in place while content scrolls.
+   - Sits behind everything via z-index.
+   - pointer-events: none so it never blocks clicks.
+*/
 #bg {
     position: fixed;
     inset: 0;
@@ -50,6 +83,10 @@ body {
     pointer-events: none;
 }
 
+/*
+   Fade at the bottom of the background:
+   - Creates a soft transition from the hero image into band-1 background.
+*/
 #bg::after {
     content: "";
     position: absolute;
@@ -61,6 +98,11 @@ body {
     pointer-events: none;
 }
 
+/*
+   Background image styling:
+   - Covers more than viewport height to allow parallax movement.
+   - Slight scale for a subtle zoomed-in feel.
+*/
 #bgImg {
     position: absolute;
     top: 0;
@@ -73,6 +115,11 @@ body {
     user-select: none;
     -webkit-user-drag: none;
 }
+
+/*
+   Dark overlay:
+   - Keeps foreground text readable regardless of image brightness.
+*/
 .bg-dim {
     position: absolute;
     inset: 0;
@@ -80,12 +127,22 @@ body {
 }
 
 /* -------- Links -------- */
+/*
+   Global link style:
+   - Inherit text colour (for dark aesthetic).
+   - Remove default underline; handled manually when needed.
+*/
 a {
     color: inherit;
     text-decoration: none;
 }
 
-/* ===== Header + Navigation (kept) ===== */
+/* ===== Header + Navigation (fixed top bar) ===== */
+/*
+   Fixed site header:
+   - Stays at the top of the viewport.
+   - Slight translucency and blur for a glassy look.
+*/
 .site-header {
     position: fixed;
     inset: 0 0 auto 0;
@@ -95,7 +152,11 @@ a {
     backdrop-filter: blur(4px);
 }
 
-/* nav styles compatible with your Tailwind classes */
+/*
+   Dark nav links:
+   - Flexible layout with icon/text.
+   - Soft hover background to indicate interactivity.
+*/
 .nav-link-dark {
     display: flex;
     align-items: center;
@@ -108,6 +169,12 @@ a {
 .nav-link-dark:hover {
     background: rgba(255, 255, 255, 0.06);
 }
+
+/*
+   Chevron icon:
+   - Simple triangle for dropdown indicators.
+   - Rotates on hover via parent .group.
+*/
 .chev {
     width: 0;
     height: 0;
@@ -120,6 +187,11 @@ a {
     transform: rotate(180deg);
 }
 
+/*
+   Dark dropdown menu:
+   - Positioned below its trigger.
+   - Hidden by default; shown on hover or focus.
+*/
 .dropdown-dark {
     position: absolute;
     left: 0;
@@ -144,6 +216,11 @@ a {
     visibility: visible;
     transform: translateY(0);
 }
+
+/*
+   Links inside dropdown:
+   - Padding and hover background for clear targets.
+*/
 .dd-link-dark {
     display: block;
     padding: 12px;
@@ -156,6 +233,12 @@ a {
     color: var(--ink);
 }
 
+/* ===== Mobile nav panel ===== */
+/*
+   Slide-down mobile nav:
+   - Fixed below the header.
+   - Hidden until .open class is applied by JS.
+*/
 .mobile-panel-dark {
     display: none;
     position: fixed;
@@ -182,14 +265,70 @@ a {
     display: block;
 }
 
+/*
+   Logo in header (if used):
+   - Simple height control and preservation of aspect ratio.
+*/
+.site-logo img {
+    height: 60px; /* or whatever fits visually */
+    width: auto;
+    display: block;
+}
+
+/* ===== Centered logo below nav ===== */
+/*
+   Container for logo under the fixed header:
+   - Centers the logo horizontally.
+   - Provides spacing from header and hero.
+*/
+.top-logo {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px; /* keeps clear of fixed header */
+    margin-bottom: 5px; /* space before hero headline */
+}
+
+/*
+   Logo image styling:
+   - Set a consistent size.
+   - Gentle hover scale for a subtle interactive feel.
+*/
+.top-logo img {
+    height: 150px; /* adjust to taste */
+    width: auto;
+    object-fit: contain;
+    opacity: 0.96;
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
+}
+
+.top-logo img:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
 /* ===== Hero ===== */
+/*
+   Hero section wrapper:
+   - Vertically centers its content.
+   - Keeps things relative so overlays/effects can be applied.
+*/
 .hero {
     position: relative;
-    min-height: 48vh;
+    min-height: 18vh;
     display: flex;
     align-items: center;
     text-align: center;
 }
+
+/*
+   Optional overlay inside hero:
+   - Currently just reserves space for potential visual effects.
+*/
 .hero::after {
     content: "";
     position: absolute;
@@ -197,22 +336,38 @@ a {
     pointer-events: none;
     opacity: 0.28;
 }
+
+/*
+   Main hero headline:
+   - Constrained width for readability.
+   - Responsive font size, tight line height, and visual balance.
+*/
 .headline {
     margin: 0.4rem auto 0.6rem;
     max-width: 86ch;
-    font-size: clamp(24px, 3.2vw, 76px);
+    font-size: clamp(34px, 5vw, 106px);
     font-weight: 400;
     letter-spacing: -0.02em;
     line-height: 1.06;
     text-wrap: balance;
 }
+
+/*
+   Hero subheading:
+   - Slightly smaller and muted.
+   - Centered with a max width for easy reading.
+*/
 .subhead {
     max-width: 780px;
     margin-inline: auto;
     color: #d0d0d0;
-    font-size: clamp(16px, 1.2vw, 20px);
+    font-size: clamp(16px, 3vw, 20px);
 }
 
+/*
+   Generic fade-up animation:
+   - Used for subtle entrance of elements from below.
+*/
 @keyframes fadeUp {
     to {
         opacity: 1;
@@ -220,22 +375,70 @@ a {
     }
 }
 
-/* ===== Pill menu (kept) ===== */
-.pillmenu-wrap {
+/* ===== Pill menu (primary pill bar) ===== */
+/*
+   Pill menu wrapper (initial layout):
+   - Centers the pill set in the page.
+   - Margins separate it from hero and content below.
+*/
+/*.pillmenu-wrap {
     position: relative;
     z-index: 1;
     display: grid;
     place-items: center;
     margin: 28px 0 18px;
+}*/
+
+/*
+   Override for pillmenu-wrap when sticky:
+   - Makes the main pill bar stick under the header once scrolled.
+   - High z-index ensures it stays above the carousel and other content.
+   - pointer-events: auto so it remains clickable.
+*/
+.pillmenu-wrap {
+    position: sticky;
+    top: calc(var(--header-h) + var(--pills-gap));
+    z-index: 500; /* keep it above the carousel */
+    pointer-events: auto; /* make sure it always receives clicks */
+    display: grid;
+    place-items: center;
+    margin: 28px 0 18px;
 }
+
+/*
+   Visual tweak when the pill bar is in its "stuck" state:
+   - Slightly stronger background, blur, and shadow for a docked feel.
+*/
+.pillmenu-wrap.stuck .pillmenu {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--ring);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+/*
+   Pill menu bar:
+   - Horizontal row of pills.
+   - Semi-transparent, rounded container with blur and shadow.
+*/
 .pillmenu {
     display: flex;
-    gap: 10px;
-    background: rgba(255, 255, 255, 0.05);
+    gap: 8px; /* was 10px */
+    padding: 8px 12px; /* was 6px */
     border: 1px solid var(--ring);
-    padding: 6px;
     border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06); /* was 0.05 */
+    backdrop-filter: blur(6px); /* NEW: match nav pill */
+    -webkit-backdrop-filter: blur(6px); /* Safari */
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32); /* NEW: match nav pill */
 }
+
+/*
+   Individual pill:
+   - Clickable chip acting as filter/nav item.
+   - Active state used for currently-viewed section.
+*/
 .pill {
     display: block;
     padding: 8px 14px;
@@ -254,22 +457,166 @@ a {
     color: var(--ink);
 }
 
-.pillmenu-wrap {
-    position: sticky;
-    top: calc(var(--header-h) + var(--pills-gap));
-    z-index: 45; /* below the fixed header (z 50), above content */
-}
-
-/* Subtle “docked” look when stuck */
-.pillmenu-wrap.stuck .pillmenu {
+/* --- Header nav shown as a pill (inside the fixed dark header) --- */
+/*
+   Styling for a pill-style nav inside the header:
+   - Used if the header contains a compact pill-style menu.
+*/
+.site-header .site-nav .pillmenu {
+    display: inline-flex;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid var(--ring, rgba(255, 255, 255, 0.25));
+    border-radius: 999px;
     background: rgba(255, 255, 255, 0.06);
-    border: 1px solid var(--ring);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(6px);
+    align-items: center;
 }
 
-/* ===== Carousel panel (kept) ===== */
+/*
+   When the floating pill nav is visible:
+   - Ensure it appears fully and can be interacted with.
+*/
+body.floating-pill-visible .nav-pill {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/*
+   Hide header nav entirely:
+   - Useful when the header menu is replaced by the floating pill system.
+*/
+.site-header .site-nav {
+    display: none !important;
+}
+
+/* ===== Floating right-hand pill nav ===== */
+/*
+   Base styling for floating pill nav:
+   - Sticky near the top.
+   - pointer-events: none so only its inner pillmenu catches clicks.
+*/
+.nav-pill {
+    position: fixed;
+    top: var(--pills-gap);
+    right: 0; /* let the .nav-pill--right padding handle inner align */
+    left: 0; /* full-width flex container */
+    z-index: 600;
+    opacity: 1;
+    pointer-events: none;
+    transform: translateY(0);
+    margin: 0; /* don't inherit the pillmenu-wrap margins */
+}
+
+/*
+   Right-aligned container:
+   - Keeps floating nav anchored to the right edge with padding.
+*/
+.nav-pill--right {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 clamp(16px, 4vw, 40px);
+}
+
+/*
+   Inner pill menu of floating nav:
+   - Same pill look as main bar.
+   - pointer-events: auto so the pills themselves are clickable.
+*/
+.nav-pill .pillmenu {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+    pointer-events: auto; /* re-enable clicks on the visible pills */
+}
+
+/*
+   Fixed state for floating nav when "joined":
+   - Converts from sticky to fixed to align with the header/pill bar.
+*/
+.nav-pill.is-fixed {
+    position: fixed; /* sticky → fixed while joined */
+    top: calc(var(--header-h, 64px) + var(--pills-gap));
+    left: 0; /* full-width flex container */
+    right: 0;
+    z-index: 700; /* keep it on top while joined */
+    pointer-events: none; /* still let clicks through outside the pill */
+}
+
+/*
+   Maintain right alignment when fixed:
+   - Uses same horizontal padding as sticky state.
+*/
+.nav-pill.is-fixed.nav-pill--right {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 clamp(16px, 4vw, 40px);
+}
+
+/*
+   When body has pills-joined:
+   - Constrain the floating pill width while keeping it right-anchored.
+*/
+body.pills-joined #floatingNavPill.is-fixed .pillmenu {
+    max-width: min(1150px, calc(100% - 32px));
+    width: auto; /* right edge stays put */
+}
+
+/*
+   Same constraint when joined but not necessarily fixed:
+   - Ensures consistent width behaviour.
+*/
+body.pills-joined #floatingNavPill .pillmenu {
+    max-width: min(1150px, calc(100% - 32px));
+    width: auto; /* auto so the right edge stays where it is */
+}
+
+/*
+   Hide the lower/main pill bar when the floating one has joined:
+   - Avoids duplicate pill bars on screen.
+*/
+body.pills-joined #pills {
+    visibility: hidden;
+    pointer-events: none;
+    height: 0;
+    margin: 0;
+}
+
+/*
+   Optional visual dim of header pill when floating is visible:
+   - Makes it feel like the pill has "detached" from the header.
+*/
+body.floating-pill-visible .site-header .site-nav .pillmenu {
+    opacity: 0.35;
+}
+
+/*
+   Slight variation for joined floating nav:
+   - Stronger background and full-width pill when joined.
+*/
+body.pills-joined #floatingNavPill .pillmenu {
+    max-width: min(1150px, calc(100% - 32px));
+    width: 100%;
+    border-color: var(--ring);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* ===== Dock panel / Carousel container ===== */
+/*
+   Dock-style panel:
+   - Used to frame the carousel as a hero object.
+   - Rounded, elevated card with inner padding.
+*/
 .dock-panel {
     position: relative;
+    z-index: 0; /* baseline so higher z-index pills sit above */
     width: min(1000px, calc(100% - 40px));
     margin: 28px auto 140px;
     background: rgba(255, 255, 255, 0.03);
@@ -281,24 +628,52 @@ a {
     overflow: visible;
 }
 
+/* ===== Carousel core layout ===== */
+/*
+   Carousel container:
+   - Relative positioning for arrows and overlays.
+*/
 .carousel {
     position: relative;
 }
+
+/*
+   Viewport wrapper:
+   - Ensures the carousel occupies full width.
+*/
 .viewport {
     position: relative;
     width: 100%;
 }
+
+/*
+   Clip region:
+   - Hides overflowing slides.
+   - Rounded corners for the image frame.
+*/
 .viewport-clip {
     position: relative;
     width: 100%;
     overflow: hidden;
     border-radius: 18px;
 }
+
+/*
+   Track:
+   - Horizontal flex strip that holds all slides.
+   - JS adjusts transform to move between slides.
+*/
 .track {
     display: flex;
     transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
     will-change: transform;
 }
+
+/*
+   Individual slide:
+   - Takes full viewport width.
+   - 16:9 aspect ratio for consistent image framing.
+*/
 .slide {
     position: relative;
     min-width: 100%;
@@ -306,6 +681,12 @@ a {
     background: #0f0f0f;
     overflow: hidden;
 }
+
+/*
+   Slide image:
+   - Fully covers slide area.
+   - Prevent drag/select behaviour for smoother UX.
+*/
 .slide img {
     position: absolute;
     inset: 0;
@@ -318,7 +699,12 @@ a {
     -webkit-user-drag: none;
 }
 
-/* Arrows */
+/* ===== Carousel arrows ===== */
+/*
+   Left/right navigation arrows:
+   - Centrally aligned vertically.
+   - Dark translucent buttons with hover feedback.
+*/
 .ctrl {
     position: absolute;
     top: 50%;
@@ -345,29 +731,31 @@ a {
     right: 12px;
 }
 
-/* -------- Utility -------- */
-.font-inter {
-    font-family:
-        "Inter",
-        system-ui,
-        -apple-system,
-        Segoe UI,
-        Roboto,
-        Arial,
-        sans-serif;
-}
-
 /* ===== New: Section bands & content patterns ===== */
+/*
+   Generic section block:
+   - Provides vertical spacing and ensures content sits above background image.
+*/
 .section {
     position: relative;
     z-index: 1; /* above the fixed bg image */
     padding: 80px 0;
 }
+
+/*
+   Section inner container:
+   - Centers content and constrains width.
+*/
 .section .container {
     width: min(1150px, calc(100% - 32px));
     margin-inline: auto;
     padding-inline: 8px;
 }
+
+/*
+   Band background colours:
+   - Each band visually separates a content block with a slightly different shade.
+*/
 .band-1 {
     background: var(--band-1);
 }
@@ -378,6 +766,10 @@ a {
     background: var(--band-3);
 }
 
+/*
+   Kicker text:
+   - Small uppercase label used above section headings.
+*/
 .kicker {
     display: inline-block;
     font-size: 12px;
@@ -386,24 +778,43 @@ a {
     color: #b7b7b7;
     margin-bottom: 10px;
 }
+
+/*
+   Section heading:
+   - Reusable h2 style, responsive in size.
+*/
 .h2 {
     font-size: clamp(24px, 2.4vw, 44px);
     letter-spacing: -0.01em;
     line-height: 1.08;
     margin: 6px 0 14px;
 }
+
+/*
+   Lead paragraph:
+   - Slightly larger or more prominent text for intros.
+*/
 .lead {
     color: #d0d0d0;
     max-width: 70ch;
 }
 
-/* cards */
+/* ===== Cards (services/projects) ===== */
+/*
+   Card grid system:
+   - 12-column grid for flexible span-based layouts.
+*/
 .card-grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: 16px;
     margin-top: 28px;
 }
+
+/*
+   Base card styling:
+   - Soft translucent background, border, and hover elevation.
+*/
 .card {
     grid-column: span 12;
     background: rgba(255, 255, 255, 0.03);
@@ -418,16 +829,31 @@ a {
     transform: translateY(-2px);
     background: rgba(255, 255, 255, 0.05);
 }
+
+/*
+   Card image wrapper:
+   - Fixed aspect ratio to keep cards consistent.
+*/
 .card .img-wrap {
     aspect-ratio: 16/9;
     background: #0f0f0f;
 }
+
+/*
+   Card image:
+   - Fills wrapper while maintaining aspect ratio.
+*/
 .card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
+
+/*
+   Card text body:
+   - Padding for comfortable reading.
+*/
 .card .body {
     padding: 16px 16px 18px;
 }
@@ -440,6 +866,10 @@ a {
     font-size: 14px;
 }
 
+/*
+   Larger-screen card spans:
+   - On wider viewports, allow cards to span fewer columns.
+*/
 @media (min-width: 700px) {
     .card.span-6 {
         grid-column: span 6;
@@ -449,13 +879,24 @@ a {
     }
 }
 
-/* split layout */
+/* ===== Split layout (image + text) ===== */
+/*
+   Split layout base:
+   - Single-column on small screens.
+   - Image and text stacked.
+*/
 .split {
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
     margin-top: 26px;
 }
+
+/*
+   Split media block:
+   - Holds an image or visual.
+   - Aspect ratio and border help match card style.
+*/
 .split .media {
     aspect-ratio: 4/3;
     background: #0f0f0f;
@@ -463,12 +904,22 @@ a {
     overflow: hidden;
     border: 1px solid var(--ring);
 }
+
+/*
+   Split content block:
+   - Vertically centers text alongside image on larger screens.
+*/
 .split .content {
     align-self: center;
 }
 .split .content p {
     color: #d0d0d0;
 }
+
+/*
+   Desktop split:
+   - Switch to two-column layout for more classic image/text split.
+*/
 @media (min-width: 900px) {
     .split {
         grid-template-columns: 1.1fr 1fr;
@@ -476,7 +927,12 @@ a {
     }
 }
 
-/* CTA */
+/* ===== CTA (call-to-action) ===== */
+/*
+   CTA block:
+   - Centered, framed card inviting user action.
+   - Radial gradient highlight from bottom for subtle emphasis.
+*/
 .cta {
     display: grid;
     place-items: center;
@@ -491,6 +947,11 @@ a {
         transparent 60%
     );
 }
+
+/*
+   CTA button:
+   - Rounded pill with subtle hover change.
+*/
 .button {
     display: inline-flex;
     align-items: center;
@@ -506,6 +967,11 @@ a {
 .button:hover {
     background: rgba(255, 255, 255, 0.12);
 }
+
+/*
+   Accent dot inside CTA button:
+   - Small coloured dot for a bit of visual personality.
+*/
 .button .dot {
     width: 6px;
     height: 6px;
@@ -514,6 +980,10 @@ a {
 }
 
 /* ===== Carousel dots (indicators) ===== */
+/*
+   Dots container:
+   - Centers slide indicators under the carousel.
+*/
 .dots {
     display: flex;
     justify-content: center;
@@ -521,6 +991,10 @@ a {
     margin-top: 18px;
 }
 
+/*
+   Individual dot:
+   - Circular buttons with hover and active states.
+*/
 .dot {
     width: 10px;
     height: 10px;

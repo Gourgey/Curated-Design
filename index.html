@@ -1,27 +1,54 @@
 <!doctype html>
 <html lang="en">
     <head>
+        <!--
+            Set document metadata and base configuration.
+            - UTF-8: supports all common characters.
+            - viewport: makes layout responsive on mobile.
+            - title: shown in browser tab and search results.
+        -->
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Curated Design Studio</title>
 
-        <!-- Libraries -->
+        <!--
+            Load external libraries used across the page:
+            - Tailwind via CDN: utility classes (spacing, flex, etc.).
+            - Feather icons: lightweight icon set (JS replaces <i> with SVG).
+            These are loaded before the body so classes and icons are available.
+        -->
         <script src="https://cdn.tailwindcss.com"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"
-            defer
-        ></script>
+
+        <!--
+            Load the Inter font from Google Fonts.
+            Used for the main typography across the site.
+        -->
         <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
             rel="stylesheet"
         />
 
-        <!-- Styles -->
+        <!--
+            Link to the custom CSS file for this site.
+            All your bespoke layout, colours, and component styles live here.
+        -->
         <link rel="stylesheet" href="./assets/css/styles.css" />
     </head>
 
+    <!--
+        Apply base styles on body:
+        - min-h-screen: ensure body covers full viewport height.
+        - text colour and custom font class.
+        The background itself is handled by a fixed layer (#bg) below.
+    -->
     <body class="min-h-screen text-[#f2f2f2] font-inter">
-        <!-- Background image layer (parallax) -->
+        <!--
+            Fixed parallax background layer.
+            - Sits behind all content (z-index in CSS).
+            - The image is moved slightly on scroll via JS for depth.
+            - .bg-dim is a dark overlay to keep text readable.
+            This is purely decorative and aria-hidden for accessibility.
+        -->
         <div id="bg" aria-hidden="true">
             <img
                 id="bgImg"
@@ -32,139 +59,117 @@
             <div class="bg-dim"></div>
         </div>
 
-        <!-- ===== HEADER ===== -->
-        <header id="siteHeader" class="site-header">
-            <nav class="max-w-7xl mx-auto px-4 h-16 flex items-center gap-6">
-                <a href="./" class="flex items-center">
-                    <i data-feather="box" class="h-6 w-6"></i>
-                    <span class="ml-2 font-semibold tracking-wide"
-                        >Curated</span
+        <!--
+            Floating navigation pill (right side).
+            - Becomes visible on scroll and can join with the main pill menu.
+            - Gives quick access to Work / Studio / Contact without scrolling back to top.
+            Behaviour (stickiness / joining) is handled in main.js + CSS.
+        -->
+        <nav
+            id="floatingNavPill"
+            class="nav-pill nav-pill--right"
+            aria-label="Primary navigation (floating)"
+        >
+            <ul class="pillmenu">
+                <li>
+                    <a class="pill" href="./projects.html#residential">Work</a>
+                </li>
+                <li><a class="pill" href="./about.html#about">Studio</a></li>
+                <li>
+                    <a class="pill" href="mailto:hello@curateddesign.studio"
+                        >Contact</a
                     >
-                </a>
+                </li>
+            </ul>
+        </nav>
 
-                <ul class="ml-auto hidden md:flex items-center gap-1">
-                    <li class="group relative">
-                        <a class="nav-link-dark" href="#"
-                            >Work <span class="chev"></span
-                        ></a>
-                        <div class="dropdown-dark">
-                            <a
-                                class="dd-link-dark"
-                                href="./projects.html#residential"
-                                >Residential</a
-                            >
-                            <a
-                                class="dd-link-dark"
-                                href="./projects.html#hospitality"
-                                >Hospitality</a
-                            >
-                            <a
-                                class="dd-link-dark"
-                                href="./projects.html#commercial"
-                                >Commercial</a
-                            >
-                        </div>
-                    </li>
-                    <li class="group relative">
-                        <a class="nav-link-dark" href="#"
-                            >Studio <span class="chev"></span
-                        ></a>
-                        <div class="dropdown-dark">
-                            <a class="dd-link-dark" href="./about.html#about"
-                                >About</a
-                            >
-                            <a class="dd-link-dark" href="./about.html#approach"
-                                >Approach</a
-                            >
-                            <a class="dd-link-dark" href="./about.html#press"
-                                >Press</a
-                            >
-                        </div>
-                    </li>
-                    <li>
-                        <a
-                            class="nav-link-dark"
-                            href="mailto:hello@curateddesign.studio"
-                            >Contact</a
-                        >
-                    </li>
-                </ul>
+        <!--
+            Centered logo below the fixed header.
+            - Visually anchors the brand at the top of the page.
+            - Separated from the hero text for a more refined hierarchy.
+        -->
+        <!--<div class="top-logo">
+            <img
+                src="./assets/images/logo5.png"
+                alt="Curated Design Studio logo"
+            />
+        </div>-->
 
-                <button
-                    id="menuBtn"
-                    class="md:hidden w-10 h-10 grid place-items-center rounded-xl border border-white/15"
-                    aria-expanded="false"
-                    aria-controls="mobileNav"
-                >
-                    ≡
-                </button>
-            </nav>
-
-            <div id="mobileNav" class="mobile-panel-dark" aria-hidden="true">
-                <a href="./projects.html#residential">Residential</a>
-                <a href="./projects.html#hospitality">Hospitality</a>
-                <a href="./projects.html#commercial">Commercial</a>
-                <hr class="border-white/10 my-1" />
-                <a href="./about.html#about">About</a>
-                <a href="./about.html#approach">Approach</a>
-                <a href="./about.html#press">Press</a>
-                <hr class="border-white/10 my-1" />
-                <a href="mailto:hello@curateddesign.studio">Contact</a>
-            </div>
-        </header>
-
+        <!--
+            Main page content wrapper.
+            - pt-28 / pb-24 create vertical breathing room
+              while the fixed header and background sit behind.
+        -->
         <main class="pt-28 pb-24">
-            <!-- ===== HERO ===== -->
+            <!--
+                HERO SECTION
+                - Introduces the studio with a clear headline and subhead.
+                - Centered layout for a strong first impression.
+                - Sits over the background image with subtle dimming.
+            -->
             <section class="hero">
                 <div class="max-w-[1150px] mx-auto px-4 hero-inner text-center">
                     <h1 class="headline">
-                        Considered interiors crafted for how you live.
+                        Curated interiors to define your lifestyle.
                     </h1>
                     <p class="subhead mx-auto">
                         A London-based interior design studio shaping
-                        distinctive residential and hospitality spaces with calm
-                        palettes, tactile materials, and thoughtful details.
+                        distinctive spaces.
                     </p>
                 </div>
             </section>
 
-            <!-- ===== PILL MENU ===== -->
+            <!--
+                PRIMARY PILL MENU
+                - Acts as an on-page navigation/index for the main sections.
+                - Each pill scrolls to its relevant section via smooth scroll in JS.
+                - Sticks under the header when scrolling, so it is always accessible.
+                Also used for "active" highlighting as the user scrolls down.
+            -->
             <nav id="pills" class="pillmenu-wrap" aria-label="Quick filters">
                 <ul class="pillmenu">
                     <li>
-                        <button class="pill active" type="button">
-                            Featured Projects
-                        </button>
+                        <a class="pill active" href="#portfolio"
+                            >Featured Projects</a
+                        >
                     </li>
                     <li>
-                        <button class="pill" type="button">
-                            Curated Services
-                        </button>
+                        <a class="pill" href="#services">Curated Services</a>
                     </li>
                     <li>
-                        <button class="pill" type="button">Collections</button>
+                        <a class="pill" href="#selected-work">Collections</a>
                     </li>
-                    <li>
-                        <button class="pill" type="button">
-                            Design Philosophy
-                        </button>
-                    </li>
+                    <li><a class="pill" href="#about">Design Philosophy</a></li>
                 </ul>
             </nav>
 
-            <!-- ===== CAROUSEL PANEL ===== -->
+            <!--
+                FEATURED PROJECTS CAROUSEL PANEL
+                - Hero-like panel showcasing a rotating set of key images.
+                - The "dock-panel" style frames the carousel as a focal object.
+                - The arrows and dots are wired up in main.js for slide control.
+                This gives a quick visual sense of your aesthetic and projects.
+            -->
             <section
                 id="portfolio"
                 class="dock-panel narrow"
                 aria-label="Portfolio carousel"
             >
                 <div class="carousel">
+                    <!-- Previous slide button -->
                     <button class="ctrl prev" id="prev" aria-label="Previous">
                         ‹
                     </button>
+
+                    <!--
+                        Viewport wrapper:
+                        - Ensures only one slide is visible at a time.
+                        - Track inside is translated left/right via JS to show slides.
+                    -->
                     <div class="viewport">
                         <div class="viewport-clip">
                             <div class="track" id="track">
+                                <!-- Slide 1 -->
                                 <div class="slide" aria-label="1 of 3">
                                     <img
                                         src="./assets/images/monet-bedroom.png"
@@ -177,6 +182,7 @@
                                         draggable="false"
                                     />
                                 </div>
+                                <!-- Slide 2 -->
                                 <div class="slide" aria-label="2 of 3">
                                     <img
                                         src="./assets/images/monet-living.png"
@@ -188,6 +194,7 @@
                                         draggable="false"
                                     />
                                 </div>
+                                <!-- Slide 3 -->
                                 <div class="slide" aria-label="3 of 3">
                                     <img
                                         src="./assets/images/monet-terrace.png"
@@ -202,14 +209,28 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Next slide button -->
                     <button class="ctrl next" id="next" aria-label="Next">
                         ›
                     </button>
                 </div>
+
+                <!--
+                    Carousel dots:
+                    - Dynamically populated in JS based on number of slides.
+                    - Show current slide and allow direct jump to a slide.
+                -->
                 <div id="dots" class="dots" aria-label="Slide indicators"></div>
             </section>
 
-            <!-- ===== BAND 1 ===== -->
+            <!--
+                BAND 1: CURATED SERVICES
+                - Background colour shift separates this from the hero/portfolio visually.
+                - Explains what you actually do, with a grid of service cards.
+                - Each card uses an image + title + short description.
+                This section is about capabilities and process rather than specific projects.
+            -->
             <section id="services" class="section band-1">
                 <div class="container">
                     <span class="kicker">Curated Services</span>
@@ -222,9 +243,15 @@
                         spaces tailored to the way you live.
                     </p>
 
+                    <!-- First row of service cards -->
                     <div class="card-grid">
                         <article class="card span-4">
-                            <div class="img-wrap"></div>
+                            <div class="img-wrap">
+                                <img
+                                    src="./assets/images/monet-living.png"
+                                    alt="Project thumbnail"
+                                />
+                            </div>
                             <div class="body">
                                 <h3 class="title">Concept Design</h3>
                                 <p class="muted">
@@ -234,8 +261,14 @@
                                 </p>
                             </div>
                         </article>
+
                         <article class="card span-4">
-                            <div class="img-wrap"></div>
+                            <div class="img-wrap">
+                                <img
+                                    src="./assets/images/monet-living.png"
+                                    alt="Project thumbnail"
+                                />
+                            </div>
                             <div class="body">
                                 <h3 class="title">
                                     Interior Architecture Design
@@ -247,8 +280,14 @@
                                 </p>
                             </div>
                         </article>
+
                         <article class="card span-4">
-                            <div class="img-wrap"></div>
+                            <div class="img-wrap">
+                                <img
+                                    src="./assets/images/monet-living.png"
+                                    alt="Project thumbnail"
+                                />
+                            </div>
                             <div class="body">
                                 <h3 class="title">Bespoke Furnishing</h3>
                                 <p class="muted">
@@ -259,9 +298,16 @@
                             </div>
                         </article>
                     </div>
+
+                    <!-- Second row of service cards -->
                     <div class="card-grid">
                         <article class="card span-4">
-                            <div class="img-wrap"></div>
+                            <div class="img-wrap">
+                                <img
+                                    src="./assets/images/monet-living.png"
+                                    alt="Project thumbnail"
+                                />
+                            </div>
                             <div class="body">
                                 <h3 class="title">Plans and Elevations</h3>
                                 <p class="muted">
@@ -271,8 +317,14 @@
                                 </p>
                             </div>
                         </article>
+
                         <article class="card span-4">
-                            <div class="img-wrap"></div>
+                            <div class="img-wrap">
+                                <img
+                                    src="./assets/images/monet-living.png"
+                                    alt="Project thumbnail"
+                                />
+                            </div>
                             <div class="body">
                                 <h3 class="title">Procurement</h3>
                                 <p class="muted">
@@ -282,8 +334,14 @@
                                 </p>
                             </div>
                         </article>
+
                         <article class="card span-4">
-                            <div class="img-wrap"></div>
+                            <div class="img-wrap">
+                                <img
+                                    src="./assets/images/monet-living.png"
+                                    alt="Project thumbnail"
+                                />
+                            </div>
                             <div class="body">
                                 <h3 class="title">Styling</h3>
                                 <p class="muted">
@@ -297,7 +355,13 @@
                 </div>
             </section>
 
-            <!-- ===== BAND 2 ===== -->
+            <!--
+                BAND 2: COLLECTIONS / RECENT PROJECTS
+                - Different band colour again to visually separate this block.
+                - Showcases specific projects as cards linking to the projects page.
+                - Each card includes an image, project title, and category/year.
+                This section is more concrete: named work rather than general services.
+            -->
             <section id="selected-work" class="section band-2">
                 <div class="container">
                     <span class="kicker">Collections</span>
@@ -319,6 +383,7 @@
                                 <p class="muted">Residential · 2025</p>
                             </div>
                         </a>
+
                         <a
                             class="card span-6"
                             href="./projects.html#hospitality"
@@ -334,6 +399,7 @@
                                 <p class="muted">Hospitality · 2025</p>
                             </div>
                         </a>
+
                         <a
                             class="card span-4"
                             href="./projects.html#commercial"
@@ -349,21 +415,33 @@
                                 <p class="muted">Commercial · 2024</p>
                             </div>
                         </a>
+
                         <a
                             class="card span-4"
                             href="./projects.html#residential"
                         >
-                            <div class="img-wrap"></div>
+                            <div class="img-wrap">
+                                <img
+                                    src="./assets/images/monet-living.png"
+                                    alt="Project thumbnail"
+                                />
+                            </div>
                             <div class="body">
                                 <h3 class="title">Chelsea Townhouse</h3>
                                 <p class="muted">Residential · 2024</p>
                             </div>
                         </a>
+
                         <a
                             class="card span-4"
                             href="./projects.html#residential"
                         >
-                            <div class="img-wrap"></div>
+                            <div class="img-wrap">
+                                <img
+                                    src="./assets/images/monet-living.png"
+                                    alt="Project thumbnail"
+                                />
+                            </div>
                             <div class="body">
                                 <h3 class="title">Shoreditch Loft</h3>
                                 <p class="muted">Residential · 2023</p>
@@ -373,10 +451,23 @@
                 </div>
             </section>
 
-            <!-- ===== BAND 3 ===== -->
+            <!--
+                BAND 3: DESIGN PHILOSOPHY + CTA
+                - Final band with the deepest background colour.
+                - Split layout: image on one side, text on the other.
+                - Explains your ethos and process in more narrative terms.
+                - Ends with a call-to-action inviting the visitor to get in touch.
+                This is where you sell the "why us" and then give a clear next step.
+            -->
             <section id="about" class="section band-3">
                 <div class="container">
                     <span class="kicker">Design Philosophy</span>
+
+                    <!--
+                        Split layout: media + copy.
+                        - Media: illustrative project image.
+                        - Content: headline and supporting paragraphs.
+                    -->
                     <div class="split">
                         <div class="media">
                             <img
@@ -407,6 +498,13 @@
                         </div>
                     </div>
 
+                    <!--
+                        Call-to-action block:
+                        - Reinforces that you welcome enquiries.
+                        - Uses a button-style link that opens an email to your studio.
+                        - Positioned after philosophy so the user understands you
+                          before being asked to make contact.
+                    -->
                     <div class="cta" style="margin-top: 36px">
                         <h3 class="h2" style="margin: 0">
                             Have a project in mind?
@@ -427,7 +525,12 @@
             </section>
         </main>
 
-        <!-- App script -->
+        <!--
+            Main JavaScript bundle for this page.
+            - Handles parallax background, carousel behaviour, mobile nav toggle,
+              pill menu scrolling, sticky behaviour, and active highlight.
+            - Loaded with 'defer' so it runs after HTML is parsed without blocking render.
+        -->
         <script src="./assets/js/main.js" defer></script>
     </body>
 </html>

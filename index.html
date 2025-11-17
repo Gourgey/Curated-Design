@@ -42,6 +42,8 @@
         The background itself is handled by a fixed layer (#bg) below.
     -->
     <body class="min-h-screen text-[#f2f2f2] font-inter">
+        <div id="top"></div>
+
         <!--
             Fixed parallax background layer.
             - Sits behind all content (z-index in CSS).
@@ -58,6 +60,10 @@
             />
             <div class="bg-dim"></div>
         </div>
+
+        <a href="#top" id="topLogo" class="top-left-logo">
+            <img src="./assets/images/logo4.png" alt="Curated Design Studio" />
+        </a>
 
         <!--
             Floating navigation pill (right side).
@@ -82,18 +88,6 @@
                 </li>
             </ul>
         </nav>
-
-        <!--
-            Centered logo below the fixed header.
-            - Visually anchors the brand at the top of the page.
-            - Separated from the hero text for a more refined hierarchy.
-        -->
-        <!--<div class="top-logo">
-            <img
-                src="./assets/images/logo5.png"
-                alt="Curated Design Studio logo"
-            />
-        </div>-->
 
         <!--
             Main page content wrapper.
@@ -172,12 +166,11 @@
                                 <!-- Slide 1 -->
                                 <div class="slide" aria-label="1 of 3">
                                     <img
-                                        src="./assets/images/monet-bedroom.png"
-                                        alt="Bedroom interior"
+                                        src="./assets/images/16-9_images/monet-living.webp"
+                                        alt="Living room interior"
                                         width="1600"
                                         height="900"
-                                        fetchpriority="high"
-                                        loading="eager"
+                                        loading="lazy"
                                         decoding="async"
                                         draggable="false"
                                     />
@@ -185,8 +178,8 @@
                                 <!-- Slide 2 -->
                                 <div class="slide" aria-label="2 of 3">
                                     <img
-                                        src="./assets/images/monet-living.png"
-                                        alt="Living room interior"
+                                        src="./assets/images/16-9_images/gwape_bedroom.webp"
+                                        alt="Bedroom interior"
                                         width="1600"
                                         height="900"
                                         loading="lazy"
@@ -197,8 +190,8 @@
                                 <!-- Slide 3 -->
                                 <div class="slide" aria-label="3 of 3">
                                     <img
-                                        src="./assets/images/monet-terrace.png"
-                                        alt="Terrace interior"
+                                        src="./assets/images/16-9_images/gwape_living.webp"
+                                        alt="Living interior"
                                         width="1600"
                                         height="900"
                                         loading="lazy"
@@ -265,7 +258,7 @@
                         <article class="card span-4">
                             <div class="img-wrap">
                                 <img
-                                    src="./assets/images/monet-living.png"
+                                    src="./assets/images/16-9_images/monet-bedroom.webp"
                                     alt="Project thumbnail"
                                 />
                             </div>
@@ -284,7 +277,7 @@
                         <article class="card span-4">
                             <div class="img-wrap">
                                 <img
-                                    src="./assets/images/monet-living.png"
+                                    src="./assets/images/16-9_images/monet-terrace.webp"
                                     alt="Project thumbnail"
                                 />
                             </div>
@@ -304,7 +297,7 @@
                         <article class="card span-4">
                             <div class="img-wrap">
                                 <img
-                                    src="./assets/images/monet-living.png"
+                                    src="./assets/images/16-9_images/gwape_bedroom.webp"
                                     alt="Project thumbnail"
                                 />
                             </div>
@@ -321,7 +314,7 @@
                         <article class="card span-4">
                             <div class="img-wrap">
                                 <img
-                                    src="./assets/images/monet-living.png"
+                                    src="./assets/images/16-9_images/gwape_living.webp"
                                     alt="Project thumbnail"
                                 />
                             </div>
@@ -338,7 +331,7 @@
                         <article class="card span-4">
                             <div class="img-wrap">
                                 <img
-                                    src="./assets/images/monet-living.png"
+                                    src="./assets/images/16-9_images/gwape_study.webp"
                                     alt="Project thumbnail"
                                 />
                             </div>
@@ -374,7 +367,7 @@
                         >
                             <div class="img-wrap">
                                 <img
-                                    src="./assets/images/monet-living.png"
+                                    src="./assets/images/16-9_images/gwape_bedroom.webp"
                                     alt="Project thumbnail"
                                 />
                             </div>
@@ -390,7 +383,7 @@
                         >
                             <div class="img-wrap">
                                 <img
-                                    src="./assets/images/monet-terrace.png"
+                                    src="./assets/images/16-9_images/monet-living.webp"
                                     alt="Project thumbnail"
                                 />
                             </div>
@@ -406,7 +399,7 @@
                         >
                             <div class="img-wrap">
                                 <img
-                                    src="./assets/images/monet-bedroom.png"
+                                    src="./assets/images/16-9_images/monet-bedroom.webp"
                                     alt="Project thumbnail"
                                 />
                             </div>
@@ -422,7 +415,7 @@
                         >
                             <div class="img-wrap">
                                 <img
-                                    src="./assets/images/monet-living.png"
+                                    src="./assets/images/16-9_images/gwape_living.webp"
                                     alt="Project thumbnail"
                                 />
                             </div>
@@ -438,7 +431,7 @@
                         >
                             <div class="img-wrap">
                                 <img
-                                    src="./assets/images/monet-living.png"
+                                    src="./assets/images/16-9_images/gwape_study.webp"
                                     alt="Project thumbnail"
                                 />
                             </div>
@@ -471,7 +464,7 @@
                     <div class="split">
                         <div class="media">
                             <img
-                                src="./assets/images/monet-living.png"
+                                src="./assets/images/16-9_images/monet-terrace.webp"
                                 alt=""
                                 style="
                                     width: 100%;

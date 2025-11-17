@@ -100,11 +100,8 @@ window.addEventListener("DOMContentLoaded", () => {
     function scrollToTarget(sel) {
       const el = document.querySelector(sel);
       if (!el) return;
-      const headerH = header ? header.offsetHeight : 0;
-      const pillsBar = document.getElementById("pills");
-      const pillsH = pillsBar ? pillsBar.offsetHeight : 0;
-      const y =
-        el.getBoundingClientRect().top + window.scrollY - headerH - pillsH - 8; // same gap as CSS
+      // Scroll so the section top aligns with the top of the viewport
+      const y = el.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
 

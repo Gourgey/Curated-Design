@@ -2,112 +2,238 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>About — Curated Design Studio</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: { colors: { ring: "rgba(255,255,255,.12)" } },
-                },
-            };
-        </script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"
-            defer
-        ></script>
-        <link rel="stylesheet" href="/assets/css/styles.css" />
-    </head>
-    <body class="bg-[#121212] text-[#f2f2f2] font-inter">
-        <!-- Shared header -->
-        <header
-            class="fixed inset-x-0 top-0 z-50 bg-black/50 backdrop-blur border-b border-white/10"
-        >
-            <nav class="max-w-7xl mx-auto px-4 h-16 flex items-center gap-6">
-                <a href="/" class="flex items-center"
-                    ><i data-feather="box" class="h-6 w-6"></i
-                    ><span class="ml-2 font-semibold">Curated</span></a
-                >
-                <ul class="ml-auto hidden md:flex items-center gap-1">
-                    <li class="group relative">
-                        <a class="nav-link-dark" href="#"
-                            >Work <span class="chev"></span
-                        ></a>
-                        <div class="dropdown-dark">
-                            <a
-                                class="dd-link-dark"
-                                href="/projects.html#residential"
-                                >Residential</a
-                            >
-                            <a
-                                class="dd-link-dark"
-                                href="/projects.html#hospitality"
-                                >Hospitality</a
-                            >
-                            <a
-                                class="dd-link-dark"
-                                href="/projects.html#commercial"
-                                >Commercial</a
-                            >
-                        </div>
-                    </li>
-                    <li class="group relative">
-                        <a class="nav-link-dark" href="#"
-                            >Studio <span class="chev"></span
-                        ></a>
-                        <div class="dropdown-dark">
-                            <a class="dd-link-dark" href="/about.html#about"
-                                >About</a
-                            >
-                            <a class="dd-link-dark" href="/about.html#approach"
-                                >Approach</a
-                            >
-                            <a class="dd-link-dark" href="/about.html#press"
-                                >Press</a
-                            >
-                        </div>
-                    </li>
-                    <li>
-                        <a
-                            class="nav-link-dark"
-                            href="mailto:hello@curateddesign.studio"
-                            >Contact</a
-                        >
-                    </li>
-                </ul>
-                <button
-                    id="menuBtn"
-                    class="md:hidden w-10 h-10 grid place-items-center rounded-xl border border-white/15"
-                >
-                    ≡
-                </button>
-            </nav>
-            <div id="mobileNav" class="mobile-panel-dark">
-                <a href="/projects.html#residential">Residential</a>
-                <a href="/projects.html#hospitality">Hospitality</a>
-                <a href="/projects.html#commercial">Commercial</a>
-                <hr class="border-white/10 my-1" />
-                <a href="/about.html#about">About</a>
-                <a href="/about.html#approach">Approach</a>
-                <a href="/about.html#press">Press</a>
-                <hr class="border-white/10 my-1" />
-                <a href="mailto:hello@curateddesign.studio">Contact</a>
-            </div>
-        </header>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Studio – Curated Design Studio</title>
 
-        <main class="max-w-3xl mx-auto px-4 pt-28 pb-24">
-            <h1 id="about" class="text-3xl font-extrabold">About</h1>
-            <p class="mt-4 text-white/80 leading-relaxed">
-                Curated Design Studio crafts interiors that balance function and
-                feeling. Replace this copy with your practice’s biography,
-                awards, and approach.
-            </p>
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="./assets/css/styles.css" />
+    </head>
+    <body class="min-h-screen text-[#f2f2f2] font-inter">
+        <div id="top"></div>
+
+        <!-- Fixed background -->
+        <div id="bg" aria-hidden="true">
+            <img
+                id="bgImg"
+                src="./assets/images/background.png"
+                alt=""
+                decoding="async"
+            />
+            <div class="bg-dim"></div>
+        </div>
+
+        <a href="index.html#top" id="topLogo" class="top-left-logo">
+            <img src="./assets/images/logo20.png" alt="Curated Design Studio" />
+            <span class="top-left-logo-text">Curated Design</span>
+        </a>
+
+        <!--
+            Floating navigation pill (right side).
+            - Becomes visible on scroll and can join with the main pill menu.
+            - Gives quick access to Work / Studio / Contact without scrolling back to top.
+            Behaviour (stickiness / joining) is handled in main.js + CSS.
+        -->
+        <nav
+            id="floatingNavPill"
+            class="nav-pill nav-pill--right"
+            aria-label="Primary navigation (floating)"
+        >
+            <!-- Burger button (hidden by default, shown in compact mode) -->
+            <button
+                class="pillmenu-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="floatingPillMenu"
+            >
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </button>
+
+            <!-- The pill menu that should disappear in compact mode -->
+            <ul id="floatingPillMenu" class="pillmenu">
+                <li class="overlay-home-only">
+                    <a class="pill" href="index.html">Home</a>
+                </li>
+                <li>
+                    <a class="pill" href="projects.html">Work</a>
+                </li>
+                <li><a class="pill" href="about.html">Studio</a></li>
+                <li>
+                    <a class="pill" href="contact.html">Contact</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="pt-28">
+            <!-- HERO -->
+            <section class="hero">
+                <div class="max-w-[1150px] mx-auto px-4 hero-inner text-center">
+                    <h1 class="headline">
+                        A studio for considered, characterful spaces.
+                    </h1>
+                    <p class="subhead mx-auto">
+                        Curated Design Studio works across residential and
+                        hospitality interiors, creating spaces that feel lived
+                        in, not themed.
+                    </p>
+                </div>
+            </section>
+
+            <!-- STUDIO OVERVIEW -->
+            <section class="section band-1">
+                <div class="container">
+                    <span class="kicker">Studio</span>
+                    <h2 class="h2">How we approach every project.</h2>
+                    <p class="lead">
+                        Every interior begins with how it will be used day to
+                        day: the rituals, the routes through the space, the way
+                        light moves during the day. From there, we build a
+                        material language that feels calm, tactile, and quietly
+                        confident.
+                    </p>
+
+                    <div class="split" style="margin-top: 28px">
+                        <div class="content">
+                            <h3 class="title">What defines our work</h3>
+                            <p>
+                                We balance clean, contemporary lines with
+                                details that add warmth and depth – from joinery
+                                proportions and hardware choices to how fabrics
+                                sit against stone, timber, and metal.
+                            </p>
+                            <p>
+                                Rather than chasing trends, we focus on layouts
+                                that genuinely work, robust materials, and a
+                                palette that can evolve with the client’s life
+                                or brand.
+                            </p>
+                        </div>
+
+                        <div class="media">
+                            <p class="muted" style="font-size: 14px">
+                                Selected focuses:
+                            </p>
+                            <ul class="list-disc pl-4 mt-2 space-y-1 text-sm">
+                                <li>Residential homes and apartments</li>
+                                <li>
+                                    Restaurants, bars, and boutique hospitality
+                                </li>
+                                <li>
+                                    Interior architecture and spatial planning
+                                </li>
+                                <li>Furniture, lighting, and styling</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PROCESS -->
+            <section class="section band-2">
+                <div class="container">
+                    <span class="kicker">Process</span>
+                    <h2 class="h2">
+                        Clear stages, from first conversation to handover.
+                    </h2>
+                    <p class="lead">
+                        The process is structured enough to keep things moving,
+                        and flexible enough to respond to how you prefer to
+                        work.
+                    </p>
+
+                    <div class="grid md:grid-cols-3 gap-6 mt-8">
+                        <div class="card">
+                            <h3 class="title">01. Brief & concept</h3>
+                            <p>
+                                We begin with a detailed brief: how you live or
+                                how you expect guests to use the space, timings,
+                                and practical constraints. From this, we develop
+                                an initial concept with floorplans and mood
+                                imagery.
+                            </p>
+                        </div>
+
+                        <div class="card">
+                            <h3 class="title">02. Design development</h3>
+                            <p>
+                                We refine layouts, fixtures, and finishes, and
+                                resolve joinery and lighting in more detail.
+                                This stage usually includes drawings, sample
+                                boards, and a clear cost direction.
+                            </p>
+                        </div>
+
+                        <div class="card">
+                            <h3 class="title">03. Delivery & styling</h3>
+                            <p>
+                                We coordinate with contractors and suppliers,
+                                help keep the project aligned with the design
+                                intent, and complete the space with furniture,
+                                art, and styling where required.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SERVICES / CLIENTS -->
+            <section class="section band-3">
+                <div class="container">
+                    <span class="kicker">Services</span>
+                    <h2 class="h2">How we can work with you.</h2>
+
+                    <div class="split" style="margin-top: 20px">
+                        <div class="content">
+                            <h3 class="title">Service options</h3>
+                            <ul class="list-disc pl-4 space-y-1 text-sm">
+                                <li>
+                                    Full interior design and project involvement
+                                </li>
+                                <li>
+                                    Design-only packages for clients with their
+                                    own contractor team
+                                </li>
+                                <li>
+                                    Concept + layout studies for early-stage
+                                    developments
+                                </li>
+                                <li>
+                                    Furniture, lighting, and styling for
+                                    existing spaces
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="media">
+                            <h3 class="title">Locations & scope</h3>
+                            <p>
+                                Based in London, with projects across the UK and
+                                selected international work. We collaborate with
+                                architects, developers, and private clients on
+                                both new-build and refurbishment schemes.
+                            </p>
+
+                            <a
+                                href="./contact.html"
+                                class="button"
+                                style="margin-top: 14px"
+                            >
+                                <span class="dot" aria-hidden="true"></span>
+                                Discuss a project
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
 
-        <footer class="max-w-7xl mx-auto px-4 text-sm text-white/60 pb-16">
-            © <span id="year"></span> Curated Design Studio.
-        </footer>
-
-        <script src="/assets/js/main.js" defer></script>
+        <script src="./assets/js/main.js" defer></script>
     </body>
 </html>

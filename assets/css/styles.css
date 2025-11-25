@@ -265,19 +265,39 @@ a {
     display: block;
 }
 
-/* --- Top-left logo aligned with floating pill nav --- */
+/* --- Top-left logo aligned with floating pill nav ---
+   - Fixed pill in the top-left that acts as your brand + home link.
+   - Mirrors the style of the floating right-hand pill for consistency.
+*/
 .top-left-logo {
     position: fixed;
-    top: -6px;
+    top: var(--pills-gap); /* vertically aligned with floating nav pill */
     left: clamp(16px, 4vw, 40px);
-    z-index: 650; /* above background, below floating pill */
-    display: flex;
+    z-index: 650; /* above background, under floating pill */
+    display: inline-flex;
     align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+    font-size: 24px;
+    white-space: nowrap;
     pointer-events: auto;
+    cursor: pointer;
+    text-decoration: none;
 }
 
+.top-left-logo:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* Logo mark inside the pill (your circular badge) */
 .top-left-logo img {
-    height: 88px; /* adjust size */
+    height: 40px;
     width: auto;
     opacity: 0.95;
     transition:
@@ -289,7 +309,246 @@ a {
 
 .top-left-logo img:hover {
     opacity: 1;
-    transform: scale(1.05);
+    transform: scale(1.03);
+}
+
+/* Visually hidden helper for accessibility (e.g. screen-reader-only text) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* --- Burger toggle base styles ---
+   - Hidden by default on desktop.
+   - Styled as a circular glassy button once it's visible on mobile.
+*/
+.pillmenu-toggle {
+    display: none; /* shown only under 1000px */
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+    cursor: pointer;
+    pointer-events: auto;
+    padding: 0;
+}
+
+/* Default: floating nav shows its pill menu inline (desktop behaviour) */
+#floatingNavPill .pillmenu {
+    display: inline-flex;
+}
+
+/* --- Basic burger lines ---
+   - Three horizontal bars that will animate into an “X” when the menu is open.
+*/
+.pillmenu-toggle .burger-line {
+    width: 18px;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.9);
+    display: block;
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.pillmenu-toggle .burger-line + .burger-line {
+    margin-top: 4px;
+}
+
+/* Burger → “X” animation when the floating nav has .is-open */
+#floatingNavPill.is-open .burger-line:nth-child(2) {
+    opacity: 0;
+}
+
+#floatingNavPill.is-open .burger-line:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+#floatingNavPill.is-open .burger-line:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+/* ===== Pill menu (primary pill bar) =====
+   - Shared pill styling used both for the main centre pill bar and
+     the floating right-hand nav.
+*/
+.pillmenu {
+    display: flex;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid var(--ring);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+}
+
+/* Individual pill buttons/links */
+.pill {
+    display: block;
+    padding: 8px 14px;
+    border-radius: 999px;
+    color: #d9d9d9;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+.pill:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--ink);
+}
+.pill.active {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--ink);
+}
+
+/* ===== Floating right-hand pill nav =====
+   - Fixed pill menu that sits on the right side near the top.
+   - Contains both the inline pills (desktop) and burger toggle (mobile).
+*/
+.nav-pill {
+    position: fixed;
+    top: var(--pills-gap);
+    right: 0;
+    left: 0;
+    z-index: 600;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    margin: 0;
+}
+
+/* Right-align the floating nav pill bar */
+.nav-pill--right {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 clamp(16px, 4vw, 40px);
+}
+
+/* Inner pill menu styling when floating nav is in desktop mode */
+.nav-pill .pillmenu {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+    pointer-events: auto;
+}
+
+/* ===== Desktop-only behaviour (≥ 1001px) =====
+   - Show inline floating pills.
+   - Hide burger toggle.
+   - Hide the Home item inside the overlay list (logo acts as Home on desktop).
+*/
+@media (min-width: 1001px) {
+    .pillmenu-toggle {
+        display: none !important;
+    }
+
+    #floatingNavPill .pillmenu {
+        display: inline-flex !important;
+    }
+
+    #floatingPillMenu .overlay-home-only {
+        display: none;
+    }
+}
+
+/* ===== Mobile behaviour (≤ 1000px) =====
+   - Floating pills are hidden.
+   - Burger button appears in the top-right.
+   - Top-left logo shrinks to icon-only.
+   - When nav has .is-open, it becomes a full-screen black overlay
+     with centred navigation items (Home, Work, Studio, Contact).
+*/
+@media (max-width: 1000px) {
+    /* Hide inline floating pills under the header; burger takes over */
+    #floatingNavPill .pillmenu {
+        display: none;
+    }
+
+    /* Show burger toggle and pin it to the top-right */
+    .pillmenu-toggle {
+        display: inline-flex;
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        z-index: 1001;
+    }
+
+    /* Logo pill becomes icon-only on mobile */
+    .top-left-logo {
+        top: 8px;
+        padding: 0;
+        font-size: 0; /* hides text label size */
+    }
+
+    .top-left-logo-text {
+        display: none; /* explicitly hide the label span if present */
+    }
+
+    .top-left-logo img {
+        height: 40px;
+    }
+
+    /* FULL-SCREEN BLACK OVERLAY WHEN BURGER IS OPEN
+       - #floatingNavPill stretches to cover the viewport.
+       - Pills stack vertically in the centre.
+    */
+    #floatingNavPill.is-open {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0;
+        padding: 0;
+        background: #000;
+        z-index: 900;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #floatingNavPill.is-open .pillmenu {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        border: none !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+
+    #floatingNavPill.is-open .pillmenu .pill {
+        font-size: 24px;
+        padding: 12px 24px;
+    }
+
+    /* Ensure the Home item (overlay-home-only) is visible in the overlay */
+    #floatingNavPill.is-open .overlay-home-only {
+        display: block;
+    }
 }
 
 /* ===== Hero ===== */
@@ -356,26 +615,6 @@ a {
     }
 }
 
-/* ===== Pill menu (primary pill bar) ===== */
-/*
-   Pill menu wrapper (initial layout):
-   - Centers the pill set in the page.
-   - Margins separate it from hero and content below.
-*/
-/*.pillmenu-wrap {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    place-items: center;
-    margin: 28px 0 18px;
-}*/
-
-/*
-   Override for pillmenu-wrap when sticky:
-   - Makes the main pill bar stick under the header once scrolled.
-   - High z-index ensures it stays above the carousel and other content.
-   - pointer-events: auto so it remains clickable.
-*/
 .pillmenu-wrap {
     position: sticky;
     top: calc(var(--header-h) + var(--pills-gap));
@@ -399,23 +638,6 @@ a {
 }
 
 /*
-   Pill menu bar:
-   - Horizontal row of pills.
-   - Semi-transparent, rounded container with blur and shadow.
-*/
-.pillmenu {
-    display: flex;
-    gap: 8px; /* was 10px */
-    padding: 8px 12px; /* was 6px */
-    border: 1px solid var(--ring);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.06); /* was 0.05 */
-    backdrop-filter: blur(6px); /* NEW: match nav pill */
-    -webkit-backdrop-filter: blur(6px); /* Safari */
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32); /* NEW: match nav pill */
-}
-
-/*
    Individual pill:
    - Clickable chip acting as filter/nav item.
    - Active state used for currently-viewed section.
@@ -428,165 +650,6 @@ a {
     border: none;
     background: transparent;
     cursor: pointer;
-}
-.pill:hover {
-    background: rgba(255, 255, 255, 0.07);
-    color: var(--ink);
-}
-.pill.active {
-    background: rgba(255, 255, 255, 0.12);
-    color: var(--ink);
-}
-
-/* --- Header nav shown as a pill (inside the fixed dark header) --- */
-/*
-   Styling for a pill-style nav inside the header:
-   - Used if the header contains a compact pill-style menu.
-*/
-.site-header .site-nav .pillmenu {
-    display: inline-flex;
-    gap: 8px;
-    padding: 8px 12px;
-    border: 1px solid var(--ring, rgba(255, 255, 255, 0.25));
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(6px);
-    align-items: center;
-}
-
-/*
-   When the floating pill nav is visible:
-   - Ensure it appears fully and can be interacted with.
-*/
-body.floating-pill-visible .nav-pill {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-/*
-   Hide header nav entirely:
-   - Useful when the header menu is replaced by the floating pill system.
-*/
-.site-header .site-nav {
-    display: none !important;
-}
-
-/* ===== Floating right-hand pill nav ===== */
-/*
-   Base styling for floating pill nav:
-   - Sticky near the top.
-   - pointer-events: none so only its inner pillmenu catches clicks.
-*/
-.nav-pill {
-    position: fixed;
-    top: var(--pills-gap);
-    right: 0; /* let the .nav-pill--right padding handle inner align */
-    left: 0; /* full-width flex container */
-    z-index: 600;
-    opacity: 1;
-    pointer-events: none;
-    transform: translateY(0);
-    margin: 0; /* don't inherit the pillmenu-wrap margins */
-}
-
-/*
-   Right-aligned container:
-   - Keeps floating nav anchored to the right edge with padding.
-*/
-.nav-pill--right {
-    display: flex;
-    justify-content: flex-end;
-    padding: 0 clamp(16px, 4vw, 40px);
-}
-
-/*
-   Inner pill menu of floating nav:
-   - Same pill look as main bar.
-   - pointer-events: auto so the pills themselves are clickable.
-*/
-.nav-pill .pillmenu {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(6px);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
-    pointer-events: auto; /* re-enable clicks on the visible pills */
-}
-
-/*
-   Fixed state for floating nav when "joined":
-   - Converts from sticky to fixed to align with the header/pill bar.
-*/
-.nav-pill.is-fixed {
-    position: fixed; /* sticky → fixed while joined */
-    top: calc(var(--header-h, 64px) + var(--pills-gap));
-    left: 0; /* full-width flex container */
-    right: 0;
-    z-index: 700; /* keep it on top while joined */
-    pointer-events: none; /* still let clicks through outside the pill */
-}
-
-/*
-   Maintain right alignment when fixed:
-   - Uses same horizontal padding as sticky state.
-*/
-.nav-pill.is-fixed.nav-pill--right {
-    display: flex;
-    justify-content: flex-end;
-    padding: 0 clamp(16px, 4vw, 40px);
-}
-
-/*
-   When body has pills-joined:
-   - Constrain the floating pill width while keeping it right-anchored.
-*/
-body.pills-joined #floatingNavPill.is-fixed .pillmenu {
-    max-width: min(1150px, calc(100% - 32px));
-    width: auto; /* right edge stays put */
-}
-
-/*
-   Same constraint when joined but not necessarily fixed:
-   - Ensures consistent width behaviour.
-*/
-body.pills-joined #floatingNavPill .pillmenu {
-    max-width: min(1150px, calc(100% - 32px));
-    width: auto; /* auto so the right edge stays where it is */
-}
-
-/*
-   Hide the lower/main pill bar when the floating one has joined:
-   - Avoids duplicate pill bars on screen.
-*/
-body.pills-joined #pills {
-    visibility: hidden;
-    pointer-events: none;
-    height: 0;
-    margin: 0;
-}
-
-/*
-   Optional visual dim of header pill when floating is visible:
-   - Makes it feel like the pill has "detached" from the header.
-*/
-body.floating-pill-visible .site-header .site-nav .pillmenu {
-    opacity: 0.35;
-}
-
-/*
-   Slight variation for joined floating nav:
-   - Stronger background and full-width pill when joined.
-*/
-body.pills-joined #floatingNavPill .pillmenu {
-    max-width: min(1150px, calc(100% - 32px));
-    width: 100%;
-    border-color: var(--ring);
-    background: rgba(255, 255, 255, 0.08);
 }
 
 /* ===== Dock panel / Carousel container ===== */
@@ -993,4 +1056,62 @@ body.pills-joined #floatingNavPill .pillmenu {
 
 .dot.active {
     background: var(--accent);
+}
+
+/*Contact Page*/
+
+.form-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--ring);
+    border-radius: 16px;
+    padding: 18px 16px 20px;
+    display: grid;
+    gap: 12px;
+}
+
+.form-field {
+    display: grid;
+    gap: 4px;
+}
+
+.form-field label {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: #0f1012;
+    color: var(--ink);
+    font-size: 14px;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+    color: rgba(189, 189, 189, 0.9);
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+    outline: 0;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(209, 243, 101, 0.45);
+}
+
+.button-full {
+    width: 100%;
+    justify-content: center;
+}
+
+/* Hide the Home item in the desktop floating pill */
+@media (min-width: 1001px) {
+    #floatingPillMenu .overlay-home-only {
+        display: none;
+    }
 }

@@ -2,116 +2,237 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Projects — Curated Design Studio</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Projects – Curated Design Studio</title>
+
         <script src="https://cdn.tailwindcss.com"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"
-            defer
-        ></script>
-        <link rel="stylesheet" href="/assets/css/styles.css" />
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="./assets/css/styles.css" />
     </head>
-    <body class="bg-[#121212] text-[#f2f2f2] font-inter">
-        <!-- Shared header -->
-        <header
-            class="fixed inset-x-0 top-0 z-50 bg-black/50 backdrop-blur border-b border-white/10"
+    <body class="min-h-screen text-[#f2f2f2] font-inter">
+        <div id="top"></div>
+
+        <!-- Fixed background -->
+        <div id="bg" aria-hidden="true">
+            <img
+                id="bgImg"
+                src="./assets/images/background.png"
+                alt=""
+                decoding="async"
+            />
+            <div class="bg-dim"></div>
+        </div>
+
+        <a href="index.html#top" id="topLogo" class="top-left-logo">
+            <img src="./assets/images/logo20.png" alt="Curated Design Studio" />
+            <span class="top-left-logo-text">Curated Design</span>
+        </a>
+
+        <!--
+            Floating navigation pill (right side).
+            - Becomes visible on scroll and can join with the main pill menu.
+            - Gives quick access to Work / Studio / Contact without scrolling back to top.
+            Behaviour (stickiness / joining) is handled in main.js + CSS.
+        -->
+        <nav
+            id="floatingNavPill"
+            class="nav-pill nav-pill--right"
+            aria-label="Primary navigation (floating)"
         >
-            <nav class="max-w-7xl mx-auto px-4 h-16 flex items-center gap-6">
-                <a href="/" class="flex items-center"
-                    ><i data-feather="box" class="h-6 w-6"></i
-                    ><span class="ml-2 font-semibold">Curated</span></a
-                >
-                <ul class="ml-auto hidden md:flex items-center gap-1">
-                    <li class="group relative">
-                        <a class="nav-link-dark" href="#"
-                            >Work <span class="chev"></span
-                        ></a>
-                        <div class="dropdown-dark">
-                            <a class="dd-link-dark" href="#residential"
-                                >Residential</a
-                            >
-                            <a class="dd-link-dark" href="#hospitality"
-                                >Hospitality</a
-                            >
-                            <a class="dd-link-dark" href="#commercial"
-                                >Commercial</a
-                            >
-                        </div>
-                    </li>
-                    <li class="group relative">
-                        <a class="nav-link-dark" href="#"
-                            >Studio <span class="chev"></span
-                        ></a>
-                        <div class="dropdown-dark">
-                            <a class="dd-link-dark" href="/about.html#about"
-                                >About</a
-                            >
-                            <a class="dd-link-dark" href="/about.html#approach"
-                                >Approach</a
-                            >
-                            <a class="dd-link-dark" href="/about.html#press"
-                                >Press</a
-                            >
-                        </div>
-                    </li>
-                    <li>
-                        <a
-                            class="nav-link-dark"
-                            href="mailto:hello@curateddesign.studio"
-                            >Contact</a
-                        >
-                    </li>
-                </ul>
-                <button
-                    id="menuBtn"
-                    class="md:hidden w-10 h-10 grid place-items-center rounded-xl border border-white/15"
-                >
-                    ≡
-                </button>
-            </nav>
-            <div id="mobileNav" class="mobile-panel-dark">
-                <a href="#residential">Residential</a>
-                <a href="#hospitality">Hospitality</a>
-                <a href="#commercial">Commercial</a>
-                <hr class="border-white/10 my-1" />
-                <a href="/about.html#about">About</a>
-                <a href="/about.html#approach">Approach</a>
-                <a href="/about.html#press">Press</a>
-                <hr class="border-white/10 my-1" />
-                <a href="mailto:hello@curateddesign.studio">Contact</a>
-            </div>
-        </header>
-
-        <main class="max-w-7xl mx-auto px-4 pt-28 pb-24">
-            <h1 class="text-3xl font-extrabold">Projects</h1>
-            <p class="mt-2 text-white/70">Selected interiors and objects.</p>
-
-            <section
-                id="residential"
-                class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+            <!-- Burger button (hidden by default, shown in compact mode) -->
+            <button
+                class="pillmenu-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="floatingPillMenu"
             >
-                <article
-                    class="rounded-xl overflow-hidden bg-[#1b1b1b] border border-white/10"
-                >
-                    <a href="#"
-                        ><img
-                            src="https://picsum.photos/800/600?1"
-                            class="w-full h-56 object-cover"
-                            alt=""
-                        />
-                        <div class="p-5">
-                            <h2 class="text-lg font-semibold">Project Name</h2>
-                            <p class="text-sm text-white/60">Location · Year</p>
-                        </div></a
-                    >
-                </article>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </button>
+
+            <!-- The pill menu that should disappear in compact mode -->
+            <ul id="floatingPillMenu" class="pillmenu">
+                <li class="overlay-home-only">
+                    <a class="pill" href="index.html">Home</a>
+                </li>
+                <li>
+                    <a class="pill" href="projects.html">Work</a>
+                </li>
+                <li><a class="pill" href="about.html">Studio</a></li>
+                <li>
+                    <a class="pill" href="contact.html">Contact</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="pt-28">
+            <!-- HERO -->
+            <section class="hero">
+                <div class="max-w-[1150px] mx-auto px-4 hero-inner text-center">
+                    <h1 class="headline">Selected projects.</h1>
+                    <p class="subhead mx-auto">
+                        A snapshot of residential, hospitality, and commercial
+                        interiors designed by the studio.
+                    </p>
+                </div>
+            </section>
+
+            <!-- RESIDENTIAL -->
+            <section id="residential" class="section band-1">
+                <div class="container">
+                    <span class="kicker">Residential</span>
+
+                    <div class="split">
+                        <div class="media">
+                            <img
+                                src="./assets/images/16-9_images/gwape_living.webp"
+                                alt="Residential living space"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+
+                        <div class="content">
+                            <h2 class="h2">Calm, characterful homes.</h2>
+                            <p class="lead">
+                                Residential work focuses on spaces that feel
+                                quietly confident rather than staged – layouts
+                                that work day-to-day, materials that age well,
+                                and details that make rooms feel lived in, not
+                                showpiece.
+                            </p>
+                            <p>
+                                Projects often combine tailored joinery, layered
+                                textiles, and considered lighting to create a
+                                sense of ease: bedrooms that genuinely feel
+                                restful, living rooms designed around
+                                conversation, and kitchens that actually
+                                function for how clients cook.
+                            </p>
+                            <p
+                                class="muted"
+                                style="margin-top: 10px; font-size: 14px"
+                            >
+                                Selected: Garden Wall Apartment, Chelsea
+                                Townhouse, study and bedroom suites.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- HOSPITALITY -->
+            <section id="hospitality" class="section band-2">
+                <div class="container">
+                    <span class="kicker">Hospitality</span>
+
+                    <div class="split">
+                        <div class="content">
+                            <h2 class="h2">Restaurants and social spaces.</h2>
+                            <p class="lead">
+                                Hospitality projects are built around
+                                atmosphere: how the space feels from the
+                                threshold, the sound and light levels, and the
+                                rhythm between bar, dining, and circulation.
+                            </p>
+                            <p>
+                                Schemes are tailored to the specific brand and
+                                site: layering texture, lighting, and furniture
+                                so that the space works through lunch, dinner,
+                                and late service without feeling overdesigned or
+                                theme-led.
+                            </p>
+                            <p
+                                class="muted"
+                                style="margin-top: 10px; font-size: 14px"
+                            >
+                                Selected: Garden Restaurant concept, bar and
+                                lounge studies, private dining spaces.
+                            </p>
+                        </div>
+
+                        <div class="media">
+                            <img
+                                src="./assets/images/16-9_images/monet-living.webp"
+                                alt="Restaurant and bar interior"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- COMMERCIAL -->
+            <section id="commercial" class="section band-3">
+                <div class="container">
+                    <span class="kicker">Commercial</span>
+
+                    <div class="split">
+                        <div class="media">
+                            <img
+                                src="./assets/images/16-9_images/monet-bedroom.webp"
+                                alt="Workspace / commercial interior"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+
+                        <div class="content">
+                            <h2 class="h2">
+                                Workspaces and client-facing environments.
+                            </h2>
+                            <p class="lead">
+                                Commercial interiors balance brand expression
+                                with clear function – how teams work, meet, and
+                                host.
+                            </p>
+                            <p>
+                                The focus is on clarity: routes, zones, and a
+                                material palette that can handle everyday use.
+                                From reception areas and meeting rooms to more
+                                informal lounges, the aim is to keep the design
+                                legible, calm, and aligned with the company’s
+                                identity.
+                            </p>
+                            <p
+                                class="muted"
+                                style="margin-top: 10px; font-size: 14px"
+                            >
+                                Selected: concept studies for client reception,
+                                flexible meeting suites, and mixed-use spaces.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section class="section band-1">
+                <div class="container">
+                    <div class="cta">
+                        <h2 class="h2">Discuss a new project.</h2>
+                        <p class="lead">
+                            Whether you’re at the early concept stage or
+                            refining a live scheme, the studio can support with
+                            full design or focused input on layouts, materials,
+                            and styling.
+                        </p>
+                        <a href="./contact.html" class="button">
+                            <span class="dot" aria-hidden="true"></span>
+                            Make an enquiry
+                        </a>
+                    </div>
+                </div>
             </section>
         </main>
 
-        <footer class="max-w-7xl mx-auto px-4 text-sm text-white/60 pb-16">
-            © <span id="year"></span> Curated Design Studio.
-        </footer>
-
-        <script src="/assets/js/main.js" defer></script>
+        <script src="./assets/js/main.js" defer></script>
     </body>
 </html>

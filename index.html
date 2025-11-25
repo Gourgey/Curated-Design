@@ -62,7 +62,8 @@
         </div>
 
         <a href="#top" id="topLogo" class="top-left-logo">
-            <img src="./assets/images/logo4.png" alt="Curated Design Studio" />
+            <img src="./assets/images/logo20.png" alt="Curated Design Studio" />
+            <span class="top-left-logo-text">Curated Design</span>
         </a>
 
         <!--
@@ -76,15 +77,29 @@
             class="nav-pill nav-pill--right"
             aria-label="Primary navigation (floating)"
         >
-            <ul class="pillmenu">
-                <li>
-                    <a class="pill" href="./projects.html#residential">Work</a>
+            <!-- Burger button (hidden by default, shown in compact mode) -->
+            <button
+                class="pillmenu-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="floatingPillMenu"
+            >
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </button>
+
+            <!-- The pill menu that should disappear in compact mode -->
+            <ul id="floatingPillMenu" class="pillmenu">
+                <li class="overlay-home-only">
+                    <a class="pill" href="index.html">Home</a>
                 </li>
-                <li><a class="pill" href="./about.html#about">Studio</a></li>
                 <li>
-                    <a class="pill" href="mailto:hello@curateddesign.studio"
-                        >Contact</a
-                    >
+                    <a class="pill" href="projects.html">Work</a>
+                </li>
+                <li><a class="pill" href="about.html">Studio</a></li>
+                <li>
+                    <a class="pill" href="contact.html">Contact</a>
                 </li>
             </ul>
         </nav>
@@ -94,7 +109,7 @@
             - pt-28 / pb-24 create vertical breathing room
               while the fixed header and background sit behind.
         -->
-        <main class="pt-28 pb-24">
+        <main class="pt-28">
             <!--
                 HERO SECTION
                 - Introduces the studio with a clear headline and subhead.

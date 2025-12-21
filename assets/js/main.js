@@ -149,6 +149,37 @@ window.addEventListener("DOMContentLoaded", () => {
   })();
 
   /* --------------------------------------------------------------------------
+   * PROJECTS PAGE — TOGGLE DARK MODE WHEN SCROLLING THROUGH .projects-band
+   * -------------------------------------------------------------------------- */
+  (function () {
+    const band = document.querySelector(".projects-band");
+    if (!band) return; // not on projects page
+
+    const header = document.getElementById("siteHeader");
+    const pillsBar = document.getElementById("pills");
+
+    function inBand() {
+      const headerH = header ? header.offsetHeight : 0;
+      const pillsH = pillsBar ? pillsBar.offsetHeight : 0;
+      const offset = headerH + pillsH + 8;
+
+      const y = window.scrollY + offset + 1;
+      const top = band.offsetTop;
+      const bottom = top + band.offsetHeight;
+
+      return y >= top && y < bottom;
+    }
+
+    function update() {
+      document.body.classList.toggle("is-projects-band", inBand());
+    }
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+  })();
+
+  /* --------------------------------------------------------------------------
    * FLOATING NAV PILL — SIMPLE BURGER TOGGLE (BREAKPOINT HANDLED IN CSS)
    * -------------------------------------------------------------------------- */
   (function () {

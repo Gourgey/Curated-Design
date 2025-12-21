@@ -14,37 +14,24 @@
 
         <link rel="stylesheet" href="./assets/css/styles.css" />
     </head>
-    <body class="min-h-screen text-[#f2f2f2] font-inter">
+
+    <body class="projects-page min-h-screen font-inter">
         <div id="top"></div>
 
-        <!-- Fixed background -->
-        <div id="bg" aria-hidden="true">
-            <img
-                id="bgImg"
-                src="./assets/images/background.png"
-                alt=""
-                decoding="async"
-            />
-            <div class="bg-dim"></div>
-        </div>
-
+        <!-- Top-left logo -->
         <a href="index.html#top" id="topLogo" class="top-left-logo">
-            <img src="./assets/images/logo20.png" alt="Curated Design Studio" />
-            <span class="top-left-logo-text">Curated Design</span>
+            <img
+                src="./assets/images/logo_white.png"
+                alt="Curated Design Studio"
+            />
         </a>
 
-        <!--
-            Floating navigation pill (right side).
-            - Becomes visible on scroll and can join with the main pill menu.
-            - Gives quick access to Work / Studio / Contact without scrolling back to top.
-            Behaviour (stickiness / joining) is handled in main.js + CSS.
-        -->
+        <!-- Floating navigation pill -->
         <nav
             id="floatingNavPill"
             class="nav-pill nav-pill--right"
             aria-label="Primary navigation (floating)"
         >
-            <!-- Burger button (hidden by default, shown in compact mode) -->
             <button
                 class="pillmenu-toggle"
                 type="button"
@@ -56,173 +43,401 @@
                 <span class="burger-line"></span>
             </button>
 
-            <!-- The pill menu that should disappear in compact mode -->
             <ul id="floatingPillMenu" class="pillmenu">
                 <li class="overlay-home-only">
                     <a class="pill" href="index.html">Home</a>
                 </li>
-                <li>
-                    <a class="pill" href="projects.html">Work</a>
-                </li>
+                <li><a class="pill" href="projects.html">Work</a></li>
                 <li><a class="pill" href="about.html">Studio</a></li>
-                <li>
-                    <a class="pill" href="contact.html">Contact</a>
-                </li>
+                <li><a class="pill" href="contact.html">Contact</a></li>
             </ul>
         </nav>
 
         <main class="pt-28">
+            <!-- Brand lockup above hero -->
+            <div class="hero-brand">
+                <img
+                    src="./assets/images/logo_black.png"
+                    alt="Curated Design logo"
+                    class="hero-brand-logo"
+                />
+                <span class="hero-brand-text">CURATED DESIGN</span>
+            </div>
+
             <!-- HERO -->
             <section class="hero">
                 <div class="max-w-[1150px] mx-auto px-4 hero-inner text-center">
                     <h1 class="headline">Selected projects.</h1>
                     <p class="subhead mx-auto">
-                        A snapshot of residential, hospitality, and commercial
-                        interiors designed by the studio.
+                        Residential, hospitality, and commercial interiors —
+                        framed as a set of project widgets.
                     </p>
                 </div>
             </section>
 
-            <!-- RESIDENTIAL -->
-            <section id="residential" class="section band-1">
-                <div class="container">
-                    <span class="kicker">Residential</span>
+            <!-- Project category pills -->
+            <nav
+                id="pills"
+                class="pillmenu-wrap"
+                aria-label="Project categories"
+            >
+                <button
+                    id="pillsToggle"
+                    class="pillmenu-toggle pills-toggle"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="pillsPanel"
+                >
+                    <span class="pills-toggle-label">Menu</span>
+                </button>
 
-                    <div class="split">
-                        <div class="media">
-                            <img
-                                src="./assets/images/16-9_images/gwape_living.webp"
-                                alt="Residential living space"
-                                loading="lazy"
-                                decoding="async"
-                            />
-                        </div>
+                <ul class="pillmenu pills-desktop">
+                    <li>
+                        <a class="pill active" href="#residential"
+                            >Residential</a
+                        >
+                    </li>
+                    <li><a class="pill" href="#hospitality">Hospitality</a></li>
+                    <li><a class="pill" href="#commercial">Commercial</a></li>
+                    <li><a class="pill" href="#enquiry">Enquiry</a></li>
+                </ul>
 
-                        <div class="content">
-                            <h2 class="h2">Calm, characterful homes.</h2>
-                            <p class="lead">
-                                Residential work focuses on spaces that feel
-                                quietly confident rather than staged – layouts
-                                that work day-to-day, materials that age well,
-                                and details that make rooms feel lived in, not
-                                showpiece.
-                            </p>
-                            <p>
-                                Projects often combine tailored joinery, layered
-                                textiles, and considered lighting to create a
-                                sense of ease: bedrooms that genuinely feel
-                                restful, living rooms designed around
-                                conversation, and kitchens that actually
-                                function for how clients cook.
-                            </p>
-                            <p
-                                class="muted"
-                                style="margin-top: 10px; font-size: 14px"
-                            >
-                                Selected: Garden Wall Apartment, Chelsea
-                                Townhouse, study and bedroom suites.
-                            </p>
+                <div id="pillsPanel" class="pills-panel" hidden>
+                    <a class="pill" href="#residential">Residential</a>
+                    <a class="pill" href="#hospitality">Hospitality</a>
+                    <a class="pill" href="#commercial">Commercial</a>
+                    <a class="pill" href="#enquiry">Enquiry</a>
+                </div>
+            </nav>
+
+            <!-- PROJECTS (dark band starts here) -->
+            <section class="projects-band">
+                <!-- RESIDENTIAL -->
+                <section id="residential" class="py-14">
+                    <div class="projects-wrap">
+                        <div class="widget-area">
+                            <span class="section-label">Residential</span>
+
+                            <div class="section-head">
+                                <h2 class="h2">Calm, characterful homes.</h2>
+                                <p class="section-note">
+                                    Layout-first thinking, material restraint,
+                                    and lighting that behaves nicely at 8am and
+                                    11pm.
+                                </p>
+                            </div>
+
+                            <div class="widget-grid">
+                                <a
+                                    class="widget col-span-7 lg:col-span-7 md:col-span-6 sm:col-span-2"
+                                    href="#residential"
+                                >
+                                    <img
+                                        class="widget-media"
+                                        src="./assets/images/16-9_images/gwape_living.webp"
+                                        alt="Residential living space"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                    <div class="widget-body">
+                                        <p class="widget-title">
+                                            Primrose Hill Apartment
+                                        </p>
+                                        <p class="widget-meta">
+                                            Residential · 2025
+                                        </p>
+                                    </div>
+                                </a>
+
+                                <a
+                                    class="widget col-span-5 lg:col-span-5 md:col-span-6 sm:col-span-2"
+                                    href="#residential"
+                                >
+                                    <img
+                                        class="widget-media"
+                                        src="./assets/images/16-9_images/gwape_bedroom.webp"
+                                        alt="Residential bedroom suite"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                    <div class="widget-body">
+                                        <p class="widget-title">
+                                            Bedroom Suite Study
+                                        </p>
+                                        <p class="widget-meta">
+                                            Residential · 2025
+                                        </p>
+                                    </div>
+                                </a>
+
+                                <a
+                                    class="widget col-span-4 lg:col-span-4 md:col-span-3 sm:col-span-2"
+                                    href="#residential"
+                                >
+                                    <img
+                                        class="widget-media"
+                                        src="./assets/images/16-9_images/gwape_study.webp"
+                                        alt="Residential study space"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                    <div class="widget-body">
+                                        <p class="widget-title">
+                                            Shoreditch Loft
+                                        </p>
+                                        <p class="widget-meta">
+                                            Residential · 2023
+                                        </p>
+                                    </div>
+                                </a>
+
+                                <a
+                                    class="widget col-span-8 lg:col-span-8 md:col-span-3 sm:col-span-2"
+                                    href="#residential"
+                                >
+                                    <img
+                                        class="widget-media"
+                                        src="./assets/images/16-9_images/monet-bedroom.webp"
+                                        alt="Residential detail / bedroom"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                    <div class="widget-body">
+                                        <p class="widget-title">
+                                            Chelsea Townhouse
+                                        </p>
+                                        <p class="widget-meta">
+                                            Residential · 2024
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- HOSPITALITY -->
-            <section id="hospitality" class="section band-2">
-                <div class="container">
-                    <span class="kicker">Hospitality</span>
+                <!-- HOSPITALITY -->
+                <section id="hospitality" class="py-14">
+                    <div class="projects-wrap">
+                        <div class="widget-area">
+                            <span class="section-label">Hospitality</span>
 
-                    <div class="split">
-                        <div class="content">
-                            <h2 class="h2">Restaurants and social spaces.</h2>
-                            <p class="lead">
-                                Hospitality projects are built around
-                                atmosphere: how the space feels from the
-                                threshold, the sound and light levels, and the
-                                rhythm between bar, dining, and circulation.
-                            </p>
-                            <p>
-                                Schemes are tailored to the specific brand and
-                                site: layering texture, lighting, and furniture
-                                so that the space works through lunch, dinner,
-                                and late service without feeling overdesigned or
-                                theme-led.
-                            </p>
-                            <p
-                                class="muted"
-                                style="margin-top: 10px; font-size: 14px"
-                            >
-                                Selected: Garden Restaurant concept, bar and
-                                lounge studies, private dining spaces.
-                            </p>
-                        </div>
+                            <div class="section-head">
+                                <h2 class="h2">
+                                    Restaurants and social spaces.
+                                </h2>
+                                <p class="section-note">
+                                    Atmosphere is engineered: threshold moments,
+                                    circulation rhythm, and material choices
+                                    that hold up under real service.
+                                </p>
+                            </div>
 
-                        <div class="media">
-                            <img
-                                src="./assets/images/16-9_images/monet-living.webp"
-                                alt="Restaurant and bar interior"
-                                loading="lazy"
-                                decoding="async"
-                            />
+                            <div class="widget-grid">
+                                <a
+                                    class="widget col-span-5 lg:col-span-5 md:col-span-6 sm:col-span-2"
+                                    href="#hospitality"
+                                >
+                                    <img
+                                        class="widget-media"
+                                        src="./assets/images/16-9_images/monet-living.webp"
+                                        alt="Restaurant interior"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                    <div class="widget-body">
+                                        <p class="widget-title">
+                                            Garden Restaurant
+                                        </p>
+                                        <p class="widget-meta">
+                                            Hospitality · 2025
+                                        </p>
+                                    </div>
+                                </a>
+
+                                <a
+                                    class="widget col-span-7 lg:col-span-7 md:col-span-6 sm:col-span-2"
+                                    href="#hospitality"
+                                >
+                                    <img
+                                        class="widget-media"
+                                        src="./assets/images/16-9_images/monet-terrace.webp"
+                                        alt="Hospitality terrace / lounge"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                    <div class="widget-body">
+                                        <p class="widget-title">
+                                            Bar + Lounge Study
+                                        </p>
+                                        <p class="widget-meta">
+                                            Hospitality · 2025
+                                        </p>
+                                    </div>
+                                </a>
+
+                                <a
+                                    class="widget col-span-4 lg:col-span-4 md:col-span-3 sm:col-span-2"
+                                    href="#hospitality"
+                                >
+                                    <img
+                                        class="widget-media"
+                                        src="./assets/images/16-9_images/gwape_living.webp"
+                                        alt="Private dining concept"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                    <div class="widget-body">
+                                        <p class="widget-title">
+                                            Private Dining Concept
+                                        </p>
+                                        <p class="widget-meta">
+                                            Hospitality · 2024
+                                        </p>
+                                    </div>
+                                </a>
+
+                                <a
+                                    class="widget col-span-8 lg:col-span-8 md:col-span-3 sm:col-span-2"
+                                    href="#hospitality"
+                                >
+                                    <img
+                                        class="widget-media"
+                                        src="./assets/images/16-9_images/gwape_bedroom.webp"
+                                        alt="Hospitality lighting and texture study"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                    <div class="widget-body">
+                                        <p class="widget-title">
+                                            Lighting + Texture Study
+                                        </p>
+                                        <p class="widget-meta">
+                                            Hospitality · 2024
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- COMMERCIAL -->
-            <section id="commercial" class="section band-3">
-                <div class="container">
-                    <span class="kicker">Commercial</span>
+                <!-- COMMERCIAL -->
+                <section id="commercial" class="py-14">
+                    <div class="projects-wrap">
+                        <div class="widget-area">
+                            <span class="section-label">Commercial</span>
 
-                    <div class="split">
-                        <div class="media">
-                            <img
-                                src="./assets/images/16-9_images/monet-bedroom.webp"
-                                alt="Workspace / commercial interior"
-                                loading="lazy"
-                                decoding="async"
-                            />
-                        </div>
+                            <div class="section-head">
+                                <h2 class="h2">
+                                    Workspaces and client-facing environments.
+                                </h2>
+                                <p class="section-note">
+                                    Clarity wins: routes, zoning, and palettes
+                                    that survive everyday use without turning
+                                    into office-beige sadness.
+                                </p>
+                            </div>
 
-                        <div class="content">
-                            <h2 class="h2">
-                                Workspaces and client-facing environments.
-                            </h2>
-                            <p class="lead">
-                                Commercial interiors balance brand expression
-                                with clear function – how teams work, meet, and
-                                host.
-                            </p>
-                            <p>
-                                The focus is on clarity: routes, zones, and a
-                                material palette that can handle everyday use.
-                                From reception areas and meeting rooms to more
-                                informal lounges, the aim is to keep the design
-                                legible, calm, and aligned with the company’s
-                                identity.
-                            </p>
-                            <p
-                                class="muted"
-                                style="margin-top: 10px; font-size: 14px"
-                            >
-                                Selected: concept studies for client reception,
-                                flexible meeting suites, and mixed-use spaces.
-                            </p>
+                            <div class="widget-grid">
+                                <a
+                                    class="widget col-span-8 lg:col-span-8 md:col-span-6 sm:col-span-2"
+                                    href="#commercial"
+                                >
+                                    <img
+                                        class="widget-media"
+                                        src="./assets/images/16-9_images/monet-bedroom.webp"
+                                        alt="Commercial interior"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                    <div class="widget-body">
+                                        <p class="widget-title">
+                                            Clerkenwell Office
+                                        </p>
+                                        <p class="widget-meta">
+                                            Commercial · 2024
+                                        </p>
+                                    </div>
+                                </a>
+
+                                <a
+                                    class="widget col-span-4 lg:col-span-4 md:col-span-6 sm:col-span-2"
+                                    href="#commercial"
+                                >
+                                    <img
+                                        class="widget-media"
+                                        src="./assets/images/16-9_images/gwape_study.webp"
+                                        alt="Reception / meeting suite concept"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                    <div class="widget-body">
+                                        <p class="widget-title">
+                                            Reception + Meeting Suite
+                                        </p>
+                                        <p class="widget-meta">
+                                            Commercial · 2024
+                                        </p>
+                                    </div>
+                                </a>
+
+                                <a
+                                    class="widget col-span-5 lg:col-span-5 md:col-span-3 sm:col-span-2"
+                                    href="#commercial"
+                                >
+                                    <img
+                                        class="widget-media"
+                                        src="./assets/images/16-9_images/monet-living.webp"
+                                        alt="Client lounge concept"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                    <div class="widget-body">
+                                        <p class="widget-title">
+                                            Client Lounge Concept
+                                        </p>
+                                        <p class="widget-meta">
+                                            Commercial · 2023
+                                        </p>
+                                    </div>
+                                </a>
+
+                                <a
+                                    class="widget col-span-7 lg:col-span-7 md:col-span-3 sm:col-span-2"
+                                    href="#commercial"
+                                >
+                                    <img
+                                        class="widget-media"
+                                        src="./assets/images/16-9_images/monet-terrace.webp"
+                                        alt="Mixed-use breakout space"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                    <div class="widget-body">
+                                        <p class="widget-title">
+                                            Mixed-use Breakout Space
+                                        </p>
+                                        <p class="widget-meta">
+                                            Commercial · 2023
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
             </section>
 
             <!-- CTA -->
-            <section class="section band-1">
-                <div class="container">
-                    <div class="cta">
+            <section id="enquiry" class="py-16">
+                <div class="projects-wrap">
+                    <div class="cta" style="margin-top: 0">
                         <h2 class="h2">Discuss a new project.</h2>
                         <p class="lead">
-                            Whether you’re at the early concept stage or
-                            refining a live scheme, the studio can support with
-                            full design or focused input on layouts, materials,
-                            and styling.
+                            Whether you’re at early concept stage or refining a
+                            live scheme, the studio can support with full design
+                            or focused input on layouts, materials, and styling.
                         </p>
                         <a href="./contact.html" class="button">
                             <span class="dot" aria-hidden="true"></span>

@@ -1317,3 +1317,362 @@ body.is-band-2 #floatingNavPill.is-open .pillmenu .pill:hover {
         display: none;
     }
 }
+
+/* =========================
+   Projects Page (projects.html)
+   ========================= */
+
+/* Scope all overrides to projects page only */
+body.projects-page {
+    background: #e4e1d7;
+    color: #000;
+}
+
+/* HERO text on projects page should be black (your global hero is light-on-dark) */
+body.projects-page .hero,
+body.projects-page .hero * {
+    color: #000;
+}
+
+body.projects-page .subhead {
+    color: #000; /* overrides global #d0d0d0 */
+    opacity: 0.85;
+}
+
+/* Dark band that contains the project sections */
+body.projects-page .projects-band {
+    background: #171717;
+    padding: 56px 0 72px;
+}
+
+/* Width wrapper used on projects page */
+body.projects-page .projects-wrap {
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* Project widget grid */
+body.projects-page .widget-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 16px;
+}
+
+/* Widget image + body blocks */
+body.projects-page .widget-media {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    display: block;
+}
+
+body.projects-page .widget-body {
+    padding: 14px 14px 16px;
+}
+
+body.projects-page .widget-title {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin: 0 0 4px;
+}
+
+body.projects-page .widget-meta {
+    font-size: 13px;
+    margin: 0;
+    opacity: 0.75;
+}
+
+/* Section header layout used inside the light widget-area */
+body.projects-page .section-label {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 10px;
+}
+
+body.projects-page .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0 0 14px;
+}
+
+body.projects-page .section-head h2 {
+    margin: 0;
+}
+
+body.projects-page .section-note {
+    font-size: 14px;
+    max-width: 560px;
+    margin: 0;
+}
+
+/* CTA in enquiry section sits on light background on this page */
+body.projects-page #enquiry .h2,
+body.projects-page #enquiry .lead {
+    color: #000;
+}
+
+body.projects-page #enquiry .lead {
+    opacity: 0.85;
+}
+
+/* Default: nav + pills are black on light background */
+body.projects-page .pill,
+body.projects-page .pillmenu-toggle,
+body.projects-page .nav-pill {
+    color: #000;
+}
+
+body.projects-page .pill::after {
+    background-color: #000; /* hover / active underline */
+}
+
+/* When scrolling through the projects dark band, invert nav + pills to light */
+body.projects-page.is-projects-band .pill,
+body.projects-page.is-projects-band .pillmenu-toggle,
+body.projects-page.is-projects-band .nav-pill {
+    color: #e4e1d7;
+}
+
+/* Hover/active backgrounds on dark */
+body.projects-page.is-projects-band .pill:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Active pill */
+body.projects-page.is-projects-band .pill.active {
+    background: rgba(255, 255, 255, 0.14);
+    color: #e4e1d7;
+}
+
+/* Burger lines should follow text colour (yours already uses currentColor for #pillsToggle,
+   but floating burger uses a fixed white background — this makes it consistent) */
+body.projects-page.is-projects-band .pillmenu-toggle .burger-line {
+    background: currentColor;
+}
+
+/* Responsive grid */
+@media (max-width: 1024px) {
+    body.projects-page .widget-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+}
+@media (max-width: 640px) {
+    body.projects-page .widget-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Section “widget area” panel */
+.widget-area {
+    background: #e4e1d7;
+    border-radius: 24px;
+    padding: 22px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.22);
+}
+
+/* Tighten spacing so the panel feels designed, not accidental */
+.widget-area .section-head {
+    margin-bottom: 16px;
+}
+
+/* IMPORTANT: section headings are now inside a light panel,
+   so make them black again */
+.projects-band .widget-area .section-label,
+.projects-band .widget-area .h2,
+.projects-band .widget-area .section-note {
+    color: #000 !important;
+    opacity: 1;
+}
+
+/* Widgets inside the widget-area */
+.widget {
+    border-radius: 18px;
+    overflow: hidden;
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease;
+}
+
+/* Option A: crisp outline */
+.widget {
+    background: #e4e1d7; /* same as panel */
+    border: 1px solid rgba(0, 0, 0, 0.35);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Option B: muddier tile surface (uncomment if you prefer this look) */
+/*
+.widget {
+    background: #d8d4c8;                 // slightly muddier than #e4e1d7
+    border: 1px solid rgba(0, 0, 0, 0.22);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+*/
+
+.widget:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
+}
+
+/* Optional: make images feel more “set” into the tile */
+.widget-media {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+}
+
+/* =========================
+   About Page (about.html)
+   ========================= */
+
+html.about-page {
+    background: #e4e1d7; /* IMPORTANT: prevents dark html bg bleeding through */
+}
+
+body.about-page {
+    background: #e4e1d7;
+    color: #000;
+}
+
+/* Make hero text black on this light page */
+body.about-page .hero,
+body.about-page .hero * {
+    color: #000;
+}
+
+body.about-page .subhead {
+    color: #000;
+    opacity: 0.85;
+}
+
+/* About content typography (override global dark theme defaults) */
+body.about-page .about-content .h2,
+body.about-page .about-content .title,
+body.about-page .about-content p,
+body.about-page .about-content li {
+    color: #000;
+}
+
+body.about-page .about-content p,
+body.about-page .about-content li {
+    opacity: 0.85;
+}
+
+/* Floating nav pill: black text on About page */
+body.about-page .pill,
+body.about-page .pillmenu-toggle,
+body.about-page .nav-pill {
+    color: #000;
+}
+
+/* Ensure burger lines follow currentColor */
+body.about-page .pillmenu-toggle .burger-line {
+    background: currentColor;
+}
+
+/* CTA dark band */
+body.about-page .about-cta-band {
+    background: #171717;
+}
+
+body.about-page .about-cta-band .h2,
+body.about-page .about-cta-band .lead {
+    color: #e4e1d7;
+}
+
+body.about-page .about-cta-band .lead {
+    opacity: 0.85;
+}
+
+body.about-page .about-cta-lead {
+    max-width: 520px;
+}
+
+body.about-page .about-cta-button {
+    margin-top: 16px;
+    display: inline-flex;
+}
+
+/* =========================
+   Contact Page (contact.html)
+   ========================= */
+
+html.contact-page {
+    background: #e4e1d7; /* prevents dark html bg bleeding through */
+}
+
+body.contact-page {
+    background: #e4e1d7;
+    color: #000;
+}
+
+/* Make nav + pills black on the light page */
+body.contact-page .pill,
+body.contact-page .pillmenu-toggle,
+body.contact-page .nav-pill {
+    color: #000;
+}
+
+/* Ensure burger lines follow currentColor */
+body.contact-page .pillmenu-toggle .burger-line {
+    background: currentColor;
+}
+
+/* Make headings/paragraphs black like the about page content */
+body.contact-page .contact-content .h2,
+body.contact-page .contact-content .title,
+body.contact-page .contact-content p,
+body.contact-page .contact-content li {
+    color: #000;
+}
+
+body.contact-page .contact-content p,
+body.contact-page .contact-content li {
+    opacity: 0.85;
+}
+
+/* Link styling on light page */
+body.contact-page .contact-link {
+    text-decoration: underline;
+}
+
+/* Form: light theme override (keeps your existing structure/classes) */
+body.contact-page .form-card {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.14);
+}
+
+body.contact-page .form-field label {
+    color: rgba(0, 0, 0, 0.65);
+}
+
+body.contact-page .form-field input,
+body.contact-page .form-field textarea,
+body.contact-page .form-field select {
+    background: rgba(255, 255, 255, 0.72);
+    color: #000;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+body.contact-page .form-field input::placeholder,
+body.contact-page .form-field textarea::placeholder {
+    color: rgba(0, 0, 0, 0.45);
+}
+
+body.contact-page .form-field input:focus,
+body.contact-page .form-field textarea:focus,
+body.contact-page .form-field select:focus {
+    border-color: rgba(0, 0, 0, 0.45);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18);
+}
+
+body.contact-page .contact-note {
+    font-size: 12px;
+    margin-top: 8px;
+    color: rgba(0, 0, 0, 0.6);
+}

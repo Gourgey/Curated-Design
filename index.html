@@ -62,8 +62,11 @@
         </div>
 
         <a href="#top" id="topLogo" class="top-left-logo">
-            <img src="./assets/images/logo20.png" alt="Curated Design Studio" />
-            <span class="top-left-logo-text">Curated Design</span>
+            <img
+                src="./assets/images/logo_46.png"
+                alt="Curated Design Studio"
+            />
+            <!--<span class="top-left-logo-text">CURATED DESIGN</span>-->
         </a>
 
         <!--
@@ -110,6 +113,16 @@
               while the fixed header and background sit behind.
         -->
         <main class="pt-28">
+            <!-- BRAND LOCKUP ABOVE HERO -->
+            <div class="hero-brand">
+                <img
+                    src="./assets/images/logo_46.png"
+                    alt="Curated Design logo"
+                    class="hero-brand-logo"
+                />
+                <span class="hero-brand-text">CURATED DESIGN</span>
+            </div>
+
             <!--
                 HERO SECTION
                 - Introduces the studio with a clear headline and subhead.
@@ -136,7 +149,19 @@
                 Also used for "active" highlighting as the user scrolls down.
             -->
             <nav id="pills" class="pillmenu-wrap" aria-label="Quick filters">
-                <ul class="pillmenu">
+                <!-- Mobile burger pill -->
+                <button
+                    id="pillsToggle"
+                    class="pillmenu-toggle pills-toggle"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="pillsPanel"
+                >
+                    <span class="pills-toggle-label">Menu</span>
+                </button>
+
+                <!-- Desktop pill row -->
+                <ul class="pillmenu pills-desktop">
                     <li>
                         <a class="pill active" href="#portfolio"
                             >Featured Projects</a
@@ -150,6 +175,14 @@
                     </li>
                     <li><a class="pill" href="#about">Design Philosophy</a></li>
                 </ul>
+
+                <!-- Mobile dropdown -->
+                <div id="pillsPanel" class="pills-panel" hidden>
+                    <a class="pill" href="#portfolio">Featured Projects</a>
+                    <a class="pill" href="#services">Curated Services</a>
+                    <a class="pill" href="#selected-work">Collections</a>
+                    <a class="pill" href="#about">Design Philosophy</a>
+                </div>
             </nav>
 
             <!--
@@ -256,7 +289,7 @@
                         <article class="card span-4">
                             <div class="img-wrap">
                                 <img
-                                    src="./assets/images/monet-living.png"
+                                    src="./assets/images/curated_services/concept_design.png"
                                     alt="Project thumbnail"
                                 />
                             </div>
@@ -273,7 +306,7 @@
                         <article class="card span-4">
                             <div class="img-wrap">
                                 <img
-                                    src="./assets/images/16-9_images/monet-bedroom.webp"
+                                    src="./assets/images/curated_services/interior_architecture_design.png"
                                     alt="Project thumbnail"
                                 />
                             </div>
@@ -292,7 +325,7 @@
                         <article class="card span-4">
                             <div class="img-wrap">
                                 <img
-                                    src="./assets/images/16-9_images/monet-terrace.webp"
+                                    src="./assets/images/curated_services/bespoke_furnishing.png"
                                     alt="Project thumbnail"
                                 />
                             </div>
@@ -312,7 +345,7 @@
                         <article class="card span-4">
                             <div class="img-wrap">
                                 <img
-                                    src="./assets/images/16-9_images/gwape_bedroom.webp"
+                                    src="./assets/images/curated_services/plans_and_elevations.png"
                                     alt="Project thumbnail"
                                 />
                             </div>
@@ -329,7 +362,7 @@
                         <article class="card span-4">
                             <div class="img-wrap">
                                 <img
-                                    src="./assets/images/16-9_images/gwape_living.webp"
+                                    src="./assets/images/curated_services/procurement.png"
                                     alt="Project thumbnail"
                                 />
                             </div>
@@ -346,7 +379,7 @@
                         <article class="card span-4">
                             <div class="img-wrap">
                                 <img
-                                    src="./assets/images/16-9_images/gwape_study.webp"
+                                    src="./assets/images/curated_services/styling.png"
                                     alt="Project thumbnail"
                                 />
                             </div>
@@ -372,8 +405,8 @@
             -->
             <section id="selected-work" class="section band-2">
                 <div class="container">
-                    <span class="kicker">Collections</span>
-                    <h2 class="h2">Recent projects.</h2>
+                    <span class="kicker2">Collections</span>
+                    <h2 class="h22">Recent projects.</h2>
 
                     <div class="card-grid">
                         <a
@@ -387,8 +420,8 @@
                                 />
                             </div>
                             <div class="body">
-                                <h3 class="title">Primrose Hill Apartment</h3>
-                                <p class="muted">Residential · 2025</p>
+                                <h3 class="title2">Primrose Hill Apartment</h3>
+                                <p class="muted2">Residential · 2025</p>
                             </div>
                         </a>
 
@@ -403,8 +436,8 @@
                                 />
                             </div>
                             <div class="body">
-                                <h3 class="title">Garden Restaurant</h3>
-                                <p class="muted">Hospitality · 2025</p>
+                                <h3 class="title2">Garden Restaurant</h3>
+                                <p class="muted2">Hospitality · 2025</p>
                             </div>
                         </a>
 
@@ -419,8 +452,8 @@
                                 />
                             </div>
                             <div class="body">
-                                <h3 class="title">Clerkenwell Office</h3>
-                                <p class="muted">Commercial · 2024</p>
+                                <h3 class="title2">Clerkenwell Office</h3>
+                                <p class="muted2">Commercial · 2024</p>
                             </div>
                         </a>
 
@@ -435,8 +468,8 @@
                                 />
                             </div>
                             <div class="body">
-                                <h3 class="title">Chelsea Townhouse</h3>
-                                <p class="muted">Residential · 2024</p>
+                                <h3 class="title2">Chelsea Townhouse</h3>
+                                <p class="muted2">Residential · 2024</p>
                             </div>
                         </a>
 
@@ -451,8 +484,8 @@
                                 />
                             </div>
                             <div class="body">
-                                <h3 class="title">Shoreditch Loft</h3>
-                                <p class="muted">Residential · 2023</p>
+                                <h3 class="title2">Shoreditch Loft</h3>
+                                <p class="muted2">Residential · 2023</p>
                             </div>
                         </a>
                     </div>
@@ -523,7 +556,7 @@
                         </p>
                         <a
                             class="button"
-                            href="mailto:hello@curateddesign.studio"
+                            href="mailto:info@curateddesign.studio"
                         >
                             <span class="dot" aria-hidden="true"></span>
                             Start a conversation

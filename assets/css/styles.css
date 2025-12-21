@@ -14,10 +14,20 @@
     --pills-gap: 15px; /* the small space you wanted */
 
     /* New band colours (adjust to taste) */
-    --band-1: #0f1012; /* slightly different from hero */
-    --band-2: #12151a; /* deeper slate */
+    --band-1: #16181f; /* slightly different from hero */
+    --band-2: #e4e1d7; /* deeper slate */
     --band-3: #16181f; /* final section colour */
     --accent: #d1f365; /* gentle lime accent for buttons/links */
+}
+
+@font-face {
+    font-family: "Servaek";
+    src:
+        url("../fonts/Servaek-ExtraLight.woff2") format("woff2"),
+        url("../fonts/Servaek-ExtraLight.woff") format("woff");
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
 }
 
 /* -------- Base reset & typography -------- */
@@ -78,7 +88,7 @@ body {
 #bg {
     position: fixed;
     inset: 0;
-    z-index: 0;
+    z-index: -1;
     overflow: hidden;
     pointer-events: none;
 }
@@ -284,7 +294,7 @@ a {
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
-    font-size: 24px;
+    font-size: 22px;
     white-space: nowrap;
     pointer-events: auto;
     cursor: pointer;
@@ -327,14 +337,14 @@ a {
 
 /* --- Burger toggle base styles ---
    - Hidden by default on desktop.
-   - Styled as a circular glassy button once it's visible on mobile.
+   - Shares pill geometry with the floating nav pill.
 */
 .pillmenu-toggle {
-    display: none; /* shown only under 1000px */
+    display: none; /* shown only under breakpoint */
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    padding: 8px 12px; /* same as logo pill */
+    height: 56px; /* approx logo pill height (40px img + 16px padding) */
     border-radius: 999px;
     border: 1px solid rgba(255, 255, 255, 0.25);
     background: rgba(255, 255, 255, 0.06);
@@ -343,7 +353,6 @@ a {
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
     cursor: pointer;
     pointer-events: auto;
-    padding: 0;
 }
 
 /* Default: floating nav shows its pill menu inline (desktop behaviour) */
@@ -380,6 +389,111 @@ a {
 
 #floatingNavPill.is-open .burger-line:nth-child(3) {
     transform: translateY(-6px) rotate(-45deg);
+}
+
+/* --- Compact "Menu" for the main sticky pills (#pills) --- */
+
+#pillsToggle.pill {
+    align-items: center;
+    gap: 10px;
+}
+
+#pillsToggle {
+    justify-content: flex-start; /* not centered */
+    gap: 10px;
+    height: auto; /* let .pill sizing rule */
+    padding: 8px 14px; /* match .pill padding */
+    display: none; /* still controlled by media query */
+}
+
+/* Main pill burger: same geometry as logo + floating nav, but with label */
+#pillsToggle.pillmenu-toggle {
+    justify-content: flex-start; /* not centered like the floating burger */
+    gap: 10px;
+    padding: 8px 12px; /* same as logo pill */
+    height: 56px; /* same as logo pill */
+}
+
+#pillsToggle .burger-line {
+    width: 16px;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor; /* inherits the pill text colour */
+    display: block;
+}
+#pillsToggle .burger-line + .burger-line {
+    margin-top: 3px;
+}
+
+.pills-toggle-label {
+    font-size: 14px;
+    letter-spacing: 0.02em;
+}
+
+/* Dropdown panel (mobile) */
+.pills-panel {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(340px, calc(100vw - 32px));
+    padding: 10px;
+    border-radius: 999px; /* “big pill” shape */
+    border: 1px solid var(--ring);
+    background: rgba(255, 255, 255, 0.06); /* same translucent material */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centers the items as a group */
+    overflow: hidden;
+}
+
+/* Make the links inside feel like “items inside the pill” */
+.pills-panel .pill {
+    display: block;
+    padding: 12px 14px;
+    border-radius: 999px;
+    background: transparent; /* don’t create dark boxes */
+    border: 0;
+    box-shadow: none;
+    width: 100%;
+    text-align: center; /* centers the text inside each option */
+}
+
+.pills-panel .pill:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+/* Under 900px: hide desktop pills, show compact toggle */
+@media (max-width: 900px) {
+    /* keep the same behaviour as the pill menu: in-flow until it sticks */
+    .pillmenu-wrap {
+        top: var(
+            --pills-gap
+        ); /* align with logo + floating pill when it sticks */
+    }
+
+    #pills .pills-desktop {
+        display: none;
+    }
+    #pillsToggle {
+        display: inline-flex;
+    }
+
+    /* keep your open-state behaviour */
+    #pills.pills-open .pills-panel {
+        display: block;
+    }
+}
+
+/* Over 900px: normal behaviour */
+@media (min-width: 901px) {
+    #pills .pills-panel {
+        display: none !important;
+    }
 }
 
 /* ===== Pill menu (primary pill bar) =====
@@ -431,6 +545,12 @@ a {
     pointer-events: auto;
     transform: translateY(0);
     margin: 0;
+    pointer-events: none;
+}
+
+.nav-pill .pillmenu,
+.nav-pill .pillmenu-toggle {
+    pointer-events: auto;
 }
 
 /* Right-align the floating nav pill bar */
@@ -459,7 +579,7 @@ a {
    - Hide burger toggle.
    - Hide the Home item inside the overlay list (logo acts as Home on desktop).
 */
-@media (min-width: 1001px) {
+@media (min-width: 1280px) {
     .pillmenu-toggle {
         display: none !important;
     }
@@ -480,34 +600,27 @@ a {
    - When nav has .is-open, it becomes a full-screen black overlay
      with centred navigation items (Home, Work, Studio, Contact).
 */
-@media (max-width: 1000px) {
+@media (max-width: 1280px) {
     /* Hide inline floating pills under the header; burger takes over */
     #floatingNavPill .pillmenu {
         display: none;
     }
 
-    /* Show burger toggle and pin it to the top-right */
+    .top-left-logo-text {
+        display: none;
+    }
+
+    /* Show burger, but let .nav-pill position it (same place as desktop pill) */
     .pillmenu-toggle {
         display: inline-flex;
+    }
+
+    /* When overlay is open, pin the X in the top-right of the screen */
+    #floatingNavPill.is-open .pillmenu-toggle {
         position: fixed;
         top: 16px;
-        right: 16px;
+        right: clamp(16px, 4vw, 40px);
         z-index: 1001;
-    }
-
-    /* Logo pill becomes icon-only on mobile */
-    .top-left-logo {
-        top: 8px;
-        padding: 0;
-        font-size: 0; /* hides text label size */
-    }
-
-    .top-left-logo-text {
-        display: none; /* explicitly hide the label span if present */
-    }
-
-    .top-left-logo img {
-        height: 40px;
     }
 
     /* FULL-SCREEN BLACK OVERLAY WHEN BURGER IS OPEN
@@ -551,7 +664,37 @@ a {
     }
 }
 
+.top-left-logo-text {
+    font-family: "Servaek", Inter, system-ui, sans-serif;
+    font-weight: 200;
+    letter-spacing: 0.02em;
+}
+
 /* ===== Hero ===== */
+
+.hero-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 112px;
+    text-align: center;
+}
+
+.hero-brand-logo {
+    width: 102px;
+    height: auto;
+}
+
+.hero-brand-text {
+    font-family: "Servaek", Inter, system-ui, sans-serif;
+    font-weight: 200;
+    font-size: 24px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    opacity: 0.85;
+}
+
 /*
    Hero section wrapper:
    - Vertically centers its content.
@@ -559,7 +702,7 @@ a {
 */
 .hero {
     position: relative;
-    min-height: 40vh;
+    min-height: 25vh;
     display: flex;
     align-items: center;
     text-align: center;
@@ -585,7 +728,7 @@ a {
 .headline {
     margin: 0.4rem auto 0.6rem;
     max-width: 86ch;
-    font-size: clamp(34px, 5vw, 106px);
+    font-size: clamp(34px, 3.5vw, 76px);
     font-weight: 400;
     letter-spacing: -0.02em;
     line-height: 1.06;
@@ -622,7 +765,7 @@ a {
     pointer-events: auto; /* make sure it always receives clicks */
     display: grid;
     place-items: center;
-    margin: 28px 0 18px;
+    margin: 12px 0 18px;
 }
 
 /*
@@ -819,7 +962,16 @@ a {
     font-size: 12px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: #b7b7b7;
+    color: #e4e1d7;
+    margin-bottom: 10px;
+}
+
+.kicker2 {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #000000;
     margin-bottom: 10px;
 }
 
@@ -832,6 +984,15 @@ a {
     letter-spacing: -0.01em;
     line-height: 1.08;
     margin: 6px 0 14px;
+    color: #e4e1d7;
+}
+
+.h22 {
+    font-size: clamp(24px, 2.4vw, 44px);
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+    margin: 6px 0 14px;
+    color: #000000;
 }
 
 /*
@@ -906,9 +1067,50 @@ a {
     font-weight: 600;
     margin: 0 0 6px;
 }
+.card .title2 {
+    font-weight: 600;
+    margin: 0 0 6px;
+    color: #0f0f0f;
+}
+
 .card .muted {
     color: var(--muted);
     font-size: 14px;
+}
+.card .muted2 {
+    color: var(--muted);
+    font-size: 14px;
+    color: #0f0f0f;
+}
+
+/* ===== Band 2 (Collections) pill colour mode ===== */
+
+body.is-band-2 .pillmenu .pill {
+    color: #000;
+}
+
+body.is-band-2 .pillmenu .pill:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+body.is-band-2 .pillmenu .pill.active {
+    background: rgba(0, 0, 0, 0.12);
+    color: #000;
+}
+
+/* Floating nav pill specifically */
+body.is-band-2 .nav-pill .pill {
+    color: #000;
+}
+
+/* Band-2 sets nav pill text to black — but the open overlay is black.
+   Force overlay menu items back to white while open. */
+body.is-band-2 #floatingNavPill.is-open .pillmenu .pill {
+    color: #f2f2f2;
+}
+
+body.is-band-2 #floatingNavPill.is-open .pillmenu .pill:hover {
+    background: rgba(255, 255, 255, 0.12);
 }
 
 /*
@@ -1110,7 +1312,7 @@ a {
 }
 
 /* Hide the Home item in the desktop floating pill */
-@media (min-width: 1001px) {
+@media (min-width: 1280px) {
     #floatingPillMenu .overlay-home-only {
         display: none;
     }

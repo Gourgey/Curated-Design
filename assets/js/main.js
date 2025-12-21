@@ -71,7 +71,9 @@ window.addEventListener("DOMContentLoaded", () => {
    * PILL MENU → SECTION SCROLL
    * -------------------------------------------------------------------------- */
   (function () {
-    const pills = document.querySelectorAll("#pills .pillmenu .pill");
+    const pills = document.querySelectorAll(
+      "#pills .pillmenu .pill, #pillsPanel a.pill",
+    );
 
     const targetMap = {
       "Featured Projects": "#portfolio",
@@ -136,6 +138,9 @@ window.addEventListener("DOMContentLoaded", () => {
     function updateActive() {
       const id = currentSectionId();
       if (id) setActiveById(id);
+
+      // Band 2 (Collections) colour mode
+      document.body.classList.toggle("is-band-2", id === "selected-work");
     }
 
     updateActive();
@@ -156,6 +161,58 @@ window.addEventListener("DOMContentLoaded", () => {
     navToggle.addEventListener("click", () => {
       const isOpen = nav.classList.toggle("is-open");
       navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+  })();
+  /* --------------------------------------------------------------------------
+   * MAIN PILL MENU (CENTER) — COMPACT BURGER UNDER 900px
+   * -------------------------------------------------------------------------- */
+  (function () {
+    const pillsWrap = document.getElementById("pills");
+    const toggle = document.getElementById("pillsToggle");
+    const panel = document.getElementById("pillsPanel");
+    if (!pillsWrap || !toggle || !panel) return;
+
+    function close() {
+      pillsWrap.classList.remove("pills-open");
+      panel.hidden = true;
+      toggle.setAttribute("aria-expanded", "false");
+    }
+
+    function open() {
+      pillsWrap.classList.add("pills-open");
+      panel.hidden = false;
+      toggle.setAttribute("aria-expanded", "true");
+    }
+
+    toggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      const isOpen = pillsWrap.classList.contains("pills-open");
+      if (isOpen) close();
+      else open();
+    });
+
+    // Close when a link is clicked (mobile UX)
+    panel.addEventListener("click", (e) => {
+      const a = e.target.closest("a");
+      if (!a) return;
+      close();
+    });
+
+    // Close on outside click
+    document.addEventListener("click", (e) => {
+      if (!pillsWrap.classList.contains("pills-open")) return;
+      if (pillsWrap.contains(e.target)) return;
+      close();
+    });
+
+    // Close on Escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") close();
+    });
+
+    // If we resize up past 900 while open, close it.
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900) close();
     });
   })();
 });

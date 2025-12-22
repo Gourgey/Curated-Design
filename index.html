@@ -33,6 +33,13 @@
             All your bespoke layout, colours, and component styles live here.
         -->
         <link rel="stylesheet" href="./assets/css/styles.css" />
+
+        <link
+            rel="preload"
+            as="image"
+            href="./assets/images/projects/16-9_images/monet-living.webp"
+            fetchpriority="high"
+        />
     </head>
 
     <!--
@@ -52,12 +59,33 @@
             This is purely decorative and aria-hidden for accessibility.
         -->
         <div id="bg" aria-hidden="true">
-            <img
-                id="bgImg"
-                src="./assets/images/background.png"
-                alt=""
-                decoding="async"
-            />
+            <picture>
+                <source
+                    type="image/avif"
+                    srcset="
+                        ./assets/images/background-1280.avif 1280w,
+                        ./assets/images/background-1920.avif 1920w,
+                        ./assets/images/background-2560.avif 2560w
+                    "
+                    sizes="100vw"
+                />
+                <source
+                    type="image/webp"
+                    srcset="
+                        ./assets/images/background-1280.webp 1280w,
+                        ./assets/images/background-1920.webp 1920w,
+                        ./assets/images/background-2560.webp 2560w
+                    "
+                    sizes="100vw"
+                />
+                <img
+                    src="./assets/images/background-1920.webp"
+                    alt=""
+                    decoding="async"
+                    fetchpriority="high"
+                />
+            </picture>
+
             <div class="bg-dim"></div>
         </div>
 
@@ -218,7 +246,8 @@
                                         alt="Living room interior"
                                         width="1600"
                                         height="900"
-                                        loading="lazy"
+                                        loading="eager"
+                                        fetchpriority="high"
                                         decoding="async"
                                         draggable="false"
                                     />
@@ -291,6 +320,8 @@
                                 <img
                                     src="./assets/images/curated_services/concept_design.webp"
                                     alt="Project thumbnail"
+                                    loading="lazy"
+                                    decoding="async"
                                 />
                             </div>
                             <div class="body">
@@ -308,6 +339,8 @@
                                 <img
                                     src="./assets/images/curated_services/interior_architecture_design.webp"
                                     alt="Project thumbnail"
+                                    loading="lazy"
+                                    decoding="async"
                                 />
                             </div>
                             <div class="body">
@@ -327,6 +360,8 @@
                                 <img
                                     src="./assets/images/curated_services/bespoke_furnishing.webp"
                                     alt="Project thumbnail"
+                                    loading="lazy"
+                                    decoding="async"
                                 />
                             </div>
                             <div class="body">
@@ -347,6 +382,8 @@
                                 <img
                                     src="./assets/images/curated_services/plans_and_elevations.webp"
                                     alt="Project thumbnail"
+                                    loading="lazy"
+                                    decoding="async"
                                 />
                             </div>
                             <div class="body">
@@ -364,6 +401,8 @@
                                 <img
                                     src="./assets/images/curated_services/procurement.webp"
                                     alt="Project thumbnail"
+                                    loading="lazy"
+                                    decoding="async"
                                 />
                             </div>
                             <div class="body">
@@ -381,6 +420,8 @@
                                 <img
                                     src="./assets/images/curated_services/styling.webp"
                                     alt="Project thumbnail"
+                                    loading="lazy"
+                                    decoding="async"
                                 />
                             </div>
                             <div class="body">

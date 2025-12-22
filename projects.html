@@ -5,8 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Projects – Curated Design Studio</title>
 
-        <script src="https://cdn.tailwindcss.com"></script>
-
         <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
             rel="stylesheet"
@@ -15,7 +13,7 @@
         <link rel="stylesheet" href="./assets/css/styles.css" />
     </head>
 
-    <body class="projects-page min-h-screen font-inter">
+    <body class="projects-page font-inter">
         <div id="top"></div>
 
         <!-- Top-left logo -->
@@ -53,7 +51,7 @@
             </ul>
         </nav>
 
-        <main class="pt-28">
+        <main class="page-main">
             <!-- Brand lockup above hero -->
             <div class="hero-brand">
                 <img
@@ -66,7 +64,7 @@
 
             <!-- HERO -->
             <section class="hero">
-                <div class="max-w-[1150px] mx-auto px-4 hero-inner text-center">
+                <div class="container hero-inner hero-inner--center">
                     <h1 class="headline">Selected projects.</h1>
                     <p class="subhead mx-auto">
                         Residential, hospitality, and commercial interiors —
@@ -99,21 +97,19 @@
                     </li>
                     <li><a class="pill" href="#hospitality">Hospitality</a></li>
                     <li><a class="pill" href="#commercial">Commercial</a></li>
-                    <li><a class="pill" href="#enquiry">Enquiry</a></li>
                 </ul>
 
                 <div id="pillsPanel" class="pills-panel" hidden>
                     <a class="pill" href="#residential">Residential</a>
                     <a class="pill" href="#hospitality">Hospitality</a>
                     <a class="pill" href="#commercial">Commercial</a>
-                    <a class="pill" href="#enquiry">Enquiry</a>
                 </div>
             </nav>
 
             <!-- PROJECTS (dark band starts here) -->
             <section class="projects-band">
                 <!-- RESIDENTIAL -->
-                <section id="residential" class="py-14">
+                <section id="residential" class="section-pad">
                     <div class="projects-wrap">
                         <div class="widget-area">
                             <span class="section-label">Residential</span>
@@ -429,21 +425,23 @@
                 </section>
             </section>
 
-            <!-- CTA -->
-            <section id="enquiry" class="py-16">
-                <div class="projects-wrap">
-                    <div class="cta" style="margin-top: 0">
-                        <h2 class="h2">Discuss a new project.</h2>
-                        <p class="lead">
-                            Whether you’re at early concept stage or refining a
-                            live scheme, the studio can support with full design
-                            or focused input on layouts, materials, and styling.
-                        </p>
-                        <a href="./contact.html" class="button">
-                            <span class="dot" aria-hidden="true"></span>
-                            Make an enquiry
-                        </a>
-                    </div>
+            <!-- CTA DARK BAND -->
+            <section id="enquiry" class="about-cta-band py-20">
+                <div class="max-w-[950px] mx-auto px-4 text-center">
+                    <h2 class="h2">Discuss a project.</h2>
+                    <p class="lead mx-auto about-cta-lead">
+                        Whether you’re at early concept stage or refining a live
+                        scheme, the studio can support with full design or
+                        focused input on layouts, materials, and styling.
+                    </p>
+
+                    <a
+                        href="mailto:info@curateddesign.studio"
+                        class="button about-cta-button"
+                    >
+                        <span class="dot" aria-hidden="true"></span>
+                        Make an enquiry
+                    </a>
                 </div>
             </section>
         </main>

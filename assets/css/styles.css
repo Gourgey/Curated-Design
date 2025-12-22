@@ -147,6 +147,42 @@ a {
     text-decoration: none;
 }
 
+/* Replaces Tailwind pt-28 on pages that use the floating nav/logo */
+main.page-main {
+    padding-top: 112px; /* same as pt-28 */
+}
+
+/* ---- Tailwind replacements used by projects.html ---- */
+.min-h-screen {
+    min-height: 100vh;
+}
+.text-center {
+    text-align: center;
+}
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+.px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* max-w-[1150px] */
+.max-w-\[1150px\] {
+    max-width: 1150px;
+}
+
+/* py-14 and py-16 */
+.py-14 {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+}
+.py-16 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
 /* ===== Header + Navigation (fixed top bar) ===== */
 /*
    Fixed site header:
@@ -510,6 +546,14 @@ a {
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+    list-style: none;
+    margin: 0;
+}
+
+.pillmenu > li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 /* Individual pill buttons/links */
@@ -718,6 +762,15 @@ a {
     inset: 0;
     pointer-events: none;
     opacity: 0.28;
+}
+
+.hero-inner--center {
+    text-align: center;
+}
+.hero-inner {
+    width: min(1150px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 0 8px;
 }
 
 /*
@@ -1226,6 +1279,43 @@ body.is-band-2 #floatingNavPill.is-open .pillmenu .pill:hover {
     background: var(--accent);
 }
 
+/* =========================
+   Reusable CTA band (use on all pages except index.html)
+   ========================= */
+
+.about-cta-band {
+    background: #171717;
+}
+
+.about-cta-band .h2,
+.about-cta-band .lead {
+    color: #e4e1d7;
+}
+
+.about-cta-band .lead {
+    opacity: 0.85;
+}
+
+.about-cta-lead {
+    max-width: 520px;
+}
+
+.about-cta-button {
+    margin-top: 16px;
+    display: inline-flex;
+}
+
+/* CTA is ALWAYS dark, regardless of page */
+.about-cta-band {
+    background: #171717;
+    padding: 80px 0; /* optional hard guarantee */
+}
+
+.about-cta-band .h2,
+.about-cta-band .lead {
+    color: #e4e1d7 !important;
+}
+
 /* ===== Carousel dots (indicators) ===== */
 /*
    Dots container:
@@ -1326,6 +1416,7 @@ body.is-band-2 #floatingNavPill.is-open .pillmenu .pill:hover {
 body.projects-page {
     background: #e4e1d7;
     color: #000;
+    min-height: 100vh;
 }
 
 /* HERO text on projects page should be black (your global hero is light-on-dark) */
@@ -1412,15 +1503,12 @@ body.projects-page .section-note {
     margin: 0;
 }
 
-/* CTA in enquiry section sits on light background on this page */
-body.projects-page #enquiry .h2,
-body.projects-page #enquiry .lead {
-    color: #000;
-}
-
-body.projects-page #enquiry .lead {
-    opacity: 0.85;
-}
+.section-pad {
+    padding: 56px 0;
+} /* same as py-14 */
+.section-pad-lg {
+    padding: 64px 0;
+} /* same as py-16 */
 
 /* Default: nav + pills are black on light background */
 body.projects-page .pill,
@@ -1467,6 +1555,57 @@ body.projects-page.is-projects-band .pillmenu-toggle .burger-line {
     body.projects-page .widget-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+}
+
+/* -------------------------------------------------------
+   Tailwind col-span replacements (projects widget grid)
+   ------------------------------------------------------- */
+body.projects-page .col-span-4 {
+    grid-column: span 4 / span 4;
+}
+body.projects-page .col-span-5 {
+    grid-column: span 5 / span 5;
+}
+body.projects-page .col-span-7 {
+    grid-column: span 7 / span 7;
+}
+body.projects-page .col-span-8 {
+    grid-column: span 8 / span 8;
+}
+
+/* Responsive variants used in projects.html
+   Note: the ":" in classnames must be escaped as "\:" in CSS */
+@media (min-width: 640px) {
+    body.projects-page .sm\:col-span-2 {
+        grid-column: span 2 / span 2;
+    }
+}
+
+@media (min-width: 768px) {
+    body.projects-page .md\:col-span-3 {
+        grid-column: span 3 / span 3;
+    }
+    body.projects-page .md\:col-span-6 {
+        grid-column: span 6 / span 6;
+    }
+}
+
+@media (min-width: 1024px) {
+    body.projects-page .lg\:col-span-4 {
+        grid-column: span 4 / span 4;
+    }
+    body.projects-page .lg\:col-span-5 {
+        grid-column: span 5 / span 5;
+    }
+    body.projects-page .lg\:col-span-7 {
+        grid-column: span 7 / span 7;
+    }
+    body.projects-page .lg\:col-span-8 {
+        grid-column: span 8 / span 8;
+    }
+}
+body.projects-page .widget {
+    min-width: 0;
 }
 
 /* Section “widget area” panel */
@@ -1575,27 +1714,72 @@ body.about-page .pillmenu-toggle .burger-line {
     background: currentColor;
 }
 
-/* CTA dark band */
-body.about-page .about-cta-band {
-    background: #171717;
+/* -------------------------------------------------------
+   Tailwind replacements for about.html
+   ------------------------------------------------------- */
+
+/* Width + centering */
+body.about-page .max-w-\[950px\] {
+    max-width: 950px;
+}
+body.about-page .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+body.about-page .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
-body.about-page .about-cta-band .h2,
-body.about-page .about-cta-band .lead {
-    color: #e4e1d7;
+/* Vertical spacing (space-y-*) */
+body.about-page .space-y-10 > * + * {
+    margin-top: 2.5rem; /* 40px */
+}
+body.about-page .space-y-4 > * + * {
+    margin-top: 1rem; /* 16px */
+}
+body.about-page .space-y-3 > * + * {
+    margin-top: 0.75rem; /* 12px */
+}
+body.about-page .space-y-2 > * + * {
+    margin-top: 0.5rem; /* 8px */
 }
 
-body.about-page .about-cta-band .lead {
-    opacity: 0.85;
+/* Grid + gaps */
+body.about-page .grid {
+    display: grid;
 }
 
-body.about-page .about-cta-lead {
-    max-width: 520px;
+body.about-page .gap-8 {
+    gap: 2rem; /* 32px */
+}
+body.about-page .gap-6 {
+    gap: 1.5rem; /* 24px */
 }
 
-body.about-page .about-cta-button {
-    margin-top: 16px;
-    display: inline-flex;
+@media (min-width: 768px) {
+    body.about-page .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    body.about-page .md\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* Lists */
+body.about-page .list-disc {
+    list-style: disc;
+}
+body.about-page .pl-5 {
+    padding-left: 1.25rem;
+}
+body.about-page .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+section.about-content {
+    padding-bottom: 80px;
 }
 
 /* =========================
@@ -1675,4 +1859,157 @@ body.contact-page .contact-note {
     font-size: 12px;
     margin-top: 8px;
     color: rgba(0, 0, 0, 0.6);
+}
+
+/* -------------------------------------------------------
+   Tailwind replacements for contact.html
+   ------------------------------------------------------- */
+
+/* Width used on contact page */
+body.contact-page .max-w-\[950px\] {
+    max-width: 950px;
+}
+
+/* Vertical spacing utilities used in contact.html */
+body.contact-page .py-12 {
+    padding-top: 3rem; /* 48px */
+    padding-bottom: 3rem;
+}
+
+body.contact-page .py-20 {
+    padding-top: 5rem; /* 80px */
+    padding-bottom: 5rem;
+}
+
+/* Vertical rhythm (space-y-*) */
+body.contact-page .space-y-10 > * + * {
+    margin-top: 2.5rem; /* 40px */
+}
+body.contact-page .space-y-4 > * + * {
+    margin-top: 1rem; /* 16px */
+}
+
+/* Grid + gaps */
+body.contact-page .grid {
+    display: grid;
+}
+body.contact-page .gap-8 {
+    gap: 2rem; /* 32px */
+}
+
+@media (min-width: 768px) {
+    body.contact-page .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* =========================
+   Concept Design Page
+   ========================= */
+
+html.concept-page {
+    background: #e4e1d7;
+}
+
+body.concept-page {
+    background: #e4e1d7;
+    color: #000;
+}
+
+/* Ensure nav/pills read as black on light pages */
+body.concept-page .pill,
+body.concept-page .pillmenu-toggle,
+body.concept-page .nav-pill {
+    color: #000;
+}
+
+body.concept-page .pillmenu-toggle .burger-line {
+    background: currentColor;
+}
+
+/* Light-form overrides (keeps your existing form-card component) */
+body.concept-page .form-card {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.14);
+}
+
+body.concept-page .form-field label {
+    color: rgba(0, 0, 0, 0.65);
+}
+
+body.concept-page .form-field input,
+body.concept-page .form-field textarea,
+body.concept-page .form-field select {
+    background: rgba(255, 255, 255, 0.72);
+    color: #000;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+}
+
+body.concept-page .form-field input::placeholder,
+body.concept-page .form-field textarea::placeholder {
+    color: rgba(0, 0, 0, 0.45);
+}
+
+/* Concept page layout (no Tailwind needed) */
+body.concept-page .concept-wrap {
+    width: min(950px, calc(100% - 32px));
+}
+
+body.concept-page .concept-title {
+    margin-top: 6px;
+}
+
+body.concept-page .concept-lead {
+    color: rgba(0, 0, 0, 0.78);
+    max-width: 70ch;
+    margin: 0 0 10px;
+}
+
+body.concept-page .concept-meta {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    margin: 0 0 22px;
+}
+
+body.concept-page .concept-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 18px;
+}
+
+@media (min-width: 900px) {
+    body.concept-page .concept-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 22px;
+        align-items: start;
+    }
+}
+
+body.concept-page .concept-block {
+    margin-bottom: 18px;
+}
+
+body.concept-page .concept-list {
+    margin: 10px 0 0;
+    padding-left: 18px;
+    color: rgba(0, 0, 0, 0.78);
+}
+
+body.concept-page .concept-list li {
+    margin: 6px 0;
+}
+/* Light-page treatment for the logo pill */
+body.concept-page .top-left-logo,
+body.contact-page .top-left-logo,
+body.about-page .top-left-logo {
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    background: rgba(0, 0, 0, 0.03);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+body.concept-page .top-left-logo:hover,
+body.contact-page .top-left-logo:hover,
+body.about-page .top-left-logo:hover {
+    background: rgba(0, 0, 0, 0.06);
 }

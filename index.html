@@ -17,7 +17,6 @@
             - Feather icons: lightweight icon set (JS replaces <i> with SVG).
             These are loaded before the body so classes and icons are available.
         -->
-        <script src="https://cdn.tailwindcss.com"></script>
 
         <!--
             Load the Inter font from Google Fonts.
@@ -140,7 +139,7 @@
             - pt-28 / pb-24 create vertical breathing room
               while the fixed header and background sit behind.
         -->
-        <main class="pt-28">
+        <main class="page-main">
             <!-- BRAND LOCKUP ABOVE HERO -->
             <div class="hero-brand">
                 <img
@@ -158,7 +157,7 @@
                 - Sits over the background image with subtle dimming.
             -->
             <section class="hero">
-                <div class="max-w-[1150px] mx-auto px-4 hero-inner text-center">
+                <div class="container hero-inner hero-inner--center">
                     <h1 class="headline">
                         Curated interiors to define your lifestyle.
                     </h1>
@@ -315,7 +314,11 @@
 
                     <!-- First row of service cards -->
                     <div class="card-grid">
-                        <article class="card span-4">
+                        <a
+                            class="card span-4"
+                            href="curated_services/concept_design.html"
+                            aria-label="View Concept Design service"
+                        >
                             <div class="img-wrap">
                                 <img
                                     src="./assets/images/curated_services/concept_design.webp"
@@ -332,9 +335,13 @@
                                     budget.
                                 </p>
                             </div>
-                        </article>
+                        </a>
 
-                        <article class="card span-4">
+                        <a
+                            class="card span-4"
+                            href="curated_services/concept_design.html"
+                            aria-label="View Concept Design service"
+                        >
                             <div class="img-wrap">
                                 <img
                                     src="./assets/images/curated_services/interior_architecture_design.webp"
@@ -353,9 +360,13 @@
                                     and functionality of the space.
                                 </p>
                             </div>
-                        </article>
+                        </a>
 
-                        <article class="card span-4">
+                        <a
+                            class="card span-4"
+                            href="curated_services/concept_design.html"
+                            aria-label="View Concept Design service"
+                        >
                             <div class="img-wrap">
                                 <img
                                     src="./assets/images/curated_services/bespoke_furnishing.webp"
@@ -372,12 +383,16 @@
                                     and space.
                                 </p>
                             </div>
-                        </article>
+                        </a>
                     </div>
 
                     <!-- Second row of service cards -->
                     <div class="card-grid">
-                        <article class="card span-4">
+                        <a
+                            class="card span-4"
+                            href="curated_services/concept_design.html"
+                            aria-label="View Concept Design service"
+                        >
                             <div class="img-wrap">
                                 <img
                                     src="./assets/images/curated_services/plans_and_elevations.webp"
@@ -394,9 +409,13 @@
                                     sections.
                                 </p>
                             </div>
-                        </article>
+                        </a>
 
-                        <article class="card span-4">
+                        <a
+                            class="card span-4"
+                            href="curated_services/concept_design.html"
+                            aria-label="View Concept Design service"
+                        >
                             <div class="img-wrap">
                                 <img
                                     src="./assets/images/curated_services/procurement.webp"
@@ -413,9 +432,13 @@
                                     project.
                                 </p>
                             </div>
-                        </article>
+                        </a>
 
-                        <article class="card span-4">
+                        <a
+                            class="card span-4"
+                            href="curated_services/concept_design.html"
+                            aria-label="View Concept Design service"
+                        >
                             <div class="img-wrap">
                                 <img
                                     src="./assets/images/curated_services/styling.webp"
@@ -432,7 +455,7 @@
                                     the space.
                                 </p>
                             </div>
-                        </article>
+                        </a>
                     </div>
                 </div>
             </section>

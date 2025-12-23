@@ -189,11 +189,27 @@ window.addEventListener("DOMContentLoaded", () => {
     const navToggle = nav.querySelector(".pillmenu-toggle");
     if (!navToggle) return;
 
+    function closeNav() {
+      nav.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    }
+
     navToggle.addEventListener("click", () => {
       const isOpen = nav.classList.toggle("is-open");
       navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
+
+    // Your CSS uses: @media (max-width: 1280px) for burger mode
+    // So mobile is <= 1280, desktop is > 1280
+    let wasMobile = window.innerWidth <= 1280;
+
+    window.addEventListener("resize", () => {
+      const isMobile = window.innerWidth <= 1280;
+      if (wasMobile !== isMobile) closeNav(); // crossing breakpoint: reset state
+      wasMobile = isMobile;
+    });
   })();
+
   /* --------------------------------------------------------------------------
    * MAIN PILL MENU (CENTER) — COMPACT BURGER UNDER 900px
    * -------------------------------------------------------------------------- */

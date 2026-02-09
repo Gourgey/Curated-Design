@@ -2308,3 +2308,546 @@ body.is-band-2:not(.projects-page):not(.about-page):not(.contact-page):not(
     .pills-toggle {
     color: #000;
 }
+
+/* =========================
+   Project Page (project template)
+   ========================= */
+
+html.project-page {
+    background: #e4e1d7;
+}
+
+body.project-page {
+    background: #e4e1d7;
+    color: #000;
+    min-height: 100vh;
+}
+
+/* Ensure nav/pills read as black on this light page */
+body.project-page .pill,
+body.project-page .pillmenu-toggle,
+body.project-page .nav-pill {
+    color: #000;
+}
+
+body.project-page .pillmenu-toggle .burger-line {
+    background: currentColor;
+}
+
+/* Light-page treatment for the logo pill (match about/contact/concept) */
+body.project-page .top-left-logo {
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    background: rgba(0, 0, 0, 0.03);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+body.project-page .top-left-logo:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+/* Topbar */
+body.project-page .project-topbar {
+    width: min(1150px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 0 8px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+body.project-page .project-backlink {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    padding: 10px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    background: rgba(255, 255, 255, 0.55);
+}
+body.project-page .project-backlink:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* Hero */
+body.project-page .project-hero {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    max-width: 100vw;
+    margin: 0;
+    overflow: hidden;
+}
+
+body.project-page .project-hero-media {
+    margin: 0;
+    width: 100%;
+}
+
+body.project-page .project-hero-media img {
+    width: 100%;
+    height: clamp(340px, 55vw, 640px);
+    object-fit: cover;
+    display: block;
+    filter: saturate(0.98);
+}
+
+body.project-page .project-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.56) 0%,
+        rgba(0, 0, 0, 0.18) 55%,
+        rgba(0, 0, 0, 0.08) 100%
+    );
+    display: grid;
+    align-items: end;
+    padding: 28px 0;
+}
+
+body.project-page .project-hero-inner {
+    width: min(1150px, calc(100% - 32px));
+    margin-inline: auto;
+    padding-inline: 8px;
+    color: #fff;
+}
+
+body.project-page .project-kicker {
+    margin: 0 0 10px;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.92;
+}
+
+body.project-page .project-title {
+    margin: 0 0 10px;
+    font-size: clamp(30px, 4vw, 58px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+}
+
+body.project-page .project-subtitle {
+    margin: 0;
+    max-width: 68ch;
+    font-size: 16px;
+    line-height: 1.45;
+    opacity: 0.92;
+}
+
+body.project-page .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+body.project-page .project-tag {
+    font-size: 12px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(0, 0, 0, 0.18);
+}
+
+/* Body layout */
+body.project-page .project-wrap {
+    width: min(1050px, calc(100% - 32px));
+}
+
+body.project-page .project-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+}
+
+@media (min-width: 980px) {
+    body.project-page .project-grid {
+        grid-template-columns: 1.25fr 0.75fr;
+        gap: 22px;
+        align-items: start;
+    }
+}
+
+body.project-page .project-article {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    border-radius: 20px;
+    padding: 18px 16px;
+}
+
+@media (min-width: 700px) {
+    body.project-page .project-article {
+        padding: 22px 22px;
+    }
+}
+
+body.project-page .project-h2 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+}
+
+body.project-page .project-p {
+    margin: 0 0 14px;
+    opacity: 0.88;
+    line-height: 1.6;
+}
+
+body.project-page .project-list {
+    margin: 8px 0 18px;
+    padding-left: 18px;
+    opacity: 0.88;
+}
+
+body.project-page .project-callout {
+    margin: 18px 0;
+    padding: 14px 14px;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    background: rgba(0, 0, 0, 0.03);
+}
+
+body.project-page .project-callout-title {
+    margin: 0 0 6px;
+    font-weight: 600;
+}
+
+/* Sticky facts */
+body.project-page .project-facts {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    border-radius: 20px;
+    padding: 16px;
+}
+
+body.project-page .project-facts-title {
+    margin: 0 0 12px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+body.project-page .project-facts-list {
+    margin: 0;
+    display: grid;
+    gap: 10px;
+}
+
+body.project-page .project-fact {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 10px;
+    align-items: baseline;
+}
+
+body.project-page .project-fact dt {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+body.project-page .project-fact dd {
+    margin: 0;
+    opacity: 0.9;
+}
+
+body.project-page .project-facts-divider {
+    height: 1px;
+    background: rgba(0, 0, 0, 0.12);
+    margin: 14px 0;
+}
+
+body.project-page .project-muted {
+    opacity: 0.72;
+}
+
+/* Gallery */
+body.project-page .project-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+}
+
+@media (min-width: 900px) {
+    body.project-page .project-gallery {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+body.project-page .project-shot {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    background: #111;
+    display: block;
+}
+
+body.project-page .project-shot img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    transition: transform 180ms ease;
+}
+
+body.project-page .project-shot:hover img {
+    transform: scale(1.02);
+}
+
+/* Detail blocks */
+body.project-page .project-details {
+    display: grid;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+@media (min-width: 700px) {
+    body.project-page .project-details {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+body.project-page .project-detail {
+    padding: 12px 12px;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    background: rgba(0, 0, 0, 0.02);
+}
+
+body.project-page .project-detail-label {
+    margin: 0 0 6px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+/* =========================
+   Project prose polish (long text elegance)
+   Paste at end of styles.css
+   ========================= */
+
+body.project-page .project-article.project-prose {
+    padding: 22px 22px;
+}
+
+@media (min-width: 700px) {
+    body.project-page .project-article.project-prose {
+        padding: 28px 28px;
+    }
+}
+
+/* Better reading comfort */
+body.project-page .project-prose {
+    text-wrap: pretty;
+    hyphens: auto;
+}
+
+body.project-page .project-prose .project-h2 {
+    margin-top: 6px;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+}
+
+/* Lead paragraph: tighter, classier, less “bloggy” */
+body.project-page .project-prose .project-lead {
+    font-size: 16px;
+    line-height: 1.55;
+    opacity: 0.92;
+    max-width: 70ch;
+    margin: 0 0 16px;
+}
+
+/* Paragraph rhythm */
+body.project-page .project-prose p {
+    max-width: 72ch;
+    margin: 0 0 14px;
+    line-height: 1.65;
+}
+
+body.project-page .project-prose p:last-child {
+    margin-bottom: 0;
+}
+
+/* Callout: make it feel designed, not “boxed text” */
+body.project-page .project-callout {
+    margin: 18px 0 22px;
+    padding: 16px 16px;
+    border-radius: 18px;
+    background: rgba(0, 0, 0, 0.025);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+body.project-page .project-callout-title {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin: 0 0 8px;
+}
+
+body.project-page .project-callout-text {
+    margin: 0;
+    opacity: 0.88;
+}
+
+/* “Approach” as steps (handles long text beautifully) */
+body.project-page .project-steps {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 18px;
+    display: grid;
+    gap: 12px;
+}
+
+body.project-page .project-steps li {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: rgba(255, 255, 255, 0.55);
+    border-radius: 16px;
+    padding: 14px 14px;
+}
+
+body.project-page .project-steps .step-title {
+    display: block;
+    font-weight: 600;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+}
+
+body.project-page .project-steps .step-text {
+    display: block;
+    opacity: 0.86;
+    line-height: 1.6;
+    max-width: 68ch;
+}
+
+/* Details block: make lists inside cards clean */
+body.project-page .project-details--rich .project-p {
+    margin: 0;
+}
+
+body.project-page .project-mini {
+    margin: 8px 0 0;
+    padding-left: 18px;
+    opacity: 0.86;
+}
+
+body.project-page .project-mini li {
+    margin: 6px 0;
+}
+
+/* Gallery intro text */
+body.project-page .project-prose .project-muted {
+    max-width: 72ch;
+    margin: 0 0 12px;
+}
+
+/* Subtle improvement to the right-side facts card */
+body.project-page .project-facts {
+    background: rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(0, 0, 0, 0.14);
+}
+
+/* Make the facts labels feel more “spec sheet” */
+body.project-page .project-fact dt {
+    opacity: 0.62;
+    letter-spacing: 0.14em;
+}
+
+/* Gallery under project facts */
+body.project-page .project-gallery-block {
+    margin-top: 16px;
+}
+
+body.project-page .project-gallery-block .project-h2 {
+    margin-top: 0;
+}
+
+/* =========================
+   Sidebar layout + gallery card
+   ========================= */
+
+body.project-page .project-aside {
+    display: grid;
+    gap: 16px;
+}
+
+/* Keep the facts card above other elements while sticky */
+body.project-page .project-facts {
+    z-index: 2;
+}
+
+/* Give the gallery its own “bubble/card” */
+body.project-page .project-gallery-card {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    border-radius: 20px;
+    padding: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+body.project-page .project-gallery-card .project-h2 {
+    margin-top: 0;
+}
+
+/* In the sidebar, 4 columns will look tiny — force 2 columns */
+body.project-page .project-gallery-card .project-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+/* Optional: slightly smaller thumbs in the sidebar */
+body.project-page .project-gallery-card .project-shot img {
+    aspect-ratio: 1 / 1;
+}
+
+/* =========================
+   Project sidebar gallery — stacked 16:9
+   ========================= */
+
+/* Force vertical stack */
+body.project-page .project-gallery-card .project-gallery {
+    display: grid;
+    grid-template-columns: 1fr; /* single column */
+    gap: 12px;
+}
+
+/* Make each image a clean 16:9 frame */
+body.project-page .project-gallery-card .project-shot {
+    aspect-ratio: 16 / 9;
+}
+
+/* Ensure the image fills the frame correctly */
+body.project-page .project-gallery-card .project-shot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: auto; /* override previous 1:1 or 4:3 rules */
+}
+
+/* =========================
+   Coming Soon badge (project pages)
+   Paste at end of styles.css
+   ========================= */
+body.project-page .coming-soon-badge {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 10px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(0, 0, 0, 0.18);
+    color: #fff;
+    vertical-align: middle;
+}

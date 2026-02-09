@@ -104,82 +104,6 @@ window.addEventListener("DOMContentLoaded", () => {
   })();
 
   /* --------------------------------------------------------------------------
-   * ACTIVE PILL HIGHLIGHT ON SCROLL
-   * -------------------------------------------------------------------------- */
-  (function () {
-    const header = document.getElementById("siteHeader");
-    const pillsBar = document.getElementById("pills");
-    const links = Array.from(
-      document.querySelectorAll("#pills .pillmenu a.pill"),
-    );
-    const sections = links
-      .map((a) => document.querySelector(a.getAttribute("href")))
-      .filter(Boolean);
-
-    function setActiveById(id) {
-      links.forEach((a) =>
-        a.classList.toggle("active", a.getAttribute("href") === `#${id}`),
-      );
-    }
-
-    function currentSectionId() {
-      const headerH = header ? header.offsetHeight : 0;
-      const pillsH = pillsBar ? pillsBar.offsetHeight : 0;
-      const offset = headerH + pillsH + 8;
-      const y = window.scrollY + offset + 1;
-      let current = sections[0]?.id || "";
-      for (const sec of sections) {
-        if (sec.offsetTop <= y) current = sec.id;
-        else break;
-      }
-      return current;
-    }
-
-    function updateActive() {
-      const id = currentSectionId();
-      if (id) setActiveById(id);
-
-      // Band 2 (Collections) colour mode
-      document.body.classList.toggle("is-band-2", id === "selected-work");
-    }
-
-    updateActive();
-    window.addEventListener("scroll", updateActive, { passive: true });
-    window.addEventListener("resize", updateActive);
-  })();
-
-  /* --------------------------------------------------------------------------
-   * PROJECTS PAGE — TOGGLE DARK MODE WHEN SCROLLING THROUGH .projects-band
-   * -------------------------------------------------------------------------- */
-  (function () {
-    const band = document.querySelector(".projects-band");
-    if (!band) return; // not on projects page
-
-    const header = document.getElementById("siteHeader");
-    const pillsBar = document.getElementById("pills");
-
-    function inBand() {
-      const headerH = header ? header.offsetHeight : 0;
-      const pillsH = pillsBar ? pillsBar.offsetHeight : 0;
-      const offset = headerH + pillsH + 8;
-
-      const y = window.scrollY + offset + 1;
-      const top = band.offsetTop;
-      const bottom = top + band.offsetHeight;
-
-      return y >= top && y < bottom;
-    }
-
-    function update() {
-      document.body.classList.toggle("is-projects-band", inBand());
-    }
-
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-  })();
-
-  /* --------------------------------------------------------------------------
    * FLOATING NAV PILL — SIMPLE BURGER TOGGLE (BREAKPOINT HANDLED IN CSS)
    * -------------------------------------------------------------------------- */
   (function () {
@@ -263,3 +187,73 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   })();
 });
+
+// ===== RAF-BASED SCROLL HANDLER (replaces old scroll listeners) =====
+
+const header = document.getElementById("siteHeader");
+const pillsBar = document.getElementById("pills");
+const links = Array.from(document.querySelectorAll("#pills .pillmenu a.pill"));
+const sections = links
+  .map((a) => document.querySelector(a.getAttribute("href")))
+  .filter(Boolean);
+
+const band = document.querySelector(".projects-band");
+
+// If this page has no pill menu, bail early
+if (links.length && sections.length) {
+  function getOffset() {
+    const headerH = header ? header.offsetHeight : 0;
+    const pillsH = pillsBar ? pillsBar.offsetHeight : 0;
+    return headerH + pillsH + 8;
+  }
+
+  function setActiveById(id) {
+    links.forEach((a) =>
+      a.classList.toggle("active", a.getAttribute("href") === `#${id}`),
+    );
+  }
+
+  function currentSectionId() {
+    const y = window.scrollY + getOffset() + 1;
+    let current = sections[0]?.id || "";
+    for (const sec of sections) {
+      if (sec.offsetTop <= y) current = sec.id;
+      else break;
+    }
+    return current;
+  }
+
+  let ticking = false;
+
+  function update() {
+    // Active pill highlight
+    const id = currentSectionId();
+    if (id) setActiveById(id);
+
+    // Projects-band colour mode
+    if (band) {
+      const y = window.scrollY + getOffset() + 1;
+      const top = band.offsetTop;
+      const bottom = top + band.offsetHeight;
+      document.body.classList.toggle(
+        "is-projects-band",
+        y >= top && y < bottom,
+      );
+    }
+  }
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      update();
+      ticking = false;
+    });
+  }
+
+  // Initial run
+  update();
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+}

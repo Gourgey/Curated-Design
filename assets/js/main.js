@@ -68,37 +68,40 @@ window.addEventListener("DOMContentLoaded", () => {
   })();
 
   /* --------------------------------------------------------------------------
-   * PILL MENU → SECTION SCROLL
+   * PILL MENU → SECTION SCROLL (generic in-page anchors)
    * -------------------------------------------------------------------------- */
   (function () {
     const pills = document.querySelectorAll(
-      "#pills .pillmenu .pill, #pillsPanel a.pill",
+      "#pills a.pill, #pillsPanel a.pill",
     );
 
-    const targetMap = {
-      "Featured Projects": "#portfolio",
-      "Curated Services": "#services",
-      Collections: "#selected-work",
-      "Design Philosophy": "#about",
-    };
+    function getOffset() {
+      const header = document.getElementById("siteHeader"); // may be null on some pages
+      const pillsBar = document.getElementById("pills");
+      const headerH = header ? header.offsetHeight : 0;
+      const pillsH = pillsBar ? pillsBar.offsetHeight : 0;
+      return headerH + pillsH + 12;
+    }
 
-    function scrollToTarget(sel) {
-      const el = document.querySelector(sel);
+    function scrollToHash(hash) {
+      const el = document.querySelector(hash);
       if (!el) return;
-      const y = el.getBoundingClientRect().top + window.scrollY;
+
+      const y = el.getBoundingClientRect().top + window.scrollY - getOffset();
       window.scrollTo({ top: y, behavior: "smooth" });
     }
 
-    pills.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
+    pills.forEach((a) => {
+      a.addEventListener("click", (e) => {
+        const href = a.getAttribute("href") || "";
+        if (!href.startsWith("#")) return; // allow normal navigation for non-hash links
+
         e.preventDefault();
-        const label = btn.textContent.trim();
-        const target = targetMap[label];
-        if (target) {
-          scrollToTarget(target);
-          pills.forEach((p) => p.classList.remove("active"));
-          btn.classList.add("active");
-        }
+        scrollToHash(href);
+
+        // Update active state (both desktop + mobile panel)
+        pills.forEach((p) => p.classList.remove("active"));
+        a.classList.add("active");
       });
     });
   })();

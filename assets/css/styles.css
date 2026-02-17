@@ -2851,3 +2851,14 @@ body.project-page .coming-soon-badge {
     color: #fff;
     vertical-align: middle;
 }
+
+/* Performance safety: blur is expensive in Chrome, especially over moving backgrounds */
+@media (max-width: 9999px) {
+    .site-header,
+    .pillmenu,
+    .top-left-logo,
+    .pillmenu-toggle {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+}

@@ -7,16 +7,31 @@ window.addEventListener("DOMContentLoaded", () => {
     const img = document.getElementById("bgImg");
     if (!img) return;
 
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const lowMemory =
+      typeof navigator.deviceMemory === "number" && navigator.deviceMemory <= 4;
+
+    if (prefersReducedMotion || lowMemory) return; // no parallax
+
     const speed = 0.4;
     const scale = 1.12;
 
+    let raf = 0;
     function update() {
-      img.style.transform = `translate3d(0, ${-window.scrollY * speed}px, 0) scale(${scale})`;
+      raf = 0;
+      const y = window.scrollY;
+      img.style.transform = `translate3d(0, ${-y * speed}px, 0) scale(${scale})`;
+    }
+
+    function onScroll() {
+      if (!raf) raf = requestAnimationFrame(update);
     }
 
     update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
   })();
 
   /* --------------------------------------------------------------------------
@@ -191,24 +206,30 @@ window.addEventListener("DOMContentLoaded", () => {
   })();
 });
 
-// ===== RAF-BASED SCROLL HANDLER (replaces old scroll listeners) =====
+// ===== RAF-BASED SCROLL HANDLER (cached metrics; avoids layout reads on scroll) =====
+(function () {
+  const header = document.getElementById("siteHeader");
+  const pillsBar = document.getElementById("pills");
+  const links = Array.from(
+    document.querySelectorAll("#pills .pillmenu a.pill"),
+  );
 
-const header = document.getElementById("siteHeader");
-const pillsBar = document.getElementById("pills");
-const links = Array.from(document.querySelectorAll("#pills .pillmenu a.pill"));
-const sections = links
-  .map((a) => document.querySelector(a.getAttribute("href")))
-  .filter(Boolean);
+  const sections = links
+    .map((a) => document.querySelector(a.getAttribute("href")))
+    .filter(Boolean);
 
-const band = document.querySelector(".projects-band");
+  const band = document.querySelector(".projects-band");
 
-// If this page has no pill menu, bail early
-if (links.length && sections.length) {
-  function getOffset() {
-    const headerH = header ? header.offsetHeight : 0;
-    const pillsH = pillsBar ? pillsBar.offsetHeight : 0;
-    return headerH + pillsH + 8;
-  }
+  // If this page has no pill menu, bail early
+  if (!links.length || !sections.length) return;
+
+  const metrics = {
+    offset: 0,
+    sectionTops: [],
+    sectionIds: [],
+    bandTop: null,
+    bandBottom: null,
+  };
 
   function setActiveById(id) {
     links.forEach((a) =>
@@ -216,31 +237,67 @@ if (links.length && sections.length) {
     );
   }
 
-  function currentSectionId() {
-    const y = window.scrollY + getOffset() + 1;
-    let current = sections[0]?.id || "";
-    for (const sec of sections) {
-      if (sec.offsetTop <= y) current = sec.id;
-      else break;
+  function measure() {
+    // Heights (use rects; avoid offsetHeight surprises)
+    const headerH = header ? header.getBoundingClientRect().height : 0;
+    const pillsH = pillsBar ? pillsBar.getBoundingClientRect().height : 0;
+    metrics.offset = headerH + pillsH + 8;
+
+    // Cache section top positions in document coordinates
+    metrics.sectionTops = sections.map(
+      (sec) => sec.getBoundingClientRect().top + window.scrollY,
+    );
+    metrics.sectionIds = sections.map((sec) => sec.id);
+
+    // Cache projects band range
+    if (band) {
+      const r = band.getBoundingClientRect();
+      const top = r.top + window.scrollY;
+      metrics.bandTop = top;
+      metrics.bandBottom = top + r.height;
+    } else {
+      metrics.bandTop = null;
+      metrics.bandBottom = null;
     }
-    return current;
+  }
+
+  function sectionIdAt(y) {
+    const tops = metrics.sectionTops;
+    const ids = metrics.sectionIds;
+    if (!tops.length) return "";
+
+    // Binary search: last section whose top <= y
+    let lo = 0;
+    let hi = tops.length - 1;
+    let ans = 0;
+
+    if (y < tops[0]) return ids[0] || "";
+
+    while (lo <= hi) {
+      const mid = (lo + hi) >> 1;
+      if (tops[mid] <= y) {
+        ans = mid;
+        lo = mid + 1;
+      } else {
+        hi = mid - 1;
+      }
+    }
+    return ids[ans] || "";
   }
 
   let ticking = false;
-
   function update() {
+    const y = window.scrollY + metrics.offset + 1;
+
     // Active pill highlight
-    const id = currentSectionId();
+    const id = sectionIdAt(y);
     if (id) setActiveById(id);
 
     // Projects-band colour mode
-    if (band) {
-      const y = window.scrollY + getOffset() + 1;
-      const top = band.offsetTop;
-      const bottom = top + band.offsetHeight;
+    if (band && metrics.bandTop != null && metrics.bandBottom != null) {
       document.body.classList.toggle(
         "is-projects-band",
-        y >= top && y < bottom,
+        y >= metrics.bandTop && y < metrics.bandBottom,
       );
     }
   }
@@ -254,9 +311,36 @@ if (links.length && sections.length) {
     });
   }
 
-  // Initial run
-  update();
+  // Throttled re-measure (so resize/fonts/images don’t spam measure calls)
+  let measureScheduled = false;
+  function scheduleMeasure() {
+    if (measureScheduled) return;
+    measureScheduled = true;
+    requestAnimationFrame(() => {
+      measure();
+      update();
+      measureScheduled = false;
+    });
+  }
 
+  // Initial
+  scheduleMeasure();
+
+  // Scroll just updates (no layout reads)
   window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll);
-}
+
+  // Re-measure when layout might change
+  window.addEventListener("resize", scheduleMeasure);
+  window.addEventListener("load", scheduleMeasure);
+
+  // Fonts can shift layout after first paint
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(scheduleMeasure).catch(() => {});
+  }
+
+  // Optional-but-good: catch dynamic size changes (images loading, menu opening, etc.)
+  if ("ResizeObserver" in window) {
+    const ro = new ResizeObserver(() => scheduleMeasure());
+    [header, pillsBar, band, ...sections].forEach((el) => el && ro.observe(el));
+  }
+})();

@@ -1,40 +1,6 @@
 // All page behavior moved here from index.html
 window.addEventListener("DOMContentLoaded", () => {
   /* --------------------------------------------------------------------------
-   * PARALLAX BACKGROUND
-   * -------------------------------------------------------------------------- */
-  (function () {
-    const img = document.getElementById("bgImg");
-    if (!img) return;
-
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    const lowMemory =
-      typeof navigator.deviceMemory === "number" && navigator.deviceMemory <= 4;
-
-    if (prefersReducedMotion || lowMemory) return; // no parallax
-
-    const speed = 0.4;
-    const scale = 1.12;
-
-    let raf = 0;
-    function update() {
-      raf = 0;
-      const y = window.scrollY;
-      img.style.transform = `translate3d(0, ${-y * speed}px, 0) scale(${scale})`;
-    }
-
-    function onScroll() {
-      if (!raf) raf = requestAnimationFrame(update);
-    }
-
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-  })();
-
-  /* --------------------------------------------------------------------------
    * MINIMAL CAROUSEL LOGIC
    * -------------------------------------------------------------------------- */
   (function () {
@@ -206,7 +172,9 @@ window.addEventListener("DOMContentLoaded", () => {
   })();
 });
 
-// ===== RAF-BASED SCROLL HANDLER (cached metrics; avoids layout reads on scroll) =====
+// ===== UNIFIED RAF-BASED SCROLL HANDLER =====
+// One scheduler drives both parallax + section tracking to avoid multiple
+// per-scroll RAF pipelines competing for frame time.
 (function () {
   const header = document.getElementById("siteHeader");
   const pillsBar = document.getElementById("pills");
@@ -219,9 +187,24 @@ window.addEventListener("DOMContentLoaded", () => {
     .filter(Boolean);
 
   const band = document.querySelector(".projects-band");
+  const bgImg = document.getElementById("bgImg");
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  const lowMemory =
+    typeof navigator.deviceMemory === "number" && navigator.deviceMemory <= 4;
+  const parallaxEnabled = Boolean(bgImg) && !prefersReducedMotion && !lowMemory;
+  const hasPillTracking = links.length > 0 && sections.length > 0;
 
-  // If this page has no pill menu, bail early
-  if (!links.length || !sections.length) return;
+  if (!hasPillTracking && !parallaxEnabled) return;
+
+  const parallax = {
+    speed: 0.4,
+    scale: 1.12,
+    maxTranslate: 0,
+    willChangeTimer: 0,
+    movingClass: "is-parallax-active",
+  };
 
   const metrics = {
     offset: 0,
@@ -230,34 +213,66 @@ window.addEventListener("DOMContentLoaded", () => {
     bandTop: null,
     bandBottom: null,
   };
+  let activeSectionId = "";
 
   function setActiveById(id) {
+    if (id === activeSectionId) return;
+    activeSectionId = id;
     links.forEach((a) =>
       a.classList.toggle("active", a.getAttribute("href") === `#${id}`),
     );
   }
 
+  function touchParallaxWillChange() {
+    if (!parallaxEnabled) return;
+    bgImg.classList.add(parallax.movingClass);
+    window.clearTimeout(parallax.willChangeTimer);
+    // Keep will-change temporary so Chrome can release compositor memory
+    // once scrolling settles.
+    parallax.willChangeTimer = window.setTimeout(() => {
+      bgImg.classList.remove(parallax.movingClass);
+    }, 150);
+  }
+
+  function updateParallax(scrollY) {
+    if (!parallaxEnabled) return;
+    // Cap travel to avoid very large translate values that can trigger
+    // fixed-layer jitter on some Chrome/GPU combinations.
+    const travel = Math.min(scrollY * parallax.speed, parallax.maxTranslate);
+    bgImg.style.transform = `translate3d(0, ${-travel}px, 0) scale(${parallax.scale})`;
+    touchParallaxWillChange();
+  }
+
   function measure() {
-    // Heights (use rects; avoid offsetHeight surprises)
-    const headerH = header ? header.getBoundingClientRect().height : 0;
-    const pillsH = pillsBar ? pillsBar.getBoundingClientRect().height : 0;
-    metrics.offset = headerH + pillsH + 8;
+    if (hasPillTracking) {
+      // Heights (use rects; avoid offsetHeight surprises)
+      const headerH = header ? header.getBoundingClientRect().height : 0;
+      const pillsH = pillsBar ? pillsBar.getBoundingClientRect().height : 0;
+      metrics.offset = headerH + pillsH + 8;
 
-    // Cache section top positions in document coordinates
-    metrics.sectionTops = sections.map(
-      (sec) => sec.getBoundingClientRect().top + window.scrollY,
-    );
-    metrics.sectionIds = sections.map((sec) => sec.id);
+      // Cache section top positions in document coordinates
+      metrics.sectionTops = sections.map(
+        (sec) => sec.getBoundingClientRect().top + window.scrollY,
+      );
+      metrics.sectionIds = sections.map((sec) => sec.id);
 
-    // Cache projects band range
-    if (band) {
-      const r = band.getBoundingClientRect();
-      const top = r.top + window.scrollY;
-      metrics.bandTop = top;
-      metrics.bandBottom = top + r.height;
-    } else {
-      metrics.bandTop = null;
-      metrics.bandBottom = null;
+      // Cache projects band range
+      if (band) {
+        const r = band.getBoundingClientRect();
+        const top = r.top + window.scrollY;
+        metrics.bandTop = top;
+        metrics.bandBottom = top + r.height;
+      } else {
+        metrics.bandTop = null;
+        metrics.bandBottom = null;
+      }
+    }
+
+    if (parallaxEnabled) {
+      parallax.maxTranslate = Math.max(
+        48,
+        Math.min(220, Math.round(window.innerHeight * 0.22)),
+      );
     }
   }
 
@@ -285,9 +300,13 @@ window.addEventListener("DOMContentLoaded", () => {
     return ids[ans] || "";
   }
 
-  let ticking = false;
   function update() {
-    const y = window.scrollY + metrics.offset + 1;
+    const scrollY = window.scrollY;
+    updateParallax(scrollY);
+
+    if (!hasPillTracking) return;
+
+    const y = scrollY + metrics.offset + 1;
 
     // Active pill highlight
     const id = sectionIdAt(y);
@@ -302,12 +321,13 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function onScroll() {
-    if (ticking) return;
-    ticking = true;
+  let updateScheduled = false;
+  function scheduleUpdate() {
+    if (updateScheduled) return;
+    updateScheduled = true;
     requestAnimationFrame(() => {
+      updateScheduled = false;
       update();
-      ticking = false;
     });
   }
 
@@ -327,7 +347,7 @@ window.addEventListener("DOMContentLoaded", () => {
   scheduleMeasure();
 
   // Scroll just updates (no layout reads)
-  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("scroll", scheduleUpdate, { passive: true });
 
   // Re-measure when layout might change
   window.addEventListener("resize", scheduleMeasure);
@@ -339,7 +359,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   // Optional-but-good: catch dynamic size changes (images loading, menu opening, etc.)
-  if ("ResizeObserver" in window) {
+  if (hasPillTracking && "ResizeObserver" in window) {
     const ro = new ResizeObserver(() => scheduleMeasure());
     [header, pillsBar, band, ...sections].forEach((el) => el && ro.observe(el));
   }

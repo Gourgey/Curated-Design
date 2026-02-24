@@ -93,7 +93,9 @@ body {
 #bg {
     position: fixed;
     inset: 0;
-    z-index: -1;
+    /* Keep this non-negative; Chrome can glitch with fixed + transformed layers
+       when they live in negative stacking contexts. */
+    z-index: 0;
     overflow: hidden;
     pointer-events: none;
 }
@@ -127,9 +129,13 @@ body {
     min-height: 130vh;
     object-fit: cover;
     transform: translate3d(0, 0, 0) scale(1.12);
-    will-change: transform;
     user-select: none;
     -webkit-user-drag: none;
+}
+
+/* Activated briefly while scrolling; JS removes this after scroll settles. */
+#bgImg.is-parallax-active {
+    will-change: transform;
 }
 
 /*
@@ -156,6 +162,8 @@ a {
 /* Replaces Tailwind pt-28 on pages that use the floating nav/logo */
 main.page-main {
     padding-top: 112px; /* same as pt-28 */
+    position: relative;
+    z-index: 1;
 }
 
 /* ---- Tailwind replacements used by projects.html ---- */

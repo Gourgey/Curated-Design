@@ -847,21 +847,6 @@ main.page-main {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
 }
 
-/*
-   Individual pill:
-   - Clickable chip acting as filter/nav item.
-   - Active state used for currently-viewed section.
-*/
-.pill {
-    display: block;
-    padding: 8px 14px;
-    border-radius: 999px;
-    color: #d9d9d9;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-}
-
 /* ===== Dock panel / Carousel container ===== */
 /*
    Dock-style panel:
@@ -1297,19 +1282,6 @@ body.is-band-2 #floatingNavPill.is-open .pillmenu .pill:hover {
    Reusable CTA band (use on all pages except index.html)
    ========================= */
 
-.about-cta-band {
-    background: #171717;
-}
-
-.about-cta-band .h2,
-.about-cta-band .lead {
-    color: #e4e1d7;
-}
-
-.about-cta-band .lead {
-    opacity: 0.85;
-}
-
 .about-cta-lead {
     max-width: 520px;
 }
@@ -1328,6 +1300,9 @@ body.is-band-2 #floatingNavPill.is-open .pillmenu .pill:hover {
 .about-cta-band .h2,
 .about-cta-band .lead {
     color: #e4e1d7 !important;
+}
+.about-cta-band .lead {
+    opacity: 0.85;
 }
 
 .about-cta-band .about-cta-button,
@@ -1418,13 +1393,6 @@ body.is-band-2 #floatingNavPill.is-open .pillmenu .pill:hover {
 .button-full {
     width: 100%;
     justify-content: center;
-}
-
-/* Hide the Home item in the desktop floating pill */
-@media (min-width: 1280px) {
-    #floatingPillMenu .overlay-home-only {
-        display: none;
-    }
 }
 
 /* =========================
@@ -2043,15 +2011,6 @@ body.concept-page .concept-hero {
     padding: 0 0 34px; /* keep your spacing */
 }
 
-body.concept-page .concept-hero-figure--fullbleed {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    border-radius: 0; /* true full-bleed look */
-    border-left: 0;
-    border-right: 0;
-}
-
 body.concept-page .concept-hero-figure--fullbleed img {
     width: 100%;
     height: clamp(240px, 38vw, 520px);
@@ -2526,10 +2485,11 @@ body.project-page .project-callout-title {
 
 /* Sticky facts */
 body.project-page .project-facts {
-    background: rgba(0, 0, 0, 0.03);
+    background: rgba(255, 255, 255, 0.35);
     border: 1px solid rgba(0, 0, 0, 0.14);
     border-radius: 20px;
     padding: 16px;
+    z-index: 2;
 }
 
 body.project-page .project-facts-title {
@@ -2756,12 +2716,6 @@ body.project-page .project-prose .project-muted {
     margin: 0 0 12px;
 }
 
-/* Subtle improvement to the right-side facts card */
-body.project-page .project-facts {
-    background: rgba(255, 255, 255, 0.35);
-    border: 1px solid rgba(0, 0, 0, 0.14);
-}
-
 /* Make the facts labels feel more “spec sheet” */
 body.project-page .project-fact dt {
     opacity: 0.62;
@@ -2784,11 +2738,6 @@ body.project-page .project-gallery-block .project-h2 {
 body.project-page .project-aside {
     display: grid;
     gap: 16px;
-}
-
-/* Keep the facts card above other elements while sticky */
-body.project-page .project-facts {
-    z-index: 2;
 }
 
 /* Give the gallery its own “bubble/card” */

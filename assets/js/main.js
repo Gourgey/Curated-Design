@@ -239,7 +239,8 @@ window.addEventListener("DOMContentLoaded", () => {
     // Cap travel to avoid very large translate values that can trigger
     // fixed-layer jitter on some Chrome/GPU combinations.
     const travel = Math.min(scrollY * parallax.speed, parallax.maxTranslate);
-    bgImg.style.transform = `translate3d(0, ${-travel}px, 0) scale(${parallax.scale})`;
+    const scale = Number.isFinite(parallax.scale) ? parallax.scale : 1;
+    bgImg.style.transform = `translate3d(0, ${-travel}px, 0) scale(${scale})`;
     touchParallaxWillChange();
   }
 

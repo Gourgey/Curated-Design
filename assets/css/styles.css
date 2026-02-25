@@ -128,7 +128,7 @@ body {
     height: 100%;
     min-height: 130vh;
     object-fit: cover;
-    transform: translate3d(0, 0, 0) scale(1.12);
+    transform: translate3d(0, 0, 0) scale(1.08);
     user-select: none;
     -webkit-user-drag: none;
 }
@@ -981,6 +981,16 @@ main.page-main {
     padding: 80px 0;
 }
 
+/* Index only: extend Design Philosophy so the floating pills remain over
+   this final dark band near page bottom across viewport sizes. */
+body:not(.projects-page):not(.about-page):not(.contact-page):not(.concept-page):not(
+        .project-page
+    )
+    #about.section {
+    min-height: max(520px, calc(100svh - 120px));
+    padding-bottom: clamp(88px, 12svh, 160px);
+}
+
 /*
    Section inner container:
    - Centers content and constrains width.
@@ -1137,31 +1147,37 @@ main.page-main {
 
 /* ===== Band 2 (Collections) pill colour mode ===== */
 
-body.is-band-2 .pillmenu .pill {
+body.is-band-2 .pillmenu .pill,
+body.pills-on-light .pillmenu .pill {
     color: #000;
 }
 
-body.is-band-2 .pillmenu .pill:hover {
+body.is-band-2 .pillmenu .pill:hover,
+body.pills-on-light .pillmenu .pill:hover {
     background: rgba(0, 0, 0, 0.08);
 }
 
-body.is-band-2 .pillmenu .pill.active {
+body.is-band-2 .pillmenu .pill.active,
+body.pills-on-light .pillmenu .pill.active {
     background: rgba(0, 0, 0, 0.12);
     color: #000;
 }
 
 /* Floating nav pill specifically */
-body.is-band-2 .nav-pill .pill {
+body.is-band-2 .nav-pill .pill,
+body.pills-on-light .nav-pill .pill {
     color: #000;
 }
 
 /* Band-2 sets nav pill text to black — but the open overlay is black.
    Force overlay menu items back to white while open. */
-body.is-band-2 #floatingNavPill.is-open .pillmenu .pill {
+body.is-band-2 #floatingNavPill.is-open .pillmenu .pill,
+body.pills-on-light #floatingNavPill.is-open .pillmenu .pill {
     color: #f2f2f2;
 }
 
-body.is-band-2 #floatingNavPill.is-open .pillmenu .pill:hover {
+body.is-band-2 #floatingNavPill.is-open .pillmenu .pill:hover,
+body.pills-on-light #floatingNavPill.is-open .pillmenu .pill:hover {
     background: rgba(255, 255, 255, 0.12);
 }
 
@@ -2245,6 +2261,11 @@ body.is-band-2:not(.projects-page):not(.about-page):not(.contact-page):not(
         .concept-page
     )
     #floatingNavPill
+    .pillmenu-toggle,
+body.pills-on-light:not(.projects-page):not(.about-page):not(.contact-page):not(
+        .concept-page
+    )
+    #floatingNavPill
     .pillmenu-toggle {
     color: #000;
 }
@@ -2269,6 +2290,11 @@ body:not(.projects-page):not(.about-page):not(.contact-page):not(.concept-page)
 
 /* When index enters light band (Collections), allow it to turn black */
 body.is-band-2:not(.projects-page):not(.about-page):not(.contact-page):not(
+        .concept-page
+    )
+    #pills
+    .pills-toggle,
+body.pills-on-light:not(.projects-page):not(.about-page):not(.contact-page):not(
         .concept-page
     )
     #pills

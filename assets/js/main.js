@@ -56,19 +56,13 @@ window.addEventListener("DOMContentLoaded", () => {
       "#pills a.pill, #pillsPanel a.pill",
     );
 
-    function getOffset() {
-      const header = document.getElementById("siteHeader"); // may be null on some pages
-      const pillsBar = document.getElementById("pills");
-      const headerH = header ? header.offsetHeight : 0;
-      const pillsH = pillsBar ? pillsBar.offsetHeight : 0;
-      return headerH + pillsH + 12;
-    }
-
     function scrollToHash(hash) {
       const el = document.querySelector(hash);
       if (!el) return;
 
-      const y = el.getBoundingClientRect().top + window.scrollY - getOffset();
+      // Scroll to the section's exact document top so the viewport aligns
+      // precisely with the target section in Chrome and Safari.
+      const y = Math.round(el.getBoundingClientRect().top + window.scrollY);
       window.scrollTo({ top: y, behavior: "smooth" });
     }
 
@@ -200,7 +194,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const parallax = {
     speed: 0.4,
-    scale: 1.12,
+    scale: 1.08,
     maxTranslate: 0,
     willChangeTimer: 0,
     movingClass: "is-parallax-active",
@@ -210,6 +204,7 @@ window.addEventListener("DOMContentLoaded", () => {
     offset: 0,
     sectionTops: [],
     sectionIds: [],
+    sectionThemes: [],
     bandTop: null,
     bandBottom: null,
   };
@@ -256,6 +251,9 @@ window.addEventListener("DOMContentLoaded", () => {
         (sec) => sec.getBoundingClientRect().top + window.scrollY,
       );
       metrics.sectionIds = sections.map((sec) => sec.id);
+      metrics.sectionThemes = sections.map(
+        (sec) => sec.getAttribute("data-theme") || "dark",
+      );
 
       // Cache projects band range
       if (band) {
@@ -270,24 +268,35 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     if (parallaxEnabled) {
+      // Keep travel below the 130vh background headroom so fixed parallax
+      // never exposes image edges while reducing compositor work.
       parallax.maxTranslate = Math.max(
-        48,
-        Math.min(220, Math.round(window.innerHeight * 0.22)),
+        40,
+        Math.min(180, Math.round(window.innerHeight * 0.18)),
       );
     }
   }
 
-  function sectionIdAt(y) {
+  function sectionIndexAt(y) {
     const tops = metrics.sectionTops;
-    const ids = metrics.sectionIds;
-    if (!tops.length) return "";
+    if (!tops.length) return -1;
+    const lastIdx = tops.length - 1;
+
+    // At document bottom, force the final section to stay active even when
+    // there isn't enough remaining scroll range for y to cross its top.
+    if (
+      window.innerHeight + window.scrollY >=
+      document.documentElement.scrollHeight - 2
+    ) {
+      return lastIdx;
+    }
 
     // Binary search: last section whose top <= y
     let lo = 0;
-    let hi = tops.length - 1;
+    let hi = lastIdx;
     let ans = 0;
 
-    if (y < tops[0]) return ids[0] || "";
+    if (y < tops[0]) return 0;
 
     while (lo <= hi) {
       const mid = (lo + hi) >> 1;
@@ -298,7 +307,7 @@ window.addEventListener("DOMContentLoaded", () => {
         hi = mid - 1;
       }
     }
-    return ids[ans] || "";
+    return ans;
   }
 
   function update() {
@@ -310,8 +319,16 @@ window.addEventListener("DOMContentLoaded", () => {
     const y = scrollY + metrics.offset + 1;
 
     // Active pill highlight
-    const id = sectionIdAt(y);
+    const idx = sectionIndexAt(y);
+    const id = idx >= 0 ? metrics.sectionIds[idx] : "";
     if (id) setActiveById(id);
+
+    // Keep pill/nav text readable against light section backgrounds.
+    const isLightTheme =
+      idx >= 0 && (metrics.sectionThemes[idx] || "").toLowerCase() === "light";
+    document.body.classList.toggle("pills-on-light", isLightTheme);
+    // Backwards compatibility with existing index selectors.
+    document.body.classList.toggle("is-band-2", isLightTheme);
 
     // Projects-band colour mode
     if (band && metrics.bandTop != null && metrics.bandBottom != null) {

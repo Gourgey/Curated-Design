@@ -1864,8 +1864,17 @@ body.contact-page .contact-note {
     color: rgba(0, 0, 0, 0.6);
 }
 
+body.contact-page #contactFormError {
+    color: #8f1d1d;
+}
+
 body.contact-page #contactFormSuccess .lead {
     margin: 0;
+}
+
+body.contact-page #contactFormSubmit[disabled] {
+    opacity: 0.7;
+    cursor: wait;
 }
 
 body.contact-page .hidden {

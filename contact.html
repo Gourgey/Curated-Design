@@ -9,7 +9,7 @@
             href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="./assets/css/styles.css" />
+        <link rel="stylesheet" href="/assets/css/styles.css" />
     </head>
 
     <body class="contact-page min-h-screen font-inter">
@@ -18,7 +18,7 @@
         
         <a href="index.html" id="topLogo" class="top-left-logo">
             <img
-                src="./assets/images/logos/logo_black.webp"
+                src="/assets/images/logos/logo_black.webp"
                 alt="Curated Design Studio"
             />
         </a>
@@ -54,7 +54,7 @@
             
             <div class="hero-brand">
                 <img
-                    src="./assets/images/logos/logo_black.webp"
+                    src="/assets/images/logos/logo_black.webp"
                     alt="Curated Design logo"
                     class="hero-brand-logo"
                 />
@@ -106,7 +106,7 @@
                                     class="form-card"
                                     name="contact"
                                     method="POST"
-                                    action="/contact/?success=1"
+                                    action="/contact.html"
                                     netlify
                                     data-netlify="true"
                                     data-netlify-honeypot="bot-field"
@@ -196,7 +196,17 @@
                                         ></textarea>
                                     </div>
 
+                                    <p
+                                        id="contactFormError"
+                                        class="contact-note hidden"
+                                        role="alert"
+                                    >
+                                        We couldn’t send your message. Please
+                                        try again.
+                                    </p>
+
                                     <button
+                                        id="contactFormSubmit"
                                         type="submit"
                                         class="button button-full"
                                     >
@@ -204,7 +214,9 @@
                                             class="dot"
                                             aria-hidden="true"
                                         ></span>
-                                        Send enquiry
+                                        <span id="contactFormSubmitLabel">
+                                            Send enquiry
+                                        </span>
                                     </button>
                                 </form>
 
@@ -246,7 +258,7 @@
             </section>
         </main>
 
-        <script src="./assets/js/main.js" defer></script>
-        <script src="./assets/js/contact-form.js" defer></script>
+        <script src="/assets/js/main.js" defer></script>
+        <script src="/assets/js/contact-form.js" defer></script>
     </body>
 </html>

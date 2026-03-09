@@ -1864,6 +1864,14 @@ body.contact-page .contact-note {
     color: rgba(0, 0, 0, 0.6);
 }
 
+body.contact-page #contactFormSuccess .lead {
+    margin: 0;
+}
+
+body.contact-page .hidden {
+    display: none;
+}
+
 /* -------------------------------------------------------
    Tailwind replacements for contact.html
    ------------------------------------------------------- */

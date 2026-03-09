@@ -102,10 +102,28 @@
                             
                             <div>
                                 <form
+                                    id="contactForm"
                                     class="form-card"
-                                    action="#"
-                                    method="post"
+                                    name="contact"
+                                    method="POST"
+                                    action="/contact/?success=1"
+                                    netlify
+                                    data-netlify="true"
+                                    data-netlify-honeypot="bot-field"
                                 >
+                                    <input
+                                        type="hidden"
+                                        name="form-name"
+                                        value="contact"
+                                    />
+
+                                    <p class="hidden">
+                                        <label>
+                                            Don’t fill this out if you're human:
+                                            <input name="bot-field" />
+                                        </label>
+                                    </p>
+
                                     <div class="form-field">
                                         <label for="name">Name</label>
                                         <input
@@ -188,13 +206,19 @@
                                         ></span>
                                         Send enquiry
                                     </button>
-
-                                    <p class="muted contact-note">
-                                        This form is currently front-end only.
-                                        Connect it to your preferred email or
-                                        form service when you’re ready.
-                                    </p>
                                 </form>
+
+                                <div
+                                    id="contactFormSuccess"
+                                    class="form-card hidden"
+                                    aria-live="polite"
+                                >
+                                    <h2 class="title">Form submitted</h2>
+                                    <p class="lead">
+                                        Thanks for reaching out — we’ll respond
+                                        shortly.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -223,5 +247,6 @@
         </main>
 
         <script src="./assets/js/main.js" defer></script>
+        <script src="./assets/js/contact-form.js" defer></script>
     </body>
 </html>

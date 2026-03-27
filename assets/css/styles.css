@@ -98,6 +98,7 @@ body {
     z-index: 0;
     overflow: hidden;
     pointer-events: none;
+    contain: paint;
 }
 
 /*
@@ -740,7 +741,7 @@ main.page-main {
 }
 
 .hero-brand-logo {
-    width: 102px;
+    width: min(100%, clamp(147px, 20vw, 280px));
     height: auto;
 }
 
@@ -845,6 +846,23 @@ main.page-main {
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Chrome compositor relief:
+   during active scroll, reduce blur radius only while scrolling.
+   Static appearance stays unchanged. */
+body.chrome-scrolling .top-left-logo,
+body.chrome-scrolling .pillmenu,
+body.chrome-scrolling .pillmenu-toggle,
+body.chrome-scrolling .nav-pill .pillmenu,
+body.chrome-scrolling .pillmenu-wrap.stuck .pillmenu {
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+}
+
+body.chrome-scrolling .pills-panel {
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 /* ===== Dock panel / Carousel container ===== */
@@ -2850,15 +2868,4 @@ body.project-page .coming-soon-badge {
     background: rgba(0, 0, 0, 0.18);
     color: #fff;
     vertical-align: middle;
-}
-
-/* Performance safety: blur is expensive in Chrome, especially over moving backgrounds */
-@media (max-width: 9999px) {
-    .site-header,
-    .pillmenu,
-    .top-left-logo,
-    .pillmenu-toggle {
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-    }
 }

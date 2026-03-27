@@ -182,6 +182,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const band = document.querySelector(".projects-band");
   const bgImg = document.getElementById("bgImg");
+  const hero = document.querySelector(".hero");
+  const heroBrand = document.querySelector(".hero-brand");
+  const body = document.body;
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   ).matches;
@@ -198,6 +201,9 @@ window.addEventListener("DOMContentLoaded", () => {
     maxTranslate: 0,
     willChangeTimer: 0,
     movingClass: "is-parallax-active",
+    currentTravel: null,
+    currentScale: null,
+    stopScrollY: 0,
   };
 
   const metrics = {
@@ -209,6 +215,25 @@ window.addEventListener("DOMContentLoaded", () => {
     bandBottom: null,
   };
   let activeSectionId = "";
+  let isLightThemeActive = null;
+  let isProjectsBandActive = null;
+  const isChromeLike = (() => {
+    const uaData = navigator.userAgentData;
+    if (uaData && Array.isArray(uaData.brands)) {
+      return uaData.brands.some((brand) =>
+        /Chrom(e|ium)/i.test(brand.brand),
+      );
+    }
+
+    const ua = navigator.userAgent || "";
+    const vendor = navigator.vendor || "";
+    return (
+      /Chrome|Chromium/i.test(ua) &&
+      !/Edg|OPR|Opera|Brave/i.test(ua) &&
+      /Google/i.test(vendor)
+    );
+  })();
+  let chromeScrollTimer = 0;
 
   function setActiveById(id) {
     if (id === activeSectionId) return;
@@ -220,7 +245,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function touchParallaxWillChange() {
     if (!parallaxEnabled) return;
-    bgImg.classList.add(parallax.movingClass);
+    if (!bgImg.classList.contains(parallax.movingClass)) {
+      bgImg.classList.add(parallax.movingClass);
+    }
     window.clearTimeout(parallax.willChangeTimer);
     // Keep will-change temporary so Chrome can release compositor memory
     // once scrolling settles.
@@ -233,8 +260,17 @@ window.addEventListener("DOMContentLoaded", () => {
     if (!parallaxEnabled) return;
     // Cap travel to avoid very large translate values that can trigger
     // fixed-layer jitter on some Chrome/GPU combinations.
-    const travel = Math.min(scrollY * parallax.speed, parallax.maxTranslate);
+    const effectiveScroll = Math.min(scrollY, parallax.stopScrollY);
+    const travel = Math.min(
+      effectiveScroll * parallax.speed,
+      parallax.maxTranslate,
+    );
     const scale = Number.isFinite(parallax.scale) ? parallax.scale : 1;
+    if (travel === parallax.currentTravel && scale === parallax.currentScale) {
+      return;
+    }
+    parallax.currentTravel = travel;
+    parallax.currentScale = scale;
     bgImg.style.transform = `translate3d(0, ${-travel}px, 0) scale(${scale})`;
     touchParallaxWillChange();
   }
@@ -268,11 +304,21 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     if (parallaxEnabled) {
+      const heroBottomSource = pillsBar || hero || heroBrand;
+      const heroBottom = heroBottomSource
+        ? heroBottomSource.getBoundingClientRect().bottom + window.scrollY
+        : window.innerHeight;
+      parallax.stopScrollY = Math.max(1, Math.round(heroBottom));
+
       // Keep travel below the 130vh background headroom so fixed parallax
       // never exposes image edges while reducing compositor work.
-      parallax.maxTranslate = Math.max(
-        40,
+      const safeMaxTranslate = Math.max(
+        24,
         Math.min(180, Math.round(window.innerHeight * 0.18)),
+      );
+      parallax.maxTranslate = Math.min(
+        safeMaxTranslate,
+        Math.max(24, Math.round(parallax.stopScrollY * parallax.speed)),
       );
     }
   }
@@ -326,21 +372,36 @@ window.addEventListener("DOMContentLoaded", () => {
     // Keep pill/nav text readable against light section backgrounds.
     const isLightTheme =
       idx >= 0 && (metrics.sectionThemes[idx] || "").toLowerCase() === "light";
-    document.body.classList.toggle("pills-on-light", isLightTheme);
-    // Backwards compatibility with existing index selectors.
-    document.body.classList.toggle("is-band-2", isLightTheme);
+    if (isLightTheme !== isLightThemeActive) {
+      isLightThemeActive = isLightTheme;
+      document.body.classList.toggle("pills-on-light", isLightTheme);
+      // Backwards compatibility with existing index selectors.
+      document.body.classList.toggle("is-band-2", isLightTheme);
+    }
 
     // Projects-band colour mode
     if (band && metrics.bandTop != null && metrics.bandBottom != null) {
-      document.body.classList.toggle(
-        "is-projects-band",
-        y >= metrics.bandTop && y < metrics.bandBottom,
-      );
+      const inProjectsBand = y >= metrics.bandTop && y < metrics.bandBottom;
+      if (inProjectsBand !== isProjectsBandActive) {
+        isProjectsBandActive = inProjectsBand;
+        document.body.classList.toggle("is-projects-band", inProjectsBand);
+      }
+    } else if (isProjectsBandActive !== false) {
+      isProjectsBandActive = false;
+      document.body.classList.remove("is-projects-band");
     }
   }
 
   let updateScheduled = false;
   function scheduleUpdate() {
+    if (isChromeLike && body) {
+      body.classList.add("chrome-scrolling");
+      window.clearTimeout(chromeScrollTimer);
+      chromeScrollTimer = window.setTimeout(() => {
+        body.classList.remove("chrome-scrolling");
+      }, 140);
+    }
+
     if (updateScheduled) return;
     updateScheduled = true;
     requestAnimationFrame(() => {

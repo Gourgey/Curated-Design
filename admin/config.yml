@@ -3,6 +3,8 @@ backend:
   repo: Gourgey/Curated-Design
   branch: main
 
+local_backend: true
+
 media_folder: "assets/images/uploads"
 public_folder: "/assets/images/uploads"
 
@@ -91,6 +93,21 @@ collections:
           - { label: "Lead", name: "lead", widget: "text" }
           - { label: "Studio Details Heading", name: "detailsHeading", widget: "string" }
           - { label: "Note", name: "note", widget: "text" }
+      - name: "projects"
+        label: "Projects Page"
+        file: "src/content/pages/projects.json"
+        format: "json"
+        fields:
+          - { label: "Hero Headline", name: "heroHeadline", widget: "string" }
+          - { label: "Hero Subhead", name: "heroSubhead", widget: "text" }
+          - label: "Categories"
+            name: "categories"
+            widget: "list"
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Note", name: "note", widget: "text" }
 
   - name: "services"
     label: "Services"
@@ -99,7 +116,10 @@ collections:
     slug: "{{slug}}"
     extension: "md"
     format: "frontmatter"
+    identifier_field: "title"
     fields:
+      - { label: "Tags", name: "tags", widget: "hidden", default: "service" }
+      - { label: "Permalink", name: "permalink", widget: "hidden", default: false }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Slug", name: "slug", widget: "string" }
       - { label: "Order", name: "order", widget: "number", value_type: "int" }
@@ -134,7 +154,10 @@ collections:
     slug: "{{slug}}"
     extension: "md"
     format: "frontmatter"
+    identifier_field: "title"
     fields:
+      - { label: "Tags", name: "tags", widget: "hidden", default: "project" }
+      - { label: "Permalink", name: "permalink", widget: "hidden", default: false }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Slug", name: "slug", widget: "string" }
       - { label: "Order", name: "order", widget: "number", value_type: "int" }
@@ -144,6 +167,7 @@ collections:
       - { label: "Status Label", name: "statusLabel", widget: "string", required: false }
       - { label: "Show in Projects Listing", name: "showInProjects", widget: "boolean", default: true }
       - { label: "Show on Homepage", name: "showOnHome", widget: "boolean", default: false }
+      - { label: "Homepage Card Class", name: "homeSpan", widget: "string", required: false }
       - { label: "Listing Grid Class", name: "gridClass", widget: "string", default: "col-span-4 lg:col-span-4 md:col-span-3 sm:col-span-2" }
       - { label: "Listing Image", name: "listingImage", widget: "image" }
       - { label: "Hero Image", name: "heroImage", widget: "image" }

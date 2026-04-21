@@ -1,0 +1,62 @@
+---
+layout: layouts/base.njk
+title: Studio – Curated Design Studio
+permalink: about.html
+htmlClass: about-page
+bodyClass: about-page min-h-screen font-inter
+---
+<main class="page-main">
+    {% include "partials/hero-brand.njk" %}
+
+    <section class="about-content py-12">
+        <div class="max-w-[950px] mx-auto px-4">
+            <div class="space-y-10">
+                <div class="space-y-4">
+                    <h2 class="h2">{{ site.about.introHeading }}</h2>
+                    <p class="lead">{{ site.about.introText }}</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-3">
+                        <h3 class="title">{{ site.about.workHeading }}</h3>
+                        {% for paragraph in site.about.workParagraphs %}
+                        <p>{{ paragraph }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="title">{{ site.about.focusHeading }}</h3>
+                        <ul class="list-disc pl-5 space-y-1 text-sm">
+                            {% for area in site.about.focusAreas %}
+                            <li>{{ area }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h2 class="h2">Process</h2>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        {% for step in site.about.processSteps %}
+                        <div class="space-y-2">
+                            <h3 class="title">{{ step.title }}</h3>
+                            <p class="text-sm">{{ step.text }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h2 class="h2">{{ site.about.locationsHeading }}</h2>
+                    <p>{{ site.about.locationsText }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% set heading = site.settings.ctaHeading %}
+    {% set text = site.settings.ctaText %}
+    {% set href = "mailto:" + site.settings.email %}
+    {% set label = site.settings.primaryCtaText %}
+    {% include "partials/cta-band.njk" %}
+</main>

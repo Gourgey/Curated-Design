@@ -1,0 +1,127 @@
+---
+layout: layouts/base.njk
+title: Contact – Curated Design Studio
+permalink: contact.html
+htmlClass: contact-page
+bodyClass: contact-page min-h-screen font-inter
+scripts:
+  - /assets/js/main.js
+  - /assets/js/contact-form.js
+---
+<main class="page-main">
+    {% include "partials/hero-brand.njk" %}
+
+    <section class="contact-content py-12">
+        <div class="max-w-[950px] mx-auto px-4">
+            <div class="space-y-10">
+                <div class="space-y-4">
+                    <h1 class="h2">{{ site.contact.heading }}</h1>
+                    <p class="lead">{{ site.contact.lead }}</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <h2 class="title">{{ site.contact.detailsHeading }}</h2>
+                        <p>
+                            {{ site.settings.studioName }}<br />
+                            {{ site.settings.location }}
+                        </p>
+
+                        <p>
+                            Email:
+                            <a href="mailto:{{ site.settings.email }}" class="contact-link">
+                                {{ site.settings.email }}
+                            </a>
+                        </p>
+
+                        <p class="muted contact-note">{{ site.contact.note }}</p>
+                    </div>
+
+                    <div>
+                        <form
+                            id="contactForm"
+                            class="form-card"
+                            name="contact"
+                            method="POST"
+                            action="/contact.html"
+                            netlify
+                            data-netlify="true"
+                            data-netlify-honeypot="bot-field"
+                        >
+                            <input type="hidden" name="form-name" value="contact" />
+
+                            <p class="hidden">
+                                <label>
+                                    Don’t fill this out if you're human:
+                                    <input name="bot-field" />
+                                </label>
+                            </p>
+
+                            <div class="form-field">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" autocomplete="name" required />
+                            </div>
+
+                            <div class="form-field">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" autocomplete="email" required />
+                            </div>
+
+                            <div class="form-field">
+                                <label for="project-type">Project type</label>
+                                <select id="project-type" name="project-type">
+                                    <option value="">Select an option</option>
+                                    <option value="residential">Residential home / apartment</option>
+                                    <option value="hospitality">Hospitality (restaurant, bar, hotel)</option>
+                                    <option value="workspace">Workspace / commercial</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="budget">Approximate budget (optional)</label>
+                                <input
+                                    type="text"
+                                    id="budget"
+                                    name="budget"
+                                    placeholder="e.g. £80,000 – £150,000"
+                                />
+                            </div>
+
+                            <div class="form-field">
+                                <label for="message">Project outline</label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    rows="5"
+                                    placeholder="Location, scope, timings, and anything else you’d like to share."
+                                    required
+                                ></textarea>
+                            </div>
+
+                            <p id="contactFormError" class="contact-note hidden" role="alert">
+                                We couldn’t send your message. Please try again.
+                            </p>
+
+                            <button id="contactFormSubmit" type="submit" class="button button-full">
+                                <span class="dot" aria-hidden="true"></span>
+                                <span id="contactFormSubmitLabel">Send enquiry</span>
+                            </button>
+                        </form>
+
+                        <div id="contactFormSuccess" class="form-card hidden" aria-live="polite">
+                            <h2 class="title">Form submitted</h2>
+                            <p class="lead">Thanks for reaching out — we’ll respond shortly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% set heading = site.settings.ctaHeading %}
+    {% set text = site.settings.ctaText %}
+    {% set href = "mailto:" + site.settings.email %}
+    {% set label = site.settings.primaryCtaText %}
+    {% include "partials/cta-band.njk" %}
+</main>

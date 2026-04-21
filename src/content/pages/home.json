@@ -1,0 +1,39 @@
+{
+  "title": "Curated Design Studio",
+  "heroHeadline": "Bespoke interiors to define your lifestyle.",
+  "heroSubhead": "A London-based interior design studio shaping distinctive spaces.",
+  "carouselSlides": [
+    {
+      "image": "/assets/images/projects/16-9_images/monet-living.webp",
+      "alt": "Living room interior"
+    },
+    {
+      "image": "/assets/images/projects/16-9_images/gwape_bedroom.webp",
+      "alt": "Bedroom interior"
+    },
+    {
+      "image": "/assets/images/projects/16-9_images/gwape_living.webp",
+      "alt": "Living interior"
+    }
+  ],
+  "servicesKicker": "Curated Services",
+  "servicesHeading": "Full-service design from concept to completion.",
+  "servicesLead": "From early mood and space planning to specification and on-site coordination, we deliver quietly confident spaces tailored to the way you live.",
+  "collectionsKicker": "Collections",
+  "collectionsHeading": "Recent projects.",
+  "philosophy": {
+    "kicker": "Design Philosophy",
+    "image": "/assets/images/projects/16-9_images/monet-terrace.webp",
+    "imageAlt": "",
+    "heading": "Quietly confident interiors with lasting impact.",
+    "paragraphs": [
+      "We combine research, material sensibility, and careful proportion to create spaces that feel calm and complete—never loud, always liveable.",
+      "Our process is collaborative and thorough: listening first, then designing with intent. The result is a home or venue that reflects your values and supports your routines."
+    ]
+  },
+  "cta": {
+    "heading": "Have a project in mind?",
+    "text": "Tell us about your space and timeline—we’ll share how we can help.",
+    "buttonLabel": "Start a conversation"
+  }
+}

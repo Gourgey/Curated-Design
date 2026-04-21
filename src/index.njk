@@ -1,0 +1,194 @@
+---
+layout: layouts/base.njk
+title: Curated Design Studio
+bodyClass: min-h-screen text-[#f2f2f2] font-inter
+topLogo: white_logo_no_text_on_transparent.svg
+showBackground: true
+preloadImage: /assets/images/projects/16-9_images/monet-living.webp
+---
+<main class="page-main">
+    {% set logoFile = "white_small_logo_and_large_text_on_transparent.svg" %}
+    {% include "partials/hero-brand.njk" %}
+
+    <section class="hero">
+        <div class="container hero-inner hero-inner--center">
+            <h1 class="headline">{{ site.home.heroHeadline }}</h1>
+            <p class="subhead mx-auto">{{ site.home.heroSubhead }}</p>
+        </div>
+    </section>
+
+    <nav id="pills" class="pillmenu-wrap" aria-label="Quick filters">
+        <button
+            id="pillsToggle"
+            class="pillmenu-toggle pills-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="pillsPanel"
+        >
+            <span class="pills-toggle-label">Menu</span>
+        </button>
+
+        <ul class="pillmenu pills-desktop">
+            <li><a class="pill active" href="#portfolio">Featured Projects</a></li>
+            <li><a class="pill" href="#services">Curated Services</a></li>
+            <li><a class="pill" href="#selected-work">Collections</a></li>
+            <li><a class="pill" href="#about">Design Philosophy</a></li>
+        </ul>
+
+        <div id="pillsPanel" class="pills-panel" hidden>
+            <a class="pill" href="#portfolio">Featured Projects</a>
+            <a class="pill" href="#services">Curated Services</a>
+            <a class="pill" href="#selected-work">Collections</a>
+            <a class="pill" href="#about">Design Philosophy</a>
+        </div>
+    </nav>
+
+    <section
+        id="portfolio"
+        class="dock-panel narrow"
+        data-theme="dark"
+        aria-label="Portfolio carousel"
+    >
+        <div class="carousel">
+            <button class="ctrl prev" id="prev" aria-label="Previous">‹</button>
+
+            <div class="viewport">
+                <div class="viewport-clip">
+                    <div class="track" id="track">
+                        {% for slide in site.home.carouselSlides %}
+                        <div class="slide" aria-label="{{ loop.index }} of {{ site.home.carouselSlides.length }}">
+                            <img
+                                src="{{ slide.image }}"
+                                alt="{{ slide.alt }}"
+                                width="1600"
+                                height="900"
+                                loading="{% if loop.first %}eager{% else %}lazy{% endif %}"
+                                {% if loop.first %}fetchpriority="high"{% endif %}
+                                decoding="async"
+                                draggable="false"
+                            />
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <button class="ctrl next" id="next" aria-label="Next">›</button>
+        </div>
+
+        <div id="dots" class="dots" aria-label="Slide indicators"></div>
+    </section>
+
+    <section id="services" class="section band-1" data-theme="dark">
+        <div class="container">
+            <span class="kicker">{{ site.home.servicesKicker }}</span>
+            <h2 class="h2">{{ site.home.servicesHeading }}</h2>
+            <p class="lead">{{ site.home.servicesLead }}</p>
+
+            <div class="card-grid">
+                {% for service in collections.service | sortByOrder %}
+                {% if loop.index <= 3 %}
+                <a
+                    class="card span-4"
+                    href="/curated_services/{{ service.data.slug }}.html"
+                    aria-label="View {{ service.data.title }} service"
+                >
+                    <div class="img-wrap">
+                        <img
+                            src="{{ service.data.cardImage }}"
+                            alt="Project thumbnail"
+                            loading="lazy"
+                            decoding="async"
+                        />
+                    </div>
+                    <div class="body">
+                        <h3 class="title">{{ service.data.title }}</h3>
+                        <p class="muted">{{ service.data.summary }}</p>
+                    </div>
+                </a>
+                {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="card-grid">
+                {% for service in collections.service | sortByOrder %}
+                {% if loop.index > 3 %}
+                <a
+                    class="card span-4"
+                    href="/curated_services/{{ service.data.slug }}.html"
+                    aria-label="View {{ service.data.title }} service"
+                >
+                    <div class="img-wrap">
+                        <img
+                            src="{{ service.data.cardImage }}"
+                            alt="Project thumbnail"
+                            loading="lazy"
+                            decoding="async"
+                        />
+                    </div>
+                    <div class="body">
+                        <h3 class="title">{{ service.data.title }}</h3>
+                        <p class="muted">{{ service.data.summary }}</p>
+                    </div>
+                </a>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section id="selected-work" class="section band-2" data-theme="light">
+        <div class="container">
+            <span class="kicker2">{{ site.home.collectionsKicker }}</span>
+            <h2 class="h22">{{ site.home.collectionsHeading }}</h2>
+
+            <div class="card-grid">
+                {% for project in collections.project | sortByOrder | where("showOnHome", true) %}
+                <a class="card {{ project.data.homeSpan | default('span-4') }}" href="/projects.html">
+                    <div class="img-wrap">
+                        <img
+                            src="{{ project.data.listingImage }}"
+                            alt="Project thumbnail"
+                        />
+                    </div>
+                    <div class="body">
+                        <h3 class="title2">{{ project.data.title }}</h3>
+                        <p class="muted2">{{ project.data.kicker }}</p>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section band-3" data-theme="dark">
+        <div class="container">
+            <span class="kicker">{{ site.home.philosophy.kicker }}</span>
+
+            <div class="split">
+                <div class="media">
+                    <img
+                        src="{{ site.home.philosophy.image }}"
+                        alt="{{ site.home.philosophy.imageAlt }}"
+                        style="width: 100%; height: 100%; object-fit: cover"
+                    />
+                </div>
+                <div class="content">
+                    <h2 class="h2">{{ site.home.philosophy.heading }}</h2>
+                    {% for paragraph in site.home.philosophy.paragraphs %}
+                    <p>{{ paragraph }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="cta" style="margin-top: 36px">
+                <h3 class="h2" style="margin: 0">{{ site.home.cta.heading }}</h3>
+                <p class="lead" style="margin: 0 0 8px">{{ site.home.cta.text }}</p>
+                <a class="button" href="mailto:{{ site.settings.email }}">
+                    <span class="dot" aria-hidden="true"></span>
+                    {{ site.home.cta.buttonLabel }}
+                </a>
+            </div>
+        </div>
+    </section>
+</main>

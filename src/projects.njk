@@ -1,0 +1,83 @@
+---
+layout: layouts/base.njk
+title: Projects – Curated Design Studio
+permalink: projects.html
+bodyClass: projects-page font-inter
+topLogo: white_logo_no_text_on_transparent.svg
+---
+<main class="page-main">
+    {% include "partials/hero-brand.njk" %}
+
+    <section class="hero">
+        <div class="container hero-inner hero-inner--center">
+            <h1 class="headline">{{ site.projectsPage.heroHeadline }}</h1>
+            <p class="subhead mx-auto">{{ site.projectsPage.heroSubhead }}</p>
+        </div>
+    </section>
+
+    <nav id="pills" class="pillmenu-wrap" aria-label="Project categories">
+        <button
+            id="pillsToggle"
+            class="pillmenu-toggle pills-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="pillsPanel"
+        >
+            <span class="pills-toggle-label">Menu</span>
+        </button>
+
+        <ul class="pillmenu pills-desktop">
+            {% for category in site.projectsPage.categories %}
+            <li><a class="pill{% if loop.first %} active{% endif %}" href="#{{ category.id }}">{{ category.label }}</a></li>
+            {% endfor %}
+        </ul>
+
+        <div id="pillsPanel" class="pills-panel" hidden>
+            {% for category in site.projectsPage.categories %}
+            <a class="pill" href="#{{ category.id }}">{{ category.label }}</a>
+            {% endfor %}
+        </div>
+    </nav>
+
+    <section class="projects-band">
+        {% set projects = collections.project | sortByOrder | where("showInProjects", true) %}
+        {% for category in site.projectsPage.categories %}
+        <section id="{{ category.id }}" class="{% if loop.first %}section-pad{% else %}py-14{% endif %}">
+            <div class="projects-wrap">
+                <div class="widget-area">
+                    <span class="section-label">{{ category.label }}</span>
+
+                    <div class="section-head">
+                        <h2 class="h2">{{ category.heading }}</h2>
+                        <p class="section-note">{{ category.note }}</p>
+                    </div>
+
+                    <div class="widget-grid">
+                        {% for project in projects | where("category", category.label) %}
+                        <a class="widget {{ project.data.gridClass }}" href="/projects/{{ project.data.slug }}.html">
+                            <img
+                                class="widget-media"
+                                src="{{ project.data.listingImage }}"
+                                alt="{{ project.data.listingAlt | default(project.data.title) }}"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <div class="widget-body">
+                                <p class="widget-title">{{ project.data.title }}</p>
+                                <p class="widget-meta">{{ project.data.kicker }}</p>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endfor %}
+    </section>
+
+    {% set heading = site.settings.ctaHeading %}
+    {% set text = site.settings.ctaText %}
+    {% set href = "mailto:" + site.settings.email %}
+    {% set label = site.settings.primaryCtaText %}
+    {% include "partials/cta-band.njk" %}
+</main>

@@ -1,0 +1,14 @@
+{
+  "name": "curated-design-website",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "clean": "node -e \"require('fs').rmSync('_site', { recursive: true, force: true })\"",
+    "build": "npm run clean && eleventy",
+    "start": "eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "markdown-it": "^14.1.0"
+  }
+}

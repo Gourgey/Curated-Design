@@ -1,0 +1,24 @@
+{
+  "heroHeadline": "Selected projects.",
+  "heroSubhead": "Residential, hospitality, and commercial interiors — framed as a set of project widgets.",
+  "categories": [
+    {
+      "id": "residential",
+      "label": "Residential",
+      "heading": "Calm, characterful homes.",
+      "note": "Layout-first thinking, material restraint, and lighting that behaves nicely at 8am and 11pm."
+    },
+    {
+      "id": "hospitality",
+      "label": "Hospitality",
+      "heading": "Restaurants and social spaces.",
+      "note": "Atmosphere is engineered: threshold moments, circulation rhythm, and material choices that hold up under real service."
+    },
+    {
+      "id": "commercial",
+      "label": "Commercial",
+      "heading": "Workspaces and client-facing environments.",
+      "note": "Clarity wins: routes, zoning, and palettes that survive everyday use without turning into office-beige sadness."
+    }
+  ]
+}

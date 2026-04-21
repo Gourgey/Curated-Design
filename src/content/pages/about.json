@@ -1,0 +1,33 @@
+{
+  "title": "Studio – Curated Design Studio",
+  "introHeading": "How the studio works",
+  "introText": "Every interior begins with how it will be used day to day: the routines, the circulation, and the way light changes across a space. From there, we build a material language that feels calm, tactile, and quietly confident.",
+  "workHeading": "What defines the work",
+  "workParagraphs": [
+    "Clean lines, warm proportions, and details that hold up at close range — joinery, hardware, finishes, and the way materials meet.",
+    "Rather than chasing trends, the focus is on layouts that genuinely work, robust materials, and a palette that can evolve with your life or brand."
+  ],
+  "focusHeading": "Focus areas",
+  "focusAreas": [
+    "Residential homes and apartments",
+    "Hospitality: restaurants, bars, boutique stays",
+    "Interior architecture and spatial planning",
+    "Furniture, lighting, and styling"
+  ],
+  "processSteps": [
+    {
+      "title": "01. Brief & concept",
+      "text": "We define needs, constraints, and priorities, then develop the initial concept with layouts and mood direction."
+    },
+    {
+      "title": "02. Design development",
+      "text": "We refine plans, finishes, lighting, and joinery detail, aligning the design intent with budget realities."
+    },
+    {
+      "title": "03. Delivery & styling",
+      "text": "We coordinate with contractors/suppliers as needed, then complete the space with furniture, art, and styling."
+    }
+  ],
+  "locationsHeading": "Locations & scope",
+  "locationsText": "Based in London, working across the UK and selected international projects. Collaborations include architects, developers, and private clients on both new-build and refurbishment schemes."
+}

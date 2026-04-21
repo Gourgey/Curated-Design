@@ -1,0 +1,141 @@
+---
+pagination:
+  data: collections.service
+  size: 1
+  alias: service
+permalink: "curated_services/{{ service.data.slug }}.html"
+layout: layouts/base.njk
+eleventyComputed:
+  title: "{{ service.data.title }} – Curated Design Studio"
+htmlClass: concept-page
+bodyClass: concept-page font-inter
+---
+<main class="page-main">
+    {% include "partials/hero-brand.njk" %}
+
+    <section class="section concept-content">
+        <div class="container concept-wrap">
+            <header class="concept-header">
+                <section class="concept-hero" aria-label="{{ service.data.title }} hero image">
+                    <figure class="concept-hero-figure concept-hero-figure--fullbleed">
+                        <img
+                            src="{{ service.data.coverImage }}"
+                            alt="{{ service.data.coverAlt }}"
+                            loading="eager"
+                            decoding="async"
+                        />
+                    </figure>
+                </section>
+
+                <div class="concept-intro">
+                    <div>
+                        <p class="concept-lead">{{ service.data.intro }}</p>
+                    </div>
+
+                    <aside class="concept-glance" aria-label="At a glance">
+                        <h2 class="title2 concept-glance-title">At a glance</h2>
+                        <ul class="concept-glance-list">
+                            {% for item in service.data.glance %}
+                            <li><strong>{{ item.label }}:</strong> {{ item.text }}</li>
+                            {% endfor %}
+                        </ul>
+                    </aside>
+                </div>
+            </header>
+
+            <div class="concept-grid">
+                <div class="concept-left">
+                    {% for section in service.data.sections %}
+                    <div class="concept-block">
+                        <h2 class="title2">{{ section.heading }}</h2>
+                        <{{ section.listType | default('ul') }} class="concept-list">
+                            {% for item in section.items %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </{{ section.listType | default('ul') }}>
+                        {% if section.note %}
+                        <p class="concept-meta">{{ section.note }}</p>
+                        {% endif %}
+                    </div>
+                    {% if not loop.last %}<hr class="concept-divider" />{% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="concept-right">
+                    <div class="form-card">
+                        <h2 class="title2 enquiry-title">{{ service.data.enquiryHeading }}</h2>
+                        <p class="concept-meta" style="margin: 0 0 12px">{{ service.data.enquiryText }}</p>
+
+                        <form action="mailto:{{ site.settings.email }}" method="post" enctype="text/plain">
+                            <div class="form-field">
+                                <label for="{{ service.data.slug }}-name">Name</label>
+                                <input type="text" id="{{ service.data.slug }}-name" name="name" autocomplete="name" required />
+                            </div>
+
+                            <div class="form-field">
+                                <label for="{{ service.data.slug }}-email">Email</label>
+                                <input type="email" id="{{ service.data.slug }}-email" name="email" autocomplete="email" required />
+                            </div>
+
+                            <div class="form-field">
+                                <label for="{{ service.data.slug }}-location">Location</label>
+                                <input
+                                    type="text"
+                                    id="{{ service.data.slug }}-location"
+                                    name="location"
+                                    placeholder="e.g. London / Glasgow / Remote"
+                                />
+                            </div>
+
+                            <div class="form-field">
+                                <label for="{{ service.data.slug }}-scope">Scope</label>
+                                <input
+                                    type="text"
+                                    id="{{ service.data.slug }}-scope"
+                                    name="scope"
+                                    placeholder="e.g. entrance hall / 1 bedroom / restaurant concept"
+                                    required
+                                />
+                            </div>
+
+                            <div class="form-field">
+                                <label for="{{ service.data.slug }}-budget">Budget (optional)</label>
+                                <input
+                                    type="text"
+                                    id="{{ service.data.slug }}-budget"
+                                    name="budget"
+                                    placeholder="e.g. £5k–£15k for furniture"
+                                />
+                            </div>
+
+                            <div class="form-field">
+                                <label for="{{ service.data.slug }}-message">Notes</label>
+                                <textarea
+                                    id="{{ service.data.slug }}-message"
+                                    name="message"
+                                    rows="4"
+                                    placeholder="Timeline, constraints, budget range, what you’re hoping to change…"
+                                    required
+                                ></textarea>
+                            </div>
+
+                            <button type="submit" class="button button-full">
+                                <span class="dot" aria-hidden="true"></span>
+                                Send enquiry
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% set heading = service.data.ctaHeading %}
+    {% set text = service.data.ctaText %}
+    {% set href = "/contact.html" %}
+    {% set ctaClass = "about-cta-band section" %}
+    {% set ctaContainerClass = "container" %}
+    {% set ctaStyle = "text-align: center" %}
+    {% set label = "Contact the studio" %}
+    {% include "partials/cta-band.njk" %}
+</main>

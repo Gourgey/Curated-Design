@@ -1,0 +1,191 @@
+backend:
+  name: github
+  repo: Gourgey/Curated-Design
+  branch: main
+
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+collections:
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - name: "settings"
+        label: "Global Settings"
+        file: "src/content/settings.json"
+        format: "json"
+        fields:
+          - { label: "Studio Name", name: "studioName", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Location", name: "location", widget: "string" }
+          - { label: "Primary CTA Text", name: "primaryCtaText", widget: "string" }
+          - { label: "Primary CTA URL", name: "primaryCtaUrl", widget: "string" }
+          - { label: "Footer CTA Heading", name: "ctaHeading", widget: "string" }
+          - { label: "Footer CTA Text", name: "ctaText", widget: "text" }
+
+  - name: "pages"
+    label: "Pages"
+    files:
+      - name: "home"
+        label: "Homepage"
+        file: "src/content/pages/home.json"
+        format: "json"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Hero Headline", name: "heroHeadline", widget: "string" }
+          - { label: "Hero Subhead", name: "heroSubhead", widget: "text" }
+          - label: "Carousel Slides"
+            name: "carouselSlides"
+            widget: "list"
+            fields:
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Alt Text", name: "alt", widget: "string" }
+          - { label: "Services Kicker", name: "servicesKicker", widget: "string" }
+          - { label: "Services Heading", name: "servicesHeading", widget: "string" }
+          - { label: "Services Lead", name: "servicesLead", widget: "text" }
+          - { label: "Collections Kicker", name: "collectionsKicker", widget: "string" }
+          - { label: "Collections Heading", name: "collectionsHeading", widget: "string" }
+          - label: "Design Philosophy"
+            name: "philosophy"
+            widget: "object"
+            fields:
+              - { label: "Kicker", name: "kicker", widget: "string" }
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Image Alt", name: "imageAlt", widget: "string", required: false }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Paragraphs", name: "paragraphs", widget: "list", field: { label: "Paragraph", name: "paragraph", widget: "text" } }
+          - label: "CTA"
+            name: "cta"
+            widget: "object"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Text", name: "text", widget: "text" }
+              - { label: "Button Label", name: "buttonLabel", widget: "string" }
+      - name: "about"
+        label: "About Page"
+        file: "src/content/pages/about.json"
+        format: "json"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Intro Heading", name: "introHeading", widget: "string" }
+          - { label: "Intro Text", name: "introText", widget: "text" }
+          - { label: "Work Heading", name: "workHeading", widget: "string" }
+          - { label: "Work Paragraphs", name: "workParagraphs", widget: "list", field: { label: "Paragraph", name: "paragraph", widget: "text" } }
+          - { label: "Focus Heading", name: "focusHeading", widget: "string" }
+          - { label: "Focus Areas", name: "focusAreas", widget: "list", field: { label: "Area", name: "area", widget: "string" } }
+          - label: "Process Steps"
+            name: "processSteps"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Text", name: "text", widget: "text" }
+          - { label: "Locations Heading", name: "locationsHeading", widget: "string" }
+          - { label: "Locations Text", name: "locationsText", widget: "text" }
+      - name: "contact"
+        label: "Contact Page"
+        file: "src/content/pages/contact.json"
+        format: "json"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Lead", name: "lead", widget: "text" }
+          - { label: "Studio Details Heading", name: "detailsHeading", widget: "string" }
+          - { label: "Note", name: "note", widget: "text" }
+
+  - name: "services"
+    label: "Services"
+    folder: "src/content/services"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Order", name: "order", widget: "number", value_type: "int" }
+      - { label: "Summary", name: "summary", widget: "text" }
+      - { label: "Card Image", name: "cardImage", widget: "image" }
+      - { label: "Cover Image", name: "coverImage", widget: "image" }
+      - { label: "Cover Alt", name: "coverAlt", widget: "string" }
+      - { label: "Intro", name: "intro", widget: "text" }
+      - label: "At a Glance"
+        name: "glance"
+        widget: "list"
+        fields:
+          - { label: "Label", name: "label", widget: "string" }
+          - { label: "Text", name: "text", widget: "string" }
+      - label: "Content Sections"
+        name: "sections"
+        widget: "list"
+        fields:
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "List Type", name: "listType", widget: "select", options: ["ul", "ol"], default: "ul" }
+          - { label: "Items", name: "items", widget: "list", field: { label: "Item", name: "item", widget: "string" } }
+          - { label: "Note", name: "note", widget: "text", required: false }
+      - { label: "Enquiry Heading", name: "enquiryHeading", widget: "string" }
+      - { label: "Enquiry Text", name: "enquiryText", widget: "text" }
+      - { label: "CTA Heading", name: "ctaHeading", widget: "string" }
+      - { label: "CTA Text", name: "ctaText", widget: "text" }
+
+  - name: "projects"
+    label: "Projects"
+    folder: "src/content/projects"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Order", name: "order", widget: "number", value_type: "int" }
+      - { label: "Category", name: "category", widget: "select", options: ["Residential", "Hospitality", "Commercial"] }
+      - { label: "Kicker", name: "kicker", widget: "string" }
+      - { label: "Subtitle", name: "subtitle", widget: "text" }
+      - { label: "Status Label", name: "statusLabel", widget: "string", required: false }
+      - { label: "Show in Projects Listing", name: "showInProjects", widget: "boolean", default: true }
+      - { label: "Show on Homepage", name: "showOnHome", widget: "boolean", default: false }
+      - { label: "Listing Grid Class", name: "gridClass", widget: "string", default: "col-span-4 lg:col-span-4 md:col-span-3 sm:col-span-2" }
+      - { label: "Listing Image", name: "listingImage", widget: "image" }
+      - { label: "Hero Image", name: "heroImage", widget: "image" }
+      - { label: "Hero Alt", name: "heroAlt", widget: "string" }
+      - { label: "Tags", name: "projectTags", widget: "list", field: { label: "Tag", name: "tag", widget: "string" } }
+      - { label: "Article Heading", name: "articleHeading", widget: "string", default: "Overview" }
+      - { label: "Lead", name: "lead", widget: "text" }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
+      - label: "Callout"
+        name: "callout"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Text", name: "text", widget: "text" }
+      - label: "Extra Sections"
+        name: "extraSections"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Text", name: "text", widget: "markdown", required: false }
+      - label: "Facts"
+        name: "facts"
+        widget: "list"
+        fields:
+          - { label: "Label", name: "label", widget: "string" }
+          - { label: "Value", name: "value", widget: "string" }
+      - { label: "Aside Text", name: "asideText", widget: "text" }
+      - label: "Gallery"
+        name: "gallery"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "Heading", name: "heading", widget: "string", required: false }
+          - { label: "Text", name: "text", widget: "text", required: false }
+          - label: "Images"
+            name: "images"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Alt", name: "alt", widget: "string" }
+      - { label: "CTA Heading", name: "ctaHeading", widget: "string" }
+      - { label: "CTA Text", name: "ctaText", widget: "text" }

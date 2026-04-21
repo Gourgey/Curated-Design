@@ -1,0 +1,11 @@
+<section id="{{ ctaId | default('enquiry') }}" class="{{ ctaClass | default('about-cta-band py-20') }}">
+    <div class="{{ ctaContainerClass | default('max-w-[950px] mx-auto px-4 text-center') }}"{% if ctaStyle %} style="{{ ctaStyle }}"{% endif %}>
+        <h2 class="h2">{{ heading }}</h2>
+        <p class="lead mx-auto about-cta-lead">{{ text }}</p>
+
+        <a href="{{ href | default('/contact.html') }}" class="button about-cta-button">
+            <span class="dot" aria-hidden="true"></span>
+            {{ label | default('Contact the studio') }}
+        </a>
+    </div>
+</section>

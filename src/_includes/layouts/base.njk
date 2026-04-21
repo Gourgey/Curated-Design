@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en"{% if htmlClass %} class="{{ htmlClass }}"{% endif %}>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{{ title }}</title>
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/assets/css/styles.css" />
+
+        {% if preloadImage %}
+        <link
+            rel="preload"
+            as="image"
+            href="{{ preloadImage }}"
+            fetchpriority="high"
+        />
+        {% endif %}
+    </head>
+
+    <body class="{{ bodyClass }}">
+        <div id="top"></div>
+
+        {% if showBackground %}
+        <div id="bg" aria-hidden="true">
+            <picture>
+                <source
+                    type="image/avif"
+                    srcset="
+                        /assets/images/background-1280.avif 1280w,
+                        /assets/images/background-1920.avif 1920w,
+                        /assets/images/background-2560.avif 2560w
+                    "
+                    sizes="100vw"
+                />
+                <source
+                    type="image/webp"
+                    srcset="
+                        /assets/images/background-1280.webp 1280w,
+                        /assets/images/background-1920.webp 1920w,
+                        /assets/images/background-2560.webp 2560w
+                    "
+                    sizes="100vw"
+                />
+                <img
+                    id="bgImg"
+                    src="/assets/images/background-1920.webp"
+                    alt=""
+                    decoding="async"
+                    fetchpriority="high"
+                />
+            </picture>
+
+            <div class="bg-dim"></div>
+        </div>
+        {% endif %}
+
+        <a href="/index.html{% if sectionTop %}#top{% endif %}" id="topLogo" class="top-left-logo">
+            <img
+                src="/assets/images/logos/{{ topLogo | default('logo_no_text_on_transparent.svg') }}"
+                alt="{{ site.settings.studioName }}"
+            />
+        </a>
+
+        {% include "partials/nav.njk" %}
+
+        {{ content | safe }}
+
+        {% for script in scripts | default(['/assets/js/main.js']) %}
+        <script src="{{ script }}" defer></script>
+        {% endfor %}
+    </body>
+</html>

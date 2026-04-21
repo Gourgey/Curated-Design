@@ -1,0 +1,130 @@
+---
+pagination:
+  data: collections.project
+  size: 1
+  alias: project
+permalink: "projects/{{ project.data.slug }}.html"
+layout: layouts/base.njk
+eleventyComputed:
+  title: "{{ project.data.title }} – Curated Design Studio"
+htmlClass: project-page
+bodyClass: project-page font-inter
+sectionTop: true
+---
+<main class="page-main">
+    <div class="project-topbar">
+        <a class="project-backlink" href="/projects.html">← Back to Work</a>
+    </div>
+
+    <header class="project-hero" aria-label="Project hero">
+        <figure class="project-hero-media">
+            <img
+                src="{{ project.data.heroImage }}"
+                alt="{{ project.data.heroAlt }}"
+                loading="eager"
+                decoding="async"
+            />
+        </figure>
+
+        <div class="project-hero-overlay">
+            <div class="project-hero-inner">
+                <p class="project-kicker">{{ project.data.kicker }}</p>
+
+                <h1 class="project-title">
+                    {{ project.data.title }}
+                    {% if project.data.statusLabel %}
+                    <span class="coming-soon-badge" aria-label="Status">{{ project.data.statusLabel }}</span>
+                    {% endif %}
+                </h1>
+
+                <p class="project-subtitle">{{ project.data.subtitle }}</p>
+
+                <div class="project-tags" aria-label="Project tags">
+                    {% for tag in project.data.projectTags %}
+                    <span class="project-tag">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="section project-body">
+        <div class="container project-wrap">
+            <div class="project-grid">
+                <article class="project-article project-prose">
+                    <h2 class="project-h2">{{ project.data.articleHeading | default("Overview") }}</h2>
+
+                    <p class="project-lead">{{ project.data.lead }}</p>
+
+                    {% if project.data.body %}
+                    {{ project.data.body | markdownify | safe }}
+                    {% endif %}
+
+                    {% if project.data.callout %}
+                    <div class="project-callout">
+                        <p class="project-callout-title">{{ project.data.callout.title }}</p>
+                        <p class="project-callout-text">{{ project.data.callout.text }}</p>
+                    </div>
+                    {% endif %}
+
+                    {% for section in project.data.extraSections %}
+                    {% if section.heading %}
+                    <h2 class="project-h2">{{ section.heading }}</h2>
+                    {% endif %}
+                    {% if section.text %}
+                    {{ section.text | markdownify | safe }}
+                    {% endif %}
+                    {% endfor %}
+                </article>
+
+                <aside class="project-aside" aria-label="Project facts">
+                    <div class="project-facts">
+                        <h2 class="project-facts-title">Project facts</h2>
+
+                        <dl class="project-facts-list">
+                            {% for fact in project.data.facts %}
+                            <div class="project-fact">
+                                <dt>{{ fact.label }}</dt>
+                                <dd>{{ fact.value }}</dd>
+                            </div>
+                            {% endfor %}
+                        </dl>
+
+                        <div class="project-facts-divider"></div>
+
+                        <p class="project-p project-muted">{{ project.data.asideText }}</p>
+
+                        <a href="/contact.html" class="button button-full">
+                            <span class="dot" aria-hidden="true"></span>
+                            Enquire
+                        </a>
+                    </div>
+
+                    {% if project.data.gallery and project.data.gallery.images and project.data.gallery.images.length %}
+                    <section class="project-gallery-card">
+                        <h2 class="project-h2">{{ project.data.gallery.heading }}</h2>
+                        <p class="project-muted">{{ project.data.gallery.text }}</p>
+
+                        <div class="project-gallery" aria-label="Project gallery grid">
+                            {% for item in project.data.gallery.images %}
+                            <a class="project-shot" href="{{ item.image }}">
+                                <img src="{{ item.image }}" alt="{{ item.alt }}" loading="lazy" />
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </section>
+                    {% endif %}
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    {% set heading = project.data.ctaHeading %}
+    {% set text = project.data.ctaText %}
+    {% set href = "/contact.html" %}
+    {% set ctaClass = "about-cta-band section" %}
+    {% set ctaContainerClass = "container" %}
+    {% set ctaStyle = "text-align: center" %}
+    {% set label = "Contact the studio" %}
+    {% include "partials/cta-band.njk" %}
+</main>

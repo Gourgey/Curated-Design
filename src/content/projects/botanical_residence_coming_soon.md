@@ -3,16 +3,16 @@ tags: project
 permalink: false
 title: Botanical Residence
 slug: botanical_residence_coming_soon
+status: coming_soon
 order: 2
 category: Residential
 kicker: Residential · 2026
 subtitle: A short, image-led case study is in progress — details and visuals will be added soon.
 statusLabel: Coming soon
 showInProjects: true
-showOnHome: true
-homeSpan: span-6
 gridClass: col-span-5 lg:col-span-5 md:col-span-6 sm:col-span-2
-listingImage: /assets/images/projects/botanical_residence/botanical_residence_coming_soon.webp
+cardImage: /assets/images/projects/botanical_residence/botanical_residence_coming_soon.webp
+cardAlt: Botanical Residence concept visual
 heroImage: /assets/images/projects/botanical_residence/botanical_residence_coming_soon.webp
 heroAlt: Botanical Residence concept visual
 projectTags:

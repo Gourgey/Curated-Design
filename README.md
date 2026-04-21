@@ -48,7 +48,7 @@ Project URLs are generated from the slug:
 /projects/project_slug.html
 ```
 
-Set `showInProjects: true` to include a project on `projects.html`, and `showOnHome: true` to include it in the homepage Recent projects section.
+Set `showInProjects: true` to include a project on `projects.html`. Homepage project cards are curated from the Homepage entry in Decap, which references Project entries by slug and uses each Project's card image, title, kicker, and URL.
 
 ## Editing Services
 
@@ -58,7 +58,7 @@ Services are stored as Markdown files in:
 src/content/services/
 ```
 
-Each service controls its homepage card, detail page cover image, intro, at-a-glance rows, content sections, enquiry copy, and CTA. To add a service in the CMS, use the `Services` collection. To add one manually, duplicate an existing service file, change the `slug`, update the `order`, and rebuild.
+Each service controls its reusable card image, card alt text, detail page cover image, intro, at-a-glance rows, content sections, enquiry copy, and CTA. To feature a service on the homepage, add it to the Homepage entry's featured services list in Decap. To add a service in the CMS, use the `Services` collection. To add one manually, duplicate an existing service file, change the `slug`, update the `order`, and rebuild.
 
 Service URLs are generated from the slug:
 

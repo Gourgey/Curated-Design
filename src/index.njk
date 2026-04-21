@@ -13,8 +13,8 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
 
     <section class="hero">
         <div class="container hero-inner hero-inner--center">
-            <h1 class="headline">{{ site.home.heroHeadline }}</h1>
-            <p class="subhead mx-auto">{{ site.home.heroSubhead }}</p>
+            <h1 class="headline">{{ site.home.hero.headline }}</h1>
+            <p class="subhead mx-auto">{{ site.home.hero.subhead }}</p>
         </div>
     </section>
 
@@ -56,8 +56,8 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
             <div class="viewport">
                 <div class="viewport-clip">
                     <div class="track" id="track">
-                        {% for slide in site.home.carouselSlides %}
-                        <div class="slide" aria-label="{{ loop.index }} of {{ site.home.carouselSlides.length }}">
+                        {% for slide in site.home.carousel.slides %}
+                        <div class="slide" aria-label="{{ loop.index }} of {{ site.home.carousel.slides.length }}">
                             <img
                                 src="{{ slide.image }}"
                                 alt="{{ slide.alt }}"
@@ -82,22 +82,22 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
 
     <section id="services" class="section band-1" data-theme="dark">
         <div class="container">
-            <span class="kicker">{{ site.home.servicesKicker }}</span>
-            <h2 class="h2">{{ site.home.servicesHeading }}</h2>
-            <p class="lead">{{ site.home.servicesLead }}</p>
+            <span class="kicker">{{ site.home.servicesSection.kicker }}</span>
+            <h2 class="h2">{{ site.home.servicesSection.heading }}</h2>
+            <p class="lead">{{ site.home.servicesSection.lead }}</p>
 
+            {% set featuredServices = site.home.servicesSection.featuredServices | resolveEntries(collections.publishedService, "service") %}
             <div class="card-grid">
-                {% for service in collections.service | sortByOrder %}
-                {% if loop.index <= 3 %}
+                {% for service in featuredServices %}
                 <a
-                    class="card span-4"
+                    class="card {{ service | homeCardSpan(featuredServices.length) }}"
                     href="/curated_services/{{ service.data.slug }}.html"
                     aria-label="View {{ service.data.title }} service"
                 >
                     <div class="img-wrap">
                         <img
                             src="{{ service.data.cardImage }}"
-                            alt="Project thumbnail"
+                            alt="{{ service.data.cardAlt | default(service.data.title) }}"
                             loading="lazy"
                             decoding="async"
                         />
@@ -107,32 +107,6 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
                         <p class="muted">{{ service.data.summary }}</p>
                     </div>
                 </a>
-                {% endif %}
-                {% endfor %}
-            </div>
-
-            <div class="card-grid">
-                {% for service in collections.service | sortByOrder %}
-                {% if loop.index > 3 %}
-                <a
-                    class="card span-4"
-                    href="/curated_services/{{ service.data.slug }}.html"
-                    aria-label="View {{ service.data.title }} service"
-                >
-                    <div class="img-wrap">
-                        <img
-                            src="{{ service.data.cardImage }}"
-                            alt="Project thumbnail"
-                            loading="lazy"
-                            decoding="async"
-                        />
-                    </div>
-                    <div class="body">
-                        <h3 class="title">{{ service.data.title }}</h3>
-                        <p class="muted">{{ service.data.summary }}</p>
-                    </div>
-                </a>
-                {% endif %}
                 {% endfor %}
             </div>
         </div>
@@ -140,16 +114,17 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
 
     <section id="selected-work" class="section band-2" data-theme="light">
         <div class="container">
-            <span class="kicker2">{{ site.home.collectionsKicker }}</span>
-            <h2 class="h22">{{ site.home.collectionsHeading }}</h2>
+            <span class="kicker2">{{ site.home.collectionsSection.kicker }}</span>
+            <h2 class="h22">{{ site.home.collectionsSection.heading }}</h2>
 
+            {% set featuredProjects = site.home.collectionsSection.featuredProjects | resolveEntries(collections.publishedProject, "project") %}
             <div class="card-grid">
-                {% for project in collections.project | sortByOrder | where("showOnHome", true) %}
-                <a class="card {{ project.data.homeSpan | default('span-4') }}" href="/projects.html">
+                {% for project in featuredProjects %}
+                <a class="card {{ project | homeCardSpan(featuredProjects.length) }}" href="/projects/{{ project.data.slug }}.html">
                     <div class="img-wrap">
                         <img
-                            src="{{ project.data.listingImage }}"
-                            alt="Project thumbnail"
+                            src="{{ project.data.cardImage }}"
+                            alt="{{ project.data.cardAlt | default(project.data.title) }}"
                         />
                     </div>
                     <div class="body">

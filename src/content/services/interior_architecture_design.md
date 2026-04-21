@@ -3,9 +3,11 @@ tags: service
 permalink: false
 title: Interior Architecture Design
 slug: interior_architecture_design
+status: published
 order: 2
 summary: Mouldings, fixtures, and other architectural elements that enhance the overall aesthetic and functionality of the space.
 cardImage: /assets/images/curated_services/interior_architecture_design.webp
+cardAlt: Interior architecture design service card
 coverImage: /assets/images/curated_services/page_brands/interior_architecture_design_cover.webp
 coverAlt: Interior architecture design cover image
 intro: Spatial planning, architectural details, and technical design direction to make rooms work beautifully before finishes and furnishings are layered in.

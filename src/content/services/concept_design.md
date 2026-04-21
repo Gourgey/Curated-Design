@@ -3,9 +3,11 @@ tags: service
 permalink: false
 title: Concept Design
 slug: concept_design
+status: published
 order: 1
 summary: A thoughtful approach to design that considers the client's needs, lifestyle, and budget.
 cardImage: /assets/images/curated_services/concept_design.webp
+cardAlt: Concept design service card
 coverImage: /assets/images/curated_services/page_brands/concept_design_cover.webp
 coverAlt: Concept design tools laid out on a marble surface
 intro: A clear, considered direction for your space—defining layout, mood, material palette, and key pieces—before you commit to construction, joinery, or procurement.

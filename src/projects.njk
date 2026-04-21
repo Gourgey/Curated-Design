@@ -40,7 +40,7 @@ topLogo: white_logo_no_text_on_transparent.svg
     </nav>
 
     <section class="projects-band">
-        {% set projects = collections.project | sortByOrder | where("showInProjects", true) %}
+        {% set projects = collections.publishedProject | sortByOrder | where("showInProjects", true) %}
         {% for category in site.projectsPage.categories %}
         <section id="{{ category.id }}" class="{% if loop.first %}section-pad{% else %}py-14{% endif %}">
             <div class="projects-wrap">
@@ -57,8 +57,8 @@ topLogo: white_logo_no_text_on_transparent.svg
                         <a class="widget {{ project.data.gridClass }}" href="/projects/{{ project.data.slug }}.html">
                             <img
                                 class="widget-media"
-                                src="{{ project.data.listingImage }}"
-                                alt="{{ project.data.listingAlt | default(project.data.title) }}"
+                                src="{{ project.data.cardImage }}"
+                                alt="{{ project.data.cardAlt | default(project.data.title) }}"
                                 loading="lazy"
                                 decoding="async"
                             />

@@ -3,16 +3,16 @@ tags: project
 permalink: false
 title: Sandbanks Residence
 slug: sandbanks_residence_coming_soon
+status: coming_soon
 order: 1
 category: Residential
 kicker: Residential · 2026
 subtitle: A new project page is in progress — imagery and a concise case study will be added soon.
 statusLabel: Coming soon
 showInProjects: true
-showOnHome: true
-homeSpan: span-6
 gridClass: col-span-7 lg:col-span-7 md:col-span-6 sm:col-span-2
-listingImage: /assets/images/projects/sandbanks_bungalow/danwood_exterior_coming_soon.webp
+cardImage: /assets/images/projects/sandbanks_bungalow/danwood_exterior_coming_soon.webp
+cardAlt: Sandbanks Residence exterior visual
 heroImage: /assets/images/projects/sandbanks_bungalow/danwood_exterior_coming_soon.webp
 heroAlt: Sandbanks Residence exterior visual
 projectTags:

@@ -3,9 +3,11 @@ tags: service
 permalink: false
 title: Procurement
 slug: procurement
+status: published
 order: 5
 summary: Purchasing, delivery, and installation of materials, fixtures, and furniture for the project.
 cardImage: /assets/images/curated_services/procurement.webp
+cardAlt: Procurement service card
 coverImage: /assets/images/curated_services/page_brands/procurement_cover.webp
 coverAlt: Procurement cover image
 intro: Order management, supplier coordination, and delivery tracking so approved pieces move from specification to site with less friction.

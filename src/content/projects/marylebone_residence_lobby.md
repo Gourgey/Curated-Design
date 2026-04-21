@@ -3,15 +3,16 @@ tags: project
 permalink: false
 title: Marylebone Residence Lobby
 slug: marylebone_residence_lobby
+status: published
 order: 7
 category: Residential
 kicker: Residential · London
 subtitle: An elegant, functional space designed to enhance the daily lives of its occupants.
 statusLabel: ""
 showInProjects: false
-showOnHome: false
 gridClass: col-span-8 lg:col-span-8 md:col-span-3 sm:col-span-2
-listingImage: /assets/images/projects/98_pc_lobby/98_pc_lobby.webp
+cardImage: /assets/images/projects/98_pc_lobby/98_pc_lobby.webp
+cardAlt: Project hero image
 heroImage: /assets/images/projects/98_pc_lobby/98_pc_lobby.webp
 heroAlt: Project hero image
 projectTags:

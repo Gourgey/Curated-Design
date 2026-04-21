@@ -3,16 +3,16 @@ tags: project
 permalink: false
 title: Shoreditch Office
 slug: shoreditch_office
+status: coming_soon
 order: 6
 category: Commercial
 kicker: Commercial · 2026
 subtitle: A workplace concept focused on atmosphere, proportion, and material restraint — designed to feel calm, premium, and genuinely usable day-to-day.
 statusLabel: Coming soon
 showInProjects: true
-showOnHome: true
-homeSpan: span-4
 gridClass: col-span-8 lg:col-span-8 md:col-span-6 sm:col-span-2
-listingImage: /assets/images/projects/shoreditch_office/gwape_study_coming_soon.webp
+cardImage: /assets/images/projects/shoreditch_office/gwape_study_coming_soon.webp
+cardAlt: Shoreditch Office
 heroImage: /assets/images/projects/shoreditch_office/gwape_study_coming_soon.webp
 heroAlt: Shoreditch Office
 projectTags:

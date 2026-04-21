@@ -1,0 +1,8 @@
+---
+permalink: admin/preview-data.json
+eleventyExcludeFromCollections: true
+---
+{
+  "services": {{ collections.publishedService | sortByOrder | mapData | jsonify | safe }},
+  "projects": {{ collections.publishedProject | sortByOrder | mapData | jsonify | safe }}
+}

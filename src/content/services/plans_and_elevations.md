@@ -3,9 +3,11 @@ tags: service
 permalink: false
 title: Plans and Elevations
 slug: plans_and_elevations
+status: published
 order: 4
 summary: Detailed drawings of the proposed layout, including floor plans, elevations, and sections.
 cardImage: /assets/images/curated_services/plans_and_elevations.webp
+cardAlt: Plans and elevations service card
 coverImage: /assets/images/curated_services/page_brands/plans_and_elevations_cover.webp
 coverAlt: Plans and elevations cover image
 intro: Clear drawings that translate design intent into layouts, elevations, and dimensions that can be priced, discussed, and built from with confidence.

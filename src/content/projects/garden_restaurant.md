@@ -3,15 +3,16 @@ tags: project
 permalink: false
 title: Garden Restaurant
 slug: garden_restaurant
+status: coming_soon
 order: 5
 category: Hospitality
 kicker: Hospitality · 2026
 subtitle: A hospitality concept focused on calm, sunlit atmosphere — where architecture, planting, and furniture feel composed rather than “decorated”.
 statusLabel: Coming soon
 showInProjects: true
-showOnHome: false
 gridClass: col-span-8 lg:col-span-8 md:col-span-6 sm:col-span-2
-listingImage: /assets/images/projects/garden_restaurant/monet-terrace_coming_soon.webp
+cardImage: /assets/images/projects/garden_restaurant/monet-terrace_coming_soon.webp
+cardAlt: Garden Restaurant
 heroImage: /assets/images/projects/16-9_images/monet-terrace_coming_soon.webp
 heroAlt: Garden Restaurant
 projectTags:

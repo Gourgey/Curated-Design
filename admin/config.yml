@@ -34,22 +34,88 @@ collections:
         format: "json"
         fields:
           - { label: "Title", name: "title", widget: "string" }
-          - { label: "Hero Headline", name: "heroHeadline", widget: "string" }
-          - { label: "Hero Subhead", name: "heroSubhead", widget: "text" }
-          - label: "Carousel Slides"
-            name: "carouselSlides"
-            widget: "list"
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: false
             fields:
-              - { label: "Image", name: "image", widget: "image" }
-              - { label: "Alt Text", name: "alt", widget: "string" }
-          - { label: "Services Kicker", name: "servicesKicker", widget: "string" }
-          - { label: "Services Heading", name: "servicesHeading", widget: "string" }
-          - { label: "Services Lead", name: "servicesLead", widget: "text" }
-          - { label: "Collections Kicker", name: "collectionsKicker", widget: "string" }
-          - { label: "Collections Heading", name: "collectionsHeading", widget: "string" }
+              - { label: "Headline", name: "headline", widget: "string" }
+              - { label: "Subhead", name: "subhead", widget: "text" }
+          - label: "Carousel"
+            name: "carousel"
+            widget: "object"
+            collapsed: false
+            hint: "These images are owned by the Homepage only. They do not change any Project or Service entry."
+            fields:
+              - label: "Slides"
+                name: "slides"
+                widget: "list"
+                summary: "{{fields.alt}}"
+                fields:
+                  - { label: "Image", name: "image", widget: "image" }
+                  - { label: "Alt Text", name: "alt", widget: "string" }
+          - label: "Homepage Services Section"
+            name: "servicesSection"
+            widget: "object"
+            collapsed: false
+            hint: "This section selects Service entries. Images, titles, summaries, and links are owned by each Service entry."
+            fields:
+              - { label: "Kicker", name: "kicker", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Lead", name: "lead", widget: "text" }
+              - label: "Featured Services"
+                name: "featuredServices"
+                widget: "list"
+                summary: "{{fields.service}}"
+                hint: "Add, remove, or reorder homepage service cards here. To change an image or card title, edit the selected Service entry."
+                fields:
+                  - label: "Service"
+                    name: "service"
+                    widget: "relation"
+                    collection: "services"
+                    value_field: "slug"
+                    search_fields: ["title", "slug", "summary"]
+                    display_fields: ["title", "slug", "cardImage"]
+                    filters:
+                      - field: "status"
+                        values: ["published", "coming_soon"]
+          - label: "Homepage Collections Section"
+            name: "collectionsSection"
+            widget: "object"
+            collapsed: false
+            hint: "This section selects Project entries. Images, titles, kickers, and links are owned by each Project entry."
+            fields:
+              - { label: "Kicker", name: "kicker", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - label: "Featured Projects"
+                name: "featuredProjects"
+                widget: "list"
+                summary: "{{fields.project}}"
+                hint: "Add, remove, or reorder homepage project cards here. Cards link to /projects/{slug}.html. To change an image or card title, edit the selected Project entry."
+                fields:
+                  - label: "Project"
+                    name: "project"
+                    widget: "relation"
+                    collection: "projects"
+                    value_field: "slug"
+                    search_fields: ["title", "slug", "category", "kicker"]
+                    display_fields: ["title", "slug", "cardImage"]
+                    filters:
+                      - field: "status"
+                        values: ["published", "coming_soon"]
+                  - label: "Homepage Card Width"
+                    name: "cardSpan"
+                    widget: "select"
+                    required: false
+                    options:
+                      - { label: "Auto", value: "" }
+                      - { label: "Half width", value: "span-6" }
+                      - { label: "Third width", value: "span-4" }
+                    hint: "Use Auto for adaptive grids, or choose a width to preserve a specific visual rhythm."
           - label: "Design Philosophy"
             name: "philosophy"
             widget: "object"
+            collapsed: false
             fields:
               - { label: "Kicker", name: "kicker", widget: "string" }
               - { label: "Image", name: "image", widget: "image" }
@@ -93,7 +159,7 @@ collections:
           - { label: "Lead", name: "lead", widget: "text" }
           - { label: "Studio Details Heading", name: "detailsHeading", widget: "string" }
           - { label: "Note", name: "note", widget: "text" }
-      - name: "projects"
+      - name: "projectsPage"
         label: "Projects Page"
         file: "src/content/pages/projects.json"
         format: "json"
@@ -120,14 +186,16 @@ collections:
     fields:
       - { label: "Tags", name: "tags", widget: "hidden", default: "service" }
       - { label: "Permalink", name: "permalink", widget: "hidden", default: false }
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Order", name: "order", widget: "number", value_type: "int" }
-      - { label: "Summary", name: "summary", widget: "text" }
-      - { label: "Card Image", name: "cardImage", widget: "image" }
-      - { label: "Cover Image", name: "coverImage", widget: "image" }
+      - { label: "Title", name: "title", widget: "string", hint: "Used for service cards and the service detail page title." }
+      - { label: "Slug", name: "slug", widget: "string", hint: "Controls the URL: /curated_services/slug.html" }
+      - { label: "Status", name: "status", widget: "select", options: [{ label: "Published", value: "published" }, { label: "Coming Soon", value: "coming_soon" }, { label: "Draft", value: "draft" }], default: "published", hint: "Draft entries are hidden from the public site." }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", hint: "Fallback ordering outside homepage curation." }
+      - { label: "Summary", name: "summary", widget: "text", hint: "Shown on service cards wherever this Service is featured." }
+      - { label: "Card Image", name: "cardImage", widget: "image", hint: "Used by homepage service cards. Changing it updates every card for this Service." }
+      - { label: "Card Alt", name: "cardAlt", widget: "string", hint: "Alt text for service card images." }
+      - { label: "Cover Image", name: "coverImage", widget: "image", hint: "Used as the service detail page hero image." }
       - { label: "Cover Alt", name: "coverAlt", widget: "string" }
-      - { label: "Intro", name: "intro", widget: "text" }
+      - { label: "Intro", name: "intro", widget: "text", hint: "Lead copy on the service detail page." }
       - label: "At a Glance"
         name: "glance"
         widget: "list"
@@ -158,23 +226,23 @@ collections:
     fields:
       - { label: "Tags", name: "tags", widget: "hidden", default: "project" }
       - { label: "Permalink", name: "permalink", widget: "hidden", default: false }
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string" }
-      - { label: "Order", name: "order", widget: "number", value_type: "int" }
+      - { label: "Title", name: "title", widget: "string", hint: "Used for project cards and the project detail page title." }
+      - { label: "Slug", name: "slug", widget: "string", hint: "Controls the URL: /projects/slug.html" }
+      - { label: "Status", name: "status", widget: "select", options: [{ label: "Published", value: "published" }, { label: "Coming Soon", value: "coming_soon" }, { label: "Draft", value: "draft" }], default: "published", hint: "Draft entries are hidden from listings, homepage selections, and detail-page generation." }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", hint: "Controls ordering on the Projects listing." }
       - { label: "Category", name: "category", widget: "select", options: ["Residential", "Hospitality", "Commercial"] }
       - { label: "Kicker", name: "kicker", widget: "string" }
-      - { label: "Subtitle", name: "subtitle", widget: "text" }
-      - { label: "Status Label", name: "statusLabel", widget: "string", required: false }
-      - { label: "Show in Projects Listing", name: "showInProjects", widget: "boolean", default: true }
-      - { label: "Show on Homepage", name: "showOnHome", widget: "boolean", default: false }
-      - { label: "Homepage Card Class", name: "homeSpan", widget: "string", required: false }
+      - { label: "Summary / Subtitle", name: "subtitle", widget: "text", hint: "Short project summary used near the project title on the detail page and in CMS previews." }
+      - { label: "Status Label", name: "statusLabel", widget: "string", required: false, hint: "Optional visible badge on the project detail page, such as Coming soon." }
+      - { label: "Show in Projects Listing", name: "showInProjects", widget: "boolean", default: true, hint: "Controls the Projects page only. Homepage featuring is controlled in the Homepage entry." }
       - { label: "Listing Grid Class", name: "gridClass", widget: "string", default: "col-span-4 lg:col-span-4 md:col-span-3 sm:col-span-2" }
-      - { label: "Listing Image", name: "listingImage", widget: "image" }
-      - { label: "Hero Image", name: "heroImage", widget: "image" }
+      - { label: "Card Image", name: "cardImage", widget: "image", hint: "Used by project cards on the homepage and Projects listing. Changing it updates every card for this Project." }
+      - { label: "Card Alt", name: "cardAlt", widget: "string", hint: "Alt text for project card images." }
+      - { label: "Hero Image", name: "heroImage", widget: "image", hint: "Used as the project detail page hero image." }
       - { label: "Hero Alt", name: "heroAlt", widget: "string" }
       - { label: "Tags", name: "projectTags", widget: "list", field: { label: "Tag", name: "tag", widget: "string" } }
       - { label: "Article Heading", name: "articleHeading", widget: "string", default: "Overview" }
-      - { label: "Lead", name: "lead", widget: "text" }
+      - { label: "Lead", name: "lead", widget: "text", hint: "Opening paragraph for the project detail page." }
       - { label: "Body", name: "body", widget: "markdown", required: false }
       - label: "Callout"
         name: "callout"

@@ -3,6 +3,7 @@ tags: project
 permalink: false
 title: Marylebone Lobby
 slug: marylebone_residence_lobby_coming_soon
+status: coming_soon
 order: 4
 category: Residential
 kicker: Residential · 2026
@@ -10,11 +11,15 @@ subtitle: An elegant, functional space designed to enhance the daily lives of
   its occupants.
 statusLabel: Coming soon
 showInProjects: true
-showOnHome: true
-homeSpan: span-4
 gridClass: col-span-8 lg:col-span-8 md:col-span-3 sm:col-span-2
+<<<<<<< HEAD
 listingImage: /assets/images/uploads/98-pp-lobby-3.png
 heroImage: /assets/images/uploads/98-pp-lobby-3.png
+=======
+cardImage: /assets/images/projects/98_pc_lobby/98_pc_lobby_coming_soon.webp
+cardAlt: Marylebone Residence Lobby hero image
+heroImage: /assets/images/projects/98_pc_lobby/98_pc_lobby.webp
+>>>>>>> updated cms
 heroAlt: Marylebone Residence Lobby hero image
 projectTags:
   - Space planning

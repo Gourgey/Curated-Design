@@ -3,16 +3,16 @@ tags: project
 permalink: false
 title: Marylebone Terrace
 slug: marylebone_terrace_coming_soon
+status: coming_soon
 order: 3
 category: Residential
 kicker: Residential · 2026
 subtitle: A penthouse apartment terrace refresh — improving comfort, layout, and atmosphere while keeping the space calm and architecturally clean.
 statusLabel: Coming soon
 showInProjects: true
-showOnHome: true
-homeSpan: span-4
 gridClass: col-span-4 lg:col-span-4 md:col-span-3 sm:col-span-2
-listingImage: /assets/images/projects/98_pc_terrace/terrace_coming_soon.webp
+cardImage: /assets/images/projects/98_pc_terrace/terrace_coming_soon.webp
+cardAlt: Marylebone Terrace
 heroImage: /assets/images/projects/98_pc_terrace/terrace_coming_soon.webp
 heroAlt: Marylebone Terrace
 projectTags:

@@ -11,19 +11,37 @@ htmlClass: project-page
 bodyClass: project-page font-inter
 sectionTop: true
 ---
+{% set isComingSoon = project.data.status == "coming_soon" %}
 <main class="page-main">
     <div class="project-topbar">
         <a class="project-backlink" href="/projects.html">← Back to Work</a>
     </div>
 
     <header class="project-hero" aria-label="Project hero">
-        <figure class="project-hero-media">
-            <img
-                src="{{ project.data.heroImage }}"
-                alt="{{ project.data.heroAlt }}"
-                loading="eager"
-                decoding="async"
-            />
+        {% set hasHeroCarousel = (not isComingSoon) and project.data.gallery and project.data.gallery.images and project.data.gallery.images.length %}
+        <figure class="project-hero-media{% if hasHeroCarousel %} project-hero-carousel{% endif %}"{% if hasHeroCarousel %} data-project-carousel{% endif %}>
+            <div class="project-hero-track"{% if hasHeroCarousel %} data-project-carousel-track{% endif %}>
+                <div class="project-hero-slide">
+                    <img
+                        src="{{ project.data.heroImage }}"
+                        alt="{{ project.data.heroAlt }}"
+                        loading="eager"
+                        decoding="async"
+                    />
+                </div>
+                {% if hasHeroCarousel %}
+                {% for item in project.data.gallery.images %}
+                <div class="project-hero-slide">
+                    <img src="{{ item.image }}" alt="{{ item.alt }}" loading="lazy" decoding="async" />
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+            {% if hasHeroCarousel %}
+            <button class="project-hero-control project-hero-control--prev" type="button" data-project-carousel-prev aria-label="Previous project image">‹</button>
+            <button class="project-hero-control project-hero-control--next" type="button" data-project-carousel-next aria-label="Next project image">›</button>
+            <div class="project-hero-dots" data-project-carousel-dots aria-label="Project image slide indicators"></div>
+            {% endif %}
         </figure>
 
         <div class="project-hero-overlay">
@@ -31,9 +49,9 @@ sectionTop: true
                 <p class="project-kicker">{{ project.data.kicker }}</p>
 
                 <h1 class="project-title">
-                    {{ project.data.title }}
-                    {% if project.data.statusLabel %}
-                    <span class="coming-soon-badge" aria-label="Status">{{ project.data.statusLabel }}</span>
+                    <span>{{ project.data.title }}</span>
+                    {% if isComingSoon %}
+                    <span class="coming-soon-badge" aria-label="Status">{{ project.data.statusLabel | default("Coming soon", true) }}</span>
                     {% endif %}
                 </h1>
 
@@ -48,6 +66,58 @@ sectionTop: true
         </div>
     </header>
 
+    {% if isComingSoon %}
+    <section class="section project-body">
+        <div class="container project-wrap">
+            <div class="project-grid">
+                <article class="project-article project-prose">
+                    <h2 class="project-h2">{{ project.data.articleHeading | default(project.data.statusLabel) | default("Coming soon") }}</h2>
+
+                    <p class="project-lead">{{ project.data.lead | default(project.data.summary) | default(project.data.subtitle) }}</p>
+
+                    {% if project.data.callout and (project.data.callout.title or project.data.callout.text) %}
+                    <div class="project-callout">
+                        {% if project.data.callout.title %}
+                        <p class="project-callout-title">{{ project.data.callout.title }}</p>
+                        {% endif %}
+                        {% if project.data.callout.text %}
+                        <p class="project-callout-text">{{ project.data.callout.text }}</p>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </article>
+
+                <aside class="project-aside" aria-label="Project facts">
+                    <div class="project-facts">
+                        <h2 class="project-facts-title">Project facts</h2>
+
+                        {% if project.data.facts and project.data.facts.length %}
+                        <dl class="project-facts-list">
+                            {% for fact in project.data.facts %}
+                            <div class="project-fact">
+                                <dt>{{ fact.label }}</dt>
+                                <dd>{{ fact.value }}</dd>
+                            </div>
+                            {% endfor %}
+                        </dl>
+
+                        <div class="project-facts-divider"></div>
+                        {% endif %}
+
+                        {% if project.data.asideText %}
+                        <p class="project-p project-muted">{{ project.data.asideText }}</p>
+                        {% endif %}
+
+                        <a href="/contact.html" class="button button-full">
+                            <span class="dot" aria-hidden="true"></span>
+                            Enquire
+                        </a>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+    {% else %}
     <section class="section project-body">
         <div class="container project-wrap">
             <div class="project-grid">
@@ -99,25 +169,11 @@ sectionTop: true
                             Enquire
                         </a>
                     </div>
-
-                    {% if project.data.gallery and project.data.gallery.images and project.data.gallery.images.length %}
-                    <section class="project-gallery-card">
-                        <h2 class="project-h2">{{ project.data.gallery.heading }}</h2>
-                        <p class="project-muted">{{ project.data.gallery.text }}</p>
-
-                        <div class="project-gallery" aria-label="Project gallery grid">
-                            {% for item in project.data.gallery.images %}
-                            <a class="project-shot" href="{{ item.image }}">
-                                <img src="{{ item.image }}" alt="{{ item.alt }}" loading="lazy" />
-                            </a>
-                            {% endfor %}
-                        </div>
-                    </section>
-                    {% endif %}
                 </aside>
             </div>
         </div>
     </section>
+    {% endif %}
 
     {% set heading = project.data.ctaHeading %}
     {% set text = project.data.ctaText %}

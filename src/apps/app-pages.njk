@@ -1,0 +1,56 @@
+---
+pagination:
+  data: apps.items
+  size: 1
+  alias: app
+permalink: "apps/{{ app.slug }}/index.html"
+layout: layouts/base.njk
+eleventyComputed:
+  title: "{{ app.name }} – Apps by Curated Design"
+  description: "{{ app.description }}"
+htmlClass: app-page
+bodyClass: app-page min-h-screen font-inter
+sectionTop: true
+---
+<main class="page-main">
+    {% include "partials/hero-brand.njk" %}
+
+    <section class="app-content">
+        <div class="app-wrap app-wrap--narrow">
+            <p class="app-backlink"><a href="/apps/">Back to Digital Tools</a></p>
+
+            <header class="app-header">
+                <p class="app-kicker">{{ app.eyebrow }}</p>
+                <h1 class="app-title">{{ app.name }}</h1>
+                <p class="app-lead">{{ app.overview }}</p>
+            </header>
+
+            <div class="app-detail-grid">
+                <article class="app-panel">
+                    <h2>App information</h2>
+                    <dl class="app-meta-list">
+                        <div>
+                            <dt>App Store</dt>
+                            <dd>{{ apps.appStoreUrlPlaceholder }}</dd>
+                        </div>
+                        <div>
+                            <dt>Support email</dt>
+                            <dd>{{ apps.supportEmailPlaceholder }}</dd>
+                        </div>
+                        <div>
+                            <dt>Last updated</dt>
+                            <dd>{{ apps.lastUpdated }}</dd>
+                        </div>
+                    </dl>
+                </article>
+
+                <aside class="app-panel app-panel--links" aria-label="{{ app.name }} links">
+                    <h2>Support and policies</h2>
+                    <a href="/apps/{{ app.slug }}/support/">Support</a>
+                    <a href="/apps/{{ app.slug }}/privacy/">Privacy Policy</a>
+                    <a href="/apps/{{ app.slug }}/terms/">Terms</a>
+                </aside>
+            </div>
+        </div>
+    </section>
+</main>

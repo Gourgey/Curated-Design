@@ -7,14 +7,17 @@
   "carousel": {
     "slides": [
       {
+        "project": "garden_restaurant",
         "image": "/assets/images/projects/16-9_images/monet-living.webp",
         "alt": "Living room interior"
       },
       {
+        "project": "shoreditch_office",
         "image": "/assets/images/projects/16-9_images/gwape_bedroom.webp",
         "alt": "Bedroom interior"
       },
       {
+        "project": "shoreditch_office",
         "image": "/assets/images/projects/16-9_images/gwape_living.webp",
         "alt": "Living interior"
       }
@@ -51,22 +54,27 @@
     "featuredProjects": [
       {
         "project": "sandbanks_residence_coming_soon",
+        "image": "/assets/images/projects/sandbanks_bungalow/danwood_exterior_coming_soon.webp",
         "cardSpan": "span-6"
       },
       {
         "project": "botanical_residence_coming_soon",
+        "image": "/assets/images/projects/botanical_residence/botanical_residence_coming_soon.webp",
         "cardSpan": "span-6"
       },
       {
         "project": "marylebone_terrace_coming_soon",
+        "image": "/assets/images/projects/98_pp_terrace/terrace_coming_soon.webp",
         "cardSpan": "span-4"
       },
       {
         "project": "marylebone_residence_lobby_coming_soon",
+        "image": "",
         "cardSpan": "span-4"
       },
       {
         "project": "shoreditch_office",
+        "image": "/assets/images/projects/shoreditch_office/gwape_study_coming_soon.webp",
         "cardSpan": "span-4"
       }
     ]

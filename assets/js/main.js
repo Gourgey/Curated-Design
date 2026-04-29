@@ -49,6 +49,43 @@ window.addEventListener("DOMContentLoaded", () => {
   })();
 
   /* --------------------------------------------------------------------------
+   * PROJECT HERO CAROUSEL
+   * -------------------------------------------------------------------------- */
+  (function () {
+    document.querySelectorAll("[data-project-carousel]").forEach((carousel) => {
+      const track = carousel.querySelector("[data-project-carousel-track]");
+      const slides = track ? Array.from(track.children) : [];
+      const prev = carousel.querySelector("[data-project-carousel-prev]");
+      const next = carousel.querySelector("[data-project-carousel-next]");
+      const dotsWrap = carousel.querySelector("[data-project-carousel-dots]");
+
+      if (!track || !prev || !next || !dotsWrap || slides.length <= 1) return;
+
+      let index = 0;
+
+      dotsWrap.innerHTML = "";
+      slides.forEach((_, i) => {
+        const dot = document.createElement("button");
+        dot.className = i === 0 ? "active" : "";
+        dot.setAttribute("aria-label", "Go to project image " + (i + 1));
+        dot.addEventListener("click", () => go(i));
+        dotsWrap.appendChild(dot);
+      });
+
+      function go(nextIndex) {
+        index = (nextIndex + slides.length) % slides.length;
+        track.style.transform = "translateX(" + -index * 100 + "%)";
+        Array.from(dotsWrap.children).forEach((dot, dotIndex) => {
+          dot.classList.toggle("active", dotIndex === index);
+        });
+      }
+
+      prev.addEventListener("click", () => go(index - 1));
+      next.addEventListener("click", () => go(index + 1));
+    });
+  })();
+
+  /* --------------------------------------------------------------------------
    * PILL MENU → SECTION SCROLL (generic in-page anchors)
    * -------------------------------------------------------------------------- */
   (function () {

@@ -57,10 +57,11 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
                 <div class="viewport-clip">
                     <div class="track" id="track">
                         {% for slide in site.home.carousel.slides %}
+                        {% set slideProject = [slide] | resolveEntries(collections.publishedProject, "project") | first %}
                         <div class="slide" aria-label="{{ loop.index }} of {{ site.home.carousel.slides.length }}">
                             <img
-                                src="{{ slide.image }}"
-                                alt="{{ slide.alt }}"
+                                src="{{ slide.image | default(slideProject.data.heroImage) }}"
+                                alt="{{ slide.alt | default(slideProject.data.heroAlt) | default(slideProject.data.title) }}"
                                 width="1600"
                                 height="900"
                                 loading="{% if loop.first %}eager{% else %}lazy{% endif %}"
@@ -123,7 +124,7 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
                 <a class="card {{ project | homeCardSpan(featuredProjects.length) }}" href="/projects/{{ project.data.slug }}.html">
                     <div class="img-wrap">
                         <img
-                            src="{{ project.data.cardImage }}"
+                            src="{{ project.relation.image | default(project.data.cardImage) }}"
                             alt="{{ project.data.cardAlt | default(project.data.title) }}"
                         />
                     </div>
@@ -134,6 +135,11 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
                 </a>
                 {% endfor %}
             </div>
+
+            <a class="button" href="/projects.html">
+                <span class="dot" aria-hidden="true"></span>
+                All projects
+            </a>
         </div>
     </section>
 

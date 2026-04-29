@@ -179,17 +179,23 @@
             h(
               "section",
               { className: "cms-preview-section" },
-              h("p", { className: "cms-preview-note" }, "Homepage-owned carousel images"),
-              h("p", { className: "cms-preview-help" }, "These images live on the Homepage entry only."),
-              h(
-                "div",
-                { className: "cms-preview-slides" },
-                slides.length
-                  ? slides.map(function (slide) {
-                      return h("img", { src: asset(this.props, slide.image), alt: slide.alt || "" });
+          h("p", { className: "cms-preview-note" }, "Homepage carousel, populated from Project entries"),
+          h("p", { className: "cms-preview-help" }, "Each slide references a Project and uses one selected image from that Project."),
+          h(
+            "div",
+            { className: "cms-preview-slides" },
+            slides.length
+              ? slides.map(function (slide) {
+                      var project = resolve(related.projects, slide.project);
+                      return h(
+                        "div",
+                        {},
+                        h("img", { src: asset(this.props, slide.image || (project && (project.heroImage || project.cardImage))), alt: slide.alt || (project && project.title) || "" }),
+                        h("span", { className: "cms-preview-source" }, project ? "Links/source Project: " + project.title : "No project selected"),
+                      );
                     }, this)
                   : h("p", {}, "No carousel slides selected."),
-              ),
+          ),
             ),
             h(
               "section",
@@ -225,12 +231,13 @@
                 { className: "cms-preview-grid" },
                 projectRelations.map(function (relation) {
                   var project = resolve(related.projects, relation.project);
+                  var cardProject = project ? Object.assign({}, project, { cardImage: relation.image || project.cardImage }) : project;
                   return project
-                    ? card(this.props, project, {
+                    ? card(this.props, cardProject, {
                         span: cardSpan(relation, projectRelations.length),
                         href: "/projects/" + project.slug + ".html",
-                        source: "Image/title/kicker source: Projects > " + project.title,
-                        affects: "Changing this Project card image affects homepage and Projects listing cards.",
+                        source: "Title/kicker source: Projects > " + project.title,
+                        affects: "Image selected from this Project's image pool.",
                       })
                     : missingCard(relation.project, "project");
                 }, this),

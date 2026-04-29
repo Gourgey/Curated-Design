@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Curated Design Visual CMS</title>
+    <link rel="stylesheet" href="/visual-cms/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Local visual CMS</p>
+          <h1>Visual site editor</h1>
+        </div>
+        <div class="topbar-actions">
+          <div class="mode-toggle" aria-label="Preview mode">
+            <button id="navigateModeButton" class="mode-button" type="button">Navigate</button>
+            <button id="editModeButton" class="mode-button is-active" type="button">Edit</button>
+          </div>
+          <span id="status" class="status">Loading content...</span>
+          <button id="reloadButton" class="button secondary" type="button">Reload</button>
+        </div>
+      </header>
+
+      <main id="workspace" class="workspace">
+        <section class="preview-pane" aria-label="Homepage preview">
+          <div class="preview-toolbar">
+            <span id="previewHelp">Edit mode: click text, images, cards, or sections to edit the matching source.</span>
+            <span id="currentPage" class="current-page">/index.html</span>
+            <a href="/index.html" target="_blank" rel="noreferrer">Open public page</a>
+          </div>
+          <iframe id="previewFrame" title="Homepage preview" src="/index.html"></iframe>
+        </section>
+
+        <div id="panelResizer" class="panel-resizer" role="separator" aria-orientation="vertical" aria-label="Resize editor panel"></div>
+
+        <aside class="editor-pane" aria-label="Editor panel">
+          <div id="editor"></div>
+        </aside>
+      </main>
+    </div>
+
+    <div id="modalRoot" class="modal-root" hidden></div>
+
+    <template id="emptyStateTemplate">
+      <section class="panel-section">
+        <p class="eyebrow">Nothing selected</p>
+        <h2>Choose an editable region</h2>
+        <p class="help">
+          Click text, images, cards, sections, or navigate to another page and
+          switch to Edit mode.
+        </p>
+      </section>
+    </template>
+
+    <script src="/visual-cms/app.js" defer></script>
+  </body>
+</html>

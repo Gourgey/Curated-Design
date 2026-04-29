@@ -2413,12 +2413,71 @@ body.project-page .project-hero-media {
     width: 100%;
 }
 
+body.project-page .project-hero-track {
+    display: flex;
+    width: 100%;
+    transform: translateX(0);
+    transition: transform 360ms ease;
+}
+
+body.project-page .project-hero-slide {
+    min-width: 100%;
+}
+
 body.project-page .project-hero-media img {
     width: 100%;
     height: clamp(340px, 55vw, 640px);
     object-fit: cover;
     display: block;
     filter: saturate(0.98);
+}
+
+body.project-page .project-hero-control {
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.22);
+    color: #fff;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+body.project-page .project-hero-control--prev {
+    left: 18px;
+}
+
+body.project-page .project-hero-control--next {
+    right: 18px;
+}
+
+body.project-page .project-hero-dots {
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    z-index: 3;
+    display: flex;
+    gap: 8px;
+    transform: translateX(-50%);
+}
+
+body.project-page .project-hero-dots button {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+}
+
+body.project-page .project-hero-dots button.active {
+    background: #fff;
 }
 
 body.project-page .project-hero-overlay {
@@ -2868,4 +2927,327 @@ body.project-page .coming-soon-badge {
     background: rgba(0, 0, 0, 0.18);
     color: #fff;
     vertical-align: middle;
+}
+
+/* =========================
+   Apps pages
+   ========================= */
+
+html.app-page {
+    background: #e4e1d7;
+}
+
+body.app-page {
+    background: #e4e1d7;
+    color: #000;
+    min-height: 100vh;
+}
+
+body.app-page .pill,
+body.app-page .pillmenu-toggle,
+body.app-page .nav-pill {
+    color: #000;
+}
+
+body.app-page .pillmenu-toggle .burger-line {
+    background: currentColor;
+}
+
+body.app-page .top-left-logo {
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    background: rgba(0, 0, 0, 0.03);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+body.app-page .top-left-logo:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+body.app-page .hero-brand {
+    margin-bottom: 40px;
+}
+
+.app-content {
+    padding: 12px 0 88px;
+}
+
+.app-wrap {
+    width: min(1050px, calc(100% - 32px));
+    margin-inline: auto;
+    padding-inline: 8px;
+}
+
+.app-wrap--narrow {
+    width: min(900px, calc(100% - 32px));
+}
+
+.app-wrap--legal {
+    width: min(820px, calc(100% - 32px));
+}
+
+.app-header {
+    max-width: 760px;
+    margin-bottom: 30px;
+}
+
+.app-header--compact {
+    margin-bottom: 22px;
+}
+
+.app-kicker,
+.app-card-kicker,
+.studio-side-note__label {
+    margin: 0 0 10px;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.62);
+}
+
+.app-title {
+    margin: 0 0 14px;
+    font-size: clamp(32px, 4vw, 58px);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.06;
+}
+
+.app-lead {
+    margin: 0;
+    max-width: 68ch;
+    color: rgba(0, 0, 0, 0.72);
+    font-size: 16px;
+    line-height: 1.65;
+}
+
+.app-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.app-card,
+.app-panel,
+.app-prose,
+.studio-side-note {
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    background: rgba(255, 255, 255, 0.42);
+    border-radius: 18px;
+}
+
+.app-card {
+    display: flex;
+    min-height: 260px;
+    flex-direction: column;
+    padding: 20px;
+    transition:
+        transform 180ms ease,
+        background 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.app-card:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.62);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.app-card h2,
+.app-panel h2,
+.app-prose h2 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+}
+
+.app-card p {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.72);
+    line-height: 1.58;
+}
+
+.app-card-link {
+    margin-top: auto;
+    padding-top: 26px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.72);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.app-small-note {
+    margin: 24px 0 0;
+    max-width: 70ch;
+    color: rgba(0, 0, 0, 0.58);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.app-backlink {
+    margin: 0 0 24px;
+}
+
+.app-backlink a {
+    display: inline-flex;
+    padding: 10px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.45);
+    font-size: 14px;
+}
+
+.app-backlink a:hover {
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.app-detail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.8fr);
+    gap: 16px;
+    align-items: start;
+}
+
+.app-panel {
+    padding: 18px;
+}
+
+.app-panel--links {
+    display: grid;
+    gap: 10px;
+}
+
+.app-panel--links a {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.78);
+}
+
+.app-panel--links a:hover {
+    color: #000;
+}
+
+.app-meta-list {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+}
+
+.app-meta-list div {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 12px;
+}
+
+.app-meta-list dt {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.58);
+}
+
+.app-meta-list dd {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.78);
+}
+
+.app-prose {
+    padding: 24px;
+}
+
+.app-prose h2 {
+    margin-top: 28px;
+}
+
+.app-prose h2:first-child {
+    margin-top: 0;
+}
+
+.app-prose p {
+    max-width: 72ch;
+    margin: 0 0 14px;
+    color: rgba(0, 0, 0, 0.78);
+    line-height: 1.68;
+}
+
+.app-todo {
+    font-weight: 600;
+}
+
+.app-todo-box {
+    margin: 0 0 24px;
+    padding: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 14px;
+    background: rgba(0, 0, 0, 0.035);
+}
+
+.app-todo-box h2 {
+    margin: 0 0 8px;
+}
+
+.app-todo-box p {
+    margin: 0;
+}
+
+.studio-side-note {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 16px;
+}
+
+.studio-side-note p {
+    margin: 0;
+}
+
+.studio-side-note a {
+    flex: 0 0 auto;
+    padding: 10px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.46);
+    font-size: 14px;
+}
+
+.studio-side-note a:hover {
+    background: rgba(255, 255, 255, 0.72);
+}
+
+@media (max-width: 820px) {
+    .app-card-grid,
+    .app-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .app-card {
+        min-height: 0;
+    }
+}
+
+@media (max-width: 640px) {
+    .app-content {
+        padding-bottom: 64px;
+    }
+
+    .app-prose,
+    .app-panel,
+    .app-card,
+    .studio-side-note {
+        border-radius: 16px;
+        padding: 16px;
+    }
+
+    .app-meta-list div {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+
+    .studio-side-note {
+        align-items: flex-start;
+        flex-direction: column;
+    }
 }

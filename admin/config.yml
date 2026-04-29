@@ -45,15 +45,25 @@ collections:
             name: "carousel"
             widget: "object"
             collapsed: false
-            hint: "These images are owned by the Homepage only. They do not change any Project or Service entry."
+            hint: "Each slide references a Project and selects one image from that Project. Upload new carousel imagery through the Project first."
             fields:
               - label: "Slides"
                 name: "slides"
                 widget: "list"
-                summary: "{{fields.alt}}"
+                summary: "{{fields.project}} · {{fields.image}}"
                 fields:
-                  - { label: "Image", name: "image", widget: "image" }
-                  - { label: "Alt Text", name: "alt", widget: "string" }
+                  - label: "Project"
+                    name: "project"
+                    widget: "relation"
+                    collection: "projects"
+                    value_field: "slug"
+                    search_fields: ["title", "slug", "category", "kicker"]
+                    display_fields: ["title", "slug", "cardImage", "heroImage"]
+                    filters:
+                      - field: "status"
+                        values: ["published", "coming_soon"]
+                  - { label: "Selected Project Image", name: "image", widget: "string", hint: "Use a path from the selected Project's card, hero, gallery, or project image folder." }
+                  - { label: "Alt Text Override", name: "alt", widget: "string", required: false }
           - label: "Homepage Services Section"
             name: "servicesSection"
             widget: "object"
@@ -103,6 +113,7 @@ collections:
                     filters:
                       - field: "status"
                         values: ["published", "coming_soon"]
+                  - { label: "Selected Project Image", name: "image", widget: "string", required: false, hint: "Optional. Use a path from the selected Project's card, hero, gallery, or project image folder. Falls back to Project Card Image." }
                   - label: "Homepage Card Width"
                     name: "cardSpan"
                     widget: "select"
@@ -233,7 +244,7 @@ collections:
       - { label: "Category", name: "category", widget: "select", options: ["Residential", "Hospitality", "Commercial"] }
       - { label: "Kicker", name: "kicker", widget: "string" }
       - { label: "Summary / Subtitle", name: "subtitle", widget: "text", hint: "Short project summary used near the project title on the detail page and in CMS previews." }
-      - { label: "Status Label", name: "statusLabel", widget: "string", required: false, hint: "Optional visible badge on the project detail page, such as Coming soon." }
+      - { label: "Status Label", name: "statusLabel", widget: "string", required: false, hint: "Only renders when Status is Coming Soon. Published projects ignore this field." }
       - { label: "Show in Projects Listing", name: "showInProjects", widget: "boolean", default: true, hint: "Controls the Projects page only. Homepage featuring is controlled in the Homepage entry." }
       - { label: "Listing Grid Class", name: "gridClass", widget: "string", default: "col-span-4 lg:col-span-4 md:col-span-3 sm:col-span-2" }
       - { label: "Card Image", name: "cardImage", widget: "image", hint: "Used by project cards on the homepage and Projects listing. Changing it updates every card for this Project." }
@@ -269,6 +280,7 @@ collections:
         name: "gallery"
         widget: "object"
         required: false
+        hint: "These images are part of the Project image pool. Homepage cards and carousel slides can select from this pool."
         fields:
           - { label: "Heading", name: "heading", widget: "string", required: false }
           - { label: "Text", name: "text", widget: "text", required: false }

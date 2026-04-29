@@ -85,6 +85,11 @@ module.exports = function (eleventyConfig) {
       coverAlt: item.data.coverAlt || "",
       heroImage: item.data.heroImage || "",
       heroAlt: item.data.heroAlt || "",
+      imagePool: [
+        item.data.cardImage,
+        item.data.heroImage,
+        ...(((item.data.gallery && item.data.gallery.images) || []).map((image) => image.image)),
+      ].filter(Boolean),
       url: [].concat(item.data.tags || []).includes("service")
         ? `/curated_services/${item.data.slug}.html`
         : `/projects/${item.data.slug}.html`,

@@ -1,0 +1,39 @@
+---
+layout: layouts/base.njk
+title: Apps by Curated Design – Curated Design Studio
+description: Digital tools and app support pages by Curated Design Studio.
+permalink: apps/index.html
+htmlClass: app-page
+bodyClass: app-page min-h-screen font-inter
+sectionTop: true
+---
+<main class="page-main">
+    {% include "partials/hero-brand.njk" %}
+
+    <section class="app-content">
+        <div class="app-wrap">
+            <header class="app-header">
+                <p class="app-kicker">Digital Tools</p>
+                <h1 class="app-title">Apps by Curated Design</h1>
+                <p class="app-lead">
+                    A small collection of practical tools developed alongside the studio. They sit quietly here for support, privacy, and App Store reference.
+                </p>
+            </header>
+
+            <div class="app-card-grid" aria-label="Apps">
+                {% for app in apps.items %}
+                <a class="app-card" href="/apps/{{ app.slug }}/">
+                    <p class="app-card-kicker">{{ app.eyebrow }}</p>
+                    <h2>{{ app.name }}</h2>
+                    <p>{{ app.description }}</p>
+                    <span class="app-card-link">View details</span>
+                </a>
+                {% endfor %}
+            </div>
+
+            <p class="app-small-note">
+                The main studio remains focused on interiors, procurement, and design work. These pages provide public app information and support links.
+            </p>
+        </div>
+    </section>
+</main>

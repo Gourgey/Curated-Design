@@ -6,59 +6,77 @@ pagination:
 permalink: "curated_services/{{ service.data.slug }}.html"
 layout: layouts/base.njk
 eleventyComputed:
-  title: "{{ service.data.title }} – Curated Design Studio"
+  title: "{{ service.data.metaTitle or service.data.title }} – Curated Design Studio"
+  description: "{{ service.data.metaDescription or service.data.summary or service.data.intro or site.settings.description }}"
 htmlClass: concept-page
 bodyClass: concept-page font-inter
 ---
 <main class="page-main">
     {% include "partials/hero-brand.njk" %}
 
+    {% set hasGlance = service.data.glance and service.data.glance.length %}
+    {% set hasSections = service.data.sections and service.data.sections.length %}
+    {% set coverAlt = service.data.coverAlt or service.data.title %}
+
     <section class="section concept-content">
         <div class="container concept-wrap">
+            <h1 class="sr-only">{{ service.data.title }}</h1>
             <header class="concept-header">
+                {% if service.data.coverImage %}
                 <section class="concept-hero" aria-label="{{ service.data.title }} hero image">
                     <figure class="concept-hero-figure concept-hero-figure--fullbleed">
                         <img
                             src="{{ service.data.coverImage }}"
-                            alt="{{ service.data.coverAlt }}"
+                            alt="{{ coverAlt }}"
                             loading="eager"
                             decoding="async"
                         />
                     </figure>
                 </section>
+                {% endif %}
 
                 <div class="concept-intro">
                     <div>
-                        <p class="concept-lead">{{ service.data.intro }}</p>
+                        {% if service.data.intro %}<p class="concept-lead">{{ service.data.intro }}</p>{% endif %}
                     </div>
 
+                    {% if hasGlance %}
                     <aside class="concept-glance" aria-label="At a glance">
                         <h2 class="title2 concept-glance-title">At a glance</h2>
                         <ul class="concept-glance-list">
                             {% for item in service.data.glance %}
-                            <li><strong>{{ item.label }}:</strong> {{ item.text }}</li>
+                            {% if item.label or item.text %}
+                            <li><strong>{{ item.label }}{% if item.label and item.text %}:{% endif %}</strong> {{ item.text }}</li>
+                            {% endif %}
                             {% endfor %}
                         </ul>
                     </aside>
+                    {% endif %}
                 </div>
             </header>
 
             <div class="concept-grid">
                 <div class="concept-left">
+                    {% if hasSections %}
                     {% for section in service.data.sections %}
+                    {% if section.heading or (section.items and section.items.length) %}
                     <div class="concept-block">
-                        <h2 class="title2">{{ section.heading }}</h2>
+                        {% if section.heading %}<h2 class="title2">{{ section.heading }}</h2>{% endif %}
+                        {% if section.items and section.items.length %}
                         <{{ section.listType | default('ul') }} class="concept-list">
                             {% for item in section.items %}
-                            <li>{{ item }}</li>
+                            {% if item %}<li>{{ item }}</li>{% endif %}
                             {% endfor %}
                         </{{ section.listType | default('ul') }}>
+                        {% endif %}
                         {% if section.note %}
                         <p class="concept-meta">{{ section.note }}</p>
                         {% endif %}
                     </div>
                     {% if not loop.last %}<hr class="concept-divider" />{% endif %}
+                    {% endif %}
                     {% endfor %}
+                    {% endif %}
                 </div>
 
                 <div class="concept-right">
@@ -130,6 +148,7 @@ bodyClass: concept-page font-inter
         </div>
     </section>
 
+    {% if service.data.ctaHeading or service.data.ctaText %}
     {% set heading = service.data.ctaHeading %}
     {% set text = service.data.ctaText %}
     {% set href = "/contact.html" %}
@@ -138,4 +157,5 @@ bodyClass: concept-page font-inter
     {% set ctaStyle = "text-align: center" %}
     {% set label = "Contact the studio" %}
     {% include "partials/cta-band.njk" %}
+    {% endif %}
 </main>

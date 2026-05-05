@@ -2,6 +2,7 @@
 layout: layouts/base.njk
 eleventyComputed:
   title: "{{ site.home.title }}"
+  description: "{{ site.home.metaDescription or site.settings.description }}"
 bodyClass: min-h-screen text-[#f2f2f2] font-inter
 topLogo: white_logo_no_text_on_transparent.svg
 showBackground: true
@@ -58,10 +59,13 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
                     <div class="track" id="track">
                         {% for slide in site.home.carousel.slides %}
                         {% set slideProject = [slide] | resolveEntries(collections.publishedProject, "project") | first %}
+                        {% set slideSrc = slide.image or slideProject.data.heroImage %}
+                        {% set slideAlt = slide.alt or slideProject.data.heroAlt or slideProject.data.title %}
+                        {% if slideSrc %}
                         <div class="slide" aria-label="{{ loop.index }} of {{ site.home.carousel.slides.length }}">
                             <img
-                                src="{{ slide.image | default(slideProject.data.heroImage) }}"
-                                alt="{{ slide.alt | default(slideProject.data.heroAlt) | default(slideProject.data.title) }}"
+                                src="{{ slideSrc }}"
+                                alt="{{ slideAlt }}"
                                 width="1600"
                                 height="900"
                                 loading="{% if loop.first %}eager{% else %}lazy{% endif %}"
@@ -70,6 +74,7 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
                                 draggable="false"
                             />
                         </div>
+                        {% endif %}
                         {% endfor %}
                     </div>
                 </div>
@@ -96,16 +101,18 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
                     aria-label="View {{ service.data.title }} service"
                 >
                     <div class="img-wrap">
+                        {% if service.data.cardImage %}
                         <img
                             src="{{ service.data.cardImage }}"
-                            alt="{{ service.data.cardAlt | default(service.data.title) }}"
+                            alt="{{ service.data.cardAlt or service.data.title }}"
                             loading="lazy"
                             decoding="async"
                         />
+                        {% endif %}
                     </div>
                     <div class="body">
                         <h3 class="title">{{ service.data.title }}</h3>
-                        <p class="muted">{{ service.data.summary }}</p>
+                        {% if service.data.summary %}<p class="muted">{{ service.data.summary }}</p>{% endif %}
                     </div>
                 </a>
                 {% endfor %}
@@ -121,16 +128,21 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
             {% set featuredProjects = site.home.collectionsSection.featuredProjects | resolveEntries(collections.publishedProject, "project") %}
             <div class="card-grid">
                 {% for project in featuredProjects %}
+                {% set projectCardSrc = project.relation.image or project.data.cardImage %}
                 <a class="card {{ project | homeCardSpan(featuredProjects.length) }}" href="/projects/{{ project.data.slug }}.html">
                     <div class="img-wrap">
+                        {% if projectCardSrc %}
                         <img
-                            src="{{ project.relation.image | default(project.data.cardImage) }}"
-                            alt="{{ project.data.cardAlt | default(project.data.title) }}"
+                            src="{{ projectCardSrc }}"
+                            alt="{{ project.data.cardAlt or project.data.title }}"
+                            loading="lazy"
+                            decoding="async"
                         />
+                        {% endif %}
                     </div>
                     <div class="body">
                         <h3 class="title2">{{ project.data.title }}</h3>
-                        <p class="muted2">{{ project.data.kicker }}</p>
+                        {% if project.data.kicker %}<p class="muted2">{{ project.data.kicker }}</p>{% endif %}
                     </div>
                 </a>
                 {% endfor %}
@@ -149,11 +161,15 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
 
             <div class="split">
                 <div class="media">
+                    {% if site.home.philosophy.image %}
                     <img
                         src="{{ site.home.philosophy.image }}"
                         alt="{{ site.home.philosophy.imageAlt }}"
+                        loading="lazy"
+                        decoding="async"
                         style="width: 100%; height: 100%; object-fit: cover"
                     />
+                    {% endif %}
                 </div>
                 <div class="content">
                     <h2 class="h2">{{ site.home.philosophy.heading }}</h2>

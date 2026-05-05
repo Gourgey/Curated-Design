@@ -1,0 +1,5 @@
+# Slug migration (Phase 4) — preserve old URLs as 301 redirects to clean slugs.
+/projects/sandbanks_residence_coming_soon.html         /projects/sandbanks_residence.html         301
+/projects/botanical_residence_coming_soon.html         /projects/botanical_residence.html         301
+/projects/marylebone_terrace_coming_soon.html          /projects/marylebone_terrace.html          301
+/projects/marylebone_residence_lobby_coming_soon.html  /projects/marylebone_residence_lobby.html  301

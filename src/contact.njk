@@ -2,6 +2,7 @@
 layout: layouts/base.njk
 eleventyComputed:
   title: "{{ site.contact.title }}"
+  description: "{{ site.contact.metaDescription or site.settings.description }}"
 permalink: contact.html
 htmlClass: contact-page
 bodyClass: contact-page min-h-screen font-inter

@@ -4,10 +4,15 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{{ title }}</title>
-        {% if description %}
-        <meta name="description" content="{{ description }}" />
+        {# `description` is composed via eleventyComputed (already HTML-escaped once);
+           `| safe` prevents a second escape pass that would produce `&amp;#39;` etc. #}
+        {% set metaDescription = description or site.settings.description %}
+        {% if metaDescription %}
+        <meta name="description" content="{{ metaDescription | safe }}" />
         {% endif %}
 
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
             rel="stylesheet"

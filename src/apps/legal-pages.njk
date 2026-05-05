@@ -40,17 +40,28 @@ sectionTop: true
                     Depending on how you use the app, Curiosity Tracker may handle curiosity titles or prompts, notes, tags, statuses, dates, resurfacing dates, saved webpage titles and URLs, optional PDF metadata, PDF files shared into the app, custom tags, recent searches, research goal settings and progress, Siri or Shortcuts input, and local notification preferences.
                 </p>
 
+                <h2>How your data is handled</h2>
+                <p>
+                    Curiosity Tracker stores user-created content locally on your device and may sync it through Apple iCloud using CloudKit’s private database. This data is associated with your Apple ID and is not accessible to Curated Design.
+                </p>
+                <p>
+                    Curated Design does not operate a backend server and does not access or collect your personal content.
+                </p>
+                <p>
+                    The app may read your device name locally to personalise the experience. This information is not transmitted off your device.
+                </p>
+
                 <h2>Storage and sync</h2>
                 <p>
                     App data is stored locally on your device using SwiftData and Apple platform storage. If iCloud is enabled for the app, data may sync through Apple iCloud/CloudKit private database services tied to your Apple account.
                 </p>
                 <p>
-                    Curated Design does not operate a custom backend for Curiosity Tracker and does not claim access to read the private iCloud content associated with your Apple account.
+                    Sync depends on your Apple account, iCloud settings, network connection, available storage, and device state.
                 </p>
 
                 <h2>Third parties, analytics, advertising, and tracking</h2>
                 <p>
-                    Based on the current build audit, Curiosity Tracker does not include third-party analytics SDKs, advertising SDKs, tracking SDKs, tracking APIs, app-authored URLSession network requests, or custom backend services.
+                    Curiosity Tracker does not include third-party analytics SDKs, advertising SDKs, tracking SDKs, tracking APIs, or a custom backend service.
                 </p>
 
                 <h2>Apple system features</h2>
@@ -75,49 +86,44 @@ sectionTop: true
 
                 <h2>Contact</h2>
                 <p>
-                    For privacy questions, contact: <span class="app-todo">{{ apps.supportEmailPlaceholder }}</span>.
+                    For privacy questions, contact <a href="{{ apps.supportEmailUrl }}">{{ apps.supportEmail }}</a>.
                 </p>
             </article>
             {% elif appPage.app.slug == "curiosity-tracker" and appPage.kind == "support" %}
             <article class="app-prose">
-                <h2>What Curiosity Tracker does</h2>
+                <h2>Introduction</h2>
                 <p>
                     Curiosity Tracker helps you capture questions, notes, links, PDFs, tags, and resurfacing dates so personal research threads can be kept in one place and revisited over time.
                 </p>
 
-                <h2>Contact support</h2>
+                <h2>Contact</h2>
                 <p>
-                    Support email: <span class="app-todo">{{ apps.supportEmailPlaceholder }}</span>.
+                    Email: <a href="{{ apps.supportEmailUrl }}">{{ apps.supportEmail }}</a>.
                 </p>
 
-                <h2>iCloud sync</h2>
+                <h2>Before Contacting Support</h2>
+                <ul>
+                    <li>Restart the app.</li>
+                    <li>Ensure iCloud is enabled.</li>
+                    <li>Update to latest version.</li>
+                </ul>
+
+                <h2>Common Issues</h2>
+                <ul>
+                    <li><strong>iCloud not syncing:</strong> Check that iCloud is enabled for Curiosity Tracker and that your device is online.</li>
+                    <li><strong>Share extension not working:</strong> Confirm Curiosity Tracker is enabled in the iOS share sheet, then open the main app after sharing.</li>
+                    <li><strong>PDFs not opening:</strong> Try reopening the curiosity. Large PDFs may take longer to become available across devices.</li>
+                    <li><strong>Notifications not appearing:</strong> Check notification permission in iOS Settings. Reminders are local only.</li>
+                </ul>
+
+                <h2>Deleting Data</h2>
                 <p>
-                    Data is stored locally and may sync through Apple iCloud/CloudKit private database services if iCloud is enabled for the app and your device settings allow it. Sync timing and availability can depend on Apple account, network, storage, and device state.
+                    You can delete curiosities inside the app. If iCloud sync is enabled, deletions will sync across your devices. Deleting the app may not immediately remove data stored in iCloud. You can manage iCloud storage through your device settings.
                 </p>
 
-                <h2>Share Extension</h2>
+                <h2>Response Time</h2>
                 <p>
-                    The Share Extension can help add text, URLs, and PDFs from other apps. If a shared item does not appear as expected, check that Curiosity Tracker is enabled in the iOS share sheet and try opening the main app after sharing.
-                </p>
-
-                <h2>PDF import</h2>
-                <p>
-                    PDFs shared into the app may be stored locally or in app storage, and may sync through iCloud if sync is enabled. Large files may take longer to appear across devices.
-                </p>
-
-                <h2>Notifications</h2>
-                <p>
-                    Reminder notifications are optional. You can manage notification permission and delivery from iOS Settings.
-                </p>
-
-                <h2>Siri and Shortcuts</h2>
-                <p>
-                    App Intents and Siri Shortcuts can be used to add curiosities when configured by you. If a shortcut stops working, review it in the Shortcuts app and confirm Curiosity Tracker remains installed.
-                </p>
-
-                <h2>Deleting app data</h2>
-                <p>
-                    You can delete curiosities inside the app. If iCloud sync is enabled, deletion may also sync through iCloud. You can also manage app data through your device and iCloud settings.
+                    We aim to respond within a few days.
                 </p>
             </article>
             {% elif appPage.app.slug == "curiosity-tracker" and appPage.kind == "terms" %}
@@ -134,121 +140,7 @@ sectionTop: true
 
                 <h2>Contact</h2>
                 <p>
-                    For terms or support questions, contact: <span class="app-todo">{{ apps.supportEmailPlaceholder }}</span>.
-                </p>
-            </article>
-            {% elif appPage.kind == "privacy" %}
-            <!--
-            TODO before publication for {{ appPage.app.name }}:
-            - Confirm iCloud/CloudKit usage
-            - Confirm third-party SDKs
-            - Confirm analytics/crash reporting
-            - Confirm notifications
-            - Confirm HealthKit usage
-            - Confirm user accounts
-            - Confirm subscriptions/IAP
-            - Confirm data deletion behaviour
-            - Confirm support email
-            - Confirm App Store URL
-            -->
-            <article class="app-prose">
-                <div class="app-todo-box">
-                    <h2>Publication TODO</h2>
-                    <p>
-                        Confirm data practices before publishing this page as final, including iCloud/CloudKit, third-party SDKs, analytics or crash reporting, notifications, HealthKit, user accounts, subscriptions or IAP, data deletion behaviour, support email, and App Store URL.
-                    </p>
-                </div>
-
-                <h2>Overview</h2>
-                <p>
-                    {{ appPage.app.name }} is an app by Curated Design. This placeholder privacy policy is provided so a stable public URL exists while the final app data practices are confirmed.
-                </p>
-
-                <h2>Information handled by the app</h2>
-                <p>
-                    TODO: Confirm the categories of information the app collects, stores, syncs, or processes.
-                </p>
-
-                <h2>Storage, sync, and services</h2>
-                <p>
-                    TODO: Confirm whether the app uses local storage, iCloud/CloudKit, accounts, subscriptions, third-party SDKs, analytics, crash reporting, notifications, HealthKit, or any custom backend.
-                </p>
-
-                <h2>Deleting data</h2>
-                <p>
-                    TODO: Confirm how users can delete app data and whether deletion syncs across devices or services.
-                </p>
-
-                <h2>Contact</h2>
-                <p>
-                    Privacy contact: <span class="app-todo">{{ apps.supportEmailPlaceholder }}</span>.
-                </p>
-            </article>
-            {% elif appPage.kind == "support" %}
-            <!--
-            TODO before publication for {{ appPage.app.name }}:
-            - Confirm iCloud/CloudKit usage
-            - Confirm third-party SDKs
-            - Confirm analytics/crash reporting
-            - Confirm notifications
-            - Confirm HealthKit usage
-            - Confirm user accounts
-            - Confirm subscriptions/IAP
-            - Confirm data deletion behaviour
-            - Confirm support email
-            - Confirm App Store URL
-            -->
-            <article class="app-prose">
-                <div class="app-todo-box">
-                    <h2>Publication TODO</h2>
-                    <p>
-                        Confirm app behaviour before publishing this support page as final, including sync, SDKs, notifications, accounts, purchases, deletion behaviour, support email, and App Store URL.
-                    </p>
-                </div>
-
-                <h2>What {{ appPage.app.name }} does</h2>
-                <p>{{ appPage.app.description }}</p>
-
-                <h2>Contact support</h2>
-                <p>
-                    Support email: <span class="app-todo">{{ apps.supportEmailPlaceholder }}</span>.
-                </p>
-
-                <h2>Common support notes</h2>
-                <p>
-                    TODO: Add confirmed support guidance for sync, notifications, imports, account behaviour, purchases, and data deletion once the app audit is complete.
-                </p>
-            </article>
-            {% else %}
-            <!--
-            TODO before publication for {{ appPage.app.name }}:
-            - Confirm support email
-            - Confirm App Store URL
-            - Confirm subscriptions/IAP
-            - Confirm user accounts
-            - Confirm data deletion behaviour
-            -->
-            <article class="app-prose">
-                <div class="app-todo-box">
-                    <h2>Publication TODO</h2>
-                    <p>
-                        Confirm commercial, account, support, App Store, and deletion details before publishing these terms as final.
-                    </p>
-                </div>
-
-                <h2>Use of the app</h2>
-                <p>
-                    {{ appPage.app.name }} is provided as a practical tool by Curated Design. You are responsible for the information you add to the app and for keeping your device and accounts secure.
-                </p>
-
-                <h2>Availability and changes</h2>
-                <p>
-                    TODO: Confirm release status, supported platforms, subscription or purchase terms, account requirements, and any service dependencies.
-                </p>
-
-                <h2>Contact</h2>
-                <p>
-                    Terms contact: <span class="app-todo">{{ apps.supportEmailPlaceholder }}</span>.
+                    For terms or support questions, contact <a href="{{ apps.supportEmailUrl }}">{{ apps.supportEmail }}</a>.
                 </p>
             </article>
             {% endif %}

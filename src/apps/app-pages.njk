@@ -29,13 +29,27 @@ sectionTop: true
                 <article class="app-panel">
                     <h2>App information</h2>
                     <dl class="app-meta-list">
+                        {% if app.appStoreUrl %}
                         <div>
                             <dt>App Store</dt>
-                            <dd>{{ apps.appStoreUrlPlaceholder }}</dd>
+                            <dd><a href="{{ app.appStoreUrl }}">View on the App Store</a></dd>
                         </div>
+                        {% endif %}
                         <div>
                             <dt>Support email</dt>
-                            <dd>{{ apps.supportEmailPlaceholder }}</dd>
+                            <dd><a href="{{ apps.supportEmailUrl }}">{{ apps.supportEmail }}</a></dd>
+                        </div>
+                        <div>
+                            <dt>Platform</dt>
+                            <dd>{{ app.platform }}</dd>
+                        </div>
+                        <div>
+                            <dt>Sync</dt>
+                            <dd>{{ app.sync }}</dd>
+                        </div>
+                        <div>
+                            <dt>Privacy</dt>
+                            <dd>{{ app.privacySummary }}</dd>
                         </div>
                         <div>
                             <dt>Last updated</dt>

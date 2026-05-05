@@ -2,6 +2,7 @@
 layout: layouts/base.njk
 eleventyComputed:
   title: "{{ site.about.title }}"
+  description: "{{ site.about.metaDescription or site.settings.description }}"
 permalink: about.html
 htmlClass: about-page
 bodyClass: about-page min-h-screen font-inter
@@ -13,7 +14,7 @@ bodyClass: about-page min-h-screen font-inter
         <div class="max-w-[950px] mx-auto px-4">
             <div class="space-y-10">
                 <div class="space-y-4">
-                    <h2 class="h2">{{ site.about.introHeading }}</h2>
+                    <h1 class="h2">{{ site.about.introHeading }}</h1>
                     <p class="lead">{{ site.about.introText }}</p>
                 </div>
 

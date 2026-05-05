@@ -10,7 +10,7 @@ kicker: Commercial · 2026
 subtitle: A workplace concept focused on atmosphere, proportion, and material restraint — designed to feel calm, premium, and genuinely usable day-to-day.
 statusLabel: Coming soon
 showInProjects: true
-gridClass: col-span-8 lg:col-span-8 md:col-span-6 sm:col-span-2
+gridSpan: two-thirds
 cardImage: /assets/images/projects/shoreditch_office/gwape_study_coming_soon.webp
 cardAlt: Shoreditch Office
 heroImage: /assets/images/projects/shoreditch_office/gwape_study_coming_soon.webp

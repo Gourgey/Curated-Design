@@ -1,6 +1,8 @@
 ---
 layout: layouts/base.njk
 title: Projects – Curated Design Studio
+eleventyComputed:
+  description: "{{ site.projectsPage.metaDescription or site.settings.description }}"
 permalink: projects.html
 bodyClass: projects-page font-inter
 topLogo: white_logo_no_text_on_transparent.svg
@@ -15,6 +17,9 @@ topLogo: white_logo_no_text_on_transparent.svg
         </div>
     </section>
 
+    {% set listedProjects = collections.publishedProject | sortByOrder | where("showInProjects", true) %}
+    {% set visibleCategories = site.projectsPage.categories | groupByCategory(listedProjects) %}
+
     <nav id="pills" class="pillmenu-wrap" aria-label="Project categories">
         <button
             id="pillsToggle"
@@ -27,44 +32,46 @@ topLogo: white_logo_no_text_on_transparent.svg
         </button>
 
         <ul class="pillmenu pills-desktop">
-            {% for category in site.projectsPage.categories %}
-            <li><a class="pill{% if loop.first %} active{% endif %}" href="#{{ category.id }}">{{ category.label }}</a></li>
+            {% for entry in visibleCategories %}
+            <li><a class="pill{% if loop.first %} active{% endif %}" href="#{{ entry.category.id }}">{{ entry.category.label }}</a></li>
             {% endfor %}
         </ul>
 
         <div id="pillsPanel" class="pills-panel" hidden>
-            {% for category in site.projectsPage.categories %}
-            <a class="pill" href="#{{ category.id }}">{{ category.label }}</a>
+            {% for entry in visibleCategories %}
+            <a class="pill" href="#{{ entry.category.id }}">{{ entry.category.label }}</a>
             {% endfor %}
         </div>
     </nav>
 
     <section class="projects-band">
-        {% set projects = collections.publishedProject | sortByOrder | where("showInProjects", true) %}
-        {% for category in site.projectsPage.categories %}
+        {% for entry in visibleCategories %}
+        {% set category = entry.category %}
         <section id="{{ category.id }}" class="{% if loop.first %}section-pad{% else %}py-14{% endif %}">
             <div class="projects-wrap">
                 <div class="widget-area">
-                    <span class="section-label">{{ category.label }}</span>
+                    {% if category.label %}<span class="section-label">{{ category.label }}</span>{% endif %}
 
                     <div class="section-head">
-                        <h2 class="h2">{{ category.heading }}</h2>
-                        <p class="section-note">{{ category.note }}</p>
+                        {% if category.heading %}<h2 class="h2">{{ category.heading }}</h2>{% endif %}
+                        {% if category.note %}<p class="section-note">{{ category.note }}</p>{% endif %}
                     </div>
 
                     <div class="widget-grid">
-                        {% for project in projects | where("category", category.label) %}
-                        <a class="widget {{ project.data.gridClass }}" href="/projects/{{ project.data.slug }}.html">
+                        {% for project in entry.projects %}
+                        <a class="widget {{ project.data | projectGridClass }}" href="/projects/{{ project.data.slug }}.html">
+                            {% if project.data.cardImage %}
                             <img
                                 class="widget-media"
                                 src="{{ project.data.cardImage }}"
-                                alt="{{ project.data.cardAlt | default(project.data.title) }}"
+                                alt="{{ project.data.cardAlt or project.data.title }}"
                                 loading="lazy"
                                 decoding="async"
                             />
+                            {% endif %}
                             <div class="widget-body">
                                 <p class="widget-title">{{ project.data.title }}</p>
-                                <p class="widget-meta">{{ project.data.kicker }}</p>
+                                {% if project.data.kicker %}<p class="widget-meta">{{ project.data.kicker }}</p>{% endif %}
                             </div>
                         </a>
                         {% endfor %}

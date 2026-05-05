@@ -24,6 +24,8 @@ collections:
           - { label: "Primary CTA URL", name: "primaryCtaUrl", widget: "string" }
           - { label: "Footer CTA Heading", name: "ctaHeading", widget: "string" }
           - { label: "Footer CTA Text", name: "ctaText", widget: "text" }
+          - { label: "Site URL", name: "siteUrl", widget: "string", required: false, hint: "Public URL of the live site (no trailing slash). Used as the canonical/SEO base — e.g. https://curateddesign.studio" }
+          - { label: "Default Meta Description", name: "description", widget: "text", required: false, hint: "Site-wide fallback description used in search results and link previews when a page or project doesn't supply its own." }
 
   - name: "pages"
     label: "Pages"
@@ -33,7 +35,8 @@ collections:
         file: "src/content/pages/home.json"
         format: "json"
         fields:
-          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Title", name: "title", widget: "string", hint: "Browser tab title for the homepage." }
+          - { label: "Meta Description (SEO)", name: "metaDescription", widget: "text", required: false, hint: "Optional. Used in search results and link previews. Falls back to the site-wide default in Site Settings." }
           - label: "Hero"
             name: "hero"
             widget: "object"
@@ -145,7 +148,8 @@ collections:
         file: "src/content/pages/about.json"
         format: "json"
         fields:
-          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Title", name: "title", widget: "string", hint: "Browser tab title for the About page." }
+          - { label: "Meta Description (SEO)", name: "metaDescription", widget: "text", required: false, hint: "Optional. Falls back to the site-wide default in Site Settings." }
           - { label: "Intro Heading", name: "introHeading", widget: "string" }
           - { label: "Intro Text", name: "introText", widget: "text" }
           - { label: "Work Heading", name: "workHeading", widget: "string" }
@@ -165,7 +169,8 @@ collections:
         file: "src/content/pages/contact.json"
         format: "json"
         fields:
-          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Title", name: "title", widget: "string", hint: "Browser tab title for the Contact page." }
+          - { label: "Meta Description (SEO)", name: "metaDescription", widget: "text", required: false, hint: "Optional. Falls back to the site-wide default in Site Settings." }
           - { label: "Heading", name: "heading", widget: "string" }
           - { label: "Lead", name: "lead", widget: "text" }
           - { label: "Studio Details Heading", name: "detailsHeading", widget: "string" }
@@ -175,6 +180,7 @@ collections:
         file: "src/content/pages/projects.json"
         format: "json"
         fields:
+          - { label: "Meta Description (SEO)", name: "metaDescription", widget: "text", required: false, hint: "Optional. Falls back to the site-wide default in Site Settings." }
           - { label: "Hero Headline", name: "heroHeadline", widget: "string" }
           - { label: "Hero Subhead", name: "heroSubhead", widget: "text" }
           - label: "Categories"
@@ -195,36 +201,59 @@ collections:
     format: "frontmatter"
     identifier_field: "title"
     fields:
+      # System fields — preserved on every save, do not edit.
       - { label: "Tags", name: "tags", widget: "hidden", default: "service" }
       - { label: "Permalink", name: "permalink", widget: "hidden", default: false }
-      - { label: "Title", name: "title", widget: "string", hint: "Used for service cards and the service detail page title." }
-      - { label: "Slug", name: "slug", widget: "string", hint: "Controls the URL: /curated_services/slug.html" }
-      - { label: "Status", name: "status", widget: "select", options: [{ label: "Published", value: "published" }, { label: "Coming Soon", value: "coming_soon" }, { label: "Draft", value: "draft" }], default: "published", hint: "Draft entries are hidden from the public site." }
-      - { label: "Order", name: "order", widget: "number", value_type: "int", hint: "Fallback ordering outside homepage curation." }
-      - { label: "Summary", name: "summary", widget: "text", hint: "Shown on service cards wherever this Service is featured." }
-      - { label: "Card Image", name: "cardImage", widget: "image", hint: "Used by homepage service cards. Changing it updates every card for this Service." }
-      - { label: "Card Alt", name: "cardAlt", widget: "string", hint: "Alt text for service card images." }
-      - { label: "Cover Image", name: "coverImage", widget: "image", hint: "Used as the service detail page hero image." }
-      - { label: "Cover Alt", name: "coverAlt", widget: "string" }
-      - { label: "Intro", name: "intro", widget: "text", hint: "Lead copy on the service detail page." }
+
+      # --- Identity ---
+      - { label: "Title", name: "title", widget: "string", hint: "Service name as shown on cards and on the service detail page." }
+      - { label: "Slug", name: "slug", widget: "string", hint: "Controls the URL (/curated_services/slug.html). Use lowercase letters, numbers, and underscores only." }
+
+      # --- Visibility & ordering ---
+      - { label: "Status", name: "status", widget: "select", default: "published", options: [{ label: "Published", value: "published" }, { label: "Coming Soon", value: "coming_soon" }, { label: "Draft — hidden from site", value: "draft" }], hint: "Draft entries are hidden from the public site and the homepage selections." }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", hint: "Fallback ordering when not curated by the homepage." }
+
+      # --- Card (used wherever the service appears as a card) ---
+      - { label: "Summary", name: "summary", widget: "text", hint: "Short description shown on service cards wherever this service is featured." }
+      - { label: "Card Image", name: "cardImage", widget: "image", hint: "Used by homepage service cards. Changing it updates every card for this service." }
+      - { label: "Card Image Alt Text", name: "cardAlt", widget: "string", hint: "Short description of the card image for accessibility." }
+
+      # --- Service detail page ---
+      - { label: "Cover Image", name: "coverImage", widget: "image", hint: "Large image at the top of the service detail page." }
+      - { label: "Cover Image Alt Text", name: "coverAlt", widget: "string" }
+      - { label: "Intro", name: "intro", widget: "text", hint: "Lead paragraph below the cover image." }
       - label: "At a Glance"
         name: "glance"
         widget: "list"
+        required: false
+        collapsed: true
+        hint: "Key/value entries shown in the small panel beside the intro."
         fields:
           - { label: "Label", name: "label", widget: "string" }
           - { label: "Text", name: "text", widget: "string" }
       - label: "Content Sections"
         name: "sections"
         widget: "list"
+        required: false
+        collapsed: true
+        hint: "Body sections, each with a heading and bulleted/numbered list."
         fields:
           - { label: "Heading", name: "heading", widget: "string" }
-          - { label: "List Type", name: "listType", widget: "select", options: ["ul", "ol"], default: "ul" }
+          - { label: "List Type", name: "listType", widget: "select", options: ["ul", "ol"], default: "ul", hint: "Bulleted (ul) or numbered (ol)." }
           - { label: "Items", name: "items", widget: "list", field: { label: "Item", name: "item", widget: "string" } }
           - { label: "Note", name: "note", widget: "text", required: false }
-      - { label: "Enquiry Heading", name: "enquiryHeading", widget: "string" }
+
+      # --- Enquiry panel ---
+      - { label: "Enquiry Heading", name: "enquiryHeading", widget: "string", hint: "Heading of the form panel on the service page." }
       - { label: "Enquiry Text", name: "enquiryText", widget: "text" }
+
+      # --- Bottom CTA ---
       - { label: "CTA Heading", name: "ctaHeading", widget: "string" }
       - { label: "CTA Text", name: "ctaText", widget: "text" }
+
+      # --- SEO ---
+      - { label: "Meta Title (SEO)", name: "metaTitle", widget: "string", required: false, hint: "Optional override for the browser tab title and search results. Falls back to the service Title." }
+      - { label: "Meta Description (SEO)", name: "metaDescription", widget: "text", required: false, hint: "1–2 sentences shown in search results and link previews. Falls back to Summary or Intro." }
 
   - name: "projects"
     label: "Projects"
@@ -235,52 +264,78 @@ collections:
     format: "frontmatter"
     identifier_field: "title"
     fields:
+      # System fields — preserved on every save, do not edit.
       - { label: "Tags", name: "tags", widget: "hidden", default: "project" }
       - { label: "Permalink", name: "permalink", widget: "hidden", default: false }
-      - { label: "Title", name: "title", widget: "string", hint: "Used for project cards and the project detail page title." }
-      - { label: "Slug", name: "slug", widget: "string", hint: "Controls the URL: /projects/slug.html" }
-      - { label: "Status", name: "status", widget: "select", options: [{ label: "Published", value: "published" }, { label: "Coming Soon", value: "coming_soon" }, { label: "Draft", value: "draft" }], default: "published", hint: "Draft entries are hidden from listings, homepage selections, and detail-page generation." }
-      - { label: "Order", name: "order", widget: "number", value_type: "int", hint: "Controls ordering on the Projects listing." }
-      - { label: "Category", name: "category", widget: "select", options: ["Residential", "Hospitality", "Commercial"] }
-      - { label: "Kicker", name: "kicker", widget: "string" }
-      - { label: "Summary / Subtitle", name: "subtitle", widget: "text", hint: "Short project summary used near the project title on the detail page and in CMS previews." }
-      - { label: "Status Label", name: "statusLabel", widget: "string", required: false, hint: "Only renders when Status is Coming Soon. Published projects ignore this field." }
-      - { label: "Show in Projects Listing", name: "showInProjects", widget: "boolean", default: true, hint: "Controls the Projects page only. Homepage featuring is controlled in the Homepage entry." }
-      - { label: "Listing Grid Class", name: "gridClass", widget: "string", default: "col-span-4 lg:col-span-4 md:col-span-3 sm:col-span-2" }
-      - { label: "Card Image", name: "cardImage", widget: "image", hint: "Used by project cards on the homepage and Projects listing. Changing it updates every card for this Project." }
-      - { label: "Card Alt", name: "cardAlt", widget: "string", hint: "Alt text for project card images." }
-      - { label: "Hero Image", name: "heroImage", widget: "image", hint: "Used as the project detail page hero image." }
-      - { label: "Hero Alt", name: "heroAlt", widget: "string" }
-      - { label: "Tags", name: "projectTags", widget: "list", field: { label: "Tag", name: "tag", widget: "string" } }
-      - { label: "Article Heading", name: "articleHeading", widget: "string", default: "Overview" }
-      - { label: "Lead", name: "lead", widget: "text", hint: "Opening paragraph for the project detail page." }
-      - { label: "Body", name: "body", widget: "markdown", required: false }
+
+      # --- Identity ---
+      - { label: "Title", name: "title", widget: "string", hint: "Project name as shown on cards, in the hero overlay, and in the browser tab." }
+      - { label: "Slug", name: "slug", widget: "string", hint: "Controls the page URL (/projects/slug.html). Use lowercase letters, numbers, and underscores only. Changing this on a live project will break links." }
+
+      # --- Visibility & ordering ---
+      - { label: "Status", name: "status", widget: "select", default: "published", options: [{ label: "Published — full case study page", value: "published" }, { label: "Coming Soon — teaser page", value: "coming_soon" }, { label: "Draft — hidden from site", value: "draft" }], hint: "Draft hides the project from listings, the homepage, and disables the project page." }
+      - { label: "Order", name: "order", widget: "number", value_type: "int", hint: "Lower numbers appear first on the Projects listing. Use 1, 2, 3, …" }
+      - { label: "Show in Projects Listing", name: "showInProjects", widget: "boolean", default: true, hint: "Controls only the /projects page. Homepage featuring is set in the Homepage entry." }
+      - { label: "Listing Card Width", name: "gridSpan", widget: "select", default: "third", options: [{ label: "Third (compact)", value: "third" }, { label: "Two-fifths", value: "two-fifths" }, { label: "Three-fifths", value: "three-fifths" }, { label: "Two-thirds (compact)", value: "two-thirds-compact" }, { label: "Two-thirds (wide)", value: "two-thirds" }], hint: "Width of this project's card on the Projects listing. Mix widths to create rhythm in the grid." }
+
+      # --- Card (used wherever the project appears as a card) ---
+      - { label: "Category", name: "category", widget: "select", options: ["Residential", "Hospitality", "Commercial"], hint: "Determines which Projects-page section this card appears under." }
+      - { label: "Kicker", name: "kicker", widget: "string", hint: "Small label above the title on cards and on the project page (e.g. 'Residential · 2026')." }
+      - { label: "Card Image", name: "cardImage", widget: "image", hint: "Used by project cards everywhere this project is referenced. Changing it updates every card for this project." }
+      - { label: "Card Image Alt Text", name: "cardAlt", widget: "string", hint: "Short description of the card image for accessibility and SEO." }
+
+      # --- Project page hero ---
+      - { label: "Hero Image", name: "heroImage", widget: "image", hint: "Large image at the top of the project page. Coming-soon pages show only this image." }
+      - { label: "Hero Image Alt Text", name: "heroAlt", widget: "string" }
+      - { label: "Subtitle", name: "subtitle", widget: "text", hint: "Short description shown below the title in the hero overlay." }
+      - { label: "Status Label", name: "statusLabel", widget: "string", required: false, hint: "Only shown when Status is Coming Soon. Defaults to 'Coming soon' if left blank." }
+      - { label: "Project Tags", name: "projectTags", widget: "list", required: false, hint: "Small chip tags shown in the hero overlay (e.g. 'Space planning', 'Lighting').", field: { label: "Tag", name: "tag", widget: "string" } }
+
+      # --- Project page body ---
+      # Body, Extra Sections, and detailed Facts only render for Published projects.
+      # Coming-soon pages show only the Lead (or Summary if Lead is empty) and Callout.
+      - { label: "Article Heading", name: "articleHeading", widget: "string", default: "Overview", required: false, hint: "Heading above the lead/body text." }
+      - { label: "Summary", name: "summary", widget: "text", required: false, hint: "Short fallback used as the coming-soon lead and for SEO descriptions when no Lead/Meta Description is set." }
+      - { label: "Lead", name: "lead", widget: "text", required: false, hint: "Opening paragraph on the project page. Required for Published; optional on Coming Soon (falls back to Summary)." }
+      - { label: "Body", name: "body", widget: "markdown", required: false, hint: "Main project write-up. Only rendered on Published pages." }
       - label: "Callout"
         name: "callout"
         widget: "object"
         required: false
+        collapsed: false
+        hint: "Optional highlighted block shown after the lead/body."
         fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Text", name: "text", widget: "text" }
+          - { label: "Title", name: "title", widget: "string", required: false }
+          - { label: "Text", name: "text", widget: "text", required: false }
       - label: "Extra Sections"
         name: "extraSections"
         widget: "list"
         required: false
+        collapsed: true
+        hint: "Additional sections after the main body. Published projects only."
         fields:
-          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Heading", name: "heading", widget: "string", required: false }
           - { label: "Text", name: "text", widget: "markdown", required: false }
+
+      # --- Project page sidebar ---
       - label: "Facts"
         name: "facts"
         widget: "list"
+        required: false
+        collapsed: true
+        hint: "Key/value entries shown in the right-hand panel. Optional — leave empty to hide the list."
         fields:
           - { label: "Label", name: "label", widget: "string" }
           - { label: "Value", name: "value", widget: "string" }
-      - { label: "Aside Text", name: "asideText", widget: "text" }
+      - { label: "Aside Text", name: "asideText", widget: "text", required: false, hint: "Small footer note above the Enquire button on the project page." }
+
+      # --- Gallery ---
       - label: "Gallery"
         name: "gallery"
         widget: "object"
         required: false
-        hint: "These images are part of the Project image pool. Homepage cards and carousel slides can select from this pool."
+        collapsed: true
+        hint: "Image set used as the hero carousel on Published projects. Coming-soon pages ignore the gallery."
         fields:
           - { label: "Heading", name: "heading", widget: "string", required: false }
           - { label: "Text", name: "text", widget: "text", required: false }
@@ -290,6 +345,12 @@ collections:
             required: false
             fields:
               - { label: "Image", name: "image", widget: "image" }
-              - { label: "Alt", name: "alt", widget: "string" }
-      - { label: "CTA Heading", name: "ctaHeading", widget: "string" }
-      - { label: "CTA Text", name: "ctaText", widget: "text" }
+              - { label: "Alt Text", name: "alt", widget: "string" }
+
+      # --- Bottom CTA ---
+      - { label: "CTA Heading", name: "ctaHeading", widget: "string", required: false, hint: "Heading of the 'Discuss a project' band at the bottom of the project page." }
+      - { label: "CTA Text", name: "ctaText", widget: "text", required: false }
+
+      # --- SEO ---
+      - { label: "Meta Title (SEO)", name: "metaTitle", widget: "string", required: false, hint: "Optional override for the browser tab title and search results. Falls back to the project Title." }
+      - { label: "Meta Description (SEO)", name: "metaDescription", widget: "text", required: false, hint: "1–2 sentences shown in search results and link previews. Falls back to Subtitle or Summary." }

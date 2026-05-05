@@ -6,33 +6,59 @@ pagination:
 permalink: "projects/{{ project.data.slug }}.html"
 layout: layouts/base.njk
 eleventyComputed:
-  title: "{{ project.data.title }} – Curated Design Studio"
+  title: "{{ project.data.metaTitle or project.data.title }} – Curated Design Studio"
+  description: "{{ project.data.metaDescription or project.data.subtitle or project.data.summary or site.settings.description }}"
 htmlClass: project-page
 bodyClass: project-page font-inter
 sectionTop: true
 ---
+{# Visibility flags #}
 {% set isComingSoon = project.data.status == "coming_soon" %}
+
+{# Hero carousel only for published projects with at least one usable gallery image #}
+{% set galleryImages = (project.data.gallery.images if project.data.gallery else []) | withImage %}
+{% set hasHeroCarousel = (not isComingSoon) and galleryImages.length %}
+
+{# Lead text fallback chain — coming-soon may rely on summary/subtitle #}
+{% set leadText = project.data.lead or project.data.summary or project.data.subtitle %}
+{% set headingText = project.data.articleHeading or (project.data.statusLabel if isComingSoon) or ("Coming soon" if isComingSoon else "Overview") %}
+
+{# Coming-soon status badge #}
+{% set comingSoonLabel = project.data.statusLabel or "Coming soon" %}
+
+{# Callout — render only if at least one of title/text is present #}
+{% set hasCallout = project.data.callout and (project.data.callout.title or project.data.callout.text) %}
+
+{# Facts — render only if non-empty #}
+{% set hasFacts = project.data.facts and project.data.facts.length %}
+
+{# Hero image — fall back to first gallery image if heroImage is missing #}
+{% set heroSrc = project.data.heroImage %}
+{% if not heroSrc and galleryImages.length %}{% set heroSrc = galleryImages[0].image %}{% endif %}
+{% set heroAlt = project.data.heroAlt or project.data.title %}
+
 <main class="page-main">
     <div class="project-topbar">
-        <a class="project-backlink" href="/projects.html">← Back to Work</a>
+        <a class="project-backlink" href="/projects.html"><span aria-hidden="true">← </span>Back to Work</a>
     </div>
 
     <header class="project-hero" aria-label="Project hero">
-        {% set hasHeroCarousel = (not isComingSoon) and project.data.gallery and project.data.gallery.images and project.data.gallery.images.length %}
         <figure class="project-hero-media{% if hasHeroCarousel %} project-hero-carousel{% endif %}"{% if hasHeroCarousel %} data-project-carousel{% endif %}>
             <div class="project-hero-track"{% if hasHeroCarousel %} data-project-carousel-track{% endif %}>
+                {% if heroSrc %}
                 <div class="project-hero-slide">
                     <img
-                        src="{{ project.data.heroImage }}"
-                        alt="{{ project.data.heroAlt }}"
+                        src="{{ heroSrc }}"
+                        alt="{{ heroAlt }}"
                         loading="eager"
                         decoding="async"
                     />
                 </div>
+                {% endif %}
                 {% if hasHeroCarousel %}
-                {% for item in project.data.gallery.images %}
+                {% for item in galleryImages %}
                 <div class="project-hero-slide">
-                    <img src="{{ item.image }}" alt="{{ item.alt }}" loading="lazy" decoding="async" />
+                    <img src="{{ item.image }}" alt="{{ item.alt or project.data.title }}" loading="lazy" decoding="async" />
                 </div>
                 {% endfor %}
                 {% endif %}
@@ -46,36 +72,41 @@ sectionTop: true
 
         <div class="project-hero-overlay">
             <div class="project-hero-inner">
-                <p class="project-kicker">{{ project.data.kicker }}</p>
+                {% if project.data.kicker %}<p class="project-kicker">{{ project.data.kicker }}</p>{% endif %}
 
                 <h1 class="project-title">
                     <span>{{ project.data.title }}</span>
                     {% if isComingSoon %}
-                    <span class="coming-soon-badge" aria-label="Status">{{ project.data.statusLabel | default("Coming soon", true) }}</span>
+                    <span class="coming-soon-badge" aria-label="Status">{{ comingSoonLabel }}</span>
                     {% endif %}
                 </h1>
 
-                <p class="project-subtitle">{{ project.data.subtitle }}</p>
+                {% if project.data.subtitle %}<p class="project-subtitle">{{ project.data.subtitle }}</p>{% endif %}
 
+                {% if project.data.projectTags and project.data.projectTags.length %}
                 <div class="project-tags" aria-label="Project tags">
                     {% for tag in project.data.projectTags %}
                     <span class="project-tag">{{ tag }}</span>
                     {% endfor %}
                 </div>
+                {% endif %}
             </div>
         </div>
     </header>
 
-    {% if isComingSoon %}
     <section class="section project-body">
         <div class="container project-wrap">
             <div class="project-grid">
                 <article class="project-article project-prose">
-                    <h2 class="project-h2">{{ project.data.articleHeading | default(project.data.statusLabel) | default("Coming soon") }}</h2>
+                    <h2 class="project-h2">{{ headingText }}</h2>
 
-                    <p class="project-lead">{{ project.data.lead | default(project.data.summary) | default(project.data.subtitle) }}</p>
+                    {% if leadText %}<p class="project-lead">{{ leadText }}</p>{% endif %}
 
-                    {% if project.data.callout and (project.data.callout.title or project.data.callout.text) %}
+                    {% if (not isComingSoon) and project.data.body %}
+                    {{ project.data.body | markdownify | safe }}
+                    {% endif %}
+
+                    {% if hasCallout %}
                     <div class="project-callout">
                         {% if project.data.callout.title %}
                         <p class="project-callout-title">{{ project.data.callout.title }}</p>
@@ -85,13 +116,24 @@ sectionTop: true
                         {% endif %}
                     </div>
                     {% endif %}
+
+                    {% if not isComingSoon %}
+                    {% for section in project.data.extraSections %}
+                    {% if section.heading %}
+                    <h2 class="project-h2">{{ section.heading }}</h2>
+                    {% endif %}
+                    {% if section.text %}
+                    {{ section.text | markdownify | safe }}
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
                 </article>
 
                 <aside class="project-aside" aria-label="Project facts">
                     <div class="project-facts">
                         <h2 class="project-facts-title">Project facts</h2>
 
-                        {% if project.data.facts and project.data.facts.length %}
+                        {% if hasFacts %}
                         <dl class="project-facts-list">
                             {% for fact in project.data.facts %}
                             <div class="project-fact">
@@ -117,64 +159,8 @@ sectionTop: true
             </div>
         </div>
     </section>
-    {% else %}
-    <section class="section project-body">
-        <div class="container project-wrap">
-            <div class="project-grid">
-                <article class="project-article project-prose">
-                    <h2 class="project-h2">{{ project.data.articleHeading | default("Overview") }}</h2>
 
-                    <p class="project-lead">{{ project.data.lead }}</p>
-
-                    {% if project.data.body %}
-                    {{ project.data.body | markdownify | safe }}
-                    {% endif %}
-
-                    {% if project.data.callout %}
-                    <div class="project-callout">
-                        <p class="project-callout-title">{{ project.data.callout.title }}</p>
-                        <p class="project-callout-text">{{ project.data.callout.text }}</p>
-                    </div>
-                    {% endif %}
-
-                    {% for section in project.data.extraSections %}
-                    {% if section.heading %}
-                    <h2 class="project-h2">{{ section.heading }}</h2>
-                    {% endif %}
-                    {% if section.text %}
-                    {{ section.text | markdownify | safe }}
-                    {% endif %}
-                    {% endfor %}
-                </article>
-
-                <aside class="project-aside" aria-label="Project facts">
-                    <div class="project-facts">
-                        <h2 class="project-facts-title">Project facts</h2>
-
-                        <dl class="project-facts-list">
-                            {% for fact in project.data.facts %}
-                            <div class="project-fact">
-                                <dt>{{ fact.label }}</dt>
-                                <dd>{{ fact.value }}</dd>
-                            </div>
-                            {% endfor %}
-                        </dl>
-
-                        <div class="project-facts-divider"></div>
-
-                        <p class="project-p project-muted">{{ project.data.asideText }}</p>
-
-                        <a href="/contact.html" class="button button-full">
-                            <span class="dot" aria-hidden="true"></span>
-                            Enquire
-                        </a>
-                    </div>
-                </aside>
-            </div>
-        </div>
-    </section>
-    {% endif %}
-
+    {% if project.data.ctaHeading or project.data.ctaText %}
     {% set heading = project.data.ctaHeading %}
     {% set text = project.data.ctaText %}
     {% set href = "/contact.html" %}
@@ -183,4 +169,5 @@ sectionTop: true
     {% set ctaStyle = "text-align: center" %}
     {% set label = "Contact the studio" %}
     {% include "partials/cta-band.njk" %}
+    {% endif %}
 </main>

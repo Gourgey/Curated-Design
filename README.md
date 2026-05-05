@@ -2,6 +2,8 @@
 
 This site is a static Netlify site generated with Eleventy and edited through Decap CMS. The visual design lives in the existing CSS and JavaScript files; content lives in `src/content`.
 
+> **Editing content?** See [CONTENT-GUIDE.md](CONTENT-GUIDE.md) for a non-developer walkthrough of adding projects, services, and homepage sections through the CMS.
+
 ## Local Development
 
 Install dependencies once:

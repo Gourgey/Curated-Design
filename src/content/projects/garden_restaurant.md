@@ -10,7 +10,7 @@ kicker: Hospitality · 2026
 subtitle: A hospitality concept focused on calm, sunlit atmosphere — where architecture, planting, and furniture feel composed rather than “decorated”.
 statusLabel: Coming soon
 showInProjects: true
-gridClass: col-span-8 lg:col-span-8 md:col-span-6 sm:col-span-2
+gridSpan: two-thirds
 cardImage: /assets/images/projects/garden_restaurant/monet-terrace_coming_soon.webp
 cardAlt: Garden Restaurant
 heroImage: /assets/images/projects/16-9_images/monet-terrace_coming_soon.webp

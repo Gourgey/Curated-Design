@@ -53,22 +53,22 @@
     "heading": "Recent projects.",
     "featuredProjects": [
       {
-        "project": "sandbanks_residence_coming_soon",
-        "image": "/assets/images/projects/sandbanks_bungalow/danwood_exterior_coming_soon.webp",
+        "project": "sandbanks_residence",
+        "image": "/assets/images/projects/sandbanks_residence/danwood_exterior_coming_soon.webp",
         "cardSpan": "span-6"
       },
       {
-        "project": "botanical_residence_coming_soon",
+        "project": "botanical_residence",
         "image": "/assets/images/projects/botanical_residence/botanical_residence_coming_soon.webp",
         "cardSpan": "span-6"
       },
       {
-        "project": "marylebone_terrace_coming_soon",
-        "image": "/assets/images/projects/98_pp_terrace/terrace_coming_soon.webp",
+        "project": "marylebone_terrace",
+        "image": "/assets/images/projects/marylebone_terrace/terrace_coming_soon.webp",
         "cardSpan": "span-4"
       },
       {
-        "project": "marylebone_residence_lobby_coming_soon",
+        "project": "marylebone_residence_lobby",
         "image": "",
         "cardSpan": "span-4"
       },

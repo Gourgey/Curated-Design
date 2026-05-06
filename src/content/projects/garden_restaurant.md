@@ -11,7 +11,7 @@ subtitle: A hospitality concept focused on calm, sunlit atmosphere — where arc
 statusLabel: Coming soon
 showInProjects: true
 gridSpan: two-thirds
-cardImage: /assets/images/projects/garden_restaurant/monet-terrace_coming_soon.webp
+cardImage: /assets/images/projects/garden_restaurant/garden_restaurant_1.webp
 cardAlt: Garden Restaurant
 heroImage: /assets/images/projects/16-9_images/monet-terrace_coming_soon.webp
 heroAlt: Garden Restaurant

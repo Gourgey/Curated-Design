@@ -1,7 +1,45 @@
 const markdownIt = require("markdown-it");
+const Image = require("@11ty/eleventy-img");
 
 module.exports = function (eleventyConfig) {
   const md = markdownIt({ html: true, breaks: false, linkify: true });
+
+  // Async image shortcode — generates AVIF + WebP responsive variants for any
+  // local image referenced from project templates. Source paths starting with
+  // "/" are resolved relative to the repo root (matching the on-disk layout
+  // of the passthrough-copied `assets/` folder). Empty `src` returns an empty
+  // string so callers don't need to wrap shortcode calls in their own guard.
+  //
+  // Derivatives land in `assets/_generated/img/` (gitignored, persistent across
+  // `npm run clean`) and are passthrough-copied to `_site/img/` on each build.
+  // This keeps incremental + clean builds fast — sharp only re-encodes when a
+  // source image changes.
+  const HERO_WIDTHS = [400, 800, 1200, 1600, 2400];
+  const CARD_WIDTHS = [400, 800, 1200];
+
+  async function imageShortcode(src, alt, sizes, loading, classNames, variant) {
+    if (!src) return "";
+    const inputPath = src.startsWith("/") ? `.${src}` : src;
+    const widths = variant === "card" ? CARD_WIDTHS : HERO_WIDTHS;
+    const metadata = await Image(inputPath, {
+      widths,
+      formats: ["avif", "webp"],
+      outputDir: "./assets/_generated/img/",
+      urlPath: "/img/",
+    });
+    const attrs = {
+      alt: alt || "",
+      sizes: sizes || "100vw",
+      loading: loading || "lazy",
+      decoding: "async",
+    };
+    if (classNames) attrs.class = classNames;
+    return Image.generateHTML(metadata, attrs);
+  }
+  eleventyConfig.addAsyncShortcode("image", imageShortcode);
+
+  // Map the persistent generated-images dir to /img/ in the deploy output.
+  eleventyConfig.addPassthroughCopy({ "assets/_generated/img": "img" });
 
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("admin");

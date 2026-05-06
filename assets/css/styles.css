@@ -386,6 +386,64 @@ main.page-main {
     border: 0;
 }
 
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 8px;
+    z-index: 1000;
+    padding: 8px 12px;
+    background: #111;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font: 500 14px/1 "Inter", system-ui, sans-serif;
+}
+
+.skip-link:focus {
+    top: 8px;
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+/* eleventy-img wraps every <img> in a <picture>. The wrapper is handled
+   per-context because the original CSS used three different layout
+   patterns (wrapper-aspect, img-aspect, clamp-height). */
+
+/* Pattern A — picture fills a wrapper that already owns the aspect-ratio */
+.card .img-wrap picture,
+.split .media picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 0;
+}
+
+/* Pattern B — picture IS the aspect-ratio box (projects widget). Lifted
+   from .widget-media to picture so the box layout is unambiguous. */
+body.projects-page .widget picture {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    line-height: 0;
+}
+body.projects-page .widget picture > .widget-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: auto;
+    display: block;
+}
+
+/* Pattern C — picture is a transparent block-flow wrapper; the inner
+   <img> keeps its existing clamped height. */
+.project-hero-slide picture,
+.project-hero-media picture {
+    display: block;
+    width: 100%;
+    line-height: 0;
+}
+
 /* --- Burger toggle base styles ---
    - Hidden by default on desktop.
    - Shares pill geometry with the floating nav pill.
@@ -1236,6 +1294,15 @@ body.pills-on-light #floatingNavPill.is-open .pillmenu .pill:hover {
     border-radius: 16px;
     overflow: hidden;
     border: 1px solid var(--ring);
+}
+
+/* Replaces the inline width/height/object-fit attributes that lived on the
+   philosophy <img> before it was upgraded to a responsive <picture>. */
+.split .media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 /*

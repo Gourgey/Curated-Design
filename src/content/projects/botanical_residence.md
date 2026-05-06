@@ -11,9 +11,9 @@ subtitle: A short, image-led case study is in progress — details and visuals w
 statusLabel: Coming soon
 showInProjects: true
 gridSpan: two-fifths
-cardImage: /assets/images/projects/botanical_residence/botanical_residence_coming_soon.webp
+cardImage: /assets/images/projects/botanical_residence/botanical_residence_1.webp
 cardAlt: Botanical Residence concept visual
-heroImage: /assets/images/projects/botanical_residence/botanical_residence_coming_soon.webp
+heroImage: /assets/images/projects/botanical_residence/botanical_residence_1.webp
 heroAlt: Botanical Residence concept visual
 projectTags:
   - Concept design

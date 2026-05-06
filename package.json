@@ -6,10 +6,12 @@
     "clean": "node -e \"require('fs').rmSync('_site', { recursive: true, force: true })\"",
     "build": "npm run clean && eleventy",
     "start": "eleventy --serve",
-    "cms": "node tools/visual-cms/server.js"
+    "cms": "node tools/visual-cms/server.js",
+    "cms:local": "npx -y decap-server"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
+    "@11ty/eleventy-img": "^6.0.4",
     "markdown-it": "^14.1.0"
   }
 }

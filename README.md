@@ -34,6 +34,24 @@ The Decap CMS admin area is available at:
 
 The CMS uses the GitHub backend for `Gourgey/Curated-Design` on the `main` branch. Anyone editing through the CMS needs GitHub access to this repository. On Netlify, keep the build command as `npm run build` and the publish directory as `_site`.
 
+### Editing the CMS locally
+
+`admin/config.yml` has `local_backend: true`, so you can run Decap against the local file system instead of GitHub. This is the safest way to test schema changes or content edits before they hit `main`.
+
+In one terminal, start the dev server:
+
+```sh
+npm start
+```
+
+In a second terminal, start the Decap proxy:
+
+```sh
+npm run cms:local
+```
+
+Then open `http://localhost:8080/admin/`. Saves write directly to local files under `src/content/`. Commit manually after testing.
+
 ## Editing Projects
 
 Projects are stored as Markdown files in:

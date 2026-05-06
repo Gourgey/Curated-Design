@@ -11,9 +11,9 @@ subtitle: A workplace concept focused on atmosphere, proportion, and material re
 statusLabel: Coming soon
 showInProjects: true
 gridSpan: two-thirds
-cardImage: /assets/images/projects/shoreditch_office/gwape_study_coming_soon.webp
+cardImage: /assets/images/projects/shoreditch_office/shoreditch_office_1.webp
 cardAlt: Shoreditch Office
-heroImage: /assets/images/projects/shoreditch_office/gwape_study_coming_soon.webp
+heroImage: /assets/images/projects/shoreditch_office/shoreditch_office_1.webp
 heroAlt: Shoreditch Office
 projectTags:
   - Workplace concept

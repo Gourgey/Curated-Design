@@ -11,9 +11,9 @@ subtitle: 'A penthouse apartment terrace refresh — improving comfort, layout, 
 statusLabel: Coming soon
 showInProjects: true
 gridSpan: third
-cardImage: /assets/images/projects/marylebone_terrace/terrace_coming_soon.webp
+cardImage: /assets/images/projects/marylebone_terrace/marylebone_terrace_1.webp
 cardAlt: Marylebone Terrace
-heroImage: /assets/images/projects/marylebone_terrace/terrace_coming_soon.webp
+heroImage: /assets/images/projects/marylebone_terrace/marylebone_terrace_1.webp
 heroAlt: Marylebone Terrace
 projectTags:
   - Terrace refresh

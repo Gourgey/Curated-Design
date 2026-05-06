@@ -84,7 +84,24 @@ bodyClass: concept-page font-inter
                         <h2 class="title2 enquiry-title">{{ service.data.enquiryHeading }}</h2>
                         <p class="concept-meta" style="margin: 0 0 12px">{{ service.data.enquiryText }}</p>
 
-                        <form action="mailto:{{ site.settings.email }}" method="post" enctype="text/plain">
+                        <form
+                            name="service-enquiry"
+                            method="POST"
+                            action="/thank-you/"
+                            netlify
+                            data-netlify="true"
+                            data-netlify-honeypot="bot-field"
+                        >
+                            <input type="hidden" name="form-name" value="service-enquiry" />
+                            <input type="hidden" name="service" value="{{ service.data.title }}" />
+
+                            <p class="hidden">
+                                <label>
+                                    Don’t fill this out if you're human:
+                                    <input name="bot-field" />
+                                </label>
+                            </p>
+
                             <div class="form-field">
                                 <label for="{{ service.data.slug }}-name">Name</label>
                                 <input type="text" id="{{ service.data.slug }}-name" name="name" autocomplete="name" required />

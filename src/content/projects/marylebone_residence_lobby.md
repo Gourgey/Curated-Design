@@ -11,9 +11,9 @@ subtitle: 'An elegant, functional space designed to enhance the daily lives of i
 statusLabel: ''
 showInProjects: true
 gridSpan: two-thirds-compact
-cardImage: /assets/images/projects/marylebone_residence_lobby/98_pp_lobby_1.webp
+cardImage: /assets/images/projects/marylebone_residence_lobby/marylebone_residence_lobby_1.webp
 cardAlt: Marylebone Residence Lobby hero image
-heroImage: /assets/images/projects/marylebone_residence_lobby/98_pp_lobby_1.webp
+heroImage: /assets/images/projects/marylebone_residence_lobby/marylebone_residence_lobby_1.webp
 heroAlt: Marylebone Residence Lobby hero image
 projectTags:
   - Space planning
@@ -61,11 +61,11 @@ gallery:
   heading: Gallery
   text: 'A calm material palette, sculptural forms, and warm lighting combine to create a more considered arrival experience.'
   images:
-    - image: /assets/images/projects/marylebone_residence_lobby/98_pp_lobby_1.webp
+    - image: /assets/images/projects/marylebone_residence_lobby/marylebone_residence_lobby_1.webp
       alt: Marylebone Lobby hero image
-    - image: /assets/images/projects/marylebone_residence_lobby/98_pp_lobby_2.webp
+    - image: /assets/images/projects/marylebone_residence_lobby/marylebone_residence_lobby_2.webp
       alt: Marylebone Lobby detail image
-    - image: /assets/images/projects/marylebone_residence_lobby/98-pp-lobby-3.webp
+    - image: /assets/images/projects/marylebone_residence_lobby/marylebone_residence_lobby_3.webp
       alt: Marylebone Lobby interior detail
 ctaHeading: Have a space that needs clarity?
 ctaText: 'I help clients define a clean direction, then carry it through with calm, detailed execution.'

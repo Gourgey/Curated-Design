@@ -11,9 +11,9 @@ subtitle: A new project page is in progress — imagery and a concise case study
 statusLabel: Coming soon
 showInProjects: true
 gridSpan: three-fifths
-cardImage: /assets/images/projects/sandbanks_residence/danwood_exterior_coming_soon.webp
+cardImage: /assets/images/projects/sandbanks_residence/sandbanks_residence_1.webp
 cardAlt: Sandbanks Residence exterior visual
-heroImage: /assets/images/projects/sandbanks_residence/danwood_exterior_coming_soon.webp
+heroImage: /assets/images/projects/sandbanks_residence/sandbanks_residence_1.webp
 heroAlt: Sandbanks Residence exterior visual
 projectTags:
   - Concept design

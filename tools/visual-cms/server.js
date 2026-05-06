@@ -5,7 +5,7 @@ const matter = require("gray-matter");
 
 const rootDir = path.resolve(__dirname, "..", "..");
 const siteDir = path.join(rootDir, "_site");
-const cmsDir = path.join(rootDir, "visual-cms");
+const cmsDir = path.join(__dirname, "web");
 const assetsDir = path.join(rootDir, "assets");
 const homePath = path.join(rootDir, "src", "content", "pages", "home.json");
 const pagePaths = {

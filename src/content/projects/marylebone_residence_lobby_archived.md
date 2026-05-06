@@ -1,4 +1,8 @@
 ---
+# ARCHIVED DRAFT — original photography never existed in this folder.
+# Replace cardImage, heroImage, and gallery image fields with valid paths
+# before changing status from `draft`. Content text below is preserved
+# as a starting point for the case study when the project is reshot.
 tags: project
 permalink: false
 title: Marylebone Residence Lobby (archived draft)
@@ -11,9 +15,9 @@ subtitle: An elegant, functional space designed to enhance the daily lives of it
 statusLabel: ""
 showInProjects: false
 gridSpan: two-thirds-compact
-cardImage: /assets/images/projects/marylebone_residence_lobby/98_pc_lobby.webp
+cardImage: ""
 cardAlt: Project hero image
-heroImage: /assets/images/projects/marylebone_residence_lobby/98_pc_lobby.webp
+heroImage: ""
 heroAlt: Project hero image
 projectTags:
   - Space planning
@@ -61,13 +65,13 @@ gallery:
   heading: Gallery
   text: A calm material palette, sculptural forms, and warm lighting combine to create a more considered arrival experience.
   images:
-    - image: /assets/images/projects/marylebone_residence_lobby/lobby_bare.webp
+    - image: ""
       alt: Lobby view 1
-    - image: /assets/images/projects/marylebone_residence_lobby/lobby_bare.webp
+    - image: ""
       alt: Lobby view 2
-    - image: /assets/images/projects/marylebone_residence_lobby/lobby_bare.webp
+    - image: ""
       alt: Lobby view 3
-    - image: /assets/images/projects/marylebone_residence_lobby/lobby_bare.webp
+    - image: ""
       alt: Lobby view 4
 ctaHeading: Have a space that needs clarity?
 ctaText: I help clients define a clean direction, then carry it through with calm, detailed execution.

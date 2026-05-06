@@ -1783,14 +1783,11 @@ body.projects-page .widget picture {
     filter: brightness(1.04) saturate(1.05);
 }
 
-/* Sibling cards in the same row should dim subtly when one is hovered,
-   focusing attention on the hovered card. */
+/* Dim non-hovered cards only when another card is actually hovered —
+   the gap between cards no longer triggers the dimming. */
 @media (hover: hover) {
-    body.projects-page .widget-grid:hover .widget {
+    body.projects-page .widget-grid:has(.widget:hover) .widget:not(:hover) {
         opacity: 0.6;
-    }
-    body.projects-page .widget-grid .widget:hover {
-        opacity: 1;
     }
 }
 
@@ -3376,4 +3373,166 @@ body.app-page .hero-brand {
         align-items: flex-start;
         flex-direction: column;
     }
+}
+
+/* =========================================================
+   Homepage — Collections (band-2) editorial card treatment
+   Mirrors the /projects.html gallery: strip card chrome,
+   image-led, hover zoom, sibling dim, caption below.
+   ========================================================= */
+
+.band-2 .card {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+    transition: opacity 200ms ease;
+}
+
+.band-2 .card .img-wrap {
+    aspect-ratio: 4 / 3;
+    background: transparent;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(40, 30, 20, 0.18);
+}
+
+.band-2 .card img {
+    object-position: center;
+    transition:
+        transform 700ms cubic-bezier(0.2, 0.6, 0.2, 1),
+        filter 700ms cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.band-2 .card:hover img {
+    transform: scale(1.04);
+    filter: brightness(1.04) saturate(1.05);
+}
+
+.band-2 .card:hover {
+    transform: none;
+    background: transparent;
+}
+
+@media (hover: hover) {
+    .band-2 .card-grid:has(.card:hover) .card:not(:hover) {
+        opacity: 0.6;
+    }
+}
+
+.band-2 .card .body {
+    padding: 16px 2px 0;
+}
+
+.band-2 .card .title2 {
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 0.005em;
+    line-height: 1.3;
+    margin: 0 0 4px;
+    color: #1a1a1a;
+}
+
+.band-2 .card .muted2 {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0;
+    opacity: 0.55;
+    color: #1a1a1a;
+}
+
+.band-2 .card:focus-visible {
+    outline: 2px solid #1a1a1a;
+    outline-offset: 6px;
+    border-radius: 4px;
+}
+
+/* Bigger, more confident heading on the Collections band */
+.band-2 .h22 {
+    font-size: clamp(32px, 3.6vw, 56px);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.05;
+}
+
+.band-2 .kicker2 {
+    letter-spacing: 0.22em;
+    opacity: 0.55;
+}
+
+.band-2 .card-grid {
+    margin-top: 40px;
+    gap: 28px 24px;
+}
+
+/* =========================================================
+   Homepage — Services (band-1) strengthened cards
+   Keep dark-on-dark feel but make the cards feel substantial.
+   ========================================================= */
+
+.band-1 .card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    transition:
+        transform 250ms cubic-bezier(0.2, 0.6, 0.2, 1),
+        background 250ms ease,
+        border-color 250ms ease,
+        box-shadow 250ms ease;
+}
+
+.band-1 .card:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+}
+
+.band-1 .card .img-wrap {
+    background: #1a1a1a;
+}
+
+.band-1 .card .body {
+    padding: 20px 20px 22px;
+}
+
+.band-1 .card .title {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.005em;
+    line-height: 1.25;
+    margin: 0 0 8px;
+    color: #f0e9da;
+}
+
+.band-1 .card .muted {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: rgba(228, 225, 215, 0.62);
+}
+
+/* Hairline highlight on top edge — gives the card a sense of dimension */
+.band-1 .card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 0,
+        rgba(255, 255, 255, 0.12) 50%,
+        transparent 100%
+    );
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 250ms ease;
+}
+
+.band-1 .card {
+    position: relative;
+}
+
+.band-1 .card:hover::before {
+    opacity: 1;
 }

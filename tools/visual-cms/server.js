@@ -325,8 +325,95 @@ function safeJoin(base, pathname) {
   return resolved;
 }
 
+function listDirImages(absDir, urlPrefix) {
+  if (!fs.existsSync(absDir) || !fs.statSync(absDir).isDirectory()) return [];
+  return fs
+    .readdirSync(absDir)
+    .filter(isImageFile)
+    .sort()
+    .map((name) => ({ filename: name, path: `${urlPrefix}/${name}` }));
+}
+
+function listSiteRootImages(absDir, urlPrefix) {
+  if (!fs.existsSync(absDir) || !fs.statSync(absDir).isDirectory()) return { backgrounds: [], other: [] };
+  const backgrounds = [];
+  const other = [];
+  for (const name of fs.readdirSync(absDir).sort()) {
+    const full = path.join(absDir, name);
+    if (!fs.statSync(full).isFile() || !isImageFile(name)) continue;
+    const entry = { filename: name, path: `${urlPrefix}/${name}` };
+    if (/^background[-._]/i.test(name)) backgrounds.push(entry);
+    else other.push(entry);
+  }
+  return { backgrounds, other };
+}
+
+function buildImageBuckets(content) {
+  const projects = (content.projects || []).map((project) => {
+    const folder = path.join(projectImagesDir, project.slug);
+    return {
+      id: `project:${project.slug}`,
+      name: project.title || project.slug,
+      slug: project.slug,
+      kind: "project",
+      url: project.url,
+      images: listDirImages(folder, `/assets/images/projects/${project.slug}`),
+    };
+  });
+
+  const root = listSiteRootImages(path.join(assetsDir, "images"), "/assets/images");
+  const siteGroups = [];
+  if (root.backgrounds.length) {
+    siteGroups.push({
+      id: "site:backgrounds",
+      name: "Backgrounds",
+      kind: "site",
+      images: root.backgrounds,
+    });
+  }
+  siteGroups.push({
+    id: "site:service-cards",
+    name: "Service cards",
+    kind: "site",
+    images: listDirImages(path.join(assetsDir, "images", "curated_services"), "/assets/images/curated_services"),
+  });
+  siteGroups.push({
+    id: "site:service-covers",
+    name: "Service covers",
+    kind: "site",
+    images: listDirImages(
+      path.join(assetsDir, "images", "curated_services", "page_brands"),
+      "/assets/images/curated_services/page_brands",
+    ),
+  });
+  siteGroups.push({
+    id: "site:logos",
+    name: "Logos",
+    kind: "site",
+    images: listDirImages(path.join(assetsDir, "images", "logos"), "/assets/images/logos"),
+  });
+  if (root.other.length) {
+    siteGroups.push({
+      id: "site:other",
+      name: "Other",
+      kind: "site",
+      images: root.other,
+    });
+  }
+
+  return [
+    { id: "projects", name: "Projects", groups: projects.filter((g) => g.images.length) },
+    { id: "site", name: "Site", groups: siteGroups.filter((g) => g.images.length) },
+  ];
+}
+
 async function handleApi(req, res, url) {
   const content = readAllContent();
+
+  if (req.method === "GET" && url.pathname === "/api/content/images") {
+    sendJson(res, 200, { buckets: buildImageBuckets(content) });
+    return;
+  }
 
   if (req.method === "GET" && url.pathname === "/api/content/home") {
     sendJson(res, 200, content);

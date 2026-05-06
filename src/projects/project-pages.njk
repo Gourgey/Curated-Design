@@ -47,13 +47,24 @@ sectionTop: true
             <div class="project-hero-track"{% if hasHeroCarousel %} data-project-carousel-track{% endif %}>
                 {% if heroSrc %}
                 <div class="project-hero-slide">
-                    {% image heroSrc, heroAlt, "100vw", "eager" %}
+                    <img
+                        src="{{ heroSrc }}"
+                        alt="{{ heroAlt }}"
+                        loading="eager"
+                        fetchpriority="high"
+                        decoding="async"
+                    />
                 </div>
                 {% endif %}
                 {% if hasHeroCarousel %}
                 {% for item in galleryImages %}
                 <div class="project-hero-slide">
-                    {% image item.image, item.alt or project.data.title, "100vw", "lazy" %}
+                    <img
+                        src="{{ item.image }}"
+                        alt="{{ item.alt or project.data.title }}"
+                        loading="lazy"
+                        decoding="async"
+                    />
                 </div>
                 {% endfor %}
                 {% endif %}

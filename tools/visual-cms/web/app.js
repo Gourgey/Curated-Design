@@ -8,6 +8,8 @@ const state = {
   mode: "edit",
   currentPage: { kind: "home", path: "/index.html" },
   newProject: null,
+  imageBuckets: [],
+  selectedImage: null,
 };
 
 const editor = document.getElementById("editor");
@@ -507,6 +509,8 @@ function renderEditor() {
 
   if (state.selected.type === "text") renderTextFieldEditor(state.selected.slug);
   else if (state.selected.type === "image") renderImageFieldEditor(state.selected.slug);
+  else if (state.selected.type === "imagesIndex") renderImagesIndex();
+  else if (state.selected.type === "imageBrowse") renderImageBrowse();
   else if (state.selected.type === "hero") renderHeroEditor();
   else if (state.selected.type === "carousel") renderCarouselEditor();
   else if (state.selected.type === "servicesSection") renderServicesSectionEditor();
@@ -2211,6 +2215,201 @@ reloadButton.addEventListener("click", async () => {
     setStatus(error.message, true);
   }
 });
+
+const imagesButton = document.getElementById("imagesButton");
+if (imagesButton) {
+  imagesButton.addEventListener("click", showImagesPanel);
+}
+
+/* =========================================================
+   Images browser — group all assets by Projects vs Site, allow
+   navigation between them via two dropdowns, and surface an
+   "Edit project" jump for project images.
+   ========================================================= */
+
+async function loadImageBuckets() {
+  const payload = await api("/api/content/images");
+  state.imageBuckets = payload.buckets || [];
+  return state.imageBuckets;
+}
+
+function flatGroups() {
+  const groups = [];
+  for (const bucket of state.imageBuckets) {
+    for (const group of bucket.groups) {
+      groups.push({ ...group, bucketId: bucket.id, bucketName: bucket.name });
+    }
+  }
+  return groups;
+}
+
+function findGroup(groupId) {
+  return flatGroups().find((g) => g.id === groupId) || null;
+}
+
+function selectImage(groupId, filename) {
+  const group = findGroup(groupId);
+  if (!group) return;
+  const image = group.images.find((img) => img.filename === filename) || group.images[0];
+  if (!image) return;
+  state.selectedImage = { groupId, filename: image.filename };
+  state.selected = { type: "imageBrowse" };
+  renderEditor();
+}
+
+function openImagesIndex() {
+  state.selected = { type: "imagesIndex" };
+  renderEditor();
+}
+
+async function showImagesPanel() {
+  try {
+    setStatus("Loading images...");
+    await loadImageBuckets();
+    setStatus("Images loaded.");
+    if (state.selectedImage && findGroup(state.selectedImage.groupId)) {
+      state.selected = { type: "imageBrowse" };
+    } else {
+      state.selected = { type: "imagesIndex" };
+    }
+    renderEditor();
+  } catch (error) {
+    setStatus(error.message, true);
+  }
+}
+
+function renderImagesIndex() {
+  const groups = flatGroups();
+  const container = el("section", { class: "panel-section" });
+  container.appendChild(sectionHeader(
+    "Images browser",
+    "All site images",
+    "Browse images grouped by project and by site section. Click any image to open it with project and file dropdowns.",
+  ));
+
+  if (!groups.length) {
+    container.appendChild(el("p", { class: "help", text: "No images found yet." }));
+    editor.appendChild(container);
+    return;
+  }
+
+  for (const bucket of state.imageBuckets) {
+    if (!bucket.groups.length) continue;
+    container.appendChild(el("h3", { class: "image-bucket-title", text: bucket.name }));
+    for (const group of bucket.groups) {
+      const groupBlock = el("div", { class: "image-group" }, [
+        el("div", { class: "image-group-head" }, [
+          el("p", { class: "image-group-name", text: group.name }),
+          el("p", { class: "image-group-count", text: `${group.images.length} ${group.images.length === 1 ? "image" : "images"}` }),
+        ]),
+      ]);
+      const grid = el("div", { class: "image-thumb-grid" });
+      for (const image of group.images) {
+        const tile = el("button", {
+          class: "image-thumb",
+          type: "button",
+          title: image.filename,
+          onclick: () => selectImage(group.id, image.filename),
+        }, [
+          el("img", { src: image.path, alt: image.filename, loading: "lazy" }),
+          el("span", { class: "image-thumb-label", text: image.filename }),
+        ]);
+        grid.appendChild(tile);
+      }
+      groupBlock.appendChild(grid);
+      container.appendChild(groupBlock);
+    }
+  }
+
+  editor.appendChild(container);
+}
+
+function renderImageBrowse() {
+  if (!state.selectedImage) {
+    openImagesIndex();
+    return;
+  }
+  const group = findGroup(state.selectedImage.groupId);
+  if (!group) {
+    openImagesIndex();
+    return;
+  }
+  const image = group.images.find((img) => img.filename === state.selectedImage.filename) || group.images[0];
+  if (!image) {
+    openImagesIndex();
+    return;
+  }
+
+  const groups = flatGroups();
+  const container = el("section", { class: "panel-section" });
+
+  container.appendChild(el("div", { class: "image-browse-back" }, [
+    el("button", {
+      class: "button-link",
+      type: "button",
+      text: "← Back to all images",
+      onclick: openImagesIndex,
+    }),
+  ]));
+
+  container.appendChild(el("div", { class: "image-browse-preview" }, [
+    el("img", { src: image.path, alt: image.filename }),
+  ]));
+
+  // Project / Site bucket dropdown — switches the group context
+  const groupSelect = el("select", { class: "image-browse-select" });
+  for (const bucket of state.imageBuckets) {
+    if (!bucket.groups.length) continue;
+    const optgroup = el("optgroup", { label: bucket.name });
+    for (const g of bucket.groups) {
+      optgroup.appendChild(el("option", { value: g.id, text: g.name }));
+    }
+    groupSelect.appendChild(optgroup);
+  }
+  groupSelect.value = group.id;
+  groupSelect.addEventListener("change", () => {
+    selectImage(groupSelect.value);
+  });
+
+  // File-name dropdown — switches the image within the current group
+  const fileSelect = el("select", { class: "image-browse-select" });
+  for (const img of group.images) {
+    fileSelect.appendChild(el("option", { value: img.filename, text: img.filename }));
+  }
+  fileSelect.value = image.filename;
+  fileSelect.addEventListener("change", () => {
+    selectImage(group.id, fileSelect.value);
+  });
+
+  const groupLabel = group.kind === "project" ? "Project" : "Site bucket";
+  container.appendChild(el("div", { class: "field" }, [
+    el("label", { text: groupLabel }),
+    groupSelect,
+  ]));
+  container.appendChild(el("div", { class: "field" }, [
+    el("label", { text: "Image file" }),
+    fileSelect,
+  ]));
+
+  if (group.kind === "project" && group.slug) {
+    container.appendChild(el("div", { class: "image-browse-actions" }, [
+      el("button", {
+        class: "button",
+        type: "button",
+        text: "Edit project →",
+        onclick: () => {
+          if (group.url) state.currentPage = { kind: "project", path: group.url, slug: group.slug };
+          select("project", group.slug);
+          syncPreview();
+        },
+      }),
+    ]));
+  }
+
+  container.appendChild(el("p", { class: "help", text: image.path }));
+
+  editor.appendChild(container);
+}
 
 function initPanelResizer() {
   if (!workspace || !panelResizer) return;

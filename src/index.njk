@@ -131,7 +131,12 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
                 {% set projectCardSrc = project.relation.image or project.data.cardImage %}
                 <a class="card {{ project | homeCardSpan(featuredProjects.length) }}" href="/projects/{{ project.data.slug }}.html">
                     <div class="img-wrap">
-                        {% image projectCardSrc, project.data.cardAlt or project.data.title, "(min-width: 1024px) 33vw, (min-width: 700px) 50vw, 100vw", "lazy", null, "card" %}
+                        <img
+                            src="{{ projectCardSrc }}"
+                            alt="{{ project.data.cardAlt or project.data.title }}"
+                            loading="lazy"
+                            decoding="async"
+                        />
                     </div>
                     <div class="body">
                         <h3 class="title2">{{ project.data.title }}</h3>
@@ -154,7 +159,12 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
 
             <div class="split">
                 <div class="media">
-                    {% image site.home.philosophy.image, site.home.philosophy.imageAlt, "(min-width: 900px) 52vw, 100vw", "lazy" %}
+                    <img
+                        src="{{ site.home.philosophy.image }}"
+                        alt="{{ site.home.philosophy.imageAlt }}"
+                        loading="lazy"
+                        decoding="async"
+                    />
                 </div>
                 <div class="content">
                     <h2 class="h2">{{ site.home.philosophy.heading }}</h2>

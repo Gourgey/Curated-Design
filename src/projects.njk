@@ -60,7 +60,13 @@ topLogo: white_logo_no_text_on_transparent.svg
                     <div class="widget-grid">
                         {% for project in entry.projects %}
                         <a class="widget {{ project.data | projectGridClass }}" href="/projects/{{ project.data.slug }}.html">
-                            {% image project.data.cardImage, project.data.cardAlt or project.data.title, "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw", "lazy", "widget-media", "card" %}
+                            <img
+                                src="{{ project.data.cardImage }}"
+                                alt="{{ project.data.cardAlt or project.data.title }}"
+                                loading="lazy"
+                                decoding="async"
+                                class="widget-media"
+                            />
                             <div class="widget-body">
                                 <p class="widget-title">{{ project.data.title }}</p>
                                 {% if project.data.kicker %}<p class="widget-meta">{{ project.data.kicker }}</p>{% endif %}

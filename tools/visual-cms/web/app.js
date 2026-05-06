@@ -48,6 +48,13 @@ async function loadContent() {
   state.pages = payload.pages || {};
   state.services = payload.services || [];
   state.projects = payload.projects || [];
+  // Eagerly load the image catalog so the in-context image panel can show
+  // the project + file dropdowns without an additional click.
+  try {
+    await loadImageBuckets();
+  } catch (error) {
+    console.warn("Image catalog failed to load:", error);
+  }
   setStatus("Content loaded. Click the preview to edit.");
   renderEditor();
   syncPreview();
@@ -546,40 +553,142 @@ function renderTextFieldEditor(path) {
 function renderImageFieldEditor(path) {
   const resolved = resolveEditableField("image", path);
   if (!resolved) return renderMissing("image field");
-  const current = assetPath(resolved.value || "");
-  const project = resolved.relatedProject;
-  editor.appendChild(el("section", { class: "panel-section" }, [
-    sectionHeader("Selected image", resolved.label, "This panel only controls the image you clicked."),
-    el("div", { class: "thumb-row image-focus" }, [
-      el("img", { src: current, alt: resolved.label }),
-      el("div", {}, [
-        el("h3", { text: current.split("/").pop() || "No image selected" }),
-        el("p", { text: current || "Choose an image path." }),
-      ]),
-    ]),
-    sourceCard([
-      { text: `File: ${resolved.sourceFile}`, code: true },
-      { text: `Field: ${resolved.path}`, code: true },
-      ...(project ? [{ text: `Project image pool: ${project.title}`, code: true }] : []),
-      ...resolved.affected.map((item) => ({ text: `Affects: ${item}`, code: true })),
-    ]),
-    project
-      ? imageChoiceField("Image from project", current, project, (value) => {
-        setAtPath(resolved.root, resolved.fieldPath, value);
-        syncPreview();
-      })
-      : field("Image path", current, (value) => {
-        setAtPath(resolved.root, resolved.fieldPath, value);
-        syncPreview();
-      }),
-    project ? uploadProjectImageControl(project, (uploadedPath) => {
-      const fresh = resolveEditableField("image", path) || resolved;
-      setAtPath(fresh.root, fresh.fieldPath, uploadedPath);
-      renderEditor();
+
+  // If the catalog isn't ready yet, show a brief loading state and try once.
+  if (!state.imageBuckets.length) {
+    editor.appendChild(el("section", { class: "panel-section" }, [
+      sectionHeader("Selected image", resolved.label, "Loading image catalog..."),
+    ]));
+    loadImageBuckets()
+      .then(() => renderEditor())
+      .catch((error) => setStatus(error.message, true));
+    return;
+  }
+
+  const currentValue = () => assetPath(resolveEditableField("image", path)?.value || "");
+  const setValue = (value) => {
+    const fresh = resolveEditableField("image", path) || resolved;
+    setAtPath(fresh.root, fresh.fieldPath, value);
+  };
+
+  // Initial group: prefer the bucket containing the current file; fall back
+  // to the field's "related project" (so a homepage Collections card defaults
+  // to the project the card represents even if its image override is empty).
+  let activeGroup = findGroupForPath(currentValue());
+  if (!activeGroup && resolved.relatedProject) {
+    activeGroup = flatGroups().find((g) => g.kind === "project" && g.slug === resolved.relatedProject.slug)
+      || null;
+  }
+
+  const renderPanel = () => {
+    const current = currentValue();
+    editor.innerHTML = "";
+
+    // Project / Site bucket dropdown — every project + every site sub-bucket
+    const groupSelect = el("select", { class: "image-browse-select" });
+    for (const bucket of state.imageBuckets) {
+      if (!bucket.groups.length) continue;
+      const optgroup = el("optgroup", { label: bucket.name });
+      for (const g of bucket.groups) {
+        optgroup.appendChild(el("option", { value: g.id, text: g.name }));
+      }
+      groupSelect.appendChild(optgroup);
+    }
+    if (activeGroup) groupSelect.value = activeGroup.id;
+    groupSelect.addEventListener("change", () => {
+      const next = findGroup(groupSelect.value);
+      if (!next) return;
+      activeGroup = next;
+      const first = next.images[0];
+      if (first) setValue(first.path);
       syncPreview();
-    }) : null,
-    el("div", { class: "button-row" }, [saveResolvedFieldButton(resolved)]),
-  ]));
+      renderPanel();
+    });
+
+    // File-name dropdown — files in the current group (plus a fallback row
+    // for the current value if it doesn't match any catalog file).
+    const fileSelect = el("select", { class: "image-browse-select" });
+    if (activeGroup) {
+      for (const img of activeGroup.images) {
+        fileSelect.appendChild(el("option", { value: img.path, text: img.filename }));
+      }
+      const inGroup = activeGroup.images.some((img) => img.path === current);
+      if (!inGroup && current) {
+        const fallback = el("option", {
+          value: current,
+          text: `${current.split("/").pop() || current} (not in this group)`,
+        });
+        fallback.selected = true;
+        fileSelect.appendChild(fallback);
+      } else if (inGroup) {
+        fileSelect.value = current;
+      }
+    } else {
+      fileSelect.appendChild(el("option", { value: "", text: "No group selected" }));
+    }
+    fileSelect.addEventListener("change", () => {
+      setValue(fileSelect.value);
+      syncPreview();
+      renderPanel();
+    });
+
+    const sectionChildren = [
+      sectionHeader("Selected image", resolved.label, "This panel only controls the image you clicked."),
+      el("div", { class: "thumb-row image-focus" }, [
+        el("img", { src: current || "", alt: resolved.label }),
+        el("div", {}, [
+          el("h3", { text: (current || "").split("/").pop() || "No image selected" }),
+          el("p", { text: current || "Choose an image below." }),
+        ]),
+      ]),
+      sourceCard([
+        { text: `File: ${resolved.sourceFile}`, code: true },
+        { text: `Field: ${resolved.path}`, code: true },
+        ...resolved.affected.map((item) => ({ text: `Affects: ${item}`, code: true })),
+      ]),
+      el("div", { class: "field" }, [
+        el("label", { text: activeGroup && activeGroup.kind === "site" ? "Site bucket" : "Project" }),
+        groupSelect,
+      ]),
+      el("div", { class: "field" }, [
+        el("label", { text: "Image file" }),
+        fileSelect,
+      ]),
+    ];
+
+    if (activeGroup && activeGroup.kind === "project" && activeGroup.slug) {
+      sectionChildren.push(el("div", { class: "image-browse-actions" }, [
+        el("button", {
+          class: "button secondary",
+          type: "button",
+          text: "Edit project →",
+          onclick: () => {
+            if (activeGroup.url) {
+              state.currentPage = { kind: "project", path: activeGroup.url, slug: activeGroup.slug };
+            }
+            select("project", activeGroup.slug);
+            syncPreview();
+          },
+        }),
+      ]));
+
+      const targetProject = projectBySlug(activeGroup.slug);
+      if (targetProject) {
+        sectionChildren.push(uploadProjectImageControl(targetProject, async (uploadedPath) => {
+          await loadImageBuckets();
+          activeGroup = findGroupForPath(uploadedPath) || activeGroup;
+          setValue(uploadedPath);
+          renderPanel();
+          syncPreview();
+        }));
+      }
+    }
+
+    sectionChildren.push(el("div", { class: "button-row" }, [saveResolvedFieldButton(resolved)]));
+    editor.appendChild(el("section", { class: "panel-section" }, sectionChildren));
+  };
+
+  renderPanel();
 }
 
 function renderHeroEditor() {
@@ -2245,6 +2354,17 @@ function flatGroups() {
 
 function findGroup(groupId) {
   return flatGroups().find((g) => g.id === groupId) || null;
+}
+
+function findGroupForPath(imagePath) {
+  if (!imagePath) return null;
+  const normalized = assetPath(imagePath);
+  for (const bucket of state.imageBuckets) {
+    for (const group of bucket.groups) {
+      if (group.images.some((img) => img.path === normalized)) return group;
+    }
+  }
+  return null;
 }
 
 function selectImage(groupId, filename) {

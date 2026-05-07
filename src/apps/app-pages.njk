@@ -6,8 +6,8 @@ pagination:
 permalink: "apps/{{ app.slug }}/index.html"
 layout: layouts/base.njk
 eleventyComputed:
-  title: "{{ app.name }} – Apps by Curated Design"
-  description: "{{ app.description }}"
+  title: "{% if app.metaTitle %}{{ app.metaTitle }}{% else %}{{ app.name }} – Apps by Curated Design{% endif %}"
+  description: "{% if app.metaDescription %}{{ app.metaDescription }}{% else %}{{ app.description }}{% endif %}"
 htmlClass: app-page
 bodyClass: app-page min-h-screen font-inter
 sectionTop: true
@@ -60,9 +60,9 @@ sectionTop: true
 
                 <aside class="app-panel app-panel--links" aria-label="{{ app.name }} links">
                     <h2>Support and policies</h2>
-                    <a href="/apps/{{ app.slug }}/support/">Support</a>
-                    <a href="/apps/{{ app.slug }}/privacy/">Privacy Policy</a>
-                    <a href="/apps/{{ app.slug }}/terms/">Terms</a>
+                    {% for kind in app.supportPages %}
+                    <a href="/apps/{{ app.slug }}/{{ kind }}/">{% if kind == "privacy" %}Privacy Policy{% elif kind == "support" %}Support{% else %}Terms{% endif %}</a>
+                    {% endfor %}
                 </aside>
             </div>
         </div>

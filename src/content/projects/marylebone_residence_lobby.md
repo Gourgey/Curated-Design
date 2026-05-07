@@ -7,7 +7,7 @@ status: published
 order: 4
 category: Residential
 kicker: Residential · 2026
-subtitle: 'An elegant, functional space designed to enhance the daily lives of its occupants.'
+subtitle: A refined residential lobby moments from Regent’s Park, elevated through considered detailing, furniture, and lighting.
 statusLabel: ''
 showInProjects: true
 gridSpan: two-thirds-compact
@@ -20,29 +20,29 @@ projectTags:
   - Lighting
   - Procurement
 articleHeading: Overview
-lead: 'A three-week refresh of a high-end residential lobby in Marylebone, moments from Regent’s Park — delivered through precise upgrades to panelling, furniture, and lighting.'
+lead: A three-week refresh of a high-end residential lobby in Marylebone, shaped around architectural panelling, sculptural furniture, and a warmer decorative lighting scheme.
 body: |
-  The existing space had strong proportions, but the finishes and lighting didn’t fully match the quality of the building. The brief was to improve the arrival experience with minimal disruption: elevate the feel, keep it calm, and make it last.
+  Set within a well-proportioned residential building close to Regent’s Park, the lobby had the bones of an elegant arrival space but needed a more polished and enduring finish.
 
-  Rather than a full redesign, the project focused on a small set of changes that carry the most visual weight. The result is warmer, more coherent, and unmistakably more premium — without looking over-worked.
+  The scheme brings a quieter sense of luxury to the space, balancing architectural detail with soft upholstery, dark accents, natural stone, and warm layers of light. The intervention was intentionally precise: enough to change the feeling of arrival, without unnecessary disruption or visual excess.
 callout:
   title: The move
-  text: 'Turn the lobby into an “arrival moment” by combining architectural rhythm (panelling), sculptural softness (curved seating), and layered lighting that flatters both the space and the people moving through it.'
+  text: Create a more memorable arrival through architectural rhythm, sculptural softness, and layered lighting — giving the lobby greater presence while keeping the atmosphere calm, residential, and refined.
 extraSections:
   - heading: Approach
     text: |
       <ul class="project-steps">
-        <li><span class="step-title">Architectural envelope</span><span class="step-text">Introduced panel detailing to add rhythm, improve scale, and unify the perimeter so the space reads as intentional.</span></li>
-        <li><span class="step-title">Furniture & layout</span><span class="step-text">Selected curved, tactile seating to soften the geometry of the room and create a comfortable waiting posture without blocking circulation.</span></li>
-        <li><span class="step-title">Lighting strategy</span><span class="step-text">Treated lighting as a layered system: a central pendant for identity, wall lights for warmth and vertical emphasis, and subtle ceiling detailing for depth.</span></li>
-        <li><span class="step-title">Fast delivery</span><span class="step-text">Kept the scope tight, specifications clear, and sequencing simple to meet a three-week programme from sign-off to completion.</span></li>
+        <li><span class="step-title">Architectural envelope</span><span class="step-text">Panel detailing gives the perimeter greater rhythm, proportion, and visual order, allowing the lobby to feel more resolved and intentional.</span></li>
+        <li><span class="step-title">Furniture & layout</span><span class="step-text">Curved, tactile seating softens the room’s geometry while maintaining clear circulation and a comfortable waiting position.</span></li>
+        <li><span class="step-title">Lighting strategy</span><span class="step-text">A layered decorative scheme gives the space warmth and identity, with a central pendant, wall lights, and subtle ceiling detail working together to lift the overall atmosphere.</span></li>
+        <li><span class="step-title">Fast delivery</span><span class="step-text">A tightly controlled scope, clear specification, and straightforward sequencing supported a three-week programme from sign-off to completion.</span></li>
       </ul>
   - heading: Details
     text: |
       <div class="project-details project-details--rich">
         <div class="project-detail"><p class="project-detail-label">Palette</p><ul class="project-mini"><li>Warm off-white architectural panelling</li><li>Neutral boucle upholstery</li><li>Black accents and dark timber notes</li><li>Natural stone floor as the anchor</li></ul></div>
-        <div class="project-detail"><p class="project-detail-label">Key pieces</p><ul class="project-mini"><li>Curved lounge seating to soften the room's lines</li><li>Sculptural side tables to keep the footprint light</li><li>Central table as a quiet focal point</li></ul></div>
-        <div class="project-detail"><p class="project-detail-label">Lighting</p><ul class="project-mini"><li>Pendant for presence and symmetry</li><li>Wall lights to warm the envelope</li><li>Ceiling detail to lift perceived height</li></ul></div>
+        <div class="project-detail"><p class="project-detail-label">Key pieces</p><ul class="project-mini"><li>Curved lounge seating to soften the room’s lines</li><li>Sculptural side tables with a light visual footprint</li><li>Central table as a quiet focal point</li></ul></div>
+        <div class="project-detail"><p class="project-detail-label">Lighting</p><ul class="project-mini"><li>Pendant lighting for presence and symmetry</li><li>Wall lights for warmth across the envelope</li><li>Ceiling detail to add depth and perceived height</li></ul></div>
         <div class="project-detail"><p class="project-detail-label">Programme</p><ul class="project-mini"><li>3 weeks from design sign-off to installation completion</li><li>Minimal disruption to resident access</li></ul></div>
       </div>
 facts:
@@ -56,10 +56,10 @@ facts:
     value: Panelling · Furniture · Decorative lighting
   - label: Programme
     value: 3 weeks
-asideText: Want something like this? A short note is enough — I’ll reply with next steps.
+asideText: Planning a similar refresh? Send a short note and I’ll reply with the next steps.
 gallery:
   heading: Gallery
-  text: 'A calm material palette, sculptural forms, and warm lighting combine to create a more considered arrival experience.'
+  text: Warm architectural detailing, sculptural forms, and layered lighting create a calmer, more polished arrival experience.
   images:
     - image: /assets/images/projects/marylebone_residence_lobby/marylebone_residence_lobby_1.webp
       alt: Marylebone Lobby hero image
@@ -68,6 +68,5 @@ gallery:
     - image: /assets/images/projects/marylebone_residence_lobby/marylebone_residence_lobby_3.webp
       alt: Marylebone Lobby interior detail
 ctaHeading: Have a space that needs clarity?
-ctaText: 'I help clients define a clean direction, then carry it through with calm, detailed execution.'
+ctaText: I help clients define a clear design direction and carry it through with calm, detailed execution.
 ---
-

@@ -6,8 +6,8 @@ pagination:
 permalink: "apps/{{ appPage.app.slug }}/{{ appPage.kind }}/index.html"
 layout: layouts/base.njk
 eleventyComputed:
-  title: "{{ appPage.app.name }} {{ appPage.title }} – Curated Design Studio"
-  description: "{{ appPage.title }} for {{ appPage.app.name }} by Curated Design Studio."
+  title: "{% if appPage.meta.title %}{{ appPage.meta.title }}{% else %}{{ appPage.app.name }} {{ appPage.title }} – Curated Design Studio{% endif %}"
+  description: "{% if appPage.meta.description %}{{ appPage.meta.description }}{% else %}{{ appPage.title }} for {{ appPage.app.name }} by Curated Design Studio.{% endif %}"
 htmlClass: app-page
 bodyClass: app-page min-h-screen font-inter
 sectionTop: true
@@ -141,6 +141,172 @@ sectionTop: true
                 <h2>Contact</h2>
                 <p>
                     For terms or support questions, contact <a href="{{ apps.supportEmailUrl }}">{{ apps.supportEmail }}</a>.
+                </p>
+            </article>
+            {% elif appPage.app.slug == "procurecore" and appPage.kind == "privacy" %}
+            <article class="app-prose">
+                <p>
+                    ProcureCore is a procurement organiser for interior designers, made by Curated Design Limited. This page explains what data ProcureCore handles and how.
+                </p>
+
+                <h2>What ProcureCore is</h2>
+                <p>
+                    ProcureCore helps you organise procurement for interior design projects. You enter information about projects, styles, rooms or areas, suppliers, products, and placements, and the app holds it together so you can work from one source of truth.
+                </p>
+
+                <h2>What you store in the app</h2>
+                <p>
+                    The information ProcureCore holds is whatever you choose to enter. That can include:
+                </p>
+                <ul>
+                    <li><strong>Projects</strong>: name, overview, notes, budget targets, and budget notes.</li>
+                    <li><strong>Styles</strong>: name, notes, and per-style budgets.</li>
+                    <li><strong>Rooms or areas</strong>: name and notes.</li>
+                    <li><strong>Suppliers</strong>: name, website, contact name, contact email, contact phone, account number, trade discount details, lead time, payment terms, and notes.</li>
+                    <li><strong>Products</strong>: name, SKU, source URL, description, dimensions, weight, lead time, retail price, trade price, delivery information, and notes.</li>
+                    <li><strong>Placements</strong>: quantities, payment status, delivery status, expected and actual delivery dates, tracking references, cost snapshots, issue notes, and positioning notes.</li>
+                    <li><strong>Checklists</strong>: items still to source per area.</li>
+                    <li><strong>Images</strong>: product images you attach from your photo library, the file picker, or the clipboard.</li>
+                </ul>
+                <p>
+                    Some of this content may include client-related information. Treat it the same way you would treat any client file.
+                </p>
+
+                <h2>Where your data is stored</h2>
+                <p>
+                    ProcureCore stores your data locally on your device. When iCloud is enabled in your device settings, the app uses Apple's iCloud and CloudKit services to sync that data between your Apple devices through your <strong>private</strong> iCloud database. Your content stays inside your iCloud account.
+                </p>
+                <p>
+                    Curated Design Limited does not operate a server that receives or stores ProcureCore content. We have no operational way to read the data you store in your private iCloud database; that data is governed by Apple's iCloud terms and security model.
+                </p>
+                <p>
+                    If iCloud is not enabled, ProcureCore stores your data only on the device you are using.
+                </p>
+
+                <h2>Importing product information from supplier URLs</h2>
+                <p>
+                    ProcureCore can read a supplier product page to help you create a product record. When you paste a URL into the import flow, the app fetches that URL <strong>directly from your device</strong> to the supplier's website, in the same way a web browser would. It uses the page's content to suggest a name, description, image, price, and other product fields, which you can then edit and save.
+                </p>
+                <p>
+                    The supplier URL and the page content are not sent to a Curated Design server. They are not sent to any third-party service. Imported content lives in your local store, and — if iCloud is on — in your private iCloud database.
+                </p>
+
+                <h2>Analytics, advertising, and tracking</h2>
+                <p>
+                    ProcureCore does not include analytics. ProcureCore does not show advertising. ProcureCore does not track you across apps or websites, and does not include any third-party tracking SDKs.
+                </p>
+
+                <h2>Third-party SDKs</h2>
+                <p>
+                    ProcureCore does not include any third-party SDKs. The app is built using Apple frameworks only.
+                </p>
+
+                <h2>Accounts and login</h2>
+                <p>
+                    ProcureCore does not require you to create an account. There is no Curated Design login. iCloud sync uses your existing Apple ID, managed by Apple.
+                </p>
+
+                <h2>Your control over your data</h2>
+                <p>
+                    You can edit or delete any item in ProcureCore at any time. Deleted items are moved to a "Recently Deleted" area inside the app where they can be restored or removed permanently. To remove all of your ProcureCore data, delete the app and remove ProcureCore data from iCloud in your device's iCloud settings.
+                </p>
+
+                <h2>Children</h2>
+                <p>
+                    ProcureCore is a professional tool intended for interior designers and design studios. It is not directed at children under 13.
+                </p>
+
+                <h2>Changes to this policy</h2>
+                <p>
+                    If we make material changes to how ProcureCore handles data, we will update this page and revise the effective date above.
+                </p>
+
+                <h2>Contact</h2>
+                <p>
+                    Questions about this policy can be sent to <strong><a href="{{ apps.supportEmailUrl }}">{{ apps.supportEmail }}</a></strong>.
+                </p>
+                <p>
+                    Curated Design Limited
+                </p>
+            </article>
+            {% elif appPage.app.slug == "procurecore" and appPage.kind == "support" %}
+            <article class="app-prose">
+                <p>
+                    If you run into a problem with ProcureCore, this page should cover the common situations. If it does not, please get in touch.
+                </p>
+
+                <h2>Contact</h2>
+                <p>
+                    Email <strong><a href="{{ apps.supportEmailUrl }}">{{ apps.supportEmail }}</a></strong> with a short description of the issue, the device you are using (Mac or iPhone), and the version of ProcureCore. Please <strong>do not include sensitive client or project information</strong> in your message unless it is necessary to explain the issue. We will only ask for the detail we need.
+                </p>
+
+                <h2>What we can help with</h2>
+                <ul>
+                    <li>Questions about how a feature in ProcureCore works.</li>
+                    <li>Sync between your Mac and iPhone not behaving as expected.</li>
+                    <li>Issues importing a product from a supplier URL.</li>
+                    <li>Bug reports and feature suggestions.</li>
+                </ul>
+
+                <h2>Before you contact us</h2>
+                <p>
+                    A short list of things that resolve most issues:
+                </p>
+
+                <h3>Restart the app</h3>
+                <p>
+                    Quit ProcureCore fully and reopen it. On Mac, use ⌘Q. On iPhone, swipe up to close it from the app switcher.
+                </p>
+
+                <h3>Restart your device</h3>
+                <p>
+                    Restarting the device resolves a surprising number of sync and rendering issues.
+                </p>
+
+                <h3>iCloud sync feels slow or items are missing on the other device</h3>
+                <p>
+                    ProcureCore syncs through Apple's iCloud and CloudKit. If a change you made on one device hasn't appeared on another:
+                </p>
+                <ol>
+                    <li>Confirm both devices are signed in to the same iCloud account, in <strong>System Settings → Apple ID → iCloud</strong> on Mac, or <strong>Settings → Apple ID → iCloud</strong> on iPhone.</li>
+                    <li>Confirm <strong>iCloud Drive</strong> is enabled on both devices.</li>
+                    <li>Confirm ProcureCore is allowed to use iCloud on each device, in the iCloud settings list.</li>
+                    <li>Make sure both devices have an active internet connection. CloudKit changes sync in the background and can be delayed on metered or restricted networks.</li>
+                    <li>Give it a few minutes. iCloud sync is best-effort and can take time, especially after large changes or when a device first comes online.</li>
+                    <li>If the issue persists, restart both devices.</li>
+                </ol>
+
+                <h3>A product import returned the wrong information</h3>
+                <p>
+                    ProcureCore reads the supplier page directly from your device. Some supplier sites use multiple variants, "customers also bought" sections, or aggressive caching, which can occasionally cause the wrong price or detail to be picked up. If that happens:
+                </p>
+                <ol>
+                    <li>Open the imported product in ProcureCore.</li>
+                    <li>Edit the field that's wrong (price, image, description, etc.) by hand.</li>
+                    <li>Save the product. Placements that reference it will reconcile to the corrected value.</li>
+                </ol>
+                <p>
+                    If a supplier site repeatedly fails to import, please email us with the URL so we can have a look.
+                </p>
+
+                <h3>Data appears to be missing</h3>
+                <p>
+                    Items deleted in ProcureCore go to <strong>Recently Deleted</strong> inside the app and can be restored from there. If the item is not in Recently Deleted, check the other device — the change may not have synced yet.
+                </p>
+
+                <h3>Reinstalling the app</h3>
+                <p>
+                    Removing and reinstalling ProcureCore on a single device will not delete content stored in your private iCloud database. Once you reinstall and sign in to the same iCloud account, your projects, styles, areas, suppliers, products, and placements will sync back down. Removing data through your device's iCloud settings will affect all devices that sync with that account.
+                </p>
+
+                <h2>Privacy</h2>
+                <p>
+                    See the <a href="/apps/{{ appPage.app.slug }}/privacy/">ProcureCore privacy policy</a> for how the app handles data.
+                </p>
+
+                <h2>About</h2>
+                <p>
+                    ProcureCore is made by Curated Design Limited.
                 </p>
             </article>
             {% endif %}

@@ -1226,17 +1226,35 @@ function renderProjectsPageEditor(page) {
   ]));
 }
 
+function itemNumberBadge(index) {
+  return el("div", { class: "relation-item-head" }, [
+    el("span", { class: "relation-item-number", text: String(index + 1) }),
+  ]);
+}
+
+function fieldSection(title, fields, options = {}) {
+  return el("section", { class: "field-section" }, [
+    el("h3", { class: "field-section-title", text: title }),
+    options.help ? el("p", { class: "field-section-help", text: options.help }) : null,
+    el("div", { class: "field-section-body" }, [].concat(fields).filter(Boolean)),
+  ]);
+}
+
 function stringListEditor(label, items, onChange, options = {}) {
   const list = el("div", { class: "relation-list" });
   items.forEach((item, index) => {
     list.appendChild(el("div", { class: "relation-item" }, [
-      field(`${label} ${index + 1}`, item, (value) => { items[index] = value; syncPreview(); }, { multiline: true, rows: options.rows || 2 }),
+      itemNumberBadge(index),
+      field(String(index + 1), item, (value) => { items[index] = value; syncPreview(); }, {
+        multiline: true,
+        rows: options.rows || 2,
+      }),
       relationButtons(items, index, onChange),
     ]));
   });
 
   return el("div", { class: "relation-list" }, [
-    el("p", { class: "eyebrow", text: label }),
+    options.hideEyebrow ? null : el("p", { class: "eyebrow", text: label }),
     list,
     el("div", { class: "button-row" }, [
       el("button", {
@@ -1252,21 +1270,24 @@ function stringListEditor(label, items, onChange, options = {}) {
   ]);
 }
 
-function objectListEditor(label, items, fields, onChange) {
+function objectListEditor(label, items, fields, onChange, options = {}) {
   const list = el("div", { class: "relation-list" });
   items.forEach((item, index) => {
-    const controls = fields.map((config) => field(
-      config.label,
-      item[config.key],
-      (value) => { item[config.key] = value; syncPreview(); },
-      { multiline: config.multiline, rows: config.rows || 2 },
-    ));
-    controls.push(relationButtons(items, index, onChange));
+    const controls = [
+      itemNumberBadge(index),
+      ...fields.map((config) => field(
+        config.label,
+        item[config.key],
+        (value) => { item[config.key] = value; syncPreview(); },
+        { multiline: config.multiline, rows: config.rows || 2 },
+      )),
+      relationButtons(items, index, onChange),
+    ];
     list.appendChild(el("div", { class: "relation-item" }, controls));
   });
 
   return el("div", { class: "relation-list" }, [
-    el("p", { class: "eyebrow", text: label }),
+    options.hideEyebrow ? null : el("p", { class: "eyebrow", text: label }),
     list,
     el("div", { class: "button-row" }, [
       el("button", {
@@ -1283,17 +1304,122 @@ function objectListEditor(label, items, fields, onChange) {
 }
 
 function entryFields(entry, type) {
+  if (type === "project") return projectEntryFields(entry);
+  return serviceEntryFields(entry);
+}
+
+function projectEntryFields(entry) {
+  entry.projectTags = entry.projectTags || [];
+  entry.extraSections = entry.extraSections || [];
+  entry.facts = entry.facts || [];
+  entry.gallery = entry.gallery || { heading: "Gallery", text: "", images: [] };
+  entry.gallery.images = entry.gallery.images || [];
+  entry.callout = entry.callout || { title: "", text: "" };
+
+  const onListChange = () => { renderEditor(); syncPreview(); };
+
+  const root = el("div", { class: "field-grid" });
+  root.appendChild(projectWarningsPanel(entry));
+
+  root.appendChild(fieldSection("Identity & status", [
+    field("Title", entry.title, (value) => { entry.title = value; syncPreview(); }),
+    field("Slug", entry.slug, (value) => { entry.slug = value; }),
+    field("Status", entry.status, (value) => {
+      const previous = entry.status;
+      entry.status = value;
+      if (value === "coming_soon" && !entry.statusLabel) entry.statusLabel = "Coming soon";
+      if (value === "published" && (entry.statusLabel || "").toLowerCase().includes("coming soon")) entry.statusLabel = "";
+      renderEditor();
+      syncPreview();
+      if (previous !== "published" && value === "published") showPublishWarningModal(entry);
+    }, {
+      select: [
+        { label: "Published", value: "published" },
+        { label: "Coming soon", value: "coming_soon" },
+        { label: "Draft", value: "draft" },
+      ],
+    }),
+    field("Status label", entry.statusLabel || "", (value) => { entry.statusLabel = value; syncPreview(); }, {
+      help: "Only renders publicly while status is Coming soon.",
+    }),
+    field("Order", entry.order, (value) => { entry.order = Number(value) || 999; }, { type: "number" }),
+    field("Category", entry.category, (value) => { entry.category = value; syncPreview(); }, {
+      select: [
+        { label: "Residential", value: "Residential" },
+        { label: "Hospitality", value: "Hospitality" },
+        { label: "Commercial", value: "Commercial" },
+      ],
+    }),
+  ]));
+
+  root.appendChild(fieldSection("Listing & card", [
+    booleanField("Show in Projects listing", entry.showInProjects !== false, (value) => { entry.showInProjects = value; syncPreview(); }),
+    field("Listing grid class", entry.gridClass || "", (value) => { entry.gridClass = value; }),
+    field("Kicker", entry.kicker, (value) => { entry.kicker = value; syncPreview(); }),
+    field("Summary / subtitle", entry.subtitle, (value) => { entry.subtitle = value; entry.summary = value; syncPreview(); }, { multiline: true, rows: 4 }),
+    field("Card image path", entry.cardImage, (value) => { entry.cardImage = value; syncPreview(); }),
+    field("Card alt", entry.cardAlt, (value) => { entry.cardAlt = value; syncPreview(); }),
+    uploadProjectImageControl(entry, () => { renderEditor(); syncPreview(); }),
+  ], { help: "Controls how the project appears on /projects.html and the homepage Collections grid." }));
+
+  root.appendChild(fieldSection("Hero", [
+    field("Hero image path", entry.heroImage, (value) => { entry.heroImage = value; syncPreview(); }),
+    field("Hero alt", entry.heroAlt, (value) => { entry.heroAlt = value; syncPreview(); }),
+    stringListEditor("Project tags", entry.projectTags, onListChange, { hideEyebrow: true }),
+  ], { help: "Top of the project detail page. Tags appear under the title." }));
+
+  root.appendChild(fieldSection("Article body", [
+    field("Article heading", entry.articleHeading || "", (value) => { entry.articleHeading = value; syncPreview(); }),
+    field("Lead", entry.lead || "", (value) => { entry.lead = value; syncPreview(); }, { multiline: true, rows: 4 }),
+    field("Body", entry.body || "", (value) => { entry.body = value; syncPreview(); }, { multiline: true, rows: 8 }),
+  ], { help: "Main article content for the published project page." }));
+
+  root.appendChild(fieldSection("Callout", [
+    field("Title", entry.callout.title || "", (value) => { entry.callout.title = value; syncPreview(); }),
+    field("Text", entry.callout.text || "", (value) => { entry.callout.text = value; syncPreview(); }, { multiline: true, rows: 4 }),
+  ], { help: "Optional highlight block inside the article." }));
+
+  root.appendChild(fieldSection("Extra sections",
+    [objectListEditor("Extra sections", entry.extraSections, [
+      { key: "heading", label: "Heading" },
+      { key: "text", label: "Text", multiline: true, rows: 5 },
+    ], onListChange, { hideEyebrow: true })],
+    { help: "Additional headed blocks rendered after the main body." },
+  ));
+
+  root.appendChild(fieldSection("Facts & sidebar", [
+    objectListEditor("Facts", entry.facts, [
+      { key: "label", label: "Label" },
+      { key: "value", label: "Value" },
+    ], onListChange, { hideEyebrow: true }),
+    field("Aside text", entry.asideText || "", (value) => { entry.asideText = value; syncPreview(); }, { multiline: true, rows: 4 }),
+  ], { help: "Sidebar facts list and the small note above the Enquire button." }));
+
+  root.appendChild(fieldSection("Gallery", [
+    field("Heading", entry.gallery.heading || "", (value) => { entry.gallery.heading = value; syncPreview(); }),
+    field("Intro text", entry.gallery.text || "", (value) => { entry.gallery.text = value; syncPreview(); }, { multiline: true, rows: 3 }),
+    galleryEditor(entry, { hideEyebrow: true }),
+  ], { help: "Image gallery shown on the published project page." }));
+
+  root.appendChild(fieldSection("Call to action", [
+    field("Heading", entry.ctaHeading || "", (value) => { entry.ctaHeading = value; syncPreview(); }),
+    field("Text", entry.ctaText || "", (value) => { entry.ctaText = value; syncPreview(); }, { multiline: true, rows: 3 }),
+  ], { help: "CTA band rendered at the bottom of the project detail page." }));
+
+  return root;
+}
+
+function serviceEntryFields(entry) {
+  entry.glance = entry.glance || [];
+  entry.sections = entry.sections || [];
+
   const fields = el("div", { class: "field-grid" });
   fields.appendChild(field("Title", entry.title, (value) => { entry.title = value; syncPreview(); }));
   fields.appendChild(field("Slug", entry.slug, (value) => { entry.slug = value; }));
   fields.appendChild(field("Status", entry.status, (value) => {
-    const previous = entry.status;
     entry.status = value;
-    if (type === "project" && value === "coming_soon" && !entry.statusLabel) entry.statusLabel = "Coming soon";
-    if (type === "project" && value === "published" && (entry.statusLabel || "").toLowerCase().includes("coming soon")) entry.statusLabel = "";
     renderEditor();
     syncPreview();
-    if (type === "project" && previous !== "published" && value === "published") showPublishWarningModal(entry);
   }, {
     select: [
       { label: "Published", value: "published" },
@@ -1302,73 +1428,21 @@ function entryFields(entry, type) {
     ],
   }));
   fields.appendChild(field("Order", entry.order, (value) => { entry.order = Number(value) || 999; }, { type: "number" }));
-  if (type === "project") {
-    fields.appendChild(projectWarningsPanel(entry));
-    fields.appendChild(field("Category", entry.category, (value) => { entry.category = value; syncPreview(); }, {
-      select: [
-        { label: "Residential", value: "Residential" },
-        { label: "Hospitality", value: "Hospitality" },
-        { label: "Commercial", value: "Commercial" },
-      ],
-    }));
-    fields.appendChild(field("Kicker", entry.kicker, (value) => { entry.kicker = value; syncPreview(); }));
-    fields.appendChild(field("Summary / subtitle", entry.subtitle, (value) => { entry.subtitle = value; entry.summary = value; syncPreview(); }, { multiline: true, rows: 4 }));
-    fields.appendChild(field("Status label", entry.statusLabel || "", (value) => { entry.statusLabel = value; syncPreview(); }, {
-      help: "Only renders publicly while status is Coming soon.",
-    }));
-    fields.appendChild(booleanField("Show in Projects listing", entry.showInProjects !== false, (value) => { entry.showInProjects = value; syncPreview(); }));
-    fields.appendChild(field("Listing grid class", entry.gridClass || "", (value) => { entry.gridClass = value; }));
-  } else {
-    fields.appendChild(field("Summary", entry.summary, (value) => { entry.summary = value; syncPreview(); }, { multiline: true, rows: 4 }));
-  }
+  fields.appendChild(field("Summary", entry.summary, (value) => { entry.summary = value; syncPreview(); }, { multiline: true, rows: 4 }));
   fields.appendChild(field("Card image path", entry.cardImage, (value) => { entry.cardImage = value; syncPreview(); }));
   fields.appendChild(field("Card alt", entry.cardAlt, (value) => { entry.cardAlt = value; syncPreview(); }));
-  if (type === "project") {
-    fields.appendChild(uploadProjectImageControl(entry, () => { renderEditor(); syncPreview(); }));
-    fields.appendChild(field("Hero image path", entry.heroImage, (value) => { entry.heroImage = value; syncPreview(); }));
-    fields.appendChild(field("Hero alt", entry.heroAlt, (value) => { entry.heroAlt = value; syncPreview(); }));
-    entry.projectTags = entry.projectTags || [];
-    entry.extraSections = entry.extraSections || [];
-    entry.facts = entry.facts || [];
-    entry.gallery = entry.gallery || { heading: "Gallery", text: "", images: [] };
-    entry.gallery.images = entry.gallery.images || [];
-    entry.callout = entry.callout || { title: "", text: "" };
-    fields.appendChild(stringListEditor("Project tags", entry.projectTags, () => { renderEditor(); syncPreview(); }));
-    fields.appendChild(field("Article heading", entry.articleHeading || "", (value) => { entry.articleHeading = value; syncPreview(); }));
-    fields.appendChild(field("Lead", entry.lead || "", (value) => { entry.lead = value; syncPreview(); }, { multiline: true, rows: 4 }));
-    fields.appendChild(field("Body", entry.body || "", (value) => { entry.body = value; syncPreview(); }, { multiline: true, rows: 8 }));
-    fields.appendChild(field("Callout title", entry.callout.title || "", (value) => { entry.callout.title = value; syncPreview(); }));
-    fields.appendChild(field("Callout text", entry.callout.text || "", (value) => { entry.callout.text = value; syncPreview(); }, { multiline: true, rows: 4 }));
-    fields.appendChild(objectListEditor("Extra sections", entry.extraSections, [
-      { key: "heading", label: "Heading" },
-      { key: "text", label: "Text", multiline: true, rows: 5 },
-    ], () => { renderEditor(); syncPreview(); }));
-    fields.appendChild(objectListEditor("Facts", entry.facts, [
-      { key: "label", label: "Label" },
-      { key: "value", label: "Value" },
-    ], () => { renderEditor(); syncPreview(); }));
-    fields.appendChild(field("Aside text", entry.asideText || "", (value) => { entry.asideText = value; syncPreview(); }, { multiline: true, rows: 4 }));
-    fields.appendChild(field("Gallery heading", entry.gallery.heading || "", (value) => { entry.gallery.heading = value; syncPreview(); }));
-    fields.appendChild(field("Gallery text", entry.gallery.text || "", (value) => { entry.gallery.text = value; syncPreview(); }, { multiline: true, rows: 3 }));
-    fields.appendChild(galleryEditor(entry));
-    fields.appendChild(field("CTA heading", entry.ctaHeading || "", (value) => { entry.ctaHeading = value; syncPreview(); }));
-    fields.appendChild(field("CTA text", entry.ctaText || "", (value) => { entry.ctaText = value; syncPreview(); }, { multiline: true, rows: 3 }));
-  } else {
-    fields.appendChild(field("Cover image path", entry.coverImage, (value) => { entry.coverImage = value; syncPreview(); }));
-    fields.appendChild(field("Cover alt", entry.coverAlt, (value) => { entry.coverAlt = value; syncPreview(); }));
-    fields.appendChild(field("Intro", entry.intro || "", (value) => { entry.intro = value; syncPreview(); }, { multiline: true, rows: 4 }));
-    entry.glance = entry.glance || [];
-    entry.sections = entry.sections || [];
-    fields.appendChild(objectListEditor("At a glance", entry.glance, [
-      { key: "label", label: "Label" },
-      { key: "text", label: "Text" },
-    ], () => { renderEditor(); syncPreview(); }));
-    fields.appendChild(serviceSectionsEditor(entry));
-    fields.appendChild(field("Enquiry heading", entry.enquiryHeading || "", (value) => { entry.enquiryHeading = value; syncPreview(); }));
-    fields.appendChild(field("Enquiry text", entry.enquiryText || "", (value) => { entry.enquiryText = value; syncPreview(); }, { multiline: true, rows: 3 }));
-    fields.appendChild(field("CTA heading", entry.ctaHeading || "", (value) => { entry.ctaHeading = value; syncPreview(); }));
-    fields.appendChild(field("CTA text", entry.ctaText || "", (value) => { entry.ctaText = value; syncPreview(); }, { multiline: true, rows: 3 }));
-  }
+  fields.appendChild(field("Cover image path", entry.coverImage, (value) => { entry.coverImage = value; syncPreview(); }));
+  fields.appendChild(field("Cover alt", entry.coverAlt, (value) => { entry.coverAlt = value; syncPreview(); }));
+  fields.appendChild(field("Intro", entry.intro || "", (value) => { entry.intro = value; syncPreview(); }, { multiline: true, rows: 4 }));
+  fields.appendChild(objectListEditor("At a glance", entry.glance, [
+    { key: "label", label: "Label" },
+    { key: "text", label: "Text" },
+  ], () => { renderEditor(); syncPreview(); }));
+  fields.appendChild(serviceSectionsEditor(entry));
+  fields.appendChild(field("Enquiry heading", entry.enquiryHeading || "", (value) => { entry.enquiryHeading = value; syncPreview(); }));
+  fields.appendChild(field("Enquiry text", entry.enquiryText || "", (value) => { entry.enquiryText = value; syncPreview(); }, { multiline: true, rows: 3 }));
+  fields.appendChild(field("CTA heading", entry.ctaHeading || "", (value) => { entry.ctaHeading = value; syncPreview(); }));
+  fields.appendChild(field("CTA text", entry.ctaText || "", (value) => { entry.ctaText = value; syncPreview(); }, { multiline: true, rows: 3 }));
   return fields;
 }
 
@@ -1399,15 +1473,15 @@ function projectWarningsPanel(project) {
   ]);
 }
 
-function galleryEditor(project) {
+function galleryEditor(project, options = {}) {
   const images = project.gallery.images;
   const list = el("div", { class: "relation-list" });
   images.forEach((item, index) => {
     list.appendChild(el("div", { class: "relation-item" }, [
+      itemNumberBadge(index),
       el("div", { class: "thumb-row" }, [
         el("img", { src: assetPath(item.image), alt: item.alt || "" }),
         el("div", {}, [
-          el("h3", { text: `Gallery image ${index + 1}` }),
           el("p", { text: item.image || "Choose an image" }),
         ]),
       ]),
@@ -1417,7 +1491,7 @@ function galleryEditor(project) {
     ]));
   });
   return el("div", { class: "relation-list" }, [
-    el("p", { class: "eyebrow", text: "Gallery images" }),
+    options.hideEyebrow ? null : el("p", { class: "eyebrow", text: "Gallery images" }),
     list,
     el("div", { class: "button-row" }, [
       el("button", {
@@ -1439,6 +1513,7 @@ function serviceSectionsEditor(service) {
   service.sections.forEach((section, index) => {
     section.items = section.items || [];
     list.appendChild(el("div", { class: "relation-item" }, [
+      itemNumberBadge(index),
       field("Heading", section.heading || "", (value) => { section.heading = value; syncPreview(); }),
       field("List type", section.listType || "ul", (value) => { section.listType = value; syncPreview(); }, {
         select: [

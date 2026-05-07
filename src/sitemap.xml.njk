@@ -10,7 +10,7 @@ eleventyExcludeFromCollections: true
 {%- endfor %}
 {%- for app in apps.items %}
 <url><loc>{{ base }}/apps/{{ app.slug }}/</loc></url>
-{%- for kind in ['privacy', 'support', 'terms'] %}
+{%- for kind in app.supportPages %}
 <url><loc>{{ base }}/apps/{{ app.slug }}/{{ kind }}/</loc></url>
 {%- endfor %}
 {%- endfor %}

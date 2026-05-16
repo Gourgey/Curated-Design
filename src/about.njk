@@ -53,6 +53,25 @@ bodyClass: about-page min-h-screen font-inter
                     <p>{{ site.about.locationsText }}</p>
                 </div>
 
+                <aside class="studio-legal" aria-label="Legal and company information">
+                    <div class="studio-legal__intro">
+                        <p class="studio-side-note__label">Legal and company information</p>
+                        <h2>Studio documents</h2>
+                        <p>
+                            Terms, privacy, and company information for Curated Design Ltd.
+                        </p>
+                    </div>
+
+                    <div class="studio-legal__links">
+                        {% for legalPage in legal.pages %}
+                        <a href="/{{ legalPage.slug }}.html">
+                            <span>{{ legalPage.title }}</span>
+                            <small>{{ legalPage.kicker }}</small>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </aside>
+
                 <aside class="studio-side-note" aria-label="Digital tools">
                     <div>
                         <p class="studio-side-note__label">Digital Tools</p>

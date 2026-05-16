@@ -1,0 +1,42 @@
+---
+pagination:
+  data: legal.pages
+  size: 1
+  alias: legalPage
+permalink: "{{ legalPage.slug }}.html"
+layout: layouts/base.njk
+eleventyComputed:
+  title: "{{ legalPage.title }} – Curated Design Studio"
+  description: "{{ legalPage.metaDescription or legalPage.summary or site.settings.description }}"
+htmlClass: legal-page
+bodyClass: legal-page min-h-screen font-inter
+sectionTop: true
+---
+<main class="page-main">
+    {% include "partials/hero-brand.njk" %}
+
+    <section class="legal-content">
+        <div class="legal-wrap">
+            <p class="legal-backlink"><a href="/about.html">Back to studio</a></p>
+
+            <header class="legal-header">
+                <p class="legal-kicker">{{ legalPage.kicker }}</p>
+                <h1 class="legal-title">{{ legalPage.title }}</h1>
+                <p class="legal-lead">{{ legalPage.summary }}</p>
+                <p class="legal-updated">Last updated: {{ legalPage.lastUpdated }}</p>
+            </header>
+
+            {% if legalPage.isPlaceholder %}
+            <aside class="legal-note" aria-label="Draft page note">
+                <p>
+                    This page is ready for final content and is intentionally brief for now.
+                </p>
+            </aside>
+            {% endif %}
+
+            <article class="legal-prose">
+                {{ legalPage.content | markdownify | safe }}
+            </article>
+        </div>
+    </section>
+</main>

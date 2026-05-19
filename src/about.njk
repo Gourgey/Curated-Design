@@ -7,87 +7,96 @@ permalink: about.html
 htmlClass: about-page
 bodyClass: about-page min-h-screen font-inter
 ---
-<main class="page-main">
+{% set romans = ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"] %}
+<main class="studio">
     {% include "partials/hero-brand.njk" %}
 
-    <section class="about-content py-12">
-        <div class="max-w-[950px] mx-auto px-4">
-            <div class="space-y-10">
-                <div class="space-y-4">
-                    <h1 class="h2">{{ site.about.introHeading }}</h1>
-                    <p class="lead">{{ site.about.introText }}</p>
-                </div>
+    <header class="studio-header">
+        {% if site.about.eyebrow %}
+        <p class="studio-header__eyebrow">{{ site.about.eyebrow }}</p>
+        {% endif %}
+        <div>
+            <h1 class="studio-header__title">{{ site.about.introHeading | safe }}</h1>
+            <p class="studio-header__intro">{{ site.about.introText }}</p>
+        </div>
+    </header>
 
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="space-y-3">
-                        <h3 class="title">{{ site.about.workHeading }}</h3>
-                        {% for paragraph in site.about.workParagraphs %}
-                        <p>{{ paragraph }}</p>
-                        {% endfor %}
-                    </div>
-
-                    <div class="space-y-3">
-                        <h3 class="title">{{ site.about.focusHeading }}</h3>
-                        <ul class="list-disc pl-5 space-y-1 text-sm">
-                            {% for area in site.about.focusAreas %}
-                            <li>{{ area }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="space-y-4">
-                    <h2 class="h2">Process</h2>
-                    <div class="grid md:grid-cols-3 gap-6">
-                        {% for step in site.about.processSteps %}
-                        <div class="space-y-2">
-                            <h3 class="title">{{ step.title }}</h3>
-                            <p class="text-sm">{{ step.text }}</p>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <div class="space-y-4">
-                    <h2 class="h2">{{ site.about.locationsHeading }}</h2>
-                    <p>{{ site.about.locationsText }}</p>
-                </div>
-
-                <aside class="studio-legal" aria-label="Legal and company information">
-                    <div class="studio-legal__intro">
-                        <p class="studio-side-note__label">Legal and company information</p>
-                        <h2>Studio documents</h2>
-                        <p>
-                            Terms, privacy, and company information for Curated Design Ltd.
-                        </p>
-                    </div>
-
-                    <div class="studio-legal__links">
-                        {% for legalPage in legal.pages %}
-                        <a href="/{{ legalPage.slug }}.html">
-                            <span>{{ legalPage.title }}</span>
-                            <small>{{ legalPage.kicker }}</small>
-                        </a>
-                        {% endfor %}
-                    </div>
-                </aside>
-
-                <aside class="studio-side-note" aria-label="Digital tools">
-                    <div>
-                        <p class="studio-side-note__label">Digital Tools</p>
-                        <p>
-                            A small group of practical apps sits alongside the studio for support and policy reference.
-                        </p>
-                    </div>
-                    <a href="/apps/">View apps</a>
-                </aside>
+    <section class="studio-two">
+        <div>
+            <h2 class="studio-two__heading">{{ site.about.workHeading }}</h2>
+            <div class="studio-two__body">
+                {% for paragraph in site.about.workParagraphs %}
+                <p>{{ paragraph }}</p>
+                {% endfor %}
             </div>
+        </div>
+        <div>
+            <h2 class="studio-two__heading">{{ site.about.focusHeading }}</h2>
+            <ul class="studio-two__list">
+                {% for area in site.about.focusAreas %}
+                <li>{{ area }}</li>
+                {% endfor %}
+            </ul>
         </div>
     </section>
 
-    {% set heading = site.settings.ctaHeading %}
-    {% set text = site.settings.ctaText %}
-    {% set href = "mailto:" + site.settings.email %}
-    {% set label = site.settings.primaryCtaText %}
-    {% include "partials/cta-band.njk" %}
+    {% if site.about.process or site.about.processSteps %}
+    <section class="studio-process">
+        {% if site.about.process %}
+        <div class="studio-process__lead">
+            {% if site.about.process.eyebrow %}
+            <p class="studio-process__eyebrow">{{ site.about.process.eyebrow }}</p>
+            {% endif %}
+            {% if site.about.process.title %}
+            <h2 class="studio-process__title">{{ site.about.process.title | safe }}</h2>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="studio-process__grid">
+            {% for step in site.about.processSteps %}
+            <article class="step">
+                <p class="step__roman">{{ romans[loop.index0] }}</p>
+                {% if step.label %}<p class="step__label">{{ step.label }}</p>{% endif %}
+                {% if step.head %}<h3 class="step__head">{{ step.head }}</h3>{% endif %}
+                {% if step.text %}<p class="step__body">{{ step.text }}</p>{% endif %}
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <section class="studio-locations">
+        {% if site.about.locationsEyebrow %}
+        <p class="studio-locations__eyebrow">{{ site.about.locationsEyebrow }}</p>
+        {% endif %}
+        <div class="studio-locations__body">
+            <h2 class="studio-locations__heading">{{ site.about.locationsHeading }}</h2>
+            <p>{{ site.about.locationsText }}</p>
+        </div>
+    </section>
+
+    {% if site.about.documents %}
+    <section class="studio-docs">
+        <div class="studio-docs__intro">
+            <p class="studio-docs__eyebrow">{{ site.about.documents.eyebrow }}</p>
+            {% if site.about.documents.hint %}
+            <p class="studio-docs__hint">{{ site.about.documents.hint }}</p>
+            {% endif %}
+        </div>
+
+        <ul class="doc-list">
+            {% for item in site.about.documents.items %}
+            <li class="doc-list__item">
+                <p class="doc-list__label">{{ item.label }}</p>
+                <p class="doc-list__title">
+                    {{ item.title }}
+                    {% if item.meta %}<span class="meta">{{ item.meta }}</span>{% endif %}
+                </p>
+                <a class="doc-list__link" href="{{ item.href }}">{{ item.link }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+    {% endif %}
 </main>

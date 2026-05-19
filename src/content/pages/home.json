@@ -51,6 +51,10 @@
   "collectionsSection": {
     "kicker": "Collections",
     "heading": "Recent projects.",
+    "lead": "A small, current selection — residential, hospitality, and workplace work in and around London.",
+    "moreLabel": "Index",
+    "moreLink": "View all projects",
+    "moreHref": "/projects.html",
     "featuredProjects": [
       {
         "project": "sandbanks_residence",
@@ -90,6 +94,7 @@
     ]
   },
   "cta": {
+    "kicker": "Contact",
     "heading": "Have a project in mind?",
     "text": "Tell us about your space and timeline—we’ll share how we can help.",
     "buttonLabel": "Start a conversation"

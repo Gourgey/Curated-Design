@@ -102,11 +102,11 @@ sectionTop: true
 
     <section class="section project-body">
         <div class="container project-wrap">
-            <div class="project-grid">
-                <article class="project-article project-prose">
-                    <h2 class="project-h2">{{ headingText }}</h2>
-
-                    {% if leadText %}<p class="project-lead">{{ leadText }}</p>{% endif %}
+            <div class="project-article">
+                <div class="project-article__main">
+                    {% if leadText %}
+                    <div class="project-lead">{{ leadText | markdownify | safe }}</div>
+                    {% endif %}
 
                     {% if (not isComingSoon) and project.data.body %}
                     {{ project.data.body | markdownify | safe }}
@@ -115,53 +115,51 @@ sectionTop: true
                     {% if hasCallout %}
                     <div class="project-callout">
                         {% if project.data.callout.title %}
-                        <p class="project-callout-title">{{ project.data.callout.title }}</p>
+                        <span class="label-small">{{ project.data.callout.title }}</span>
                         {% endif %}
                         {% if project.data.callout.text %}
-                        <p class="project-callout-text">{{ project.data.callout.text }}</p>
+                        <blockquote class="project-callout__text">{{ project.data.callout.text | markdownify | safe }}</blockquote>
                         {% endif %}
                     </div>
                     {% endif %}
 
                     {% if not isComingSoon %}
                     {% for section in project.data.extraSections %}
-                    {% if section.heading %}
-                    <h2 class="project-h2">{{ section.heading }}</h2>
-                    {% endif %}
-                    {% if section.text %}
-                    {{ section.text | markdownify | safe }}
+                    {% if section.heading or section.text %}
+                    <section class="project-section">
+                        {% if section.heading %}
+                        <h2 class="project-section__heading label-small">{{ section.heading }}</h2>
+                        {% endif %}
+                        {% if section.text %}
+                        <div class="project-section__body">{{ section.text | markdownify | safe }}</div>
+                        {% endif %}
+                    </section>
                     {% endif %}
                     {% endfor %}
                     {% endif %}
-                </article>
+                </div>
 
-                <aside class="project-aside" aria-label="Project facts">
-                    <div class="project-facts">
-                        <h2 class="project-facts-title">Project facts</h2>
-
+                <div class="project-article__aside">
+                    <aside class="project-aside" aria-label="Project facts">
+                        <h2 class="label-small">Project facts</h2>
                         {% if hasFacts %}
-                        <dl class="project-facts-list">
+                        <dl class="project-facts">
                             {% for fact in project.data.facts %}
-                            <div class="project-fact">
-                                <dt>{{ fact.label }}</dt>
-                                <dd>{{ fact.value }}</dd>
+                            <div class="project-facts__row">
+                                <dt class="project-facts__label">{{ fact.label }}</dt>
+                                <dd class="project-facts__value">{{ fact.value }}</dd>
                             </div>
                             {% endfor %}
                         </dl>
-
-                        <div class="project-facts-divider"></div>
                         {% endif %}
-
                         {% if project.data.asideText %}
-                        <p class="project-p project-muted">{{ project.data.asideText }}</p>
+                        <p class="project-aside__note">{{ project.data.asideText }}</p>
                         {% endif %}
-
-                        <a href="/contact.html" class="button button-full">
-                            <span class="dot" aria-hidden="true"></span>
-                            Enquire
-                        </a>
-                    </div>
-                </aside>
+                        {% if project.data.asideCta %}
+                        <a class="project-aside__cta" href="/contact.html">{{ project.data.asideCta }}</a>
+                        {% endif %}
+                    </aside>
+                </div>
             </div>
         </div>
     </section>
@@ -170,10 +168,9 @@ sectionTop: true
     {% set heading = project.data.ctaHeading %}
     {% set text = project.data.ctaText %}
     {% set href = "/contact.html" %}
-    {% set ctaClass = "about-cta-band section" %}
-    {% set ctaContainerClass = "container" %}
-    {% set ctaStyle = "text-align: center" %}
-    {% set label = "Contact the studio" %}
+    {% set ctaClass = "project-cta-band section" %}
+    {% set ctaContainerClass = "project-cta__inner" %}
+    {% set label = project.data.asideCta or "Make an enquiry" %}
     {% include "partials/cta-band.njk" %}
     {% endif %}
 </main>

@@ -4,23 +4,27 @@ title: Projects – Curated Design Studio
 eleventyComputed:
   description: "{{ site.projectsPage.metaDescription or site.settings.description }}"
 permalink: projects.html
+htmlClass: projects-page
 bodyClass: projects-page font-inter
-topLogo: white_logo_no_text_on_transparent.svg
+topLogo: logo_no_text_on_transparent.svg
 ---
 <main class="page-main">
-    {% include "partials/hero-brand.njk" %}
-
-    <section class="hero">
-        <div class="container hero-inner hero-inner--center">
-            <h1 class="headline">{{ site.projectsPage.heroHeadline }}</h1>
-            <p class="subhead mx-auto">{{ site.projectsPage.heroSubhead }}</p>
+    <header class="projects-header">
+        {% if site.projectsPage.eyebrow %}
+        <p class="projects-header__eyebrow">{{ site.projectsPage.eyebrow }}</p>
+        {% endif %}
+        <div>
+            <h1 class="projects-header__title">{{ site.projectsPage.heroHeadline | safe }}</h1>
+            {% if site.projectsPage.heroSubhead %}
+            <p class="projects-header__intro">{{ site.projectsPage.heroSubhead }}</p>
+            {% endif %}
         </div>
-    </section>
+    </header>
 
     {% set listedProjects = collections.publishedProject | sortByOrder | where("showInProjects", true) %}
     {% set visibleCategories = site.projectsPage.categories | groupByCategory(listedProjects) %}
 
-    <nav id="pills" class="pillmenu-wrap" aria-label="Project categories">
+    <nav id="pills" class="pillmenu-wrap projects-filter" aria-label="Project categories">
         <button
             id="pillsToggle"
             class="pillmenu-toggle pills-toggle"
@@ -44,41 +48,45 @@ topLogo: white_logo_no_text_on_transparent.svg
         </div>
     </nav>
 
-    <section class="projects-band">
-        {% for entry in visibleCategories %}
-        {% set category = entry.category %}
-        <section id="{{ category.id }}" class="{% if loop.first %}section-pad{% else %}py-14{% endif %}">
-            <div class="projects-wrap">
-                <div class="widget-area">
-                    {% if category.label %}<span class="section-label">{{ category.label }}</span>{% endif %}
+    {% for entry in visibleCategories %}
+    {% set category = entry.category %}
+    <section id="{{ category.id }}" class="projects-section">
+        <div class="projects-section__inner">
+            <header class="projects-section__head">
+                {% if category.label %}
+                <p class="projects-section__eyebrow label-small">{{ category.label }}</p>
+                {% endif %}
+                {% if category.heading %}
+                <h2 class="projects-section__heading">{{ category.heading }}</h2>
+                {% endif %}
+                {% if category.note %}
+                <p class="projects-section__note">{{ category.note }}</p>
+                {% endif %}
+            </header>
 
-                    <div class="section-head">
-                        {% if category.heading %}<h2 class="h2">{{ category.heading }}</h2>{% endif %}
-                        {% if category.note %}<p class="section-note">{{ category.note }}</p>{% endif %}
+            <div class="projects-grid">
+                {% for project in entry.projects %}
+                <a class="projects-card" href="/projects/{{ project.data.slug }}.html">
+                    <div class="projects-card__media">
+                        <img
+                            src="{{ project.data.cardImage }}"
+                            alt="{{ project.data.cardAlt or project.data.title }}"
+                            loading="lazy"
+                            decoding="async"
+                        />
                     </div>
-
-                    <div class="widget-grid">
-                        {% for project in entry.projects %}
-                        <a class="widget {{ project.data | projectGridClass }}" href="/projects/{{ project.data.slug }}.html">
-                            <img
-                                src="{{ project.data.cardImage }}"
-                                alt="{{ project.data.cardAlt or project.data.title }}"
-                                loading="lazy"
-                                decoding="async"
-                                class="widget-media"
-                            />
-                            <div class="widget-body">
-                                <p class="widget-title">{{ project.data.title }}</p>
-                                {% if project.data.kicker %}<p class="widget-meta">{{ project.data.kicker }}</p>{% endif %}
-                            </div>
-                        </a>
-                        {% endfor %}
+                    <div class="projects-card__body">
+                        <p class="projects-card__title">{{ project.data.title }}</p>
+                        {% if project.data.kicker %}
+                        <p class="projects-card__kicker">{{ project.data.kicker }}</p>
+                        {% endif %}
                     </div>
-                </div>
+                </a>
+                {% endfor %}
             </div>
-        </section>
-        {% endfor %}
+        </div>
     </section>
+    {% endfor %}
 
     {% set heading = site.settings.ctaHeading %}
     {% set text = site.settings.ctaText %}

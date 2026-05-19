@@ -31,20 +31,30 @@ callout:
 extraSections:
   - heading: Approach
     text: |
-      <ul class="project-steps">
-        <li><span class="step-title">Architectural envelope</span><span class="step-text">Panel detailing gives the perimeter greater rhythm, proportion, and visual order, allowing the lobby to feel more resolved and intentional.</span></li>
-        <li><span class="step-title">Furniture & layout</span><span class="step-text">Curved, tactile seating softens the room’s geometry while maintaining clear circulation and a comfortable waiting position.</span></li>
-        <li><span class="step-title">Lighting strategy</span><span class="step-text">A layered decorative scheme gives the space warmth and identity, with a central pendant, wall lights, and subtle ceiling detail working together to lift the overall atmosphere.</span></li>
-        <li><span class="step-title">Fast delivery</span><span class="step-text">A tightly controlled scope, clear specification, and straightforward sequencing supported a three-week programme from sign-off to completion.</span></li>
-      </ul>
-  - heading: Details
+      - **Architectural envelope** — Panel detailing gives the perimeter greater rhythm, proportion, and visual order, allowing the lobby to feel more resolved and intentional.
+      - **Furniture & layout** — Curved, tactile seating softens the room’s geometry while maintaining clear circulation and a comfortable waiting position.
+      - **Lighting strategy** — A layered decorative scheme gives the space warmth and identity, with a central pendant, wall lights, and subtle ceiling detail working together to lift the overall atmosphere.
+      - **Fast delivery** — A tightly controlled scope, clear specification, and straightforward sequencing supported a three-week programme from sign-off to completion.
+  - heading: Palette
     text: |
-      <div class="project-details project-details--rich">
-        <div class="project-detail"><p class="project-detail-label">Palette</p><ul class="project-mini"><li>Warm off-white architectural panelling</li><li>Neutral boucle upholstery</li><li>Black accents and dark timber notes</li><li>Natural stone floor as the anchor</li></ul></div>
-        <div class="project-detail"><p class="project-detail-label">Key pieces</p><ul class="project-mini"><li>Curved lounge seating to soften the room’s lines</li><li>Sculptural side tables with a light visual footprint</li><li>Central table as a quiet focal point</li></ul></div>
-        <div class="project-detail"><p class="project-detail-label">Lighting</p><ul class="project-mini"><li>Pendant lighting for presence and symmetry</li><li>Wall lights for warmth across the envelope</li><li>Ceiling detail to add depth and perceived height</li></ul></div>
-        <div class="project-detail"><p class="project-detail-label">Programme</p><ul class="project-mini"><li>3 weeks from design sign-off to installation completion</li><li>Minimal disruption to resident access</li></ul></div>
-      </div>
+      - Warm off-white architectural panelling
+      - Neutral boucle upholstery
+      - Black accents and dark timber notes
+      - Natural stone floor as the anchor
+  - heading: Key Pieces
+    text: |
+      - Curved lounge seating to soften the room’s lines
+      - Sculptural side tables with a light visual footprint
+      - Central table as a quiet focal point
+  - heading: Lighting
+    text: |
+      - Pendant lighting for presence and symmetry
+      - Wall lights for warmth across the envelope
+      - Ceiling detail to add depth and perceived height
+  - heading: Programme
+    text: |
+      - 3 weeks from design sign-off to installation completion
+      - Minimal disruption to resident access
 facts:
   - label: Location
     value: 'Marylebone, London'
@@ -57,6 +67,7 @@ facts:
   - label: Programme
     value: 3 weeks
 asideText: Planning a similar refresh? Send a short note and I’ll reply with the next steps.
+asideCta: Make an enquiry
 gallery:
   heading: Gallery
   text: Warm architectural detailing, sculptural forms, and layered lighting create a calmer, more polished arrival experience.
@@ -67,6 +78,6 @@ gallery:
       alt: Marylebone Lobby detail image
     - image: /assets/images/projects/marylebone_residence_lobby/marylebone_residence_lobby_3.webp
       alt: Marylebone Lobby interior detail
-ctaHeading: Have a space that needs clarity?
-ctaText: I help clients define a clear design direction and carry it through with calm, detailed execution.
+ctaHeading: Every brief begins with a conversation.
+ctaText: Whether you are at early concept stage or refining a live scheme, we would like to hear about your project.
 ---

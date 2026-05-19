@@ -1,6 +1,7 @@
 {
   "title": "Studio – Curated Design Studio",
-  "introHeading": "How the studio works",
+  "eyebrow": "Studio",
+  "introHeading": "Design with intention.<br>Execute with precision.",
   "introText": "Every interior begins with how it will be used day to day: the routines, the circulation, and the way light changes across a space. From there, we build a material language that feels calm, tactile, and quietly confident.",
   "workHeading": "What defines the work",
   "workParagraphs": [
@@ -10,24 +11,66 @@
   "focusHeading": "Focus areas",
   "focusAreas": [
     "Residential homes and apartments",
-    "Hospitality: restaurants, bars, boutique stays",
+    "Hospitality — restaurants, bars, boutique stays",
     "Interior architecture and spatial planning",
     "Furniture, lighting, and styling"
   ],
+  "process": {
+    "eyebrow": "Process",
+    "title": "Three movements, from <em>brief</em> to <em>install</em>."
+  },
   "processSteps": [
     {
-      "title": "01. Brief & concept",
+      "label": "Brief & concept",
+      "head": "Listening, then sketching.",
       "text": "We define needs, constraints, and priorities, then develop the initial concept with layouts and mood direction."
     },
     {
-      "title": "02. Design development",
+      "label": "Design development",
+      "head": "Resolving the room.",
       "text": "We refine plans, finishes, lighting, and joinery detail, aligning the design intent with budget realities."
     },
     {
-      "title": "03. Delivery & styling",
-      "text": "We coordinate with contractors/suppliers as needed, then complete the space with furniture, art, and styling."
+      "label": "Delivery & styling",
+      "head": "Bringing the space to life.",
+      "text": "We coordinate with contractors and suppliers as needed, then complete the space with furniture, art, and styling."
     }
   ],
+  "locationsEyebrow": "Scope",
   "locationsHeading": "Locations & scope",
-  "locationsText": "Based in London, working across the UK and selected international projects. Collaborations include architects, developers, and private clients on both new-build and refurbishment schemes."
+  "locationsText": "Based in London, working across the UK and on selected international projects. Collaborations include architects, developers, and private clients on both new-build and refurbishment schemes.",
+  "documents": {
+    "eyebrow": "Documents & tools",
+    "hint": "Terms, privacy, and the small group of practical apps that sit alongside the studio.",
+    "items": [
+      {
+        "label": "Legal · 01",
+        "title": "Terms of Business",
+        "meta": "Engagement terms for studio commissions",
+        "link": "Studio terms",
+        "href": "/terms-of-business.html"
+      },
+      {
+        "label": "Legal · 02",
+        "title": "Privacy Notice",
+        "meta": "How we handle enquiry and project data",
+        "link": "Privacy",
+        "href": "/privacy-notice.html"
+      },
+      {
+        "label": "Legal · 03",
+        "title": "Company Information",
+        "meta": "Curated Design Ltd — registered details",
+        "link": "Company details",
+        "href": "/company-information.html"
+      },
+      {
+        "label": "Digital · 04",
+        "title": "Practical apps",
+        "meta": "Support and policy references for active projects",
+        "link": "View apps",
+        "href": "/apps/"
+      }
+    ]
+  }
 }

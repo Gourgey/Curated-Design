@@ -1,7 +1,8 @@
 {
   "title": "Contact – Curated Design Studio",
-  "heading": "Let’s discuss your project",
+  "heading": "Every brief begins with a conversation.",
   "lead": "Share a few details and we’ll respond shortly. Based in London, working on residential and hospitality interiors across the UK and beyond.",
-  "detailsHeading": "Studio details",
-  "note": "For press, collaborations, or speaking enquiries, please note this in your message."
+  "note": "For press, collaborations, or speaking enquiries, please note this in your message.",
+  "submitLabel": "Send enquiry",
+  "submitMeta": "Response within two working days"
 }

@@ -120,68 +120,85 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
         </div>
     </section>
 
-    <section id="selected-work" class="section band-2" data-theme="light">
-        <div class="container">
-            <span class="kicker2">{{ site.home.collectionsSection.kicker }}</span>
-            <h2 class="h22">{{ site.home.collectionsSection.heading }}</h2>
+    <section id="selected-work" class="home-section home-collections" data-theme="light">
+        <div class="home-section__inner">
+            <div class="home-section__head">
+                <p class="home-section__eyebrow">{{ site.home.collectionsSection.kicker }}</p>
+                <div>
+                    <h2 class="home-section__title">{{ site.home.collectionsSection.heading | safe }}</h2>
+                    {% if site.home.collectionsSection.lead %}
+                    <p class="home-section__intro">{{ site.home.collectionsSection.lead }}</p>
+                    {% endif %}
+                </div>
+            </div>
 
             {% set featuredProjects = site.home.collectionsSection.featuredProjects | resolveEntries(collections.publishedProject, "project") %}
-            <div class="card-grid">
+            <div class="home-collections__grid">
                 {% for project in featuredProjects %}
                 {% set projectCardSrc = project.relation.image or project.data.cardImage %}
-                <a class="card {{ project | homeCardSpan(featuredProjects.length) }}" href="/projects/{{ project.data.slug }}.html">
-                    <div class="img-wrap">
+                <a class="home-project" href="/projects/{{ project.data.slug }}.html">
+                    <div class="home-project__media">
+                        {% if projectCardSrc %}
                         <img
                             src="{{ projectCardSrc }}"
                             alt="{{ project.data.cardAlt or project.data.title }}"
                             loading="lazy"
                             decoding="async"
                         />
+                        {% endif %}
                     </div>
-                    <div class="body">
-                        <h3 class="title2">{{ project.data.title }}</h3>
-                        {% if project.data.kicker %}<p class="muted2">{{ project.data.kicker }}</p>{% endif %}
-                    </div>
+                    <h3 class="home-project__title">{{ project.data.title }}</h3>
+                    {% if project.data.kicker %}
+                    <p class="home-project__kicker">{{ project.data.kicker }}</p>
+                    {% endif %}
                 </a>
                 {% endfor %}
             </div>
 
-            <a class="button" href="/projects.html">
-                <span class="dot" aria-hidden="true"></span>
-                All projects
-            </a>
+            {% if site.home.collectionsSection.moreLink %}
+            <div class="home-collections__more">
+                {% if site.home.collectionsSection.moreLabel %}
+                <p class="home-collections__more-label">{{ site.home.collectionsSection.moreLabel }}</p>
+                {% endif %}
+                <a class="home-collections__more-link" href="{{ site.home.collectionsSection.moreHref or '/projects.html' }}">{{ site.home.collectionsSection.moreLink }}</a>
+            </div>
+            {% endif %}
         </div>
     </section>
 
-    <section id="about" class="section band-3" data-theme="dark">
-        <div class="container">
-            <span class="kicker">{{ site.home.philosophy.kicker }}</span>
-
-            <div class="split">
-                <div class="media">
-                    <img
-                        src="{{ site.home.philosophy.image }}"
-                        alt="{{ site.home.philosophy.imageAlt }}"
-                        loading="lazy"
-                        decoding="async"
-                    />
-                </div>
-                <div class="content">
-                    <h2 class="h2">{{ site.home.philosophy.heading }}</h2>
-                    {% for paragraph in site.home.philosophy.paragraphs %}
-                    <p>{{ paragraph }}</p>
-                    {% endfor %}
-                </div>
+    <section id="about" class="home-philosophy" data-theme="dark">
+        <div class="home-philosophy__inner">
+            <figure class="home-philosophy__media">
+                <img
+                    src="{{ site.home.philosophy.image }}"
+                    alt="{{ site.home.philosophy.imageAlt }}"
+                    loading="lazy"
+                    decoding="async"
+                />
+            </figure>
+            <div class="home-philosophy__body">
+                <p class="home-philosophy__eyebrow">{{ site.home.philosophy.kicker }}</p>
+                <h2 class="home-philosophy__title">{{ site.home.philosophy.heading | safe }}</h2>
+                {% for paragraph in site.home.philosophy.paragraphs %}
+                <p class="home-philosophy__text">{{ paragraph }}</p>
+                {% endfor %}
             </div>
+        </div>
+    </section>
 
-            <div class="cta" style="margin-top: 36px">
-                <h3 class="h2" style="margin: 0">{{ site.home.cta.heading }}</h3>
-                <p class="lead" style="margin: 0 0 8px">{{ site.home.cta.text }}</p>
-                <a class="button" href="mailto:{{ site.settings.email }}">
-                    <span class="dot" aria-hidden="true"></span>
-                    {{ site.home.cta.buttonLabel }}
-                </a>
-            </div>
+    <section class="home-cta" data-theme="dark" aria-label="Contact call to action">
+        <div class="home-cta__inner">
+            {% if site.home.cta.kicker %}
+            <p class="home-cta__eyebrow">{{ site.home.cta.kicker }}</p>
+            {% endif %}
+            <h2 class="home-cta__title">{{ site.home.cta.heading | safe }}</h2>
+            {% if site.home.cta.text %}
+            <p class="home-cta__subline">{{ site.home.cta.text }}</p>
+            {% endif %}
+            <a class="home-cta__link" href="mailto:{{ site.settings.email }}">
+                <span class="home-cta__dot" aria-hidden="true"></span>
+                {{ site.home.cta.buttonLabel }}
+            </a>
         </div>
     </section>
 </main>

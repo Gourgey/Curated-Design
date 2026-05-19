@@ -14,8 +14,8 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
 
     <section class="hero">
         <div class="container hero-inner hero-inner--center">
-            <h1 class="headline">{{ site.home.hero.headline }}</h1>
-            <p class="subhead mx-auto">{{ site.home.hero.subhead }}</p>
+            <h1 class="home-hero__title">{{ site.home.hero.headline | safe }}</h1>
+            <p class="home-hero__intro">{{ site.home.hero.subhead }}</p>
         </div>
     </section>
 
@@ -86,21 +86,23 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
         <div id="dots" class="dots" aria-label="Slide indicators"></div>
     </section>
 
-    <section id="services" class="section band-1" data-theme="dark">
-        <div class="container">
-            <span class="kicker">{{ site.home.servicesSection.kicker }}</span>
-            <h2 class="h2">{{ site.home.servicesSection.heading }}</h2>
-            <p class="lead">{{ site.home.servicesSection.lead }}</p>
+    <section id="services" class="home-section home-services" data-theme="dark">
+        <div class="home-section__inner">
+            <div class="home-section__head">
+                <p class="home-section__eyebrow">{{ site.home.servicesSection.kicker }}</p>
+                <div>
+                    <h2 class="home-section__title">{{ site.home.servicesSection.heading | safe }}</h2>
+                    {% if site.home.servicesSection.lead %}
+                    <p class="home-section__intro">{{ site.home.servicesSection.lead }}</p>
+                    {% endif %}
+                </div>
+            </div>
 
             {% set featuredServices = site.home.servicesSection.featuredServices | resolveEntries(collections.publishedService, "service") %}
-            <div class="card-grid">
+            <div class="home-services__grid">
                 {% for service in featuredServices %}
-                <a
-                    class="card {{ service | homeCardSpan(featuredServices.length) }}"
-                    href="/curated_services/{{ service.data.slug }}.html"
-                    aria-label="View {{ service.data.title }} service"
-                >
-                    <div class="img-wrap">
+                <a class="home-service-card" href="/curated_services/{{ service.data.slug }}.html" aria-label="View {{ service.data.title }} service">
+                    <div class="home-service-card__media">
                         {% if service.data.cardImage %}
                         <img
                             src="{{ service.data.cardImage }}"
@@ -110,10 +112,10 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
                         />
                         {% endif %}
                     </div>
-                    <div class="body">
-                        <h3 class="title">{{ service.data.title }}</h3>
-                        {% if service.data.summary %}<p class="muted">{{ service.data.summary }}</p>{% endif %}
-                    </div>
+                    <h3 class="home-service-card__title">{{ service.data.title }}</h3>
+                    {% if service.data.summary %}
+                    <p class="home-service-card__summary">{{ service.data.summary }}</p>
+                    {% endif %}
                 </a>
                 {% endfor %}
             </div>

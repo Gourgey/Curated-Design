@@ -11,168 +11,152 @@ eleventyComputed:
 htmlClass: concept-page
 bodyClass: concept-page font-inter
 ---
-<main class="page-main">
-    {% include "partials/hero-brand.njk" %}
+{% set hasGlance = service.data.glance and service.data.glance.length %}
+{% set hasSections = service.data.sections and service.data.sections.length %}
+{% set coverAlt = service.data.coverAlt or service.data.title %}
 
-    {% set hasGlance = service.data.glance and service.data.glance.length %}
-    {% set hasSections = service.data.sections and service.data.sections.length %}
-    {% set coverAlt = service.data.coverAlt or service.data.title %}
+<main class="service">
+    <header class="service-header">
+        <p class="service-header__eyebrow">{{ service.data.eyebrow or "Service" }}</p>
+        <div>
+            <h1 class="service-header__title">{{ service.data.title | safe }}</h1>
+            {% if service.data.intro %}
+            <p class="service-header__intro">{{ service.data.intro }}</p>
+            {% endif %}
+        </div>
+    </header>
 
-    <section class="section concept-content">
-        <div class="container concept-wrap">
-            <h1 class="sr-only">{{ service.data.title }}</h1>
-            <header class="concept-header">
-                {% if service.data.coverImage %}
-                <section class="concept-hero" aria-label="{{ service.data.title }} hero image">
-                    <figure class="concept-hero-figure concept-hero-figure--fullbleed">
-                        <img
-                            src="{{ service.data.coverImage }}"
-                            alt="{{ coverAlt }}"
-                            loading="eager"
-                            decoding="async"
-                        />
-                    </figure>
-                </section>
+    {% if service.data.coverImage %}
+    <figure class="service-hero" aria-label="{{ service.data.title }} hero image">
+        <img
+            src="{{ service.data.coverImage }}"
+            alt="{{ coverAlt }}"
+            loading="eager"
+            decoding="async"
+        />
+    </figure>
+    {% endif %}
+
+    <section class="service-body">
+        <div class="service-body__main">
+            {% if hasSections %}
+            {% for section in service.data.sections %}
+            {% if section.heading or (section.items and section.items.length) %}
+            <section class="service-section">
+                {% if section.heading %}
+                <h2 class="service-section__heading label-small">{{ section.heading }}</h2>
                 {% endif %}
+                {% if section.items and section.items.length %}
+                <{{ section.listType | default('ul') }} class="service-section__list">
+                    {% for item in section.items %}
+                    {% if item %}<li>{{ item }}</li>{% endif %}
+                    {% endfor %}
+                </{{ section.listType | default('ul') }}>
+                {% endif %}
+                {% if section.note %}
+                <p class="service-section__note">{{ section.note }}</p>
+                {% endif %}
+            </section>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
 
-                <div class="concept-intro">
-                    <div>
-                        {% if service.data.intro %}<p class="concept-lead">{{ service.data.intro }}</p>{% endif %}
+        <aside class="service-body__aside" aria-label="Service details">
+            {% if hasGlance %}
+            <div class="service-glance">
+                <h2 class="label-small">At a glance</h2>
+                <dl class="service-glance__list">
+                    {% for item in service.data.glance %}
+                    {% if item.label or item.text %}
+                    <div class="service-glance__row">
+                        {% if item.label %}<dt class="service-glance__label">{{ item.label }}</dt>{% endif %}
+                        {% if item.text %}<dd class="service-glance__value">{{ item.text }}</dd>{% endif %}
                     </div>
-
-                    {% if hasGlance %}
-                    <aside class="concept-glance" aria-label="At a glance">
-                        <h2 class="title2 concept-glance-title">At a glance</h2>
-                        <ul class="concept-glance-list">
-                            {% for item in service.data.glance %}
-                            {% if item.label or item.text %}
-                            <li><strong>{{ item.label }}{% if item.label and item.text %}:{% endif %}</strong> {{ item.text }}</li>
-                            {% endif %}
-                            {% endfor %}
-                        </ul>
-                    </aside>
-                    {% endif %}
-                </div>
-            </header>
-
-            <div class="concept-grid">
-                <div class="concept-left">
-                    {% if hasSections %}
-                    {% for section in service.data.sections %}
-                    {% if section.heading or (section.items and section.items.length) %}
-                    <div class="concept-block">
-                        {% if section.heading %}<h2 class="title2">{{ section.heading }}</h2>{% endif %}
-                        {% if section.items and section.items.length %}
-                        <{{ section.listType | default('ul') }} class="concept-list">
-                            {% for item in section.items %}
-                            {% if item %}<li>{{ item }}</li>{% endif %}
-                            {% endfor %}
-                        </{{ section.listType | default('ul') }}>
-                        {% endif %}
-                        {% if section.note %}
-                        <p class="concept-meta">{{ section.note }}</p>
-                        {% endif %}
-                    </div>
-                    {% if not loop.last %}<hr class="concept-divider" />{% endif %}
                     {% endif %}
                     {% endfor %}
-                    {% endif %}
-                </div>
-
-                <div class="concept-right">
-                    <div class="form-card">
-                        <h2 class="title2 enquiry-title">{{ service.data.enquiryHeading }}</h2>
-                        <p class="concept-meta" style="margin: 0 0 12px">{{ service.data.enquiryText }}</p>
-
-                        <form
-                            name="service-enquiry"
-                            method="POST"
-                            action="/thank-you/"
-                            netlify
-                            data-netlify="true"
-                            data-netlify-honeypot="bot-field"
-                        >
-                            <input type="hidden" name="form-name" value="service-enquiry" />
-                            <input type="hidden" name="service" value="{{ service.data.title }}" />
-
-                            <p class="hidden">
-                                <label>
-                                    Don’t fill this out if you're human:
-                                    <input name="bot-field" />
-                                </label>
-                            </p>
-
-                            <div class="form-field">
-                                <label for="{{ service.data.slug }}-name">Name</label>
-                                <input type="text" id="{{ service.data.slug }}-name" name="name" autocomplete="name" required />
-                            </div>
-
-                            <div class="form-field">
-                                <label for="{{ service.data.slug }}-email">Email</label>
-                                <input type="email" id="{{ service.data.slug }}-email" name="email" autocomplete="email" required />
-                            </div>
-
-                            <div class="form-field">
-                                <label for="{{ service.data.slug }}-location">Location</label>
-                                <input
-                                    type="text"
-                                    id="{{ service.data.slug }}-location"
-                                    name="location"
-                                    placeholder="e.g. London / Glasgow / Remote"
-                                />
-                            </div>
-
-                            <div class="form-field">
-                                <label for="{{ service.data.slug }}-scope">Scope</label>
-                                <input
-                                    type="text"
-                                    id="{{ service.data.slug }}-scope"
-                                    name="scope"
-                                    placeholder="e.g. entrance hall / 1 bedroom / restaurant concept"
-                                    required
-                                />
-                            </div>
-
-                            <div class="form-field">
-                                <label for="{{ service.data.slug }}-budget">Budget (optional)</label>
-                                <input
-                                    type="text"
-                                    id="{{ service.data.slug }}-budget"
-                                    name="budget"
-                                    placeholder="e.g. £5k–£15k for furniture"
-                                />
-                            </div>
-
-                            <div class="form-field">
-                                <label for="{{ service.data.slug }}-message">Notes</label>
-                                <textarea
-                                    id="{{ service.data.slug }}-message"
-                                    name="message"
-                                    rows="4"
-                                    placeholder="Timeline, constraints, budget range, what you’re hoping to change…"
-                                    required
-                                ></textarea>
-                            </div>
-
-                            <button type="submit" class="button button-full">
-                                <span class="dot" aria-hidden="true"></span>
-                                Send enquiry
-                            </button>
-                        </form>
-                    </div>
-                </div>
+                </dl>
             </div>
-        </div>
+            {% endif %}
+
+            <div class="service-enquiry">
+                {% if service.data.enquiryHeading %}
+                <h2 class="service-enquiry__title">{{ service.data.enquiryHeading }}</h2>
+                {% endif %}
+                {% if service.data.enquiryText %}
+                <p class="service-enquiry__intro">{{ service.data.enquiryText }}</p>
+                {% endif %}
+
+                <form
+                    class="service-enquiry__form"
+                    name="service-enquiry"
+                    method="POST"
+                    action="/thank-you/"
+                    netlify
+                    data-netlify="true"
+                    data-netlify-honeypot="bot-field"
+                    novalidate
+                >
+                    <input type="hidden" name="form-name" value="service-enquiry" />
+                    <input type="hidden" name="service" value="{{ service.data.title }}" />
+
+                    <p class="hidden">
+                        <label>
+                            Don’t fill this out if you're human:
+                            <input name="bot-field" />
+                        </label>
+                    </p>
+
+                    <div class="field">
+                        <label class="field__label" for="{{ service.data.slug }}-name">Name</label>
+                        <input class="field__input" type="text" id="{{ service.data.slug }}-name" name="name" autocomplete="name" placeholder="Your full name" required />
+                    </div>
+
+                    <div class="field">
+                        <label class="field__label" for="{{ service.data.slug }}-email">Email</label>
+                        <input class="field__input" type="email" id="{{ service.data.slug }}-email" name="email" autocomplete="email" placeholder="you@studio.com" required />
+                    </div>
+
+                    <div class="field">
+                        <label class="field__label" for="{{ service.data.slug }}-location">Location</label>
+                        <input class="field__input" type="text" id="{{ service.data.slug }}-location" name="location" placeholder="e.g. London / Glasgow / Remote" />
+                    </div>
+
+                    <div class="field">
+                        <label class="field__label" for="{{ service.data.slug }}-scope">Scope</label>
+                        <input class="field__input" type="text" id="{{ service.data.slug }}-scope" name="scope" placeholder="e.g. entrance hall / 1 bedroom / restaurant concept" required />
+                    </div>
+
+                    <div class="field field--optional">
+                        <label class="field__label" for="{{ service.data.slug }}-budget">Budget</label>
+                        <input class="field__input" type="text" id="{{ service.data.slug }}-budget" name="budget" placeholder="e.g. £5k–£15k" />
+                    </div>
+
+                    <div class="field">
+                        <label class="field__label" for="{{ service.data.slug }}-message">Notes</label>
+                        <textarea class="field__textarea" id="{{ service.data.slug }}-message" name="message" rows="4" placeholder="Timeline, constraints, budget range, what you’re hoping to change…" required></textarea>
+                    </div>
+
+                    <div class="service-enquiry__submit-row">
+                        <button type="submit" class="service-enquiry__submit">
+                            Send enquiry
+                            <span class="service-enquiry__arrow" aria-hidden="true">→</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </aside>
     </section>
 
-    {% if service.data.ctaHeading or service.data.ctaText %}
-    {% set heading = service.data.ctaHeading %}
-    {% set text = service.data.ctaText %}
-    {% set href = "/contact.html" %}
-    {% set ctaClass = "about-cta-band section" %}
-    {% set ctaContainerClass = "container" %}
-    {% set ctaStyle = "text-align: center" %}
-    {% set label = "Contact the studio" %}
-    {% include "partials/cta-band.njk" %}
-    {% endif %}
 </main>
+
+{% if service.data.ctaHeading or service.data.ctaText %}
+{% set heading = service.data.ctaHeading %}
+{% set text = service.data.ctaText %}
+{% set href = "/contact.html" %}
+{% set ctaClass = "about-cta-band section" %}
+{% set ctaContainerClass = "container" %}
+{% set ctaStyle = "text-align: center" %}
+{% set label = "Contact the studio" %}
+{% include "partials/cta-band.njk" %}
+{% endif %}

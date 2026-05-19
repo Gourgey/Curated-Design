@@ -4317,6 +4317,103 @@ body.legal-page .hero-brand {
     text-wrap: pretty;
 }
 
+/* ---- Hero typography (Cormorant italic + Inter Light, on dark page bg) ---- */
+.home-hero__title {
+    margin: 0 auto 24px;
+    max-width: 22ch;
+    font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(40px, 5vw, 84px);
+    line-height: 1.04;
+    letter-spacing: -0.016em;
+    color: rgba(237, 232, 221, 0.96);
+    text-wrap: balance;
+}
+.home-hero__title em { font-style: italic; }
+.home-hero__intro {
+    max-width: 38em;
+    margin: 0 auto;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    font-weight: 300;
+    font-size: clamp(16px, 1.5vw, 18px);
+    line-height: 1.6;
+    color: rgba(237, 232, 221, 0.65);
+    text-wrap: pretty;
+}
+
+/* ---- Curated Services grid (mirrors Featured Projects with summary text) ---- */
+.home-services__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 64px 48px;
+    border-top: 1px solid var(--hp-rule-soft);
+    padding-top: 56px;
+}
+.home-service-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 280ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.home-service-card:hover { transform: translateY(-2px); }
+.home-service-card__media {
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    background-color: var(--hp-paper);
+    margin-bottom: 18px;
+    overflow: hidden;
+}
+.home-service-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.home-service-card__title {
+    font-family: var(--hp-font-display);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.008em;
+    color: var(--hp-ink);
+    margin: 0 0 8px;
+}
+.home-service-card__summary {
+    font-family: var(--hp-font-body);
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--hp-ink-2);
+    margin: 0;
+    text-wrap: pretty;
+}
+
+/* Dark void variant — matches Design Philosophy band */
+.home-services {
+    background: var(--hp-void);
+    color: var(--hp-void-ink);
+}
+.home-services .home-section__eyebrow {
+    color: rgba(237, 232, 221, 0.55);
+}
+.home-services .home-section__title {
+    color: rgba(237, 232, 221, 0.96);
+}
+.home-services .home-section__intro {
+    color: rgba(237, 232, 221, 0.78);
+}
+.home-services .home-services__grid {
+    border-top-color: rgba(237, 232, 221, 0.15);
+}
+.home-services .home-service-card__title {
+    color: rgba(237, 232, 221, 0.96);
+}
+.home-services .home-service-card__summary {
+    color: rgba(237, 232, 221, 0.65);
+}
+
 /* ---- Featured Projects grid ---- */
 .home-collections {
     border-top: 1px solid var(--hp-rule-soft);
@@ -4553,6 +4650,7 @@ body.legal-page .hero-brand {
     .home-section { padding: 80px 24px 72px; }
     .home-section__head { grid-template-columns: 1fr; gap: 12px; padding-bottom: 40px; }
     .home-collections__grid { grid-template-columns: 1fr; gap: 48px; }
+    .home-services__grid { grid-template-columns: 1fr; gap: 48px; }
     .home-collections__more { flex-direction: column; gap: 12px; align-items: flex-start; }
     .home-philosophy { padding: 72px 24px; }
     .home-cta { padding: 64px 24px 96px; }
@@ -4955,6 +5053,377 @@ body.projects-page .pill.active {
     body.projects-page .projects-grid {
         grid-template-columns: 1fr;
         gap: 40px;
+    }
+}
+
+/* =========================
+   Service Detail Page — redesign 2026
+   Scoped to body.concept-page (the service-pages.njk body class).
+   Tokens scoped so global --ink remains #f2f2f2.
+   Earlier .concept-* rules in this file remain in place but target
+   old class names the new template no longer renders.
+   ========================= */
+
+html.concept-page {
+    background: #f2eee6;
+}
+
+body.concept-page {
+    --srv-paper: #faf8f4;
+    --srv-paper-2: #f2eee6;
+    --srv-ink: #1b1a17;
+    --srv-ink-2: #46443e;
+    --srv-ink-3: #807b72;
+    --srv-rule: #c9c3b6;
+    --srv-rule-soft: #e4dfd4;
+    --srv-font-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    --srv-font-body: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    background: var(--srv-paper-2);
+    color: var(--srv-ink);
+    font-family: var(--srv-font-body);
+}
+
+/* Outer rhythm */
+body.concept-page main.service {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 144px 80px 80px;
+}
+
+/* Header */
+body.concept-page .service-header {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 32px;
+    align-items: start;
+    padding-bottom: 64px;
+}
+body.concept-page .service-header__eyebrow {
+    font-family: var(--srv-font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--srv-ink);
+    margin: 14px 0 0;
+}
+body.concept-page .service-header__title {
+    font-family: var(--srv-font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(48px, 6.2vw, 84px);
+    line-height: 1.04;
+    letter-spacing: -0.016em;
+    color: var(--srv-ink);
+    margin: 0 0 32px;
+    text-wrap: balance;
+}
+body.concept-page .service-header__title em { font-style: italic; }
+body.concept-page .service-header__intro {
+    font-family: var(--srv-font-body);
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--srv-ink-2);
+    margin: 0;
+    max-width: 38em;
+    text-wrap: pretty;
+}
+
+/* Cover image — clean editorial frame, no rounded corners or shadow */
+body.concept-page .service-hero {
+    margin: 0 0 64px;
+    overflow: hidden;
+}
+body.concept-page .service-hero img {
+    width: 100%;
+    height: clamp(280px, 40vw, 520px);
+    object-fit: cover;
+    display: block;
+}
+
+/* Two-column body */
+body.concept-page .service-body {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+}
+@media (min-width: 900px) {
+    body.concept-page .service-body {
+        grid-template-columns: 3fr 2fr;
+        gap: 64px;
+        align-items: start;
+    }
+}
+
+/* Left column — sections with hairline rule above each */
+body.concept-page .service-section {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 24px;
+    margin-top: 40px;
+}
+body.concept-page .service-section:first-child {
+    margin-top: 0;
+}
+body.concept-page .service-section__heading {
+    margin: 0 0 16px;
+}
+body.concept-page .service-section__list {
+    font-family: var(--srv-font-body);
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.7;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: var(--srv-ink-2);
+}
+body.concept-page .service-section__list li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+body.concept-page .service-section__list li:last-child {
+    border-bottom: none;
+}
+body.concept-page ol.service-section__list {
+    counter-reset: srv-step;
+}
+body.concept-page ol.service-section__list li {
+    counter-increment: srv-step;
+    padding-left: 32px;
+    position: relative;
+}
+body.concept-page ol.service-section__list li::before {
+    content: counter(srv-step, lower-roman);
+    position: absolute;
+    left: 0;
+    top: 10px;
+    font-family: var(--srv-font-display);
+    font-style: italic;
+    color: var(--srv-ink-3);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+}
+body.concept-page .service-section__note {
+    font-family: var(--srv-font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--srv-ink-3);
+    margin: 20px 0 0;
+    max-width: 38em;
+    text-wrap: pretty;
+}
+
+/* Right column — sticky aside containing At-a-glance + enquiry form */
+body.concept-page .service-body__aside {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+@media (min-width: 900px) {
+    body.concept-page .service-body__aside {
+        position: sticky;
+        top: 32px;
+    }
+}
+
+/* At-a-glance facts list */
+body.concept-page .service-glance__list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0;
+}
+body.concept-page .service-glance__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    gap: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+body.concept-page .service-glance__row:first-child {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+body.concept-page .service-glance__label {
+    font-family: var(--srv-font-body);
+    font-weight: 500;
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.45);
+    margin: 0;
+}
+body.concept-page .service-glance__value {
+    font-family: var(--srv-font-display);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--srv-ink);
+    margin: 0;
+    text-align: right;
+    max-width: 65%;
+}
+
+/* Enquiry block */
+body.concept-page .service-enquiry__title {
+    font-family: var(--srv-font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(24px, 2.2vw, 32px);
+    line-height: 1.1;
+    letter-spacing: -0.012em;
+    color: var(--srv-ink);
+    margin: 0 0 12px;
+    text-wrap: balance;
+}
+body.concept-page .service-enquiry__intro {
+    font-family: var(--srv-font-body);
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--srv-ink-2);
+    margin: 0 0 24px;
+}
+
+/* Enquiry form — bottom-border-only fields, matching contact-page pattern */
+body.concept-page .service-enquiry__form {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding-top: 8px;
+}
+body.concept-page .service-enquiry__form .field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: 1px solid var(--srv-rule);
+    padding-bottom: 12px;
+    transition: border-color 200ms ease;
+}
+body.concept-page .service-enquiry__form .field:focus-within {
+    border-bottom-color: var(--srv-ink);
+}
+body.concept-page .service-enquiry__form .field__label {
+    font-family: var(--srv-font-body);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--srv-ink-3);
+    margin: 0;
+}
+body.concept-page .service-enquiry__form .field:focus-within .field__label {
+    color: var(--srv-ink);
+}
+body.concept-page .service-enquiry__form .field__input,
+body.concept-page .service-enquiry__form .field__textarea {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: var(--srv-font-display);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    color: var(--srv-ink);
+    padding: 0;
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+}
+body.concept-page .service-enquiry__form .field__input::placeholder,
+body.concept-page .service-enquiry__form .field__textarea::placeholder {
+    color: var(--srv-ink-3);
+    font-style: italic;
+    font-weight: 300;
+}
+body.concept-page .service-enquiry__form .field__textarea {
+    resize: vertical;
+    min-height: 80px;
+    font-family: var(--srv-font-body);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.55;
+    letter-spacing: 0;
+}
+body.concept-page .service-enquiry__form .field--optional .field__label::after {
+    content: " · optional";
+    font-style: italic;
+    letter-spacing: 0.06em;
+    text-transform: none;
+    color: var(--srv-ink-3);
+    font-family: var(--srv-font-display);
+    font-weight: 400;
+    font-size: 11px;
+    margin-left: 2px;
+}
+
+/* Submit — editorial link-button */
+body.concept-page .service-enquiry__submit-row {
+    margin-top: 8px;
+}
+body.concept-page .service-enquiry__submit {
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--srv-ink);
+    padding: 0 0 4px;
+    font-family: var(--srv-font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--srv-ink);
+    cursor: pointer;
+    letter-spacing: -0.005em;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    transition: padding-right 200ms ease;
+}
+body.concept-page .service-enquiry__submit:hover {
+    padding-right: 12px;
+}
+body.concept-page .service-enquiry__arrow {
+    font-style: normal;
+    transition: transform 240ms ease;
+}
+body.concept-page .service-enquiry__submit:hover .service-enquiry__arrow {
+    transform: translateX(4px);
+}
+
+/* .label-small reused from project-detail block — scope explicit here so
+   the 11px projects-page treatment doesn't apply on service pages */
+body.concept-page .label-small {
+    font-family: var(--srv-font-body);
+    font-weight: 500;
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.45);
+}
+
+/* Responsive */
+@media (max-width: 920px) {
+    body.concept-page main.service {
+        padding: 120px 32px 0;
+    }
+    body.concept-page .service-header {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding-bottom: 56px;
+    }
+    body.concept-page .service-header__title {
+        font-size: 52px;
+    }
+    body.concept-page .service-hero {
+        margin-bottom: 48px;
+    }
+    body.concept-page .service-hero img {
+        height: clamp(240px, 50vw, 400px);
+    }
+    body.concept-page .service-body__aside {
+        gap: 32px;
     }
 }
 

@@ -11,6 +11,12 @@
         <meta name="description" content="{{ metaDescription | safe }}" />
         {% endif %}
 
+        {# Favicons — generated from the Curated Design brand mark; served from
+           site root via the `public/` passthrough copy. #}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
         {# Canonical + Open Graph + Twitter — site-wide defaults overridable per-page #}
         {% set siteUrl = site.settings.siteUrl %}
         {% set canonicalUrl = (siteUrl + page.url) if siteUrl and page.url else "" %}
@@ -46,6 +52,21 @@
             href="{{ preloadImage }}"
             fetchpriority="high"
         />
+        {% endif %}
+
+        {# Organization/logo structured data — homepage only, so Google can
+           associate the brand logo with the business. Logo URL is absolute. #}
+        {% if page.url == "/" %}
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Curated Design",
+            "alternateName": "{{ site.settings.studioName }}",
+            "url": "{{ site.settings.siteUrl }}/",
+            "logo": "{{ site.settings.siteUrl }}/images/curated-design-logo.png"
+        }
+        </script>
         {% endif %}
     </head>
 

@@ -80,7 +80,7 @@ The lesson generalises: a breakpoint value that doesn't match the shared set is 
 
 ## Migration and usage
 
-The current `--sp-*`, `--cp-*`, `--hp-*`, `--pp-*`, and `--srv-*` variables are compatibility aliases. Their values now resolve to the shared tokens, keeping the current pages visually stable while P2.2 reorganises the stylesheet. Do not add new page-prefixed tokens.
+The page-prefixed `--sp-*` (Studio/about), `--cp-*` (Contact), `--hp-*` (Homepage), `--pp-*` (Projects listing), and `--srv-*` (Service) compatibility aliases have been retired (P2.2, July 2026). Each was a 1:1 alias for a shared token (e.g. `--cp-ink: var(--color-text-primary);`), so retiring them was a mechanical, zero-risk substitution: replace every `var(--cp-ink)` with `var(--color-text-primary)` directly, then delete the now-unreferenced alias declaration — verified with `npm run capture:references` afterward (see P2.2's build-plan note for the full before/after diff results, including how photographic-page capture noise was distinguished from a real regression along the way). Do not add new page-prefixed tokens; use the shared semantic roles directly, as shown below.
 
 Use semantic roles directly in new CSS:
 

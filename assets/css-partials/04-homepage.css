@@ -460,14 +460,14 @@ body.pills-on-light #floatingNavPill.is-open .pillmenu .pill:hover {
 }
 
 .thanks__inner .h2 {
-    font-family: var(--cp-font-display);
+    font-family: var(--font-family-display);
     font-weight: 500;
-    color: var(--cp-ink);
+    color: var(--color-text-primary);
 }
 
 .thanks__inner .lead {
     margin: 0 0 24px;
-    color: var(--cp-ink-2);
+    color: var(--color-text-secondary);
 }
 
 .about-cta-band .h2,

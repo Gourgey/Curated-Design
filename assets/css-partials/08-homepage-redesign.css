@@ -4,30 +4,14 @@
    Tokens scoped to wrappers so they don't leak into the rest of
    the site (notably the global --ink remains #f2f2f2).
    ============================================================ */
-.home-section,
-.home-philosophy,
-.home-cta {
-    --hp-paper: var(--color-surface-light);
-    --hp-paper-2: var(--color-canvas-light);
-    --hp-ink: var(--color-text-primary);
-    --hp-ink-2: var(--color-text-secondary);
-    --hp-ink-3: var(--color-text-muted);
-    --hp-rule: var(--color-border);
-    --hp-rule-soft: var(--color-border-soft);
-    --hp-void: var(--color-surface-inverse);
-    --hp-void-ink: var(--color-text-inverse);
-    --hp-font-display: var(--font-family-display);
-    --hp-font-body: var(--font-family-body);
-}
-
 /* ---- Shared section spine (cream band) ---- */
 .home-section {
     position: relative;
     z-index: 1;
     padding: 144px 80px 112px;
-    background: var(--hp-paper-2);
-    color: var(--hp-ink);
-    font-family: var(--hp-font-body);
+    background: var(--color-canvas-light);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-body);
 }
 .home-section__inner {
     max-width: 1280px;
@@ -41,22 +25,22 @@
     padding-bottom: 56px;
 }
 .home-section__eyebrow {
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--hp-ink);
+    color: var(--color-text-primary);
     margin: 14px 0 0;
 }
 .home-section__title {
-    font-family: var(--hp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: clamp(44px, 5.4vw, 72px);
     line-height: 1.04;
     letter-spacing: -0.016em;
-    color: var(--hp-ink);
+    color: var(--color-text-primary);
     margin: 0 0 32px;
     text-wrap: balance;
     max-width: 18ch;
@@ -64,12 +48,12 @@
 
 .home-section__title em { font-style: italic; }
 .home-section__intro {
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 17px;
     line-height: 1.6;
     letter-spacing: 0.005em;
-    color: var(--hp-ink-2);
+    color: var(--color-text-secondary);
     margin: 0;
     max-width: 38em;
     text-wrap: pretty;
@@ -105,7 +89,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 64px 48px;
-    border-top: 1px solid var(--hp-rule-soft);
+    border-top: 1px solid var(--color-border-soft);
     padding-top: 56px;
 }
 .home-service-card {
@@ -119,7 +103,7 @@
 .home-service-card__media {
     aspect-ratio: 4 / 3;
     width: 100%;
-    background-color: var(--hp-paper);
+    background-color: var(--color-surface-light);
     margin-bottom: 18px;
     overflow: hidden;
 }
@@ -130,28 +114,28 @@
     display: block;
 }
 .home-service-card__title {
-    font-family: var(--hp-font-display);
+    font-family: var(--font-family-display);
     font-weight: 400;
     font-size: 24px;
     line-height: 1.2;
     letter-spacing: -0.008em;
-    color: var(--hp-ink);
+    color: var(--color-text-primary);
     margin: 0 0 8px;
 }
 .home-service-card__summary {
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 14px;
     line-height: 1.55;
-    color: var(--hp-ink-2);
+    color: var(--color-text-secondary);
     margin: 0;
     text-wrap: pretty;
 }
 
 /* Dark void variant — matches Design Philosophy band */
 .home-services {
-    background: var(--hp-void);
-    color: var(--hp-void-ink);
+    background: var(--color-surface-inverse);
+    color: var(--color-text-inverse);
 }
 .home-services .home-section__eyebrow {
     color: rgba(237, 232, 221, 0.55);
@@ -174,13 +158,13 @@
 
 /* ---- Featured Projects grid ---- */
 .home-collections {
-    border-top: 1px solid var(--hp-rule-soft);
+    border-top: 1px solid var(--color-border-soft);
 }
 .home-collections__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 64px 48px;
-    border-top: 1px solid var(--hp-rule-soft);
+    border-top: 1px solid var(--color-border-soft);
     padding-top: 56px;
 }
 
@@ -202,7 +186,7 @@
 .home-project__media {
     aspect-ratio: 4 / 3;
     width: 100%;
-    background-color: var(--hp-paper);
+    background-color: var(--color-surface-light);
     margin-bottom: 18px;
     overflow: hidden;
 }
@@ -213,55 +197,55 @@
     display: block;
 }
 .home-project__title {
-    font-family: var(--hp-font-display);
+    font-family: var(--font-family-display);
     font-weight: 400;
     font-size: 24px;
     line-height: 1.2;
     letter-spacing: -0.008em;
-    color: var(--hp-ink);
+    color: var(--color-text-primary);
     margin: 0 0 8px;
 }
 .home-project__kicker {
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--hp-ink-3);
+    color: var(--color-text-muted);
     margin: 0;
 }
 
 .home-collections__more {
     margin-top: 80px;
     padding-top: 32px;
-    border-top: 1px solid var(--hp-rule-soft);
+    border-top: 1px solid var(--color-border-soft);
     display: flex;
     justify-content: space-between;
     align-items: baseline;
 }
 .home-collections__more-label {
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--hp-ink-3);
+    color: var(--color-text-muted);
     margin: 0;
 }
 .home-collections__more-link {
-    font-family: var(--hp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 400;
     font-size: 20px;
-    color: var(--hp-ink);
+    color: var(--color-text-primary);
     text-decoration: none;
-    border-bottom: 1px solid var(--hp-rule);
+    border-bottom: 1px solid var(--color-border);
     padding-bottom: 2px;
     transition: border-color 200ms ease, padding-right 200ms ease;
 }
 .home-collections__more-link::after { content: " →"; font-style: normal; }
 .home-collections__more-link:hover {
-    border-bottom-color: var(--hp-ink);
+    border-bottom-color: var(--color-text-primary);
     padding-right: 6px;
 }
 
@@ -269,10 +253,10 @@
 .home-philosophy {
     position: relative;
     z-index: 1;
-    background: var(--hp-void);
-    color: var(--hp-void-ink);
+    background: var(--color-surface-inverse);
+    color: var(--color-text-inverse);
     padding: 144px 80px;
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
 }
 .home-philosophy__inner {
     max-width: 1280px;
@@ -284,7 +268,7 @@
 }
 .home-philosophy__media {
     aspect-ratio: 4 / 5;
-    background-color: var(--hp-paper-2);
+    background-color: var(--color-canvas-light);
     margin: 0;
     overflow: hidden;
 }
@@ -299,7 +283,7 @@
     flex-direction: column;
 }
 .home-philosophy__eyebrow {
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
@@ -308,7 +292,7 @@
     margin: 0 0 32px;
 }
 .home-philosophy__title {
-    font-family: var(--hp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: clamp(40px, 4.6vw, 60px);
@@ -321,7 +305,7 @@
 }
 .home-philosophy__title em { font-style: italic; }
 .home-philosophy__text {
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 17px;
     line-height: 1.65;
@@ -336,19 +320,19 @@
 .home-cta {
     position: relative;
     z-index: 1;
-    background: var(--hp-void);
-    color: var(--hp-void-ink);
+    background: var(--color-surface-inverse);
+    color: var(--color-text-inverse);
     padding: 96px 80px 144px;
     border-top: 1px solid rgba(237, 232, 221, 0.10);
     text-align: center;
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
 }
 .home-cta__inner {
     max-width: 1000px;
     margin: 0 auto;
 }
 .home-cta__eyebrow {
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
@@ -357,7 +341,7 @@
     margin: 0 0 32px;
 }
 .home-cta__title {
-    font-family: var(--hp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: clamp(48px, 5vw, 72px);
@@ -370,7 +354,7 @@
 }
 .home-cta__title em { font-style: italic; }
 .home-cta__subline {
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 17px;
     line-height: 1.6;
@@ -384,7 +368,7 @@
     gap: 12px;
     padding: 0 0 4px;
     border-bottom: 1px solid rgba(237, 232, 221, 0.95);
-    font-family: var(--hp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 400;
     font-size: 22px;

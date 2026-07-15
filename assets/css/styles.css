@@ -1162,14 +1162,14 @@ body.pills-on-light #floatingNavPill.is-open .pillmenu .pill:hover {
 }
 
 .thanks__inner .h2 {
-    font-family: var(--cp-font-display);
+    font-family: var(--font-family-display);
     font-weight: 500;
-    color: var(--cp-ink);
+    color: var(--color-text-primary);
 }
 
 .thanks__inner .lead {
     margin: 0 0 24px;
-    color: var(--cp-ink-2);
+    color: var(--color-text-secondary);
 }
 
 .about-cta-band .h2,
@@ -1313,24 +1313,16 @@ html.about-page {
 }
 
 body.about-page {
-    --sp-paper-2: var(--color-canvas-light);
-    --sp-ink: var(--color-text-primary);
-    --sp-ink-2: var(--color-text-secondary);
-    --sp-ink-3: var(--color-text-muted);
-    --sp-rule: var(--color-border);
-    --sp-rule-soft: var(--color-border-soft);
-    --sp-font-display: var(--font-family-display);
-    --sp-font-body: var(--font-family-body);
-    background: var(--sp-paper-2);
-    color: var(--sp-ink);
-    font-family: var(--sp-font-body);
+    background: var(--color-canvas-light);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-body);
 }
 
 /* Nav + pills on light page */
 body.about-page .pill,
 body.about-page .pillmenu-toggle,
 body.about-page .nav-pill {
-    color: var(--sp-ink);
+    color: var(--color-text-primary);
 }
 body.about-page .pillmenu-toggle .burger-line {
     background: currentColor;
@@ -1346,41 +1338,41 @@ body.about-page main.studio {
 /* 01 — Editorial header (no centred logo) */
 body.about-page .studio-header {
     padding-bottom: 96px;
-    border-bottom: 1px solid var(--sp-rule-soft);
+    border-bottom: 1px solid var(--color-border-soft);
     display: grid;
     grid-template-columns: 96px 1fr;
     gap: 32px;
     align-items: start;
 }
 body.about-page .studio-header__eyebrow {
-    font-family: var(--sp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--sp-ink);
+    color: var(--color-text-primary);
     margin: 14px 0 0;
 }
 body.about-page .studio-header__title {
-    font-family: var(--sp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: clamp(48px, 6.2vw, 84px);
     line-height: 1.04;
     letter-spacing: -0.016em;
-    color: var(--sp-ink);
+    color: var(--color-text-primary);
     margin: 0 0 40px;
     text-wrap: balance;
 }
 body.about-page .studio-header__title em { font-style: italic; }
 
 body.about-page .studio-header__intro {
-    font-family: var(--sp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 18px;
     line-height: 1.6;
     letter-spacing: 0.005em;
-    color: var(--sp-ink-2);
+    color: var(--color-text-secondary);
     margin: 0;
     max-width: 38em;
     text-wrap: pretty;
@@ -1394,23 +1386,23 @@ body.about-page .studio-two {
     padding: 80px 0 96px;
 }
 body.about-page .studio-two__heading {
-    font-family: var(--sp-font-display);
+    font-family: var(--font-family-display);
     font-style: normal;
     font-weight: 400;
     font-size: 36px;
     line-height: 1.2;
     letter-spacing: -0.005em;
-    color: var(--sp-ink);
+    color: var(--color-text-primary);
     margin: 0 0 24px;
     padding-top: 24px;
-    border-top: 1px solid var(--sp-rule-soft);
+    border-top: 1px solid var(--color-border-soft);
 }
 body.about-page .studio-two__body p {
-    font-family: var(--sp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 16px;
     line-height: 1.65;
-    color: var(--sp-ink-2);
+    color: var(--color-text-secondary);
     margin: 0 0 16px;
     text-wrap: pretty;
     max-width: 34em;
@@ -1424,14 +1416,14 @@ body.about-page .studio-two__list {
     flex-direction: column;
 }
 body.about-page .studio-two__list li {
-    font-family: var(--sp-font-display);
+    font-family: var(--font-family-display);
     font-weight: 300;
     font-size: 22px;
     line-height: 1.35;
     letter-spacing: -0.005em;
-    color: var(--sp-ink);
+    color: var(--color-text-primary);
     padding: 14px 0;
-    border-bottom: 1px solid var(--sp-rule-soft);
+    border-bottom: 1px solid var(--color-border-soft);
 }
 body.about-page .studio-two__list li:first-child { padding-top: 0; }
 body.about-page .studio-two__list li:last-child { border-bottom: none; }
@@ -1439,7 +1431,7 @@ body.about-page .studio-two__list li:last-child { border-bottom: none; }
 /* 03 — Process · i / ii / iii */
 body.about-page .studio-process {
     padding: 96px 0;
-    border-top: 1px solid var(--sp-rule-soft);
+    border-top: 1px solid var(--color-border-soft);
 }
 body.about-page .studio-process__lead {
     display: grid;
@@ -1449,22 +1441,22 @@ body.about-page .studio-process__lead {
     margin-bottom: 64px;
 }
 body.about-page .studio-process__eyebrow {
-    font-family: var(--sp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--sp-ink);
+    color: var(--color-text-primary);
     margin: 0;
 }
 body.about-page .studio-process__title {
-    font-family: var(--sp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: 48px;
     line-height: 1.04;
     letter-spacing: -0.012em;
-    color: var(--sp-ink);
+    color: var(--color-text-primary);
     margin: 0;
     text-wrap: balance;
     max-width: 18ch;
@@ -1480,44 +1472,44 @@ body.about-page .step {
     display: flex;
     flex-direction: column;
     padding-top: 24px;
-    border-top: 1px solid var(--sp-ink);
+    border-top: 1px solid var(--color-text-primary);
 }
 body.about-page .step__roman {
-    font-family: var(--sp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 400;
     font-size: 28px;
     letter-spacing: 0.04em;
-    color: var(--sp-ink);
+    color: var(--color-text-primary);
     margin: 0 0 32px;
 }
 body.about-page .step__label {
-    font-family: var(--sp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--sp-ink-2);
+    color: var(--color-text-secondary);
     margin: 0 0 12px;
 }
 body.about-page .step__head {
-    font-family: var(--sp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: 28px;
     line-height: 1.15;
     letter-spacing: -0.008em;
-    color: var(--sp-ink);
+    color: var(--color-text-primary);
     margin: 0 0 16px;
     text-wrap: balance;
     max-width: 14ch;
 }
 body.about-page .step__body {
-    font-family: var(--sp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 15px;
     line-height: 1.6;
-    color: var(--sp-ink-2);
+    color: var(--color-text-secondary);
     margin: 0;
     text-wrap: pretty;
 }
@@ -1525,19 +1517,19 @@ body.about-page .step__body {
 /* 04 — Locations & scope */
 body.about-page .studio-locations {
     padding: 96px 0 80px;
-    border-top: 1px solid var(--sp-rule-soft);
+    border-top: 1px solid var(--color-border-soft);
     display: grid;
     grid-template-columns: 96px 1fr;
     gap: 32px;
     align-items: start;
 }
 body.about-page .studio-locations__eyebrow {
-    font-family: var(--sp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--sp-ink);
+    color: var(--color-text-primary);
     margin: 6px 0 0;
 }
 body.about-page .studio-locations__body {
@@ -1547,20 +1539,20 @@ body.about-page .studio-locations__body {
     max-width: 56em;
 }
 body.about-page .studio-locations__heading {
-    font-family: var(--sp-font-display);
+    font-family: var(--font-family-display);
     font-weight: 400;
     font-size: 36px;
     line-height: 1.2;
     letter-spacing: -0.005em;
-    color: var(--sp-ink);
+    color: var(--color-text-primary);
     margin: 0;
 }
 body.about-page .studio-locations__body p {
-    font-family: var(--sp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 17px;
     line-height: 1.6;
-    color: var(--sp-ink-2);
+    color: var(--color-text-secondary);
     margin: 0;
     text-wrap: pretty;
 }
@@ -1575,23 +1567,23 @@ body.about-page .studio-docs__intro {
     gap: 32px;
     align-items: baseline;
     padding: 24px 0 32px;
-    border-top: 1px solid var(--sp-rule-soft);
+    border-top: 1px solid var(--color-border-soft);
 }
 body.about-page .studio-docs__eyebrow {
-    font-family: var(--sp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--sp-ink);
+    color: var(--color-text-primary);
     margin: 0;
 }
 body.about-page .studio-docs__hint {
-    font-family: var(--sp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: 18px;
-    color: var(--sp-ink-3);
+    color: var(--color-text-muted);
     margin: 0;
 }
 
@@ -1606,54 +1598,54 @@ body.about-page .doc-list__item {
     gap: 32px;
     align-items: baseline;
     padding: 28px 0;
-    border-top: 1px solid var(--sp-ink);
+    border-top: 1px solid var(--color-text-primary);
 }
 body.about-page .doc-list__item:last-child {
-    border-bottom: 1px solid var(--sp-ink);
+    border-bottom: 1px solid var(--color-text-primary);
 }
 body.about-page .doc-list__label {
-    font-family: var(--sp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--sp-ink-2);
+    color: var(--color-text-secondary);
     margin: 0;
 }
 body.about-page .doc-list__title {
-    font-family: var(--sp-font-display);
+    font-family: var(--font-family-display);
     font-weight: 400;
     font-size: 24px;
     line-height: 1.25;
     letter-spacing: -0.005em;
-    color: var(--sp-ink);
+    color: var(--color-text-primary);
     margin: 0;
 }
 body.about-page .doc-list__title .meta {
     display: block;
     margin-top: 4px;
-    font-family: var(--sp-font-body);
+    font-family: var(--font-family-body);
     font-size: 13px;
     font-weight: 300;
     letter-spacing: 0;
-    color: var(--sp-ink-3);
+    color: var(--color-text-muted);
     text-transform: none;
 }
 body.about-page .doc-list__link {
-    font-family: var(--sp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 400;
     font-size: 18px;
     letter-spacing: -0.005em;
-    color: var(--sp-ink);
+    color: var(--color-text-primary);
     text-decoration: none;
-    border-bottom: 1px solid var(--sp-rule);
+    border-bottom: 1px solid var(--color-border);
     padding-bottom: 2px;
     white-space: nowrap;
     transition: border-color 200ms ease, padding-right 200ms ease;
 }
 body.about-page .doc-list__link:hover {
-    border-bottom-color: var(--sp-ink);
+    border-bottom-color: var(--color-text-primary);
     padding-right: 6px;
 }
 body.about-page .doc-list__link::after {
@@ -1708,25 +1700,16 @@ html.contact-page {
 }
 
 body.contact-page {
-    --cp-paper: var(--color-surface-light);
-    --cp-paper-2: var(--color-canvas-light);
-    --cp-ink: var(--color-text-primary);
-    --cp-ink-2: var(--color-text-secondary);
-    --cp-ink-3: var(--color-text-muted);
-    --cp-rule: var(--color-border);
-    --cp-rule-soft: var(--color-border-soft);
-    --cp-font-display: var(--font-family-display);
-    --cp-font-body: var(--font-family-body);
-    background: var(--cp-paper-2);
-    color: var(--cp-ink);
-    font-family: var(--cp-font-body);
+    background: var(--color-canvas-light);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-body);
 }
 
 /* Nav + pills on light page */
 body.contact-page .pill,
 body.contact-page .pillmenu-toggle,
 body.contact-page .nav-pill {
-    color: var(--cp-ink);
+    color: var(--color-text-primary);
 }
 body.contact-page .pillmenu-toggle .burger-line {
     background: currentColor;
@@ -1753,13 +1736,13 @@ body.contact-page .contact-body {
 
 /* Left column */
 body.contact-page .contact-headline {
-    font-family: var(--cp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: 76px;
     line-height: 1.04;
     letter-spacing: -0.015em;
-    color: var(--cp-ink);
+    color: var(--color-text-primary);
     margin: 0 0 32px;
     text-wrap: balance;
     max-width: 10em;
@@ -1767,12 +1750,12 @@ body.contact-page .contact-headline {
 
 body.contact-page .contact-headline em { font-style: italic; }
 body.contact-page .contact-subline {
-    font-family: var(--cp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 17px;
     line-height: 1.55;
     letter-spacing: 0.005em;
-    color: var(--cp-ink-2);
+    color: var(--color-text-secondary);
     margin: 0 0 80px;
     max-width: 38em;
     text-wrap: pretty;
@@ -1784,48 +1767,48 @@ body.contact-page .studio-meta {
     flex-direction: column;
     gap: 16px;
     padding-top: 32px;
-    border-top: 1px solid var(--cp-rule-soft);
+    border-top: 1px solid var(--color-border-soft);
     font-style: normal;
 }
 body.contact-page .studio-meta__name {
-    font-family: var(--cp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--cp-ink);
+    color: var(--color-text-primary);
     margin: 0;
 }
 body.contact-page .studio-meta__addr {
-    font-family: var(--cp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 17px;
     line-height: 1.5;
-    color: var(--cp-ink-2);
+    color: var(--color-text-secondary);
     margin: 0;
     font-style: normal;
 }
 body.contact-page .studio-meta__email {
-    font-family: var(--cp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 400;
     font-size: 17px;
-    color: var(--cp-ink);
+    color: var(--color-text-primary);
     text-decoration: none;
-    border-bottom: 1px solid var(--cp-rule);
+    border-bottom: 1px solid var(--color-border);
     align-self: flex-start;
     padding-bottom: 1px;
     transition: border-color 200ms ease;
 }
 body.contact-page .studio-meta__email:hover {
-    border-bottom-color: var(--cp-ink);
+    border-bottom-color: var(--color-text-primary);
 }
 body.contact-page .studio-meta__note {
-    font-family: var(--cp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: 16px;
     line-height: 1.45;
-    color: var(--cp-ink-3);
+    color: var(--color-text-muted);
     margin: 12px 0 0;
     max-width: 32em;
     text-wrap: pretty;
@@ -1846,24 +1829,24 @@ body.contact-page .field {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    border-bottom: 1px solid var(--cp-rule);
+    border-bottom: 1px solid var(--color-border);
     padding-bottom: 14px;
     transition: border-color 200ms ease;
 }
 body.contact-page .field:focus-within {
-    border-bottom-color: var(--cp-ink);
+    border-bottom-color: var(--color-text-primary);
 }
 body.contact-page .field__label {
-    font-family: var(--cp-font-body);
+    font-family: var(--font-family-body);
     font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--cp-ink-3);
+    color: var(--color-text-muted);
     margin: 0;
 }
 body.contact-page .field:focus-within .field__label {
-    color: var(--cp-ink);
+    color: var(--color-text-primary);
 }
 body.contact-page .field__input,
 body.contact-page .field__select,
@@ -1871,12 +1854,12 @@ body.contact-page .field__textarea {
     background: transparent;
     border: none;
     outline: none;
-    font-family: var(--cp-font-display);
+    font-family: var(--font-family-display);
     font-weight: 400;
     font-size: 22px;
     line-height: 1.4;
     letter-spacing: -0.005em;
-    color: var(--cp-ink);
+    color: var(--color-text-primary);
     padding: 0;
     width: 100%;
     -webkit-appearance: none;
@@ -1884,14 +1867,14 @@ body.contact-page .field__textarea {
 }
 body.contact-page .field__input::placeholder,
 body.contact-page .field__textarea::placeholder {
-    color: var(--cp-ink-3);
+    color: var(--color-text-muted);
     font-style: italic;
     font-weight: 300;
 }
 body.contact-page .field__textarea {
     resize: vertical;
     min-height: 96px;
-    font-family: var(--cp-font-body);
+    font-family: var(--font-family-body);
     font-size: 16px;
     font-weight: 300;
     line-height: 1.55;
@@ -1907,16 +1890,16 @@ body.contact-page .field__select {
     text-overflow: ellipsis;
 }
 body.contact-page .field__select option {
-    color: var(--cp-ink);
-    background: var(--cp-paper);
+    color: var(--color-text-primary);
+    background: var(--color-surface-light);
 }
 body.contact-page .field--optional .field__label::after {
     content: " · optional";
     font-style: italic;
     letter-spacing: 0.06em;
     text-transform: none;
-    color: var(--cp-ink-3);
-    font-family: var(--cp-font-display);
+    color: var(--color-text-muted);
+    font-family: var(--font-family-display);
     font-weight: 400;
     font-size: 12px;
     margin-left: 2px;
@@ -1933,13 +1916,13 @@ body.contact-page .contact-submit-row {
 body.contact-page .contact-submit {
     background: none;
     border: none;
-    border-bottom: 1px solid var(--cp-ink);
+    border-bottom: 1px solid var(--color-text-primary);
     padding: 0 0 4px;
-    font-family: var(--cp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 400;
     font-size: 22px;
-    color: var(--cp-ink);
+    color: var(--color-text-primary);
     cursor: pointer;
     letter-spacing: -0.005em;
     transition: padding-right 200ms ease;
@@ -1961,20 +1944,20 @@ body.contact-page .contact-submit[disabled] {
     cursor: wait;
 }
 body.contact-page .contact-submit-meta {
-    font-family: var(--cp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--cp-ink-3);
+    color: var(--color-text-muted);
 }
 
 body.contact-page .contact-form-privacy {
-    font-family: var(--cp-font-body);
+    font-family: var(--font-family-body);
     font-size: 12px;
     font-weight: 300;
     line-height: 1.55;
-    color: var(--cp-ink-3);
+    color: var(--color-text-muted);
     margin: -10px 0 0;
 }
 body.contact-page .contact-form-privacy a {
@@ -1984,7 +1967,7 @@ body.contact-page .contact-form-privacy a {
 
 /* Error / success states */
 body.contact-page .contact-form-error {
-    font-family: var(--cp-font-body);
+    font-family: var(--font-family-body);
     font-size: 14px;
     color: var(--color-state-error);
     margin: 0;
@@ -1993,19 +1976,19 @@ body.contact-page .contact-form-success {
     padding-top: 18px;
 }
 body.contact-page .contact-form-success__title {
-    font-family: var(--cp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: 32px;
     line-height: 1.1;
-    color: var(--cp-ink);
+    color: var(--color-text-primary);
     margin: 0 0 12px;
 }
 body.contact-page .contact-form-success__text {
-    font-family: var(--cp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 17px;
-    color: var(--cp-ink-2);
+    color: var(--color-text-secondary);
     margin: 0;
 }
 
@@ -2984,30 +2967,14 @@ body.legal-page .hero-brand {
    Tokens scoped to wrappers so they don't leak into the rest of
    the site (notably the global --ink remains #f2f2f2).
    ============================================================ */
-.home-section,
-.home-philosophy,
-.home-cta {
-    --hp-paper: var(--color-surface-light);
-    --hp-paper-2: var(--color-canvas-light);
-    --hp-ink: var(--color-text-primary);
-    --hp-ink-2: var(--color-text-secondary);
-    --hp-ink-3: var(--color-text-muted);
-    --hp-rule: var(--color-border);
-    --hp-rule-soft: var(--color-border-soft);
-    --hp-void: var(--color-surface-inverse);
-    --hp-void-ink: var(--color-text-inverse);
-    --hp-font-display: var(--font-family-display);
-    --hp-font-body: var(--font-family-body);
-}
-
 /* ---- Shared section spine (cream band) ---- */
 .home-section {
     position: relative;
     z-index: 1;
     padding: 144px 80px 112px;
-    background: var(--hp-paper-2);
-    color: var(--hp-ink);
-    font-family: var(--hp-font-body);
+    background: var(--color-canvas-light);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-body);
 }
 .home-section__inner {
     max-width: 1280px;
@@ -3021,22 +2988,22 @@ body.legal-page .hero-brand {
     padding-bottom: 56px;
 }
 .home-section__eyebrow {
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--hp-ink);
+    color: var(--color-text-primary);
     margin: 14px 0 0;
 }
 .home-section__title {
-    font-family: var(--hp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: clamp(44px, 5.4vw, 72px);
     line-height: 1.04;
     letter-spacing: -0.016em;
-    color: var(--hp-ink);
+    color: var(--color-text-primary);
     margin: 0 0 32px;
     text-wrap: balance;
     max-width: 18ch;
@@ -3044,12 +3011,12 @@ body.legal-page .hero-brand {
 
 .home-section__title em { font-style: italic; }
 .home-section__intro {
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 17px;
     line-height: 1.6;
     letter-spacing: 0.005em;
-    color: var(--hp-ink-2);
+    color: var(--color-text-secondary);
     margin: 0;
     max-width: 38em;
     text-wrap: pretty;
@@ -3085,7 +3052,7 @@ body.legal-page .hero-brand {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 64px 48px;
-    border-top: 1px solid var(--hp-rule-soft);
+    border-top: 1px solid var(--color-border-soft);
     padding-top: 56px;
 }
 .home-service-card {
@@ -3099,7 +3066,7 @@ body.legal-page .hero-brand {
 .home-service-card__media {
     aspect-ratio: 4 / 3;
     width: 100%;
-    background-color: var(--hp-paper);
+    background-color: var(--color-surface-light);
     margin-bottom: 18px;
     overflow: hidden;
 }
@@ -3110,28 +3077,28 @@ body.legal-page .hero-brand {
     display: block;
 }
 .home-service-card__title {
-    font-family: var(--hp-font-display);
+    font-family: var(--font-family-display);
     font-weight: 400;
     font-size: 24px;
     line-height: 1.2;
     letter-spacing: -0.008em;
-    color: var(--hp-ink);
+    color: var(--color-text-primary);
     margin: 0 0 8px;
 }
 .home-service-card__summary {
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 14px;
     line-height: 1.55;
-    color: var(--hp-ink-2);
+    color: var(--color-text-secondary);
     margin: 0;
     text-wrap: pretty;
 }
 
 /* Dark void variant — matches Design Philosophy band */
 .home-services {
-    background: var(--hp-void);
-    color: var(--hp-void-ink);
+    background: var(--color-surface-inverse);
+    color: var(--color-text-inverse);
 }
 .home-services .home-section__eyebrow {
     color: rgba(237, 232, 221, 0.55);
@@ -3154,13 +3121,13 @@ body.legal-page .hero-brand {
 
 /* ---- Featured Projects grid ---- */
 .home-collections {
-    border-top: 1px solid var(--hp-rule-soft);
+    border-top: 1px solid var(--color-border-soft);
 }
 .home-collections__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 64px 48px;
-    border-top: 1px solid var(--hp-rule-soft);
+    border-top: 1px solid var(--color-border-soft);
     padding-top: 56px;
 }
 
@@ -3182,7 +3149,7 @@ body.legal-page .hero-brand {
 .home-project__media {
     aspect-ratio: 4 / 3;
     width: 100%;
-    background-color: var(--hp-paper);
+    background-color: var(--color-surface-light);
     margin-bottom: 18px;
     overflow: hidden;
 }
@@ -3193,55 +3160,55 @@ body.legal-page .hero-brand {
     display: block;
 }
 .home-project__title {
-    font-family: var(--hp-font-display);
+    font-family: var(--font-family-display);
     font-weight: 400;
     font-size: 24px;
     line-height: 1.2;
     letter-spacing: -0.008em;
-    color: var(--hp-ink);
+    color: var(--color-text-primary);
     margin: 0 0 8px;
 }
 .home-project__kicker {
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--hp-ink-3);
+    color: var(--color-text-muted);
     margin: 0;
 }
 
 .home-collections__more {
     margin-top: 80px;
     padding-top: 32px;
-    border-top: 1px solid var(--hp-rule-soft);
+    border-top: 1px solid var(--color-border-soft);
     display: flex;
     justify-content: space-between;
     align-items: baseline;
 }
 .home-collections__more-label {
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--hp-ink-3);
+    color: var(--color-text-muted);
     margin: 0;
 }
 .home-collections__more-link {
-    font-family: var(--hp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 400;
     font-size: 20px;
-    color: var(--hp-ink);
+    color: var(--color-text-primary);
     text-decoration: none;
-    border-bottom: 1px solid var(--hp-rule);
+    border-bottom: 1px solid var(--color-border);
     padding-bottom: 2px;
     transition: border-color 200ms ease, padding-right 200ms ease;
 }
 .home-collections__more-link::after { content: " →"; font-style: normal; }
 .home-collections__more-link:hover {
-    border-bottom-color: var(--hp-ink);
+    border-bottom-color: var(--color-text-primary);
     padding-right: 6px;
 }
 
@@ -3249,10 +3216,10 @@ body.legal-page .hero-brand {
 .home-philosophy {
     position: relative;
     z-index: 1;
-    background: var(--hp-void);
-    color: var(--hp-void-ink);
+    background: var(--color-surface-inverse);
+    color: var(--color-text-inverse);
     padding: 144px 80px;
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
 }
 .home-philosophy__inner {
     max-width: 1280px;
@@ -3264,7 +3231,7 @@ body.legal-page .hero-brand {
 }
 .home-philosophy__media {
     aspect-ratio: 4 / 5;
-    background-color: var(--hp-paper-2);
+    background-color: var(--color-canvas-light);
     margin: 0;
     overflow: hidden;
 }
@@ -3279,7 +3246,7 @@ body.legal-page .hero-brand {
     flex-direction: column;
 }
 .home-philosophy__eyebrow {
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
@@ -3288,7 +3255,7 @@ body.legal-page .hero-brand {
     margin: 0 0 32px;
 }
 .home-philosophy__title {
-    font-family: var(--hp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: clamp(40px, 4.6vw, 60px);
@@ -3301,7 +3268,7 @@ body.legal-page .hero-brand {
 }
 .home-philosophy__title em { font-style: italic; }
 .home-philosophy__text {
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 17px;
     line-height: 1.65;
@@ -3316,19 +3283,19 @@ body.legal-page .hero-brand {
 .home-cta {
     position: relative;
     z-index: 1;
-    background: var(--hp-void);
-    color: var(--hp-void-ink);
+    background: var(--color-surface-inverse);
+    color: var(--color-text-inverse);
     padding: 96px 80px 144px;
     border-top: 1px solid rgba(237, 232, 221, 0.10);
     text-align: center;
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
 }
 .home-cta__inner {
     max-width: 1000px;
     margin: 0 auto;
 }
 .home-cta__eyebrow {
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
@@ -3337,7 +3304,7 @@ body.legal-page .hero-brand {
     margin: 0 0 32px;
 }
 .home-cta__title {
-    font-family: var(--hp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: clamp(48px, 5vw, 72px);
@@ -3350,7 +3317,7 @@ body.legal-page .hero-brand {
 }
 .home-cta__title em { font-style: italic; }
 .home-cta__subline {
-    font-family: var(--hp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 17px;
     line-height: 1.6;
@@ -3364,7 +3331,7 @@ body.legal-page .hero-brand {
     gap: 12px;
     padding: 0 0 4px;
     border-bottom: 1px solid rgba(237, 232, 221, 0.95);
-    font-family: var(--hp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 400;
     font-size: 22px;
@@ -3592,17 +3559,9 @@ html.projects-page {
 }
 
 body.projects-page {
-    --pp-paper: var(--color-surface-light);
-    --pp-paper-2: var(--color-canvas-light);
-    --pp-ink: var(--color-text-primary);
-    --pp-ink-2: var(--color-text-secondary);
-    --pp-ink-3: var(--color-text-muted);
-    --pp-rule-soft: var(--color-border-soft);
-    --pp-font-display: var(--font-family-display);
-    --pp-font-body: var(--font-family-body);
-    background: var(--pp-paper-2);
-    color: var(--pp-ink);
-    font-family: var(--pp-font-body);
+    background: var(--color-canvas-light);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-body);
     min-height: 100vh;
 }
 
@@ -3615,35 +3574,35 @@ body.projects-page .projects-header {
     grid-template-columns: 96px 1fr;
     gap: 32px;
     align-items: start;
-    border-bottom: 1px solid var(--pp-rule-soft);
+    border-bottom: 1px solid var(--color-border-soft);
 }
 body.projects-page .projects-header__eyebrow {
-    font-family: var(--pp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--pp-ink);
+    color: var(--color-text-primary);
     margin: 14px 0 0;
 }
 body.projects-page .projects-header__title {
-    font-family: var(--pp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: clamp(48px, 6.2vw, 84px);
     line-height: 1.04;
     letter-spacing: -0.016em;
-    color: var(--pp-ink);
+    color: var(--color-text-primary);
     margin: 0 0 32px;
     text-wrap: balance;
 }
 body.projects-page .projects-header__title em { font-style: italic; }
 body.projects-page .projects-header__intro {
-    font-family: var(--pp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 18px;
     line-height: 1.6;
-    color: var(--pp-ink-2);
+    color: var(--color-text-secondary);
     margin: 0;
     max-width: 38em;
     text-wrap: pretty;
@@ -3654,7 +3613,7 @@ body.projects-page .projects-section {
     padding: 80px 0;
 }
 body.projects-page .projects-section + .projects-section {
-    border-top: 1px solid var(--pp-rule-soft);
+    border-top: 1px solid var(--color-border-soft);
 }
 body.projects-page .projects-section__inner {
     max-width: 1280px;
@@ -3674,24 +3633,24 @@ body.projects-page .projects-section__eyebrow {
 }
 body.projects-page .projects-section__heading {
     grid-column: 2;
-    font-family: var(--pp-font-display);
+    font-family: var(--font-family-display);
     font-weight: 400;
     font-size: clamp(32px, 4vw, 48px);
     line-height: 1.1;
     letter-spacing: -0.012em;
-    color: var(--pp-ink);
+    color: var(--color-text-primary);
     margin: 0 0 16px;
     text-wrap: balance;
     max-width: 22ch;
 }
 body.projects-page .projects-section__note {
     grid-column: 2;
-    font-family: var(--pp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: 18px;
     line-height: 1.5;
-    color: var(--pp-ink-3);
+    color: var(--color-text-muted);
     margin: 0;
     max-width: 42em;
     text-wrap: pretty;
@@ -3716,7 +3675,7 @@ body.projects-page .projects-card:hover {
 body.projects-page .projects-card__media {
     aspect-ratio: 4 / 3;
     width: 100%;
-    background-color: var(--pp-paper);
+    background-color: var(--color-surface-light);
     overflow: hidden;
     margin-bottom: 18px;
     border-radius: 0;
@@ -3732,32 +3691,32 @@ body.projects-page .projects-card__body {
     padding: 0;
 }
 body.projects-page .projects-card__title {
-    font-family: var(--pp-font-display);
+    font-family: var(--font-family-display);
     font-weight: 400;
     font-size: 22px;
     line-height: 1.2;
     letter-spacing: -0.008em;
-    color: var(--pp-ink);
+    color: var(--color-text-primary);
     margin: 0 0 8px;
 }
 body.projects-page .projects-card__kicker {
-    font-family: var(--pp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--pp-ink-3);
+    color: var(--color-text-muted);
     margin: 0;
 }
 
 /* .label-small in projects-page context — slightly more prominent than detail-page */
 body.projects-page .label-small {
-    font-family: var(--pp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 500;
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--pp-ink);
+    color: var(--color-text-primary);
 }
 
 /* Pill hover / active states — cream-page treatment.
@@ -3767,11 +3726,11 @@ body.projects-page .label-small {
    visible. */
 body.projects-page .pill:hover {
     background: rgba(0, 0, 0, 0.06);
-    color: var(--pp-ink);
+    color: var(--color-text-primary);
 }
 body.projects-page .pill.active {
     background: rgba(0, 0, 0, 0.1);
-    color: var(--pp-ink);
+    color: var(--color-text-primary);
 }
 
 /* Responsive */
@@ -3825,16 +3784,9 @@ html.concept-page {
 }
 
 body.concept-page {
-    --srv-paper-2: var(--color-canvas-light);
-    --srv-ink: var(--color-text-primary);
-    --srv-ink-2: var(--color-text-secondary);
-    --srv-ink-3: var(--color-text-muted);
-    --srv-rule: var(--color-border);
-    --srv-font-display: var(--font-family-display);
-    --srv-font-body: var(--font-family-body);
-    background: var(--srv-paper-2);
-    color: var(--srv-ink);
-    font-family: var(--srv-font-body);
+    background: var(--color-canvas-light);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-body);
 }
 
 /* Outer rhythm */
@@ -3853,32 +3805,32 @@ body.concept-page .service-header {
     padding-bottom: 64px;
 }
 body.concept-page .service-header__eyebrow {
-    font-family: var(--srv-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--srv-ink);
+    color: var(--color-text-primary);
     margin: 14px 0 0;
 }
 body.concept-page .service-header__title {
-    font-family: var(--srv-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: clamp(48px, 6.2vw, 84px);
     line-height: 1.04;
     letter-spacing: -0.016em;
-    color: var(--srv-ink);
+    color: var(--color-text-primary);
     margin: 0 0 32px;
     text-wrap: balance;
 }
 body.concept-page .service-header__title em { font-style: italic; }
 body.concept-page .service-header__intro {
-    font-family: var(--srv-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 18px;
     line-height: 1.6;
-    color: var(--srv-ink-2);
+    color: var(--color-text-secondary);
     margin: 0;
     max-width: 38em;
     text-wrap: pretty;
@@ -3923,14 +3875,14 @@ body.concept-page .service-section__heading {
     margin: 0 0 16px;
 }
 body.concept-page .service-section__list {
-    font-family: var(--srv-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 15px;
     line-height: 1.7;
     list-style: none;
     padding: 0;
     margin: 0;
-    color: var(--srv-ink-2);
+    color: var(--color-text-secondary);
 }
 body.concept-page .service-section__list li {
     padding: 10px 0;
@@ -3952,19 +3904,19 @@ body.concept-page ol.service-section__list li::before {
     position: absolute;
     left: 0;
     top: 10px;
-    font-family: var(--srv-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
-    color: var(--srv-ink-3);
+    color: var(--color-text-muted);
     font-size: 14px;
     letter-spacing: 0.04em;
 }
 body.concept-page .service-section__note {
-    font-family: var(--srv-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: 15px;
     line-height: 1.5;
-    color: var(--srv-ink-3);
+    color: var(--color-text-muted);
     margin: 20px 0 0;
     max-width: 38em;
     text-wrap: pretty;
@@ -4001,7 +3953,7 @@ body.concept-page .service-glance__row:first-child {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 body.concept-page .service-glance__label {
-    font-family: var(--srv-font-body);
+    font-family: var(--font-family-body);
     font-weight: 500;
     font-size: 12px;
     letter-spacing: 0.15em;
@@ -4010,11 +3962,11 @@ body.concept-page .service-glance__label {
     margin: 0;
 }
 body.concept-page .service-glance__value {
-    font-family: var(--srv-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-size: 16px;
     line-height: 1.4;
-    color: var(--srv-ink);
+    color: var(--color-text-primary);
     margin: 0;
     text-align: right;
     max-width: 65%;
@@ -4022,22 +3974,22 @@ body.concept-page .service-glance__value {
 
 /* Enquiry block */
 body.concept-page .service-enquiry__title {
-    font-family: var(--srv-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: clamp(24px, 2.2vw, 32px);
     line-height: 1.1;
     letter-spacing: -0.012em;
-    color: var(--srv-ink);
+    color: var(--color-text-primary);
     margin: 0 0 12px;
     text-wrap: balance;
 }
 body.concept-page .service-enquiry__intro {
-    font-family: var(--srv-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 14px;
     line-height: 1.55;
-    color: var(--srv-ink-2);
+    color: var(--color-text-secondary);
     margin: 0 0 24px;
 }
 
@@ -4052,36 +4004,36 @@ body.concept-page .service-enquiry__form .field {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    border-bottom: 1px solid var(--srv-rule);
+    border-bottom: 1px solid var(--color-border);
     padding-bottom: 12px;
     transition: border-color 200ms ease;
 }
 body.concept-page .service-enquiry__form .field:focus-within {
-    border-bottom-color: var(--srv-ink);
+    border-bottom-color: var(--color-text-primary);
 }
 body.concept-page .service-enquiry__form .field__label {
-    font-family: var(--srv-font-body);
+    font-family: var(--font-family-body);
     font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--srv-ink-3);
+    color: var(--color-text-muted);
     margin: 0;
 }
 body.concept-page .service-enquiry__form .field:focus-within .field__label {
-    color: var(--srv-ink);
+    color: var(--color-text-primary);
 }
 body.concept-page .service-enquiry__form .field__input,
 body.concept-page .service-enquiry__form .field__textarea {
     background: transparent;
     border: none;
     outline: none;
-    font-family: var(--srv-font-display);
+    font-family: var(--font-family-display);
     font-weight: 400;
     font-size: 18px;
     line-height: 1.4;
     letter-spacing: -0.005em;
-    color: var(--srv-ink);
+    color: var(--color-text-primary);
     padding: 0;
     width: 100%;
     -webkit-appearance: none;
@@ -4089,14 +4041,14 @@ body.concept-page .service-enquiry__form .field__textarea {
 }
 body.concept-page .service-enquiry__form .field__input::placeholder,
 body.concept-page .service-enquiry__form .field__textarea::placeholder {
-    color: var(--srv-ink-3);
+    color: var(--color-text-muted);
     font-style: italic;
     font-weight: 300;
 }
 body.concept-page .service-enquiry__form .field__textarea {
     resize: vertical;
     min-height: 80px;
-    font-family: var(--srv-font-body);
+    font-family: var(--font-family-body);
     font-size: 15px;
     font-weight: 300;
     line-height: 1.55;
@@ -4107,8 +4059,8 @@ body.concept-page .service-enquiry__form .field--optional .field__label::after {
     font-style: italic;
     letter-spacing: 0.06em;
     text-transform: none;
-    color: var(--srv-ink-3);
-    font-family: var(--srv-font-display);
+    color: var(--color-text-muted);
+    font-family: var(--font-family-display);
     font-weight: 400;
     font-size: 11px;
     margin-left: 2px;
@@ -4117,14 +4069,14 @@ body.concept-page .service-enquiry__form .field--optional .field__label::after {
 body.concept-page .service-enquiry__privacy,
 body.concept-page .service-enquiry__error,
 body.concept-page .service-enquiry__success-text {
-    font-family: var(--srv-font-body);
+    font-family: var(--font-family-body);
     font-size: 12px;
     font-weight: 300;
     line-height: 1.55;
     margin: 0;
 }
 body.concept-page .service-enquiry__privacy {
-    color: var(--srv-ink-3);
+    color: var(--color-text-muted);
     margin-top: -8px;
 }
 body.concept-page .service-enquiry__privacy a {
@@ -4138,16 +4090,16 @@ body.concept-page .service-enquiry__success {
     padding-top: 8px;
 }
 body.concept-page .service-enquiry__success-title {
-    font-family: var(--srv-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: 28px;
     line-height: 1.1;
-    color: var(--srv-ink);
+    color: var(--color-text-primary);
     margin: 0 0 10px;
 }
 body.concept-page .service-enquiry__success-text {
-    color: var(--srv-ink-2);
+    color: var(--color-text-secondary);
 }
 body.concept-page .service-enquiry__submit[disabled] {
     opacity: 0.7;
@@ -4164,13 +4116,13 @@ body.concept-page .service-enquiry__submit-row {
 body.concept-page .service-enquiry__submit {
     background: none;
     border: none;
-    border-bottom: 1px solid var(--srv-ink);
+    border-bottom: 1px solid var(--color-text-primary);
     padding: 0 0 4px;
-    font-family: var(--srv-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 400;
     font-size: 20px;
-    color: var(--srv-ink);
+    color: var(--color-text-primary);
     cursor: pointer;
     letter-spacing: -0.005em;
     display: inline-flex;
@@ -4192,7 +4144,7 @@ body.concept-page .service-enquiry__submit:hover .service-enquiry__arrow {
 /* .label-small reused from project-detail block — scope explicit here so
    the 11px projects-page treatment doesn't apply on service pages */
 body.concept-page .label-small {
-    font-family: var(--srv-font-body);
+    font-family: var(--font-family-body);
     font-weight: 500;
     font-size: 12px;
     letter-spacing: 0.15em;

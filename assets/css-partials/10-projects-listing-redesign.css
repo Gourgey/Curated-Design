@@ -13,17 +13,9 @@ html.projects-page {
 }
 
 body.projects-page {
-    --pp-paper: var(--color-surface-light);
-    --pp-paper-2: var(--color-canvas-light);
-    --pp-ink: var(--color-text-primary);
-    --pp-ink-2: var(--color-text-secondary);
-    --pp-ink-3: var(--color-text-muted);
-    --pp-rule-soft: var(--color-border-soft);
-    --pp-font-display: var(--font-family-display);
-    --pp-font-body: var(--font-family-body);
-    background: var(--pp-paper-2);
-    color: var(--pp-ink);
-    font-family: var(--pp-font-body);
+    background: var(--color-canvas-light);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-body);
     min-height: 100vh;
 }
 
@@ -36,35 +28,35 @@ body.projects-page .projects-header {
     grid-template-columns: 96px 1fr;
     gap: 32px;
     align-items: start;
-    border-bottom: 1px solid var(--pp-rule-soft);
+    border-bottom: 1px solid var(--color-border-soft);
 }
 body.projects-page .projects-header__eyebrow {
-    font-family: var(--pp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--pp-ink);
+    color: var(--color-text-primary);
     margin: 14px 0 0;
 }
 body.projects-page .projects-header__title {
-    font-family: var(--pp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: clamp(48px, 6.2vw, 84px);
     line-height: 1.04;
     letter-spacing: -0.016em;
-    color: var(--pp-ink);
+    color: var(--color-text-primary);
     margin: 0 0 32px;
     text-wrap: balance;
 }
 body.projects-page .projects-header__title em { font-style: italic; }
 body.projects-page .projects-header__intro {
-    font-family: var(--pp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 18px;
     line-height: 1.6;
-    color: var(--pp-ink-2);
+    color: var(--color-text-secondary);
     margin: 0;
     max-width: 38em;
     text-wrap: pretty;
@@ -75,7 +67,7 @@ body.projects-page .projects-section {
     padding: 80px 0;
 }
 body.projects-page .projects-section + .projects-section {
-    border-top: 1px solid var(--pp-rule-soft);
+    border-top: 1px solid var(--color-border-soft);
 }
 body.projects-page .projects-section__inner {
     max-width: 1280px;
@@ -95,24 +87,24 @@ body.projects-page .projects-section__eyebrow {
 }
 body.projects-page .projects-section__heading {
     grid-column: 2;
-    font-family: var(--pp-font-display);
+    font-family: var(--font-family-display);
     font-weight: 400;
     font-size: clamp(32px, 4vw, 48px);
     line-height: 1.1;
     letter-spacing: -0.012em;
-    color: var(--pp-ink);
+    color: var(--color-text-primary);
     margin: 0 0 16px;
     text-wrap: balance;
     max-width: 22ch;
 }
 body.projects-page .projects-section__note {
     grid-column: 2;
-    font-family: var(--pp-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: 18px;
     line-height: 1.5;
-    color: var(--pp-ink-3);
+    color: var(--color-text-muted);
     margin: 0;
     max-width: 42em;
     text-wrap: pretty;
@@ -137,7 +129,7 @@ body.projects-page .projects-card:hover {
 body.projects-page .projects-card__media {
     aspect-ratio: 4 / 3;
     width: 100%;
-    background-color: var(--pp-paper);
+    background-color: var(--color-surface-light);
     overflow: hidden;
     margin-bottom: 18px;
     border-radius: 0;
@@ -153,32 +145,32 @@ body.projects-page .projects-card__body {
     padding: 0;
 }
 body.projects-page .projects-card__title {
-    font-family: var(--pp-font-display);
+    font-family: var(--font-family-display);
     font-weight: 400;
     font-size: 22px;
     line-height: 1.2;
     letter-spacing: -0.008em;
-    color: var(--pp-ink);
+    color: var(--color-text-primary);
     margin: 0 0 8px;
 }
 body.projects-page .projects-card__kicker {
-    font-family: var(--pp-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--pp-ink-3);
+    color: var(--color-text-muted);
     margin: 0;
 }
 
 /* .label-small in projects-page context — slightly more prominent than detail-page */
 body.projects-page .label-small {
-    font-family: var(--pp-font-body);
+    font-family: var(--font-family-body);
     font-weight: 500;
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--pp-ink);
+    color: var(--color-text-primary);
 }
 
 /* Pill hover / active states — cream-page treatment.
@@ -188,11 +180,11 @@ body.projects-page .label-small {
    visible. */
 body.projects-page .pill:hover {
     background: rgba(0, 0, 0, 0.06);
-    color: var(--pp-ink);
+    color: var(--color-text-primary);
 }
 body.projects-page .pill.active {
     background: rgba(0, 0, 0, 0.1);
-    color: var(--pp-ink);
+    color: var(--color-text-primary);
 }
 
 /* Responsive */

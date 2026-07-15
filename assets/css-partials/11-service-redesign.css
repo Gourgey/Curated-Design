@@ -11,16 +11,9 @@ html.concept-page {
 }
 
 body.concept-page {
-    --srv-paper-2: var(--color-canvas-light);
-    --srv-ink: var(--color-text-primary);
-    --srv-ink-2: var(--color-text-secondary);
-    --srv-ink-3: var(--color-text-muted);
-    --srv-rule: var(--color-border);
-    --srv-font-display: var(--font-family-display);
-    --srv-font-body: var(--font-family-body);
-    background: var(--srv-paper-2);
-    color: var(--srv-ink);
-    font-family: var(--srv-font-body);
+    background: var(--color-canvas-light);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-body);
 }
 
 /* Outer rhythm */
@@ -39,32 +32,32 @@ body.concept-page .service-header {
     padding-bottom: 64px;
 }
 body.concept-page .service-header__eyebrow {
-    font-family: var(--srv-font-body);
+    font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--srv-ink);
+    color: var(--color-text-primary);
     margin: 14px 0 0;
 }
 body.concept-page .service-header__title {
-    font-family: var(--srv-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: clamp(48px, 6.2vw, 84px);
     line-height: 1.04;
     letter-spacing: -0.016em;
-    color: var(--srv-ink);
+    color: var(--color-text-primary);
     margin: 0 0 32px;
     text-wrap: balance;
 }
 body.concept-page .service-header__title em { font-style: italic; }
 body.concept-page .service-header__intro {
-    font-family: var(--srv-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 18px;
     line-height: 1.6;
-    color: var(--srv-ink-2);
+    color: var(--color-text-secondary);
     margin: 0;
     max-width: 38em;
     text-wrap: pretty;
@@ -109,14 +102,14 @@ body.concept-page .service-section__heading {
     margin: 0 0 16px;
 }
 body.concept-page .service-section__list {
-    font-family: var(--srv-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 15px;
     line-height: 1.7;
     list-style: none;
     padding: 0;
     margin: 0;
-    color: var(--srv-ink-2);
+    color: var(--color-text-secondary);
 }
 body.concept-page .service-section__list li {
     padding: 10px 0;
@@ -138,19 +131,19 @@ body.concept-page ol.service-section__list li::before {
     position: absolute;
     left: 0;
     top: 10px;
-    font-family: var(--srv-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
-    color: var(--srv-ink-3);
+    color: var(--color-text-muted);
     font-size: 14px;
     letter-spacing: 0.04em;
 }
 body.concept-page .service-section__note {
-    font-family: var(--srv-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: 15px;
     line-height: 1.5;
-    color: var(--srv-ink-3);
+    color: var(--color-text-muted);
     margin: 20px 0 0;
     max-width: 38em;
     text-wrap: pretty;
@@ -187,7 +180,7 @@ body.concept-page .service-glance__row:first-child {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 body.concept-page .service-glance__label {
-    font-family: var(--srv-font-body);
+    font-family: var(--font-family-body);
     font-weight: 500;
     font-size: 12px;
     letter-spacing: 0.15em;
@@ -196,11 +189,11 @@ body.concept-page .service-glance__label {
     margin: 0;
 }
 body.concept-page .service-glance__value {
-    font-family: var(--srv-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-size: 16px;
     line-height: 1.4;
-    color: var(--srv-ink);
+    color: var(--color-text-primary);
     margin: 0;
     text-align: right;
     max-width: 65%;
@@ -208,22 +201,22 @@ body.concept-page .service-glance__value {
 
 /* Enquiry block */
 body.concept-page .service-enquiry__title {
-    font-family: var(--srv-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: clamp(24px, 2.2vw, 32px);
     line-height: 1.1;
     letter-spacing: -0.012em;
-    color: var(--srv-ink);
+    color: var(--color-text-primary);
     margin: 0 0 12px;
     text-wrap: balance;
 }
 body.concept-page .service-enquiry__intro {
-    font-family: var(--srv-font-body);
+    font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 14px;
     line-height: 1.55;
-    color: var(--srv-ink-2);
+    color: var(--color-text-secondary);
     margin: 0 0 24px;
 }
 
@@ -238,36 +231,36 @@ body.concept-page .service-enquiry__form .field {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    border-bottom: 1px solid var(--srv-rule);
+    border-bottom: 1px solid var(--color-border);
     padding-bottom: 12px;
     transition: border-color 200ms ease;
 }
 body.concept-page .service-enquiry__form .field:focus-within {
-    border-bottom-color: var(--srv-ink);
+    border-bottom-color: var(--color-text-primary);
 }
 body.concept-page .service-enquiry__form .field__label {
-    font-family: var(--srv-font-body);
+    font-family: var(--font-family-body);
     font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--srv-ink-3);
+    color: var(--color-text-muted);
     margin: 0;
 }
 body.concept-page .service-enquiry__form .field:focus-within .field__label {
-    color: var(--srv-ink);
+    color: var(--color-text-primary);
 }
 body.concept-page .service-enquiry__form .field__input,
 body.concept-page .service-enquiry__form .field__textarea {
     background: transparent;
     border: none;
     outline: none;
-    font-family: var(--srv-font-display);
+    font-family: var(--font-family-display);
     font-weight: 400;
     font-size: 18px;
     line-height: 1.4;
     letter-spacing: -0.005em;
-    color: var(--srv-ink);
+    color: var(--color-text-primary);
     padding: 0;
     width: 100%;
     -webkit-appearance: none;
@@ -275,14 +268,14 @@ body.concept-page .service-enquiry__form .field__textarea {
 }
 body.concept-page .service-enquiry__form .field__input::placeholder,
 body.concept-page .service-enquiry__form .field__textarea::placeholder {
-    color: var(--srv-ink-3);
+    color: var(--color-text-muted);
     font-style: italic;
     font-weight: 300;
 }
 body.concept-page .service-enquiry__form .field__textarea {
     resize: vertical;
     min-height: 80px;
-    font-family: var(--srv-font-body);
+    font-family: var(--font-family-body);
     font-size: 15px;
     font-weight: 300;
     line-height: 1.55;
@@ -293,8 +286,8 @@ body.concept-page .service-enquiry__form .field--optional .field__label::after {
     font-style: italic;
     letter-spacing: 0.06em;
     text-transform: none;
-    color: var(--srv-ink-3);
-    font-family: var(--srv-font-display);
+    color: var(--color-text-muted);
+    font-family: var(--font-family-display);
     font-weight: 400;
     font-size: 11px;
     margin-left: 2px;
@@ -303,14 +296,14 @@ body.concept-page .service-enquiry__form .field--optional .field__label::after {
 body.concept-page .service-enquiry__privacy,
 body.concept-page .service-enquiry__error,
 body.concept-page .service-enquiry__success-text {
-    font-family: var(--srv-font-body);
+    font-family: var(--font-family-body);
     font-size: 12px;
     font-weight: 300;
     line-height: 1.55;
     margin: 0;
 }
 body.concept-page .service-enquiry__privacy {
-    color: var(--srv-ink-3);
+    color: var(--color-text-muted);
     margin-top: -8px;
 }
 body.concept-page .service-enquiry__privacy a {
@@ -324,16 +317,16 @@ body.concept-page .service-enquiry__success {
     padding-top: 8px;
 }
 body.concept-page .service-enquiry__success-title {
-    font-family: var(--srv-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
     font-size: 28px;
     line-height: 1.1;
-    color: var(--srv-ink);
+    color: var(--color-text-primary);
     margin: 0 0 10px;
 }
 body.concept-page .service-enquiry__success-text {
-    color: var(--srv-ink-2);
+    color: var(--color-text-secondary);
 }
 body.concept-page .service-enquiry__submit[disabled] {
     opacity: 0.7;
@@ -350,13 +343,13 @@ body.concept-page .service-enquiry__submit-row {
 body.concept-page .service-enquiry__submit {
     background: none;
     border: none;
-    border-bottom: 1px solid var(--srv-ink);
+    border-bottom: 1px solid var(--color-text-primary);
     padding: 0 0 4px;
-    font-family: var(--srv-font-display);
+    font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 400;
     font-size: 20px;
-    color: var(--srv-ink);
+    color: var(--color-text-primary);
     cursor: pointer;
     letter-spacing: -0.005em;
     display: inline-flex;
@@ -378,7 +371,7 @@ body.concept-page .service-enquiry__submit:hover .service-enquiry__arrow {
 /* .label-small reused from project-detail block — scope explicit here so
    the 11px projects-page treatment doesn't apply on service pages */
 body.concept-page .label-small {
-    font-family: var(--srv-font-body);
+    font-family: var(--font-family-body);
     font-weight: 500;
     font-size: 12px;
     letter-spacing: 0.15em;

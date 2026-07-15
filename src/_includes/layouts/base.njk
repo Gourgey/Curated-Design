@@ -118,7 +118,8 @@
 
         {{ content | safe }}
 
-        {% for script in scripts | default(['/assets/js/main.js']) %}
+        {% set defaultScripts = ['/assets/js/navigation.js', '/assets/js/carousels.js', '/assets/js/scroll-effects.js'] %}
+        {% for script in scripts | default(defaultScripts) %}
         <script src="{{ script }}" defer></script>
         {% endfor %}
     </body>

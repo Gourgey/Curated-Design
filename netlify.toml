@@ -2,17 +2,22 @@
   command = "npm run build"
   publish = "_site"
 
+# Generated image derivatives have content-hashed filenames, so they are
+# safe to cache forever.
 [[headers]]
   for = "/img/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# Source assets keep their filenames when edited (CMS uploads replace files
+# in place), so they must not be immutable. One day fresh, then revalidate
+# in the background for a week. The stylesheet is additionally cache-busted
+# by its ?v= query parameter.
 [[headers]]
   for = "/assets/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
 
-[[headers]]
-  for = "/*.html"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
+# HTML is served with Netlify's default ETag-based revalidation — no rule
+# needed (a "/*.html" pattern would not match: Netlify splats must be the
+# final path segment).

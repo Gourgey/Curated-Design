@@ -10,7 +10,6 @@ kicker: Residential · 2026
 subtitle: 'A penthouse apartment terrace refresh — improving comfort, layout, and atmosphere while keeping the space calm and architecturally clean.'
 statusLabel: Coming soon
 showInProjects: true
-gridSpan: third
 cardImage: /assets/images/projects/marylebone_terrace/marylebone_terrace_1.webp
 cardAlt: Marylebone Terrace
 heroImage: /assets/images/projects/marylebone_terrace/marylebone_terrace_1.webp

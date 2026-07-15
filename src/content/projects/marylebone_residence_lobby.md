@@ -10,7 +10,6 @@ kicker: Residential · 2026
 subtitle: A refined residential lobby moments from Regent’s Park, elevated through considered detailing, furniture, and lighting.
 statusLabel: ''
 showInProjects: true
-gridSpan: two-thirds-compact
 cardImage: /assets/images/projects/marylebone_residence_lobby/marylebone_residence_lobby_1.webp
 cardAlt: Marylebone Residence Lobby hero image
 heroImage: /assets/images/projects/marylebone_residence_lobby/marylebone_residence_lobby_1.webp

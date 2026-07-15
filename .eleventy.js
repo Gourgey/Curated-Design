@@ -1,3 +1,4 @@
+const fs = require("fs");
 const markdownIt = require("markdown-it");
 const Image = require("@11ty/eleventy-img");
 
@@ -33,15 +34,27 @@ module.exports = function (eleventyConfig) {
       loading: loading || "lazy",
       decoding: "async",
     };
+    // Eager images are above the fold — tell the browser to fetch them first.
+    if (attrs.loading === "eager") attrs.fetchpriority = "high";
     if (classNames) attrs.class = classNames;
     return Image.generateHTML(metadata, attrs);
   }
   eleventyConfig.addAsyncShortcode("image", imageShortcode);
 
-  // Map the persistent generated-images dir to /img/ in the deploy output.
-  eleventyConfig.addPassthroughCopy({ "assets/_generated/img": "img" });
+  // Copy the persistent generated-images dir to /img/ in the deploy output.
+  // This must run AFTER the build (not as a passthrough copy): the shortcode
+  // writes new derivatives while templates render, and a passthrough copy
+  // evaluated at build start would miss them.
+  eleventyConfig.on("eleventy.after", ({ dir }) => {
+    const generated = "./assets/_generated/img";
+    if (fs.existsSync(generated)) {
+      fs.cpSync(generated, `${dir.output}/img`, { recursive: true });
+    }
+  });
 
-  eleventyConfig.addPassthroughCopy("assets");
+  eleventyConfig.addPassthroughCopy("assets/css");
+  eleventyConfig.addPassthroughCopy("assets/images");
+  eleventyConfig.addPassthroughCopy("assets/js");
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy({ public: "/" });
 
@@ -66,14 +79,6 @@ module.exports = function (eleventyConfig) {
     return (items || []).filter((item) => item.data && item.data[key] === value);
   });
 
-  eleventyConfig.addFilter("take", (items, count) => {
-    return (items || []).slice(0, count);
-  });
-
-  eleventyConfig.addFilter("notDraft", (items) => {
-    return (items || []).filter((item) => !isDraft(item));
-  });
-
   eleventyConfig.addFilter("resolveEntries", (relations, items, relationKey) => {
     const bySlug = new Map(
       (items || [])
@@ -96,24 +101,29 @@ module.exports = function (eleventyConfig) {
       .filter(Boolean);
   });
 
-  eleventyConfig.addFilter("homeCardSpan", (item, count) => {
-    const explicit = item && item.relation && item.relation.cardSpan;
-    if (count === 1) return "";
-    if (count === 2) return "span-6";
-    if (explicit) return explicit;
-    return "span-4";
-  });
+  // Resolve the homepage carousel config into a flat list of renderable
+  // slides ({ src, alt }), skipping entries with no usable image so the
+  // template's slide count and aria-labels stay accurate.
+  eleventyConfig.addFilter("carouselSlides", (slides, projects) => {
+    const bySlug = new Map(
+      (projects || [])
+        .filter((item) => item.data && item.data.slug)
+        .map((item) => [item.data.slug, item]),
+    );
 
-  // Map friendly project listing span tokens to the responsive CSS classes
-  // used on /projects.html. Falls back to a legacy `gridClass` string when
-  // present, then to the default third-width span.
-  const GRID_SPAN_PRESETS = {
-    third: "col-span-4 lg:col-span-4 md:col-span-3 sm:col-span-2",
-    "two-fifths": "col-span-5 lg:col-span-5 md:col-span-6 sm:col-span-2",
-    "three-fifths": "col-span-7 lg:col-span-7 md:col-span-6 sm:col-span-2",
-    "two-thirds-compact": "col-span-8 lg:col-span-8 md:col-span-3 sm:col-span-2",
-    "two-thirds": "col-span-8 lg:col-span-8 md:col-span-6 sm:col-span-2",
-  };
+    return (slides || [])
+      .map((slide) => {
+        const project = bySlug.get(slide.project);
+        const projectData = project && !isDraft(project) ? project.data : {};
+        const src = slide.image || projectData.heroImage;
+        if (!src) return null;
+        return {
+          src,
+          alt: slide.alt || projectData.heroAlt || projectData.title || "",
+        };
+      })
+      .filter(Boolean);
+  });
 
   // Drop gallery items that have no usable image path so templates can rely
   // on a clean list and skip rendering empty <img> tags.
@@ -133,14 +143,6 @@ module.exports = function (eleventyConfig) {
         ),
       }))
       .filter((entry) => entry.projects.length > 0);
-  });
-
-  eleventyConfig.addFilter("projectGridClass", (data) => {
-    if (!data) return GRID_SPAN_PRESETS.third;
-    const token = data.gridSpan;
-    if (token && GRID_SPAN_PRESETS[token]) return GRID_SPAN_PRESETS[token];
-    if (data.gridClass) return data.gridClass;
-    return GRID_SPAN_PRESETS.third;
   });
 
   eleventyConfig.addFilter("jsonify", (value) => {
@@ -171,13 +173,6 @@ module.exports = function (eleventyConfig) {
         ? `/curated_services/${item.data.slug}.html`
         : `/projects/${item.data.slug}.html`,
     }));
-  });
-
-  eleventyConfig.addFilter("assetPath", (path, depth = 0) => {
-    if (!path) return "";
-    if (/^(https?:)?\/\//.test(path) || path.startsWith("mailto:")) return path;
-    const clean = path.startsWith("/") ? path.slice(1) : path;
-    return `${"../".repeat(depth)}${clean}`;
   });
 
   eleventyConfig.addCollection("publishedService", (collectionApi) => {

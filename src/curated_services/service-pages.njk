@@ -28,12 +28,7 @@ bodyClass: concept-page font-inter
 
     {% if service.data.coverImage %}
     <figure class="service-hero" aria-label="{{ service.data.title }} hero image">
-        <img
-            src="{{ service.data.coverImage }}"
-            alt="{{ coverAlt }}"
-            loading="eager"
-            decoding="async"
-        />
+        {% image service.data.coverImage, coverAlt, "100vw", "eager" %}
     </figure>
     {% endif %}
 
@@ -95,7 +90,6 @@ bodyClass: concept-page font-inter
                     netlify
                     data-netlify="true"
                     data-netlify-honeypot="bot-field"
-                    novalidate
                 >
                     <input type="hidden" name="form-name" value="service-enquiry" />
                     <input type="hidden" name="service" value="{{ service.data.title }}" />

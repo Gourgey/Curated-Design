@@ -58,28 +58,23 @@
     "featuredProjects": [
       {
         "project": "sandbanks_residence",
-        "image": "/assets/images/projects/sandbanks_residence/sandbanks_residence_1.webp",
-        "cardSpan": "span-6"
+        "image": "/assets/images/projects/sandbanks_residence/sandbanks_residence_1.webp"
       },
       {
         "project": "botanical_residence",
-        "image": "/assets/images/projects/botanical_residence/botanical_residence_1.webp",
-        "cardSpan": "span-6"
+        "image": "/assets/images/projects/botanical_residence/botanical_residence_1.webp"
       },
       {
         "project": "marylebone_terrace",
-        "image": "/assets/images/projects/marylebone_terrace/marylebone_terrace_1.webp",
-        "cardSpan": "span-4"
+        "image": "/assets/images/projects/marylebone_terrace/marylebone_terrace_1.webp"
       },
       {
         "project": "marylebone_residence_lobby",
-        "image": "",
-        "cardSpan": "span-4"
+        "image": ""
       },
       {
         "project": "shoreditch_office",
-        "image": "/assets/images/projects/shoreditch_office/shoreditch_office_1.webp",
-        "cardSpan": "span-4"
+        "image": "/assets/images/projects/shoreditch_office/shoreditch_office_1.webp"
       }
     ]
   },

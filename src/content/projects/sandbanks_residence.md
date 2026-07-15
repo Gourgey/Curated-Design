@@ -10,7 +10,6 @@ kicker: Residential · 2026
 subtitle: A new project page is in progress — imagery and a concise case study will be added soon.
 statusLabel: Coming soon
 showInProjects: true
-gridSpan: three-fifths
 cardImage: /assets/images/projects/sandbanks_residence/sandbanks_residence_1.webp
 cardAlt: Sandbanks Residence exterior visual
 heroImage: /assets/images/projects/sandbanks_residence/sandbanks_residence_1.webp

@@ -100,6 +100,10 @@ collections:
             fields:
               - { label: "Kicker", name: "kicker", widget: "string" }
               - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Lead", name: "lead", widget: "text", required: false }
+              - { label: "More Label", name: "moreLabel", widget: "string", required: false, hint: "Small label beside the 'view all' link (e.g. 'Index')." }
+              - { label: "More Link Text", name: "moreLink", widget: "string", required: false, hint: "Text of the 'View all projects' link. Leave empty to hide it." }
+              - { label: "More Link URL", name: "moreHref", widget: "string", required: false, hint: "Defaults to /projects.html." }
               - label: "Featured Projects"
                 name: "featuredProjects"
                 widget: "list"
@@ -117,15 +121,6 @@ collections:
                       - field: "status"
                         values: ["published", "coming_soon"]
                   - { label: "Selected Project Image", name: "image", widget: "string", required: false, hint: "Optional. Use a path from the selected Project's card, hero, gallery, or project image folder. Falls back to Project Card Image." }
-                  - label: "Homepage Card Width"
-                    name: "cardSpan"
-                    widget: "select"
-                    required: false
-                    options:
-                      - { label: "Auto", value: "" }
-                      - { label: "Half width", value: "span-6" }
-                      - { label: "Third width", value: "span-4" }
-                    hint: "Use Auto for adaptive grids, or choose a width to preserve a specific visual rhythm."
           - label: "Design Philosophy"
             name: "philosophy"
             widget: "object"
@@ -140,6 +135,7 @@ collections:
             name: "cta"
             widget: "object"
             fields:
+              - { label: "Kicker", name: "kicker", widget: "string", required: false }
               - { label: "Heading", name: "heading", widget: "string" }
               - { label: "Text", name: "text", widget: "text" }
               - { label: "Button Label", name: "buttonLabel", widget: "string" }
@@ -150,20 +146,48 @@ collections:
         fields:
           - { label: "Title", name: "title", widget: "string", hint: "Browser tab title for the About page." }
           - { label: "Meta Description (SEO)", name: "metaDescription", widget: "text", required: false, hint: "Optional. Falls back to the site-wide default in Site Settings." }
+          - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false, hint: "Small label above the intro heading." }
           - { label: "Intro Heading", name: "introHeading", widget: "string" }
           - { label: "Intro Text", name: "introText", widget: "text" }
           - { label: "Work Heading", name: "workHeading", widget: "string" }
           - { label: "Work Paragraphs", name: "workParagraphs", widget: "list", field: { label: "Paragraph", name: "paragraph", widget: "text" } }
           - { label: "Focus Heading", name: "focusHeading", widget: "string" }
           - { label: "Focus Areas", name: "focusAreas", widget: "list", field: { label: "Area", name: "area", widget: "string" } }
+          - label: "Process Intro"
+            name: "process"
+            widget: "object"
+            required: false
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
+              - { label: "Title", name: "title", widget: "string", required: false, hint: "May contain <em> for italics." }
           - label: "Process Steps"
             name: "processSteps"
             widget: "list"
             fields:
-              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Label", name: "label", widget: "string", hint: "Small label above the step heading (e.g. 'Brief & concept')." }
+              - { label: "Heading", name: "head", widget: "string" }
               - { label: "Text", name: "text", widget: "text" }
+          - { label: "Locations Eyebrow", name: "locationsEyebrow", widget: "string", required: false }
           - { label: "Locations Heading", name: "locationsHeading", widget: "string" }
           - { label: "Locations Text", name: "locationsText", widget: "text" }
+          - label: "Documents & Tools"
+            name: "documents"
+            widget: "object"
+            required: false
+            collapsed: true
+            hint: "The legal/apps link list at the bottom of the Studio page."
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Hint", name: "hint", widget: "text", required: false }
+              - label: "Items"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Label", name: "label", widget: "string", hint: "e.g. 'Legal · 01'" }
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Meta", name: "meta", widget: "string", required: false }
+                  - { label: "Link Text", name: "link", widget: "string" }
+                  - { label: "Link URL", name: "href", widget: "string" }
       - name: "contact"
         label: "Contact Page"
         file: "src/content/pages/contact.json"
@@ -173,14 +197,16 @@ collections:
           - { label: "Meta Description (SEO)", name: "metaDescription", widget: "text", required: false, hint: "Optional. Falls back to the site-wide default in Site Settings." }
           - { label: "Heading", name: "heading", widget: "string" }
           - { label: "Lead", name: "lead", widget: "text" }
-          - { label: "Studio Details Heading", name: "detailsHeading", widget: "string" }
           - { label: "Note", name: "note", widget: "text" }
+          - { label: "Submit Button Label", name: "submitLabel", widget: "string", required: false, hint: "Defaults to 'Send enquiry'." }
+          - { label: "Submit Meta Text", name: "submitMeta", widget: "string", required: false, hint: "Small note beside the submit button (e.g. response time)." }
       - name: "projectsPage"
         label: "Projects Page"
         file: "src/content/pages/projects.json"
         format: "json"
         fields:
           - { label: "Meta Description (SEO)", name: "metaDescription", widget: "text", required: false, hint: "Optional. Falls back to the site-wide default in Site Settings." }
+          - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false, hint: "Small label above the hero headline." }
           - { label: "Hero Headline", name: "heroHeadline", widget: "string" }
           - { label: "Hero Subhead", name: "heroSubhead", widget: "text" }
           - label: "Categories"
@@ -276,7 +302,6 @@ collections:
       - { label: "Status", name: "status", widget: "select", default: "published", options: [{ label: "Published — full case study page", value: "published" }, { label: "Coming Soon — teaser page", value: "coming_soon" }, { label: "Draft — hidden from site", value: "draft" }], hint: "Draft hides the project from listings, the homepage, and disables the project page." }
       - { label: "Order", name: "order", widget: "number", value_type: "int", hint: "Lower numbers appear first on the Projects listing. Use 1, 2, 3, …" }
       - { label: "Show in Projects Listing", name: "showInProjects", widget: "boolean", default: true, hint: "Controls only the /projects page. Homepage featuring is set in the Homepage entry." }
-      - { label: "Listing Card Width", name: "gridSpan", widget: "select", default: "third", options: [{ label: "Third (compact)", value: "third" }, { label: "Two-fifths", value: "two-fifths" }, { label: "Three-fifths", value: "three-fifths" }, { label: "Two-thirds (compact)", value: "two-thirds-compact" }, { label: "Two-thirds (wide)", value: "two-thirds" }], hint: "Width of this project's card on the Projects listing. Mix widths to create rhythm in the grid." }
 
       # --- Card (used wherever the project appears as a card) ---
       - { label: "Category", name: "category", widget: "select", options: ["Residential", "Hospitality", "Commercial"], hint: "Determines which Projects-page section this card appears under." }
@@ -328,6 +353,7 @@ collections:
           - { label: "Label", name: "label", widget: "string" }
           - { label: "Value", name: "value", widget: "string" }
       - { label: "Aside Text", name: "asideText", widget: "text", required: false, hint: "Small footer note above the Enquire button on the project page." }
+      - { label: "Aside CTA Label", name: "asideCta", widget: "string", required: false, hint: "Text of the enquiry button in the sidebar (links to /contact.html). Leave empty to hide the button." }
 
       # --- Gallery ---
       - label: "Gallery"

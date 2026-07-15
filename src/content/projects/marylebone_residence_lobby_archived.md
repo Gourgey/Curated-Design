@@ -14,7 +14,6 @@ kicker: Residential · London
 subtitle: An elegant, functional space designed to enhance the daily lives of its occupants.
 statusLabel: ""
 showInProjects: false
-gridSpan: two-thirds-compact
 cardImage: ""
 cardAlt: Project hero image
 heroImage: ""

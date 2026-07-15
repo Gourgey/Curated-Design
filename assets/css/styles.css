@@ -20,16 +20,6 @@
     --accent: #d1f365; /* gentle lime accent for buttons/links */
 }
 
-@font-face {
-    font-family: "Servaek";
-    src:
-        url("../fonts/Servaek-ExtraLight.woff2") format("woff2"),
-        url("../fonts/Servaek-ExtraLight.woff") format("woff");
-    font-weight: 200;
-    font-style: normal;
-    font-display: swap;
-}
-
 /* -------- Base reset & typography -------- */
 /*
    Basic reset / global defaults:
@@ -781,12 +771,6 @@ body.projects-page .widget picture > .widget-media {
     }
 }
 
-.top-left-logo-text {
-    font-family: "Servaek", Inter, system-ui, sans-serif;
-    font-weight: 200;
-    letter-spacing: 0.02em;
-}
-
 /* ===== Hero ===== */
 
 .hero-brand {
@@ -801,15 +785,6 @@ body.projects-page .widget picture > .widget-media {
 .hero-brand-logo {
     width: min(100%, clamp(147px, 20vw, 280px));
     height: auto;
-}
-
-.hero-brand-text {
-    font-family: "Servaek", Inter, system-ui, sans-serif;
-    font-weight: 200;
-    font-size: 24px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    opacity: 0.85;
 }
 
 /*
@@ -1257,19 +1232,6 @@ body.pills-on-light #floatingNavPill.is-open .pillmenu .pill:hover {
     background: rgba(255, 255, 255, 0.12);
 }
 
-/*
-   Larger-screen card spans:
-   - On wider viewports, allow cards to span fewer columns.
-*/
-@media (min-width: 700px) {
-    .card.span-6 {
-        grid-column: span 6;
-    }
-    .card.span-4 {
-        grid-column: span 4;
-    }
-}
-
 /* ===== Split layout (image + text) ===== */
 /*
    Split layout base:
@@ -1529,135 +1491,6 @@ body.projects-page .projects-band > section + section {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* Width wrapper used on projects page */
-body.projects-page .projects-wrap {
-    max-width: 1150px;
-    margin: 0 auto;
-    padding: 0 16px;
-}
-
-/* Uniform editorial grid — all cards equal width, equal height.
-   3 columns on desktop, 2 on tablet, 1 on mobile. The variable
-   col-span classes from projectGridClass are overridden below. */
-body.projects-page .widget-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 40px 28px;
-}
-
-@media (max-width: 1023px) {
-    body.projects-page .widget-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 32px 24px;
-    }
-}
-
-@media (max-width: 640px) {
-    body.projects-page .widget-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-    }
-}
-
-/* Override the variable col-span classes so every card is the same width.
-   Higher specificity than the col-span-X rules below. */
-body.projects-page .widget-grid > .widget {
-    grid-column: auto;
-}
-
-/* Widget image + body blocks */
-body.projects-page .widget-media {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    display: block;
-    transition: transform 700ms cubic-bezier(0.2, 0.6, 0.2, 1),
-        filter 700ms cubic-bezier(0.2, 0.6, 0.2, 1);
-}
-
-body.projects-page .widget-body {
-    padding: 16px 2px 0;
-    color: #1a1a1a;
-}
-
-body.projects-page .widget-title {
-    font-size: 17px;
-    font-weight: 500;
-    letter-spacing: 0.005em;
-    margin: 0 0 4px;
-    line-height: 1.3;
-}
-
-body.projects-page .widget-meta {
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin: 0;
-    opacity: 0.55;
-    color: #1a1a1a;
-}
-
-/* Section header — editorial scale, dark text on cream */
-body.projects-page .section-label {
-    display: inline-block;
-    font-size: 11px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    opacity: 0.5;
-    margin-bottom: 18px;
-    color: #1a1a1a;
-}
-
-body.projects-page .section-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 48px;
-    margin: 0 0 48px;
-    padding-bottom: 28px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-}
-
-body.projects-page .section-head h2 {
-    margin: 0;
-    font-size: clamp(32px, 3.6vw, 56px);
-    font-weight: 500;
-    letter-spacing: -0.015em;
-    line-height: 1.05;
-    color: #1a1a1a;
-}
-
-body.projects-page .section-note {
-    font-size: 14px;
-    max-width: 360px;
-    margin: 0;
-    color: #1a1a1a;
-    opacity: 0.65;
-    line-height: 1.5;
-    text-align: right;
-    flex-shrink: 0;
-}
-
-@media (max-width: 768px) {
-    body.projects-page .section-head {
-        flex-direction: column;
-        gap: 14px;
-        align-items: flex-start;
-        margin-bottom: 36px;
-    }
-    body.projects-page .section-note {
-        text-align: left;
-        max-width: none;
-    }
-}
-
-.section-pad {
-    padding: 56px 0;
-} /* same as py-14 */
-.section-pad-lg {
-    padding: 64px 0;
-} /* same as py-16 */
-
 /* Default: nav + pills are black on light background */
 body.projects-page .pill,
 body.projects-page .pillmenu-toggle,
@@ -1689,112 +1522,6 @@ body.projects-page.is-projects-band .pill.active {
 
 body.projects-page.is-projects-band .pillmenu-toggle .burger-line {
     background: currentColor;
-}
-
-/* Responsive grid */
-@media (max-width: 1024px) {
-    body.projects-page .widget-grid {
-        grid-template-columns: repeat(6, minmax(0, 1fr));
-    }
-}
-@media (max-width: 640px) {
-    body.projects-page .widget-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-/* -------------------------------------------------------
-   Tailwind col-span replacements (projects widget grid)
-   ------------------------------------------------------- */
-body.projects-page .col-span-4 {
-    grid-column: span 4 / span 4;
-}
-body.projects-page .col-span-5 {
-    grid-column: span 5 / span 5;
-}
-body.projects-page .col-span-7 {
-    grid-column: span 7 / span 7;
-}
-body.projects-page .col-span-8 {
-    grid-column: span 8 / span 8;
-}
-
-/* Responsive variants used in projects.html
-   Note: the ":" in classnames must be escaped as "\:" in CSS */
-@media (min-width: 640px) {
-    body.projects-page .sm\:col-span-2 {
-        grid-column: span 2 / span 2;
-    }
-}
-
-@media (min-width: 768px) {
-    body.projects-page .md\:col-span-3 {
-        grid-column: span 3 / span 3;
-    }
-    body.projects-page .md\:col-span-6 {
-        grid-column: span 6 / span 6;
-    }
-}
-
-@media (min-width: 1024px) {
-    body.projects-page .lg\:col-span-4 {
-        grid-column: span 4 / span 4;
-    }
-    body.projects-page .lg\:col-span-5 {
-        grid-column: span 5 / span 5;
-    }
-    body.projects-page .lg\:col-span-7 {
-        grid-column: span 7 / span 7;
-    }
-    body.projects-page .lg\:col-span-8 {
-        grid-column: span 8 / span 8;
-    }
-}
-body.projects-page .widget {
-    min-width: 0;
-}
-
-/* Editorial gallery layout — no panel, no card chrome.
-   The image is the card; only the picture wrapper has rounded corners
-   and overflow:hidden so the hover-zoom doesn't bleed past the edge. */
-.widget-area {
-    background: transparent;
-    padding: 0;
-    box-shadow: none;
-}
-
-.widget {
-    background: transparent;
-    border: 0;
-    border-radius: 0;
-    box-shadow: none;
-    display: block;
-    transition: opacity 200ms ease;
-}
-
-body.projects-page .widget picture {
-    border-radius: 4px;
-    box-shadow: 0 12px 32px rgba(40, 30, 20, 0.18);
-    will-change: transform;
-}
-
-.widget:hover .widget-media {
-    transform: scale(1.04);
-    filter: brightness(1.04) saturate(1.05);
-}
-
-/* Dim non-hovered cards only when another card is actually hovered —
-   the gap between cards no longer triggers the dimming. */
-@media (hover: hover) {
-    body.projects-page .widget-grid:has(.widget:hover) .widget:not(:hover) {
-        opacity: 0.6;
-    }
-}
-
-.widget:focus-visible {
-    outline: 2px solid #1a1a1a;
-    outline-offset: 6px;
-    border-radius: 4px;
 }
 
 /* =========================

@@ -6,7 +6,6 @@ eleventyComputed:
 bodyClass: min-h-screen text-[#f2f2f2] font-inter
 topLogo: white_logo_no_text_on_transparent.svg
 showBackground: true
-preloadImage: /assets/images/projects/16-9_images/monet-living.webp
 ---
 <main class="page-main">
     {% set logoFile = "white_small_logo_and_large_text_on_transparent.svg" %}
@@ -57,24 +56,11 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
             <div class="viewport">
                 <div class="viewport-clip">
                     <div class="track" id="track">
-                        {% for slide in site.home.carousel.slides %}
-                        {% set slideProject = [slide] | resolveEntries(collections.publishedProject, "project") | first %}
-                        {% set slideSrc = slide.image or slideProject.data.heroImage %}
-                        {% set slideAlt = slide.alt or slideProject.data.heroAlt or slideProject.data.title %}
-                        {% if slideSrc %}
-                        <div class="slide" aria-label="{{ loop.index }} of {{ site.home.carousel.slides.length }}">
-                            <img
-                                src="{{ slideSrc }}"
-                                alt="{{ slideAlt }}"
-                                width="1600"
-                                height="900"
-                                loading="{% if loop.first %}eager{% else %}lazy{% endif %}"
-                                {% if loop.first %}fetchpriority="high"{% endif %}
-                                decoding="async"
-                                draggable="false"
-                            />
+                        {% set carousel = site.home.carousel.slides | carouselSlides(collections.publishedProject) %}
+                        {% for slide in carousel %}
+                        <div class="slide" aria-label="{{ loop.index }} of {{ carousel.length }}">
+                            {% image slide.src, slide.alt, "(min-width: 1040px) 1000px, calc(100vw - 40px)", ("eager" if loop.first else "lazy") %}
                         </div>
-                        {% endif %}
                         {% endfor %}
                     </div>
                 </div>
@@ -103,14 +89,7 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
                 {% for service in featuredServices %}
                 <a class="home-service-card" href="/curated_services/{{ service.data.slug }}.html" aria-label="View {{ service.data.title }} service">
                     <div class="home-service-card__media">
-                        {% if service.data.cardImage %}
-                        <img
-                            src="{{ service.data.cardImage }}"
-                            alt="{{ service.data.cardAlt or service.data.title }}"
-                            loading="lazy"
-                            decoding="async"
-                        />
-                        {% endif %}
+                        {% image service.data.cardImage, service.data.cardAlt or service.data.title, "(min-width: 1280px) 400px, (min-width: 761px) 33vw, 100vw", "lazy", "", "card" %}
                     </div>
                     <h3 class="home-service-card__title">{{ service.data.title }}</h3>
                     {% if service.data.summary %}
@@ -140,14 +119,7 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
                 {% set projectCardSrc = project.relation.image or project.data.cardImage %}
                 <a class="home-project" href="/projects/{{ project.data.slug }}.html">
                     <div class="home-project__media">
-                        {% if projectCardSrc %}
-                        <img
-                            src="{{ projectCardSrc }}"
-                            alt="{{ project.data.cardAlt or project.data.title }}"
-                            loading="lazy"
-                            decoding="async"
-                        />
-                        {% endif %}
+                        {% image projectCardSrc, project.data.cardAlt or project.data.title, "(min-width: 1280px) 400px, (min-width: 761px) 33vw, 100vw", "lazy", "", "card" %}
                     </div>
                     <h3 class="home-project__title">{{ project.data.title }}</h3>
                     {% if project.data.kicker %}
@@ -171,12 +143,7 @@ preloadImage: /assets/images/projects/16-9_images/monet-living.webp
     <section id="about" class="home-philosophy" data-theme="dark">
         <div class="home-philosophy__inner">
             <figure class="home-philosophy__media">
-                <img
-                    src="{{ site.home.philosophy.image }}"
-                    alt="{{ site.home.philosophy.imageAlt }}"
-                    loading="lazy"
-                    decoding="async"
-                />
+                {% image site.home.philosophy.image, site.home.philosophy.imageAlt, "(min-width: 1280px) 600px, (min-width: 761px) 50vw, 100vw", "lazy" %}
             </figure>
             <div class="home-philosophy__body">
                 <p class="home-philosophy__eyebrow">{{ site.home.philosophy.kicker }}</p>

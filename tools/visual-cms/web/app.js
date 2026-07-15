@@ -826,16 +826,6 @@ function renderCollectionsSectionEditor() {
         relation.image = value;
         syncPreview();
       }),
-      field("Homepage card width", relation.cardSpan || "", (value) => {
-        relation.cardSpan = value;
-        syncPreview();
-      }, {
-        select: [
-          { label: "Auto", value: "" },
-          { label: "Half width", value: "span-6" },
-          { label: "Third width", value: "span-4" },
-        ],
-      }),
       sourceCard([
         { text: project ? `Image/title/kicker source: Projects > ${project.title}` : "Missing project relation" },
         { text: project ? `Links to ${project.url}` : relation.project, code: true },
@@ -862,7 +852,7 @@ function renderCollectionsSectionEditor() {
         text: "Add project card",
         onclick: () => {
           const first = state.projects.find((item) => item.status !== "draft");
-          section.featuredProjects.push({ project: first ? first.slug : "", image: first ? first.cardImage : "", cardSpan: "" });
+          section.featuredProjects.push({ project: first ? first.slug : "", image: first ? first.cardImage : "" });
           renderEditor();
           syncPreview();
         },
@@ -899,16 +889,6 @@ function renderHomeProjectCardEditor(index) {
       relation.image = value;
       syncPreview();
     }) : null,
-    field("Homepage card width", relation.cardSpan || "", (value) => {
-      relation.cardSpan = value;
-      syncPreview();
-    }, {
-      select: [
-        { label: "Auto", value: "" },
-        { label: "Half width", value: "span-6" },
-        { label: "Third width", value: "span-4" },
-      ],
-    }),
     project ? uploadProjectImageControl(project, (path) => {
       relation.image = path;
       renderEditor();
@@ -1129,7 +1109,6 @@ function openCreateProjectModal() {
                 section.featuredProjects.push({
                   project: draft.slug,
                   image: draft.cardImage || draft.heroImage || "",
-                  cardSpan: "",
                 });
                 const homePayload = await api("/api/content/home", {
                   method: "POST",

@@ -4,14 +4,16 @@
   "private": true,
   "scripts": {
     "clean": "node -e \"require('fs').rmSync('_site', { recursive: true, force: true })\"",
-    "build": "npm run clean && eleventy",
+    "build": "npm run clean && eleventy && node tools/minify-css.js",
     "start": "eleventy --serve",
     "cms": "node tools/visual-cms/server.js",
     "cms:local": "npx -y decap-server"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.2",
+    "@11ty/eleventy": "^3.1.6",
     "@11ty/eleventy-img": "^6.0.4",
-    "markdown-it": "^14.1.0"
+    "clean-css": "^5.3.3",
+    "gray-matter": "^4.0.3",
+    "markdown-it": "^14.3.0"
   }
 }

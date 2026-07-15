@@ -68,12 +68,7 @@ topLogo: logo_no_text_on_transparent.svg
                 {% for project in entry.projects %}
                 <a class="projects-card" href="/projects/{{ project.data.slug }}.html">
                     <div class="projects-card__media">
-                        <img
-                            src="{{ project.data.cardImage }}"
-                            alt="{{ project.data.cardAlt or project.data.title }}"
-                            loading="lazy"
-                            decoding="async"
-                        />
+                        {% image project.data.cardImage, project.data.cardAlt or project.data.title, "(min-width: 1024px) 33vw, (min-width: 641px) 50vw, 100vw", "lazy", "", "card" %}
                     </div>
                     <div class="projects-card__body">
                         <p class="projects-card__title">{{ project.data.title }}</p>

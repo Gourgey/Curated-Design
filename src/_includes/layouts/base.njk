@@ -39,20 +39,13 @@
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        {# Only the weights the stylesheet uses: Cormorant 300–600 (display,
+           incl. italics), Inter 300–700 (700 covers <strong> in body copy). #}
         <link
-            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap"
             rel="stylesheet"
         />
         <link rel="stylesheet" href="/assets/css/styles.css?v={{ site.cssVersion }}" />
-
-        {% if preloadImage %}
-        <link
-            rel="preload"
-            as="image"
-            href="{{ preloadImage }}"
-            fetchpriority="high"
-        />
-        {% endif %}
 
         {# Organization/logo structured data — homepage only, so Google can
            associate the brand logo with the business. Logo URL is absolute. #}

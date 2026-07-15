@@ -10,7 +10,6 @@ kicker: Residential · 2026
 subtitle: A short, image-led case study is in progress — details and visuals will be added soon.
 statusLabel: Coming soon
 showInProjects: true
-gridSpan: two-fifths
 cardImage: /assets/images/projects/botanical_residence/botanical_residence_1.webp
 cardAlt: Botanical Residence concept visual
 heroImage: /assets/images/projects/botanical_residence/botanical_residence_1.webp

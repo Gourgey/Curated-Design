@@ -179,12 +179,6 @@ function resolveHome(home, services, projects) {
   };
 }
 
-function projectCardClass(relation, count) {
-  if (count === 1) return "";
-  if (count === 2) return "span-6";
-  return relation.cardSpan || "span-4";
-}
-
 function validateHome(home, services, projects) {
   const serviceSlugs = new Set(services.map((item) => item.slug));
   const projectSlugs = new Set(projects.filter((item) => item.status !== "draft").map((item) => item.slug));
@@ -321,7 +315,7 @@ function serveFile(res, filePath) {
 
 function safeJoin(base, pathname) {
   const resolved = path.resolve(base, pathname.replace(/^\/+/, ""));
-  if (!resolved.startsWith(base)) return null;
+  if (resolved !== base && !resolved.startsWith(base + path.sep)) return null;
   return resolved;
 }
 
@@ -518,7 +512,6 @@ async function handleApi(req, res, url) {
       "subtitle",
       "summary",
       "showInProjects",
-      "gridClass",
       "cardImage",
       "cardAlt",
       "heroImage",
@@ -569,7 +562,6 @@ async function handleApi(req, res, url) {
       subtitle: fields.subtitle || fields.summary || "",
       statusLabel: fields.status === "coming_soon" ? "Coming soon" : "",
       showInProjects: fields.showInProjects !== false,
-      gridClass: fields.gridClass || "col-span-4 lg:col-span-4 md:col-span-3 sm:col-span-2",
       cardImage: fields.cardImage || "",
       cardAlt: fields.cardAlt || fields.title || slug,
       heroImage: fields.heroImage || "",

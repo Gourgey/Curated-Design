@@ -5,3 +5,6 @@ _site/
 
 # Eleventy-img derivative cache (regenerated from sources by sharp).
 assets/_generated/
+
+# Local Claude Code session artifacts
+.claude/scheduled_tasks.lock

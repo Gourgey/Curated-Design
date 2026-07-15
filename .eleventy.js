@@ -101,9 +101,9 @@ module.exports = function (eleventyConfig) {
       .filter(Boolean);
   });
 
-  // Resolve the homepage carousel config into linked, labelled, published
-  // project slides. Coming-soon work cannot silently become the homepage's
-  // lead proof point.
+  // Resolve the homepage carousel config into linked, labelled project
+  // slides. Coming-soon entries remain eligible when explicitly curated, but
+  // their status is carried into the visible overlay.
   eleventyConfig.addFilter("carouselSlides", (slides, projects) => {
     const bySlug = new Map(
       (projects || [])
@@ -115,7 +115,7 @@ module.exports = function (eleventyConfig) {
       .map((slide) => {
         const project = bySlug.get(slide.project);
         const projectData = project && !isDraft(project) ? project.data : {};
-        if (projectData.status !== "published") return null;
+        if (!new Set(["published", "coming_soon"]).has(projectData.status)) return null;
         const src = slide.image || projectData.heroImage;
         if (!src) return null;
         return {
@@ -123,6 +123,10 @@ module.exports = function (eleventyConfig) {
           alt: slide.alt || projectData.heroAlt || projectData.title || "",
           title: projectData.title || "Project",
           kicker: projectData.kicker || projectData.category || "Featured work",
+          statusLabel:
+            projectData.status === "coming_soon"
+              ? projectData.statusLabel || "Coming soon"
+              : "",
           url: `/projects/${projectData.slug}.html`,
         };
       })

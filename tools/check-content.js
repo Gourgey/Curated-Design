@@ -99,6 +99,12 @@ function validateRelationList(relations, relationKey, entriesBySlug, label, opti
           `${options.requiredStatus} is required`,
       );
     }
+    if (options.allowedStatuses && !options.allowedStatuses.includes(entry.data.status)) {
+      fail(
+        `${label}[${index}] references ${entry.data.status} entry "${slug}"; ` +
+          `allowed statuses are ${options.allowedStatuses.join(", ")}`,
+      );
+    }
     if (relation && relation.image) {
       validateLocalImage(relation.image, `${label}[${index}].image`);
     }
@@ -207,7 +213,7 @@ validateRelationList(
   "project",
   projectsBySlug,
   "home.carousel.slides",
-  { requiredStatus: "published" },
+  { allowedStatuses: ["published", "coming_soon"] },
 );
 validateRelationList(
   home.collectionsSection && home.collectionsSection.featuredProjects,

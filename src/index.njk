@@ -65,6 +65,7 @@ showBackground: true
                                 {% image slide.src, slide.alt, "(min-width: 1040px) 1000px, calc(100vw - 40px)", ("eager" if loop.first else "lazy") %}
                                 <span class="featured-project__overlay">
                                     <span class="featured-project__kicker">{{ slide.kicker }}</span>
+                                    {% if slide.statusLabel %}<span class="featured-project__status">{{ slide.statusLabel }}</span>{% endif %}
                                     <span class="featured-project__title">{{ slide.title }}</span>
                                     <span class="featured-project__action">View project <span aria-hidden="true">→</span></span>
                                 </span>

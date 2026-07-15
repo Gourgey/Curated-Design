@@ -7,9 +7,14 @@
   "carousel": {
     "slides": [
       {
-        "project": "marylebone_residence_lobby",
-        "image": "/assets/images/projects/marylebone_residence_lobby/marylebone_residence_lobby_1.webp",
-        "alt": "Marylebone Lobby interior"
+        "project": "garden_restaurant",
+        "image": "/assets/images/projects/16-9_images/monet-living.webp",
+        "alt": "Living room interior"
+      },
+      {
+        "project": "shoreditch_office",
+        "image": "/assets/images/projects/16-9_images/gwape_living.webp",
+        "alt": "Living interior"
       }
     ]
   },

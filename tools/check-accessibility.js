@@ -74,24 +74,50 @@ function localFileForRequest(requestUrl) {
 
 async function checkFeaturedProject(page) {
   const state = await page.evaluate(() => {
+    const carousel = document.querySelector("#portfolio .carousel");
     const links = Array.from(document.querySelectorAll("#portfolio .featured-project"));
+    const slides = Array.from(document.querySelectorAll("#portfolio .slide"));
+    const dots = Array.from(document.querySelectorAll("#portfolio .dots button"));
     return {
       linkCount: links.length,
-      href: links[0] && links[0].getAttribute("href"),
-      title: links[0] && links[0].querySelector(".featured-project__title")?.textContent.trim(),
+      hrefs: links.map((link) => link.getAttribute("href")),
+      titles: links.map((link) => link.querySelector(".featured-project__title")?.textContent.trim()),
+      statuses: links.map((link) => link.querySelector(".featured-project__status")?.textContent.trim()),
       carouselControls: document.querySelectorAll("#portfolio .ctrl, #portfolio .dots").length,
-      comingSoonText: /coming soon/i.test(document.querySelector("#portfolio")?.textContent || ""),
+      carouselLabel: carousel?.getAttribute("aria-label"),
+      activeSlides: slides.filter((slide) => slide.getAttribute("aria-current") === "true").length,
+      hiddenSlides: slides.filter((slide) => slide.getAttribute("aria-hidden") === "true").length,
+      dotCount: dots.length,
+      activeDots: dots.filter((dot) => dot.getAttribute("aria-current") === "true").length,
     };
   });
+  const expectedHrefs = [
+    "/projects/garden_restaurant.html",
+    "/projects/shoreditch_office.html",
+  ];
   if (
-    state.linkCount !== 1 ||
-    state.href !== "/projects/marylebone_residence_lobby.html" ||
-    !state.title ||
-    state.carouselControls !== 0 ||
-    state.comingSoonText
+    state.linkCount !== 2 ||
+    JSON.stringify(state.hrefs) !== JSON.stringify(expectedHrefs) ||
+    state.titles.some((title) => !title) ||
+    state.statuses.some((status) => status !== "Coming soon") ||
+    state.carouselControls !== 3 ||
+    !state.carouselLabel ||
+    state.activeSlides !== 1 ||
+    state.hiddenSlides !== 1 ||
+    state.dotCount !== 2 ||
+    state.activeDots !== 1
   ) {
     throw new Error(`Homepage featured-project contract failed: ${JSON.stringify(state)}`);
   }
+
+  await page.focus("#portfolio .carousel");
+  await page.keyboard.press("ArrowRight");
+  await page.waitForFunction(() => {
+    const slides = document.querySelectorAll("#portfolio .slide");
+    const dots = document.querySelectorAll("#portfolio .dots button");
+    return slides[1]?.getAttribute("aria-current") === "true" && dots[1]?.getAttribute("aria-current") === "true";
+  });
+  await page.click("#portfolio .dots button:first-child");
 }
 
 async function checkProjectCarousel(page) {

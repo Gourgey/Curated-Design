@@ -1,0 +1,328 @@
+/* =========================================================
+   Carousels — shared structural mechanics for both the homepage
+   featured-work carousel and the project-page hero gallery carousel.
+   Moved here from 04-homepage.css, 03-navigation.css,
+   06-project-template.css, and 11-service-redesign.css (P2.2 by-topic
+   regrouping) -- see docs/overhaul/DESIGN-TOKENS.md for the move log.
+
+   Scope: container/track/slide/control/indicator mechanics only. Each
+   carousel's slide CONTENT styling (title, subtitle, tags, kicker,
+   status) stays with that page's own content partial -- it's page
+   content that happens to sit inside a carousel, not carousel
+   mechanics itself. See the homepage's .featured-project* rules and
+   the project template's .project-hero-overlay/.project-kicker/
+   .project-title/etc. for that content styling.
+   ========================================================= */
+
+/* -----------------------------------------------------------
+   Homepage featured-work carousel
+   ----------------------------------------------------------- */
+
+/* ===== Dock panel / Carousel container ===== */
+/*
+   Dock-style panel:
+   - Used to frame the carousel as a hero object.
+   - Rounded, elevated card with inner padding.
+*/
+.dock-panel {
+    position: relative;
+    z-index: 0; /* baseline so higher z-index pills sit above */
+    width: min(1000px, calc(100% - 40px));
+    margin: 28px auto 140px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 22px;
+    padding: 16px 16px 24px;
+    box-shadow:
+        0 40px 80px rgba(0, 0, 0, 0.6),
+        0 1px 0 rgba(255, 255, 255, 0.03) inset;
+    overflow: visible;
+}
+
+/* ===== Carousel core layout ===== */
+/*
+   Carousel container:
+   - Relative positioning for arrows and overlays.
+*/
+.carousel {
+    position: relative;
+}
+
+/*
+   Viewport wrapper:
+   - Ensures the carousel occupies full width.
+*/
+.viewport {
+    position: relative;
+    width: 100%;
+}
+
+/*
+   Clip region:
+   - Hides overflowing slides.
+   - Rounded corners for the image frame.
+*/
+.viewport-clip {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 18px;
+}
+
+/*
+   Track:
+   - Horizontal flex strip that holds all slides.
+   - JS adjusts transform to move between slides.
+*/
+.track {
+    display: flex;
+    transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform;
+}
+
+/*
+   Individual slide:
+   - Takes full viewport width.
+   - 16:9 aspect ratio for consistent image framing.
+*/
+.slide {
+    position: relative;
+    min-width: 100%;
+    aspect-ratio: 16/9;
+    background: #0f0f0f;
+    overflow: hidden;
+}
+
+/*
+   Slide image:
+   - Fully covers slide area.
+   - Prevent drag/select behaviour for smoother UX.
+*/
+.slide img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+/* ===== Carousel arrows ===== */
+/*
+   Left/right navigation arrows:
+   - Centrally aligned vertically.
+   - Dark translucent buttons with hover feedback.
+*/
+.ctrl {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid var(--ring);
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    color: #e8e8e8;
+}
+.ctrl:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+.prev {
+    left: 12px;
+}
+.next {
+    right: 12px;
+}
+/* ===== Carousel dots (indicators) ===== */
+/*
+   Dots container:
+   - Centers slide indicators under the carousel.
+*/
+.dots {
+    display: flex;
+    justify-content: center;
+    /* Zero gap: the 44px touch-target buttons below provide their own
+       spacing, so an additional flex gap would double it up. */
+    gap: 0;
+    margin-top: 18px;
+}
+
+/*
+   Individual dot:
+   - Circular buttons with hover and active states.
+*/
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    border: none;
+    cursor: pointer;
+    transition: background 0.25s ease;
+}
+
+.dot:hover {
+    background: rgba(255, 255, 255, 0.55);
+}
+
+.dot.active {
+    background: var(--accent);
+}
+
+/* Keep the visible indicator small while giving each carousel control a
+   comfortable touch target. */
+.dots .dot {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: transparent;
+}
+.dots .dot::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    transform: translate(-50%, -50%);
+}
+.dots .dot:hover,
+.dots .dot.active {
+    background: transparent;
+}
+.dots .dot:hover::before {
+    background: rgba(255, 255, 255, 0.78);
+}
+.dots .dot.active::before {
+    background: var(--accent);
+}
+
+/* -----------------------------------------------------------
+   Project-page hero gallery carousel
+   ----------------------------------------------------------- */
+
+/* Pattern C — picture is a transparent block-flow wrapper; the inner
+   <img> keeps its existing clamped height. */
+.project-hero-slide picture,
+.project-hero-media picture {
+    display: block;
+    width: 100%;
+    line-height: 0;
+}
+/* Hero */
+body.project-page .project-hero {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    max-width: 100vw;
+    margin: 0;
+    overflow: hidden;
+    min-height: clamp(620px, 100svh, 980px);
+}
+
+body.project-page .project-hero-media {
+    margin: 0;
+    width: 100%;
+}
+
+body.project-page .project-hero-track {
+    display: flex;
+    width: 100%;
+    transform: translateX(0);
+    transition: transform 360ms ease;
+}
+
+body.project-page .project-hero-slide {
+    min-width: 100%;
+}
+
+body.project-page .project-hero-media img {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(0.98);
+    height: clamp(620px, 100svh, 980px);
+    min-height: 100%;
+    object-position: center center;
+}
+
+body.project-page .project-hero-control {
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 999px;
+    background: rgba(32, 29, 25, 0.28);
+    color: #fff;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+body.project-page .project-hero-control--prev {
+    left: 18px;
+}
+
+body.project-page .project-hero-control--next {
+    right: 18px;
+}
+
+body.project-page .project-hero-dots {
+    position: absolute;
+    left: 50%;
+    bottom: 34px;
+    z-index: 3;
+    display: flex;
+    gap: 0;
+    transform: translateX(-50%);
+}
+
+body.project-page .project-hero-dots button {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+body.project-page .project-hero-dots button.active {
+    background: transparent;
+}
+
+body.project-page .project-hero-dots button::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.45);
+    transform: translate(-50%, -50%);
+}
+
+body.project-page .project-hero-dots button.active::before {
+    background: #fff;
+}
+body.project-page .project-hero-media,
+body.project-page .project-hero-track,
+body.project-page .project-hero-slide {
+    height: 100%;
+}

@@ -424,11 +424,9 @@ body.project-page .nav-pill .pill:hover {
     background: rgba(255, 255, 255, 0.08);
 }
 
-body.project-page .project-hero-media,
-body.project-page .project-hero-track,
-body.project-page .project-hero-slide {
-    height: 100%;
-}
+/* The additive .project-hero-media/.project-hero-track/.project-hero-slide
+   { height: 100% } rule that lived here moved to
+   assets/css-partials/12-carousels.css (P2.2 by-topic regrouping). */
 
 body.project-page .project-cta-band {
     background: #12120f;

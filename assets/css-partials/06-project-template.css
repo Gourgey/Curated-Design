@@ -80,109 +80,13 @@ body.project-page .project-backlink:hover {
     color: #fff;
 }
 
-/* Hero */
-body.project-page .project-hero {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw;
-    max-width: 100vw;
-    margin: 0;
-    overflow: hidden;
-    min-height: clamp(620px, 100svh, 980px);
-}
-
-body.project-page .project-hero-media {
-    margin: 0;
-    width: 100%;
-}
-
-body.project-page .project-hero-track {
-    display: flex;
-    width: 100%;
-    transform: translateX(0);
-    transition: transform 360ms ease;
-}
-
-body.project-page .project-hero-slide {
-    min-width: 100%;
-}
-
-body.project-page .project-hero-media img {
-    width: 100%;
-    object-fit: cover;
-    display: block;
-    filter: saturate(0.98);
-    height: clamp(620px, 100svh, 980px);
-    min-height: 100%;
-    object-position: center center;
-}
-
-body.project-page .project-hero-control {
-    position: absolute;
-    top: 50%;
-    z-index: 3;
-    transform: translateY(-50%);
-    width: 42px;
-    height: 42px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 999px;
-    background: rgba(32, 29, 25, 0.28);
-    color: #fff;
-    font-size: 26px;
-    line-height: 1;
-    cursor: pointer;
-    box-shadow: none;
-}
-
-body.project-page .project-hero-control--prev {
-    left: 18px;
-}
-
-body.project-page .project-hero-control--next {
-    right: 18px;
-}
-
-body.project-page .project-hero-dots {
-    position: absolute;
-    left: 50%;
-    bottom: 34px;
-    z-index: 3;
-    display: flex;
-    gap: 0;
-    transform: translateX(-50%);
-}
-
-body.project-page .project-hero-dots button {
-    position: relative;
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-}
-
-body.project-page .project-hero-dots button.active {
-    background: transparent;
-}
-
-body.project-page .project-hero-dots button::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 8px;
-    height: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.85);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.45);
-    transform: translate(-50%, -50%);
-}
-
-body.project-page .project-hero-dots button.active::before {
-    background: #fff;
-}
+/* Hero carousel container/track/slide/control/dots mechanics
+   (.project-hero, .project-hero-media, .project-hero-track,
+   .project-hero-slide, .project-hero-media img, .project-hero-control
+   (+variants), .project-hero-dots (+children)) moved to
+   assets/css-partials/12-carousels.css (P2.2 by-topic regrouping). The
+   hero's text CONTENT styling below (overlay, kicker, title, subtitle,
+   tags) stays here -- it's page content, not carousel mechanics. */
 
 body.project-page .project-hero-overlay {
     position: absolute;

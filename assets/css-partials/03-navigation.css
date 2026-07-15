@@ -92,19 +92,9 @@ body.nav-open {
     }
 }
 
-/* eleventy-img wraps every <img> in a <picture>. The wrapper is handled
-   per-context because the original CSS used three different layout
-   patterns (wrapper-aspect, img-aspect, clamp-height). */
-
-
-/* Pattern C — picture is a transparent block-flow wrapper; the inner
-   <img> keeps its existing clamped height. */
-.project-hero-slide picture,
-.project-hero-media picture {
-    display: block;
-    width: 100%;
-    line-height: 0;
-}
+/* eleventy-img wraps every <img> in a <picture>. The project-hero-carousel
+   picture-wrapper reset ("Pattern C" in the original comment here) moved to
+   assets/css-partials/12-carousels.css (P2.2 by-topic regrouping). */
 
 /* --- Burger toggle base styles ---
    - Hidden by default on desktop.

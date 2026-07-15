@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 
 function readJson(relativePath) {
   const filePath = path.join(__dirname, "..", "content", relativePath);
@@ -8,7 +9,8 @@ function readJson(relativePath) {
 
 function fileVersion(relativePath) {
   const filePath = path.join(__dirname, "..", "..", relativePath);
-  return Math.round(fs.statSync(filePath).mtimeMs).toString(36);
+  const contents = fs.readFileSync(filePath);
+  return crypto.createHash("sha256").update(contents).digest("hex").slice(0, 10);
 }
 
 module.exports = {

@@ -203,6 +203,7 @@ const home = readJson("src/content/pages/home.json");
   "siteUrl",
   "description",
   "shareImage",
+  "shareImageAlt",
 ].forEach((field) => requireValue(settings[field], `src/content/settings.json: ${field}`));
 validateLocalImage(settings.shareImage, "src/content/settings.json: shareImage");
 
@@ -238,6 +239,7 @@ const cmsConfig = fs.readFileSync(path.join(root, "admin/config.yml"), "utf8");
 [
   "primaryCtaUrl",
   "shareImage",
+  "shareImageAlt",
   "gallery",
   "articleHeading",
   "status",

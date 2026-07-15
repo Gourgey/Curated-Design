@@ -26,6 +26,7 @@
         {% set canonicalUrl = (siteUrl + page.url) if siteUrl and page.url else "" %}
         {% set ogImageRaw = ogImage or (project.data.heroImage if project) or (service.data.coverImage if service) or site.settings.shareImage %}
         {% set ogImage = (siteUrl + ogImageRaw) if siteUrl and ogImageRaw and ogImageRaw[0] == "/" else ogImageRaw %}
+        {% set ogImageAlt = ogImageAlt or (project.data.heroAlt if project) or (service.data.coverAlt if service) or site.settings.shareImageAlt %}
         {% set ogType = ogType or ("article" if (project or service) else "website") %}
         {% if canonicalUrl %}
         <link rel="canonical" href="{{ canonicalUrl }}" />
@@ -36,10 +37,12 @@
         {% if metaDescription %}<meta property="og:description" content="{{ metaDescription | safe }}" />{% endif %}
         {% if canonicalUrl %}<meta property="og:url" content="{{ canonicalUrl }}" />{% endif %}
         {% if ogImage %}<meta property="og:image" content="{{ ogImage }}" />{% endif %}
+        {% if ogImage and ogImageAlt %}<meta property="og:image:alt" content="{{ ogImageAlt }}" />{% endif %}
         <meta name="twitter:card" content="{{ "summary_large_image" if ogImage else "summary" }}" />
         <meta name="twitter:title" content="{{ title }}" />
         {% if metaDescription %}<meta name="twitter:description" content="{{ metaDescription | safe }}" />{% endif %}
         {% if ogImage %}<meta name="twitter:image" content="{{ ogImage }}" />{% endif %}
+        {% if ogImage and ogImageAlt %}<meta name="twitter:image:alt" content="{{ ogImageAlt }}" />{% endif %}
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

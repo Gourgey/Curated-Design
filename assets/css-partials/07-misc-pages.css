@@ -479,9 +479,37 @@ body.legal-page .hero-brand {
         gap: 4px;
     }
 
-    
 
-    
+
+
+}
+
+/* ===== Thank-you page (form success landing) =====
+   Rendered on the contact-page cream theme, so the shared .h2/.lead
+   colours (made for dark bands) are re-inked with contact tokens. Moved
+   here from 04-homepage.css (P2.2 by-topic regrouping) -- not
+   homepage-specific. */
+.thanks {
+    padding: 48px 16px 96px;
+}
+
+.thanks__inner {
+    max-width: 950px;
+    margin: 0 auto;
+    display: grid;
+    justify-items: start;
+    gap: 16px;
+}
+
+.thanks__inner .h2 {
+    font-family: var(--font-family-display);
+    font-weight: 500;
+    color: var(--color-text-primary);
+}
+
+.thanks__inner .lead {
+    margin: 0 0 24px;
+    color: var(--color-text-secondary);
 }
 
 

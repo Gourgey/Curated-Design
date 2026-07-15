@@ -266,108 +266,13 @@ body.pills-on-light #floatingNavPill.is-open .pillmenu .pill:hover {
 }
 
 
-/* ===== CTA (call-to-action) ===== */
-
-
-/*
-   CTA button:
-   - Rounded pill with subtle hover change.
-*/
-.button {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 18px;
-    border-radius: 999px;
-    border: 1px solid var(--ring);
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--ink);
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-.button:hover {
-    background: rgba(255, 255, 255, 0.12);
-}
-
-/*
-   Accent dot inside CTA button:
-   - Small coloured dot for a bit of visual personality.
-*/
-.button .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 999px;
-    background: var(--accent);
-}
-
-/* =========================
-   Reusable CTA band (use on all pages except index.html)
-   ========================= */
-
-.about-cta-lead {
-    max-width: 520px;
-}
-
-.about-cta-button {
-    margin-top: 16px;
-    display: inline-flex;
-}
-
-/* CTA is ALWAYS dark, regardless of page */
-.about-cta-band {
-    background: #171717;
-    padding: 80px 0; /* optional hard guarantee */
-}
-
-/* Default inner wrapper for the shared CTA band partial (pages that don't
-   pass their own ctaContainerClass). */
-.cta-band__inner {
-    max-width: 950px;
-    margin: 0 auto;
-    padding: 0 16px;
-    text-align: center;
-}
-
-/* ===== Thank-you page (form success landing) =====
-   Rendered on the contact-page cream theme, so the shared .h2/.lead
-   colours (made for dark bands) are re-inked with contact tokens. */
-.thanks {
-    padding: 48px 16px 96px;
-}
-
-.thanks__inner {
-    max-width: 950px;
-    margin: 0 auto;
-    display: grid;
-    justify-items: start;
-    gap: 16px;
-}
-
-.thanks__inner .h2 {
-    font-family: var(--font-family-display);
-    font-weight: 500;
-    color: var(--color-text-primary);
-}
-
-.thanks__inner .lead {
-    margin: 0 0 24px;
-    color: var(--color-text-secondary);
-}
-
-.about-cta-band .h2,
-.about-cta-band .lead {
-    color: #e4e1d7 !important;
-}
-.about-cta-band .lead {
-    opacity: 0.85;
-}
-
-.about-cta-band .about-cta-button,
-.about-cta-band .about-cta-button:hover {
-    color: #fff !important;
-}
-
-/* Carousel dots/indicators (.dots, .dot) moved to
+/* Shared CTA button/band component (.button, .about-cta-*, .cta-band__inner)
+   moved to assets/css-partials/13-buttons-cta.css (P2.2 by-topic
+   regrouping) -- used by the cta-band.njk partial across the homepage,
+   projects, service, and project-detail templates, not homepage-only.
+   Thank-you page styles (.thanks, .thanks__inner) moved to
+   assets/css-partials/07-misc-pages.css for the same reason: not
+   homepage-specific. Carousel dots/indicators (.dots, .dot) moved to
    assets/css-partials/12-carousels.css (P2.2 by-topic regrouping). */
 
 

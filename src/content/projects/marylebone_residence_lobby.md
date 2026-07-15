@@ -71,8 +71,6 @@ gallery:
   heading: Gallery
   text: Warm architectural detailing, sculptural forms, and layered lighting create a calmer, more polished arrival experience.
   images:
-    - image: /assets/images/projects/marylebone_residence_lobby/marylebone_residence_lobby_1.webp
-      alt: Marylebone Lobby hero image
     - image: /assets/images/projects/marylebone_residence_lobby/marylebone_residence_lobby_2.webp
       alt: Marylebone Lobby detail image
     - image: /assets/images/projects/marylebone_residence_lobby/marylebone_residence_lobby_3.webp

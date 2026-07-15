@@ -1,11 +1,12 @@
 <nav
     id="floatingNavPill"
     class="nav-pill nav-pill--right"
-    aria-label="Primary navigation (floating)"
+    aria-label="Primary navigation"
 >
     <button
         class="pillmenu-toggle"
         type="button"
+        aria-label="Open primary menu"
         aria-expanded="false"
         aria-controls="floatingPillMenu"
     >
@@ -16,10 +17,10 @@
 
     <ul id="floatingPillMenu" class="pillmenu">
         <li class="overlay-home-only">
-            <a class="pill" href="/index.html">Home</a>
+            <a class="pill" href="/index.html"{% if page.url == "/" or page.url == "/index.html" %} aria-current="page"{% endif %}>Home</a>
         </li>
-        <li><a class="pill" href="/projects.html">Work</a></li>
-        <li><a class="pill" href="/about.html">Studio</a></li>
-        <li><a class="pill" href="/contact.html">Contact</a></li>
+        <li><a class="pill" href="/projects.html"{% if page.url == "/projects.html" or project %} aria-current="page"{% endif %}>Work</a></li>
+        <li><a class="pill" href="/about.html"{% if page.url == "/about.html" %} aria-current="page"{% endif %}>Studio</a></li>
+        <li><a class="pill" href="/contact.html"{% if page.url == "/contact.html" %} aria-current="page"{% endif %}>Contact</a></li>
     </ul>
 </nav>

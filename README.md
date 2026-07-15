@@ -6,6 +6,8 @@ This site is a static Netlify site generated with Eleventy and edited through De
 
 ## Local Development
 
+Use Node.js 22.12 or newer. If you use `nvm`, run `nvm use` to select the repository's Node 22 runtime.
+
 Install dependencies once:
 
 ```sh
@@ -16,6 +18,12 @@ Build the static site:
 
 ```sh
 npm run build
+```
+
+Run the build plus content, JavaScript, link, asset, metadata, indexing, and representative accessibility checks:
+
+```sh
+npm run check
 ```
 
 Run a local development server:
@@ -112,3 +120,11 @@ Publish directory: _site
 ```
 
 These values are also committed in `netlify.toml`. The contact form remains a Netlify form and is rendered into the generated `contact.html`.
+
+## Site Overhaul
+
+The implementation programme is in [SITE-OVERHAUL-BUILD-PLAN.md](SITE-OVERHAUL-BUILD-PLAN.md). Phase 0 working records are kept in:
+
+- [Content inventory](docs/overhaul/CONTENT-INVENTORY.md)
+- [Decision log](docs/overhaul/DECISIONS.md)
+- [Audit and check baseline](docs/overhaul/BASELINE.md)

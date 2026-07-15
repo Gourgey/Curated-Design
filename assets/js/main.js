@@ -100,7 +100,10 @@ window.addEventListener("DOMContentLoaded", () => {
       // Scroll to the section's exact document top so the viewport aligns
       // precisely with the target section in Chrome and Safari.
       const y = Math.round(el.getBoundingClientRect().top + window.scrollY);
-      window.scrollTo({ top: y, behavior: "smooth" });
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      window.scrollTo({ top: y, behavior: reduceMotion ? "auto" : "smooth" });
     }
 
     pills.forEach((a) => {
@@ -126,16 +129,96 @@ window.addEventListener("DOMContentLoaded", () => {
     if (!nav) return;
 
     const navToggle = nav.querySelector(".pillmenu-toggle");
-    if (!navToggle) return;
+    const menu = nav.querySelector("#floatingPillMenu");
+    if (!navToggle || !menu) return;
 
-    function closeNav() {
+    const siteHeader = nav.closest("header");
+    const logo = siteHeader && siteHeader.querySelector(".top-left-logo");
+    let inertTargets = [];
+
+    function setBackgroundInert(isInert) {
+      if (isInert) {
+        inertTargets = Array.from(document.body.children).filter(
+          (child) => child !== siteHeader && child.tagName !== "SCRIPT",
+        );
+        inertTargets.forEach((child) => {
+          child.dataset.navWasInert = child.inert ? "true" : "false";
+          child.inert = true;
+        });
+        if (logo) logo.inert = true;
+        return;
+      }
+
+      inertTargets.forEach((child) => {
+        child.inert = child.dataset.navWasInert === "true";
+        delete child.dataset.navWasInert;
+      });
+      inertTargets = [];
+      if (logo) logo.inert = false;
+    }
+
+    function focusableMenuItems() {
+      return Array.from(menu.querySelectorAll("a[href], button:not([disabled])")).filter(
+        (item) => item.getClientRects().length > 0,
+      );
+    }
+
+    function closeNav({ restoreFocus = false } = {}) {
+      const wasOpen = nav.classList.contains("is-open");
       nav.classList.remove("is-open");
       navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "Open primary menu");
+      document.body.classList.remove("nav-open");
+      setBackgroundInert(false);
+      if (wasOpen && restoreFocus) navToggle.focus();
+    }
+
+    function openNav() {
+      nav.classList.add("is-open");
+      navToggle.setAttribute("aria-expanded", "true");
+      navToggle.setAttribute("aria-label", "Close primary menu");
+      document.body.classList.add("nav-open");
+      setBackgroundInert(true);
+      window.requestAnimationFrame(() => {
+        const [firstItem] = focusableMenuItems();
+        if (firstItem) firstItem.focus();
+      });
     }
 
     navToggle.addEventListener("click", () => {
-      const isOpen = nav.classList.toggle("is-open");
-      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      if (nav.classList.contains("is-open")) closeNav({ restoreFocus: true });
+      else openNav();
+    });
+
+    menu.addEventListener("click", (event) => {
+      if (event.target.closest("a")) closeNav();
+    });
+
+    nav.addEventListener("click", (event) => {
+      if (event.target === nav && nav.classList.contains("is-open")) {
+        closeNav({ restoreFocus: true });
+      }
+    });
+
+    nav.addEventListener("keydown", (event) => {
+      if (!nav.classList.contains("is-open")) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeNav({ restoreFocus: true });
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const items = [navToggle, ...focusableMenuItems()];
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     });
 
     // Your CSS uses: @media (max-width: 1280px) for burger mode

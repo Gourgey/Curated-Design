@@ -37,10 +37,20 @@ window.addEventListener("DOMContentLoaded", () => {
       form.reset();
       form.classList.add("hidden");
       successCard.classList.remove("hidden");
-      successCard.scrollIntoView({ behavior: "smooth", block: "start" });
+      successCard.setAttribute("tabindex", "-1");
+      successCard.focus();
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      successCard.scrollIntoView({
+        behavior: reduceMotion ? "auto" : "smooth",
+        block: "start",
+      });
     } catch (error) {
       console.error("Contact form submission failed", error);
       errorMessage.classList.remove("hidden");
+      errorMessage.setAttribute("tabindex", "-1");
+      errorMessage.focus();
       submitButton.disabled = false;
       submitLabel.textContent = defaultLabel;
     }

@@ -3,8 +3,9 @@ layout: layouts/base.njk
 title: Thank You – Curated Design Studio
 htmlClass: contact-page
 bodyClass: contact-page min-h-screen font-inter
+noindex: true
 ---
-<main class="page-main">
+<main id="main-content" class="page-main" tabindex="-1">
     {% include "partials/hero-brand.njk" %}
 
     <section class="thanks">

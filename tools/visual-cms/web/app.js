@@ -1960,7 +1960,7 @@ function syncProjectDetailPage(doc, slug) {
       );
     });
   }
-  doc.querySelectorAll(".project-gallery-card").forEach((node) => { node.hidden = true; });
+  doc.querySelectorAll(".project-gallery-card").forEach((node) => { node.hidden = isComingSoon; });
   const calloutTitle = doc.querySelector(".project-callout-title");
   const calloutText = doc.querySelector(".project-callout-text");
   if (calloutTitle) {

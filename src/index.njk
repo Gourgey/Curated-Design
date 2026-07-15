@@ -7,7 +7,7 @@ bodyClass: min-h-screen text-[#f2f2f2] font-inter
 topLogo: white_logo_no_text_on_transparent.svg
 showBackground: true
 ---
-<main class="page-main">
+<main id="main-content" class="page-main" tabindex="-1">
     {% set logoFile = "white_small_logo_and_large_text_on_transparent.svg" %}
     {% include "partials/hero-brand.njk" %}
 
@@ -164,7 +164,7 @@ showBackground: true
             {% if site.home.cta.text %}
             <p class="home-cta__subline">{{ site.home.cta.text }}</p>
             {% endif %}
-            <a class="home-cta__link" href="mailto:{{ site.settings.email }}">
+            <a class="home-cta__link" href="{{ site.settings.primaryCtaUrl or ('mailto:' + site.settings.email) }}">
                 <span class="home-cta__dot" aria-hidden="true"></span>
                 {{ site.home.cta.buttonLabel }}
             </a>

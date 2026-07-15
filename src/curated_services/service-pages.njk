@@ -15,7 +15,7 @@ bodyClass: concept-page font-inter
 {% set hasSections = service.data.sections and service.data.sections.length %}
 {% set coverAlt = service.data.coverAlt or service.data.title %}
 
-<main class="service">
+<main id="main-content" class="service" tabindex="-1">
     <header class="service-header">
         <p class="service-header__eyebrow">{{ service.data.eyebrow or "Service" }}</p>
         <div>

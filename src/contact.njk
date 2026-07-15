@@ -10,7 +10,7 @@ scripts:
   - /assets/js/main.js
   - /assets/js/contact-form.js
 ---
-<main class="page-main">
+<main id="main-content" class="page-main" tabindex="-1">
     {% include "partials/hero-brand.njk" %}
 
     <div class="contact-body">
@@ -34,7 +34,7 @@ scripts:
                 class="contact-form"
                 name="contact"
                 method="POST"
-                action="/contact.html"
+                action="/thank-you/"
                 netlify
                 data-netlify="true"
                 data-netlify-honeypot="bot-field"

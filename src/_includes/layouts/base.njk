@@ -10,6 +10,10 @@
         {% if metaDescription %}
         <meta name="description" content="{{ metaDescription | safe }}" />
         {% endif %}
+        {% set shouldNoindex = noindex or (project and project.data.status != "published") %}
+        {% if shouldNoindex %}
+        <meta name="robots" content="noindex, follow" />
+        {% endif %}
 
         {# Favicons — generated from the Curated Design brand mark; served from
            site root via the `public/` passthrough copy. #}
@@ -101,16 +105,17 @@
         </div>
         {% endif %}
 
-        <a href="/index.html{% if sectionTop %}#top{% endif %}" id="topLogo" class="top-left-logo">
-            <img
-                src="/assets/images/logos/{{ topLogo | default('logo_no_text_on_transparent.svg') }}"
-                alt="{{ site.settings.studioName }}"
-            />
-        </a>
+        <header id="siteHeader">
+            <a href="/index.html{% if sectionTop %}#top{% endif %}" id="topLogo" class="top-left-logo">
+                <img
+                    src="/assets/images/logos/{{ topLogo | default('logo_no_text_on_transparent.svg') }}"
+                    alt="{{ site.settings.studioName }}"
+                />
+            </a>
 
-        {% include "partials/nav.njk" %}
+            {% include "partials/nav.njk" %}
+        </header>
 
-        <div id="main-content" tabindex="-1"></div>
         {{ content | safe }}
 
         {% for script in scripts | default(['/assets/js/main.js']) %}

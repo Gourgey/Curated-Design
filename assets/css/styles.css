@@ -238,6 +238,30 @@ main.page-main {
     outline-offset: 2px;
 }
 
+:where(a, button, input, select, textarea):focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+}
+
+body.nav-open {
+    overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
 /* eleventy-img wraps every <img> in a <picture>. The wrapper is handled
    per-context because the original CSS used three different layout
    patterns (wrapper-aspect, img-aspect, clamp-height). */
@@ -1026,6 +1050,40 @@ body.pills-on-light #floatingNavPill.is-open .pillmenu .pill:hover {
     background: var(--accent);
 }
 
+/* Keep the visible indicator small while giving each carousel control a
+   comfortable touch target. */
+.dots {
+    gap: 0;
+}
+.dots .dot {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: transparent;
+}
+.dots .dot::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    transform: translate(-50%, -50%);
+}
+.dots .dot:hover,
+.dots .dot.active {
+    background: transparent;
+}
+.dots .dot:hover::before {
+    background: rgba(255, 255, 255, 0.78);
+}
+.dots .dot.active::before {
+    background: var(--accent);
+}
+
 
 /* =========================
    Projects Page (projects.html)
@@ -1092,7 +1150,7 @@ body.about-page {
     --sp-paper-2: #f2eee6;
     --sp-ink: #1b1a17;
     --sp-ink-2: #46443e;
-    --sp-ink-3: #807b72;
+    --sp-ink-3: #625e57;
     --sp-rule: #c9c3b6;
     --sp-rule-soft: #e4dfd4;
     --sp-font-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
@@ -1488,7 +1546,7 @@ body.contact-page {
     --cp-paper-2: #f2eee6;
     --cp-ink: #1b1a17;
     --cp-ink-2: #46443e;
-    --cp-ink-3: #807b72;
+    --cp-ink-3: #625e57;
     --cp-rule: #c9c3b6;
     --cp-rule-soft: #e4dfd4;
     --cp-font-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
@@ -2118,21 +2176,38 @@ body.project-page .project-hero-dots {
     bottom: 18px;
     z-index: 3;
     display: flex;
-    gap: 8px;
+    gap: 0;
     transform: translateX(-50%);
 }
 
 body.project-page .project-hero-dots button {
-    width: 8px;
-    height: 8px;
+    position: relative;
+    width: 44px;
+    height: 44px;
     padding: 0;
-    border: 1px solid rgba(255, 255, 255, 0.72);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.35);
+    border: 0;
+    background: transparent;
     cursor: pointer;
 }
 
 body.project-page .project-hero-dots button.active {
+    background: transparent;
+}
+
+body.project-page .project-hero-dots button::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.45);
+    transform: translate(-50%, -50%);
+}
+
+body.project-page .project-hero-dots button.active::before {
     background: #fff;
 }
 
@@ -2761,7 +2836,7 @@ body.legal-page .hero-brand {
     --hp-paper-2: #f2eee6;
     --hp-ink: #1b1a17;
     --hp-ink-2: #46443e;
-    --hp-ink-3: #807b72;
+    --hp-ink-3: #625e57;
     --hp-rule: #c9c3b6;
     --hp-rule-soft: #e4dfd4;
     --hp-void: #14130f;
@@ -3192,6 +3267,15 @@ body.project-page .project-article {
 }
 
 /* Lead paragraph — Cormorant italic on the page background */
+body.project-page .project-article__heading {
+    margin: 0 0 20px;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(28px, 3vw, 40px);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
 body.project-page .project-lead {
     font-family: "Cormorant Garamond", serif;
     font-style: italic;
@@ -3284,10 +3368,10 @@ body.project-page .project-facts__row:first-child {
 body.project-page .project-facts__label {
     font-family: "Inter", sans-serif;
     font-weight: 500;
-    font-size: 8px;
+    font-size: 12px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(0, 0, 0, 0.45);
+    color: #625e57;
 }
 body.project-page .project-facts__value {
     font-family: "Cormorant Garamond", serif;
@@ -3323,10 +3407,10 @@ body.project-page .project-aside__cta {
 body.project-page .label-small {
     font-family: "Inter", sans-serif;
     font-weight: 500;
-    font-size: 8px;
+    font-size: 12px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(0, 0, 0, 0.45);
+    color: #625e57;
 }
 
 /* =========================
@@ -3348,7 +3432,7 @@ body.projects-page {
     --pp-paper-2: #f2eee6;
     --pp-ink: #1b1a17;
     --pp-ink-2: #46443e;
-    --pp-ink-3: #807b72;
+    --pp-ink-3: #625e57;
     --pp-rule-soft: #e4dfd4;
     --pp-font-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
     --pp-font-body: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
@@ -3579,7 +3663,7 @@ body.concept-page {
     --srv-paper-2: #f2eee6;
     --srv-ink: #1b1a17;
     --srv-ink-2: #46443e;
-    --srv-ink-3: #807b72;
+    --srv-ink-3: #625e57;
     --srv-rule: #c9c3b6;
     --srv-font-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
     --srv-font-body: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
@@ -3754,10 +3838,10 @@ body.concept-page .service-glance__row:first-child {
 body.concept-page .service-glance__label {
     font-family: var(--srv-font-body);
     font-weight: 500;
-    font-size: 8px;
+    font-size: 12px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(0, 0, 0, 0.45);
+    color: #625e57;
     margin: 0;
 }
 body.concept-page .service-glance__value {
@@ -3902,10 +3986,10 @@ body.concept-page .service-enquiry__submit:hover .service-enquiry__arrow {
 body.concept-page .label-small {
     font-family: var(--srv-font-body);
     font-weight: 500;
-    font-size: 8px;
+    font-size: 12px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(0, 0, 0, 0.45);
+    color: #625e57;
 }
 
 /* Responsive */

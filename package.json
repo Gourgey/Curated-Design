@@ -2,9 +2,17 @@
   "name": "curated-design-website",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=22.12"
+  },
   "scripts": {
     "clean": "node -e \"require('fs').rmSync('_site', { recursive: true, force: true })\"",
     "build": "npm run clean && eleventy && node tools/minify-css.js",
+    "check": "npm run check:content && npm run check:js && npm run build && npm run check:site && npm run check:a11y",
+    "check:a11y": "node tools/check-accessibility.js",
+    "check:content": "node tools/check-content.js",
+    "check:js": "node tools/check-js.js",
+    "check:site": "node tools/check-output.js",
     "start": "eleventy --serve",
     "cms": "node tools/visual-cms/server.js",
     "cms:local": "npx -y decap-server"
@@ -12,8 +20,10 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",
     "@11ty/eleventy-img": "^6.0.4",
+    "axe-core": "^4.12.1",
     "clean-css": "^5.3.3",
     "gray-matter": "^4.0.3",
-    "markdown-it": "^14.3.0"
+    "markdown-it": "^14.3.0",
+    "puppeteer-core": "^25.3.0"
   }
 }

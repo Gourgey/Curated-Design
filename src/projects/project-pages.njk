@@ -37,7 +37,7 @@ sectionTop: true
 {% if not heroSrc and galleryImages.length %}{% set heroSrc = galleryImages[0].image %}{% endif %}
 {% set heroAlt = project.data.heroAlt or project.data.title %}
 
-<main class="page-main">
+<main id="main-content" class="page-main" tabindex="-1">
     <div class="project-topbar">
         <a class="project-backlink" href="/projects.html"><span aria-hidden="true">← </span>Back to Work</a>
     </div>
@@ -93,6 +93,10 @@ sectionTop: true
         <div class="container project-wrap">
             <div class="project-article">
                 <div class="project-article__main">
+                    {% if headingText %}
+                    <h2 class="project-article__heading project-h2">{{ headingText }}</h2>
+                    {% endif %}
+
                     {% if leadText %}
                     <div class="project-lead">{{ leadText | markdownify | safe }}</div>
                     {% endif %}
@@ -110,6 +114,17 @@ sectionTop: true
                         <blockquote class="project-callout__text">{{ project.data.callout.text | markdownify | safe }}</blockquote>
                         {% endif %}
                     </div>
+                    {% endif %}
+
+                    {% if (not isComingSoon) and project.data.gallery and (project.data.gallery.heading or project.data.gallery.text) %}
+                    <section class="project-gallery-card project-section">
+                        {% if project.data.gallery.heading %}
+                        <h2 class="project-section__heading project-h2 label-small">{{ project.data.gallery.heading }}</h2>
+                        {% endif %}
+                        {% if project.data.gallery.text %}
+                        <div class="project-section__body project-muted">{{ project.data.gallery.text | markdownify | safe }}</div>
+                        {% endif %}
+                    </section>
                     {% endif %}
 
                     {% if not isComingSoon %}
@@ -156,7 +171,7 @@ sectionTop: true
     {% if project.data.ctaHeading or project.data.ctaText %}
     {% set heading = project.data.ctaHeading %}
     {% set text = project.data.ctaText %}
-    {% set href = "/contact.html" %}
+    {% set href = site.settings.primaryCtaUrl or "/contact.html" %}
     {% set ctaClass = "project-cta-band section" %}
     {% set ctaContainerClass = "project-cta__inner" %}
     {% set label = project.data.asideCta or "Make an enquiry" %}

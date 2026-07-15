@@ -26,6 +26,7 @@ collections:
           - { label: "Footer CTA Text", name: "ctaText", widget: "text" }
           - { label: "Site URL", name: "siteUrl", widget: "string", required: false, hint: "Public URL of the live site (no trailing slash). Used as the canonical/SEO base — e.g. https://curateddesign.studio" }
           - { label: "Default Meta Description", name: "description", widget: "text", required: false, hint: "Site-wide fallback description used in search results and link previews when a page or project doesn't supply its own." }
+          - { label: "Default Share Image", name: "shareImage", widget: "image", required: false, hint: "Fallback image used for social previews when a project or service does not provide its own image." }
 
   - name: "pages"
     label: "Pages"

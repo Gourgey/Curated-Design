@@ -20,7 +20,8 @@ eleventyExcludeFromCollections: true
 {%- for service in collections.publishedService | sortByOrder %}
 <url><loc>{{ base }}/curated_services/{{ service.data.slug }}.html</loc></url>
 {%- endfor %}
-{%- for project in collections.publishedProject | sortByOrder %}
+{%- set indexableProjects = collections.publishedProject | where("status", "published") -%}
+{%- for project in indexableProjects | sortByOrder %}
 <url><loc>{{ base }}/projects/{{ project.data.slug }}.html</loc></url>
 {%- endfor %}
 </urlset>

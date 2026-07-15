@@ -8,7 +8,7 @@ htmlClass: projects-page
 bodyClass: projects-page font-inter
 topLogo: logo_no_text_on_transparent.svg
 ---
-<main class="page-main">
+<main id="main-content" class="page-main" tabindex="-1">
     <header class="projects-header">
         {% if site.projectsPage.eyebrow %}
         <p class="projects-header__eyebrow">{{ site.projectsPage.eyebrow }}</p>
@@ -85,7 +85,7 @@ topLogo: logo_no_text_on_transparent.svg
 
     {% set heading = site.settings.ctaHeading %}
     {% set text = site.settings.ctaText %}
-    {% set href = "mailto:" + site.settings.email %}
+    {% set href = site.settings.primaryCtaUrl or ("mailto:" + site.settings.email) %}
     {% set label = site.settings.primaryCtaText %}
     {% include "partials/cta-band.njk" %}
 </main>

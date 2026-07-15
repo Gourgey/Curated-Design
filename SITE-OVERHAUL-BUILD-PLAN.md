@@ -6,6 +6,24 @@ This plan turns the full site audit into an ordered implementation programme. It
 
 The work is intentionally ordered so that correctness and content decisions come before a visual rebuild. The new interface should not be used to disguise incomplete portfolio material or unresolved content structure.
 
+### Companion documents
+
+The plan is tracked against these repository documents, which hold the evidence behind each gate. When a ticket changes a decision, a baseline, or the schema, update the relevant companion document in the same change set; the plan itself should stay stable while those documents absorb day-to-day detail.
+
+- `docs/overhaul/BASELINE.md` — preserved audit baseline and the first-milestone `npm run check` results (P0.6).
+- `docs/overhaul/CONTENT-INVENTORY.md` — Phase 0 project classification, findings, and the per-project approval checklist (P0.1).
+- `docs/overhaul/DECISIONS.md` — confirmed positions, open business decisions, and unassigned owners (P0.2–P0.5). Check it before starting any ticket that depends on an open decision.
+- `docs/overhaul/DESIGN-TOKENS.md` — the implemented token layer and migration rules (P2.1).
+- `CONTENT-GUIDE.md` — editor-facing instructions for the content model.
+- `README.md` — runtime, install, and command documentation (P2.7).
+
+### Status at last update — 15 July 2026
+
+- **Phase 0** is documentarily complete, but several decisions remain open with unassigned owners: final navigation structure, analytics, the case-study launch threshold, image permissions, and legal review. `docs/overhaul/DECISIONS.md` is the authoritative list.
+- **Phase 1** has largely landed: the `npm run check` gate, visual references, navigation accessibility and focus management, contrast and target-size corrections, carousel deduplication (rendered image count 80 → 79), standardised form feedback, and indexing controls for coming-soon teasers. Walk the Phase 1 exit-gate checklist before declaring the phase closed — the CMS save-and-build round trip (P1.8) and staged form submission (P1.9) in particular need explicit verification on a deploy preview.
+- **Phase 2** is in progress: P2.1 tokens and P2.7 runtime pinning are done; P2.2 stylesheet reorganisation is the active front.
+- **Hard content constraint:** only Marylebone Lobby is published; the two-to-three case-study target in §2 is not met. Engineering can proceed through Phase 2, but the Phase 3–4 homepage and Work redesign is blocked on content per the hard gate in §14.
+
 ## 2. Target outcome
 
 At completion, the website should:
@@ -79,6 +97,35 @@ The estimates below are directional development estimates for one developer. Con
 
 Expected development range: approximately **19–42 working days**, with the largest uncertainty being the availability and approval of credible project content.
 
+### Repository map
+
+Where the work described in this plan actually lives:
+
+| Area | Location | Notes |
+| --- | --- | --- |
+| Base layout and metadata | `src/_includes/layouts/base.njk` | The single layout contract targeted by P2.5 |
+| Shared partials | `src/_includes/partials/` | Currently `nav.njk`, `hero-brand.njk`, `cta-band.njk`; the P2.3 component set grows here |
+| Page templates | `src/*.njk`, `src/projects/`, `src/curated_services/` | Public templates consuming the content model |
+| Content model | `src/content/` | `projects/`, `services/`, `pages/`, `settings.json` |
+| Global data | `src/_data/site.js` | Site metadata and the stylesheet version parameter (see P2.6) |
+| Decap CMS schema | `admin/config.yml` | Must stay in sync with templates per P1.8 |
+| Source stylesheet | `assets/css/styles.css` | Single source file; minified by `tools/minify-css.js` during the build |
+| Client JavaScript | `assets/js/main.js`, `assets/js/contact-form.js` | The P2.4 module split applies here |
+| Automated checks | `tools/check-*.js` | Content/schema contract, JavaScript syntax, output structure, accessibility |
+| Visual references | `tests/visual/reference/` | P1.2 screenshots at 390/768/1440px, including nav-open and form error/success states |
+| Custom visual CMS | `tools/visual-cms/` | Outside the supported publishing path per the decision log |
+| Hosting configuration | `netlify.toml` | Build command, publish directory, cache headers |
+
+### Key commands
+
+- `npm run check` — the full quality gate: content/schema validation, JavaScript checks, production build, output checks, and representative Axe scans. Run before every commit that touches templates, content, CSS, or JavaScript.
+- `npm run capture:references` — rebuilds and regenerates the visual reference screenshots. Run only when a visual change is intentional, and review the resulting image diff deliberately; refreshing references without review defeats their purpose.
+- `npm start` — Eleventy dev server.
+- `npm run build` — production build to `_site/`.
+- `npm run cms` / `npm run cms:local` — custom visual CMS server / Decap local backend.
+
+The screenshot and accessibility tooling uses `puppeteer-core`, which drives a locally installed Chrome or Chromium rather than downloading its own. Any CI environment running `npm run check` or `capture:references` must provide a system browser.
+
 ## 6. Phase 0 — Decisions, inventory, and baseline
 
 ### Objective
@@ -106,6 +153,8 @@ Create a content inventory that records, for every project:
 - At least two or three projects are identified for full case-study treatment, or the launch plan explicitly acknowledges that this is not yet possible.
 - Every public image has a known type and publication status.
 - Archived and private content cannot enter the production collection accidentally.
+
+**Implementation note (July 2026):** the working inventory exists at `docs/overhaul/CONTENT-INVENTORY.md` — seven records: one published (Marylebone Lobby), five coming-soon teasers, one archived draft. Review Garden Restaurant early: its card and hero use different image sources and the hero filename refers to the older "Monet Terrace" asset set.
 
 ### P0.2 — Agree the content hierarchy
 
@@ -214,6 +263,8 @@ Before restructuring CSS, capture reference screenshots for:
 
 Capture at minimum 390px, 768px, and 1440px widths. These references protect intentional visual qualities while obsolete CSS is removed.
 
+**Implementation note (July 2026):** references are captured in `tests/visual/reference/` via `npm run capture:references`. Treat regeneration as a reviewed act, not a routine step — the comparison against the previous references is the actual safety mechanism.
+
 ### P1.3 — Repair the navigation interaction
 
 Implement a fully accessible menu:
@@ -272,6 +323,8 @@ When `prefers-reduced-motion: reduce` is active:
 - Add `type="button"` to non-submit buttons.
 - Make each homepage featured slide a meaningful project link with visible title, category/status, and destination—or replace the carousel with one strong featured case study.
 - Remove any `aria-label` that overrides visible service-card text and causes a label/content mismatch.
+
+**Implementation note (July 2026):** the duplicate Marylebone hero/gallery image has been removed (rendered image count 80 → 79, recorded in `docs/overhaul/BASELINE.md`).
 
 ### P1.8 — Repair the content model/template contract
 
@@ -341,6 +394,8 @@ Consolidate repeated custom properties such as `--sp`, `--cp`, `--hp`, `--pp`, a
 
 Tokens should have semantic names rather than page-specific names.
 
+**Implementation note (July 2026):** done — the token layer is documented in `docs/overhaul/DESIGN-TOKENS.md`. The legacy `--sp-*`/`--cp-*`/`--hp-*`/`--pp-*`/`--srv-*` variables survive only as compatibility aliases resolving to the shared tokens; P2.2 should retire them rather than let new work reference them.
+
 ### P2.2 — Reorganise CSS by responsibility
 
 Split the 4,000-plus-line stylesheet source into maintainable layers or partials:
@@ -365,6 +420,28 @@ Continue compiling to one production stylesheet. Remove legacy selectors and red
 - Do not neutralise old rules by adding later source-order overrides.
 - Prefer container/layout primitives to repeated page-specific measurements.
 
+**Implementation notes (July 2026):**
+
+- CSS custom properties cannot be interpolated into media-query conditions, so the `--breakpoint-*` tokens are documentation only; media queries must use the documented literal widths (640/760/920/1180/1280px).
+- Legacy breakpoints at 700/820/900/901/980/1000/1001/1120px remain in the stylesheet. Part of this ticket is deciding, per breakpoint, whether it represents a real component need or collapses into the shared set.
+- After each extraction step, run `npm run check` and compare against the visual references before removing the superseded rules — the plan's "remove only after visual comparison" rule is enforced by nothing except this discipline.
+
+**Status (July 2026): duplicate-selector reconciliation complete; full 10-layer split and breakpoint consolidation not started.**
+
+`npm run lint:css` (Stylelint) originally surfaced ~27 `no-duplicate-selectors` findings. Investigation showed these were not accidental copy-paste duplicates — each was a deliberate later-source-order override from a past change (an editorial "hero polish" pass, the P1.5 44×44px touch-target fix, the P2.1 token migration), where the later block is what actually renders. All 27 were reconciled into single rules, one cluster at a time:
+
+- `.dots`, `.pillmenu-toggle .burger-line` (unscoped), `body.projects-page`, `html.concept-page`/`body.concept-page` — small clusters, 1–2 properties each.
+- The `body.project-page` "hero and CTA editorial polish" cluster — 16 selectors (topbar, backlink, hero, hero-media, hero-overlay, hero-inner, kicker, title, subtitle, tags, tag, hero-control, hero-dots, top-left-logo, plus the project-wide burger-line override) — merged property-by-property (later value wins per property; properties unique to either block preserved).
+- `.project-article`, `.project-callout` (which had *three* layered definitions, not two), `.project-facts` (moved its surviving `z-index: 2` into the canonical rule), `.project-aside` (dropped a `gap` that had already gone inert under a since-changed `display: block`).
+
+Every merge was verified with pixel-level diffing, not just a visual glance: `tools/capture-references.js` supports `--output=`/`--stylesheet-file=`/`--stylesheet-git-ref=` flags precisely for this (see `tests/visual/reference/README.md`), which made it possible to render the same generated HTML through both the pre- and post-edit stylesheet and diff the resulting screenshots pixel-by-pixel (via `sharp`, already a transitive dependency) rather than eyeballing them. The project page — the highest-risk template, carrying the 16-selector cluster — came back byte-identical at 390/768/1440px both before and after. Two pages showed small, non-zero diffs (home-390, work-390, a stray contact-error-390 page-height difference); each was confirmed via a control test (rebuilding with the *unedited* stylesheet and re-diffing) to be pre-existing capture non-determinism unrelated to any CSS content — reproduced with the exact same pixel count/region regardless of which stylesheet was rendered. This is worth knowing for any future CSS work in this repo: a single `capture:references` diff on `-390` variants is not by itself trustworthy evidence of a regression; re-run it or use a control before concluding a diff is real.
+
+One transcription mistake surfaced by this process, not the pixel diff: the merged `.project-topbar` rule initially placed `margin-bottom: 16px` before the `margin: 0 auto` shorthand, which resets it — caught by Stylelint's `declaration-block-no-shorthand-property-overrides`, not by the pixel diff (the element is `position: absolute`, so `margin-bottom` doesn't currently affect layout — the pixel diff was correctly reporting "no visible change" even though the source no longer said what it meant). Fixed by reordering. This is a useful lesson: pixel-diffing proves visual equivalence, not source correctness — both checks matter.
+
+`assets/css/styles.css` dropped from 4,505 to 4,368 lines (137 lines removed) with zero visual change. The remaining Stylelint finding (`pointer-events` declared twice in `.nav-pill`, line ~578) predates this work and is unrelated — left alone as out of scope.
+
+**Not done:** the full 10-layer file split (tokens/reset/layout/nav/forms/cards/carousels/modules/a11y/utilities), retiring the `--sp-*`/`--cp-*`/`--hp-*`/`--pp-*`/`--srv-*` aliases, reducing `body.page`-specificity reliance, and consolidating the 700/820/900/901/980/1000/1001/1120px legacy breakpoints into the shared set. These are larger, riskier structural changes — breakpoint consolidation in particular changes the exact viewport width where a layout shifts, which the 390/768/1440px reference screenshots can't fully verify (a breakpoint at 820px could regress and never show up in a 768 or 1440 capture). Recommend the same methodology demonstrated here — one change at a time, `capture:references` diffed with a control test, not just a glance — extended to cover intermediate widths before touching any breakpoint value.
+
 ### P2.3 — Define reusable interface components
 
 Build and document the minimum shared component set:
@@ -386,6 +463,15 @@ Build and document the minimum shared component set:
 
 Status must be real HTML text, not baked into artwork.
 
+**Implementation note (July 2026):** audited, not yet built — see `docs/overhaul/COMPONENTS.md` for the full inventory. Findings:
+
+- Header/overlay menu, hero brand mark, and the CTA band already exist as shared partials (`src/_includes/partials/`).
+- Breadcrumb/back-navigation and the project/service card are each implemented three-to-four times with different class names per template (`.project-backlink`/`.app-backlink`/`.legal-backlink`; `.projects-card`/`.home-service-card`) rather than as one shared component — real duplication, confirmed by direct comparison, not assumed.
+- Status (e.g. "Coming soon") is already real HTML text rather than baked into artwork — verified live in a preview during this pass — so that specific requirement is already met even though a named "concept card" component doesn't formally exist yet.
+- The global footer and the quote/testimonial block are not just undocumented — they're genuinely blocked. No `<footer>` exists anywhere in the codebase, and building one now would mean inventing footer content ahead of the open navigation/footer decision in `docs/overhaul/DECISIONS.md`. No genuine testimonial content exists to build a real quote block around.
+
+Consolidating the duplicated components (backlink, card) was not attempted here because it requires changing the CSS selectors those templates depend on — the same visual-regression risk as P2.2, and arguably part of the same piece of work. Recommended order: reconcile P2.2's duplicate-selector clusters first, then extract the now-unified backlink and card patterns into shared partials, verifying visually after each.
+
 ### P2.4 — Split JavaScript into small initialisers
 
 Replace the monolithic main script with small modules or clearly separated functions for:
@@ -400,6 +486,17 @@ Replace the monolithic main script with small modules or clearly separated funct
 Remove dead references such as `#siteHeader` and `.projects-band` if they are no longer part of the rendered interface. Each initialiser should exit safely when its expected markup is absent.
 
 No client application framework is needed.
+
+**Implementation note (July 2026):** done. `assets/js/main.js` (612 lines) is retired; `#siteHeader` is still live (the header element still carries that id) and was kept, but `.projects-band` was confirmed genuinely dead — no template renders an element with that class — so the `band`/`bandTop`/`bandBottom`/`isProjectsBandActive` tracking was removed rather than relocated. Its corresponding CSS (`.is-projects-band` rules, `assets/css/styles.css` around line 1280) is now dead too and is a specific target for P2.2. The remaining logic split three ways:
+
+- `assets/js/navigation.js` — pill-anchor smooth scroll, the floating overlay menu (focus trap, inert background, Escape/outside-click), and the compact under-900px pill menu toggle.
+- `assets/js/carousels.js` — the homepage featured-work carousel and the project hero gallery carousel, moved verbatim (not merged, despite their near-identical shape — the two have a real behavioural difference in slide `inert` handling, and unifying them is a design decision for P1.7/P4, not this ticket).
+- `assets/js/scroll-effects.js` — background parallax and pill-menu scrollspy. These stayed in one file rather than splitting fully, because the original code deliberately shares a single `requestAnimationFrame` scheduler between them ("one scheduler... to avoid multiple per-scroll RAF pipelines competing for frame time" — see the file's own comment). Splitting them into two initialisers would have reintroduced the exact problem that comment documents avoiding.
+- `assets/js/contact-form.js` was already its own file and needed no change.
+
+No shared reduced-motion module was introduced — each file still computes `window.matchMedia("(prefers-reduced-motion: reduce)")` locally, matching the pattern already used in `contact-form.js`. This keeps every initialiser able to fail independently per the exit-safe requirement above, rather than depending on a shared global that would need a defined load order.
+
+`src/_includes/layouts/base.njk`'s default `scripts` list and the two explicit overrides (`src/contact.njk`, `src/curated_services/service-pages.njk`) were updated to the new filenames. Verified with a full `npm run check` pass (including the accessibility suite's navigation/carousel/form interaction smoke tests) and manually in a live preview: overlay menu open/Escape-close and the homepage carousel's next-slide control both work identically to before the split.
 
 ### P2.5 — Standardise base templates and metadata
 
@@ -416,9 +513,13 @@ Create one dependable layout contract for:
 - header and footer inclusion;
 - CSS/JavaScript asset references.
 
+**Implementation note (July 2026):** `src/_includes/layouts/base.njk` already covered most of this contract from earlier phases — every template consistently sets a computed title/description, canonical URL, OG/Twitter tags, `htmlClass`/`bodyClass`, a real `<main id="main-content">` landmark matching the skip link, `noindex` state, and the shared script list. This pass closed the remaining gap: `og:image:alt` and `twitter:image:alt` now render from a fallback chain (`project.data.heroAlt` → `service.data.coverAlt` → the new `site.settings.shareImageAlt`), which required adding `shareImageAlt` to `settings.json`, `admin/config.yml`, and the `tools/check-content.js` contract check (mirroring how `shareImage` itself is validated) so a CMS save can't silently drop it. `og:image:width`/`height` are deliberately left for P5.5, which already owns validating a real 1200×630 share asset — adding dimensions now would mean guessing at a canonical asset ahead of that decision. Structured-data hooks remain limited to the homepage-only Organization block; broader breadcrumb/service structured data is P5.5's job once service claims are approved.
+
 ### P2.6 — Make asset versioning deterministic
 
 Replace stylesheet versioning based on filesystem modification time with a content hash or build manifest. A fresh Netlify checkout must not change an asset URL when its contents are unchanged.
+
+**Implementation note (July 2026):** done. `src/_data/site.js` now hashes the stylesheet's contents (SHA-256, truncated to 10 hex characters) instead of reading `statSync(...).mtimeMs`; the `?v=` query parameter is stable across rebuilds when the file is unchanged and changes only when its contents change. The `netlify.toml` caching split (immutable `/img/*`, one-day `/assets/*`) was left as-is — the versioning mechanism is still a query parameter on a fixed path, not a content-addressed filename, so the existing cache duration reasoning still applies.
 
 ### P2.7 — Pin and document the runtime
 
@@ -426,6 +527,10 @@ Replace stylesheet versioning based on filesystem modification time with a conte
 - Add the supported Node range to `package.json` engines.
 - Document install, development, build, CMS, check, and preview commands.
 - Add formatter and lint scripts with stable versions.
+
+**Implementation note (July 2026):** done. `.nvmrc` selects Node 22, `engines` requires ≥22.12 (the accessibility tooling's floor), and the README documents install/build/check/CMS/preview commands. Prettier (`3.9.5`), ESLint (`10.7.0` with `@eslint/js` `10.0.1` and `globals`), and Stylelint (`17.14.0` with `stylelint-config-standard`) are added as exact-pinned devDependencies with `format`, `format:check`, `lint:js`, and `lint:css` scripts.
+
+These are deliberately *not* wired into `npm run check` yet, because the codebase predates the tooling: `lint:css` surfaces ~27 pre-existing duplicate CSS selectors (useful direct input to P2.2's dedup work, not a new regression) and `format:check` reports differences across most of the repository (Prettier has never run repository-wide). Wiring either into the required gate should wait until P2.2 has addressed the duplicate selectors and a deliberate one-time formatting pass has been reviewed as its own change, so the gate doesn't start red.
 
 ### Phase 2 exit gate
 
@@ -690,6 +795,8 @@ This addresses both performance and third-party privacy concerns.
 - Ensure carousels do not request 800px images for approximately 340px display widths.
 - Remove orphaned generated derivatives and avoid passing unused originals into `_site`.
 
+**Implementation note (July 2026):** responsive derivatives are generated by `@11ty/eleventy-img` into `/img/` with content-hashed filenames, already cached immutable by `netlify.toml`. New width candidates therefore carry no cache-invalidation cost; the work is in the shortcode width lists and `sizes` attributes, not the hosting layer.
+
 ### P5.3 — Reduce render-blocking work and layout thrashing
 
 - Keep the production CSS bundle small enough that critical rendering is not delayed unnecessarily.
@@ -832,6 +939,8 @@ Use Playwright or an equivalent tool for at least these journeys:
 
 Run viewport coverage at 390px, 768px, and 1440px.
 
+**Implementation note (July 2026):** the repository already drives a browser through `puppeteer-core` for screenshots and Axe scans. Before adding Playwright, decide deliberately: either build the journeys on the existing puppeteer harness to keep one browser stack, or adopt Playwright for its test runner and accept two harnesses. Do not drift into both without a recorded reason.
+
 ### P6.3 — Conduct manual accessibility UAT
 
 Check:
@@ -922,6 +1031,8 @@ At approximately 48 hours and again after 2–4 weeks:
 ## 13. Recommended ticket order
 
 This is the practical dependency order for issue tracking. Content work can run alongside engineering after the Phase 0 inventory.
+
+As of July 2026, groups 1–4 have largely landed (see the status summary in §1) and group 5 is underway with P2.1 and P2.7 complete. The current front is P2.2 stylesheet reorganisation; groups 6–7 remain gated on the content decisions in `docs/overhaul/DECISIONS.md`.
 
 | Order | Ticket group | Why it comes here |
 | ---: | --- | --- |

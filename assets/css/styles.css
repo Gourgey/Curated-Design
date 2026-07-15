@@ -1,17 +1,99 @@
-/* -------- Theme tokens -------- */
-/*
-   Global design variables:
-   - Define colours, spacing, and layout constants used across the site.
-   - Makes it easy to adjust the overall theme in one place.
-*/
+/* -------- Shared design tokens -------- */
 :root {
-    --bg: #0e0e0e;
-    --ink: #f2f2f2;
-    --ring: rgba(255, 255, 255, 0.12); /* semi-transparent frame line */
+    /* Colour */
+    --color-canvas-dark: #0e0e0e;
+    --color-surface-dark: #16181f;
+    --color-canvas-light: #f2eee6;
+    --color-surface-light: #faf8f4;
+    --color-surface-muted: #e4e1d7;
+    --color-surface-inverse: #14130f;
+    --color-text-on-dark: #f2f2f2;
+    --color-text-primary: #1b1a17;
+    --color-text-secondary: #46443e;
+    --color-text-muted: #625e57;
+    --color-text-inverse: #ede8dd;
+    --color-border: #c9c3b6;
+    --color-border-soft: #e4dfd4;
+    --color-accent: #d1f365;
+    --color-accent-muted: #cfe465;
+    --color-state-error: #8f1d1d;
+    --color-ring-on-dark: rgba(255, 255, 255, 0.12);
+
+    /* Typography */
+    --font-family-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    --font-family-body: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    --font-size-kicker: 11px;
+    --font-size-label: 12px;
+    --font-size-body-small: 15px;
+    --font-size-body: 17px;
+    --font-size-lead: 18px;
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --line-height-tight: 1.1;
+    --line-height-body: 1.6;
+    --line-height-relaxed: 1.7;
+    --letter-spacing-tight: -0.01em;
+    --letter-spacing-label: 0.15em;
+    --letter-spacing-kicker: 0.22em;
+
+    /* Spacing */
+    --space-3xs: 4px;
+    --space-2xs: 8px;
+    --space-xs: 12px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 32px;
+    --space-xl: 40px;
+    --space-2xl: 48px;
+    --space-3xl: 56px;
+    --space-4xl: 64px;
+    --space-5xl: 80px;
+    --space-6xl: 96px;
+    --space-7xl: 120px;
+    --space-8xl: 144px;
+
+    /* Layout and component geometry */
+    --layout-content-wide: 1280px;
+    --layout-content-standard: 1180px;
+    --layout-reading-width: 68ch;
+    --layout-page-gutter: 80px;
+    --layout-grid-gap: 32px;
+    --control-target-min: 44px;
+    --radius-small: 4px;
+    --radius-panel: 18px;
+    --radius-round: 50%;
+    --radius-pill: 999px;
+    --border-width-hairline: 1px;
+    --shadow-floating: 0 10px 28px rgba(0, 0, 0, 0.32);
+    --layer-background: 0;
+    --layer-content: 1;
+    --layer-header: 650;
+    --layer-overlay: 700;
+    --layer-skip-link: 1000;
+
+    /* Motion */
+    --motion-duration-fast: 200ms;
+    --motion-duration-standard: 250ms;
+    --motion-duration-slow: 350ms;
+    --motion-easing-standard: ease;
+    --motion-easing-emphasized: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+    /* Breakpoint reference values; custom properties cannot be used in media queries. */
+    --breakpoint-compact: 640px;
+    --breakpoint-narrow: 760px;
+    --breakpoint-content-stack: 920px;
+    --breakpoint-wide: 1180px;
+    --breakpoint-navigation: 1280px;
+
+    /* Compatibility aliases used by the pre-Phase-2 homepage shell. */
+    --bg: var(--color-canvas-dark);
+    --ink: var(--color-text-on-dark);
+    --ring: var(--color-ring-on-dark);
     --header-h: 0px;
     --pills-gap: 15px;
-    --band-1: #16181f; /* dark band background */
-    --accent: #d1f365; /* gentle lime accent for buttons/links */
+    --band-1: var(--color-surface-dark);
+    --accent: var(--color-accent);
 }
 
 /* -------- Base reset & typography -------- */
@@ -308,7 +390,9 @@ body.nav-open {
     width: 18px;
     height: 2px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.9);
+    /* Follows the button's text color so it stays readable against every
+       page background (see the page-specific text-color overrides below). */
+    background: currentColor;
     display: block;
     transition:
         transform 0.2s ease,
@@ -1104,7 +1188,9 @@ body.pills-on-light #floatingNavPill.is-open .pillmenu .pill:hover {
 .dots {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    /* Zero gap: the 44px touch-target buttons below provide their own
+       spacing, so an additional flex gap would double it up. */
+    gap: 0;
     margin-top: 18px;
 }
 
@@ -1132,9 +1218,6 @@ body.pills-on-light #floatingNavPill.is-open .pillmenu .pill:hover {
 
 /* Keep the visible indicator small while giving each carousel control a
    comfortable touch target. */
-.dots {
-    gap: 0;
-}
 .dots .dot {
     position: relative;
     width: 44px;
@@ -1169,12 +1252,10 @@ body.pills-on-light #floatingNavPill.is-open .pillmenu .pill:hover {
    Projects Page (projects.html)
    ========================= */
 
-/* Scope all overrides to projects page only */
-body.projects-page {
-    background: #e4e1d7;
-    color: #000;
-    min-height: 100vh;
-}
+/* This selector's rules now live in the "Projects Listing — redesign 2026"
+   section later in this file, which already superseded background/color
+   here via source order; min-height moved there too so the selector isn't
+   defined twice. */
 
 /* HERO text on projects page should be black (your global hero is light-on-dark) */
 body.projects-page .hero,
@@ -1223,18 +1304,18 @@ body.projects-page.is-projects-band .pillmenu-toggle .burger-line {
    ========================= */
 
 html.about-page {
-    background: #f2eee6;
+    background: var(--color-canvas-light);
 }
 
 body.about-page {
-    --sp-paper-2: #f2eee6;
-    --sp-ink: #1b1a17;
-    --sp-ink-2: #46443e;
-    --sp-ink-3: #625e57;
-    --sp-rule: #c9c3b6;
-    --sp-rule-soft: #e4dfd4;
-    --sp-font-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
-    --sp-font-body: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    --sp-paper-2: var(--color-canvas-light);
+    --sp-ink: var(--color-text-primary);
+    --sp-ink-2: var(--color-text-secondary);
+    --sp-ink-3: var(--color-text-muted);
+    --sp-rule: var(--color-border);
+    --sp-rule-soft: var(--color-border-soft);
+    --sp-font-display: var(--font-family-display);
+    --sp-font-body: var(--font-family-body);
     background: var(--sp-paper-2);
     color: var(--sp-ink);
     font-family: var(--sp-font-body);
@@ -1618,19 +1699,19 @@ body.about-page .doc-list__link::after {
    ========================= */
 
 html.contact-page {
-    background: #f2eee6;
+    background: var(--color-canvas-light);
 }
 
 body.contact-page {
-    --cp-paper: #faf8f4;
-    --cp-paper-2: #f2eee6;
-    --cp-ink: #1b1a17;
-    --cp-ink-2: #46443e;
-    --cp-ink-3: #625e57;
-    --cp-rule: #c9c3b6;
-    --cp-rule-soft: #e4dfd4;
-    --cp-font-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
-    --cp-font-body: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    --cp-paper: var(--color-surface-light);
+    --cp-paper-2: var(--color-canvas-light);
+    --cp-ink: var(--color-text-primary);
+    --cp-ink-2: var(--color-text-secondary);
+    --cp-ink-3: var(--color-text-muted);
+    --cp-rule: var(--color-border);
+    --cp-rule-soft: var(--color-border-soft);
+    --cp-font-display: var(--font-family-display);
+    --cp-font-body: var(--font-family-body);
     background: var(--cp-paper-2);
     color: var(--cp-ink);
     font-family: var(--cp-font-body);
@@ -1900,7 +1981,7 @@ body.contact-page .contact-form-privacy a {
 body.contact-page .contact-form-error {
     font-family: var(--cp-font-body);
     font-size: 14px;
-    color: #8f1d1d;
+    color: var(--color-state-error);
     margin: 0;
 }
 body.contact-page .contact-form-success {
@@ -1944,16 +2025,10 @@ body.contact-page .hidden {
 
 /* =========================
    Concept Design Page
+   `html.concept-page`/`body.concept-page` base background/color rules now
+   live only in the "Service Detail Page — redesign 2026" section later in
+   this file, which already superseded these values via source order.
    ========================= */
-
-html.concept-page {
-    background: #e4e1d7;
-}
-
-body.concept-page {
-    background: #e4e1d7;
-    color: #000;
-}
 
 /* Ensure nav/pills read as black on light pages */
 body.concept-page .pill,
@@ -1992,11 +2067,6 @@ body.concept-page .hero-brand {
    FLOATING NAV OVERLAY — ALWAYS READABLE WHEN OPEN
    Fixes: light pages where nav text becomes invisible on black overlay
    ========================================================= */
-
-/* Make the burger lines follow the button text color everywhere */
-.pillmenu-toggle .burger-line {
-    background: currentColor;
-}
 
 /* When the floating nav overlay is open, force readable styling */
 #floatingNavPill.is-open {
@@ -2149,11 +2219,11 @@ body.pills-on-light:not(.projects-page):not(.about-page):not(.contact-page):not(
    ========================= */
 
 html.project-page {
-    background: #e4e1d7;
+    background: var(--color-surface-muted);
 }
 
 body.project-page {
-    background: #e4e1d7;
+    background: var(--color-surface-muted);
     color: #000;
     min-height: 100vh;
 }
@@ -2166,14 +2236,22 @@ body.project-page .nav-pill {
 }
 
 body.project-page .pillmenu-toggle .burger-line {
-    background: currentColor;
+    /* Final value; see the "hero and CTA editorial polish" section later
+       in this file, which supersedes the base currentColor via source order. */
+    background: rgba(247, 244, 237, 0.94);
 }
 
-/* Light-page treatment for the logo pill (match about/contact/concept) */
+/* Light-page treatment for the logo pill (match about/contact/concept).
+   border-color/background/box-shadow below reflect the dark-theme values
+   from the "hero and CTA editorial polish" section, which superseded the
+   original light-page values via source order. */
 body.project-page .top-left-logo {
-    border: 1px solid rgba(0, 0, 0, 0.18);
-    background: rgba(0, 0, 0, 0.03);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(32, 29, 25, 0.72);
+    box-shadow: none;
+}
+body.project-page .top-left-logo img {
+    filter: invert(1);
 }
 body.project-page .top-left-logo:hover {
     background: rgba(0, 0, 0, 0.06);
@@ -2181,27 +2259,41 @@ body.project-page .top-left-logo:hover {
 
 /* Topbar */
 body.project-page .project-topbar {
-    width: min(1150px, calc(100% - 32px));
-    margin: 0 auto;
-    padding: 0 8px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    position: absolute;
+    z-index: 4;
+    top: clamp(92px, 9vw, 150px);
+    left: 0;
+    right: 0;
+    width: min(1320px, calc(100% - 64px));
+    margin: 0 auto;
     margin-bottom: 16px;
+    padding: 0;
+    pointer-events: none;
 }
 
 body.project-page .project-backlink {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    padding: 10px 12px;
-    border-radius: 999px;
-    border: 1px solid rgba(0, 0, 0, 0.16);
-    background: rgba(255, 255, 255, 0.55);
+    gap: 7px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.92);
+    font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: clamp(20px, 1.6vw, 28px);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1;
+    text-shadow: 0 1px 18px rgba(0, 0, 0, 0.35);
+    pointer-events: auto;
 }
 body.project-page .project-backlink:hover {
-    background: rgba(255, 255, 255, 0.8);
+    background: transparent;
+    color: #fff;
 }
 
 /* Hero */
@@ -2213,6 +2305,7 @@ body.project-page .project-hero {
     max-width: 100vw;
     margin: 0;
     overflow: hidden;
+    min-height: clamp(620px, 100svh, 980px);
 }
 
 body.project-page .project-hero-media {
@@ -2233,10 +2326,12 @@ body.project-page .project-hero-slide {
 
 body.project-page .project-hero-media img {
     width: 100%;
-    height: clamp(340px, 55vw, 640px);
     object-fit: cover;
     display: block;
     filter: saturate(0.98);
+    height: clamp(620px, 100svh, 980px);
+    min-height: 100%;
+    object-position: center center;
 }
 
 body.project-page .project-hero-control {
@@ -2248,11 +2343,12 @@ body.project-page .project-hero-control {
     height: 42px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 999px;
-    background: rgba(0, 0, 0, 0.22);
+    background: rgba(32, 29, 25, 0.28);
     color: #fff;
     font-size: 26px;
     line-height: 1;
     cursor: pointer;
+    box-shadow: none;
 }
 
 body.project-page .project-hero-control--prev {
@@ -2266,7 +2362,7 @@ body.project-page .project-hero-control--next {
 body.project-page .project-hero-dots {
     position: absolute;
     left: 50%;
-    bottom: 18px;
+    bottom: 34px;
     z-index: 3;
     display: flex;
     gap: 0;
@@ -2307,61 +2403,74 @@ body.project-page .project-hero-dots button.active::before {
 body.project-page .project-hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.56) 0%,
-        rgba(0, 0, 0, 0.18) 55%,
-        rgba(0, 0, 0, 0.08) 100%
-    );
     display: grid;
     align-items: end;
-    padding: 28px 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.62) 0%,
+        rgba(0, 0, 0, 0.34) 24%,
+        rgba(0, 0, 0, 0.07) 58%,
+        rgba(0, 0, 0, 0.10) 100%
+    );
+    padding: 0;
 }
 
 body.project-page .project-hero-inner {
-    width: min(1150px, calc(100% - 32px));
     margin-inline: auto;
-    padding-inline: 8px;
     color: #fff;
+    width: min(1320px, calc(100% - 64px));
+    padding: 0 0 clamp(52px, 7vw, 96px);
 }
 
 body.project-page .project-kicker {
-    margin: 0 0 10px;
-    font-size: 12px;
-    letter-spacing: 0.18em;
     text-transform: uppercase;
-    opacity: 0.92;
+    margin: 0 0 16px;
+    font-family: "Inter", sans-serif;
+    font-size: clamp(12px, 1vw, 16px);
+    font-weight: 400;
+    letter-spacing: 0.32em;
+    line-height: 1.2;
+    opacity: 0.94;
 }
 
 body.project-page .project-title {
-    margin: 0 0 10px;
-    font-size: clamp(30px, 4vw, 58px);
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
+    max-width: 9.6em;
+    margin: 0 0 24px;
+    font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: clamp(64px, 9vw, 132px);
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: 0;
+    line-height: 0.86;
 }
 
 body.project-page .project-subtitle {
+    max-width: 40em;
     margin: 0;
-    max-width: 68ch;
-    font-size: 16px;
-    line-height: 1.45;
-    opacity: 0.92;
+    font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: clamp(24px, 2.4vw, 38px);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.25;
+    opacity: 0.94;
 }
 
 body.project-page .project-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 16px;
+    gap: 12px;
+    margin-top: clamp(34px, 4vw, 58px);
 }
 
 body.project-page .project-tag {
-    font-size: 12px;
-    padding: 8px 10px;
     border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    background: rgba(0, 0, 0, 0.18);
+    padding: 12px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    background: rgba(32, 29, 25, 0.28);
+    color: rgba(255, 255, 255, 0.94);
+    font-family: "Inter", sans-serif;
+    font-size: clamp(13px, 1vw, 16px);
+    font-weight: 400;
 }
 
 /* Body layout */
@@ -2370,63 +2479,11 @@ body.project-page .project-wrap {
 }
 
 
-body.project-page .project-article {
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(0, 0, 0, 0.14);
-    border-radius: 20px;
-    padding: 18px 16px;
-}
-
-@media (min-width: 700px) {
-    body.project-page .project-article {
-        padding: 22px 22px;
-    }
-}
-
-
-body.project-page .project-callout {
-    margin: 18px 0;
-    padding: 14px 14px;
-    border-radius: 16px;
-    border: 1px solid rgba(0, 0, 0, 0.14);
-    background: rgba(0, 0, 0, 0.03);
-}
-
-
-/* Sticky facts */
-body.project-page .project-facts {
-    background: rgba(255, 255, 255, 0.35);
-    border: 1px solid rgba(0, 0, 0, 0.14);
-    border-radius: 20px;
-    padding: 16px;
-    z-index: 2;
-}
-
-
-/* =========================
-   Project prose polish (long text elegance)
-   Paste at end of styles.css
-   ========================= */
-
-
-/* Callout: make it feel designed, not “boxed text” */
-body.project-page .project-callout {
-    margin: 18px 0 22px;
-    padding: 16px 16px;
-    border-radius: 18px;
-    background: rgba(0, 0, 0, 0.025);
-    border: 1px solid rgba(0, 0, 0, 0.12);
-}
-
-
-/* =========================
-   Sidebar layout + gallery card
-   ========================= */
-
-body.project-page .project-aside {
-    display: grid;
-    gap: 16px;
-}
+/* .project-article, .project-callout, .project-facts, and .project-aside
+   base rules used to live here. Each is now fully superseded (and, for
+   .project-facts, folded into) the corresponding rule in the "Project
+   detail page — redesign 2026" section later in this file — see that
+   section's own comment about neutralising this legacy card styling. */
 
 
 /* =========================
@@ -2925,17 +2982,17 @@ body.legal-page .hero-brand {
 .home-section,
 .home-philosophy,
 .home-cta {
-    --hp-paper: #faf8f4;
-    --hp-paper-2: #f2eee6;
-    --hp-ink: #1b1a17;
-    --hp-ink-2: #46443e;
-    --hp-ink-3: #625e57;
-    --hp-rule: #c9c3b6;
-    --hp-rule-soft: #e4dfd4;
-    --hp-void: #14130f;
-    --hp-void-ink: #ede8dd;
-    --hp-font-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
-    --hp-font-body: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    --hp-paper: var(--color-surface-light);
+    --hp-paper-2: var(--color-canvas-light);
+    --hp-ink: var(--color-text-primary);
+    --hp-ink-2: var(--color-text-secondary);
+    --hp-ink-3: var(--color-text-muted);
+    --hp-rule: var(--color-border);
+    --hp-rule-soft: var(--color-border-soft);
+    --hp-void: var(--color-surface-inverse);
+    --hp-void-ink: var(--color-text-inverse);
+    --hp-font-display: var(--font-family-display);
+    --hp-font-body: var(--font-family-body);
 }
 
 /* ---- Shared section spine (cream band) ---- */
@@ -3318,7 +3375,7 @@ body.legal-page .hero-brand {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #cfe465;
+    background: var(--color-accent-muted);
     transform: translateY(-2px);
 }
 
@@ -3455,6 +3512,7 @@ body.project-page .project-facts {
     background: transparent;
     border: 0;
     border-radius: 0;
+    z-index: 2;
 }
 body.project-page .project-facts__row {
     display: flex;
@@ -3472,7 +3530,7 @@ body.project-page .project-facts__label {
     font-size: 12px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #625e57;
+    color: var(--color-text-muted);
 }
 body.project-page .project-facts__value {
     font-family: "Cormorant Garamond", serif;
@@ -3511,7 +3569,7 @@ body.project-page .label-small {
     font-size: 12px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #625e57;
+    color: var(--color-text-muted);
 }
 
 /* =========================
@@ -3525,21 +3583,22 @@ body.project-page .label-small {
    ========================= */
 
 html.projects-page {
-    background: #f2eee6;
+    background: var(--color-canvas-light);
 }
 
 body.projects-page {
-    --pp-paper: #faf8f4;
-    --pp-paper-2: #f2eee6;
-    --pp-ink: #1b1a17;
-    --pp-ink-2: #46443e;
-    --pp-ink-3: #625e57;
-    --pp-rule-soft: #e4dfd4;
-    --pp-font-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
-    --pp-font-body: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    --pp-paper: var(--color-surface-light);
+    --pp-paper-2: var(--color-canvas-light);
+    --pp-ink: var(--color-text-primary);
+    --pp-ink-2: var(--color-text-secondary);
+    --pp-ink-3: var(--color-text-muted);
+    --pp-rule-soft: var(--color-border-soft);
+    --pp-font-display: var(--font-family-display);
+    --pp-font-body: var(--font-family-body);
     background: var(--pp-paper-2);
     color: var(--pp-ink);
     font-family: var(--pp-font-body);
+    min-height: 100vh;
 }
 
 /* Editorial hero — eyebrow + Cormorant italic title + Inter intro */
@@ -3757,17 +3816,17 @@ body.projects-page .projects-section__note {
    ========================= */
 
 html.concept-page {
-    background: #f2eee6;
+    background: var(--color-canvas-light);
 }
 
 body.concept-page {
-    --srv-paper-2: #f2eee6;
-    --srv-ink: #1b1a17;
-    --srv-ink-2: #46443e;
-    --srv-ink-3: #625e57;
-    --srv-rule: #c9c3b6;
-    --srv-font-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
-    --srv-font-body: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    --srv-paper-2: var(--color-canvas-light);
+    --srv-ink: var(--color-text-primary);
+    --srv-ink-2: var(--color-text-secondary);
+    --srv-ink-3: var(--color-text-muted);
+    --srv-rule: var(--color-border);
+    --srv-font-display: var(--font-family-display);
+    --srv-font-body: var(--font-family-body);
     background: var(--srv-paper-2);
     color: var(--srv-ink);
     font-family: var(--srv-font-body);
@@ -3942,7 +4001,7 @@ body.concept-page .service-glance__label {
     font-size: 12px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #625e57;
+    color: var(--color-text-muted);
     margin: 0;
 }
 body.concept-page .service-glance__value {
@@ -4068,7 +4127,7 @@ body.concept-page .service-enquiry__privacy a {
     text-underline-offset: 3px;
 }
 body.concept-page .service-enquiry__error {
-    color: #8f1d1d;
+    color: var(--color-state-error);
 }
 body.concept-page .service-enquiry__success {
     padding-top: 8px;
@@ -4133,7 +4192,7 @@ body.concept-page .label-small {
     font-size: 12px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #625e57;
+    color: var(--color-text-muted);
 }
 
 /* Responsive */
@@ -4165,14 +4224,6 @@ body.project-page main.page-main {
     padding-top: 0;
 }
 
-body.project-page .top-left-logo {
-    border-color: rgba(255, 255, 255, 0.16);
-    background: rgba(32, 29, 25, 0.72);
-    box-shadow: none;
-}
-body.project-page .top-left-logo img {
-    filter: invert(1);
-}
 body.project-page .nav-pill .pillmenu,
 body.project-page .nav-pill .pillmenu-toggle {
     border-color: rgba(255, 255, 255, 0.14);
@@ -4188,117 +4239,11 @@ body.project-page .nav-pill .pill:hover {
     color: #fff;
     background: rgba(255, 255, 255, 0.08);
 }
-body.project-page .pillmenu-toggle .burger-line {
-    background: rgba(247, 244, 237, 0.94);
-}
 
-body.project-page .project-topbar {
-    position: absolute;
-    z-index: 4;
-    top: clamp(92px, 9vw, 150px);
-    left: 0;
-    right: 0;
-    width: min(1320px, calc(100% - 64px));
-    margin: 0 auto;
-    padding: 0;
-    pointer-events: none;
-}
-body.project-page .project-backlink {
-    gap: 7px;
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-    color: rgba(255, 255, 255, 0.92);
-    font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
-    font-size: clamp(20px, 1.6vw, 28px);
-    font-style: italic;
-    font-weight: 300;
-    line-height: 1;
-    text-shadow: 0 1px 18px rgba(0, 0, 0, 0.35);
-    pointer-events: auto;
-}
-body.project-page .project-backlink:hover {
-    background: transparent;
-    color: #fff;
-}
-
-body.project-page .project-hero {
-    min-height: clamp(620px, 100svh, 980px);
-}
 body.project-page .project-hero-media,
 body.project-page .project-hero-track,
 body.project-page .project-hero-slide {
     height: 100%;
-}
-body.project-page .project-hero-media img {
-    height: clamp(620px, 100svh, 980px);
-    min-height: 100%;
-    object-position: center center;
-}
-body.project-page .project-hero-overlay {
-    background:
-        linear-gradient(
-            to top,
-            rgba(0, 0, 0, 0.62) 0%,
-            rgba(0, 0, 0, 0.34) 24%,
-            rgba(0, 0, 0, 0.07) 58%,
-            rgba(0, 0, 0, 0.10) 100%
-        );
-    padding: 0;
-}
-body.project-page .project-hero-inner {
-    width: min(1320px, calc(100% - 64px));
-    padding: 0 0 clamp(52px, 7vw, 96px);
-}
-body.project-page .project-kicker {
-    margin: 0 0 16px;
-    font-family: "Inter", sans-serif;
-    font-size: clamp(12px, 1vw, 16px);
-    font-weight: 400;
-    letter-spacing: 0.32em;
-    line-height: 1.2;
-    opacity: 0.94;
-}
-body.project-page .project-title {
-    max-width: 9.6em;
-    margin: 0 0 24px;
-    font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
-    font-size: clamp(64px, 9vw, 132px);
-    font-style: italic;
-    font-weight: 300;
-    letter-spacing: 0;
-    line-height: 0.86;
-}
-body.project-page .project-subtitle {
-    max-width: 40em;
-    margin: 0;
-    font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
-    font-size: clamp(24px, 2.4vw, 38px);
-    font-style: italic;
-    font-weight: 300;
-    line-height: 1.25;
-    opacity: 0.94;
-}
-body.project-page .project-tags {
-    gap: 12px;
-    margin-top: clamp(34px, 4vw, 58px);
-}
-body.project-page .project-tag {
-    padding: 12px 18px;
-    border-color: rgba(255, 255, 255, 0.42);
-    background: rgba(32, 29, 25, 0.28);
-    color: rgba(255, 255, 255, 0.94);
-    font-family: "Inter", sans-serif;
-    font-size: clamp(13px, 1vw, 16px);
-    font-weight: 400;
-}
-body.project-page .project-hero-control {
-    background: rgba(32, 29, 25, 0.28);
-    box-shadow: none;
-}
-body.project-page .project-hero-dots {
-    bottom: 34px;
 }
 
 body.project-page .project-cta-band {

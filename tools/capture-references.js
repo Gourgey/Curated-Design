@@ -2,6 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const { execFileSync } = require("child_process");
 const { pathToFileURL } = require("url");
 const puppeteer = require("puppeteer-core");
 
@@ -9,10 +10,30 @@ const root = path.resolve(__dirname, "..");
 const outputRoot = path.join(root, "_site");
 const outputArgument = process.argv.find((argument) => argument.startsWith("--output="));
 const onlyArgument = process.argv.find((argument) => argument.startsWith("--only="));
+const stylesheetGitRefArgument = process.argv.find((argument) =>
+  argument.startsWith("--stylesheet-git-ref="),
+);
+const stylesheetFileArgument = process.argv.find((argument) =>
+  argument.startsWith("--stylesheet-file="),
+);
 const referenceRoot = outputArgument
   ? path.resolve(root, outputArgument.slice("--output=".length))
   : path.join(root, "tests/visual/reference");
 const only = onlyArgument ? onlyArgument.slice("--only=".length) : "";
+const stylesheetGitRef = stylesheetGitRefArgument
+  ? stylesheetGitRefArgument.slice("--stylesheet-git-ref=".length)
+  : "";
+const stylesheetFile = stylesheetFileArgument
+  ? stylesheetFileArgument.slice("--stylesheet-file=".length)
+  : "";
+const stylesheetOverride = stylesheetGitRef
+  ? execFileSync("git", ["show", `${stylesheetGitRef}:assets/css/styles.css`], {
+      cwd: root,
+      encoding: "utf8",
+    })
+  : stylesheetFile
+    ? fs.readFileSync(path.resolve(root, stylesheetFile), "utf8")
+    : "";
 const widths = [390, 768, 1440];
 const pages = [
   { name: "home", route: "/" },
@@ -70,10 +91,11 @@ async function preparePage(browser, route, width) {
   page.on("request", (request) => {
     const file = localFileForRequest(request.url());
     if (file && fs.existsSync(file) && fs.statSync(file).isFile()) {
+      const isStylesheet = path.normalize(file) === path.join(outputRoot, "assets", "css", "styles.css");
       request.respond({
         status: 200,
         contentType: contentTypes[path.extname(file).toLowerCase()] || "application/octet-stream",
-        body: fs.readFileSync(file),
+        body: isStylesheet && stylesheetOverride ? stylesheetOverride : fs.readFileSync(file),
       });
       return;
     }

@@ -79,6 +79,41 @@ function localFileForRequest(requestUrl) {
   return path.join(outputRoot, pathname.replace(/^\/+/, ""));
 }
 
+async function checkViewportLayout(page) {
+  const state = await page.evaluate(() => {
+    const viewportWidth = document.documentElement.clientWidth;
+    const fullWidthSections = Array.from(
+      document.querySelectorAll(".home-section, .home-philosophy, .home-cta"),
+    ).map((element) => {
+      const rect = element.getBoundingClientRect();
+      return {
+        selector: element.className,
+        left: Math.round(rect.left),
+        right: Math.round(rect.right),
+        width: Math.round(rect.width),
+      };
+    });
+    return {
+      viewportWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+      fullWidthSections,
+    };
+  });
+
+  if (state.scrollWidth > state.viewportWidth + 1) {
+    throw new Error(`Page has horizontal overflow: ${JSON.stringify(state)}`);
+  }
+  const clippedSection = state.fullWidthSections.find(
+    (section) =>
+      Math.abs(section.left) > 1 ||
+      Math.abs(section.right - state.viewportWidth) > 1 ||
+      Math.abs(section.width - state.viewportWidth) > 1,
+  );
+  if (clippedSection) {
+    throw new Error(`Homepage section is not viewport-wide: ${JSON.stringify(clippedSection)}`);
+  }
+}
+
 async function checkFeaturedProject(page) {
   const state = await page.evaluate(() => {
     const carousel = document.querySelector("#portfolio .carousel");
@@ -303,6 +338,7 @@ async function main() {
       await page.goto(pathToFileURL(routeToFile(scan.route)).href, {
         waitUntil: "domcontentloaded",
       });
+      await checkViewportLayout(page);
       if (scan.featuredProject) await checkFeaturedProject(page);
       if (scan.projectCarousel) await checkProjectCarousel(page);
       if (scan.openMenu) {
@@ -378,7 +414,7 @@ async function main() {
   }
 
   console.log(
-    `Accessibility check passed: ${scans.length} representative Axe scans plus navigation, featured-project, carousel, and enquiry-form interaction smoke tests; no critical/serious violations, ${nonBlockingViolationCount} non-blocking violation(s).`,
+    `Accessibility check passed: ${scans.length} representative Axe and viewport-layout scans plus navigation, featured-project, carousel, and enquiry-form interaction smoke tests; no critical/serious violations, ${nonBlockingViolationCount} non-blocking violation(s).`,
   );
 }
 

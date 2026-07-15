@@ -26,6 +26,12 @@ Run the build plus content, JavaScript, link, asset, metadata, indexing, and rep
 npm run check
 ```
 
+Regenerate the overhaul's visual reference screenshots:
+
+```sh
+npm run capture:references
+```
+
 Run a local development server:
 
 ```sh

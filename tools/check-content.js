@@ -82,7 +82,7 @@ function validateUniqueSlugs(entries, label) {
   });
 }
 
-function validateRelationList(relations, relationKey, entriesBySlug, label) {
+function validateRelationList(relations, relationKey, entriesBySlug, label, options = {}) {
   (relations || []).forEach((relation, index) => {
     const slug = typeof relation === "string" ? relation : relation && relation[relationKey];
     const entry = entriesBySlug.get(slug);
@@ -92,6 +92,12 @@ function validateRelationList(relations, relationKey, entriesBySlug, label) {
     }
     if (entry.data.status === "draft") {
       fail(`${label}[${index}] references draft entry "${slug}"`);
+    }
+    if (options.requiredStatus && entry.data.status !== options.requiredStatus) {
+      fail(
+        `${label}[${index}] references ${entry.data.status} entry "${slug}"; ` +
+          `${options.requiredStatus} is required`,
+      );
     }
     if (relation && relation.image) {
       validateLocalImage(relation.image, `${label}[${index}].image`);
@@ -196,18 +202,26 @@ validateLocalImage(settings.shareImage, "src/content/settings.json: shareImage")
 
 const projectsBySlug = new Map(projects.map((entry) => [entry.data.slug, entry]));
 const servicesBySlug = new Map(services.map((entry) => [entry.data.slug, entry]));
-validateRelationList(home.carousel && home.carousel.slides, "project", projectsBySlug, "home.carousel.slides");
+validateRelationList(
+  home.carousel && home.carousel.slides,
+  "project",
+  projectsBySlug,
+  "home.carousel.slides",
+  { requiredStatus: "published" },
+);
 validateRelationList(
   home.collectionsSection && home.collectionsSection.featuredProjects,
   "project",
   projectsBySlug,
   "home.collectionsSection.featuredProjects",
+  { requiredStatus: "published" },
 );
 validateRelationList(
   home.servicesSection && home.servicesSection.featuredServices,
   "service",
   servicesBySlug,
   "home.servicesSection.featuredServices",
+  { requiredStatus: "published" },
 );
 validateLocalImage(home.philosophy && home.philosophy.image, "home.philosophy.image");
 if (home.philosophy && home.philosophy.image && !home.philosophy.imageAlt) {

@@ -10,7 +10,7 @@ const outputRoot = path.join(root, "_site");
 const axePath = require.resolve("axe-core/axe.min.js");
 
 const scans = [
-  { label: "Homepage mobile", route: "/", width: 390, height: 844 },
+  { label: "Homepage mobile", route: "/", width: 390, height: 844, featuredProject: true },
   { label: "Homepage mobile menu", route: "/", width: 390, height: 844, openMenu: true },
   { label: "Work mobile", route: "/projects.html", width: 390, height: 844 },
   {
@@ -18,6 +18,7 @@ const scans = [
     route: "/projects/marylebone_residence_lobby.html",
     width: 390,
     height: 844,
+    projectCarousel: true,
   },
   {
     label: "Service mobile",
@@ -71,6 +72,72 @@ function localFileForRequest(requestUrl) {
   return path.join(outputRoot, pathname.replace(/^\/+/, ""));
 }
 
+async function checkFeaturedProject(page) {
+  const state = await page.evaluate(() => {
+    const links = Array.from(document.querySelectorAll("#portfolio .featured-project"));
+    return {
+      linkCount: links.length,
+      href: links[0] && links[0].getAttribute("href"),
+      title: links[0] && links[0].querySelector(".featured-project__title")?.textContent.trim(),
+      carouselControls: document.querySelectorAll("#portfolio .ctrl, #portfolio .dots").length,
+      comingSoonText: /coming soon/i.test(document.querySelector("#portfolio")?.textContent || ""),
+    };
+  });
+  if (
+    state.linkCount !== 1 ||
+    state.href !== "/projects/marylebone_residence_lobby.html" ||
+    !state.title ||
+    state.carouselControls !== 0 ||
+    state.comingSoonText
+  ) {
+    throw new Error(`Homepage featured-project contract failed: ${JSON.stringify(state)}`);
+  }
+}
+
+async function checkProjectCarousel(page) {
+  const initialState = await page.evaluate(() => {
+    const carousel = document.querySelector("[data-project-carousel]");
+    const slides = Array.from(carousel?.querySelectorAll("[role='group'][aria-roledescription='slide']") || []);
+    const dots = Array.from(carousel?.querySelectorAll("[data-project-carousel-dots] button") || []);
+    return {
+      carouselLabel: carousel?.getAttribute("aria-label"),
+      slideCount: slides.length,
+      activeSlides: slides.filter((slide) => slide.getAttribute("aria-current") === "true").length,
+      hiddenSlides: slides.filter((slide) => slide.getAttribute("aria-hidden") === "true").length,
+      dotCount: dots.length,
+      activeDots: dots.filter((dot) => dot.getAttribute("aria-current") === "true").length,
+      nonButtonControls: Array.from(carousel?.querySelectorAll("button") || []).filter(
+        (button) => button.type !== "button",
+      ).length,
+    };
+  });
+  if (
+    !initialState.carouselLabel ||
+    initialState.slideCount !== 3 ||
+    initialState.activeSlides !== 1 ||
+    initialState.hiddenSlides !== 2 ||
+    initialState.dotCount !== 3 ||
+    initialState.activeDots !== 1 ||
+    initialState.nonButtonControls !== 0
+  ) {
+    throw new Error(`Project carousel initial state failed: ${JSON.stringify(initialState)}`);
+  }
+
+  await page.focus("[data-project-carousel]");
+  await page.keyboard.press("ArrowRight");
+  await page.waitForFunction(() => {
+    const slides = document.querySelectorAll("[data-project-carousel] [aria-roledescription='slide']");
+    const dots = document.querySelectorAll("[data-project-carousel-dots] button");
+    return slides[1]?.getAttribute("aria-current") === "true" && dots[1]?.getAttribute("aria-current") === "true";
+  });
+  await page.click("[data-project-carousel-dots] button:first-child");
+  await page.waitForFunction(() =>
+    document
+      .querySelector("[data-project-carousel] [aria-roledescription='slide']")
+      ?.getAttribute("aria-current") === "true",
+  );
+}
+
 async function main() {
   if (!fs.existsSync(outputRoot)) {
     throw new Error("Generated site is missing. Run npm run build before check:a11y.");
@@ -114,6 +181,8 @@ async function main() {
       await page.goto(pathToFileURL(routeToFile(scan.route)).href, {
         waitUntil: "domcontentloaded",
       });
+      if (scan.featuredProject) await checkFeaturedProject(page);
+      if (scan.projectCarousel) await checkProjectCarousel(page);
       if (scan.openMenu) {
         await page.click("[aria-controls='floatingPillMenu']");
         await page.waitForSelector("#floatingNavPill.is-open");
@@ -186,7 +255,7 @@ async function main() {
   }
 
   console.log(
-    `Accessibility check passed: ${scans.length} representative Axe scans plus the mobile-menu focus smoke test, no critical/serious violations, ${nonBlockingViolationCount} non-blocking violation(s).`,
+    `Accessibility check passed: ${scans.length} representative Axe scans plus navigation, featured-project, and carousel interaction smoke tests; no critical/serious violations, ${nonBlockingViolationCount} non-blocking violation(s).`,
   );
 }
 

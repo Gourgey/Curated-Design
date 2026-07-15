@@ -65,7 +65,7 @@ collections:
                     display_fields: ["title", "slug", "cardImage", "heroImage"]
                     filters:
                       - field: "status"
-                        values: ["published", "coming_soon"]
+                        values: ["published"]
                   - { label: "Selected Project Image", name: "image", widget: "string", hint: "Use a path from the selected Project's card, hero, gallery, or project image folder." }
                   - { label: "Alt Text Override", name: "alt", widget: "string", required: false }
           - label: "Homepage Services Section"
@@ -92,7 +92,7 @@ collections:
                     display_fields: ["title", "slug", "cardImage"]
                     filters:
                       - field: "status"
-                        values: ["published", "coming_soon"]
+                        values: ["published"]
           - label: "Homepage Collections Section"
             name: "collectionsSection"
             widget: "object"
@@ -120,7 +120,7 @@ collections:
                     display_fields: ["title", "slug", "cardImage"]
                     filters:
                       - field: "status"
-                        values: ["published", "coming_soon"]
+                        values: ["published"]
                   - { label: "Selected Project Image", name: "image", widget: "string", required: false, hint: "Optional. Use a path from the selected Project's card, hero, gallery, or project image folder. Falls back to Project Card Image." }
           - label: "Design Philosophy"
             name: "philosophy"

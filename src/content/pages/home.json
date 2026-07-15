@@ -7,19 +7,9 @@
   "carousel": {
     "slides": [
       {
-        "project": "garden_restaurant",
-        "image": "/assets/images/projects/16-9_images/monet-living.webp",
-        "alt": "Living room interior"
-      },
-      {
-        "project": "shoreditch_office",
-        "image": "/assets/images/projects/16-9_images/gwape_bedroom.webp",
-        "alt": "Bedroom interior"
-      },
-      {
-        "project": "shoreditch_office",
-        "image": "/assets/images/projects/16-9_images/gwape_living.webp",
-        "alt": "Living interior"
+        "project": "marylebone_residence_lobby",
+        "image": "/assets/images/projects/marylebone_residence_lobby/marylebone_residence_lobby_1.webp",
+        "alt": "Marylebone Lobby interior"
       }
     ]
   },
@@ -50,31 +40,15 @@
   },
   "collectionsSection": {
     "kicker": "Collections",
-    "heading": "Recent projects.",
-    "lead": "A small, current selection — residential, hospitality, and workplace work in and around London.",
+    "heading": "Featured project.",
+    "lead": "A completed residential lobby refresh in Marylebone, shaped through architectural detailing, sculptural furniture, and layered lighting.",
     "moreLabel": "Index",
     "moreLink": "View all projects",
     "moreHref": "/projects.html",
     "featuredProjects": [
       {
-        "project": "sandbanks_residence",
-        "image": "/assets/images/projects/sandbanks_residence/sandbanks_residence_1.webp"
-      },
-      {
-        "project": "botanical_residence",
-        "image": "/assets/images/projects/botanical_residence/botanical_residence_1.webp"
-      },
-      {
-        "project": "marylebone_terrace",
-        "image": "/assets/images/projects/marylebone_terrace/marylebone_terrace_1.webp"
-      },
-      {
         "project": "marylebone_residence_lobby",
         "image": ""
-      },
-      {
-        "project": "shoreditch_office",
-        "image": "/assets/images/projects/shoreditch_office/shoreditch_office_1.webp"
       }
     ]
   },

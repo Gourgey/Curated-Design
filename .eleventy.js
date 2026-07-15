@@ -101,9 +101,9 @@ module.exports = function (eleventyConfig) {
       .filter(Boolean);
   });
 
-  // Resolve the homepage carousel config into a flat list of renderable
-  // slides ({ src, alt }), skipping entries with no usable image so the
-  // template's slide count and aria-labels stay accurate.
+  // Resolve the homepage carousel config into linked, labelled, published
+  // project slides. Coming-soon work cannot silently become the homepage's
+  // lead proof point.
   eleventyConfig.addFilter("carouselSlides", (slides, projects) => {
     const bySlug = new Map(
       (projects || [])
@@ -115,11 +115,15 @@ module.exports = function (eleventyConfig) {
       .map((slide) => {
         const project = bySlug.get(slide.project);
         const projectData = project && !isDraft(project) ? project.data : {};
+        if (projectData.status !== "published") return null;
         const src = slide.image || projectData.heroImage;
         if (!src) return null;
         return {
           src,
           alt: slide.alt || projectData.heroAlt || projectData.title || "",
+          title: projectData.title || "Project",
+          kicker: projectData.kicker || projectData.category || "Featured work",
+          url: `/projects/${projectData.slug}.html`,
         };
       })
       .filter(Boolean);

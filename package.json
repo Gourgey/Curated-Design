@@ -8,6 +8,7 @@
   "scripts": {
     "clean": "node -e \"require('fs').rmSync('_site', { recursive: true, force: true })\"",
     "build": "npm run clean && eleventy && node tools/minify-css.js",
+    "capture:references": "npm run build && node tools/capture-references.js",
     "check": "npm run check:content && npm run check:js && npm run build && npm run check:site && npm run check:a11y",
     "check:a11y": "node tools/check-accessibility.js",
     "check:content": "node tools/check-content.js",

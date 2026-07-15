@@ -48,28 +48,41 @@ showBackground: true
         id="portfolio"
         class="dock-panel narrow"
         data-theme="dark"
-        aria-label="Portfolio carousel"
+        aria-label="Featured work"
     >
-        <div class="carousel">
-            <button class="ctrl prev" id="prev" aria-label="Previous">‹</button>
+        {% set carousel = site.home.carousel.slides | carouselSlides(collections.publishedProject) %}
+        <div class="carousel{% if carousel.length == 1 %} carousel--single{% endif %}"{% if carousel.length > 1 %} role="region" aria-roledescription="carousel" aria-label="Featured projects" tabindex="0"{% endif %}>
+            {% if carousel.length > 1 %}
+            <button class="ctrl prev" id="prev" type="button" aria-label="Previous featured project">‹</button>
+            {% endif %}
 
             <div class="viewport">
                 <div class="viewport-clip">
                     <div class="track" id="track">
-                        {% set carousel = site.home.carousel.slides | carouselSlides(collections.publishedProject) %}
                         {% for slide in carousel %}
-                        <div class="slide" aria-label="{{ loop.index }} of {{ carousel.length }}">
-                            {% image slide.src, slide.alt, "(min-width: 1040px) 1000px, calc(100vw - 40px)", ("eager" if loop.first else "lazy") %}
-                        </div>
+                        <article class="slide" role="group"{% if carousel.length > 1 %} aria-roledescription="slide" aria-label="{{ loop.index }} of {{ carousel.length }}"{% endif %}{% if loop.first %} aria-current="true"{% endif %}>
+                            <a class="featured-project" href="{{ slide.url }}">
+                                {% image slide.src, slide.alt, "(min-width: 1040px) 1000px, calc(100vw - 40px)", ("eager" if loop.first else "lazy") %}
+                                <span class="featured-project__overlay">
+                                    <span class="featured-project__kicker">{{ slide.kicker }}</span>
+                                    <span class="featured-project__title">{{ slide.title }}</span>
+                                    <span class="featured-project__action">View project <span aria-hidden="true">→</span></span>
+                                </span>
+                            </a>
+                        </article>
                         {% endfor %}
                     </div>
                 </div>
             </div>
 
-            <button class="ctrl next" id="next" aria-label="Next">›</button>
+            {% if carousel.length > 1 %}
+            <button class="ctrl next" id="next" type="button" aria-label="Next featured project">›</button>
+            {% endif %}
         </div>
 
-        <div id="dots" class="dots" aria-label="Slide indicators"></div>
+        {% if carousel.length > 1 %}
+        <div id="dots" class="dots" role="group" aria-label="Choose featured project"></div>
+        {% endif %}
     </section>
 
     <section id="services" class="home-section home-services" data-theme="dark">
@@ -87,7 +100,7 @@ showBackground: true
             {% set featuredServices = site.home.servicesSection.featuredServices | resolveEntries(collections.publishedService, "service") %}
             <div class="home-services__grid">
                 {% for service in featuredServices %}
-                <a class="home-service-card" href="/curated_services/{{ service.data.slug }}.html" aria-label="View {{ service.data.title }} service">
+                <a class="home-service-card" href="/curated_services/{{ service.data.slug }}.html">
                     <div class="home-service-card__media">
                         {% image service.data.cardImage, service.data.cardAlt or service.data.title, "(min-width: 1280px) 400px, (min-width: 761px) 33vw, 100vw", "lazy", "", "card" %}
                     </div>
@@ -114,7 +127,7 @@ showBackground: true
             </div>
 
             {% set featuredProjects = site.home.collectionsSection.featuredProjects | resolveEntries(collections.publishedProject, "project") %}
-            <div class="home-collections__grid">
+            <div class="home-collections__grid{% if featuredProjects.length == 1 %} home-collections__grid--single{% endif %}">
                 {% for project in featuredProjects %}
                 {% set projectCardSrc = project.relation.image or project.data.cardImage %}
                 <a class="home-project" href="/projects/{{ project.data.slug }}.html">

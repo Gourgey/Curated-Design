@@ -36,6 +36,7 @@ sectionTop: true
 {% set heroSrc = project.data.heroImage %}
 {% if not heroSrc and galleryImages.length %}{% set heroSrc = galleryImages[0].image %}{% endif %}
 {% set heroAlt = project.data.heroAlt or project.data.title %}
+{% set mediaCount = galleryImages.length + (1 if heroSrc else 0) %}
 
 <main id="main-content" class="page-main" tabindex="-1">
     <div class="project-topbar">
@@ -43,16 +44,16 @@ sectionTop: true
     </div>
 
     <header class="project-hero" aria-label="Project hero">
-        <figure class="project-hero-media{% if hasHeroCarousel %} project-hero-carousel{% endif %}"{% if hasHeroCarousel %} data-project-carousel{% endif %}>
+        <figure class="project-hero-media{% if hasHeroCarousel %} project-hero-carousel{% endif %}"{% if hasHeroCarousel %} data-project-carousel role="region" aria-roledescription="carousel" aria-label="{{ project.data.title }} project images" tabindex="0"{% else %} aria-label="{{ project.data.title }} project image"{% endif %}>
             <div class="project-hero-track"{% if hasHeroCarousel %} data-project-carousel-track{% endif %}>
                 {% if heroSrc %}
-                <div class="project-hero-slide">
+                <div class="project-hero-slide" role="group"{% if hasHeroCarousel %} aria-roledescription="slide" aria-label="1 of {{ mediaCount }}" aria-current="true"{% endif %}>
                     {% image heroSrc, heroAlt, "100vw", "eager" %}
                 </div>
                 {% endif %}
                 {% if hasHeroCarousel %}
                 {% for item in galleryImages %}
-                <div class="project-hero-slide">
+                <div class="project-hero-slide" role="group" aria-roledescription="slide" aria-label="{{ loop.index + 1 }} of {{ mediaCount }}">
                     {% image item.image, item.alt or project.data.title, "100vw", "lazy" %}
                 </div>
                 {% endfor %}
@@ -61,7 +62,7 @@ sectionTop: true
             {% if hasHeroCarousel %}
             <button class="project-hero-control project-hero-control--prev" type="button" data-project-carousel-prev aria-label="Previous project image">‹</button>
             <button class="project-hero-control project-hero-control--next" type="button" data-project-carousel-next aria-label="Next project image">›</button>
-            <div class="project-hero-dots" data-project-carousel-dots aria-label="Project image slide indicators"></div>
+            <div class="project-hero-dots" data-project-carousel-dots role="group" aria-label="Choose project image"></div>
             {% endif %}
         </figure>
 

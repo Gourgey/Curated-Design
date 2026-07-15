@@ -19,3 +19,16 @@ node tools/capture-references.js \
 ```
 
 This comparison mode does not modify the stored references or the working tree.
+
+## Verifying responsive breakpoints
+
+The default 390/768/1440px set only proves a page looks right at those three widths — it cannot catch a regression that only appears between them (for example, a two-column layout that briefly looks broken between 900px and 980px). Override the capture widths with `--widths=` (comma-separated) to check specific breakpoints directly, combined with `--output=` and `--only=` so the sweep stays fast:
+
+```sh
+node tools/capture-references.js \
+  --output=/private/tmp/curated-breakpoint-check \
+  --only=contact \
+  --widths=960,979,980,981,1000
+```
+
+Use this before changing (or consolidating) any `@media` width in `assets/css/styles.css` — capture just below, at, and just above the existing breakpoint, make the change, re-capture the same widths into a second directory, and diff. Do not change a breakpoint's numeric value based on the 390/768/1440 baseline alone; none of those widths land inside the 700–1200px range where most of this stylesheet's non-shared breakpoints actually operate.

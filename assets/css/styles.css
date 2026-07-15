@@ -2012,7 +2012,7 @@ body.contact-page .hidden {
 @media (max-width: 1280px) {
     body.contact-page .contact-headline { font-size: 64px; }
 }
-@media (max-width: 980px) {
+@media (max-width: 920px) {
     body.contact-page .contact-body {
         grid-template-columns: 1fr;
         gap: 56px;

@@ -16,6 +16,7 @@ const stylesheetGitRefArgument = process.argv.find((argument) =>
 const stylesheetFileArgument = process.argv.find((argument) =>
   argument.startsWith("--stylesheet-file="),
 );
+const widthsArgument = process.argv.find((argument) => argument.startsWith("--widths="));
 const referenceRoot = outputArgument
   ? path.resolve(root, outputArgument.slice("--output=".length))
   : path.join(root, "tests/visual/reference");
@@ -34,7 +35,13 @@ const stylesheetOverride = stylesheetGitRef
   : stylesheetFile
     ? fs.readFileSync(path.resolve(root, stylesheetFile), "utf8")
     : "";
-const widths = [390, 768, 1440];
+const widths = widthsArgument
+  ? widthsArgument
+      .slice("--widths=".length)
+      .split(",")
+      .map((value) => Number.parseInt(value, 10))
+      .filter((value) => Number.isFinite(value) && value > 0)
+  : [390, 768, 1440];
 const pages = [
   { name: "home", route: "/" },
   { name: "work", route: "/projects.html" },
@@ -42,6 +49,7 @@ const pages = [
   { name: "contact", route: "/contact.html" },
   { name: "project", route: "/projects/marylebone_residence_lobby.html" },
   { name: "service", route: "/curated_services/concept_design.html" },
+  { name: "apps-index", route: "/apps/index.html" },
 ];
 
 const contentTypes = {

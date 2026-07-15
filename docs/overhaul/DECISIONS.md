@@ -13,6 +13,8 @@ This log separates confirmed implementation facts from decisions that need busin
 | Analytics | No analytics integration was found in the repository; do not add one by default | Open — hosting-level tools also need confirmation | Privacy review and Phase 5 |
 | Project indexing | Published projects may be indexed; coming-soon teasers are `noindex` and excluded from the sitemap; drafts are not generated | Implemented | Revisit when a teaser becomes a complete case study |
 | Case-study launch threshold | Aim for at least two or three approved complete case studies; if unavailable, launch a deliberately smaller portfolio | Open business/content decision | Homepage and Work redesign approval |
+| Enquiry qualification fields | Preserve the current required fields while project type remains optional; do not tighten or remove qualification fields without an owner confirming what the studio genuinely needs | Open business decision | Final form-copy approval |
+| Enquiry budget guidance | Preserve the current general-contact and service-specific examples; the £80–150k and £5–15k ranges may reflect different scopes but need explicit approval before they are reconciled | Open business decision | Final form-copy approval |
 | Image permissions | Treat all current publication rights and credits as unconfirmed until an owner signs them off | Open, hard gate | Final content approval |
 | Legal review | Do not treat implementation review as legal approval | Open, hard gate | Privacy/terms release |
 | Runtime | Node 22 is selected in `.nvmrc`; package dependencies require Node 22.12 or newer; CI consumes the same version file | Implemented; local verification on 15 July 2026 used Node 25.8.1 | Revisit only when upgrading the runtime |

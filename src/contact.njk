@@ -38,6 +38,8 @@ scripts:
                 netlify
                 data-netlify="true"
                 data-netlify-honeypot="bot-field"
+                data-enhanced-netlify-form
+                data-success-target="contactFormSuccess"
             >
                 <input type="hidden" name="form-name" value="contact" />
 
@@ -79,13 +81,18 @@ scripts:
                     <textarea class="field__textarea" id="message" name="message" rows="4" placeholder="Location, scope, timings, and anything else you’d like to share." required></textarea>
                 </div>
 
-                <p id="contactFormError" class="contact-form-error hidden" role="alert">
+                <p id="contactFormError" class="contact-form-error hidden" role="alert" data-form-error tabindex="-1">
                     We couldn’t send your message. Please try again.
                 </p>
 
+                <p class="contact-form-privacy">
+                    We’ll use your details only to respond to your enquiry.
+                    <a href="/privacy-notice.html">Read our privacy notice.</a>
+                </p>
+
                 <div class="contact-submit-row">
-                    <button id="contactFormSubmit" type="submit" class="contact-submit">
-                        <span id="contactFormSubmitLabel">{{ site.contact.submitLabel or "Send enquiry" }}</span>
+                    <button id="contactFormSubmit" type="submit" class="contact-submit" data-form-submit>
+                        <span id="contactFormSubmitLabel" data-form-submit-label>{{ site.contact.submitLabel or "Send enquiry" }}</span>
                         <span class="contact-submit__arrow" aria-hidden="true">→</span>
                     </button>
                     {% if site.contact.submitMeta %}
@@ -94,7 +101,7 @@ scripts:
                 </div>
             </form>
 
-            <div id="contactFormSuccess" class="contact-form-success hidden" aria-live="polite">
+            <div id="contactFormSuccess" class="contact-form-success hidden" role="status" aria-live="polite" data-form-success tabindex="-1">
                 <h2 class="contact-form-success__title">Form submitted</h2>
                 <p class="contact-form-success__text">Thanks for reaching out — we’ll respond shortly.</p>
             </div>

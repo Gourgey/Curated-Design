@@ -25,9 +25,16 @@ const scans = [
     route: "/curated_services/concept_design.html",
     width: 390,
     height: 844,
+    enquiryForm: "service-enquiry",
   },
   { label: "Studio mobile", route: "/about.html", width: 390, height: 844 },
-  { label: "Contact mobile", route: "/contact.html", width: 390, height: 844 },
+  {
+    label: "Contact mobile",
+    route: "/contact.html",
+    width: 390,
+    height: 844,
+    enquiryForm: "contact",
+  },
   { label: "Homepage desktop", route: "/", width: 1440, height: 1000 },
 ];
 
@@ -164,6 +171,95 @@ async function checkProjectCarousel(page) {
   );
 }
 
+async function checkEnquiryForm(page, expectedName) {
+  const selector = `[data-enhanced-netlify-form][name="${expectedName}"]`;
+  const initialState = await page.evaluate((formSelector) => {
+    const form = document.querySelector(formSelector);
+    const success = document.getElementById(form?.getAttribute("data-success-target"));
+    const error = form?.querySelector("[data-form-error]");
+    const privacyLink = form?.querySelector('a[href="/privacy-notice.html"]');
+    const honeypot = form?.querySelector('[name="bot-field"]');
+    return {
+      formCount: document.querySelectorAll(formSelector).length,
+      action: form?.getAttribute("action"),
+      method: form?.getAttribute("method")?.toLowerCase(),
+      submitType: form?.querySelector("[data-form-submit]")?.getAttribute("type"),
+      successHidden: success ? getComputedStyle(success).display === "none" : false,
+      errorHidden: error ? getComputedStyle(error).display === "none" : false,
+      honeypotHidden: honeypot ? honeypot.getClientRects().length === 0 : false,
+      privacyHref: privacyLink?.getAttribute("href"),
+    };
+  }, selector);
+
+  if (
+    initialState.formCount !== 1 ||
+    initialState.action !== "/thank-you/" ||
+    initialState.method !== "post" ||
+    initialState.submitType !== "submit" ||
+    !initialState.successHidden ||
+    !initialState.errorHidden ||
+    !initialState.honeypotHidden ||
+    initialState.privacyHref !== "/privacy-notice.html"
+  ) {
+    throw new Error(`Enquiry form fallback contract failed: ${JSON.stringify(initialState)}`);
+  }
+
+  const validBeforeSubmit = await page.evaluate((formSelector) => {
+    const form = document.querySelector(formSelector);
+    form.querySelectorAll("[required]").forEach((field) => {
+      field.value = field.type === "email" ? "studio@example.com" : "Test project enquiry";
+    });
+    window.fetch = async () => ({ ok: false, status: 503 });
+    const valid = form.checkValidity();
+    form.requestSubmit();
+    return valid;
+  }, selector);
+  if (!validBeforeSubmit) throw new Error(`${expectedName} test data did not satisfy form validation.`);
+
+  await page.waitForFunction(
+    (formSelector) => {
+      const form = document.querySelector(formSelector);
+      const error = form.querySelector("[data-form-error]");
+      return !error.classList.contains("hidden") && document.activeElement === error;
+    },
+    {},
+    selector,
+  );
+  const failureState = await page.evaluate((formSelector) => {
+    const form = document.querySelector(formSelector);
+    const error = form.querySelector("[data-form-error]");
+    const submit = form.querySelector("[data-form-submit]");
+    const label = form.querySelector("[data-form-submit-label]");
+    return {
+      errorFocused: document.activeElement === error,
+      submitEnabled: !submit.disabled,
+      labelRestored: label.textContent.trim() !== "Sending…",
+      valuesPreserved: Array.from(form.querySelectorAll("[required]")).every(
+        (field) => field.value.length > 0,
+      ),
+    };
+  }, selector);
+  if (Object.values(failureState).some((value) => !value)) {
+    throw new Error(`Enquiry form failure state failed: ${JSON.stringify(failureState)}`);
+  }
+
+  await page.evaluate((formSelector) => {
+    window.fetch = async () => ({ ok: true, status: 200 });
+    document.querySelector(formSelector).requestSubmit();
+  }, selector);
+  await page.waitForFunction(
+    (formSelector) => {
+      const form = document.querySelector(formSelector);
+      const success = document.getElementById(form.getAttribute("data-success-target"));
+      return form.classList.contains("hidden") &&
+        !success.classList.contains("hidden") &&
+        document.activeElement === success;
+    },
+    {},
+    selector,
+  );
+}
+
 async function main() {
   if (!fs.existsSync(outputRoot)) {
     throw new Error("Generated site is missing. Run npm run build before check:a11y.");
@@ -248,6 +344,7 @@ async function main() {
           targets: violation.nodes.flatMap((node) => node.target.map(String)),
         });
       });
+      if (scan.enquiryForm) await checkEnquiryForm(page, scan.enquiryForm);
       if (scan.openMenu) {
         await page.keyboard.press("Escape");
         await page.waitForFunction(() =>
@@ -281,7 +378,7 @@ async function main() {
   }
 
   console.log(
-    `Accessibility check passed: ${scans.length} representative Axe scans plus navigation, featured-project, and carousel interaction smoke tests; no critical/serious violations, ${nonBlockingViolationCount} non-blocking violation(s).`,
+    `Accessibility check passed: ${scans.length} representative Axe scans plus navigation, featured-project, carousel, and enquiry-form interaction smoke tests; no critical/serious violations, ${nonBlockingViolationCount} non-blocking violation(s).`,
   );
 }
 

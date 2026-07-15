@@ -10,6 +10,9 @@ eleventyComputed:
   description: "{{ service.data.metaDescription or service.data.summary or service.data.intro or site.settings.description }}"
 htmlClass: concept-page
 bodyClass: concept-page font-inter
+scripts:
+  - /assets/js/main.js
+  - /assets/js/contact-form.js
 ---
 {% set hasGlance = service.data.glance and service.data.glance.length %}
 {% set hasSections = service.data.sections and service.data.sections.length %}
@@ -90,6 +93,8 @@ bodyClass: concept-page font-inter
                     netlify
                     data-netlify="true"
                     data-netlify-honeypot="bot-field"
+                    data-enhanced-netlify-form
+                    data-success-target="serviceFormSuccess"
                 >
                     <input type="hidden" name="form-name" value="service-enquiry" />
                     <input type="hidden" name="service" value="{{ service.data.title }}" />
@@ -131,13 +136,27 @@ bodyClass: concept-page font-inter
                         <textarea class="field__textarea" id="{{ service.data.slug }}-message" name="message" rows="4" placeholder="Timeline, constraints, budget range, what you’re hoping to change…" required></textarea>
                     </div>
 
+                    <p class="service-enquiry__error hidden" role="alert" data-form-error tabindex="-1">
+                        We couldn’t send your enquiry. Please try again.
+                    </p>
+
+                    <p class="service-enquiry__privacy">
+                        We’ll use your details only to respond to your enquiry.
+                        <a href="/privacy-notice.html">Read our privacy notice.</a>
+                    </p>
+
                     <div class="service-enquiry__submit-row">
-                        <button type="submit" class="service-enquiry__submit">
-                            Send enquiry
+                        <button type="submit" class="service-enquiry__submit" data-form-submit>
+                            <span data-form-submit-label>Send enquiry</span>
                             <span class="service-enquiry__arrow" aria-hidden="true">→</span>
                         </button>
                     </div>
                 </form>
+
+                <div id="serviceFormSuccess" class="service-enquiry__success hidden" role="status" aria-live="polite" data-form-success tabindex="-1">
+                    <h2 class="service-enquiry__success-title">Enquiry sent</h2>
+                    <p class="service-enquiry__success-text">Thanks for getting in touch — we’ll respond shortly.</p>
+                </div>
             </div>
         </aside>
     </section>

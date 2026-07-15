@@ -16,15 +16,25 @@
     "check:site": "node tools/check-output.js",
     "start": "eleventy --serve",
     "cms": "node tools/visual-cms/server.js",
-    "cms:local": "npx -y decap-server"
+    "cms:local": "npx -y decap-server",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint:js": "eslint .",
+    "lint:css": "stylelint \"assets/css/**/*.css\""
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",
     "@11ty/eleventy-img": "^6.0.4",
+    "@eslint/js": "10.0.1",
     "axe-core": "^4.12.1",
     "clean-css": "^5.3.3",
+    "eslint": "10.7.0",
+    "globals": "17.7.0",
     "gray-matter": "^4.0.3",
     "markdown-it": "^14.3.0",
-    "puppeteer-core": "^25.3.0"
+    "prettier": "3.9.5",
+    "puppeteer-core": "^25.3.0",
+    "stylelint": "17.14.0",
+    "stylelint-config-standard": "40.0.0"
   }
 }

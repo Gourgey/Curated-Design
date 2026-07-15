@@ -38,6 +38,17 @@ Run a local development server:
 npm start
 ```
 
+Format and lint checks are available as separate commands and are not yet part of `npm run check`:
+
+```sh
+npm run format        # rewrite files with Prettier
+npm run format:check  # verify formatting without writing
+npm run lint:js       # ESLint over repository JavaScript
+npm run lint:css      # Stylelint over assets/css/styles.css
+```
+
+`lint:css` currently reports pre-existing duplicate selectors in `assets/css/styles.css`; these are known targets for the P2.2 stylesheet reorganisation, not new regressions. `format:check` reports pre-existing formatting differences across the wider repository (docs, CMS config, `tools/`); Prettier has not been run repository-wide, so treat that as a baseline rather than a bug list.
+
 ## CMS Access
 
 The Decap CMS admin area is available at:
@@ -134,3 +145,5 @@ The implementation programme is in [SITE-OVERHAUL-BUILD-PLAN.md](SITE-OVERHAUL-B
 - [Content inventory](docs/overhaul/CONTENT-INVENTORY.md)
 - [Decision log](docs/overhaul/DECISIONS.md)
 - [Audit and check baseline](docs/overhaul/BASELINE.md)
+- [Shared design tokens](docs/overhaul/DESIGN-TOKENS.md)
+- [Component inventory](docs/overhaul/COMPONENTS.md)

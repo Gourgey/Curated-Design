@@ -95,3 +95,25 @@ Use semantic roles directly in new CSS:
 ```
 
 When a value does not express a repeatable design decision, keep it local. When the same role appears across components, promote it to a semantic token and document it here.
+
+## Stylesheet source structure (P2.2)
+
+`assets/css/styles.css` is a generated file — built from `assets/css-partials/*.css` by `tools/build-css.js`, which runs automatically before every Eleventy build (including `npm start`'s dev server, via an `eleventy.before` hook, so an edited partial is never silently stale). Edit the partials; never hand-edit `assets/css/styles.css` directly, since the next build overwrites it.
+
+This first split (July 2026) is deliberately **physical only** — each partial is an exact, verbatim slice of the pre-split file in its original order (confirmed byte-identical when concatenated back together, before the generated banner comment was added). Nothing was reordered relative to anything else, so none of the cascade-reordering risk described in the P2.2 build-plan ticket applies to this step.
+
+| Partial | Contents |
+| --- | --- |
+| `01-tokens.css` | The shared token layer (this document's source). |
+| `02-base.css` | Reset, base typography, parallax background, links, Tailwind-replacement utility classes. |
+| `03-navigation.css` | Mobile nav panel, compact pill-menu toggle, floating pill nav, desktop/mobile nav behaviour. |
+| `04-homepage.css` | Hero, homepage carousel, section bands, the shared CTA band, the thank-you page. |
+| `05-legacy-pages.css` | Early Projects/About/Contact/Concept-Design page rules, plus interspersed floating-nav-overlay readability fixes. |
+| `06-project-template.css` | The project detail template's original (pre-redesign) rules. |
+| `07-misc-pages.css` | Coming-soon badge, Apps pages, Studio legal pages. |
+| `08-homepage-redesign.css` | The homepage redesign pass — Featured Projects, Design Philosophy, CTA band, shared section spine. |
+| `09-project-redesign.css` | "Project detail page — redesign 2026" — supersedes parts of `06-project-template.css` via source order (see P2.2's duplicate-selector work). |
+| `10-projects-listing-redesign.css` | "Projects Listing — redesign 2026" — supersedes parts of `05-legacy-pages.css`. |
+| `11-service-redesign.css` | "Service Detail Page — redesign 2026". |
+
+Note that page-specific CSS for the same page is often split across two partials (an early one and a later "redesign 2026" one) — this mirrors how the site was actually built over time, and is exactly the pattern the P2.2 duplicate-selector cleanup already reconciled where the two overlapped. **True by-topic regrouping — e.g. gathering every carousel rule, wherever it lives today, into one file — is intentionally not done yet.** That requires moving rules relative to each other (the homepage carousel in `04-homepage.css` and the project-hero carousel inside `06-project-template.css`/`09-project-redesign.css` would need to become one file), which reintroduces real cascade risk and needs the same one-change-at-a-time, pixel-diff-verified treatment as the duplicate-selector work — at the scale of the whole file rather than 27 known selectors.

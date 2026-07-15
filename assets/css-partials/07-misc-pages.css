@@ -1,0 +1,487 @@
+/* =========================
+   Coming Soon badge (project pages)
+   Paste at end of styles.css
+   ========================= */
+body.project-page .coming-soon-badge {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 10px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(0, 0, 0, 0.18);
+    color: #fff;
+    vertical-align: middle;
+}
+
+/* =========================
+   Apps pages
+   ========================= */
+
+html.app-page {
+    background: #e4e1d7;
+}
+
+body.app-page {
+    background: #e4e1d7;
+    color: #000;
+    min-height: 100vh;
+}
+
+body.app-page .pill,
+body.app-page .pillmenu-toggle,
+body.app-page .nav-pill {
+    color: #000;
+}
+
+body.app-page .pillmenu-toggle .burger-line {
+    background: currentColor;
+}
+
+body.app-page .top-left-logo {
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    background: rgba(0, 0, 0, 0.03);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+body.app-page .top-left-logo:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+body.app-page .hero-brand {
+    margin-bottom: 40px;
+}
+
+.app-content {
+    padding: 12px 0 88px;
+}
+
+.app-wrap {
+    width: min(1050px, calc(100% - 32px));
+    margin-inline: auto;
+    padding-inline: 8px;
+}
+
+.app-wrap--narrow {
+    width: min(900px, calc(100% - 32px));
+}
+
+.app-wrap--legal {
+    width: min(820px, calc(100% - 32px));
+}
+
+.app-header {
+    max-width: 760px;
+    margin-bottom: 30px;
+}
+
+.app-header--compact {
+    margin-bottom: 22px;
+}
+
+.app-kicker,
+.app-card-kicker {
+    margin: 0 0 10px;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.62);
+}
+
+.app-title {
+    margin: 0 0 14px;
+    font-size: clamp(32px, 4vw, 58px);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.06;
+}
+
+.app-lead {
+    margin: 0;
+    max-width: 68ch;
+    color: rgba(0, 0, 0, 0.72);
+    font-size: 16px;
+    line-height: 1.65;
+}
+
+.app-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.app-card,
+.app-panel,
+.app-prose {
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    background: rgba(255, 255, 255, 0.42);
+    border-radius: 18px;
+}
+
+.app-card {
+    display: flex;
+    min-height: 260px;
+    flex-direction: column;
+    padding: 20px;
+    transition:
+        transform 180ms ease,
+        background 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.app-card:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.62);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.app-card h2,
+.app-panel h2,
+.app-prose h2 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+}
+
+.app-card p {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.72);
+    line-height: 1.58;
+}
+
+.app-card-link {
+    margin-top: auto;
+    padding-top: 26px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.72);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.app-small-note {
+    margin: 24px 0 0;
+    max-width: 70ch;
+    color: rgba(0, 0, 0, 0.58);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.app-backlink {
+    margin: 0 0 24px;
+}
+
+.app-backlink a {
+    display: inline-flex;
+    padding: 10px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.45);
+    font-size: 14px;
+}
+
+.app-backlink a:hover {
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.app-detail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.8fr);
+    gap: 16px;
+    align-items: start;
+}
+
+.app-panel {
+    padding: 18px;
+}
+
+.app-panel--links {
+    display: grid;
+    gap: 10px;
+}
+
+.app-panel--links a {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.78);
+}
+
+.app-panel--links a:hover {
+    color: #000;
+}
+
+.app-meta-list {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+}
+
+.app-meta-list div {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 12px;
+}
+
+.app-meta-list dt {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.58);
+}
+
+.app-meta-list dd {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.78);
+}
+
+.app-prose {
+    padding: 24px;
+}
+
+.app-prose h2 {
+    margin-top: 28px;
+}
+
+.app-prose h2:first-child {
+    margin-top: 0;
+}
+
+.app-prose p {
+    max-width: 72ch;
+    margin: 0 0 14px;
+    color: rgba(0, 0, 0, 0.78);
+    line-height: 1.68;
+}
+
+.app-prose ul,
+.app-prose ol {
+    max-width: 72ch;
+    margin: 0 0 14px;
+    padding-left: 1.2rem;
+    color: rgba(0, 0, 0, 0.78);
+    line-height: 1.68;
+}
+
+.app-prose li + li {
+    margin-top: 8px;
+}
+
+.app-prose h3 {
+    margin: 22px 0 8px;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+}
+
+.app-prose em {
+    color: rgba(0, 0, 0, 0.66);
+}
+
+
+/* =========================
+   Studio legal pages
+   ========================= */
+
+html.legal-page {
+    background: #e4e1d7;
+}
+
+body.legal-page {
+    background: #e4e1d7;
+    color: #000;
+    min-height: 100vh;
+}
+
+body.legal-page .pill,
+body.legal-page .pillmenu-toggle,
+body.legal-page .nav-pill {
+    color: #000;
+}
+
+body.legal-page .pillmenu-toggle .burger-line {
+    background: currentColor;
+}
+
+body.legal-page .top-left-logo {
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    background: rgba(0, 0, 0, 0.03);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+body.legal-page .top-left-logo:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+body.legal-page .hero-brand {
+    margin-bottom: 40px;
+}
+
+.legal-content {
+    padding: 12px 0 88px;
+}
+
+.legal-wrap {
+    width: min(820px, calc(100% - 32px));
+    margin-inline: auto;
+    padding-inline: 8px;
+}
+
+.legal-backlink {
+    margin: 0 0 24px;
+}
+
+.legal-backlink a {
+    display: inline-flex;
+    padding: 10px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.45);
+    font-size: 14px;
+}
+
+.legal-backlink a:hover {
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.legal-header {
+    max-width: 760px;
+    margin-bottom: 22px;
+}
+
+.legal-kicker {
+    margin: 0 0 10px;
+    color: rgba(0, 0, 0, 0.62);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.legal-title {
+    margin: 0 0 14px;
+    font-size: clamp(32px, 4vw, 58px);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.06;
+}
+
+.legal-lead,
+.legal-updated {
+    max-width: 68ch;
+    margin: 0;
+    color: rgba(0, 0, 0, 0.72);
+    font-size: 16px;
+    line-height: 1.65;
+}
+
+.legal-updated {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.legal-note,
+.legal-prose {
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.42);
+}
+
+.legal-note {
+    margin-bottom: 16px;
+    padding: 16px;
+}
+
+.legal-note p {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.72);
+    line-height: 1.6;
+}
+
+.legal-prose {
+    padding: 24px;
+}
+
+.legal-prose h2 {
+    margin: 28px 0 10px;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+}
+
+.legal-prose h2:first-child {
+    margin-top: 0;
+}
+
+.legal-prose h3 {
+    margin: 22px 0 8px;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+}
+
+.legal-prose p {
+    max-width: 72ch;
+    margin: 0 0 14px;
+    color: rgba(0, 0, 0, 0.78);
+    line-height: 1.68;
+}
+
+.legal-prose ul,
+.legal-prose ol {
+    max-width: 72ch;
+    margin: 0 0 14px;
+    padding-left: 1.2rem;
+    color: rgba(0, 0, 0, 0.78);
+    line-height: 1.68;
+}
+
+.legal-prose li + li {
+    margin-top: 8px;
+}
+
+.legal-prose a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+@media (max-width: 820px) {
+    .app-card-grid,
+.app-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .app-card {
+        min-height: 0;
+    }
+}
+
+@media (max-width: 640px) {
+    .app-content {
+        padding-bottom: 64px;
+    }
+
+    .app-prose,
+.app-panel,
+.app-card,
+.legal-prose,
+.legal-note {
+        border-radius: 16px;
+        padding: 16px;
+    }
+
+    .app-meta-list div {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+
+    
+
+    
+}
+
+

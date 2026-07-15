@@ -1,0 +1,154 @@
+/* -------- Base reset & typography -------- */
+/*
+   Basic reset / global defaults:
+   - Ensure consistent box sizing.
+   - Set full-height for layout calculations.
+   - Apply default background and typography.
+*/
+* {
+    box-sizing: border-box;
+}
+html,
+body {
+    height: 100%;
+}
+html {
+    background: var(--bg);
+}
+body {
+    margin: 0;
+    color: var(--ink);
+    font-family:
+        "Inter",
+        system-ui,
+        -apple-system,
+        Segoe UI,
+        Roboto,
+        Arial,
+        sans-serif;
+    background: transparent;
+    overflow-x: hidden;
+}
+
+/*
+   Utility class to explicitly force Inter font.
+   Helpful when combined with Tailwind or other utilities.
+*/
+.font-inter {
+    font-family:
+        "Inter",
+        system-ui,
+        -apple-system,
+        Segoe UI,
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+}
+
+/* Always respect the hidden attribute */
+[hidden] {
+    display: none !important;
+}
+
+/* ===== Parallax background ===== */
+/*
+   Fixed full-screen background wrapper:
+   - Stays in place while content scrolls.
+   - Sits behind everything via z-index.
+   - pointer-events: none so it never blocks clicks.
+*/
+#bg {
+    position: fixed;
+    inset: 0;
+    /* Keep this non-negative; Chrome can glitch with fixed + transformed layers
+       when they live in negative stacking contexts. */
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    contain: paint;
+}
+
+/*
+   Fade at the bottom of the background:
+   - Creates a soft transition from the hero image into band-1 background.
+*/
+#bg::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10vh; /* shorter fade */
+    background: linear-gradient(to bottom, transparent 0%, var(--band-1) 100%);
+    pointer-events: none;
+}
+
+/*
+   Background image styling:
+   - Covers more than viewport height to allow parallax movement.
+   - Slight scale for a subtle zoomed-in feel.
+*/
+#bgImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    min-height: 130vh;
+    object-fit: cover;
+    transform: translate3d(0, 0, 0) scale(1.08);
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* Activated briefly while scrolling; JS removes this after scroll settles. */
+#bgImg.is-parallax-active {
+    will-change: transform;
+}
+
+/*
+   Dark overlay:
+   - Keeps foreground text readable regardless of image brightness.
+*/
+.bg-dim {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.36);
+}
+
+/* -------- Links -------- */
+/*
+   Global link style:
+   - Inherit text colour (for dark aesthetic).
+   - Remove default underline; handled manually when needed.
+*/
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Replaces Tailwind pt-28 on pages that use the floating nav/logo */
+main.page-main {
+    padding-top: 112px; /* same as pt-28 */
+    position: relative;
+    z-index: 1;
+}
+
+/* ---- Tailwind replacements used by projects.html ---- */
+.min-h-screen {
+    min-height: 100vh;
+}
+.text-center {
+    text-align: center;
+}
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+.px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+

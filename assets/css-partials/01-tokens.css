@@ -1,0 +1,98 @@
+/* -------- Shared design tokens -------- */
+:root {
+    /* Colour */
+    --color-canvas-dark: #0e0e0e;
+    --color-surface-dark: #16181f;
+    --color-canvas-light: #f2eee6;
+    --color-surface-light: #faf8f4;
+    --color-surface-muted: #e4e1d7;
+    --color-surface-inverse: #14130f;
+    --color-text-on-dark: #f2f2f2;
+    --color-text-primary: #1b1a17;
+    --color-text-secondary: #46443e;
+    --color-text-muted: #625e57;
+    --color-text-inverse: #ede8dd;
+    --color-border: #c9c3b6;
+    --color-border-soft: #e4dfd4;
+    --color-accent: #d1f365;
+    --color-accent-muted: #cfe465;
+    --color-state-error: #8f1d1d;
+    --color-ring-on-dark: rgba(255, 255, 255, 0.12);
+
+    /* Typography */
+    --font-family-display: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    --font-family-body: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    --font-size-kicker: 11px;
+    --font-size-label: 12px;
+    --font-size-body-small: 15px;
+    --font-size-body: 17px;
+    --font-size-lead: 18px;
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --line-height-tight: 1.1;
+    --line-height-body: 1.6;
+    --line-height-relaxed: 1.7;
+    --letter-spacing-tight: -0.01em;
+    --letter-spacing-label: 0.15em;
+    --letter-spacing-kicker: 0.22em;
+
+    /* Spacing */
+    --space-3xs: 4px;
+    --space-2xs: 8px;
+    --space-xs: 12px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 32px;
+    --space-xl: 40px;
+    --space-2xl: 48px;
+    --space-3xl: 56px;
+    --space-4xl: 64px;
+    --space-5xl: 80px;
+    --space-6xl: 96px;
+    --space-7xl: 120px;
+    --space-8xl: 144px;
+
+    /* Layout and component geometry */
+    --layout-content-wide: 1280px;
+    --layout-content-standard: 1180px;
+    --layout-reading-width: 68ch;
+    --layout-page-gutter: 80px;
+    --layout-grid-gap: 32px;
+    --control-target-min: 44px;
+    --radius-small: 4px;
+    --radius-panel: 18px;
+    --radius-round: 50%;
+    --radius-pill: 999px;
+    --border-width-hairline: 1px;
+    --shadow-floating: 0 10px 28px rgba(0, 0, 0, 0.32);
+    --layer-background: 0;
+    --layer-content: 1;
+    --layer-header: 650;
+    --layer-overlay: 700;
+    --layer-skip-link: 1000;
+
+    /* Motion */
+    --motion-duration-fast: 200ms;
+    --motion-duration-standard: 250ms;
+    --motion-duration-slow: 350ms;
+    --motion-easing-standard: ease;
+    --motion-easing-emphasized: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+    /* Breakpoint reference values; custom properties cannot be used in media queries. */
+    --breakpoint-compact: 640px;
+    --breakpoint-narrow: 760px;
+    --breakpoint-content-stack: 920px;
+    --breakpoint-wide: 1180px;
+    --breakpoint-navigation: 1280px;
+
+    /* Compatibility aliases used by the pre-Phase-2 homepage shell. */
+    --bg: var(--color-canvas-dark);
+    --ink: var(--color-text-on-dark);
+    --ring: var(--color-ring-on-dark);
+    --header-h: 0px;
+    --pills-gap: 15px;
+    --band-1: var(--color-surface-dark);
+    --accent: var(--color-accent);
+}
+

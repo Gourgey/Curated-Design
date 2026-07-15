@@ -4,3 +4,6 @@ node_modules
 assets/_generated
 package-lock.json
 tests/visual/reference
+
+# Generated from assets/css-partials/ by tools/build-css.js
+assets/css/styles.css

@@ -1,0 +1,424 @@
+/* ============================================================
+   Homepage redesign — Featured Projects + Design Philosophy + CTA
+   Prototype: Website Redesign : Stage X / Homepage - Standalone.
+   Tokens scoped to wrappers so they don't leak into the rest of
+   the site (notably the global --ink remains #f2f2f2).
+   ============================================================ */
+.home-section,
+.home-philosophy,
+.home-cta {
+    --hp-paper: var(--color-surface-light);
+    --hp-paper-2: var(--color-canvas-light);
+    --hp-ink: var(--color-text-primary);
+    --hp-ink-2: var(--color-text-secondary);
+    --hp-ink-3: var(--color-text-muted);
+    --hp-rule: var(--color-border);
+    --hp-rule-soft: var(--color-border-soft);
+    --hp-void: var(--color-surface-inverse);
+    --hp-void-ink: var(--color-text-inverse);
+    --hp-font-display: var(--font-family-display);
+    --hp-font-body: var(--font-family-body);
+}
+
+/* ---- Shared section spine (cream band) ---- */
+.home-section {
+    position: relative;
+    z-index: 1;
+    padding: 144px 80px 112px;
+    background: var(--hp-paper-2);
+    color: var(--hp-ink);
+    font-family: var(--hp-font-body);
+}
+.home-section__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+.home-section__head {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 32px;
+    align-items: start;
+    padding-bottom: 56px;
+}
+.home-section__eyebrow {
+    font-family: var(--hp-font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--hp-ink);
+    margin: 14px 0 0;
+}
+.home-section__title {
+    font-family: var(--hp-font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(44px, 5.4vw, 72px);
+    line-height: 1.04;
+    letter-spacing: -0.016em;
+    color: var(--hp-ink);
+    margin: 0 0 32px;
+    text-wrap: balance;
+    max-width: 18ch;
+}
+
+.home-section__title em { font-style: italic; }
+.home-section__intro {
+    font-family: var(--hp-font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+    letter-spacing: 0.005em;
+    color: var(--hp-ink-2);
+    margin: 0;
+    max-width: 38em;
+    text-wrap: pretty;
+}
+
+/* ---- Hero typography (Cormorant italic + Inter Light, on dark page bg) ---- */
+.home-hero__title {
+    margin: 0 auto 24px;
+    max-width: 22ch;
+    font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(40px, 5vw, 84px);
+    line-height: 1.04;
+    letter-spacing: -0.016em;
+    color: rgba(237, 232, 221, 0.96);
+    text-wrap: balance;
+}
+.home-hero__title em { font-style: italic; }
+.home-hero__intro {
+    max-width: 38em;
+    margin: 0 auto;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    font-weight: 300;
+    font-size: clamp(16px, 1.5vw, 18px);
+    line-height: 1.6;
+    color: rgba(237, 232, 221, 0.65);
+    text-wrap: pretty;
+}
+
+/* ---- Curated Services grid (mirrors Featured Projects with summary text) ---- */
+.home-services__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 64px 48px;
+    border-top: 1px solid var(--hp-rule-soft);
+    padding-top: 56px;
+}
+.home-service-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 280ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.home-service-card:hover { transform: translateY(-2px); }
+.home-service-card__media {
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    background-color: var(--hp-paper);
+    margin-bottom: 18px;
+    overflow: hidden;
+}
+.home-service-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.home-service-card__title {
+    font-family: var(--hp-font-display);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.008em;
+    color: var(--hp-ink);
+    margin: 0 0 8px;
+}
+.home-service-card__summary {
+    font-family: var(--hp-font-body);
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--hp-ink-2);
+    margin: 0;
+    text-wrap: pretty;
+}
+
+/* Dark void variant — matches Design Philosophy band */
+.home-services {
+    background: var(--hp-void);
+    color: var(--hp-void-ink);
+}
+.home-services .home-section__eyebrow {
+    color: rgba(237, 232, 221, 0.55);
+}
+.home-services .home-section__title {
+    color: rgba(237, 232, 221, 0.96);
+}
+.home-services .home-section__intro {
+    color: rgba(237, 232, 221, 0.78);
+}
+.home-services .home-services__grid {
+    border-top-color: rgba(237, 232, 221, 0.15);
+}
+.home-services .home-service-card__title {
+    color: rgba(237, 232, 221, 0.96);
+}
+.home-services .home-service-card__summary {
+    color: rgba(237, 232, 221, 0.65);
+}
+
+/* ---- Featured Projects grid ---- */
+.home-collections {
+    border-top: 1px solid var(--hp-rule-soft);
+}
+.home-collections__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 64px 48px;
+    border-top: 1px solid var(--hp-rule-soft);
+    padding-top: 56px;
+}
+
+.home-collections__grid--single {
+    grid-template-columns: minmax(0, 640px);
+}
+
+.home-collections__grid--single .home-project__media {
+    aspect-ratio: 16 / 10;
+}
+.home-project {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 280ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.home-project:hover { transform: translateY(-2px); }
+.home-project__media {
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    background-color: var(--hp-paper);
+    margin-bottom: 18px;
+    overflow: hidden;
+}
+.home-project__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.home-project__title {
+    font-family: var(--hp-font-display);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.008em;
+    color: var(--hp-ink);
+    margin: 0 0 8px;
+}
+.home-project__kicker {
+    font-family: var(--hp-font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--hp-ink-3);
+    margin: 0;
+}
+
+.home-collections__more {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--hp-rule-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.home-collections__more-label {
+    font-family: var(--hp-font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--hp-ink-3);
+    margin: 0;
+}
+.home-collections__more-link {
+    font-family: var(--hp-font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--hp-ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--hp-rule);
+    padding-bottom: 2px;
+    transition: border-color 200ms ease, padding-right 200ms ease;
+}
+.home-collections__more-link::after { content: " →"; font-style: normal; }
+.home-collections__more-link:hover {
+    border-bottom-color: var(--hp-ink);
+    padding-right: 6px;
+}
+
+/* ---- Design Philosophy band (dark, 50/50) ---- */
+.home-philosophy {
+    position: relative;
+    z-index: 1;
+    background: var(--hp-void);
+    color: var(--hp-void-ink);
+    padding: 144px 80px;
+    font-family: var(--hp-font-body);
+}
+.home-philosophy__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+.home-philosophy__media {
+    aspect-ratio: 4 / 5;
+    background-color: var(--hp-paper-2);
+    margin: 0;
+    overflow: hidden;
+}
+.home-philosophy__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.home-philosophy__body {
+    display: flex;
+    flex-direction: column;
+}
+.home-philosophy__eyebrow {
+    font-family: var(--hp-font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(237, 232, 221, 0.55);
+    margin: 0 0 32px;
+}
+.home-philosophy__title {
+    font-family: var(--hp-font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(40px, 4.6vw, 60px);
+    line-height: 1.06;
+    letter-spacing: -0.014em;
+    color: rgba(237, 232, 221, 0.96);
+    margin: 0 0 40px;
+    text-wrap: balance;
+    max-width: 18ch;
+}
+.home-philosophy__title em { font-style: italic; }
+.home-philosophy__text {
+    font-family: var(--hp-font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.65;
+    color: rgba(237, 232, 221, 0.78);
+    margin: 0 0 24px;
+    max-width: 32em;
+    text-wrap: pretty;
+}
+.home-philosophy__text:last-child { margin-bottom: 0; }
+
+/* ---- CTA band (dark, centred — continues from Philosophy) ---- */
+.home-cta {
+    position: relative;
+    z-index: 1;
+    background: var(--hp-void);
+    color: var(--hp-void-ink);
+    padding: 96px 80px 144px;
+    border-top: 1px solid rgba(237, 232, 221, 0.10);
+    text-align: center;
+    font-family: var(--hp-font-body);
+}
+.home-cta__inner {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.home-cta__eyebrow {
+    font-family: var(--hp-font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(237, 232, 221, 0.55);
+    margin: 0 0 32px;
+}
+.home-cta__title {
+    font-family: var(--hp-font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(48px, 5vw, 72px);
+    line-height: 1.04;
+    letter-spacing: -0.018em;
+    color: rgba(237, 232, 221, 0.96);
+    margin: 0 auto 28px;
+    text-wrap: balance;
+    max-width: 18ch;
+}
+.home-cta__title em { font-style: italic; }
+.home-cta__subline {
+    font-family: var(--hp-font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(237, 232, 221, 0.65);
+    margin: 0 auto 56px;
+    max-width: 32em;
+}
+.home-cta__link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 0 0 4px;
+    border-bottom: 1px solid rgba(237, 232, 221, 0.95);
+    font-family: var(--hp-font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    color: rgba(237, 232, 221, 0.96);
+    text-decoration: none;
+    letter-spacing: -0.005em;
+    transition: padding-right 220ms ease;
+}
+.home-cta__link::after { content: " →"; font-style: normal; }
+.home-cta__link:hover { padding-right: 6px; }
+.home-cta__dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-accent-muted);
+    transform: translateY(-2px);
+}
+
+/* ---- Responsive (from prototype) ---- */
+@media (max-width: 1120px) {
+    .home-section { padding: 96px 40px; }
+    .home-philosophy { padding: 96px 40px; }
+    .home-philosophy__inner { grid-template-columns: 1fr; gap: 48px; }
+    .home-philosophy__media { aspect-ratio: 16 / 10; }
+    .home-cta { padding: 80px 40px 120px; }
+}
+@media (max-width: 760px) {
+    .home-section { padding: 80px 24px 72px; }
+    .home-section__head { grid-template-columns: 1fr; gap: 12px; padding-bottom: 40px; }
+    .home-collections__grid { grid-template-columns: 1fr; gap: 48px; }
+    .home-services__grid { grid-template-columns: 1fr; gap: 48px; }
+    .home-collections__more { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .home-philosophy { padding: 72px 24px; }
+    .home-cta { padding: 64px 24px 96px; }
+}
+

@@ -2,6 +2,8 @@
 
 This site is a static Netlify site generated with Eleventy and edited through Decap CMS. The visual design lives in the existing CSS and JavaScript files; content lives in `src/content`.
 
+`assets/css/styles.css` is a **generated file** — edit the source partials in `assets/css-partials/` instead (numbered `01-`–`11-`, concatenated in filename order). It rebuilds automatically as part of `npm run build`, `npm start`, and `npm run check`; run `npm run build:css` directly if you just want to regenerate it without a full build. See `docs/overhaul/DESIGN-TOKENS.md` for how the partials are organised.
+
 > **Editing content?** See [CONTENT-GUIDE.md](CONTENT-GUIDE.md) for a non-developer walkthrough of adding projects, services, and homepage sections through the CMS.
 
 ## Local Development
@@ -44,10 +46,10 @@ Format and lint checks are available as separate commands and are not yet part o
 npm run format        # rewrite files with Prettier
 npm run format:check  # verify formatting without writing
 npm run lint:js       # ESLint over repository JavaScript
-npm run lint:css      # Stylelint over assets/css/styles.css
+npm run lint:css      # Stylelint over assets/css-partials/ (the CSS source of truth)
 ```
 
-`lint:css` currently reports pre-existing duplicate selectors in `assets/css/styles.css`; these are known targets for the P2.2 stylesheet reorganisation, not new regressions. `format:check` reports pre-existing formatting differences across the wider repository (docs, CMS config, `tools/`); Prettier has not been run repository-wide, so treat that as a baseline rather than a bug list.
+`lint:css` targets `assets/css-partials/` rather than the generated `assets/css/styles.css`. `format:check` reports pre-existing formatting differences across the wider repository (docs, CMS config, `tools/`); Prettier has not been run repository-wide, so treat that as a baseline rather than a bug list.
 
 ## CMS Access
 

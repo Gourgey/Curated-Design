@@ -1,0 +1,272 @@
+/* =========================
+   Project Page (project template)
+   ========================= */
+
+html.project-page {
+    background: var(--color-surface-muted);
+}
+
+body.project-page {
+    background: var(--color-surface-muted);
+    color: #000;
+    min-height: 100vh;
+}
+
+/* Ensure nav/pills read as black on this light page */
+body.project-page .pill,
+body.project-page .pillmenu-toggle,
+body.project-page .nav-pill {
+    color: #000;
+}
+
+body.project-page .pillmenu-toggle .burger-line {
+    /* Final value; see the "hero and CTA editorial polish" section later
+       in this file, which supersedes the base currentColor via source order. */
+    background: rgba(247, 244, 237, 0.94);
+}
+
+/* Light-page treatment for the logo pill (match about/contact/concept).
+   border-color/background/box-shadow below reflect the dark-theme values
+   from the "hero and CTA editorial polish" section, which superseded the
+   original light-page values via source order. */
+body.project-page .top-left-logo {
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(32, 29, 25, 0.72);
+    box-shadow: none;
+}
+body.project-page .top-left-logo img {
+    filter: invert(1);
+}
+body.project-page .top-left-logo:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+/* Topbar */
+body.project-page .project-topbar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: absolute;
+    z-index: 4;
+    top: clamp(92px, 9vw, 150px);
+    left: 0;
+    right: 0;
+    width: min(1320px, calc(100% - 64px));
+    margin: 0 auto;
+    margin-bottom: 16px;
+    padding: 0;
+    pointer-events: none;
+}
+
+body.project-page .project-backlink {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.92);
+    font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: clamp(20px, 1.6vw, 28px);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1;
+    text-shadow: 0 1px 18px rgba(0, 0, 0, 0.35);
+    pointer-events: auto;
+}
+body.project-page .project-backlink:hover {
+    background: transparent;
+    color: #fff;
+}
+
+/* Hero */
+body.project-page .project-hero {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    max-width: 100vw;
+    margin: 0;
+    overflow: hidden;
+    min-height: clamp(620px, 100svh, 980px);
+}
+
+body.project-page .project-hero-media {
+    margin: 0;
+    width: 100%;
+}
+
+body.project-page .project-hero-track {
+    display: flex;
+    width: 100%;
+    transform: translateX(0);
+    transition: transform 360ms ease;
+}
+
+body.project-page .project-hero-slide {
+    min-width: 100%;
+}
+
+body.project-page .project-hero-media img {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(0.98);
+    height: clamp(620px, 100svh, 980px);
+    min-height: 100%;
+    object-position: center center;
+}
+
+body.project-page .project-hero-control {
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 999px;
+    background: rgba(32, 29, 25, 0.28);
+    color: #fff;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+body.project-page .project-hero-control--prev {
+    left: 18px;
+}
+
+body.project-page .project-hero-control--next {
+    right: 18px;
+}
+
+body.project-page .project-hero-dots {
+    position: absolute;
+    left: 50%;
+    bottom: 34px;
+    z-index: 3;
+    display: flex;
+    gap: 0;
+    transform: translateX(-50%);
+}
+
+body.project-page .project-hero-dots button {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+body.project-page .project-hero-dots button.active {
+    background: transparent;
+}
+
+body.project-page .project-hero-dots button::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.45);
+    transform: translate(-50%, -50%);
+}
+
+body.project-page .project-hero-dots button.active::before {
+    background: #fff;
+}
+
+body.project-page .project-hero-overlay {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    align-items: end;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.62) 0%,
+        rgba(0, 0, 0, 0.34) 24%,
+        rgba(0, 0, 0, 0.07) 58%,
+        rgba(0, 0, 0, 0.10) 100%
+    );
+    padding: 0;
+}
+
+body.project-page .project-hero-inner {
+    margin-inline: auto;
+    color: #fff;
+    width: min(1320px, calc(100% - 64px));
+    padding: 0 0 clamp(52px, 7vw, 96px);
+}
+
+body.project-page .project-kicker {
+    text-transform: uppercase;
+    margin: 0 0 16px;
+    font-family: "Inter", sans-serif;
+    font-size: clamp(12px, 1vw, 16px);
+    font-weight: 400;
+    letter-spacing: 0.32em;
+    line-height: 1.2;
+    opacity: 0.94;
+}
+
+body.project-page .project-title {
+    max-width: 9.6em;
+    margin: 0 0 24px;
+    font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: clamp(64px, 9vw, 132px);
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: 0;
+    line-height: 0.86;
+}
+
+body.project-page .project-subtitle {
+    max-width: 40em;
+    margin: 0;
+    font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: clamp(24px, 2.4vw, 38px);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.25;
+    opacity: 0.94;
+}
+
+body.project-page .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: clamp(34px, 4vw, 58px);
+}
+
+body.project-page .project-tag {
+    border-radius: 999px;
+    padding: 12px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    background: rgba(32, 29, 25, 0.28);
+    color: rgba(255, 255, 255, 0.94);
+    font-family: "Inter", sans-serif;
+    font-size: clamp(13px, 1vw, 16px);
+    font-weight: 400;
+}
+
+/* Body layout */
+body.project-page .project-wrap {
+    width: min(1050px, calc(100% - 32px));
+}
+
+
+/* .project-article, .project-callout, .project-facts, and .project-aside
+   base rules used to live here. Each is now fully superseded (and, for
+   .project-facts, folded into) the corresponding rule in the "Project
+   detail page — redesign 2026" section later in this file — see that
+   section's own comment about neutralising this legacy card styling. */
+
+

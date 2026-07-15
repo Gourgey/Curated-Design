@@ -1,3 +1,8 @@
+/* GENERATED FILE -- do not edit directly.
+   Source partials: assets/css-partials/ (01-tokens.css, 02-base.css, 03-navigation.css, 04-homepage.css, 05-legacy-pages.css, 06-project-template.css, 07-misc-pages.css, 08-homepage-redesign.css, 09-project-redesign.css, 10-projects-listing-redesign.css, 11-service-redesign.css)
+   Rebuild with: node tools/build-css.js (also runs automatically as part of npm run build
+   and npm start) */
+
 /* -------- Shared design tokens -------- */
 :root {
     /* Colour */
@@ -607,7 +612,7 @@ body.nav-open {
     pointer-events: auto;
 }
 
-/* ===== Desktop-only behaviour (≥ 1001px) =====
+/* ===== Desktop-only behaviour (>= 1280px) =====
    - Show inline floating pills.
    - Hide burger toggle.
    - Hide the Home item inside the overlay list (logo acts as Home on desktop).
@@ -626,7 +631,7 @@ body.nav-open {
     }
 }
 
-/* ===== Mobile behaviour (≤ 1000px) =====
+/* ===== Mobile behaviour (<= 1280px) =====
    - Floating pills are hidden.
    - Burger button appears in the top-right.
    - Top-left logo shrinks to icon-only.

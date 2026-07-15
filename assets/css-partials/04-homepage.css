@@ -1,0 +1,553 @@
+/* ===== Hero ===== */
+
+.hero-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 112px;
+    text-align: center;
+}
+
+.hero-brand-logo {
+    width: min(100%, clamp(147px, 20vw, 280px));
+    height: auto;
+}
+
+/*
+   Hero section wrapper:
+   - Vertically centers its content.
+   - Keeps things relative so overlays/effects can be applied.
+*/
+.hero {
+    position: relative;
+    min-height: 25vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+/*
+   Optional overlay inside hero:
+   - Currently just reserves space for potential visual effects.
+*/
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.28;
+}
+
+.hero-inner--center {
+    text-align: center;
+}
+.hero-inner {
+    width: min(1150px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 0 8px;
+}
+
+
+/*
+   Generic fade-up animation:
+   - Used for subtle entrance of elements from below.
+*/
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.pillmenu-wrap {
+    position: sticky;
+    top: calc(var(--header-h) + var(--pills-gap));
+    z-index: 500; /* keep it above the carousel */
+    pointer-events: auto; /* make sure it always receives clicks */
+    display: grid;
+    place-items: center;
+    margin: 12px 0 18px;
+}
+
+
+/* Chrome compositor relief:
+   during active scroll, reduce blur radius only while scrolling.
+   Static appearance stays unchanged. */
+body.chrome-scrolling .top-left-logo,
+body.chrome-scrolling .pillmenu,
+body.chrome-scrolling .pillmenu-toggle,
+body.chrome-scrolling .nav-pill .pillmenu {
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+}
+
+body.chrome-scrolling .pills-panel {
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+/* ===== Dock panel / Carousel container ===== */
+/*
+   Dock-style panel:
+   - Used to frame the carousel as a hero object.
+   - Rounded, elevated card with inner padding.
+*/
+.dock-panel {
+    position: relative;
+    z-index: 0; /* baseline so higher z-index pills sit above */
+    width: min(1000px, calc(100% - 40px));
+    margin: 28px auto 140px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 22px;
+    padding: 16px 16px 24px;
+    box-shadow:
+        0 40px 80px rgba(0, 0, 0, 0.6),
+        0 1px 0 rgba(255, 255, 255, 0.03) inset;
+    overflow: visible;
+}
+
+/* ===== Carousel core layout ===== */
+/*
+   Carousel container:
+   - Relative positioning for arrows and overlays.
+*/
+.carousel {
+    position: relative;
+}
+
+/*
+   Viewport wrapper:
+   - Ensures the carousel occupies full width.
+*/
+.viewport {
+    position: relative;
+    width: 100%;
+}
+
+/*
+   Clip region:
+   - Hides overflowing slides.
+   - Rounded corners for the image frame.
+*/
+.viewport-clip {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 18px;
+}
+
+/*
+   Track:
+   - Horizontal flex strip that holds all slides.
+   - JS adjusts transform to move between slides.
+*/
+.track {
+    display: flex;
+    transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform;
+}
+
+/*
+   Individual slide:
+   - Takes full viewport width.
+   - 16:9 aspect ratio for consistent image framing.
+*/
+.slide {
+    position: relative;
+    min-width: 100%;
+    aspect-ratio: 16/9;
+    background: #0f0f0f;
+    overflow: hidden;
+}
+
+/*
+   Slide image:
+   - Fully covers slide area.
+   - Prevent drag/select behaviour for smoother UX.
+*/
+.slide img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.featured-project {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    text-decoration: none;
+}
+
+.featured-project::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        to top,
+        rgba(8, 8, 7, 0.84) 0%,
+        rgba(8, 8, 7, 0.28) 46%,
+        rgba(8, 8, 7, 0.04) 72%
+    );
+    pointer-events: none;
+}
+
+.featured-project__overlay {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    display: grid;
+    justify-items: start;
+    gap: 5px;
+    padding: clamp(18px, 4vw, 40px);
+}
+
+.featured-project__kicker,
+.featured-project__status,
+.featured-project__action {
+    font-family: "Inter", sans-serif;
+    font-size: clamp(10px, 1vw, 12px);
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.featured-project__kicker {
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.featured-project__status {
+    position: absolute;
+    right: clamp(18px, 4vw, 40px);
+    bottom: clamp(18px, 4vw, 40px);
+    padding: 7px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.58);
+    border-radius: 999px;
+    background: rgba(8, 8, 7, 0.38);
+    color: #fff;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.featured-project__title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(26px, 4vw, 48px);
+    font-style: italic;
+    line-height: 1;
+}
+
+.featured-project__action {
+    margin-top: 5px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.65);
+    color: #fff;
+}
+
+.featured-project:hover .featured-project__action {
+    border-bottom-color: #fff;
+}
+
+/* ===== Carousel arrows ===== */
+/*
+   Left/right navigation arrows:
+   - Centrally aligned vertically.
+   - Dark translucent buttons with hover feedback.
+*/
+.ctrl {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid var(--ring);
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    color: #e8e8e8;
+}
+.ctrl:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+.prev {
+    left: 12px;
+}
+.next {
+    right: 12px;
+}
+
+/* ===== New: Section bands & content patterns ===== */
+/*
+   Generic section block:
+   - Provides vertical spacing and ensures content sits above background image.
+*/
+.section {
+    position: relative;
+    z-index: 1; /* above the fixed bg image */
+    padding: 80px 0;
+}
+
+/* Index only: extend Design Philosophy so the floating pills remain over
+   this final dark band near page bottom across viewport sizes. */
+body:not(.projects-page):not(.about-page):not(.contact-page):not(.concept-page):not(
+        .project-page
+    )
+    #about.section {
+    min-height: max(520px, calc(100svh - 120px));
+    padding-bottom: clamp(88px, 12svh, 160px);
+}
+
+/*
+   Section inner container:
+   - Centers content and constrains width.
+*/
+.section .container {
+    width: min(1150px, calc(100% - 32px));
+    margin-inline: auto;
+    padding-inline: 8px;
+}
+
+
+/*
+   Section heading:
+   - Reusable h2 style, responsive in size.
+*/
+.h2 {
+    font-size: clamp(24px, 2.4vw, 44px);
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+    margin: 6px 0 14px;
+    color: #e4e1d7;
+}
+
+
+/*
+   Lead paragraph:
+   - Slightly larger or more prominent text for intros.
+*/
+.lead {
+    color: #d0d0d0;
+    max-width: 70ch;
+}
+
+
+/* ===== Band 2 (Collections) pill colour mode ===== */
+
+body.is-band-2 .pillmenu .pill,
+body.pills-on-light .pillmenu .pill {
+    color: #000;
+}
+
+body.is-band-2 .pillmenu .pill:hover,
+body.pills-on-light .pillmenu .pill:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+body.is-band-2 .pillmenu .pill.active,
+body.pills-on-light .pillmenu .pill.active {
+    background: rgba(0, 0, 0, 0.12);
+    color: #000;
+}
+
+/* Floating nav pill specifically */
+body.is-band-2 .nav-pill .pill,
+body.pills-on-light .nav-pill .pill {
+    color: #000;
+}
+
+/* Band-2 sets nav pill text to black — but the open overlay is black.
+   Force overlay menu items back to white while open. */
+body.is-band-2 #floatingNavPill.is-open .pillmenu .pill,
+body.pills-on-light #floatingNavPill.is-open .pillmenu .pill {
+    color: #f2f2f2;
+}
+
+body.is-band-2 #floatingNavPill.is-open .pillmenu .pill:hover,
+body.pills-on-light #floatingNavPill.is-open .pillmenu .pill:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+
+/* ===== CTA (call-to-action) ===== */
+
+
+/*
+   CTA button:
+   - Rounded pill with subtle hover change.
+*/
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--ring);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+.button:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/*
+   Accent dot inside CTA button:
+   - Small coloured dot for a bit of visual personality.
+*/
+.button .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--accent);
+}
+
+/* =========================
+   Reusable CTA band (use on all pages except index.html)
+   ========================= */
+
+.about-cta-lead {
+    max-width: 520px;
+}
+
+.about-cta-button {
+    margin-top: 16px;
+    display: inline-flex;
+}
+
+/* CTA is ALWAYS dark, regardless of page */
+.about-cta-band {
+    background: #171717;
+    padding: 80px 0; /* optional hard guarantee */
+}
+
+/* Default inner wrapper for the shared CTA band partial (pages that don't
+   pass their own ctaContainerClass). */
+.cta-band__inner {
+    max-width: 950px;
+    margin: 0 auto;
+    padding: 0 16px;
+    text-align: center;
+}
+
+/* ===== Thank-you page (form success landing) =====
+   Rendered on the contact-page cream theme, so the shared .h2/.lead
+   colours (made for dark bands) are re-inked with contact tokens. */
+.thanks {
+    padding: 48px 16px 96px;
+}
+
+.thanks__inner {
+    max-width: 950px;
+    margin: 0 auto;
+    display: grid;
+    justify-items: start;
+    gap: 16px;
+}
+
+.thanks__inner .h2 {
+    font-family: var(--cp-font-display);
+    font-weight: 500;
+    color: var(--cp-ink);
+}
+
+.thanks__inner .lead {
+    margin: 0 0 24px;
+    color: var(--cp-ink-2);
+}
+
+.about-cta-band .h2,
+.about-cta-band .lead {
+    color: #e4e1d7 !important;
+}
+.about-cta-band .lead {
+    opacity: 0.85;
+}
+
+.about-cta-band .about-cta-button,
+.about-cta-band .about-cta-button:hover {
+    color: #fff !important;
+}
+
+/* ===== Carousel dots (indicators) ===== */
+/*
+   Dots container:
+   - Centers slide indicators under the carousel.
+*/
+.dots {
+    display: flex;
+    justify-content: center;
+    /* Zero gap: the 44px touch-target buttons below provide their own
+       spacing, so an additional flex gap would double it up. */
+    gap: 0;
+    margin-top: 18px;
+}
+
+/*
+   Individual dot:
+   - Circular buttons with hover and active states.
+*/
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    border: none;
+    cursor: pointer;
+    transition: background 0.25s ease;
+}
+
+.dot:hover {
+    background: rgba(255, 255, 255, 0.55);
+}
+
+.dot.active {
+    background: var(--accent);
+}
+
+/* Keep the visible indicator small while giving each carousel control a
+   comfortable touch target. */
+.dots .dot {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: transparent;
+}
+.dots .dot::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    transform: translate(-50%, -50%);
+}
+.dots .dot:hover,
+.dots .dot.active {
+    background: transparent;
+}
+.dots .dot:hover::before {
+    background: rgba(255, 255, 255, 0.78);
+}
+.dots .dot.active::before {
+    background: var(--accent);
+}
+
+

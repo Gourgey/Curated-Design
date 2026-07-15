@@ -1,0 +1,559 @@
+/* =========================
+   Service Detail Page — redesign 2026
+   Scoped to body.concept-page (the service-pages.njk body class).
+   Tokens scoped so global --ink remains #f2f2f2.
+   Earlier .concept-* rules in this file remain in place but target
+   old class names the new template no longer renders.
+   ========================= */
+
+html.concept-page {
+    background: var(--color-canvas-light);
+}
+
+body.concept-page {
+    --srv-paper-2: var(--color-canvas-light);
+    --srv-ink: var(--color-text-primary);
+    --srv-ink-2: var(--color-text-secondary);
+    --srv-ink-3: var(--color-text-muted);
+    --srv-rule: var(--color-border);
+    --srv-font-display: var(--font-family-display);
+    --srv-font-body: var(--font-family-body);
+    background: var(--srv-paper-2);
+    color: var(--srv-ink);
+    font-family: var(--srv-font-body);
+}
+
+/* Outer rhythm */
+body.concept-page main.service {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 144px 80px 80px;
+}
+
+/* Header */
+body.concept-page .service-header {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 32px;
+    align-items: start;
+    padding-bottom: 64px;
+}
+body.concept-page .service-header__eyebrow {
+    font-family: var(--srv-font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--srv-ink);
+    margin: 14px 0 0;
+}
+body.concept-page .service-header__title {
+    font-family: var(--srv-font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(48px, 6.2vw, 84px);
+    line-height: 1.04;
+    letter-spacing: -0.016em;
+    color: var(--srv-ink);
+    margin: 0 0 32px;
+    text-wrap: balance;
+}
+body.concept-page .service-header__title em { font-style: italic; }
+body.concept-page .service-header__intro {
+    font-family: var(--srv-font-body);
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--srv-ink-2);
+    margin: 0;
+    max-width: 38em;
+    text-wrap: pretty;
+}
+
+/* Cover image — clean editorial frame, no rounded corners or shadow */
+body.concept-page .service-hero {
+    margin: 0 0 64px;
+    overflow: hidden;
+}
+body.concept-page .service-hero img {
+    width: 100%;
+    height: clamp(280px, 40vw, 520px);
+    object-fit: cover;
+    display: block;
+}
+
+/* Two-column body */
+body.concept-page .service-body {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+}
+@media (min-width: 900px) {
+    body.concept-page .service-body {
+        grid-template-columns: 3fr 2fr;
+        gap: 64px;
+        align-items: start;
+    }
+}
+
+/* Left column — sections with hairline rule above each */
+body.concept-page .service-section {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 24px;
+    margin-top: 40px;
+}
+body.concept-page .service-section:first-child {
+    margin-top: 0;
+}
+body.concept-page .service-section__heading {
+    margin: 0 0 16px;
+}
+body.concept-page .service-section__list {
+    font-family: var(--srv-font-body);
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.7;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: var(--srv-ink-2);
+}
+body.concept-page .service-section__list li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+body.concept-page .service-section__list li:last-child {
+    border-bottom: none;
+}
+body.concept-page ol.service-section__list {
+    counter-reset: srv-step;
+}
+body.concept-page ol.service-section__list li {
+    counter-increment: srv-step;
+    padding-left: 32px;
+    position: relative;
+}
+body.concept-page ol.service-section__list li::before {
+    content: counter(srv-step, lower-roman);
+    position: absolute;
+    left: 0;
+    top: 10px;
+    font-family: var(--srv-font-display);
+    font-style: italic;
+    color: var(--srv-ink-3);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+}
+body.concept-page .service-section__note {
+    font-family: var(--srv-font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--srv-ink-3);
+    margin: 20px 0 0;
+    max-width: 38em;
+    text-wrap: pretty;
+}
+
+/* Right column — sticky aside containing At-a-glance + enquiry form */
+body.concept-page .service-body__aside {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+@media (min-width: 900px) {
+    body.concept-page .service-body__aside {
+        position: sticky;
+        top: 32px;
+    }
+}
+
+/* At-a-glance facts list */
+body.concept-page .service-glance__list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0;
+}
+body.concept-page .service-glance__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    gap: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+body.concept-page .service-glance__row:first-child {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+body.concept-page .service-glance__label {
+    font-family: var(--srv-font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+body.concept-page .service-glance__value {
+    font-family: var(--srv-font-display);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--srv-ink);
+    margin: 0;
+    text-align: right;
+    max-width: 65%;
+}
+
+/* Enquiry block */
+body.concept-page .service-enquiry__title {
+    font-family: var(--srv-font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(24px, 2.2vw, 32px);
+    line-height: 1.1;
+    letter-spacing: -0.012em;
+    color: var(--srv-ink);
+    margin: 0 0 12px;
+    text-wrap: balance;
+}
+body.concept-page .service-enquiry__intro {
+    font-family: var(--srv-font-body);
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--srv-ink-2);
+    margin: 0 0 24px;
+}
+
+/* Enquiry form — bottom-border-only fields, matching contact-page pattern */
+body.concept-page .service-enquiry__form {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding-top: 8px;
+}
+body.concept-page .service-enquiry__form .field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: 1px solid var(--srv-rule);
+    padding-bottom: 12px;
+    transition: border-color 200ms ease;
+}
+body.concept-page .service-enquiry__form .field:focus-within {
+    border-bottom-color: var(--srv-ink);
+}
+body.concept-page .service-enquiry__form .field__label {
+    font-family: var(--srv-font-body);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--srv-ink-3);
+    margin: 0;
+}
+body.concept-page .service-enquiry__form .field:focus-within .field__label {
+    color: var(--srv-ink);
+}
+body.concept-page .service-enquiry__form .field__input,
+body.concept-page .service-enquiry__form .field__textarea {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: var(--srv-font-display);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    color: var(--srv-ink);
+    padding: 0;
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+}
+body.concept-page .service-enquiry__form .field__input::placeholder,
+body.concept-page .service-enquiry__form .field__textarea::placeholder {
+    color: var(--srv-ink-3);
+    font-style: italic;
+    font-weight: 300;
+}
+body.concept-page .service-enquiry__form .field__textarea {
+    resize: vertical;
+    min-height: 80px;
+    font-family: var(--srv-font-body);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.55;
+    letter-spacing: 0;
+}
+body.concept-page .service-enquiry__form .field--optional .field__label::after {
+    content: " · optional";
+    font-style: italic;
+    letter-spacing: 0.06em;
+    text-transform: none;
+    color: var(--srv-ink-3);
+    font-family: var(--srv-font-display);
+    font-weight: 400;
+    font-size: 11px;
+    margin-left: 2px;
+}
+
+body.concept-page .service-enquiry__privacy,
+body.concept-page .service-enquiry__error,
+body.concept-page .service-enquiry__success-text {
+    font-family: var(--srv-font-body);
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.55;
+    margin: 0;
+}
+body.concept-page .service-enquiry__privacy {
+    color: var(--srv-ink-3);
+    margin-top: -8px;
+}
+body.concept-page .service-enquiry__privacy a {
+    color: inherit;
+    text-underline-offset: 3px;
+}
+body.concept-page .service-enquiry__error {
+    color: var(--color-state-error);
+}
+body.concept-page .service-enquiry__success {
+    padding-top: 8px;
+}
+body.concept-page .service-enquiry__success-title {
+    font-family: var(--srv-font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 1.1;
+    color: var(--srv-ink);
+    margin: 0 0 10px;
+}
+body.concept-page .service-enquiry__success-text {
+    color: var(--srv-ink-2);
+}
+body.concept-page .service-enquiry__submit[disabled] {
+    opacity: 0.7;
+    cursor: wait;
+}
+body.concept-page .service-enquiry .hidden {
+    display: none;
+}
+
+/* Submit — editorial link-button */
+body.concept-page .service-enquiry__submit-row {
+    margin-top: 8px;
+}
+body.concept-page .service-enquiry__submit {
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--srv-ink);
+    padding: 0 0 4px;
+    font-family: var(--srv-font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--srv-ink);
+    cursor: pointer;
+    letter-spacing: -0.005em;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    transition: padding-right 200ms ease;
+}
+body.concept-page .service-enquiry__submit:hover {
+    padding-right: 12px;
+}
+body.concept-page .service-enquiry__arrow {
+    font-style: normal;
+    transition: transform 240ms ease;
+}
+body.concept-page .service-enquiry__submit:hover .service-enquiry__arrow {
+    transform: translateX(4px);
+}
+
+/* .label-small reused from project-detail block — scope explicit here so
+   the 11px projects-page treatment doesn't apply on service pages */
+body.concept-page .label-small {
+    font-family: var(--srv-font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+/* Responsive */
+@media (max-width: 920px) {
+    body.concept-page main.service {
+        padding: 120px 32px 0;
+    }
+    body.concept-page .service-header {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding-bottom: 56px;
+    }
+    body.concept-page .service-header__title {
+        font-size: 52px;
+    }
+    body.concept-page .service-hero {
+        margin-bottom: 48px;
+    }
+    body.concept-page .service-hero img {
+        height: clamp(240px, 50vw, 400px);
+    }
+    body.concept-page .service-body__aside {
+        gap: 32px;
+    }
+}
+
+/* Project detail page — hero and CTA editorial polish */
+body.project-page main.page-main {
+    padding-top: 0;
+}
+
+body.project-page .nav-pill .pillmenu,
+body.project-page .nav-pill .pillmenu-toggle {
+    border-color: rgba(255, 255, 255, 0.14);
+    background: rgba(32, 29, 25, 0.72);
+    box-shadow: none;
+}
+body.project-page .pill,
+body.project-page .nav-pill .pill {
+    color: rgba(247, 244, 237, 0.94);
+}
+body.project-page .pill:hover,
+body.project-page .nav-pill .pill:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+body.project-page .project-hero-media,
+body.project-page .project-hero-track,
+body.project-page .project-hero-slide {
+    height: 100%;
+}
+
+body.project-page .project-cta-band {
+    background: #12120f;
+    color: rgba(237, 232, 221, 0.96);
+    padding: clamp(92px, 12vw, 172px) 0 clamp(84px, 10vw, 144px);
+}
+body.project-page .project-cta__inner {
+    width: min(1320px, calc(100% - 64px));
+    margin: 0 auto;
+    text-align: left;
+}
+body.project-page .project-cta-band .h2 {
+    max-width: 9.8em;
+    margin: 0 0 68px;
+    color: rgba(237, 232, 221, 0.98) !important;
+    font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: clamp(52px, 6vw, 96px);
+    font-style: italic;
+    font-weight: 300;
+    letter-spacing: 0;
+    line-height: 0.98;
+}
+body.project-page .project-cta-band .h2::before {
+    content: "Contact";
+    display: block;
+    margin: 0 0 34px;
+    color: rgba(237, 232, 221, 0.58);
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    line-height: 1;
+    text-transform: uppercase;
+}
+body.project-page .project-cta-band .lead {
+    max-width: 48em;
+    margin: 0 0 42px;
+    color: rgba(237, 232, 221, 0.74) !important;
+    font-family: "Inter", sans-serif;
+    font-size: clamp(17px, 1.4vw, 24px);
+    font-weight: 300;
+    line-height: 1.55;
+}
+body.project-page .project-cta-band .about-cta-button {
+    display: flex;
+    width: 100%;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 18px;
+    margin: 0;
+    padding: 0 0 20px;
+    border: 0;
+    border-bottom: 1px solid rgba(237, 232, 221, 0.9);
+    border-radius: 0;
+    background: transparent;
+    color: rgba(237, 232, 221, 0.96) !important;
+    font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: clamp(28px, 2.4vw, 38px);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1;
+}
+body.project-page .project-cta-band .about-cta-button:hover {
+    background: transparent;
+    color: #fff !important;
+}
+body.project-page .project-cta-band .about-cta-button::after {
+    content: "→";
+    margin-left: 8px;
+    font-family: "Inter", sans-serif;
+    font-size: 0.95em;
+    font-style: normal;
+    line-height: 1;
+    transition: transform 180ms ease;
+}
+body.project-page .project-cta-band .about-cta-button:hover::after {
+    transform: translateX(6px);
+}
+body.project-page .project-cta-band .about-cta-button .dot {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 auto;
+    background: var(--accent);
+    transform: translateY(-3px);
+}
+
+@media (max-width: 760px) {
+    body.project-page .project-topbar,
+body.project-page .project-hero-inner,
+body.project-page .project-cta__inner {
+        width: min(100% - 32px, 1320px);
+    }
+    body.project-page .project-topbar {
+        top: 96px;
+    }
+    body.project-page .project-hero,
+body.project-page .project-hero-media img {
+        min-height: 720px;
+        height: 86svh;
+    }
+    body.project-page .project-title {
+        font-size: clamp(56px, 18vw, 82px);
+    }
+    body.project-page .project-subtitle {
+        font-size: 24px;
+    }
+    body.project-page .project-tags {
+        margin-top: 30px;
+    }
+    body.project-page .project-tag {
+        padding: 10px 14px;
+    }
+    body.project-page .project-cta-band {
+        padding: 76px 0 84px;
+    }
+    body.project-page .project-cta-band .h2 {
+        margin-bottom: 42px;
+        font-size: clamp(46px, 15vw, 66px);
+    }
+}

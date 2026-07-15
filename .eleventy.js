@@ -1,6 +1,7 @@
 const fs = require("fs");
 const markdownIt = require("markdown-it");
 const Image = require("@11ty/eleventy-img");
+const { build: buildCss } = require("./tools/build-css.js");
 
 module.exports = function (eleventyConfig) {
   const md = markdownIt({ html: true, breaks: false, linkify: true });
@@ -51,6 +52,13 @@ module.exports = function (eleventyConfig) {
       fs.cpSync(generated, `${dir.output}/img`, { recursive: true });
     }
   });
+
+  // assets/css/styles.css is generated from assets/css-partials/*.css (see
+  // tools/build-css.js). Rebuild it before each build -- including each
+  // incremental rebuild `eleventy --serve` triggers on file change -- so a
+  // partial edit is never silently stale in the passthrough-copied output.
+  eleventyConfig.addWatchTarget("assets/css-partials");
+  eleventyConfig.on("eleventy.before", () => buildCss());
 
   eleventyConfig.addPassthroughCopy("assets/css");
   eleventyConfig.addPassthroughCopy("assets/images");

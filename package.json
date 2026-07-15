@@ -7,6 +7,7 @@
   },
   "scripts": {
     "clean": "node -e \"require('fs').rmSync('_site', { recursive: true, force: true })\"",
+    "build:css": "node tools/build-css.js",
     "build": "npm run clean && eleventy && node tools/minify-css.js",
     "capture:references": "npm run build && node tools/capture-references.js",
     "check": "npm run check:content && npm run check:js && npm run build && npm run check:site && npm run check:a11y",
@@ -20,7 +21,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint:js": "eslint .",
-    "lint:css": "stylelint \"assets/css/**/*.css\""
+    "lint:css": "stylelint \"assets/css-partials/**/*.css\""
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",

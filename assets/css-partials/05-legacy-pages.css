@@ -1,0 +1,966 @@
+/* =========================
+   Projects Page (projects.html)
+   ========================= */
+
+/* This selector's rules now live in the "Projects Listing — redesign 2026"
+   section later in this file, which already superseded background/color
+   here via source order; min-height moved there too so the selector isn't
+   defined twice. */
+
+/* HERO text on projects page should be black (your global hero is light-on-dark) */
+body.projects-page .hero,
+body.projects-page .hero * {
+    color: #000;
+}
+
+
+/* Default: nav + pills are black on light background */
+body.projects-page .pill,
+body.projects-page .pillmenu-toggle,
+body.projects-page .nav-pill {
+    color: #000;
+}
+
+body.projects-page .pill::after {
+    background-color: #000; /* hover / active underline */
+}
+
+/* The page is now uniformly cream, so pills stay dark whether the user
+   has scrolled into the projects band or not. The .is-projects-band JS
+   hook is harmless to leave on — these rules just keep colors stable. */
+body.projects-page.is-projects-band .pill,
+body.projects-page.is-projects-band .pillmenu-toggle,
+body.projects-page.is-projects-band .nav-pill {
+    color: #1a1a1a;
+}
+
+body.projects-page.is-projects-band .pill:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+body.projects-page.is-projects-band .pill.active {
+    background: rgba(0, 0, 0, 0.08);
+    color: #1a1a1a;
+}
+
+body.projects-page.is-projects-band .pillmenu-toggle .burger-line {
+    background: currentColor;
+}
+
+/* =========================
+   About Page (about.html) — Studio
+   Prototype: Website Redesign : Stage X / Studio - Standalone
+   Tokens scoped to body.about-page so global --ink remains #f2f2f2.
+   ========================= */
+
+html.about-page {
+    background: var(--color-canvas-light);
+}
+
+body.about-page {
+    --sp-paper-2: var(--color-canvas-light);
+    --sp-ink: var(--color-text-primary);
+    --sp-ink-2: var(--color-text-secondary);
+    --sp-ink-3: var(--color-text-muted);
+    --sp-rule: var(--color-border);
+    --sp-rule-soft: var(--color-border-soft);
+    --sp-font-display: var(--font-family-display);
+    --sp-font-body: var(--font-family-body);
+    background: var(--sp-paper-2);
+    color: var(--sp-ink);
+    font-family: var(--sp-font-body);
+}
+
+/* Nav + pills on light page */
+body.about-page .pill,
+body.about-page .pillmenu-toggle,
+body.about-page .nav-pill {
+    color: var(--sp-ink);
+}
+body.about-page .pillmenu-toggle .burger-line {
+    background: currentColor;
+}
+
+/* Studio shell — outer rhythm */
+body.about-page main.studio {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 144px 80px 80px;
+}
+
+/* 01 — Editorial header (no centred logo) */
+body.about-page .studio-header {
+    padding-bottom: 96px;
+    border-bottom: 1px solid var(--sp-rule-soft);
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 32px;
+    align-items: start;
+}
+body.about-page .studio-header__eyebrow {
+    font-family: var(--sp-font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sp-ink);
+    margin: 14px 0 0;
+}
+body.about-page .studio-header__title {
+    font-family: var(--sp-font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(48px, 6.2vw, 84px);
+    line-height: 1.04;
+    letter-spacing: -0.016em;
+    color: var(--sp-ink);
+    margin: 0 0 40px;
+    text-wrap: balance;
+}
+body.about-page .studio-header__title em { font-style: italic; }
+
+body.about-page .studio-header__intro {
+    font-family: var(--sp-font-body);
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.6;
+    letter-spacing: 0.005em;
+    color: var(--sp-ink-2);
+    margin: 0;
+    max-width: 38em;
+    text-wrap: pretty;
+}
+
+/* 02 — Two-column: defines / focus areas */
+body.about-page .studio-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 96px;
+    padding: 80px 0 96px;
+}
+body.about-page .studio-two__heading {
+    font-family: var(--sp-font-display);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    color: var(--sp-ink);
+    margin: 0 0 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--sp-rule-soft);
+}
+body.about-page .studio-two__body p {
+    font-family: var(--sp-font-body);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--sp-ink-2);
+    margin: 0 0 16px;
+    text-wrap: pretty;
+    max-width: 34em;
+}
+body.about-page .studio-two__body p:last-child { margin-bottom: 0; }
+body.about-page .studio-two__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+body.about-page .studio-two__list li {
+    font-family: var(--sp-font-display);
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 1.35;
+    letter-spacing: -0.005em;
+    color: var(--sp-ink);
+    padding: 14px 0;
+    border-bottom: 1px solid var(--sp-rule-soft);
+}
+body.about-page .studio-two__list li:first-child { padding-top: 0; }
+body.about-page .studio-two__list li:last-child { border-bottom: none; }
+
+/* 03 — Process · i / ii / iii */
+body.about-page .studio-process {
+    padding: 96px 0;
+    border-top: 1px solid var(--sp-rule-soft);
+}
+body.about-page .studio-process__lead {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 32px;
+    align-items: baseline;
+    margin-bottom: 64px;
+}
+body.about-page .studio-process__eyebrow {
+    font-family: var(--sp-font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sp-ink);
+    margin: 0;
+}
+body.about-page .studio-process__title {
+    font-family: var(--sp-font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 48px;
+    line-height: 1.04;
+    letter-spacing: -0.012em;
+    color: var(--sp-ink);
+    margin: 0;
+    text-wrap: balance;
+    max-width: 18ch;
+}
+body.about-page .studio-process__title em { font-style: italic; }
+
+body.about-page .studio-process__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+}
+body.about-page .step {
+    display: flex;
+    flex-direction: column;
+    padding-top: 24px;
+    border-top: 1px solid var(--sp-ink);
+}
+body.about-page .step__roman {
+    font-family: var(--sp-font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 28px;
+    letter-spacing: 0.04em;
+    color: var(--sp-ink);
+    margin: 0 0 32px;
+}
+body.about-page .step__label {
+    font-family: var(--sp-font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sp-ink-2);
+    margin: 0 0 12px;
+}
+body.about-page .step__head {
+    font-family: var(--sp-font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: -0.008em;
+    color: var(--sp-ink);
+    margin: 0 0 16px;
+    text-wrap: balance;
+    max-width: 14ch;
+}
+body.about-page .step__body {
+    font-family: var(--sp-font-body);
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--sp-ink-2);
+    margin: 0;
+    text-wrap: pretty;
+}
+
+/* 04 — Locations & scope */
+body.about-page .studio-locations {
+    padding: 96px 0 80px;
+    border-top: 1px solid var(--sp-rule-soft);
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 32px;
+    align-items: start;
+}
+body.about-page .studio-locations__eyebrow {
+    font-family: var(--sp-font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sp-ink);
+    margin: 6px 0 0;
+}
+body.about-page .studio-locations__body {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 56em;
+}
+body.about-page .studio-locations__heading {
+    font-family: var(--sp-font-display);
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    color: var(--sp-ink);
+    margin: 0;
+}
+body.about-page .studio-locations__body p {
+    font-family: var(--sp-font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--sp-ink-2);
+    margin: 0;
+    text-wrap: pretty;
+}
+
+/* 05 — Documents & tools — hairline list, no cards */
+body.about-page .studio-docs {
+    padding: 56px 0 120px;
+}
+body.about-page .studio-docs__intro {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 32px;
+    align-items: baseline;
+    padding: 24px 0 32px;
+    border-top: 1px solid var(--sp-rule-soft);
+}
+body.about-page .studio-docs__eyebrow {
+    font-family: var(--sp-font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sp-ink);
+    margin: 0;
+}
+body.about-page .studio-docs__hint {
+    font-family: var(--sp-font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 18px;
+    color: var(--sp-ink-3);
+    margin: 0;
+}
+
+body.about-page .doc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+body.about-page .doc-list__item {
+    display: grid;
+    grid-template-columns: 96px 1fr auto;
+    gap: 32px;
+    align-items: baseline;
+    padding: 28px 0;
+    border-top: 1px solid var(--sp-ink);
+}
+body.about-page .doc-list__item:last-child {
+    border-bottom: 1px solid var(--sp-ink);
+}
+body.about-page .doc-list__label {
+    font-family: var(--sp-font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sp-ink-2);
+    margin: 0;
+}
+body.about-page .doc-list__title {
+    font-family: var(--sp-font-display);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    color: var(--sp-ink);
+    margin: 0;
+}
+body.about-page .doc-list__title .meta {
+    display: block;
+    margin-top: 4px;
+    font-family: var(--sp-font-body);
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0;
+    color: var(--sp-ink-3);
+    text-transform: none;
+}
+body.about-page .doc-list__link {
+    font-family: var(--sp-font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: -0.005em;
+    color: var(--sp-ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--sp-rule);
+    padding-bottom: 2px;
+    white-space: nowrap;
+    transition: border-color 200ms ease, padding-right 200ms ease;
+}
+body.about-page .doc-list__link:hover {
+    border-bottom-color: var(--sp-ink);
+    padding-right: 6px;
+}
+body.about-page .doc-list__link::after {
+    content: " →";
+    font-style: normal;
+}
+
+/* Responsive (from prototype) */
+@media (max-width: 1180px) {
+    body.about-page .studio-header__title { font-size: 72px; }
+    body.about-page .studio-process__title { font-size: 40px; }
+}
+@media (max-width: 920px) {
+    body.about-page main.studio { padding: 120px 32px 0; }
+    body.about-page .studio-header {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding-bottom: 56px;
+    }
+    body.about-page .studio-header__title { font-size: 52px; }
+    body.about-page .studio-two { grid-template-columns: 1fr; gap: 56px; padding: 56px 0 64px; }
+    body.about-page .studio-process__lead { grid-template-columns: 1fr; gap: 16px; }
+    body.about-page .studio-process__title { font-size: 32px; }
+    body.about-page .studio-process__grid { grid-template-columns: 1fr; gap: 32px; }
+    body.about-page .studio-locations {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 56px 0;
+    }
+    body.about-page .studio-locations__heading { font-size: 28px; }
+    body.about-page .studio-docs__intro { grid-template-columns: 1fr; gap: 12px; padding-top: 0; border-top: none; }
+    body.about-page .doc-list__item {
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "label link"
+            "title title";
+        gap: 12px 24px;
+    }
+    body.about-page .doc-list__label { grid-area: label; }
+    body.about-page .doc-list__link { grid-area: link; align-self: start; }
+    body.about-page .doc-list__title { grid-area: title; }
+}
+
+/* =========================
+   Contact Page (contact.html)
+   Prototype: Website Redesign : Stage X / Contact - Standalone
+   Tokens scoped to body.contact-page so global --ink remains #f2f2f2.
+   ========================= */
+
+html.contact-page {
+    background: var(--color-canvas-light);
+}
+
+body.contact-page {
+    --cp-paper: var(--color-surface-light);
+    --cp-paper-2: var(--color-canvas-light);
+    --cp-ink: var(--color-text-primary);
+    --cp-ink-2: var(--color-text-secondary);
+    --cp-ink-3: var(--color-text-muted);
+    --cp-rule: var(--color-border);
+    --cp-rule-soft: var(--color-border-soft);
+    --cp-font-display: var(--font-family-display);
+    --cp-font-body: var(--font-family-body);
+    background: var(--cp-paper-2);
+    color: var(--cp-ink);
+    font-family: var(--cp-font-body);
+}
+
+/* Nav + pills on light page */
+body.contact-page .pill,
+body.contact-page .pillmenu-toggle,
+body.contact-page .nav-pill {
+    color: var(--cp-ink);
+}
+body.contact-page .pillmenu-toggle .burger-line {
+    background: currentColor;
+}
+
+/* Hero brand: prototype mast padding (override default 112px margin) */
+body.contact-page .hero-brand {
+    margin-bottom: 0;
+    padding: 144px 80px 96px;
+}
+
+/* ───────────────────────────────────────────────────────────
+   Body — two-column editorial layout
+   ─────────────────────────────────────────────────────────── */
+body.contact-page .contact-body {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 80px 160px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 96px;
+    align-items: start;
+}
+
+/* Left column */
+body.contact-page .contact-headline {
+    font-family: var(--cp-font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 76px;
+    line-height: 1.04;
+    letter-spacing: -0.015em;
+    color: var(--cp-ink);
+    margin: 0 0 32px;
+    text-wrap: balance;
+    max-width: 10em;
+}
+
+body.contact-page .contact-headline em { font-style: italic; }
+body.contact-page .contact-subline {
+    font-family: var(--cp-font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.55;
+    letter-spacing: 0.005em;
+    color: var(--cp-ink-2);
+    margin: 0 0 80px;
+    max-width: 38em;
+    text-wrap: pretty;
+}
+
+/* Studio details — no subheading, hairline above */
+body.contact-page .studio-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 32px;
+    border-top: 1px solid var(--cp-rule-soft);
+    font-style: normal;
+}
+body.contact-page .studio-meta__name {
+    font-family: var(--cp-font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cp-ink);
+    margin: 0;
+}
+body.contact-page .studio-meta__addr {
+    font-family: var(--cp-font-body);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--cp-ink-2);
+    margin: 0;
+    font-style: normal;
+}
+body.contact-page .studio-meta__email {
+    font-family: var(--cp-font-body);
+    font-weight: 400;
+    font-size: 17px;
+    color: var(--cp-ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--cp-rule);
+    align-self: flex-start;
+    padding-bottom: 1px;
+    transition: border-color 200ms ease;
+}
+body.contact-page .studio-meta__email:hover {
+    border-bottom-color: var(--cp-ink);
+}
+body.contact-page .studio-meta__note {
+    font-family: var(--cp-font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--cp-ink-3);
+    margin: 12px 0 0;
+    max-width: 32em;
+    text-wrap: pretty;
+}
+
+/* Right column / form — sits on page bg, no card */
+body.contact-page .contact-form-col {
+    display: flex;
+    flex-direction: column;
+}
+body.contact-page .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    padding-top: 18px;
+}
+body.contact-page .field {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-bottom: 1px solid var(--cp-rule);
+    padding-bottom: 14px;
+    transition: border-color 200ms ease;
+}
+body.contact-page .field:focus-within {
+    border-bottom-color: var(--cp-ink);
+}
+body.contact-page .field__label {
+    font-family: var(--cp-font-body);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cp-ink-3);
+    margin: 0;
+}
+body.contact-page .field:focus-within .field__label {
+    color: var(--cp-ink);
+}
+body.contact-page .field__input,
+body.contact-page .field__select,
+body.contact-page .field__textarea {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: var(--cp-font-display);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    color: var(--cp-ink);
+    padding: 0;
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+}
+body.contact-page .field__input::placeholder,
+body.contact-page .field__textarea::placeholder {
+    color: var(--cp-ink-3);
+    font-style: italic;
+    font-weight: 300;
+}
+body.contact-page .field__textarea {
+    resize: vertical;
+    min-height: 96px;
+    font-family: var(--cp-font-body);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.55;
+    letter-spacing: 0;
+}
+body.contact-page .field__select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%231B1A17' stroke-width='1.2'><path d='M1 1.5 L6 6.5 L11 1.5'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 2px center;
+    background-size: 12px 8px;
+    padding-right: 28px;
+    text-overflow: ellipsis;
+}
+body.contact-page .field__select option {
+    color: var(--cp-ink);
+    background: var(--cp-paper);
+}
+body.contact-page .field--optional .field__label::after {
+    content: " · optional";
+    font-style: italic;
+    letter-spacing: 0.06em;
+    text-transform: none;
+    color: var(--cp-ink-3);
+    font-family: var(--cp-font-display);
+    font-weight: 400;
+    font-size: 12px;
+    margin-left: 2px;
+}
+
+/* Submit row — editorial link-button, no pill */
+body.contact-page .contact-submit-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 16px;
+}
+body.contact-page .contact-submit {
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--cp-ink);
+    padding: 0 0 4px;
+    font-family: var(--cp-font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--cp-ink);
+    cursor: pointer;
+    letter-spacing: -0.005em;
+    transition: padding-right 200ms ease;
+}
+body.contact-page .contact-submit:hover {
+    padding-right: 12px;
+}
+body.contact-page .contact-submit__arrow {
+    font-style: normal;
+    display: inline-block;
+    margin-left: 8px;
+    transition: transform 240ms ease;
+}
+body.contact-page .contact-submit:hover .contact-submit__arrow {
+    transform: translateX(4px);
+}
+body.contact-page .contact-submit[disabled] {
+    opacity: 0.7;
+    cursor: wait;
+}
+body.contact-page .contact-submit-meta {
+    font-family: var(--cp-font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cp-ink-3);
+}
+
+body.contact-page .contact-form-privacy {
+    font-family: var(--cp-font-body);
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.55;
+    color: var(--cp-ink-3);
+    margin: -10px 0 0;
+}
+body.contact-page .contact-form-privacy a {
+    color: inherit;
+    text-underline-offset: 3px;
+}
+
+/* Error / success states */
+body.contact-page .contact-form-error {
+    font-family: var(--cp-font-body);
+    font-size: 14px;
+    color: var(--color-state-error);
+    margin: 0;
+}
+body.contact-page .contact-form-success {
+    padding-top: 18px;
+}
+body.contact-page .contact-form-success__title {
+    font-family: var(--cp-font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 1.1;
+    color: var(--cp-ink);
+    margin: 0 0 12px;
+}
+body.contact-page .contact-form-success__text {
+    font-family: var(--cp-font-body);
+    font-weight: 300;
+    font-size: 17px;
+    color: var(--cp-ink-2);
+    margin: 0;
+}
+
+body.contact-page .hidden {
+    display: none;
+}
+
+/* Responsive (from prototype) */
+@media (max-width: 1280px) {
+    body.contact-page .contact-headline { font-size: 64px; }
+}
+@media (max-width: 920px) {
+    body.contact-page .contact-body {
+        grid-template-columns: 1fr;
+        gap: 56px;
+        padding: 24px 32px 96px;
+    }
+    body.contact-page .hero-brand { padding: 120px 32px 64px; }
+    body.contact-page .contact-headline { font-size: 56px; }
+    body.contact-page .contact-subline { margin-bottom: 48px; }
+}
+
+/* =========================
+   Concept Design Page
+   `html.concept-page`/`body.concept-page` base background/color rules now
+   live only in the "Service Detail Page — redesign 2026" section later in
+   this file, which already superseded these values via source order.
+   ========================= */
+
+/* Ensure nav/pills read as black on light pages */
+body.concept-page .pill,
+body.concept-page .pillmenu-toggle,
+body.concept-page .nav-pill {
+    color: #000;
+}
+
+body.concept-page .pillmenu-toggle .burger-line {
+    background: currentColor;
+}
+
+
+/* Light-page treatment for the logo pill */
+body.concept-page .top-left-logo,
+body.contact-page .top-left-logo,
+body.about-page .top-left-logo {
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    background: rgba(0, 0, 0, 0.03);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+body.concept-page .top-left-logo:hover,
+body.contact-page .top-left-logo:hover,
+body.about-page .top-left-logo:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+/* --- Concept Design page: layout polish --- */
+body.concept-page .hero-brand {
+    margin-bottom: 28px; /* tighter: hero image follows */
+}
+
+
+/* =========================================================
+   FLOATING NAV OVERLAY — ALWAYS READABLE WHEN OPEN
+   Fixes: light pages where nav text becomes invisible on black overlay
+   ========================================================= */
+
+/* When the floating nav overlay is open, force readable styling */
+#floatingNavPill.is-open {
+    background: rgba(
+        0,
+        0,
+        0,
+        0.96
+    ); /* keep it rich, slightly softer than pure #000 */
+}
+
+/* Force overlay menu items to be visible even if the page sets pills to black */
+#floatingNavPill.is-open .pillmenu .pill {
+    color: #f2f2f2 !important;
+}
+
+/* Hover state in overlay */
+#floatingNavPill.is-open .pillmenu .pill:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    color: #fff !important;
+}
+
+/* Ensure the X/burger is visible on the black overlay too */
+#floatingNavPill.is-open .pillmenu-toggle {
+    color: #f2f2f2;
+    border-color: rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* Light pages: buttons should be black */
+body.concept-page .button,
+body.contact-page .button,
+body.about-page .button,
+body.projects-page .button {
+    color: #000;
+    border-color: rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, 0.04);
+}
+
+body.concept-page .button:hover,
+body.contact-page .button:hover,
+body.about-page .button:hover,
+body.projects-page .button:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================================
+   Floating nav overlay — reliable hover highlight (esp. after resize)
+   ========================================================= */
+
+@media (max-width: 1280px) {
+    /* When open, make the overlay itself interactive (nav-pill is pointer-events:none by default) */
+    #floatingNavPill.is-open {
+        pointer-events: auto;
+    }
+
+    /* Make overlay links feel like buttons and ensure hover always reads */
+    #floatingNavPill.is-open .pillmenu .pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        transition:
+            background 160ms ease,
+            transform 160ms ease,
+            color 160ms ease;
+    }
+
+    #floatingNavPill.is-open .pillmenu .pill:hover {
+        background: rgba(255, 255, 255, 0.14) !important;
+        color: #fff !important;
+        transform: translateY(-1px);
+    }
+
+    /* Optional: clearer focus state for keyboard navigation */
+    #floatingNavPill.is-open .pillmenu .pill:focus-visible {
+        outline: 2px solid rgba(255, 255, 255, 0.35);
+        outline-offset: 3px;
+    }
+}
+/* INDEX (dark) — force floating nav to light */
+body:not(.projects-page):not(.about-page):not(.contact-page):not(.concept-page)
+    #floatingNavPill {
+    color: #f2f2f2;
+}
+
+/* Lines follow the color */
+body:not(.projects-page):not(.about-page):not(.contact-page):not(.concept-page)
+    #floatingNavPill
+    .pillmenu-toggle
+    .burger-line {
+    background: currentColor;
+}
+
+/* INDEX ONLY (no page class): keep floating burger white by default */
+body:not(.projects-page):not(.about-page):not(.contact-page):not(.concept-page)
+    #floatingNavPill
+    .pillmenu-toggle {
+    color: #f2f2f2;
+}
+
+/* When index enters the light band (Collections), allow it to go black */
+body.is-band-2:not(.projects-page):not(.about-page):not(.contact-page):not(
+        .concept-page
+    )
+    #floatingNavPill
+    .pillmenu-toggle,
+body.pills-on-light:not(.projects-page):not(.about-page):not(.contact-page):not(
+        .concept-page
+    )
+    #floatingNavPill
+    .pillmenu-toggle {
+    color: #000;
+}
+
+/* =========================================================
+   INDEX — MAIN PILL MENU BURGER TEXT COLOUR
+   ========================================================= */
+
+/* Index page (no page class): burger text should be white by default */
+body:not(.projects-page):not(.about-page):not(.contact-page):not(.concept-page)
+    #pills
+    .pills-toggle {
+    color: #f2f2f2;
+}
+
+/* Ensure the label inherits correctly */
+body:not(.projects-page):not(.about-page):not(.contact-page):not(.concept-page)
+    #pills
+    .pills-toggle-label {
+    color: currentColor;
+}
+
+/* When index enters light band (Collections), allow it to turn black */
+body.is-band-2:not(.projects-page):not(.about-page):not(.contact-page):not(
+        .concept-page
+    )
+    #pills
+    .pills-toggle,
+body.pills-on-light:not(.projects-page):not(.about-page):not(.contact-page):not(
+        .concept-page
+    )
+    #pills
+    .pills-toggle {
+    color: #000;
+}
+

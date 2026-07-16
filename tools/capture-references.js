@@ -62,6 +62,7 @@ const contentTypes = {
   ".png": "image/png",
   ".svg": "image/svg+xml",
   ".webp": "image/webp",
+  ".woff2": "font/woff2",
 };
 
 function findChrome() {
@@ -106,10 +107,6 @@ async function preparePage(browser, route, width) {
         contentType: contentTypes[path.extname(file).toLowerCase()] || "application/octet-stream",
         body: isStylesheet && stylesheetOverride ? stylesheetOverride : fs.readFileSync(file),
       });
-      return;
-    }
-    if (request.url().startsWith("https://fonts.googleapis.com/") || request.url().startsWith("https://fonts.gstatic.com/")) {
-      request.continue();
       return;
     }
     request.abort();

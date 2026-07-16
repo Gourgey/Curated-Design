@@ -44,14 +44,13 @@
         {% if ogImage %}<meta name="twitter:image" content="{{ ogImage }}" />{% endif %}
         {% if ogImage and ogImageAlt %}<meta name="twitter:image:alt" content="{{ ogImageAlt }}" />{% endif %}
 
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        {# Only the weights the stylesheet uses: Cormorant 300–600 (display,
-           incl. italics), Inter 300–700 (700 covers <strong> in body copy). #}
-        <link
-            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap"
-            rel="stylesheet"
-        />
+        {# Self-hosted fonts (P5.1) -- @font-face rules live in
+           assets/css-partials/01-tokens.css. Preload only the two files
+           used above the fold on every template (Inter body copy, the
+           Cormorant Garamond display heading); the italic file loads
+           on demand where it's actually used. #}
+        <link rel="preload" href="/assets/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href="/assets/fonts/cormorant-garamond-variable.woff2" as="font" type="font/woff2" crossorigin />
         <link rel="stylesheet" href="/assets/css/styles.css?v={{ site.cssVersion }}" />
 
         {# Organization/logo structured data — homepage only, so Google can

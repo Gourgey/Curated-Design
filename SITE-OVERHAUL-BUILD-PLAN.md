@@ -960,7 +960,15 @@ Optimise the stable implementation, strengthen platform safeguards, and make the
 
 This addresses both performance and third-party privacy concerns.
 
-### P5.2 — Improve responsive image delivery
+**Implemented (16 July 2026).** The stylesheet's own comment already documented the exact weights in use — Cormorant Garamond 300–600 (normal and italic) and Inter 300–700 — so no separate audit was needed to know what to keep. Fetching Google's own CSS2 response (with a modern-browser User-Agent, so it returns woff2 rather than legacy formats) showed every requested weight for a given family/style resolves to the *same* file: both families ship as variable fonts, and Google's discrete per-weight `@font-face` blocks are just the same variable file repeated with a different declared `font-weight`. That meant only **three files** were needed to cover all thirteen weight/style combinations — one each for Cormorant normal, Cormorant italic, and Inter — rather than one file per weight. Confirmed with `fontTools` (`pip install fonttools`) that each file carries an `fvar` table with a `wght` axis spanning the full range needed (Cormorant 300–700, Inter 100–900) before relying on this.
+
+Downloaded the three files from `fonts.gstatic.com` (already subsetted by Google to the Latin range — the only range this English-language site needs; file sizes are 37–48KB each, consistent with a Latin-only variable subset rather than a full multi-script font) and vendored them at `assets/fonts/*.woff2`. Added a passthrough-copy rule for the new folder in `.eleventy.js` (the existing rules are per-subfolder, not a blanket `assets/` copy) and an immutable-cache rule in `netlify.toml` (these are fixed vendor files, never replaced in place by a CMS upload, so they get the same treatment as the content-hashed `/img/*` derivatives rather than the 1-day cache used for CMS-editable assets).
+
+Three `@font-face` rules were added at the top of `assets/css-partials/01-tokens.css`, each using the `font-weight: 300 600` range syntax (well-supported since 2017–2018 in all evergreen browsers) so one rule per family/style correctly serves every weight via the variable font's `wght` axis — matching Google's own `format('woff2')` hint rather than the less universally-recognised `woff2-variations` one. `src/_includes/layouts/base.njk`'s Google Fonts `<link rel="preconnect">`/stylesheet tags were removed and replaced with two `<link rel="preload">` tags for the two files used above the fold on every template (Inter normal weight for body copy, Cormorant Garamond normal style for the display heading) — the italic file loads on demand only where actually used, per the "preload only above-the-fold" requirement.
+
+`tools/capture-references.js` had a now-dead special-case allowing requests through to `fonts.googleapis.com`/`fonts.gstatic.com` (needed only when those requests were real); removed it now that every font request resolves to a local file through the tool's existing local-file-serving path. Added a `.woff2` MIME type entry to both `tools/capture-references.js` and `tools/check-accessibility.js`'s content-type maps.
+
+Verified with `npm run check` (full gate) and live in a preview: `document.fonts` confirms all three `@font-face` rules loaded successfully with the correct weight ranges; `getComputedStyle` on the hero heading and body text shows the expected families; screenshots of both a normal-style heading (homepage) and an italic one (a project hero) render identically to their prior appearance; and a full network-request capture during page load shows zero requests to any Google domain — every font file loads from this origin.
 
 - Add intermediate responsive widths such as 600/640/768px instead of jumping from 400 to 800 to 1200.
 - Tighten `sizes` values to reflect real rendered widths.
@@ -1070,7 +1078,7 @@ If field data becomes available, use Core Web Vitals as the ultimate performance
 
 ### Phase 5 exit gate
 
-- [ ] Fonts are self-hosted and unused variants removed.
+- [x] Fonts are self-hosted and unused variants removed (P5.1, 16 July 2026) — no Google Fonts requests remain; only the three files actually used (Cormorant normal, Cormorant italic, Inter) are vendored.
 - [ ] Responsive-image selection is verified at target viewport sizes.
 - [ ] Median performance and accessibility budgets pass.
 - [ ] Structured data validates and contains only truthful content.

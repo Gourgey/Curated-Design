@@ -1,3 +1,32 @@
+/* -------- Self-hosted fonts (P5.1) --------
+   Variable fonts subsetted to the Latin range by Google Fonts (the only
+   range this site's English-language content needs); a single file per
+   family/style covers every weight the CSS actually uses via the `wght`
+   axis, so one @font-face per style is sufficient -- no separate file per
+   discrete weight. Downloaded once from fonts.gstatic.com and vendored
+   here so no request leaves this origin. */
+@font-face {
+    font-family: "Cormorant Garamond";
+    font-style: normal;
+    font-weight: 300 600;
+    font-display: swap;
+    src: url("/assets/fonts/cormorant-garamond-variable.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Cormorant Garamond";
+    font-style: italic;
+    font-weight: 300 600;
+    font-display: swap;
+    src: url("/assets/fonts/cormorant-garamond-italic-variable.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+    src: url("/assets/fonts/inter-variable.woff2") format("woff2");
+}
+
 /* -------- Shared design tokens -------- */
 :root {
     /* Colour */

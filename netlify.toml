@@ -18,6 +18,15 @@
   [headers.values]
     Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
 
+# Self-hosted font files (P5.1) are vendored, fixed-filename files, never
+# replaced in place by a CMS upload -- safe to cache forever like /img/*.
+# Declared after the general /assets/* rule so its Cache-Control wins for
+# this more specific path.
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
 # HTML is served with Netlify's default ETag-based revalidation — no rule
 # needed (a "/*.html" pattern would not match: Netlify splats must be the
 # final path segment).

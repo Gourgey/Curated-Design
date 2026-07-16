@@ -61,6 +61,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.on("eleventy.before", () => buildCss());
 
   eleventyConfig.addPassthroughCopy("assets/css");
+  eleventyConfig.addPassthroughCopy("assets/fonts");
   eleventyConfig.addPassthroughCopy("assets/images");
   eleventyConfig.addPassthroughCopy("assets/js");
   eleventyConfig.addPassthroughCopy("admin");

@@ -1,0 +1,141 @@
+/* ===== Shared enquiry field component =====
+   .contact-form (contact page) and .service-enquiry__form (service pages)
+   render the exact same field structure -- bottom-border-only fields with
+   a small uppercase label above -- just tuned to two different scales
+   (contact is the primary, full-size form; the service enquiry is a
+   smaller in-context aside). Consolidated here from
+   05-legacy-pages.css/11-service-redesign.css (P2.2 by-topic regrouping)
+   using custom properties for the values that differ, so the rendered
+   output is unchanged. Dropped the redundant `body.contact-page`/
+   `body.concept-page` prefix -- `.contact-form`/`.service-enquiry__form`
+   are unique to their own template, so the extra specificity added
+   nothing (P2.2 quality rule: reduce dependence on body.page
+   specificity).
+
+   The submit row/button and the privacy/error/success text are NOT
+   included here -- those differ in real structural ways (the contact
+   page's submit row carries an inline meta counter the service one
+   doesn't; the success/error text sizes are deliberately different
+   scales, not accidental drift), so they stay with each page's own
+   partial. */
+
+.contact-form {
+    --field-form-gap: 36px;
+    --field-form-padding-top: 18px;
+    --field-row-gap: 12px;
+    --field-row-padding-bottom: 14px;
+    --field-value-size: 22px;
+    --field-textarea-min-height: 96px;
+    --field-textarea-size: 16px;
+    --field-optional-size: 12px;
+}
+.service-enquiry__form {
+    --field-form-gap: 28px;
+    --field-form-padding-top: 8px;
+    --field-row-gap: 10px;
+    --field-row-padding-bottom: 12px;
+    --field-value-size: 18px;
+    --field-textarea-min-height: 80px;
+    --field-textarea-size: 15px;
+    --field-optional-size: 11px;
+}
+
+.contact-form,
+.service-enquiry__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--field-form-gap);
+    padding-top: var(--field-form-padding-top);
+}
+
+.contact-form .field,
+.service-enquiry__form .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--field-row-gap);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--field-row-padding-bottom);
+    transition: border-color 200ms ease;
+}
+.contact-form .field:focus-within,
+.service-enquiry__form .field:focus-within {
+    border-bottom-color: var(--color-text-primary);
+}
+.contact-form .field__label,
+.service-enquiry__form .field__label {
+    font-family: var(--font-family-body);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+.contact-form .field:focus-within .field__label,
+.service-enquiry__form .field:focus-within .field__label {
+    color: var(--color-text-primary);
+}
+.contact-form .field__input,
+.contact-form .field__select,
+.contact-form .field__textarea,
+.service-enquiry__form .field__input,
+.service-enquiry__form .field__textarea {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: var(--font-family-display);
+    font-weight: 400;
+    font-size: var(--field-value-size);
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    color: var(--color-text-primary);
+    padding: 0;
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.contact-form .field__input::placeholder,
+.contact-form .field__textarea::placeholder,
+.service-enquiry__form .field__input::placeholder,
+.service-enquiry__form .field__textarea::placeholder {
+    color: var(--color-text-muted);
+    font-style: italic;
+    font-weight: 300;
+}
+.contact-form .field__textarea,
+.service-enquiry__form .field__textarea {
+    resize: vertical;
+    min-height: var(--field-textarea-min-height);
+    font-family: var(--font-family-body);
+    font-size: var(--field-textarea-size);
+    font-weight: 300;
+    line-height: 1.55;
+    letter-spacing: 0;
+}
+.contact-form .field--optional .field__label::after,
+.service-enquiry__form .field--optional .field__label::after {
+    content: " · optional";
+    font-style: italic;
+    letter-spacing: 0.06em;
+    text-transform: none;
+    color: var(--color-text-muted);
+    font-family: var(--font-family-display);
+    font-weight: 400;
+    font-size: var(--field-optional-size);
+    margin-left: 2px;
+}
+
+/* Select is contact-only -- the service enquiry form has no <select>. */
+.contact-form .field__select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%231B1A17' stroke-width='1.2'><path d='M1 1.5 L6 6.5 L11 1.5'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 2px center;
+    background-size: 12px 8px;
+    padding-right: 28px;
+    text-overflow: ellipsis;
+}
+.contact-form .field__select option {
+    color: var(--color-text-primary);
+    background: var(--color-surface-light);
+}

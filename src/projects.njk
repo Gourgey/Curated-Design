@@ -22,50 +22,25 @@ topLogo: logo_no_text_on_transparent.svg
     </header>
 
     {% set listedProjects = collections.publishedProject | sortByOrder | where("showInProjects", true) %}
-    {% set visibleCategories = site.projectsPage.categories | groupByCategory(listedProjects) %}
+    {% set completedProjects = listedProjects | where("status", "published") %}
+    {% set conceptProjects = listedProjects | where("status", "coming_soon") %}
+    {% set visibleCategories = site.projectsPage.categories | groupByCategory(conceptProjects) %}
 
-    <nav id="pills" class="pillmenu-wrap projects-filter" aria-label="Project categories">
-        <button
-            id="pillsToggle"
-            class="pillmenu-toggle pills-toggle"
-            type="button"
-            aria-expanded="false"
-            aria-controls="pillsPanel"
-        >
-            <span class="pills-toggle-label">Menu</span>
-        </button>
-
-        <ul class="pillmenu pills-desktop">
-            {% for entry in visibleCategories %}
-            <li><a class="pill{% if loop.first %} active{% endif %}" href="#{{ entry.category.id }}">{{ entry.category.label }}</a></li>
-            {% endfor %}
-        </ul>
-
-        <div id="pillsPanel" class="pills-panel" hidden>
-            {% for entry in visibleCategories %}
-            <a class="pill" href="#{{ entry.category.id }}">{{ entry.category.label }}</a>
-            {% endfor %}
-        </div>
-    </nav>
-
-    {% for entry in visibleCategories %}
-    {% set category = entry.category %}
-    <section id="{{ category.id }}" class="projects-section">
+    {# Completed work leads the listing — see build plan P3.3. #}
+    {% if completedProjects.length %}
+    <section id="completed" class="projects-section projects-section--completed">
         <div class="projects-section__inner">
             <header class="projects-section__head">
-                {% if category.label %}
-                <p class="projects-section__eyebrow label-small">{{ category.label }}</p>
+                {% if site.projectsPage.completedEyebrow %}
+                <p class="projects-section__eyebrow label-small">{{ site.projectsPage.completedEyebrow }}</p>
                 {% endif %}
-                {% if category.heading %}
-                <h2 class="projects-section__heading">{{ category.heading }}</h2>
-                {% endif %}
-                {% if category.note %}
-                <p class="projects-section__note">{{ category.note }}</p>
+                {% if site.projectsPage.completedHeading %}
+                <h2 class="projects-section__heading">{{ site.projectsPage.completedHeading }}</h2>
                 {% endif %}
             </header>
 
             <div class="projects-grid">
-                {% for project in entry.projects %}
+                {% for project in completedProjects %}
                 <a class="card card--project" href="/projects/{{ project.data.slug }}.html">
                     <div class="card__media">
                         {% image project.data.cardImage, project.data.cardAlt or project.data.title, "(min-width: 1024px) 33vw, (min-width: 641px) 50vw, 100vw", "lazy", "", "card" %}
@@ -81,7 +56,85 @@ topLogo: logo_no_text_on_transparent.svg
             </div>
         </div>
     </section>
-    {% endfor %}
+    {% endif %}
+
+    {# Concepts and work-in-progress: kept separate and clearly labelled so it
+       never reads as finished case-study work — see build plan P3.3. #}
+    {% if conceptProjects.length %}
+    <div class="projects-concepts">
+        <div class="projects-section__inner projects-concepts__intro">
+            {% if site.projectsPage.conceptEyebrow %}
+            <p class="projects-section__eyebrow label-small">{{ site.projectsPage.conceptEyebrow }}</p>
+            {% endif %}
+            {% if site.projectsPage.conceptHeading %}
+            <h2 class="projects-section__heading">{{ site.projectsPage.conceptHeading }}</h2>
+            {% endif %}
+            {% if site.projectsPage.conceptNote %}
+            <p class="projects-section__note">{{ site.projectsPage.conceptNote }}</p>
+            {% endif %}
+        </div>
+
+        <nav id="pills" class="pillmenu-wrap projects-filter" aria-label="Concept project categories">
+            <button
+                id="pillsToggle"
+                class="pillmenu-toggle pills-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="pillsPanel"
+            >
+                <span class="pills-toggle-label">Menu</span>
+            </button>
+
+            <ul class="pillmenu pills-desktop">
+                {% for entry in visibleCategories %}
+                <li><a class="pill{% if loop.first %} active{% endif %}" href="#{{ entry.category.id }}">{{ entry.category.label }}</a></li>
+                {% endfor %}
+            </ul>
+
+            <div id="pillsPanel" class="pills-panel" hidden>
+                {% for entry in visibleCategories %}
+                <a class="pill" href="#{{ entry.category.id }}">{{ entry.category.label }}</a>
+                {% endfor %}
+            </div>
+        </nav>
+
+        {% for entry in visibleCategories %}
+        {% set category = entry.category %}
+        <section id="{{ category.id }}" class="projects-section projects-section--concept">
+            <div class="projects-section__inner">
+                <header class="projects-section__head">
+                    {% if category.label %}
+                    <p class="projects-section__eyebrow label-small">{{ category.label }}</p>
+                    {% endif %}
+                    {% if category.heading %}
+                    <h2 class="projects-section__heading">{{ category.heading }}</h2>
+                    {% endif %}
+                    {% if category.note %}
+                    <p class="projects-section__note">{{ category.note }}</p>
+                    {% endif %}
+                </header>
+
+                <div class="projects-grid">
+                    {% for project in entry.projects %}
+                    <a class="card card--project card--concept" href="/projects/{{ project.data.slug }}.html">
+                        <div class="card__media">
+                            {% image project.data.cardImage, project.data.cardAlt or project.data.title, "(min-width: 1024px) 33vw, (min-width: 641px) 50vw, 100vw", "lazy", "", "card" %}
+                        </div>
+                        <div class="card__body">
+                            <p class="card__title">{{ project.data.title }}</p>
+                            {% if project.data.kicker %}
+                            <p class="card__kicker">{{ project.data.kicker }}</p>
+                            {% endif %}
+                            <p class="card__status">{{ project.data.statusLabel or "Coming soon" }}</p>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        {% endfor %}
+    </div>
+    {% endif %}
 
     {% set heading = site.settings.ctaHeading %}
     {% set text = site.settings.ctaText %}

@@ -69,6 +69,21 @@ body.projects-page .projects-section {
 body.projects-page .projects-section + .projects-section {
     border-top: 1px solid var(--color-border-soft);
 }
+
+/* Concepts & work-in-progress wrapper — a distinct block below the
+   completed-work section, with its own intro before the category
+   subsections. Keeps concept work clearly separated per the build plan's
+   guiding decision #4 (P3.3). */
+body.projects-page .projects-concepts {
+    border-top: 1px solid var(--color-border-soft);
+}
+body.projects-page .projects-concepts__intro {
+    padding-top: 80px;
+    padding-bottom: 40px;
+}
+body.projects-page .projects-concepts .projects-section:first-of-type {
+    border-top: none;
+}
 body.projects-page .projects-section__inner {
     max-width: 1280px;
     margin: 0 auto;
@@ -159,6 +174,10 @@ body.projects-page .pill.active {
     body.projects-page .projects-header__title { font-size: 48px; }
     body.projects-page .projects-section {
         padding: 56px 0;
+    }
+    body.projects-page .projects-concepts__intro {
+        padding-top: 56px;
+        padding-bottom: 24px;
     }
     body.projects-page .projects-section__inner {
         padding: 0 32px;

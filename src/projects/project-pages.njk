@@ -15,6 +15,9 @@ sectionTop: true
 {# Visibility flags #}
 {% set isComingSoon = project.data.status == "coming_soon" %}
 
+{# Related-work path — order-based, wrap-around (see build plan P3.4) #}
+{% set nextProjectEntry = collections.publishedProject | nextProject(project.data.slug) %}
+
 {# Hero carousel only for published projects with at least one usable gallery image #}
 {% set galleryImages = (project.data.gallery.images if project.data.gallery else []) | withImage %}
 {% set hasHeroCarousel = (not isComingSoon) and galleryImages.length %}
@@ -55,6 +58,12 @@ sectionTop: true
                 {% for item in galleryImages %}
                 <div class="project-hero-slide" role="group" aria-roledescription="slide" aria-label="{{ loop.index + 1 }} of {{ mediaCount }}">
                     {% image item.image, item.alt or project.data.title, "100vw", "lazy" %}
+                    {% if item.caption or item.imageType %}
+                    <p class="project-hero-slide__caption">
+                        {% if item.caption %}<span class="project-hero-slide__caption-text">{{ item.caption }}</span>{% endif %}
+                        {% if item.imageType %}<span class="project-hero-slide__caption-type">{{ item.imageType }}</span>{% endif %}
+                    </p>
+                    {% endif %}
                 </div>
                 {% endfor %}
                 {% endif %}
@@ -168,6 +177,17 @@ sectionTop: true
             </div>
         </div>
     </section>
+
+    {% if nextProjectEntry %}
+    <section class="project-next" aria-label="Next project">
+        <div class="container project-wrap project-next__inner">
+            <a class="project-next__link" href="/projects/{{ nextProjectEntry.data.slug }}.html">
+                <span class="project-next__eyebrow label-small">{% if nextProjectEntry.data.status == "coming_soon" %}Next — {{ nextProjectEntry.data.statusLabel or "Coming soon" }}{% else %}Next project{% endif %}</span>
+                <span class="project-next__title">{{ nextProjectEntry.data.title }}<span aria-hidden="true"> →</span></span>
+            </a>
+        </div>
+    </section>
+    {% endif %}
 
     {% if project.data.ctaHeading or project.data.ctaText %}
     {% set heading = project.data.ctaHeading %}

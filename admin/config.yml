@@ -211,6 +211,11 @@ collections:
           - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false, hint: "Small label above the hero headline." }
           - { label: "Hero Headline", name: "heroHeadline", widget: "string" }
           - { label: "Hero Subhead", name: "heroSubhead", widget: "text" }
+          - { label: "Completed Section Eyebrow", name: "completedEyebrow", widget: "string", required: false, hint: "Small label above the completed-work section heading." }
+          - { label: "Completed Section Heading", name: "completedHeading", widget: "string", required: false }
+          - { label: "Concepts Section Eyebrow", name: "conceptEyebrow", widget: "string", required: false, hint: "Small label above the concepts/work-in-progress section heading." }
+          - { label: "Concepts Section Heading", name: "conceptHeading", widget: "string", required: false }
+          - { label: "Concepts Section Note", name: "conceptNote", widget: "text", required: false, hint: "Short intro shown above the coming-soon project grid." }
           - label: "Categories"
             name: "categories"
             widget: "list"
@@ -374,6 +379,8 @@ collections:
             fields:
               - { label: "Image", name: "image", widget: "image" }
               - { label: "Alt Text", name: "alt", widget: "string" }
+              - { label: "Caption", name: "caption", widget: "string", required: false, hint: "Optional. Only shown if it adds real meaning beyond the alt text — leave blank otherwise." }
+              - { label: "Image Type", name: "imageType", widget: "select", required: false, options: ["Photography", "Visualisation"], hint: "Optional. Only set once the image's real type and publication rights are confirmed — see docs/overhaul/CONTENT-INVENTORY.md." }
 
       # --- Bottom CTA ---
       - { label: "CTA Heading", name: "ctaHeading", widget: "string", required: false, hint: "Heading of the 'Discuss a project' band at the bottom of the project page." }

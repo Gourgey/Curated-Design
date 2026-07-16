@@ -87,6 +87,24 @@ module.exports = function (eleventyConfig) {
     return (items || []).filter((item) => item.data && item.data[key] === value);
   });
 
+  // Order-based, wrap-around "next project" lookup for the project-detail
+  // template's related-work link (see build plan P3.4). Returns null when
+  // there is nothing to link to (fewer than two listed projects, or the
+  // current slug isn't in the listed set).
+  eleventyConfig.addFilter("nextProject", (projects, currentSlug) => {
+    const list = [...(projects || [])]
+      .filter((item) => item.data && item.data.showInProjects === true)
+      .sort((a, b) => {
+        const aOrder = a.data && Number.isFinite(a.data.order) ? a.data.order : 999;
+        const bOrder = b.data && Number.isFinite(b.data.order) ? b.data.order : 999;
+        return aOrder - bOrder;
+      });
+    if (list.length < 2) return null;
+    const index = list.findIndex((item) => item.data && item.data.slug === currentSlug);
+    if (index === -1) return null;
+    return list[(index + 1) % list.length];
+  });
+
   eleventyConfig.addFilter("resolveEntries", (relations, items, relationKey) => {
     const bySlug = new Map(
       (items || [])

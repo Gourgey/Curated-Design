@@ -40,3 +40,12 @@ For every project intended for the redesigned public portfolio, assign a content
 ## Current launch constraint
 
 Do not complete the new homepage or Work hierarchy around the present five coming-soon projects. Either approve and complete at least one or two more genuine case studies, or explicitly approve a smaller portfolio led by Marylebone Lobby.
+
+## Case-study model gaps (P3.4, 16 July 2026)
+
+Building out the case-study content model against Marylebone Lobby (the one published project) surfaced two specific, still-open follow-ups from the row above, now backed by real schema capability rather than a general note:
+
+- **Outcome wording.** The template's `extraSections` already supports an arbitrary heading/text block, so an editor can add an "Outcome" section as soon as approved outcome wording exists. None has been written for Marylebone Lobby yet.
+- **Image type (photography vs. visualisation).** `admin/config.yml` now exposes an optional `imageType` field per gallery image (and a matching optional `caption` field). Neither is set on any current project's gallery images — setting `imageType` without confirmation would assert a rights/provenance claim this inventory already lists as unconfirmed.
+
+Both are content/business decisions, not implementation gaps — do not fill either in without an owner's sign-off.

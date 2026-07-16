@@ -23,6 +23,7 @@ The plan is tracked against these repository documents, which hold the evidence 
 - **Phase 1** has largely landed: the `npm run check` gate, visual references, navigation accessibility and focus management, contrast and target-size corrections, carousel deduplication (rendered image count 80 → 79), standardised form feedback, and indexing controls for coming-soon teasers. Walk the Phase 1 exit-gate checklist before declaring the phase closed — the CMS save-and-build round trip (P1.8) and staged form submission (P1.9) in particular need explicit verification on a deploy preview.
 - **Phase 2** is in progress: P2.1 tokens and P2.7 runtime pinning are done; P2.2 stylesheet reorganisation is the active front.
 - **Content gate resolved (16 July 2026):** the site owner decided to launch with the single published case study (Marylebone Lobby) rather than wait for the two-to-three target in §2, and confirmed no testimonial content exists to publish for this launch — see `docs/overhaul/DECISIONS.md`. Phase 3–4 homepage and Work redesign is no longer blocked on this; it can proceed designed around one case study.
+- **Phase 3 has started** even though Phase 2 isn't formally closed: P3.1 (global footer) landed first, then P3.3 (Work index restructured into Completed / Concepts sections) and P3.4 (case-study model gaps closed at the template/schema level — next-project link, caption and image-type capability). P3.2 (Services index) has no work to do per the no-Services-index decision above. Outstanding Phase 2 items (`body.page`-specificity reduction, formalising the backlink/card partials as named components) and the rest of Phase 3 (P3.5 homepage rewrite, P3.6 Studio, P3.7 baked-in cover text, P3.8 metadata) are still open.
 
 ## 2. Target outcome
 
@@ -620,6 +621,8 @@ Add `/services/` as the clear parent of the service pages. It should explain:
 
 Each service page must link back to the index through a breadcrumb or clear parent link.
 
+**Implementation note (16 July 2026):** not started — deliberately. The site owner confirmed no Services index is wanted for now (see `docs/overhaul/DECISIONS.md`), so there is no approved content to build this against. Revisit only if that decision changes.
+
 ### P3.3 — Restructure the Work index
 
 Use this order:
@@ -635,6 +638,16 @@ Requirements:
 - represent status, image type, and project metadata in semantic HTML;
 - do not link to empty case-study shells;
 - omit the second section entirely if it adds no genuine value.
+
+**Implementation note (16 July 2026):** done. `src/projects.njk` now renders two top-level blocks instead of one status-mixed, category-grouped listing: a **Completed work** section (published projects only) first, then a separately-labelled **Concepts & work in progress** section (coming-soon projects only), each with its own eyebrow/heading pulled from `src/content/pages/projects.json` (`completedHeading`, `conceptHeading`, `conceptNote` — CMS-editable via `admin/config.yml`, not hardcoded copy). This directly fixes the ordering fault the old template had: `order` values were assigned per-project without regard to status, so the sole published case study (Marylebone Lobby, `order: 4`) rendered *after* three coming-soon cards (`order: 1–3`) in the Residential category grid — exactly the "coming-soon cards dominate the first row" failure mode this ticket exists to prevent.
+
+The category pill-nav (`#pills`, Residential/Hospitality/Commercial) is retained but now scoped to the Concepts section only, since that's the only place multiple categories currently apply — the Completed section is a flat grid (one category, one project; it will need its own category grouping once P3.4's threshold is revisited and a second/third completed case study exists, per the case-study launch decision).
+
+Each concept card now carries a real-text `.card__status` badge (defaulting to the project's `statusLabel`, e.g. "Coming soon") in `card__body`, styled in `assets/css-partials/16-card.css` — previously that distinction only existed on the project's own detail-page hero, not in the listing grid, so a coming-soon card was visually indistinguishable from a completed one when scanning `/projects.html`. New section-level CSS lives in `assets/css-partials/10-projects-listing-redesign.css` (`.projects-concepts`, `.projects-concepts__intro`).
+
+Deeper visual de-emphasis of concept cards (smaller scale, muted treatment) was intentionally left for P4.3 ("Keep concepts/in-progress visually secondary and unambiguously labelled" is that ticket's acceptance criterion, not this one's) — P3.3 only owns structural separation and labelling, which is now in place. Image-type labelling (photography vs. visualisation) is not yet shown anywhere in the listing because that data doesn't exist for any project yet (see `docs/overhaul/CONTENT-INVENTORY.md`); the schema capability was added in P3.4 below and can be surfaced here once confirmed.
+
+Verified with `npm run check` (full gate, accessibility scan) and by reading back the rendered section order and card text on `/projects.html` in a live preview: Completed work (Marylebone Lobby) now renders first, above the fold, followed by the explicitly-labelled Concepts section with all five coming-soon cards showing a visible status badge.
 
 ### P3.4 — Create the complete case-study model
 
@@ -652,6 +665,22 @@ For each selected completed project, structure available content around:
 - relevant enquiry CTA.
 
 Do not force every project into identical word counts or modules, but maintain a predictable reading hierarchy.
+
+**Implementation note (16 July 2026):** partially done — the structural/template gaps are closed; two items remain genuinely blocked on content the studio hasn't approved, per the plan's own "do not invent project facts, outcomes... or claims that cannot be substantiated" boundary (§4).
+
+Checked against the model's nine elements, using Marylebone Lobby (the one published case study):
+
+- **Concise overview** — already present (`lead`).
+- **Project facts and services** — already present (`facts` sidebar, `projectTags` chips).
+- **Brief/design challenge** and **approach/key interventions** — already present (`callout`, `extraSections`: Approach, Palette, Key Pieces, Lighting, Programme).
+- **Materials, spatial decisions, notable details** — already present (same `extraSections`).
+- **Relevant enquiry CTA** — already present (`ctaHeading`/`ctaText` + the CTA band).
+- **Outcome** — no schema change was needed; `extraSections` already accepts an arbitrary heading/text pair, so an editor can add an "Outcome" section the moment real outcome wording is approved. None exists yet — `docs/overhaul/CONTENT-INVENTORY.md` already flagged this as unconfirmed for Marylebone Lobby, and this pass does not invent it.
+- **Clearly labelled photography/visualisations** — new optional `imageType` field (select: Photography / Visualisation) added to each gallery image in the content schema (`admin/config.yml`) and rendered as a small in-image label when set (`src/projects/project-pages.njk`, styled in `assets/css-partials/12-carousels.css`). Left unset on every existing project, including Marylebone Lobby — the content inventory records image type as unconfirmed, and setting it would be a fabricated claim about image rights/provenance, not a template decision.
+- **Image captions where they add meaning** — new optional `caption` field added alongside `imageType` on the same gallery-image schema entry, rendered the same way. No existing project has caption copy, so nothing renders differently today; the capability exists for when a content owner supplies real captions.
+- **Next-project or related-work path** — implemented as a functional, order-based, wrap-around "next project" link between the article body and the CTA band (`nextProject` filter in `.eleventy.js`, rendered in `project-pages.njk`, styled in `06-project-template.css`). It cycles through all listed projects regardless of status (coming-soon pages have real explanatory content, not empty shells, so linking to one is not a "link to an empty case-study shell" violation) and labels the target honestly — "Next project" for a published target, "Next — Coming soon" for a coming-soon one. Deeper visual/UX polish of this link (e.g. a thumbnail preview) is P4.4's job, not this ticket's; what's built here is the functional, accessible baseline P4.4 can refine.
+
+Both remaining gaps (outcome wording, image type/rights) are owner-dependent business decisions, not implementation work — see the updated entries in `docs/overhaul/CONTENT-INVENTORY.md`. Verified with `npm run check` and a live-preview read of Marylebone Lobby's project page: the next-project link renders and points at a real, non-empty coming-soon page; the caption/image-type render paths were smoke-tested by temporarily setting test values on one gallery image, confirming the label renders correctly, then reverting (no real project data was changed).
 
 ### P3.5 — Rewrite the homepage content hierarchy
 
@@ -1080,7 +1109,7 @@ At approximately 48 hours and again after 2–4 weeks:
 
 This is the practical dependency order for issue tracking. Content work can run alongside engineering after the Phase 0 inventory.
 
-As of July 2026, groups 1–4 have largely landed (see the status summary in §1) and group 5 is underway with P2.1 and P2.7 complete. The current front is P2.2 stylesheet reorganisation; groups 6–7 remain gated on the content decisions in `docs/overhaul/DECISIONS.md`.
+As of July 2026, groups 1–4 have largely landed (see the status summary in §1) and group 5 is underway with P2.1 and P2.7 complete. Group 6 has started ahead of group 5's formal close — the content-gate decisions in `docs/overhaul/DECISIONS.md` that were blocking it (case-study threshold, footer scope, testimonials) are now resolved, so P3.1, P3.3, and P3.4 have landed; P3.2 is not applicable per the no-Services-index decision. Group 7 (P4.1–P4.9) remains gated on groups 5–6 finishing.
 
 | Order | Ticket group | Why it comes here |
 | ---: | --- | --- |

@@ -2,6 +2,11 @@
   "eyebrow": "Work",
   "heroHeadline": "Selected projects.",
   "heroSubhead": "Residential, hospitality, and commercial interiors — framed as a set of project widgets.",
+  "completedEyebrow": "Completed",
+  "completedHeading": "Completed work.",
+  "conceptEyebrow": "In progress",
+  "conceptHeading": "Concepts & work in progress.",
+  "conceptNote": "Live, in development, or awaiting a finished set of images — shown to reflect the range of current work, not as finished case studies.",
   "categories": [
     {
       "id": "residential",

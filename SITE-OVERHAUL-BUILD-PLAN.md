@@ -835,6 +835,8 @@ If clean URLs were approved:
 
 **Verification:** `npm run check` passes clean (production build, content/schema validation, JS syntax, 30-page/587-link output check, and the full Axe/interaction suite — all now exercising the new URLs). A full-site grep of the generated `_site/` output for any remaining old-style `.html` href confirmed zero matches. Spot-checked live in a preview: homepage → Work → a project page (backlink, next-project link, contact CTA all correct) → Services → a service page (backlink, privacy link, form action) → Studio (legal-document links) → a legal page (embedded cross-reference link) → Contact (form action, privacy link) — every link resolved to its new clean URL. Also confirmed the Decap CMS preview-data JSON and the apps section (deliberately unchanged) are correct.
 
+**Owner action needed — post-deploy smoke test.** Everything above verifies the redirect map's *content* is correct and that `public/_redirects` is copied into the build output at the right path for Netlify to pick up. It does not, and cannot, verify that Netlify actually *applies* those redirects in production — that requires hitting the live site, which isn't possible from this environment. Once this deploys, manually check a handful of old URLs on the live domain (e.g. `/projects.html`, `/about.html`, one old project URL like `/projects/marylebone_residence_lobby.html`, and one of the four pre-existing "coming soon" slug redirects) and confirm each returns a 301 to its new clean URL rather than a 404.
+
 ### Phase 3 exit gate
 
 - [x] Global navigation and footer architecture approved (P3.1) — see `docs/overhaul/DECISIONS.md`.

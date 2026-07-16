@@ -1,5 +1,38 @@
-# Slug migration (Phase 4) — preserve old URLs as 301 redirects to clean slugs.
-/projects/sandbanks_residence_coming_soon.html         /projects/sandbanks_residence.html         301
-/projects/botanical_residence_coming_soon.html         /projects/botanical_residence.html         301
-/projects/marylebone_terrace_coming_soon.html          /projects/marylebone_terrace.html          301
-/projects/marylebone_residence_lobby_coming_soon.html  /projects/marylebone_residence_lobby.html  301
+# Clean-URL migration (P3.9) — permanent redirects from the old .html routes
+# to the new clean directory URLs. App support/legal URLs under /apps/ were
+# already clean directory URLs before this migration and are unaffected.
+
+/index.html              /                        301
+/projects.html           /work/                   301
+/curated_services.html   /services/               301
+/about.html              /studio/                 301
+/contact.html            /contact/                301
+
+# Project detail pages
+/projects/botanical_residence.html            /work/botanical_residence/            301
+/projects/sandbanks_residence.html            /work/sandbanks_residence/            301
+/projects/marylebone_terrace.html             /work/marylebone_terrace/             301
+/projects/shoreditch_office.html              /work/shoreditch_office/              301
+/projects/garden_restaurant.html              /work/garden_restaurant/              301
+/projects/marylebone_residence_lobby.html     /work/marylebone_residence_lobby/     301
+
+# Service detail pages
+/curated_services/interior_architecture_design.html   /services/interior_architecture_design/   301
+/curated_services/concept_design.html                 /services/concept_design/                 301
+/curated_services/procurement.html                    /services/procurement/                    301
+/curated_services/styling.html                         /services/styling/                        301
+/curated_services/plans_and_elevations.html            /services/plans_and_elevations/            301
+/curated_services/bespoke_furnishing.html              /services/bespoke_furnishing/              301
+
+# Legal pages
+/terms-of-business.html    /terms-of-business/    301
+/privacy-notice.html       /privacy-notice/       301
+/company-information.html  /company-information/  301
+
+# Pre-existing slug migration (predates the clean-URL migration above) —
+# these old teaser slugs now redirect straight to the current clean URL
+# rather than to an intermediate .html route that no longer exists.
+/projects/sandbanks_residence_coming_soon.html         /work/sandbanks_residence/            301
+/projects/botanical_residence_coming_soon.html         /work/botanical_residence/            301
+/projects/marylebone_terrace_coming_soon.html          /work/marylebone_terrace/             301
+/projects/marylebone_residence_lobby_coming_soon.html  /work/marylebone_residence_lobby/     301

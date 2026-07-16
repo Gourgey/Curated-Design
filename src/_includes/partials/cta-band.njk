@@ -3,7 +3,7 @@
         <h2 class="h2">{{ heading }}</h2>
         <p class="lead mx-auto about-cta-lead">{{ text }}</p>
 
-        <a href="{{ href | default('/contact.html') }}" class="button about-cta-button">
+        <a href="{{ href | default('/contact/') }}" class="button about-cta-button">
             <span class="dot" aria-hidden="true"></span>
             {{ label | default('Contact the studio') }}
         </a>

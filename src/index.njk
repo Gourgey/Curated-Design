@@ -101,7 +101,7 @@ showBackground: true
             {% set featuredServices = site.home.servicesSection.featuredServices | resolveEntries(collections.publishedService, "service") %}
             <div class="home-services__grid">
                 {% for service in featuredServices %}
-                <a class="card card--service" href="/curated_services/{{ service.data.slug }}.html">
+                <a class="card card--service" href="/services/{{ service.data.slug }}/">
                     <div class="card__media">
                         {% image service.data.cardImage, service.data.cardAlt or service.data.title, "(min-width: 1280px) 400px, (min-width: 761px) 33vw, 100vw", "lazy", "", "card" %}
                     </div>
@@ -118,7 +118,7 @@ showBackground: true
                 {% if site.home.servicesSection.moreLabel %}
                 <p class="home-services__more-label">{{ site.home.servicesSection.moreLabel }}</p>
                 {% endif %}
-                <a class="home-services__more-link" href="{{ site.home.servicesSection.moreHref or '/curated_services.html' }}">{{ site.home.servicesSection.moreLink }}</a>
+                <a class="home-services__more-link" href="{{ site.home.servicesSection.moreHref or '/services/' }}">{{ site.home.servicesSection.moreLink }}</a>
             </div>
             {% endif %}
         </div>
@@ -140,7 +140,7 @@ showBackground: true
             <div class="home-collections__grid{% if featuredProjects.length == 1 %} home-collections__grid--single{% endif %}">
                 {% for project in featuredProjects %}
                 {% set projectCardSrc = project.relation.image or project.data.cardImage %}
-                <a class="home-project" href="/projects/{{ project.data.slug }}.html">
+                <a class="home-project" href="/work/{{ project.data.slug }}/">
                     <div class="home-project__media">
                         {% image projectCardSrc, project.data.cardAlt or project.data.title, "(min-width: 1280px) 400px, (min-width: 761px) 33vw, 100vw", "lazy", "", "card" %}
                     </div>
@@ -157,7 +157,7 @@ showBackground: true
                 {% if site.home.collectionsSection.moreLabel %}
                 <p class="home-collections__more-label">{{ site.home.collectionsSection.moreLabel }}</p>
                 {% endif %}
-                <a class="home-collections__more-link" href="{{ site.home.collectionsSection.moreHref or '/projects.html' }}">{{ site.home.collectionsSection.moreLink }}</a>
+                <a class="home-collections__more-link" href="{{ site.home.collectionsSection.moreHref or '/work/' }}">{{ site.home.collectionsSection.moreLink }}</a>
             </div>
             {% endif %}
         </div>

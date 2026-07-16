@@ -3,7 +3,7 @@ pagination:
   data: legal.pages
   size: 1
   alias: legalPage
-permalink: "{{ legalPage.slug }}.html"
+permalink: "{{ legalPage.slug }}/index.html"
 layout: layouts/base.njk
 eleventyComputed:
   title: "{{ legalPage.title }} – Curated Design Studio"
@@ -18,7 +18,7 @@ sectionTop: true
 
     <section class="legal-content">
         <div class="legal-wrap">
-            {{ backlinkPill("/about.html", "Back to studio") }}
+            {{ backlinkPill("/studio/", "Back to studio") }}
 
             <header class="legal-header">
                 <p class="legal-kicker">{{ legalPage.kicker }}</p>

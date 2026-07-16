@@ -17,10 +17,10 @@
 
     <ul id="floatingPillMenu" class="pillmenu">
         <li class="overlay-home-only">
-            <a class="pill" href="/index.html"{% if page.url == "/" or page.url == "/index.html" %} aria-current="page"{% endif %}>Home</a>
+            <a class="pill" href="/"{% if page.url == "/" %} aria-current="page"{% endif %}>Home</a>
         </li>
-        <li><a class="pill" href="/projects.html"{% if page.url == "/projects.html" or project %} aria-current="page"{% endif %}>Work</a></li>
-        <li><a class="pill" href="/about.html"{% if page.url == "/about.html" %} aria-current="page"{% endif %}>Studio</a></li>
-        <li><a class="pill" href="/contact.html"{% if page.url == "/contact.html" %} aria-current="page"{% endif %}>Contact</a></li>
+        <li><a class="pill" href="/work/"{% if page.url == "/work/" or project %} aria-current="page"{% endif %}>Work</a></li>
+        <li><a class="pill" href="/studio/"{% if page.url == "/studio/" %} aria-current="page"{% endif %}>Studio</a></li>
+        <li><a class="pill" href="/contact/"{% if page.url == "/contact/" %} aria-current="page"{% endif %}>Contact</a></li>
     </ul>
 </nav>

@@ -132,8 +132,8 @@ const projectEntries = fs
   .map((file) => matter.read(path.join(root, "src/content/projects", file)).data);
 
 projectEntries.forEach((project) => {
-  const route = `/projects/${project.slug}.html`;
-  const outputPath = path.join(outputRoot, route.slice(1));
+  const route = `/work/${project.slug}/`;
+  const outputPath = path.join(outputRoot, route.slice(1), "index.html");
   const sitemapHasRoute = sitemap.includes(route);
   if (project.status === "draft") {
     if (fs.existsSync(outputPath)) fail(outputPath, "draft project was generated");

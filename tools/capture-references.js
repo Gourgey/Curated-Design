@@ -44,12 +44,12 @@ const widths = widthsArgument
   : [390, 768, 1440];
 const pages = [
   { name: "home", route: "/" },
-  { name: "work", route: "/projects.html" },
-  { name: "services-index", route: "/curated_services.html" },
-  { name: "studio", route: "/about.html" },
-  { name: "contact", route: "/contact.html" },
-  { name: "project", route: "/projects/marylebone_residence_lobby.html" },
-  { name: "service", route: "/curated_services/concept_design.html" },
+  { name: "work", route: "/work/" },
+  { name: "services-index", route: "/services/" },
+  { name: "studio", route: "/studio/" },
+  { name: "contact", route: "/contact/" },
+  { name: "project", route: "/work/marylebone_residence_lobby/" },
+  { name: "service", route: "/services/concept_design/" },
   { name: "apps-index", route: "/apps/index.html" },
 ];
 
@@ -164,7 +164,7 @@ async function main() {
     }
 
     for (const width of only && !only.startsWith("contact-") ? [] : widths) {
-      const errorPage = await preparePage(browser, "/contact.html", width);
+      const errorPage = await preparePage(browser, "/contact/", width);
       await errorPage.evaluate(() => {
         const error = document.querySelector("#contactFormError");
         error.classList.remove("hidden");
@@ -173,7 +173,7 @@ async function main() {
       if (!only || only === "contact-error") await capture(errorPage, "contact-error", width);
       await errorPage.close();
 
-      const successPage = await preparePage(browser, "/contact.html", width);
+      const successPage = await preparePage(browser, "/contact/", width);
       await successPage.evaluate(() => {
         document.querySelector("#contactForm").classList.add("hidden");
         document.querySelector("#contactFormSuccess").classList.remove("hidden");

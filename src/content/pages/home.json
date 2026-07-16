@@ -25,7 +25,7 @@
     "lead": "From early mood and space planning to specification and on-site coordination, we deliver quietly confident spaces tailored to the way you live.",
     "moreLabel": "Index",
     "moreLink": "View all services",
-    "moreHref": "/curated_services.html",
+    "moreHref": "/services/",
     "featuredServices": [
       {
         "service": "concept_design"
@@ -53,7 +53,7 @@
     "lead": "A completed residential lobby refresh in Marylebone, shaped through architectural detailing, sculptural furniture, and layered lighting.",
     "moreLabel": "Index",
     "moreLink": "View all projects",
-    "moreHref": "/projects.html",
+    "moreHref": "/work/",
     "featuredProjects": [
       {
         "project": "marylebone_residence_lobby",

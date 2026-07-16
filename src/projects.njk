@@ -3,7 +3,7 @@ layout: layouts/base.njk
 title: Projects – Curated Design Studio
 eleventyComputed:
   description: "{{ site.projectsPage.metaDescription or site.settings.description }}"
-permalink: projects.html
+permalink: work/index.html
 htmlClass: projects-page
 bodyClass: projects-page font-inter
 topLogo: logo_no_text_on_transparent.svg
@@ -18,7 +18,7 @@ topLogo: logo_no_text_on_transparent.svg
             {% if site.projectsPage.heroSubhead %}
             <p class="projects-header__intro">{{ site.projectsPage.heroSubhead }}</p>
             {% endif %}
-            <a class="header-more-link" href="/curated_services.html">View all services</a>
+            <a class="header-more-link" href="/services/">View all services</a>
         </div>
     </header>
 
@@ -42,7 +42,7 @@ topLogo: logo_no_text_on_transparent.svg
 
             <div class="projects-grid">
                 {% for project in completedProjects %}
-                <a class="card card--project" href="/projects/{{ project.data.slug }}.html">
+                <a class="card card--project" href="/work/{{ project.data.slug }}/">
                     <div class="card__media">
                         {% image project.data.cardImage, project.data.cardAlt or project.data.title, "(min-width: 1024px) 33vw, (min-width: 641px) 50vw, 100vw", "lazy", "", "card" %}
                     </div>
@@ -117,7 +117,7 @@ topLogo: logo_no_text_on_transparent.svg
 
                 <div class="projects-grid">
                     {% for project in entry.projects %}
-                    <a class="card card--project card--concept" href="/projects/{{ project.data.slug }}.html">
+                    <a class="card card--project card--concept" href="/work/{{ project.data.slug }}/">
                         <div class="card__media">
                             {% image project.data.cardImage, project.data.cardAlt or project.data.title, "(min-width: 1024px) 33vw, (min-width: 641px) 50vw, 100vw", "lazy", "", "card" %}
                         </div>

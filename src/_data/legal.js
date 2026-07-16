@@ -413,7 +413,7 @@ Curated Design Ltd will process personal information in accordance with its Priv
 
 The Privacy Notice explains what personal information we collect, how we use it, who we share it with, and the rights available to individuals.
 
-The Privacy Notice is available at: https://curateddesign.studio/privacy-notice.html
+The Privacy Notice is available at: https://curateddesign.studio/privacy-notice/
 
 ## 28. Liability
 
@@ -760,9 +760,9 @@ Curated Design Ltd provides interior design, procurement, styling, installation 
 
 The following documents apply to our website, services, and business operations where relevant:
 
-- Terms of Business: [https://curateddesign.studio/terms-of-business.html](https://curateddesign.studio/terms-of-business.html)
-- Privacy Notice: [https://curateddesign.studio/privacy-notice.html](https://curateddesign.studio/privacy-notice.html)
-- Company Information: [https://curateddesign.studio/company-information.html](https://curateddesign.studio/company-information.html)
+- Terms of Business: [https://curateddesign.studio/terms-of-business/](https://curateddesign.studio/terms-of-business/)
+- Privacy Notice: [https://curateddesign.studio/privacy-notice/](https://curateddesign.studio/privacy-notice/)
+- Company Information: [https://curateddesign.studio/company-information/](https://curateddesign.studio/company-information/)
 
 ## Contact
 

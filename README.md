@@ -92,10 +92,10 @@ Each project controls its title, slug, category, listing image, hero image, tags
 Project URLs are generated from the slug:
 
 ```text
-/projects/project_slug.html
+/work/project_slug/
 ```
 
-Set `showInProjects: true` to include a project on `projects.html`. Homepage project cards are curated from the Homepage entry in Decap, which references Project entries by slug and uses each Project's card image, title, kicker, and URL.
+Set `showInProjects: true` to include a project on `/work/`. Homepage project cards are curated from the Homepage entry in Decap, which references Project entries by slug and uses each Project's card image, title, kicker, and URL.
 
 ## Editing Services
 
@@ -110,7 +110,7 @@ Each service controls its reusable card image, card alt text, detail page cover 
 Service URLs are generated from the slug:
 
 ```text
-/curated_services/service_slug.html
+/services/service_slug/
 ```
 
 ## Editing Pages and Settings Manually
@@ -138,7 +138,7 @@ Build command: npm run build
 Publish directory: _site
 ```
 
-These values are also committed in `netlify.toml`. The contact form remains a Netlify form and is rendered into the generated `contact.html`.
+These values are also committed in `netlify.toml`. The contact form remains a Netlify form and is rendered into the generated `/contact/` page.
 
 ## Site Overhaul
 

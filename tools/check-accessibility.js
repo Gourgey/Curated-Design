@@ -12,26 +12,26 @@ const axePath = require.resolve("axe-core/axe.min.js");
 const scans = [
   { label: "Homepage mobile", route: "/", width: 390, height: 844, featuredProject: true },
   { label: "Homepage mobile menu", route: "/", width: 390, height: 844, openMenu: true },
-  { label: "Work mobile", route: "/projects.html", width: 390, height: 844 },
-  { label: "Services index mobile", route: "/curated_services.html", width: 390, height: 844 },
+  { label: "Work mobile", route: "/work/", width: 390, height: 844 },
+  { label: "Services index mobile", route: "/services/", width: 390, height: 844 },
   {
     label: "Published project mobile",
-    route: "/projects/marylebone_residence_lobby.html",
+    route: "/work/marylebone_residence_lobby/",
     width: 390,
     height: 844,
     projectCarousel: true,
   },
   {
     label: "Service mobile",
-    route: "/curated_services/concept_design.html",
+    route: "/services/concept_design/",
     width: 390,
     height: 844,
     enquiryForm: "service-enquiry",
   },
-  { label: "Studio mobile", route: "/about.html", width: 390, height: 844 },
+  { label: "Studio mobile", route: "/studio/", width: 390, height: 844 },
   {
     label: "Contact mobile",
-    route: "/contact.html",
+    route: "/contact/",
     width: 390,
     height: 844,
     enquiryForm: "contact",
@@ -134,10 +134,7 @@ async function checkFeaturedProject(page) {
       activeDots: dots.filter((dot) => dot.getAttribute("aria-current") === "true").length,
     };
   });
-  const expectedHrefs = [
-    "/projects/garden_restaurant.html",
-    "/projects/shoreditch_office.html",
-  ];
+  const expectedHrefs = ["/work/garden_restaurant/", "/work/shoreditch_office/"];
   if (
     state.linkCount !== 2 ||
     JSON.stringify(state.hrefs) !== JSON.stringify(expectedHrefs) ||
@@ -213,7 +210,7 @@ async function checkEnquiryForm(page, expectedName) {
     const form = document.querySelector(formSelector);
     const success = document.getElementById(form?.getAttribute("data-success-target"));
     const error = form?.querySelector("[data-form-error]");
-    const privacyLink = form?.querySelector('a[href="/privacy-notice.html"]');
+    const privacyLink = form?.querySelector('a[href="/privacy-notice/"]');
     const honeypot = form?.querySelector('[name="bot-field"]');
     return {
       formCount: document.querySelectorAll(formSelector).length,
@@ -235,7 +232,7 @@ async function checkEnquiryForm(page, expectedName) {
     !initialState.successHidden ||
     !initialState.errorHidden ||
     !initialState.honeypotHidden ||
-    initialState.privacyHref !== "/privacy-notice.html"
+    initialState.privacyHref !== "/privacy-notice/"
   ) {
     throw new Error(`Enquiry form fallback contract failed: ${JSON.stringify(initialState)}`);
   }

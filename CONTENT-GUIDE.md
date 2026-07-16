@@ -5,8 +5,8 @@ This guide is for the website owner. It covers everything you can edit through D
 ## Quick reference
 
 - **Site editor:** `https://your-site/admin/` (Decap CMS)
-- **Project pages live at:** `/projects/{slug}.html`
-- **Service pages live at:** `/curated_services/{slug}.html`
+- **Project pages live at:** `/work/{slug}/`
+- **Service pages live at:** `/services/{slug}/`
 - **Three project statuses:** Published, Coming Soon, Draft
 - **Where to add images:** Upload through any CMS image field; saved to `/assets/images/uploads/`
 
@@ -48,7 +48,7 @@ This is the standard workflow for a project you've finished.
 1. In the CMS sidebar, click **Projects → New Project**
 2. Fill in:
     - **Title** — e.g. "Sandbanks Residence"
-    - **Slug** — lowercase, underscores only, no spaces. Becomes the URL: `/projects/{slug}.html`. Example: `sandbanks_residence`. **Once published, do not change the slug** unless you want the URL to break.
+    - **Slug** — lowercase, underscores only, no spaces. Becomes the URL: `/work/{slug}/`. Example: `sandbanks_residence`. **Once published, do not change the slug** unless you want the URL to break.
     - **Status** — choose "Published"
     - **Order** — a number (1, 2, 3 …). Lower numbers appear first in the Projects listing
     - **Show in Projects Listing** — leave on (default)
@@ -81,7 +81,7 @@ This is the standard workflow for a project you've finished.
     - **Meta Description** — leave blank to fall back to Subtitle, then Summary, then the site-wide default
 11. Click **Publish** in the top right
 
-After saving, the new project page will be live at `/projects/{slug}.html` once the site rebuilds (typically a minute or two on Netlify).
+After saving, the new project page will be live at `/work/{slug}/` once the site rebuilds (typically a minute or two on Netlify).
 
 ---
 
@@ -336,7 +336,7 @@ Visit `http://localhost:8080/`. Combined with `npx decap-server` in another term
 | Slug | URL identifier and image-folder name |
 | Status | Published / Coming Soon / Draft |
 | Order | Sort order on the Projects listing (lower = earlier) |
-| Show in Projects Listing | Whether the card appears on /projects.html |
+| Show in Projects Listing | Whether the card appears on /work/ |
 | Listing Card Width | How wide the card is on the Projects listing |
 | Category | Residential / Hospitality / Commercial |
 | Kicker | Small label above the title on cards |

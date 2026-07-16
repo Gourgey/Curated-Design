@@ -3,7 +3,7 @@ layout: layouts/base.njk
 title: Services – Curated Design Studio
 eleventyComputed:
   description: "{{ site.servicesPage.metaDescription or site.settings.description }}"
-permalink: curated_services.html
+permalink: services/index.html
 htmlClass: services-page
 bodyClass: services-page font-inter
 topLogo: logo_no_text_on_transparent.svg
@@ -26,7 +26,7 @@ topLogo: logo_no_text_on_transparent.svg
             {% set allServices = collections.publishedService | sortByOrder %}
             <div class="projects-grid">
                 {% for service in allServices %}
-                <a class="card card--service" href="/curated_services/{{ service.data.slug }}.html">
+                <a class="card card--service" href="/services/{{ service.data.slug }}/">
                     <div class="card__media">
                         {% image service.data.cardImage, service.data.cardAlt or service.data.title, "(min-width: 1024px) 33vw, (min-width: 641px) 50vw, 100vw", "lazy", "", "card" %}
                     </div>

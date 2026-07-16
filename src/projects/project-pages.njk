@@ -3,7 +3,7 @@ pagination:
   data: collections.publishedProject
   size: 1
   alias: project
-permalink: "projects/{{ project.data.slug }}.html"
+permalink: "work/{{ project.data.slug }}/index.html"
 layout: layouts/base.njk
 eleventyComputed:
   title: "{{ project.data.metaTitle or project.data.title }} – Curated Design Studio"
@@ -44,7 +44,7 @@ sectionTop: true
 {% from "partials/backlink.njk" import hero as backlinkHero -%}
 <main id="main-content" class="page-main" tabindex="-1">
     <div class="project-topbar">
-        {{ backlinkHero("/projects.html", "Back to Work") }}
+        {{ backlinkHero("/work/", "Back to Work") }}
     </div>
 
     <header class="project-hero" aria-label="Project hero">
@@ -171,7 +171,7 @@ sectionTop: true
                         <p class="project-aside__note">{{ project.data.asideText }}</p>
                         {% endif %}
                         {% if project.data.asideCta %}
-                        <a class="project-aside__cta" href="/contact.html">{{ project.data.asideCta }}</a>
+                        <a class="project-aside__cta" href="/contact/">{{ project.data.asideCta }}</a>
                         {% endif %}
                     </aside>
                 </div>
@@ -182,7 +182,7 @@ sectionTop: true
     {% if nextProjectEntry %}
     <section class="project-next" aria-label="Next project">
         <div class="container project-wrap project-next__inner">
-            <a class="project-next__link" href="/projects/{{ nextProjectEntry.data.slug }}.html">
+            <a class="project-next__link" href="/work/{{ nextProjectEntry.data.slug }}/">
                 <span class="project-next__eyebrow label-small">{% if nextProjectEntry.data.status == "coming_soon" %}Next — {{ nextProjectEntry.data.statusLabel or "Coming soon" }}{% else %}Next project{% endif %}</span>
                 <span class="project-next__title">{{ nextProjectEntry.data.title }}<span aria-hidden="true"> →</span></span>
             </a>
@@ -193,7 +193,7 @@ sectionTop: true
     {% if project.data.ctaHeading or project.data.ctaText %}
     {% set heading = project.data.ctaHeading %}
     {% set text = project.data.ctaText %}
-    {% set href = site.settings.primaryCtaUrl or "/contact.html" %}
+    {% set href = site.settings.primaryCtaUrl or "/contact/" %}
     {% set ctaClass = "project-cta-band section" %}
     {% set ctaContainerClass = "project-cta__inner" %}
     {% set label = project.data.asideCta or "Make an enquiry" %}

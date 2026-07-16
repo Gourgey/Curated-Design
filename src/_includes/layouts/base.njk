@@ -109,7 +109,7 @@
         {% endif %}
 
         <header id="siteHeader">
-            <a href="/index.html{% if sectionTop %}#top{% endif %}" id="topLogo" class="top-left-logo">
+            <a href="/{% if sectionTop %}#top{% endif %}" id="topLogo" class="top-left-logo">
                 <img
                     src="/assets/images/logos/{{ topLogo | default('logo_no_text_on_transparent.svg') }}"
                     alt="{{ site.settings.studioName }}"

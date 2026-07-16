@@ -3,7 +3,7 @@ layout: layouts/base.njk
 eleventyComputed:
   title: "{{ site.about.title }}"
   description: "{{ site.about.metaDescription or site.settings.description }}"
-permalink: about.html
+permalink: studio/index.html
 htmlClass: about-page
 bodyClass: about-page min-h-screen font-inter
 ---
@@ -18,7 +18,7 @@ bodyClass: about-page min-h-screen font-inter
         <div>
             <h1 class="studio-header__title">{{ site.about.introHeading | safe }}</h1>
             <p class="studio-header__intro">{{ site.about.introText }}</p>
-            <a class="header-more-link" href="/curated_services.html">View all services</a>
+            <a class="header-more-link" href="/services/">View all services</a>
         </div>
     </header>
 

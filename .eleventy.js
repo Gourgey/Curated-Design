@@ -153,7 +153,7 @@ module.exports = function (eleventyConfig) {
             projectData.status === "coming_soon"
               ? projectData.statusLabel || "Coming soon"
               : "",
-          url: `/projects/${projectData.slug}.html`,
+          url: `/work/${projectData.slug}/`,
         };
       })
       .filter(Boolean);
@@ -204,8 +204,8 @@ module.exports = function (eleventyConfig) {
         ...(((item.data.gallery && item.data.gallery.images) || []).map((image) => image.image)),
       ].filter(Boolean),
       url: [].concat(item.data.tags || []).includes("service")
-        ? `/curated_services/${item.data.slug}.html`
-        : `/projects/${item.data.slug}.html`,
+        ? `/services/${item.data.slug}/`
+        : `/work/${item.data.slug}/`,
     }));
   });
 

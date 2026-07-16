@@ -121,6 +121,8 @@
 
         {{ content | safe }}
 
+        {% include "partials/footer.njk" %}
+
         {% set defaultScripts = ['/assets/js/navigation.js', '/assets/js/carousels.js', '/assets/js/scroll-effects.js'] %}
         {% for script in scripts | default(defaultScripts) %}
         <script src="{{ script }}" defer></script>

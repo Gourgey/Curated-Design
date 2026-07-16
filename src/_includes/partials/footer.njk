@@ -1,0 +1,49 @@
+<footer class="site-footer">
+    <div class="site-footer__inner">
+        <div class="site-footer__brand">
+            <a href="/index.html" class="site-footer__logo-link">
+                <img
+                    src="/assets/images/logos/logo_no_text_on_transparent.svg"
+                    alt="{{ site.settings.studioName }}"
+                    class="site-footer__logo"
+                />
+            </a>
+            <p class="site-footer__tagline">{{ site.settings.description }}</p>
+            <a class="site-footer__email" href="mailto:{{ site.settings.email }}">{{ site.settings.email }}</a>
+        </div>
+
+        <nav class="site-footer__col" aria-label="Footer site navigation">
+            <p class="site-footer__heading">Site</p>
+            <ul class="site-footer__list">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/projects.html">Work</a></li>
+                <li><a href="/about.html">Studio</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <nav class="site-footer__col" aria-label="Legal and company information">
+            <p class="site-footer__heading">Legal</p>
+            <ul class="site-footer__list">
+                {% for legalPage in legal.pages %}
+                <li><a href="/{{ legalPage.slug }}.html">{{ legalPage.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+
+        <nav class="site-footer__col site-footer__col--apps" aria-label="App support">
+            <p class="site-footer__heading">App support</p>
+            <ul class="site-footer__list">
+                <li><a href="/apps/">Digital Tools</a></li>
+                {% for app in apps.items %}
+                <li><a href="/apps/{{ app.slug }}/">{{ app.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+
+    <div class="site-footer__base">
+        <p class="site-footer__copyright">© {{ site.currentYear }} Curated Design Ltd</p>
+        <p class="site-footer__location">{{ site.settings.location }}</p>
+    </div>
+</footer>

@@ -598,6 +598,16 @@ The footer should include:
 - real social links only;
 - app support and related documents in a quiet, clearly labelled area.
 
+**Implementation note (16 July 2026):** done — the global footer half of this ticket is built (primary navigation is unchanged; no Services link, per the site-owner decision below). `src/_includes/partials/footer.njk` is included from `src/_includes/layouts/base.njk` on every page, right after `{{ content }}`. Content per the site-owner's decisions recorded in `docs/overhaul/DECISIONS.md` (16 July 2026):
+
+- **Contact route:** the studio email (`site.settings.email`) as a direct `mailto:` link, alongside the tagline in the brand column.
+- **Primary navigation:** Home, Work, Studio, Contact — mirrors `partials/nav.njk` exactly; no Services link (there's no Services index yet, and the owner confirmed not to add one for now).
+- **Legal/company information:** all three existing legal pages (Terms of Business, Privacy Notice, Company Information), looped from the same `legal.pages` data the legal-page template itself uses — so a future fourth legal page appears in the footer automatically, no hand-maintained list to fall out of sync.
+- **App support:** shown as its own visible column (not de-emphasised), linking to the apps index plus each app by name, looped from `apps.items` for the same reason.
+- **Social links:** none — the owner confirmed there are no real social profiles to add, so the footer has no social section at all rather than a placeholder.
+
+Styling lives in `assets/css-partials/17-footer.css`: a dark band (`--color-surface-inverse`) matching the tone most pages already end on via `.about-cta-band`/`.project-cta-band`, a 4-column grid (brand + 3 nav columns) collapsing to 2 columns at 920px and 1 at 640px. Each footer `<nav>` has its own distinct `aria-label` ("Footer site navigation", "Legal and company information", "App support") so it doesn't collide with the header's "Primary navigation" landmark — axe's landmark-uniqueness check would otherwise flag it. A `site.currentYear` global (computed once at build time in `src/_data/site.js`) drives the copyright line, no build-time date entered by hand. Verified with `npm run check` (the accessibility gate's 8-page axe/contrast scan now covers the footer on every sampled page) and by reading back the rendered footer text/computed styles on multiple pages (Studio, a project detail page) against the intended content — no CMS schema changes were needed since the footer only reuses existing `site.settings`/`legal`/`apps` data.
+
 ### P3.2 — Create a Services index
 
 Add `/services/` as the clear parent of the service pages. It should explain:

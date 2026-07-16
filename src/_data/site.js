@@ -16,6 +16,7 @@ function fileVersion(relativePath) {
 module.exports = {
   settings: readJson("settings.json"),
   cssVersion: fileVersion("assets/css/styles.css"),
+  currentYear: new Date().getFullYear(),
   home: readJson("pages/home.json"),
   about: readJson("pages/about.json"),
   contact: readJson("pages/contact.json"),

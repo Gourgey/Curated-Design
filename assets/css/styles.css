@@ -570,7 +570,6 @@ body.nav-open {
     left: 0;
     z-index: 600;
     opacity: 1;
-    pointer-events: auto;
     transform: translateY(0);
     margin: 0;
     pointer-events: none;
@@ -4042,6 +4041,7 @@ body.project-page .pill:hover,
 
 .project-hero-slide {
     min-width: 100%;
+    position: relative;
 }
 
 .project-hero-media img {
@@ -4128,10 +4128,8 @@ body.project-page .pill:hover,
 /* Optional per-slide caption / image-type label — only renders when a
    gallery item sets caption or imageType (see build plan P3.4). Kept to
    the same dark-pill visual language as .coming-soon-badge and the hero
-   controls. */
-.project-hero-slide {
-    position: relative;
-}
+   controls. Relies on .project-hero-slide's own position: relative above
+   to anchor this absolutely. */
 .project-hero-slide__caption {
     position: absolute;
     left: 18px;

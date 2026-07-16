@@ -313,7 +313,6 @@ body.nav-open {
     left: 0;
     z-index: 600;
     opacity: 1;
-    pointer-events: auto;
     transform: translateY(0);
     margin: 0;
     pointer-events: none;

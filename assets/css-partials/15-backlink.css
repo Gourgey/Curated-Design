@@ -1,0 +1,66 @@
+/* ===== Shared "back to X" link component =====
+   Three templates each reimplemented their own "back to X" link under a
+   different class name and, for two of them, an identical set of rules:
+   .project-backlink (project detail), .app-backlink (apps index/detail +
+   apps legal), .legal-backlink (studio legal). Consolidated per
+   docs/overhaul/COMPONENTS.md's recommended order (P2.2 follow-up, July
+   2026).
+
+   Two genuinely different visual treatments, not three -- .app-backlink
+   and .legal-backlink were byte-for-byte identical rules under two names.
+   The project one renders over a dark hero image with an italic-serif
+   treatment and no border/background, so it keeps its own modifier
+   rather than being forced into the pill shape.
+
+   Markup shape intentionally stays as each template already had it
+   (project: bare <a>; apps/legal: <a> wrapped in a spacing <p>) -- see
+   COMPONENTS.md for why unifying the DOM shape itself is a separate,
+   deliberate decision, not part of this mechanical class consolidation. */
+
+/* Wrapper for the pill treatment's <p> -- the app/legal pages need a
+   block-level margin below the link; the reset above doesn't zero <p>
+   margins globally, so this class still carries that job. */
+.backlink-row {
+    margin: 0 0 24px;
+}
+
+.backlink {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Pill treatment -- apps index/detail, apps legal, studio legal. */
+.backlink--pill {
+    padding: 10px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.45);
+    font-size: 14px;
+}
+.backlink--pill:hover {
+    background: rgba(255, 255, 255, 0.72);
+}
+
+/* Hero treatment -- project detail page, over the dark hero image. Lives
+   inside .project-topbar, which sets pointer-events: none so the topbar
+   itself doesn't block the hero below; this restores pointer-events on
+   the link itself. */
+.backlink--hero {
+    gap: 7px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.92);
+    font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: clamp(20px, 1.6vw, 28px);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1;
+    text-shadow: 0 1px 18px rgba(0, 0, 0, 0.35);
+    pointer-events: auto;
+}
+.backlink--hero:hover {
+    background: transparent;
+    color: #fff;
+}

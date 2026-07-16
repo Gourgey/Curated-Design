@@ -58,27 +58,8 @@ body.project-page .project-topbar {
     pointer-events: none;
 }
 
-body.project-page .project-backlink {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-    color: rgba(255, 255, 255, 0.92);
-    font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
-    font-size: clamp(20px, 1.6vw, 28px);
-    font-style: italic;
-    font-weight: 300;
-    line-height: 1;
-    text-shadow: 0 1px 18px rgba(0, 0, 0, 0.35);
-    pointer-events: auto;
-}
-body.project-page .project-backlink:hover {
-    background: transparent;
-    color: #fff;
-}
+/* .project-backlink moved to assets/css-partials/15-backlink.css as the
+   shared .backlink/.backlink--hero component (P2.2 follow-up). */
 
 /* Hero carousel container/track/slide/control/dots mechanics
    (.project-hero, .project-hero-media, .project-hero-track,

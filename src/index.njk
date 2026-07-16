@@ -101,13 +101,13 @@ showBackground: true
             {% set featuredServices = site.home.servicesSection.featuredServices | resolveEntries(collections.publishedService, "service") %}
             <div class="home-services__grid">
                 {% for service in featuredServices %}
-                <a class="home-service-card" href="/curated_services/{{ service.data.slug }}.html">
-                    <div class="home-service-card__media">
+                <a class="card card--service" href="/curated_services/{{ service.data.slug }}.html">
+                    <div class="card__media">
                         {% image service.data.cardImage, service.data.cardAlt or service.data.title, "(min-width: 1280px) 400px, (min-width: 761px) 33vw, 100vw", "lazy", "", "card" %}
                     </div>
-                    <h3 class="home-service-card__title">{{ service.data.title }}</h3>
+                    <h3 class="card__title">{{ service.data.title }}</h3>
                     {% if service.data.summary %}
-                    <p class="home-service-card__summary">{{ service.data.summary }}</p>
+                    <p class="card__summary">{{ service.data.summary }}</p>
                     {% endif %}
                 </a>
                 {% endfor %}

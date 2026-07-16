@@ -1,5 +1,5 @@
 /* GENERATED FILE -- do not edit directly.
-   Source partials: assets/css-partials/ (01-tokens.css, 02-base.css, 03-navigation.css, 04-homepage.css, 05-legacy-pages.css, 06-project-template.css, 07-misc-pages.css, 08-homepage-redesign.css, 09-project-redesign.css, 10-projects-listing-redesign.css, 11-service-redesign.css, 12-carousels.css, 13-buttons-cta.css, 14-form-fields.css)
+   Source partials: assets/css-partials/ (01-tokens.css, 02-base.css, 03-navigation.css, 04-homepage.css, 05-legacy-pages.css, 06-project-template.css, 07-misc-pages.css, 08-homepage-redesign.css, 09-project-redesign.css, 10-projects-listing-redesign.css, 11-service-redesign.css, 12-carousels.css, 13-buttons-cta.css, 14-form-fields.css, 15-backlink.css, 16-card.css)
    Rebuild with: node tools/build-css.js (also runs automatically as part of npm run build
    and npm start) */
 
@@ -1897,27 +1897,8 @@ body.project-page .project-topbar {
     pointer-events: none;
 }
 
-body.project-page .project-backlink {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-    color: rgba(255, 255, 255, 0.92);
-    font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
-    font-size: clamp(20px, 1.6vw, 28px);
-    font-style: italic;
-    font-weight: 300;
-    line-height: 1;
-    text-shadow: 0 1px 18px rgba(0, 0, 0, 0.35);
-    pointer-events: auto;
-}
-body.project-page .project-backlink:hover {
-    background: transparent;
-    color: #fff;
-}
+/* .project-backlink moved to assets/css-partials/15-backlink.css as the
+   shared .backlink/.backlink--hero component (P2.2 follow-up). */
 
 /* Hero carousel container/track/slide/control/dots mechanics
    (.project-hero, .project-hero-media, .project-hero-track,
@@ -2186,22 +2167,10 @@ body.app-page .hero-brand {
     line-height: 1.6;
 }
 
-.app-backlink {
-    margin: 0 0 24px;
-}
-
-.app-backlink a {
-    display: inline-flex;
-    padding: 10px 12px;
-    border: 1px solid rgba(0, 0, 0, 0.16);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.45);
-    font-size: 14px;
-}
-
-.app-backlink a:hover {
-    background: rgba(255, 255, 255, 0.72);
-}
+/* .app-backlink moved to assets/css-partials/15-backlink.css as the
+   shared .backlink-row/.backlink/.backlink--pill component (P2.2
+   follow-up) -- it was byte-for-byte identical to .legal-backlink
+   below. */
 
 .app-detail-grid {
     display: grid;
@@ -2347,22 +2316,9 @@ body.legal-page .hero-brand {
     padding-inline: 8px;
 }
 
-.legal-backlink {
-    margin: 0 0 24px;
-}
-
-.legal-backlink a {
-    display: inline-flex;
-    padding: 10px 12px;
-    border: 1px solid rgba(0, 0, 0, 0.16);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.45);
-    font-size: 14px;
-}
-
-.legal-backlink a:hover {
-    background: rgba(255, 255, 255, 0.72);
-}
+/* .legal-backlink moved to assets/css-partials/15-backlink.css as the
+   shared .backlink-row/.backlink/.backlink--pill component (P2.2
+   follow-up). */
 
 .legal-header {
     max-width: 760px;
@@ -2622,45 +2578,9 @@ body.legal-page .hero-brand {
     border-top: 1px solid var(--color-border-soft);
     padding-top: 56px;
 }
-.home-service-card {
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: inherit;
-    transition: transform 280ms cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.home-service-card:hover { transform: translateY(-2px); }
-.home-service-card__media {
-    aspect-ratio: 4 / 3;
-    width: 100%;
-    background-color: var(--color-surface-light);
-    margin-bottom: 18px;
-    overflow: hidden;
-}
-.home-service-card__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-.home-service-card__title {
-    font-family: var(--font-family-display);
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 1.2;
-    letter-spacing: -0.008em;
-    color: var(--color-text-primary);
-    margin: 0 0 8px;
-}
-.home-service-card__summary {
-    font-family: var(--font-family-body);
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 1.55;
-    color: var(--color-text-secondary);
-    margin: 0;
-    text-wrap: pretty;
-}
+/* .home-service-card and its descendants moved to
+   assets/css-partials/16-card.css as the shared .card/.card--service
+   component (P2.2 follow-up). */
 
 /* Dark void variant — matches Design Philosophy band */
 .home-services {
@@ -2679,10 +2599,10 @@ body.legal-page .hero-brand {
 .home-services .home-services__grid {
     border-top-color: rgba(237, 232, 221, 0.15);
 }
-.home-services .home-service-card__title {
+.home-services .card__title {
     color: rgba(237, 232, 221, 0.96);
 }
-.home-services .home-service-card__summary {
+.home-services .card__summary {
     color: rgba(237, 232, 221, 0.65);
 }
 
@@ -3229,52 +3149,11 @@ body.projects-page .projects-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 56px 32px;
 }
-body.projects-page .projects-card {
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: inherit;
-    transition: transform 280ms cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-body.projects-page .projects-card:hover {
-    transform: translateY(-2px);
-}
-body.projects-page .projects-card__media {
-    aspect-ratio: 4 / 3;
-    width: 100%;
-    background-color: var(--color-surface-light);
-    overflow: hidden;
-    margin-bottom: 18px;
-    border-radius: 0;
-    box-shadow: none;
-}
-body.projects-page .projects-card__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-body.projects-page .projects-card__body {
-    padding: 0;
-}
-body.projects-page .projects-card__title {
-    font-family: var(--font-family-display);
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 1.2;
-    letter-spacing: -0.008em;
-    color: var(--color-text-primary);
-    margin: 0 0 8px;
-}
-body.projects-page .projects-card__kicker {
-    font-family: var(--font-family-body);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--color-text-muted);
-    margin: 0;
-}
+/* .projects-card and its descendants moved to
+   assets/css-partials/16-card.css as the shared .card/.card--project
+   component (P2.2 follow-up) -- .card__media's old explicit
+   border-radius:0/box-shadow:none reset was dropped since those are
+   already the initial values (a no-op, not a real override). */
 
 /* .label-small in projects-page context — slightly more prominent than detail-page */
 body.projects-page .label-small {
@@ -4366,4 +4245,147 @@ body.project-page .project-hero-slide {
 .contact-form .field__select option {
     color: var(--color-text-primary);
     background: var(--color-surface-light);
+}
+/* ===== Shared "back to X" link component =====
+   Three templates each reimplemented their own "back to X" link under a
+   different class name and, for two of them, an identical set of rules:
+   .project-backlink (project detail), .app-backlink (apps index/detail +
+   apps legal), .legal-backlink (studio legal). Consolidated per
+   docs/overhaul/COMPONENTS.md's recommended order (P2.2 follow-up, July
+   2026).
+
+   Two genuinely different visual treatments, not three -- .app-backlink
+   and .legal-backlink were byte-for-byte identical rules under two names.
+   The project one renders over a dark hero image with an italic-serif
+   treatment and no border/background, so it keeps its own modifier
+   rather than being forced into the pill shape.
+
+   Markup shape intentionally stays as each template already had it
+   (project: bare <a>; apps/legal: <a> wrapped in a spacing <p>) -- see
+   COMPONENTS.md for why unifying the DOM shape itself is a separate,
+   deliberate decision, not part of this mechanical class consolidation. */
+
+/* Wrapper for the pill treatment's <p> -- the app/legal pages need a
+   block-level margin below the link; the reset above doesn't zero <p>
+   margins globally, so this class still carries that job. */
+.backlink-row {
+    margin: 0 0 24px;
+}
+
+.backlink {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Pill treatment -- apps index/detail, apps legal, studio legal. */
+.backlink--pill {
+    padding: 10px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.45);
+    font-size: 14px;
+}
+.backlink--pill:hover {
+    background: rgba(255, 255, 255, 0.72);
+}
+
+/* Hero treatment -- project detail page, over the dark hero image. Lives
+   inside .project-topbar, which sets pointer-events: none so the topbar
+   itself doesn't block the hero below; this restores pointer-events on
+   the link itself. */
+.backlink--hero {
+    gap: 7px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.92);
+    font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+    font-size: clamp(20px, 1.6vw, 28px);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1;
+    text-shadow: 0 1px 18px rgba(0, 0, 0, 0.35);
+    pointer-events: auto;
+}
+.backlink--hero:hover {
+    background: transparent;
+    color: #fff;
+}
+/* ===== Shared project/service card component =====
+   .projects-card (projects listing) and .home-service-card (homepage
+   services grid) rendered the identical wrapper/media/hover shape, just
+   at a slightly different title scale (22px vs 24px). Their sub-text is
+   NOT the same field under two names, though: a project card shows its
+   category kicker (a short uppercase taxonomy label), a service card
+   shows its summary (a descriptive sentence) -- genuinely different
+   content, so .card__kicker and .card__summary both keep their own
+   class rather than being forced into one. Consolidated per
+   docs/overhaul/COMPONENTS.md's recommended order (P2.2 follow-up, July
+   2026). Markup shape (the project card's extra .card__body wrapper div)
+   was left as each template already had it -- not part of this
+   consolidation. */
+
+.card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 280ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.card:hover {
+    transform: translateY(-2px);
+}
+.card__body {
+    padding: 0;
+}
+.card__media {
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    background-color: var(--color-surface-light);
+    overflow: hidden;
+    margin-bottom: 18px;
+}
+.card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.card__title {
+    font-family: var(--font-family-display);
+    font-weight: 400;
+    font-size: var(--card-title-size, 22px);
+    line-height: 1.2;
+    letter-spacing: -0.008em;
+    color: var(--color-text-primary);
+    margin: 0 0 8px;
+}
+
+/* Project card: category kicker under the title. */
+.card--project {
+    --card-title-size: 22px;
+}
+.card__kicker {
+    font-family: var(--font-family-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+/* Service card: descriptive summary under the title. */
+.card--service {
+    --card-title-size: 24px;
+}
+.card__summary {
+    font-family: var(--font-family-body);
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    margin: 0;
+    text-wrap: pretty;
 }

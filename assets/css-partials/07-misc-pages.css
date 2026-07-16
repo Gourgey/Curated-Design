@@ -171,22 +171,10 @@ body.app-page .hero-brand {
     line-height: 1.6;
 }
 
-.app-backlink {
-    margin: 0 0 24px;
-}
-
-.app-backlink a {
-    display: inline-flex;
-    padding: 10px 12px;
-    border: 1px solid rgba(0, 0, 0, 0.16);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.45);
-    font-size: 14px;
-}
-
-.app-backlink a:hover {
-    background: rgba(255, 255, 255, 0.72);
-}
+/* .app-backlink moved to assets/css-partials/15-backlink.css as the
+   shared .backlink-row/.backlink/.backlink--pill component (P2.2
+   follow-up) -- it was byte-for-byte identical to .legal-backlink
+   below. */
 
 .app-detail-grid {
     display: grid;
@@ -332,22 +320,9 @@ body.legal-page .hero-brand {
     padding-inline: 8px;
 }
 
-.legal-backlink {
-    margin: 0 0 24px;
-}
-
-.legal-backlink a {
-    display: inline-flex;
-    padding: 10px 12px;
-    border: 1px solid rgba(0, 0, 0, 0.16);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.45);
-    font-size: 14px;
-}
-
-.legal-backlink a:hover {
-    background: rgba(255, 255, 255, 0.72);
-}
+/* .legal-backlink moved to assets/css-partials/15-backlink.css as the
+   shared .backlink-row/.backlink/.backlink--pill component (P2.2
+   follow-up). */
 
 .legal-header {
     max-width: 760px;

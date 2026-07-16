@@ -11,7 +11,9 @@ This is a working audit of the interface patterns the site already has, ahead of
 | --- | --- | --- |
 | Site header + overlay menu | `src/_includes/partials/nav.njk`, `assets/js/navigation.js` | Accessible focus-trapped overlay menu, implemented in Phase 1; compact pill-menu variant for the in-page quick-filter nav. |
 | Hero brand mark | `src/_includes/partials/hero-brand.njk` | Used by most non-homepage templates. |
-| CTA band | `src/_includes/partials/cta-band.njk` | Parameterised (`ctaId`, `ctaClass`, `text`, `href`); currently only used on the Studio page — the plan's shared "call-to-action band" component target. |
+| CTA band | `src/_includes/partials/cta-band.njk` | Parameterised (`ctaId`, `ctaClass`, `text`, `href`); used on the homepage, projects listing, service pages, and project-detail pages — the plan's shared "call-to-action band" component target. Its CSS lives in `assets/css-partials/13-buttons-cta.css` (P2.2). |
+| Breadcrumb / back navigation | `src/apps/app-pages.njk`, `src/apps/legal-pages.njk`, `src/legal-pages.njk`, `src/projects/project-pages.njk` | Consolidated (P2.2 follow-up, July 2026) into `.backlink`/`.backlink--pill` (apps + studio legal, byte-for-byte identical before the merge) and `.backlink--hero` (project detail, over the dark hero image) in `assets/css-partials/15-backlink.css`. Each template's existing DOM shape (bare `<a>` for the project page; `<a>` wrapped in a `.backlink-row` `<p>` for apps/legal) was kept as-is — only the class names/CSS were unified, not the markup shape. Service pages still have no back-navigation; unchanged, see below. |
+| Card (project / service) | `src/projects.njk`, `src/index.njk` | Consolidated (P2.2 follow-up, July 2026) into `.card`/`.card--project`/`.card--service` in `assets/css-partials/16-card.css`. The wrapper/media/hover shape and title styling (parameterised 22px vs. 24px via `--card-title-size`) were genuinely identical; the sub-text was not — a project card's `.card__kicker` is a taxonomy label, a service card's `.card__summary` is a description sentence, so those stayed as separate classes rather than being forced into one "summary" field. |
 
 ## Components that exist, but duplicated per template (candidates for consolidation)
 
@@ -19,9 +21,7 @@ These render consistent-looking results today, but each template reimplements it
 
 | Component | Current implementations | Duplication found |
 | --- | --- | --- |
-| Breadcrumb / back navigation | `.project-backlink` (`src/projects/project-pages.njk`), `.app-backlink` (`src/apps/app-pages.njk`, `src/apps/legal-pages.njk`), `.legal-backlink` (`src/legal-pages.njk`) | Four separate class names and two different markup shapes (bare `<a>` vs. `<a>` wrapped in `<p>`) for the same "back to X" pattern. Service pages have no back-navigation at all — there is no Services index yet (P3.2), so there is nowhere to point it. |
-| Card (project / service) | `.projects-card` (`src/projects.njk`), `.home-service-card` (`src/index.njk`) | Same media/title/summary shape, independently named. The plan's "completed project card" and "service card" targets should share a base card pattern with a modifier, not two parallel implementations. |
-| Project status card (concept/in-progress) | Rendered inline inside `src/projects/project-pages.njk` and the `.projects-card` variants in `src/projects.njk` via `isComingSoon` | Status (`coming_soon`, `published`) is already real HTML text (e.g. the "Coming soon" pill rendered in markup, confirmed in a live preview during this pass) rather than baked into artwork — this specific plan requirement is already met. It is not yet a named, documented, reusable "concept card" component distinct from the completed-project card. |
+| Project status card (concept/in-progress) | Rendered inline inside `src/projects/project-pages.njk` and the `.card--project` variants in `src/projects.njk` via `isComingSoon` | Status (`coming_soon`, `published`) is already real HTML text (e.g. the "Coming soon" pill rendered in markup, confirmed in a live preview during this pass) rather than baked into artwork — this specific plan requirement is already met. It is not yet a named, documented, reusable "concept card" component distinct from the completed-project card — no concept-status project currently exists in the published content to design one against (see the hard content gate in `SITE-OVERHAUL-BUILD-PLAN.md` §1). |
 
 ## Components that are genuinely blocked, not just undocumented
 
@@ -37,10 +37,12 @@ The original version of this document held off on consolidating the backlink/car
 
 **What this means for this ticket:** extracting `.project-backlink`/`.app-backlink`/`.legal-backlink` into one shared partial, and `.projects-card`/`.home-service-card` into one shared card pattern, is no longer blocked by unresolved CSS duplication. It's still not done — it wasn't attempted in this pass — but the previously-cited reason it was deferred no longer applies. It remains real work: the three backlink implementations render with genuinely different visual treatments (the project one is an elaborate italic-serif treatment on a dark hero overlay; app/legal are plain text links), so unifying the *markup* into one partial means designing a modifier system (one base class, page-specific modifier classes), not just renaming. That's a design decision worth making deliberately rather than as a side effect of a refactor — recommend scoping it as its own ticket, verified the same way (pixel-diff before/after on every affected template, not just the one being changed).
 
+## Update (July 2026, round 2): backlink and card consolidated
+
+Steps 1 and 2 of the recommended order below are now done — see the "shared partials" table above for what each ended up looking like. Both were verified the same way: `npm run check` (build, output structure, and the accessibility gate's interaction smoke tests) plus reading back computed styles on every affected live page against the pre-refactor values, not just a visual glance.
+
+One outcome worth flagging: the "same media/title/summary shape" description in the original audit undersold a real difference — a project card's second line is a taxonomy label, a service card's is a description sentence. The consolidated component keeps `.card__kicker` and `.card__summary` as distinct classes for that reason, rather than merging them into one generic "summary" slot the way the original audit implied it should.
+
 ## What this pass did not do
 
-Extracting the duplicated components into shared partials was not attempted, now that the reason for deferring it (CSS duplication) is resolved. This remains recommended future work, in this order:
-
-1. Design one shared backlink/breadcrumb partial with modifier classes for the three existing visual treatments (project/app/legal), verify against all affected templates.
-2. Design one shared card partial (base + completed/concept modifiers) covering `.projects-card` and `.home-service-card`.
-3. Build the global footer and quote/testimonial block only once their content-side blockers (open footer decision, genuine testimonial content) are resolved — not before.
+Building the global footer and quote/testimonial block remains blocked on their content-side decisions (open footer-links decision, genuine testimonial content) — not attempted, and shouldn't be until those are resolved. See "Components that are genuinely blocked" above.

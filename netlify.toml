@@ -30,3 +30,56 @@
 # HTML is served with Netlify's default ETag-based revalidation — no rule
 # needed (a "/*.html" pattern would not match: Netlify splats must be the
 # final path segment).
+
+# Security headers (P5.6). These four are safe and identical everywhere,
+# admin included, so they live on the general "/*" rule.
+#
+# - X-Frame-Options/frame-ancestors: this site is never meant to be framed
+#   by another origin.
+# - Referrer-Policy: no analytics on this site (P0.5), but this still avoids
+#   leaking full same-origin URLs (query strings, paths) to third-party
+#   link targets -- e.g. the legal pages' outbound link to ico.org.uk.
+# - Permissions-Policy: this site uses none of these browser APIs anywhere,
+#   including in Decap's admin UI (its image-upload field uses a plain
+#   file input, not the in-page camera/mic APIs this blocks).
+# - Strict-Transport-Security: deliberately without "preload" -- submitting
+#   to browsers' HSTS preload lists is a hard-to-reverse, cross-site
+#   decision that belongs to the site owner, not something to opt into here.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+# Public-page CSP. Fully verified against this site's actual resource graph:
+# fonts are self-hosted (P5.1), there is no analytics/tracking/chat/ad
+# script anywhere, no inline <style> attributes remain (P5.6 removed the
+# one that existed), and inline JSON-LD <script type="application/ld+json">
+# blocks are exempt from script-src by the CSP spec (non-executable data,
+# not "script-like"). The one data: URI in the compiled stylesheet (a small
+# inline SVG background-image) is why img-src allows data:. The contact
+# and service-enquiry forms' fetch() calls and native <form> fallbacks both
+# submit same-origin, covered by connect-src/form-action 'self'.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+
+# Admin-page CSP override (more specific path, declared after the general
+# rule above so it wins for this path). NOT independently verified against
+# a live login/edit/save/publish round trip -- Decap CMS's actual runtime
+# needs (its unpkg.com-hosted bundle, the GitHub-backed OAuth flow via
+# Netlify's proxy) can't be fully exercised from this environment. Scoped
+# to what the static config declares Decap needs (admin/config.yml's
+# "backend: name: github", and the unpkg.com script tag in admin/index.html)
+# rather than left wide open. Treat this as a starting point, not a
+# finished hardening pass: test the full CMS workflow against it (P5.7)
+# and tighten or loosen specific directives based on real Content-Security-
+# Policy violation reports before relying on it.
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://api.github.com https://api.netlify.com; base-uri 'self'; object-src 'none'; frame-ancestors 'none'"

@@ -45,6 +45,7 @@ const widths = widthsArgument
 const pages = [
   { name: "home", route: "/" },
   { name: "work", route: "/projects.html" },
+  { name: "services-index", route: "/curated_services.html" },
   { name: "studio", route: "/about.html" },
   { name: "contact", route: "/contact.html" },
   { name: "project", route: "/projects/marylebone_residence_lobby.html" },

@@ -11,6 +11,7 @@ cardAlt: Bespoke furnishing service card
 coverImage: /assets/images/curated_services/page_brands/bespoke_furnishing_cover.webp
 coverAlt: Bespoke furnishing and material selection
 intro: Furniture and key pieces sourced (or made) to fit your space and the way you use it—proportion, comfort, and longevity first.
+metaDescription: Furniture and key pieces sourced (or made) to fit your space and the way you use it—proportion, comfort, and longevity first.
 glance:
   - label: Timeline
     text: typically 2–6 weeks (scope-dependent)

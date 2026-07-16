@@ -1,0 +1,48 @@
+---
+layout: layouts/base.njk
+title: Services – Curated Design Studio
+eleventyComputed:
+  description: "{{ site.servicesPage.metaDescription or site.settings.description }}"
+permalink: curated_services.html
+htmlClass: services-page
+bodyClass: services-page font-inter
+topLogo: logo_no_text_on_transparent.svg
+---
+<main id="main-content" class="page-main" tabindex="-1">
+    <header class="projects-header">
+        {% if site.servicesPage.eyebrow %}
+        <p class="projects-header__eyebrow">{{ site.servicesPage.eyebrow }}</p>
+        {% endif %}
+        <div>
+            <h1 class="projects-header__title">{{ site.servicesPage.heroHeadline | safe }}</h1>
+            {% if site.servicesPage.heroSubhead %}
+            <p class="projects-header__intro">{{ site.servicesPage.heroSubhead }}</p>
+            {% endif %}
+        </div>
+    </header>
+
+    <section class="projects-section">
+        <div class="projects-section__inner">
+            {% set allServices = collections.publishedService | sortByOrder %}
+            <div class="projects-grid">
+                {% for service in allServices %}
+                <a class="card card--service" href="/curated_services/{{ service.data.slug }}.html">
+                    <div class="card__media">
+                        {% image service.data.cardImage, service.data.cardAlt or service.data.title, "(min-width: 1024px) 33vw, (min-width: 641px) 50vw, 100vw", "lazy", "", "card" %}
+                    </div>
+                    <h3 class="card__title">{{ service.data.title }}</h3>
+                    {% if service.data.summary %}
+                    <p class="card__summary">{{ service.data.summary }}</p>
+                    {% endif %}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {% set heading = site.settings.ctaHeading %}
+    {% set text = site.settings.ctaText %}
+    {% set href = site.settings.primaryCtaUrl or ("mailto:" + site.settings.email) %}
+    {% set label = site.settings.primaryCtaText %}
+    {% include "partials/cta-band.njk" %}
+</main>

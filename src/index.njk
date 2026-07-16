@@ -112,6 +112,15 @@ showBackground: true
                 </a>
                 {% endfor %}
             </div>
+
+            {% if site.home.servicesSection.moreLink %}
+            <div class="home-services__more">
+                {% if site.home.servicesSection.moreLabel %}
+                <p class="home-services__more-label">{{ site.home.servicesSection.moreLabel }}</p>
+                {% endif %}
+                <a class="home-services__more-link" href="{{ site.home.servicesSection.moreHref or '/curated_services.html' }}">{{ site.home.servicesSection.moreLink }}</a>
+            </div>
+            {% endif %}
         </div>
     </section>
 

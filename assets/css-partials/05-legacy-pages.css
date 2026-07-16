@@ -9,7 +9,7 @@
 
 /* HERO text on projects page should be black (your global hero is light-on-dark) */
 body.projects-page .hero,
-body.projects-page .hero * {
+.hero * {
     color: #000;
 }
 
@@ -21,7 +21,7 @@ body.projects-page .nav-pill {
     color: #000;
 }
 
-body.projects-page .pill::after {
+.pill::after {
     background-color: #000; /* hover / active underline */
 }
 
@@ -74,14 +74,14 @@ body.about-page .pillmenu-toggle .burger-line {
 }
 
 /* Studio shell — outer rhythm */
-body.about-page main.studio {
+main.studio {
     max-width: 1280px;
     margin: 0 auto;
     padding: 144px 80px 80px;
 }
 
 /* 01 — Editorial header (no centred logo) */
-body.about-page .studio-header {
+.studio-header {
     padding-bottom: 96px;
     border-bottom: 1px solid var(--color-border-soft);
     display: grid;
@@ -89,7 +89,7 @@ body.about-page .studio-header {
     gap: 32px;
     align-items: start;
 }
-body.about-page .studio-header__eyebrow {
+.studio-header__eyebrow {
     font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
@@ -98,7 +98,7 @@ body.about-page .studio-header__eyebrow {
     color: var(--color-text-primary);
     margin: 14px 0 0;
 }
-body.about-page .studio-header__title {
+.studio-header__title {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -111,7 +111,7 @@ body.about-page .studio-header__title {
 }
 body.about-page .studio-header__title em { font-style: italic; }
 
-body.about-page .studio-header__intro {
+.studio-header__intro {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 18px;
@@ -124,13 +124,13 @@ body.about-page .studio-header__intro {
 }
 
 /* 02 — Two-column: defines / focus areas */
-body.about-page .studio-two {
+.studio-two {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 96px;
     padding: 80px 0 96px;
 }
-body.about-page .studio-two__heading {
+.studio-two__heading {
     font-family: var(--font-family-display);
     font-style: normal;
     font-weight: 400;
@@ -142,7 +142,7 @@ body.about-page .studio-two__heading {
     padding-top: 24px;
     border-top: 1px solid var(--color-border-soft);
 }
-body.about-page .studio-two__body p {
+.studio-two__body p {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 16px;
@@ -153,14 +153,14 @@ body.about-page .studio-two__body p {
     max-width: 34em;
 }
 body.about-page .studio-two__body p:last-child { margin-bottom: 0; }
-body.about-page .studio-two__list {
+.studio-two__list {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
 }
-body.about-page .studio-two__list li {
+.studio-two__list li {
     font-family: var(--font-family-display);
     font-weight: 300;
     font-size: 22px;
@@ -174,18 +174,18 @@ body.about-page .studio-two__list li:first-child { padding-top: 0; }
 body.about-page .studio-two__list li:last-child { border-bottom: none; }
 
 /* 03 — Process · i / ii / iii */
-body.about-page .studio-process {
+.studio-process {
     padding: 96px 0;
     border-top: 1px solid var(--color-border-soft);
 }
-body.about-page .studio-process__lead {
+.studio-process__lead {
     display: grid;
     grid-template-columns: 96px 1fr;
     gap: 32px;
     align-items: baseline;
     margin-bottom: 64px;
 }
-body.about-page .studio-process__eyebrow {
+.studio-process__eyebrow {
     font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
@@ -194,7 +194,7 @@ body.about-page .studio-process__eyebrow {
     color: var(--color-text-primary);
     margin: 0;
 }
-body.about-page .studio-process__title {
+.studio-process__title {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -208,18 +208,29 @@ body.about-page .studio-process__title {
 }
 body.about-page .studio-process__title em { font-style: italic; }
 
-body.about-page .studio-process__grid {
+.studio-process__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 48px;
 }
-body.about-page .step {
+.studio-process__note {
+    font-family: var(--font-family-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--color-text-muted);
+    margin: 48px 0 0;
+    max-width: 42em;
+    text-wrap: pretty;
+}
+.step {
     display: flex;
     flex-direction: column;
     padding-top: 24px;
     border-top: 1px solid var(--color-text-primary);
 }
-body.about-page .step__roman {
+.step__roman {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 400;
@@ -228,7 +239,7 @@ body.about-page .step__roman {
     color: var(--color-text-primary);
     margin: 0 0 32px;
 }
-body.about-page .step__label {
+.step__label {
     font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
@@ -237,7 +248,7 @@ body.about-page .step__label {
     color: var(--color-text-secondary);
     margin: 0 0 12px;
 }
-body.about-page .step__head {
+.step__head {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -249,7 +260,7 @@ body.about-page .step__head {
     text-wrap: balance;
     max-width: 14ch;
 }
-body.about-page .step__body {
+.step__body {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 15px;
@@ -260,7 +271,7 @@ body.about-page .step__body {
 }
 
 /* 04 — Locations & scope */
-body.about-page .studio-locations {
+.studio-locations {
     padding: 96px 0 80px;
     border-top: 1px solid var(--color-border-soft);
     display: grid;
@@ -268,7 +279,7 @@ body.about-page .studio-locations {
     gap: 32px;
     align-items: start;
 }
-body.about-page .studio-locations__eyebrow {
+.studio-locations__eyebrow {
     font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
@@ -277,13 +288,13 @@ body.about-page .studio-locations__eyebrow {
     color: var(--color-text-primary);
     margin: 6px 0 0;
 }
-body.about-page .studio-locations__body {
+.studio-locations__body {
     display: flex;
     flex-direction: column;
     gap: 24px;
     max-width: 56em;
 }
-body.about-page .studio-locations__heading {
+.studio-locations__heading {
     font-family: var(--font-family-display);
     font-weight: 400;
     font-size: 36px;
@@ -292,7 +303,7 @@ body.about-page .studio-locations__heading {
     color: var(--color-text-primary);
     margin: 0;
 }
-body.about-page .studio-locations__body p {
+.studio-locations__body p {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 17px;
@@ -303,10 +314,10 @@ body.about-page .studio-locations__body p {
 }
 
 /* 05 — Documents & tools — hairline list, no cards */
-body.about-page .studio-docs {
+.studio-docs {
     padding: 56px 0 120px;
 }
-body.about-page .studio-docs__intro {
+.studio-docs__intro {
     display: grid;
     grid-template-columns: 96px 1fr;
     gap: 32px;
@@ -314,7 +325,7 @@ body.about-page .studio-docs__intro {
     padding: 24px 0 32px;
     border-top: 1px solid var(--color-border-soft);
 }
-body.about-page .studio-docs__eyebrow {
+.studio-docs__eyebrow {
     font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
@@ -323,7 +334,7 @@ body.about-page .studio-docs__eyebrow {
     color: var(--color-text-primary);
     margin: 0;
 }
-body.about-page .studio-docs__hint {
+.studio-docs__hint {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -332,12 +343,12 @@ body.about-page .studio-docs__hint {
     margin: 0;
 }
 
-body.about-page .doc-list {
+.doc-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-body.about-page .doc-list__item {
+.doc-list__item {
     display: grid;
     grid-template-columns: 96px 1fr auto;
     gap: 32px;
@@ -345,10 +356,10 @@ body.about-page .doc-list__item {
     padding: 28px 0;
     border-top: 1px solid var(--color-text-primary);
 }
-body.about-page .doc-list__item:last-child {
+.doc-list__item:last-child {
     border-bottom: 1px solid var(--color-text-primary);
 }
-body.about-page .doc-list__label {
+.doc-list__label {
     font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
@@ -357,7 +368,7 @@ body.about-page .doc-list__label {
     color: var(--color-text-secondary);
     margin: 0;
 }
-body.about-page .doc-list__title {
+.doc-list__title {
     font-family: var(--font-family-display);
     font-weight: 400;
     font-size: 24px;
@@ -366,7 +377,7 @@ body.about-page .doc-list__title {
     color: var(--color-text-primary);
     margin: 0;
 }
-body.about-page .doc-list__title .meta {
+.doc-list__title .meta {
     display: block;
     margin-top: 4px;
     font-family: var(--font-family-body);
@@ -376,7 +387,7 @@ body.about-page .doc-list__title .meta {
     color: var(--color-text-muted);
     text-transform: none;
 }
-body.about-page .doc-list__link {
+.doc-list__link {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 400;
@@ -389,11 +400,11 @@ body.about-page .doc-list__link {
     white-space: nowrap;
     transition: border-color 200ms ease, padding-right 200ms ease;
 }
-body.about-page .doc-list__link:hover {
+.doc-list__link:hover {
     border-bottom-color: var(--color-text-primary);
     padding-right: 6px;
 }
-body.about-page .doc-list__link::after {
+.doc-list__link::after {
     content: " →";
     font-style: normal;
 }
@@ -405,7 +416,7 @@ body.about-page .doc-list__link::after {
 }
 @media (max-width: 920px) {
     body.about-page main.studio { padding: 120px 32px 0; }
-    body.about-page .studio-header {
+    .studio-header {
         grid-template-columns: 1fr;
         gap: 16px;
         padding-bottom: 56px;
@@ -415,14 +426,14 @@ body.about-page .doc-list__link::after {
     body.about-page .studio-process__lead { grid-template-columns: 1fr; gap: 16px; }
     body.about-page .studio-process__title { font-size: 32px; }
     body.about-page .studio-process__grid { grid-template-columns: 1fr; gap: 32px; }
-    body.about-page .studio-locations {
+    .studio-locations {
         grid-template-columns: 1fr;
         gap: 16px;
         padding: 56px 0;
     }
     body.about-page .studio-locations__heading { font-size: 28px; }
     body.about-page .studio-docs__intro { grid-template-columns: 1fr; gap: 12px; padding-top: 0; border-top: none; }
-    body.about-page .doc-list__item {
+    .doc-list__item {
         grid-template-columns: 1fr auto;
         grid-template-areas:
             "label link"
@@ -469,7 +480,7 @@ body.contact-page .hero-brand {
 /* ───────────────────────────────────────────────────────────
    Body — two-column editorial layout
    ─────────────────────────────────────────────────────────── */
-body.contact-page .contact-body {
+.contact-body {
     max-width: 1280px;
     margin: 0 auto;
     padding: 24px 80px 160px;
@@ -480,7 +491,7 @@ body.contact-page .contact-body {
 }
 
 /* Left column */
-body.contact-page .contact-headline {
+.contact-headline {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -494,7 +505,7 @@ body.contact-page .contact-headline {
 }
 
 body.contact-page .contact-headline em { font-style: italic; }
-body.contact-page .contact-subline {
+.contact-subline {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 17px;
@@ -507,7 +518,7 @@ body.contact-page .contact-subline {
 }
 
 /* Studio details — no subheading, hairline above */
-body.contact-page .studio-meta {
+.studio-meta {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -515,7 +526,7 @@ body.contact-page .studio-meta {
     border-top: 1px solid var(--color-border-soft);
     font-style: normal;
 }
-body.contact-page .studio-meta__name {
+.studio-meta__name {
     font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
@@ -524,7 +535,7 @@ body.contact-page .studio-meta__name {
     color: var(--color-text-primary);
     margin: 0;
 }
-body.contact-page .studio-meta__addr {
+.studio-meta__addr {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 17px;
@@ -533,7 +544,7 @@ body.contact-page .studio-meta__addr {
     margin: 0;
     font-style: normal;
 }
-body.contact-page .studio-meta__email {
+.studio-meta__email {
     font-family: var(--font-family-body);
     font-weight: 400;
     font-size: 17px;
@@ -544,10 +555,10 @@ body.contact-page .studio-meta__email {
     padding-bottom: 1px;
     transition: border-color 200ms ease;
 }
-body.contact-page .studio-meta__email:hover {
+.studio-meta__email:hover {
     border-bottom-color: var(--color-text-primary);
 }
-body.contact-page .studio-meta__note {
+.studio-meta__note {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -560,7 +571,7 @@ body.contact-page .studio-meta__note {
 }
 
 /* Right column / form — sits on page bg, no card */
-body.contact-page .contact-form-col {
+.contact-form-col {
     display: flex;
     flex-direction: column;
 }
@@ -571,14 +582,14 @@ body.contact-page .contact-form-col {
    reused by .service-enquiry__form in 11-service-redesign.css. */
 
 /* Submit row — editorial link-button, no pill */
-body.contact-page .contact-submit-row {
+.contact-submit-row {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
     gap: 24px;
     margin-top: 16px;
 }
-body.contact-page .contact-submit {
+.contact-submit {
     background: none;
     border: none;
     border-bottom: 1px solid var(--color-text-primary);
@@ -592,23 +603,23 @@ body.contact-page .contact-submit {
     letter-spacing: -0.005em;
     transition: padding-right 200ms ease;
 }
-body.contact-page .contact-submit:hover {
+.contact-submit:hover {
     padding-right: 12px;
 }
-body.contact-page .contact-submit__arrow {
+.contact-submit__arrow {
     font-style: normal;
     display: inline-block;
     margin-left: 8px;
     transition: transform 240ms ease;
 }
-body.contact-page .contact-submit:hover .contact-submit__arrow {
+.contact-submit:hover .contact-submit__arrow {
     transform: translateX(4px);
 }
-body.contact-page .contact-submit[disabled] {
+.contact-submit[disabled] {
     opacity: 0.7;
     cursor: wait;
 }
-body.contact-page .contact-submit-meta {
+.contact-submit-meta {
     font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
@@ -617,7 +628,7 @@ body.contact-page .contact-submit-meta {
     color: var(--color-text-muted);
 }
 
-body.contact-page .contact-form-privacy {
+.contact-form-privacy {
     font-family: var(--font-family-body);
     font-size: 12px;
     font-weight: 300;
@@ -625,22 +636,22 @@ body.contact-page .contact-form-privacy {
     color: var(--color-text-muted);
     margin: -10px 0 0;
 }
-body.contact-page .contact-form-privacy a {
+.contact-form-privacy a {
     color: inherit;
     text-underline-offset: 3px;
 }
 
 /* Error / success states */
-body.contact-page .contact-form-error {
+.contact-form-error {
     font-family: var(--font-family-body);
     font-size: 14px;
     color: var(--color-state-error);
     margin: 0;
 }
-body.contact-page .contact-form-success {
+.contact-form-success {
     padding-top: 18px;
 }
-body.contact-page .contact-form-success__title {
+.contact-form-success__title {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -649,7 +660,7 @@ body.contact-page .contact-form-success__title {
     color: var(--color-text-primary);
     margin: 0 0 12px;
 }
-body.contact-page .contact-form-success__text {
+.contact-form-success__text {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 17px;
@@ -666,7 +677,7 @@ body.contact-page .hidden {
     body.contact-page .contact-headline { font-size: 64px; }
 }
 @media (max-width: 920px) {
-    body.contact-page .contact-body {
+    .contact-body {
         grid-template-columns: 1fr;
         gap: 56px;
         padding: 24px 32px 96px;

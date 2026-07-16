@@ -41,9 +41,10 @@ sectionTop: true
 {% set heroAlt = project.data.heroAlt or project.data.title %}
 {% set mediaCount = galleryImages.length + (1 if heroSrc else 0) %}
 
+{% from "partials/backlink.njk" import hero as backlinkHero -%}
 <main id="main-content" class="page-main" tabindex="-1">
     <div class="project-topbar">
-        <a class="backlink backlink--hero" href="/projects.html"><span aria-hidden="true">← </span>Back to Work</a>
+        {{ backlinkHero("/projects.html", "Back to Work") }}
     </div>
 
     <header class="project-hero" aria-label="Project hero">

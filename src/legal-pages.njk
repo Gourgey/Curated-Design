@@ -12,12 +12,13 @@ htmlClass: legal-page
 bodyClass: legal-page min-h-screen font-inter
 sectionTop: true
 ---
+{% from "partials/backlink.njk" import pill as backlinkPill -%}
 <main id="main-content" class="page-main" tabindex="-1">
     {% include "partials/hero-brand.njk" %}
 
     <section class="legal-content">
         <div class="legal-wrap">
-            <p class="backlink-row"><a class="backlink backlink--pill" href="/about.html">Back to studio</a></p>
+            {{ backlinkPill("/about.html", "Back to studio") }}
 
             <header class="legal-header">
                 <p class="legal-kicker">{{ legalPage.kicker }}</p>

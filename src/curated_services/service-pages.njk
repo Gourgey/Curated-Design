@@ -20,7 +20,10 @@ scripts:
 {% set hasSections = service.data.sections and service.data.sections.length %}
 {% set coverAlt = service.data.coverAlt or service.data.title %}
 
+{% from "partials/backlink.njk" import pill as backlinkPill -%}
 <main id="main-content" class="service" tabindex="-1">
+    {{ backlinkPill("/curated_services.html", "Back to Services") }}
+
     <header class="service-header">
         <p class="service-header__eyebrow">{{ service.data.eyebrow or "Service" }}</p>
         <div>

@@ -1,33 +1,35 @@
 # Overhaul decision log
 
-Last updated: 15 July 2026
+Last updated: 16 July 2026
 
 This log separates confirmed implementation facts from decisions that need business approval. Open decisions do not block the current safety and correctness milestone unless noted.
 
 | Decision | Current working position | State | Needed before |
 | --- | --- | --- | --- |
-| Primary navigation | No Services index for now — footer/nav should stay to the current three routes (Work, Studio, Contact); revisit only if a Services index gets built later | **Decided (16 July 2026, owner: site owner)** | — |
+| Primary navigation | Primary nav/footer stay to the current three routes (Work, Studio, Contact) — a Services index existing (see P3.2 below) doesn't change this; it's reached via in-page links, not the primary nav or footer | **Decided (16 July 2026, owner: site owner)** | — |
+| Services index (P3.2) | Reversed 16 July 2026: build a Services index at `/curated_services.html` after all, linked from the homepage's Curated Services section, the Studio page, and the Work page (each via a small in-page link, not primary nav/footer — see Primary navigation row above); each service detail page links back to it | **Decided (16 July 2026, owner: site owner)** | Implemented — see P3.2 in the build plan |
 | Secondary/footer destinations | Footer should include: contact + the three main nav routes (Work, Studio, Contact) — no Services link; all existing legal/company pages (Company Information, Privacy Notice, Terms of Business); app-support links, shown visibly (not de-emphasised); no social profile links — none exist to add | **Decided (16 July 2026, owner: site owner)** | Ready for Global footer build (P3.1) |
-| Primary CMS | Use Decap as the provisional primary structured editor; keep the custom visual CMS outside the supported publishing path until it demonstrably shares the same contract | Provisional — supported by the current README and configuration | CMS hardening and schema generation |
-| URL strategy | Retain current `.html` routes for now; do not change permalinks without an approved redirect map | Provisional | Any clean-URL migration |
-| Analytics | No analytics integration was found in the repository; do not add one by default | Open — hosting-level tools also need confirmation | Privacy review and Phase 5 |
+| Primary CMS | Decap is the primary structured editor; the custom visual CMS is retired from the supported publishing path (see reasoning below) rather than kept as a second option. A "drop all CMS, edit content via a coding agent + git" alternative was raised and considered — deferred in favour of keeping Decap, since Decap is already schema-synced and working, gives a deploy-preview safety net before publish, and remains available to a future non-technical editor without re-building anything; the reversibility is asymmetric (dropping it later is cheap, rebuilding it later is not) | **Decided (16 July 2026, owner: site owner)** | CMS hardening (P5.7) and generating `admin/config.yml` from the shared content contract |
+| URL strategy | Move to clean directory URLs. Chosen now rather than later because the site is still small (29 pages) and pre-launch on search visibility (single published case study) — migration cost only grows the longer current `.html` URLs stay live and get indexed/linked externally. Full pattern now confirmed: `/work/`, `/studio/`, `/services/`, `/services/{slug}/`, `/contact/`, and — the two patterns P0.4 originally left open — project pages nest under Work (`/work/{slug}/`, not `/projects/{slug}/`) and the three general legal pages move flat (`/terms-of-business/`, `/privacy-notice/`, `/company-information/`, not nested under `/legal/`). `/apps/*` stays unchanged (external products may reference those URLs). See P3.9 in the build plan for the full old→new mapping table and file list | **Decided (16 July 2026, owner: site owner)** | Implementation: permalink changes, the old-to-new redirect map, and a full internal-link sweep — scoped in P3.9, not yet executed |
+| Analytics | No analytics integration; do not add one by default | **Decided (16 July 2026, owner: site owner)** | — |
+| Project inventory | The classification table in `docs/overhaul/CONTENT-INVENTORY.md` (title, location, type, status, public treatment per project) is confirmed accurate. Per-project image rights/type and approved brief/outcome wording are separate, still-open items — see Image permissions below | **Decided (16 July 2026, owner: site owner)** | — |
 | Project indexing | Published projects may be indexed; coming-soon teasers are `noindex` and excluded from the sitemap; drafts are not generated | Implemented | Revisit when a teaser becomes a complete case study |
 | Case-study launch threshold | Launch with the single published case study (Marylebone Lobby) rather than waiting for two or three; revisit only if/when more case studies are ready | **Decided (16 July 2026, owner: site owner)** | Ready for Phase 3–4 homepage/Work redesign |
 | Quote/testimonial block | No genuine client testimonial exists to publish; do not build a testimonial section for this launch | **Decided (16 July 2026, owner: site owner)** | — |
 | Enquiry qualification fields | Preserve the current required fields while project type remains optional; do not tighten or remove qualification fields without an owner confirming what the studio genuinely needs | Open business decision | Final form-copy approval |
 | Enquiry budget guidance | Preserve the current general-contact and service-specific examples; the £80–150k and £5–15k ranges may reflect different scopes but need explicit approval before they are reconciled | Open business decision | Final form-copy approval |
-| Image permissions | Treat all current publication rights and credits as unconfirmed until an owner signs them off | Open, hard gate | Final content approval |
-| Legal review | Do not treat implementation review as legal approval | Open, hard gate | Privacy/terms release |
+| Image permissions | Treat all current publication rights and credits as unconfirmed until the owner signs them off. Owner assigned: the site owner will personally confirm ownership, publication permission, credit, and photography-vs-visualisation type per project image | **Owner assigned (16 July 2026, owner: site owner)** — confirmation itself is still outstanding per project | Final content approval |
+| Legal review | Do not treat implementation review as legal approval. Owner assigned: the site owner will personally review privacy/terms/company-information content before launch. This is an informal self-review, not professional legal advice — if that distinction matters for this business, revisit before launch | **Owner assigned (16 July 2026, owner: site owner)** — review itself is still outstanding | Privacy/terms release |
 | Runtime | Node 22 is selected in `.nvmrc`; package dependencies require Node 22.12 or newer; CI consumes the same version file | Implemented; local verification on 15 July 2026 used Node 25.8.1 | Revisit only when upgrading the runtime |
+| Site positioning (P3.8 metadata) | Approved: state London as the primary location and "Interior Design Studio" as the service category in SEO metadata (homepage title: "Interior Design Studio London \| Curated Design"). The studio intentionally covers multiple project types (residential, hospitality, commercial) rather than narrowing to one — do not narrow the positioning without an explicit request | **Decided (16 July 2026, owner: site owner)** | Ready for the rest of P3.8's per-page metadata |
+| Homepage layout (P3.5) | A P3.5 implementation pass restructured the homepage (featured carousel pointed at the one published case study, hero primary/secondary CTAs, a new Process section, Collections-duplication guard). The site owner declined the direction itself, not just the execution; reverted in full. Keep the current homepage structure as-is — including the featured carousel still referencing coming-soon projects — and do not restructure it again without an explicit request, even under a generic "continue the build plan" instruction | **Declined (16 July 2026, owner: site owner)** | — |
 
 ## Owners still required
 
-- Project facts and public/draft/private classification: unassigned.
-- Image ownership, permission, type, and credit: unassigned.
-- Homepage, Studio, and service copy approval: unassigned.
-- Privacy and terms review: unassigned.
-- URL migration approval: unassigned.
-- Analytics and consent decision: unassigned.
+- Image ownership, permission, type, and credit per project: owner assigned (site owner), confirmation itself still outstanding.
+- Privacy and terms review: owner assigned (site owner, informal self-review), review itself still outstanding.
+- Homepage, Studio, and service body-copy approval: unassigned (SEO metadata positioning is decided — see Site positioning row above).
+- Redirect map for the clean-URL migration (P3.9): unassigned.
 
 ## Decisions deliberately not inferred
 

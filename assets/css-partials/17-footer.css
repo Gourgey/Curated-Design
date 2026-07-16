@@ -7,6 +7,12 @@
    social links (none exist to add). */
 
 .site-footer {
+    position: relative;
+    z-index: 1; /* #bg is position:fixed with z-index:0 (02-base.css) and
+                   establishes its own stacking context above plain static
+                   content; main.page-main already opts out the same way.
+                   Without this the footer rendered behind the fixed
+                   background image instead of on top of it. */
     background: var(--color-surface-inverse);
     color: var(--color-text-inverse);
 }

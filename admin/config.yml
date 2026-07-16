@@ -78,6 +78,9 @@ collections:
               - { label: "Kicker", name: "kicker", widget: "string" }
               - { label: "Heading", name: "heading", widget: "string" }
               - { label: "Lead", name: "lead", widget: "text" }
+              - { label: "More Label", name: "moreLabel", widget: "string", required: false, hint: "Small label beside the 'view all' link (e.g. 'Index')." }
+              - { label: "More Link Text", name: "moreLink", widget: "string", required: false, hint: "Text of the 'View all services' link. Leave empty to hide it." }
+              - { label: "More Link URL", name: "moreHref", widget: "string", required: false, hint: "Defaults to /curated_services.html." }
               - label: "Featured Services"
                 name: "featuredServices"
                 widget: "list"
@@ -169,6 +172,7 @@ collections:
               - { label: "Label", name: "label", widget: "string", hint: "Small label above the step heading (e.g. 'Brief & concept')." }
               - { label: "Heading", name: "head", widget: "string" }
               - { label: "Text", name: "text", widget: "text" }
+          - { label: "Process Closing Note", name: "processNote", widget: "text", required: false, hint: "Optional short line closing the process section (e.g. what clients can expect while working together). Keep it general, not a specific scenario." }
           - { label: "Locations Eyebrow", name: "locationsEyebrow", widget: "string", required: false }
           - { label: "Locations Heading", name: "locationsHeading", widget: "string" }
           - { label: "Locations Text", name: "locationsText", widget: "text" }
@@ -224,6 +228,15 @@ collections:
               - { label: "Label", name: "label", widget: "string" }
               - { label: "Heading", name: "heading", widget: "string" }
               - { label: "Note", name: "note", widget: "text" }
+      - name: "servicesPage"
+        label: "Services Page"
+        file: "src/content/pages/services.json"
+        format: "json"
+        fields:
+          - { label: "Meta Description (SEO)", name: "metaDescription", widget: "text", required: false, hint: "Optional. Falls back to the site-wide default in Site Settings." }
+          - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false, hint: "Small label above the hero headline." }
+          - { label: "Hero Headline", name: "heroHeadline", widget: "string" }
+          - { label: "Hero Subhead", name: "heroSubhead", widget: "text" }
 
   - name: "services"
     label: "Services"

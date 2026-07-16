@@ -219,7 +219,7 @@
     line-height: 0;
 }
 /* Hero */
-body.project-page .project-hero {
+.project-hero {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
@@ -230,23 +230,23 @@ body.project-page .project-hero {
     min-height: clamp(620px, 100svh, 980px);
 }
 
-body.project-page .project-hero-media {
+.project-hero-media {
     margin: 0;
     width: 100%;
 }
 
-body.project-page .project-hero-track {
+.project-hero-track {
     display: flex;
     width: 100%;
     transform: translateX(0);
     transition: transform 360ms ease;
 }
 
-body.project-page .project-hero-slide {
+.project-hero-slide {
     min-width: 100%;
 }
 
-body.project-page .project-hero-media img {
+.project-hero-media img {
     width: 100%;
     object-fit: cover;
     display: block;
@@ -256,7 +256,7 @@ body.project-page .project-hero-media img {
     object-position: center center;
 }
 
-body.project-page .project-hero-control {
+.project-hero-control {
     position: absolute;
     top: 50%;
     z-index: 3;
@@ -273,15 +273,15 @@ body.project-page .project-hero-control {
     box-shadow: none;
 }
 
-body.project-page .project-hero-control--prev {
+.project-hero-control--prev {
     left: 18px;
 }
 
-body.project-page .project-hero-control--next {
+.project-hero-control--next {
     right: 18px;
 }
 
-body.project-page .project-hero-dots {
+.project-hero-dots {
     position: absolute;
     left: 50%;
     bottom: 34px;
@@ -291,7 +291,7 @@ body.project-page .project-hero-dots {
     transform: translateX(-50%);
 }
 
-body.project-page .project-hero-dots button {
+.project-hero-dots button {
     position: relative;
     width: 44px;
     height: 44px;
@@ -301,11 +301,11 @@ body.project-page .project-hero-dots button {
     cursor: pointer;
 }
 
-body.project-page .project-hero-dots button.active {
+.project-hero-dots button.active {
     background: transparent;
 }
 
-body.project-page .project-hero-dots button::before {
+.project-hero-dots button::before {
     content: "";
     position: absolute;
     top: 50%;
@@ -318,12 +318,12 @@ body.project-page .project-hero-dots button::before {
     transform: translate(-50%, -50%);
 }
 
-body.project-page .project-hero-dots button.active::before {
+.project-hero-dots button.active::before {
     background: #fff;
 }
-body.project-page .project-hero-media,
-body.project-page .project-hero-track,
-body.project-page .project-hero-slide {
+.project-hero-media,
+.project-hero-track,
+.project-hero-slide {
     height: 100%;
 }
 
@@ -331,10 +331,10 @@ body.project-page .project-hero-slide {
    gallery item sets caption or imageType (see build plan P3.4). Kept to
    the same dark-pill visual language as .coming-soon-badge and the hero
    controls. */
-body.project-page .project-hero-slide {
+.project-hero-slide {
     position: relative;
 }
-body.project-page .project-hero-slide__caption {
+.project-hero-slide__caption {
     position: absolute;
     left: 18px;
     bottom: 18px;
@@ -353,7 +353,7 @@ body.project-page .project-hero-slide__caption {
     font-size: 12px;
     line-height: 1.4;
 }
-body.project-page .project-hero-slide__caption-type {
+.project-hero-slide__caption-type {
     flex-shrink: 0;
     padding: 2px 8px;
     border-radius: 999px;

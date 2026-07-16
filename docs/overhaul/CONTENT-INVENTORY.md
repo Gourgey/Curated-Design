@@ -1,14 +1,16 @@
 # Overhaul content inventory
 
-Last updated: 15 July 2026
+Last updated: 16 July 2026
 
 This is the Phase 0 working inventory for the existing project collection. It records what the repository can establish without inventing project facts or assuming image rights. Items marked **confirmation required** need a business or content owner before the redesign can treat them as approved claims.
+
+**Inventory approved as-is (16 July 2026, owner: site owner).** The classification table below — public title, location, type, status, and public treatment per project — is confirmed accurate. This does not extend to the still-open per-project items in the approval checklist below (image rights/type/ownership, approved brief/outcome wording): those remain unconfirmed, now with the site owner as the named owner for closing them out.
 
 ## Current classification
 
 | Project | Type and location | Repository status | Public treatment | Image type and rights | Case-study readiness | Required follow-up |
 | --- | --- | --- | --- | --- | --- | --- |
-| Marylebone Lobby | Residential lobby; Marylebone, London | `published` | Linked and indexable | Image type is not explicitly recorded; publication permission is unconfirmed | Best current candidate; the only complete case study in the content model | Confirm whether imagery is photography or visualisation, rights/credits, client-approved facts, outcome wording, and whether 2026 is correct |
+| Marylebone Lobby | Residential lobby; Marylebone, London | `published` | Linked and indexable | Confirmed 16 July 2026 (owner: site owner): all images are photography taken by the site owner; gallery images now carry `imageType: Photography`. Outcome wording confirmed and published (see Outcome section). Client-approved facts and whether "2026" is correct remain unconfirmed | Best current candidate; the only complete case study in the content model | Confirm client-approved facts and whether 2026 is correct |
 | Sandbanks Residence | Residential; Sandbanks | `coming_soon` | Linked teaser; `noindex`; excluded from sitemap | Alt text calls the image an exterior visual; rights are unconfirmed | Not launch-quality as a full case study | Confirm project status, image type/rights, brief, interventions, outcome, and whether it should remain public |
 | Botanical Residence | Residential; location not recorded | `coming_soon` | Linked teaser; `noindex`; excluded from sitemap | Alt text calls the image a concept visual; rights are unconfirmed | Not launch-quality as a full case study | Confirm location, real project status, image type/rights, brief, interventions, and outcome |
 | Marylebone Terrace | Residential terrace; Marylebone, London | `coming_soon` | Linked teaser; `noindex`; excluded from sitemap | Image type and rights are unconfirmed | Not launch-quality as a full case study | Confirm project status, image type/rights, brief, interventions, and outcome |
@@ -29,23 +31,23 @@ This is the Phase 0 working inventory for the existing project collection. It re
 
 For every project intended for the redesigned public portfolio, assign a content owner and confirm:
 
-- [ ] public title, location, type, and year;
-- [ ] completed, in-progress, concept, archived, or private status;
-- [ ] image type for every image;
-- [ ] ownership, publication permission, and credit;
-- [ ] approved brief, constraints, interventions, and outcome;
-- [ ] indexable, teaser/noindex, draft, private, or remove treatment;
-- [ ] whether it qualifies as a launch case study.
+- [x] public title, location, type, and year — confirmed by the 16 July 2026 inventory approval above.
+- [x] completed, in-progress, concept, archived, or private status — confirmed by the 16 July 2026 inventory approval above.
+- [ ] image type for every image — owner: site owner; confirmed for Marylebone Lobby (photography, 16 July 2026), not yet confirmed for any other project.
+- [ ] ownership, publication permission, and credit — owner: site owner; confirmed for Marylebone Lobby (site owner's own photography, 16 July 2026), not yet confirmed for any other project.
+- [x] approved brief, constraints, interventions, and outcome — outcome confirmed for Marylebone Lobby 16 July 2026 (owner: site owner); other projects unconfirmed beyond what they already publish.
+- [x] indexable, teaser/noindex, draft, private, or remove treatment — confirmed by the 16 July 2026 inventory approval above; implemented per P1.10.
+- [x] whether it qualifies as a launch case study — resolved by the case-study launch threshold decision: Marylebone Lobby alone, see `docs/overhaul/DECISIONS.md`.
 
-## Current launch constraint
+## Current launch constraint — resolved
 
-Do not complete the new homepage or Work hierarchy around the present five coming-soon projects. Either approve and complete at least one or two more genuine case studies, or explicitly approve a smaller portfolio led by Marylebone Lobby.
+**Resolved (16 July 2026, owner: site owner).** The site owner explicitly approved a smaller portfolio led by Marylebone Lobby rather than waiting for more case studies — see the case-study launch threshold decision in `docs/overhaul/DECISIONS.md`. The original constraint (do not complete the homepage/Work hierarchy around the present five coming-soon projects without one of the two approvals below) is satisfied by that decision. Kept here for the historical record of what the constraint was and how it was closed.
 
 ## Case-study model gaps (P3.4, 16 July 2026)
 
-Building out the case-study content model against Marylebone Lobby (the one published project) surfaced two specific, still-open follow-ups from the row above, now backed by real schema capability rather than a general note:
+Building out the case-study content model against Marylebone Lobby (the one published project) surfaced two specific follow-ups from the row above, now backed by real schema capability rather than a general note — both resolved for this project on 16 July 2026:
 
-- **Outcome wording.** The template's `extraSections` already supports an arbitrary heading/text block, so an editor can add an "Outcome" section as soon as approved outcome wording exists. None has been written for Marylebone Lobby yet.
-- **Image type (photography vs. visualisation).** `admin/config.yml` now exposes an optional `imageType` field per gallery image (and a matching optional `caption` field). Neither is set on any current project's gallery images — setting `imageType` without confirmation would assert a rights/provenance claim this inventory already lists as unconfirmed.
+- **Outcome wording.** The template's `extraSections` already supports an arbitrary heading/text block. The site owner confirmed the outcome — a redesigned lobby that gives residents a warmer welcome on arrival and gives guests a proper waiting area — now published as an "Outcome" section.
+- **Image type (photography vs. visualisation).** `admin/config.yml` exposes an optional `imageType` field per gallery image (and a matching optional `caption` field). The site owner confirmed both of Marylebone Lobby's gallery images are their own photography; `imageType: Photography` is now set on both.
 
-Both are content/business decisions, not implementation gaps — do not fill either in without an owner's sign-off.
+Both were content/business decisions, not implementation gaps, and still are for every other project — do not fill either in for another project without that project's own owner sign-off.

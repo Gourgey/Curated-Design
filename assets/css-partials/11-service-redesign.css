@@ -17,21 +17,21 @@ body.concept-page {
 }
 
 /* Outer rhythm */
-body.concept-page main.service {
+main.service {
     max-width: 1280px;
     margin: 0 auto;
     padding: 144px 80px 80px;
 }
 
 /* Header */
-body.concept-page .service-header {
+.service-header {
     display: grid;
     grid-template-columns: 96px 1fr;
     gap: 32px;
     align-items: start;
     padding-bottom: 64px;
 }
-body.concept-page .service-header__eyebrow {
+.service-header__eyebrow {
     font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
@@ -40,7 +40,7 @@ body.concept-page .service-header__eyebrow {
     color: var(--color-text-primary);
     margin: 14px 0 0;
 }
-body.concept-page .service-header__title {
+.service-header__title {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -52,7 +52,7 @@ body.concept-page .service-header__title {
     text-wrap: balance;
 }
 body.concept-page .service-header__title em { font-style: italic; }
-body.concept-page .service-header__intro {
+.service-header__intro {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 18px;
@@ -64,11 +64,11 @@ body.concept-page .service-header__intro {
 }
 
 /* Cover image — clean editorial frame, no rounded corners or shadow */
-body.concept-page .service-hero {
+.service-hero {
     margin: 0 0 64px;
     overflow: hidden;
 }
-body.concept-page .service-hero img {
+.service-hero img {
     width: 100%;
     height: clamp(280px, 40vw, 520px);
     object-fit: cover;
@@ -76,13 +76,13 @@ body.concept-page .service-hero img {
 }
 
 /* Two-column body */
-body.concept-page .service-body {
+.service-body {
     display: grid;
     grid-template-columns: 1fr;
     gap: 40px;
 }
 @media (min-width: 900px) {
-    body.concept-page .service-body {
+    .service-body {
         grid-template-columns: 3fr 2fr;
         gap: 64px;
         align-items: start;
@@ -90,18 +90,18 @@ body.concept-page .service-body {
 }
 
 /* Left column — sections with hairline rule above each */
-body.concept-page .service-section {
+.service-section {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 24px;
     margin-top: 40px;
 }
-body.concept-page .service-section:first-child {
+.service-section:first-child {
     margin-top: 0;
 }
-body.concept-page .service-section__heading {
+.service-section__heading {
     margin: 0 0 16px;
 }
-body.concept-page .service-section__list {
+.service-section__list {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 15px;
@@ -111,22 +111,22 @@ body.concept-page .service-section__list {
     margin: 0;
     color: var(--color-text-secondary);
 }
-body.concept-page .service-section__list li {
+.service-section__list li {
     padding: 10px 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
-body.concept-page .service-section__list li:last-child {
+.service-section__list li:last-child {
     border-bottom: none;
 }
-body.concept-page ol.service-section__list {
+ol.service-section__list {
     counter-reset: srv-step;
 }
-body.concept-page ol.service-section__list li {
+ol.service-section__list li {
     counter-increment: srv-step;
     padding-left: 32px;
     position: relative;
 }
-body.concept-page ol.service-section__list li::before {
+ol.service-section__list li::before {
     content: counter(srv-step, lower-roman);
     position: absolute;
     left: 0;
@@ -137,7 +137,7 @@ body.concept-page ol.service-section__list li::before {
     font-size: 14px;
     letter-spacing: 0.04em;
 }
-body.concept-page .service-section__note {
+.service-section__note {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -150,25 +150,25 @@ body.concept-page .service-section__note {
 }
 
 /* Right column — sticky aside containing At-a-glance + enquiry form */
-body.concept-page .service-body__aside {
+.service-body__aside {
     display: flex;
     flex-direction: column;
     gap: 40px;
 }
 @media (min-width: 900px) {
-    body.concept-page .service-body__aside {
+    .service-body__aside {
         position: sticky;
         top: 32px;
     }
 }
 
 /* At-a-glance facts list */
-body.concept-page .service-glance__list {
+.service-glance__list {
     list-style: none;
     padding: 0;
     margin: 16px 0 0;
 }
-body.concept-page .service-glance__row {
+.service-glance__row {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -176,10 +176,10 @@ body.concept-page .service-glance__row {
     gap: 16px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-body.concept-page .service-glance__row:first-child {
+.service-glance__row:first-child {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
-body.concept-page .service-glance__label {
+.service-glance__label {
     font-family: var(--font-family-body);
     font-weight: 500;
     font-size: 12px;
@@ -188,7 +188,7 @@ body.concept-page .service-glance__label {
     color: var(--color-text-muted);
     margin: 0;
 }
-body.concept-page .service-glance__value {
+.service-glance__value {
     font-family: var(--font-family-display);
     font-style: italic;
     font-size: 16px;
@@ -200,7 +200,7 @@ body.concept-page .service-glance__value {
 }
 
 /* Enquiry block */
-body.concept-page .service-enquiry__title {
+.service-enquiry__title {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -211,7 +211,7 @@ body.concept-page .service-enquiry__title {
     margin: 0 0 12px;
     text-wrap: balance;
 }
-body.concept-page .service-enquiry__intro {
+.service-enquiry__intro {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 14px;
@@ -226,30 +226,30 @@ body.concept-page .service-enquiry__intro {
    same structure as .contact-form in 05-legacy-pages.css, just tuned to a
    smaller scale for this in-context aside. */
 
-body.concept-page .service-enquiry__privacy,
-body.concept-page .service-enquiry__error,
-body.concept-page .service-enquiry__success-text {
+.service-enquiry__privacy,
+.service-enquiry__error,
+.service-enquiry__success-text {
     font-family: var(--font-family-body);
     font-size: 12px;
     font-weight: 300;
     line-height: 1.55;
     margin: 0;
 }
-body.concept-page .service-enquiry__privacy {
+.service-enquiry__privacy {
     color: var(--color-text-muted);
     margin-top: -8px;
 }
-body.concept-page .service-enquiry__privacy a {
+.service-enquiry__privacy a {
     color: inherit;
     text-underline-offset: 3px;
 }
-body.concept-page .service-enquiry__error {
+.service-enquiry__error {
     color: var(--color-state-error);
 }
-body.concept-page .service-enquiry__success {
+.service-enquiry__success {
     padding-top: 8px;
 }
-body.concept-page .service-enquiry__success-title {
+.service-enquiry__success-title {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -258,22 +258,22 @@ body.concept-page .service-enquiry__success-title {
     color: var(--color-text-primary);
     margin: 0 0 10px;
 }
-body.concept-page .service-enquiry__success-text {
+.service-enquiry__success-text {
     color: var(--color-text-secondary);
 }
-body.concept-page .service-enquiry__submit[disabled] {
+.service-enquiry__submit[disabled] {
     opacity: 0.7;
     cursor: wait;
 }
-body.concept-page .service-enquiry .hidden {
+.service-enquiry .hidden {
     display: none;
 }
 
 /* Submit — editorial link-button */
-body.concept-page .service-enquiry__submit-row {
+.service-enquiry__submit-row {
     margin-top: 8px;
 }
-body.concept-page .service-enquiry__submit {
+.service-enquiry__submit {
     background: none;
     border: none;
     border-bottom: 1px solid var(--color-text-primary);
@@ -290,14 +290,14 @@ body.concept-page .service-enquiry__submit {
     gap: 10px;
     transition: padding-right 200ms ease;
 }
-body.concept-page .service-enquiry__submit:hover {
+.service-enquiry__submit:hover {
     padding-right: 12px;
 }
-body.concept-page .service-enquiry__arrow {
+.service-enquiry__arrow {
     font-style: normal;
     transition: transform 240ms ease;
 }
-body.concept-page .service-enquiry__submit:hover .service-enquiry__arrow {
+.service-enquiry__submit:hover .service-enquiry__arrow {
     transform: translateX(4px);
 }
 
@@ -314,24 +314,24 @@ body.concept-page .label-small {
 
 /* Responsive */
 @media (max-width: 920px) {
-    body.concept-page main.service {
+    main.service {
         padding: 120px 32px 0;
     }
-    body.concept-page .service-header {
+    .service-header {
         grid-template-columns: 1fr;
         gap: 16px;
         padding-bottom: 56px;
     }
-    body.concept-page .service-header__title {
+    .service-header__title {
         font-size: 52px;
     }
-    body.concept-page .service-hero {
+    .service-hero {
         margin-bottom: 48px;
     }
-    body.concept-page .service-hero img {
+    .service-hero img {
         height: clamp(240px, 50vw, 400px);
     }
-    body.concept-page .service-body__aside {
+    .service-body__aside {
         gap: 32px;
     }
 }
@@ -348,11 +348,11 @@ body.project-page .nav-pill .pillmenu-toggle {
     box-shadow: none;
 }
 body.project-page .pill,
-body.project-page .nav-pill .pill {
+.nav-pill .pill {
     color: rgba(247, 244, 237, 0.94);
 }
 body.project-page .pill:hover,
-body.project-page .nav-pill .pill:hover {
+.nav-pill .pill:hover {
     color: #fff;
     background: rgba(255, 255, 255, 0.08);
 }
@@ -361,17 +361,17 @@ body.project-page .nav-pill .pill:hover {
    { height: 100% } rule that lived here moved to
    assets/css-partials/12-carousels.css (P2.2 by-topic regrouping). */
 
-body.project-page .project-cta-band {
+.project-cta-band {
     background: #12120f;
     color: rgba(237, 232, 221, 0.96);
     padding: clamp(92px, 12vw, 172px) 0 clamp(84px, 10vw, 144px);
 }
-body.project-page .project-cta__inner {
+.project-cta__inner {
     width: min(1320px, calc(100% - 64px));
     margin: 0 auto;
     text-align: left;
 }
-body.project-page .project-cta-band .h2 {
+.project-cta-band .h2 {
     max-width: 9.8em;
     margin: 0 0 68px;
     color: rgba(237, 232, 221, 0.98) !important;
@@ -382,7 +382,7 @@ body.project-page .project-cta-band .h2 {
     letter-spacing: 0;
     line-height: 0.98;
 }
-body.project-page .project-cta-band .h2::before {
+.project-cta-band .h2::before {
     content: "Contact";
     display: block;
     margin: 0 0 34px;
@@ -395,7 +395,7 @@ body.project-page .project-cta-band .h2::before {
     line-height: 1;
     text-transform: uppercase;
 }
-body.project-page .project-cta-band .lead {
+.project-cta-band .lead {
     max-width: 48em;
     margin: 0 0 42px;
     color: rgba(237, 232, 221, 0.74) !important;
@@ -404,7 +404,7 @@ body.project-page .project-cta-band .lead {
     font-weight: 300;
     line-height: 1.55;
 }
-body.project-page .project-cta-band .about-cta-button {
+.project-cta-band .about-cta-button {
     display: flex;
     width: 100%;
     align-items: baseline;
@@ -423,11 +423,11 @@ body.project-page .project-cta-band .about-cta-button {
     font-weight: 300;
     line-height: 1;
 }
-body.project-page .project-cta-band .about-cta-button:hover {
+.project-cta-band .about-cta-button:hover {
     background: transparent;
     color: #fff !important;
 }
-body.project-page .project-cta-band .about-cta-button::after {
+.project-cta-band .about-cta-button::after {
     content: "→";
     margin-left: 8px;
     font-family: "Inter", sans-serif;
@@ -436,10 +436,10 @@ body.project-page .project-cta-band .about-cta-button::after {
     line-height: 1;
     transition: transform 180ms ease;
 }
-body.project-page .project-cta-band .about-cta-button:hover::after {
+.project-cta-band .about-cta-button:hover::after {
     transform: translateX(6px);
 }
-body.project-page .project-cta-band .about-cta-button .dot {
+.project-cta-band .about-cta-button .dot {
     width: 8px;
     height: 8px;
     flex: 0 0 auto;
@@ -448,35 +448,35 @@ body.project-page .project-cta-band .about-cta-button .dot {
 }
 
 @media (max-width: 760px) {
-    body.project-page .project-topbar,
-body.project-page .project-hero-inner,
-body.project-page .project-cta__inner {
+    .project-topbar,
+.project-hero-inner,
+.project-cta__inner {
         width: min(100% - 32px, 1320px);
     }
-    body.project-page .project-topbar {
+    .project-topbar {
         top: 96px;
     }
-    body.project-page .project-hero,
-body.project-page .project-hero-media img {
+    .project-hero,
+.project-hero-media img {
         min-height: 720px;
         height: 86svh;
     }
-    body.project-page .project-title {
+    .project-title {
         font-size: clamp(56px, 18vw, 82px);
     }
-    body.project-page .project-subtitle {
+    .project-subtitle {
         font-size: 24px;
     }
-    body.project-page .project-tags {
+    .project-tags {
         margin-top: 30px;
     }
-    body.project-page .project-tag {
+    .project-tag {
         padding: 10px 14px;
     }
-    body.project-page .project-cta-band {
+    .project-cta-band {
         padding: 76px 0 84px;
     }
-    body.project-page .project-cta-band .h2 {
+    .project-cta-band .h2 {
         margin-bottom: 42px;
         font-size: clamp(46px, 15vw, 66px);
     }

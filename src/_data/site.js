@@ -20,5 +20,6 @@ module.exports = {
   home: readJson("pages/home.json"),
   about: readJson("pages/about.json"),
   contact: readJson("pages/contact.json"),
-  projectsPage: readJson("pages/projects.json")
+  projectsPage: readJson("pages/projects.json"),
+  servicesPage: readJson("pages/services.json")
 };

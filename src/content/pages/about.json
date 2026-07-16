@@ -1,5 +1,6 @@
 {
   "title": "Studio – Curated Design Studio",
+  "metaDescription": "A London-based interior design studio shaping calm, tactile, and quietly confident interiors — working across the UK and on selected international projects.",
   "eyebrow": "Studio",
   "introHeading": "Design with intention.<br>Execute with precision.",
   "introText": "Every interior begins with how it will be used day to day: the routines, the circulation, and the way light changes across a space. From there, we build a material language that feels calm, tactile, and quietly confident.",
@@ -19,6 +20,7 @@
     "eyebrow": "Process",
     "title": "Three movements, from <em>brief</em> to <em>install</em>."
   },
+  "processNote": "Throughout, you'll be closely involved — kept close to the decisions that matter without being buried in the ones that don't — with direct, responsive contact from first sketch to final install.",
   "processSteps": [
     {
       "label": "Brief & concept",

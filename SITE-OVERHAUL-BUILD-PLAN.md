@@ -17,13 +17,13 @@ The plan is tracked against these repository documents, which hold the evidence 
 - `CONTENT-GUIDE.md` — editor-facing instructions for the content model.
 - `README.md` — runtime, install, and command documentation (P2.7).
 
-### Status at last update — 15 July 2026
+### Status at last update — 16 July 2026
 
-- **Phase 0** is documentarily complete, but several decisions remain open with unassigned owners: final navigation structure, analytics, the case-study launch threshold, image permissions, and legal review. `docs/overhaul/DECISIONS.md` is the authoritative list.
-- **Phase 1** has largely landed: the `npm run check` gate, visual references, navigation accessibility and focus management, contrast and target-size corrections, carousel deduplication (rendered image count 80 → 79), standardised form feedback, and indexing controls for coming-soon teasers. Walk the Phase 1 exit-gate checklist before declaring the phase closed — the CMS save-and-build round trip (P1.8) and staged form submission (P1.9) in particular need explicit verification on a deploy preview.
-- **Phase 2** is in progress: P2.1 tokens and P2.7 runtime pinning are done; P2.2 stylesheet reorganisation is the active front.
+- **Phase 0's exit gate is now fully checked (16 July 2026).** Primary CMS (Decap), URL strategy (clean directory URLs), and analytics (none) were decided; the project inventory was approved as-is; and image-rights confirmation and legal review both now have a named owner (the site owner, for both) — see P0.1–P0.6 and `docs/overhaul/DECISIONS.md`. "Owner assigned" is not the same as "review completed": per-project image rights/type and the privacy/terms legal review are still outstanding work for the site owner to actually do, and homepage/Studio/service copy approval and the URL redirect-map ownership (P3.9) remain unassigned.
+- **Phase 1 is now closed (16 July 2026).** All seven exit-gate items are checked. The remaining verification work — the contact/service enquiry forms' native-validation, async-error, and async-success paths, and a sitemap/indexing consistency audit — was completed against a production build; the audit surfaced and fixed one real gap (the Services index page was missing from `sitemap.xml.njk`). See the Phase 1 exit gate below for detail.
+- **Phase 2 is now closed.** All seven exit-gate items are checked — see the Phase 2 exit gate below for what each covers and what residual gaps (card markup duplication, footer/testimonial content) are carried forward for documented reasons rather than left silently open. The closing pass (16 July 2026) reduced `body.page`-prefixed CSS selectors from 326 to 104 (the remainder are genuinely reused across page types), found and fixed two real specificity-tie regressions in the process (see P2.2), and extracted the backlink component into a shared Nunjucks partial (see P2.3) — the equivalent card-component extraction was attempted, found to trigger a genuine Nunjucks async-shortcode-in-loop data-correctness bug, and reverted; do not re-attempt it without reading P2.3's implementation note first.
 - **Content gate resolved (16 July 2026):** the site owner decided to launch with the single published case study (Marylebone Lobby) rather than wait for the two-to-three target in §2, and confirmed no testimonial content exists to publish for this launch — see `docs/overhaul/DECISIONS.md`. Phase 3–4 homepage and Work redesign is no longer blocked on this; it can proceed designed around one case study.
-- **Phase 3 has started** even though Phase 2 isn't formally closed: P3.1 (global footer) landed first, then P3.3 (Work index restructured into Completed / Concepts sections) and P3.4 (case-study model gaps closed at the template/schema level — next-project link, caption and image-type capability). P3.2 (Services index) has no work to do per the no-Services-index decision above. Outstanding Phase 2 items (`body.page`-specificity reduction, formalising the backlink/card partials as named components) and the rest of Phase 3 (P3.5 homepage rewrite, P3.6 Studio, P3.7 baked-in cover text, P3.8 metadata) are still open.
+- **Phase 3 is well advanced.** P3.1 (global footer) landed first, then P3.3 (Work index restructured into Completed / Concepts sections) and P3.4 (case-study model gaps closed at the template/schema level — next-project link, caption and image-type capability). P3.2 (Services index) was initially not applicable, then reversed and built as a lightly-linked hub page (see the P3.2 section below and `docs/overhaul/DECISIONS.md`). **P3.5 was declined by the site owner (16 July 2026)** — see the P3.5 section below and `docs/overhaul/DECISIONS.md`; the homepage's current layout is intentional and should not be restructured again without being explicitly asked for, even under a generic "continue the build plan" instruction. **P3.6 (Studio) is resolved** via the site owner's recorded decisions. **P3.8 (unique metadata) is now written** for every page it applies to (Work, Services, all 6 service pages, Studio, Contact, the one indexable project, and the Curiosity Tracker app pages) — see P3.8 below. **P3.9 (redirects/clean URLs) is now fully scoped** — the site owner confirmed the two previously-open URL patterns (project pages nest under `/work/{slug}/`; legal pages move flat), giving a complete old→new mapping and file list — but not yet implemented; it's real work for a dedicated pass given its size (permalink changes across ~13 templates, a full internal-link sweep, and the redirect map itself). **P3.7 (baked-in cover text)** is partially done: the Garden Restaurant hero swap is fixed; the six service cover images remain blocked on new photography.
 
 ## 2. Target outcome
 
@@ -105,7 +105,7 @@ Where the work described in this plan actually lives:
 | Area | Location | Notes |
 | --- | --- | --- |
 | Base layout and metadata | `src/_includes/layouts/base.njk` | The single layout contract targeted by P2.5 |
-| Shared partials | `src/_includes/partials/` | Currently `nav.njk`, `hero-brand.njk`, `cta-band.njk`; the P2.3 component set grows here |
+| Shared partials | `src/_includes/partials/` | Currently `nav.njk`, `hero-brand.njk`, `cta-band.njk`, `footer.njk`, `backlink.njk`; the P2.3 component set grows here — but see P2.3's implementation note before adding a component that wraps the `{% image %}` shortcode inside a loop |
 | Page templates | `src/*.njk`, `src/projects/`, `src/curated_services/` | Public templates consuming the content model |
 | Content model | `src/content/` | `projects/`, `services/`, `pages/`, `settings.json` |
 | Global data | `src/_data/site.js` | Site metadata and the stylesheet version parameter (see P2.6) |
@@ -123,7 +123,7 @@ Where the work described in this plan actually lives:
 - `npm run capture:references` — rebuilds and regenerates the visual reference screenshots. Run only when a visual change is intentional, and review the resulting image diff deliberately; refreshing references without review defeats their purpose.
 - `npm start` — Eleventy dev server.
 - `npm run build` — production build to `_site/`.
-- `npm run cms` / `npm run cms:local` — custom visual CMS server / Decap local backend.
+- `npm run cms:local` — Decap local backend, the supported editing path (P0.3). `npm run cms` starts the custom visual CMS server, which is not part of the supported publishing path per that decision — don't use it for real content changes.
 
 The screenshot and accessibility tooling uses `puppeteer-core`, which drives a locally installed Chrome or Chromium rather than downloading its own. Any CI environment running `npm run check` or `capture:references` must provide a system browser.
 
@@ -185,6 +185,8 @@ The other editor may remain available only if it consumes the same schema and ha
 
 **Recommended default:** retain Decap as the primary structured editor unless the visual editor is essential to day-to-day publishing.
 
+**Decided (16 July 2026, owner: site owner):** Decap is the primary CMS; the custom visual CMS is retired from the supported publishing path rather than kept in parallel. An alternative — dropping CMS entirely and editing content directly through a coding agent + git — was raised and considered. Recommendation given and accepted: keep Decap. It's already schema-synced with the templates (P1.8), gives a deploy-preview safety net before anything publishes, and stays available to a future non-technical editor without rebuilding anything; removing it later if it proves unnecessary is cheap, whereas rebuilding it later if content needs grow is not — an asymmetry that favours keeping it now. See `docs/overhaul/DECISIONS.md`. This scopes P5.7 (Decap hardening) as real work and makes P5.8 (custom visual CMS hardening) moot — that editor should be removed from the supported path rather than hardened.
+
 ### P0.4 — Decide the URL strategy
 
 Choose between:
@@ -193,6 +195,8 @@ Choose between:
 - moving to clean directory URLs such as `/work/`, `/studio/`, `/services/interior-design/`, and `/contact/`.
 
 If clean URLs are approved, prepare a complete old-to-new redirect map before changing permalinks. App support and legal URLs used by external products must remain stable or have permanent redirects.
+
+**Decided (16 July 2026, owner: site owner):** move to clean directory URLs. Chosen over keeping current `.html` routes because the site is still small (29 pages) and has minimal existing search equity (single published case study, most projects still coming-soon) — the cost of migrating only grows the longer the current URLs stay live and get indexed or linked externally, so doing it now is the lower long-term-risk move despite the short-term redirect-map work. This makes P3.9 (redirects) and the URL-dependent parts of P5.5 (canonicals, sitemap) real work again — not implemented yet.
 
 ### P0.5 — Decide analytics and consent requirements
 
@@ -204,6 +208,8 @@ Confirm whether the business needs:
 - no analytics at all.
 
 Do not add analytics or cookie tooling by default. Any selected service must be reflected in the privacy notice and security policy.
+
+**Decided (16 July 2026, owner: site owner):** no analytics. Confirms the existing default; no privacy-notice or CSP work is needed on this account.
 
 ### P0.6 — Preserve the audit baseline
 
@@ -222,13 +228,13 @@ Because the Lighthouse run reported slow host CPU, future comparisons must use t
 
 ### Phase 0 exit gate
 
-- [ ] Project inventory approved.
-- [ ] Public/draft/indexing status assigned to all content.
-- [ ] Primary CMS chosen.
-- [ ] URL strategy chosen.
-- [ ] Analytics decision recorded.
-- [ ] Required photography, copy, permissions, and legal reviews have named owners.
-- [ ] Baseline results stored.
+- [x] Project inventory approved — 16 July 2026, owner: site owner; see `docs/overhaul/CONTENT-INVENTORY.md`. Approval covers the classification table (title, location, type, status); per-project image rights and approved brief/outcome wording remain separately open, see below.
+- [x] Public/draft/indexing status assigned to all content — confirmed accurate as part of the inventory approval above; implemented per P1.10.
+- [x] Primary CMS chosen — Decap, decided 16 July 2026.
+- [x] URL strategy chosen — clean directory URLs, decided 16 July 2026; redirect map (P3.9) still needs an owner.
+- [x] Analytics decision recorded — none, decided 16 July 2026.
+- [x] Required photography, copy, permissions, and legal reviews have named owners — image rights/type and legal review are both owned by the site owner as of 16 July 2026 (see `docs/overhaul/DECISIONS.md`); the reviews themselves are still outstanding, and homepage/Studio/service copy approval remains unassigned.
+- [x] Baseline results stored — `docs/overhaul/BASELINE.md`.
 
 ## 7. Phase 1 — Safety net and critical correctness
 
@@ -365,13 +371,13 @@ Do not send a real production enquiry during automated testing. Test forms on an
 
 ### Phase 1 exit gate
 
-- [ ] Production build and initial `npm run check` pass.
-- [ ] No critical or serious Axe violations on representative templates.
-- [ ] Navigation passes keyboard and screen-reader smoke tests.
-- [ ] All known CMS/template field mismatches are resolved.
-- [ ] Duplicate carousel media is removed.
-- [ ] Form fallback, asynchronous result, and focus behaviour are verified.
-- [ ] Draft, archived, incomplete, and indexable statuses behave consistently.
+- [x] Production build and initial `npm run check` pass. Re-run 16 July 2026: content/JS/build/output/a11y all pass clean (30 HTML pages, 110 images, 7 forms, 587 internal link references; 9 Axe/viewport scans, 0 non-blocking violations).
+- [x] No critical or serious Axe violations on representative templates. Confirmed by the `check:a11y` run above.
+- [x] Navigation passes keyboard and screen-reader smoke tests. Covered by `check:a11y`'s automated navigation/focus-trap smoke test; spot-checked live in a preview (16 July 2026).
+- [x] All known CMS/template field mismatches are resolved (P1.8) — see that ticket's implementation notes.
+- [x] Duplicate carousel media is removed (P1.7) — rendered image count 80 → 79, recorded in `docs/overhaul/BASELINE.md`.
+- [x] Form fallback, asynchronous result, and focus behaviour are verified (16 July 2026). Tested the contact form live against a production build: native `checkValidity()` blocks submission and focuses the first invalid field when required fields are empty; a failed async submission shows the error summary, moves focus to it (`role="alert"`, `tabindex="-1"`), re-enables the submit button, and preserves every entered value (no data loss); a mocked-successful submission resets and hides the form, reveals the success card, and moves focus to it. The service enquiry form (`curated_services/service-pages.njk`) shares the identical `data-enhanced-netlify-form`/`data-success-target` contract, so the same behaviour applies there. Both forms post to `/thank-you/`, which is `noindex: true`.
+- [x] Draft, archived, incomplete, and indexable statuses behave consistently (16 July 2026). `tools/check-output.js` already asserts draft/coming-soon projects are absent from the sitemap and published ones are present. Auditing the built sitemap directly during this pass found one real gap: `/curated_services.html` (the P3.2 Services index — indexable, has its own canonical, no `noindex`) was missing from `sitemap.xml.njk`'s hardcoded URL list, predating that ticket. Fixed by adding it to the list; verified the rebuilt sitemap now includes it and `npm run check` still passes.
 
 ## 8. Phase 2 — Shared foundations and design system
 
@@ -479,7 +485,18 @@ Verification still turned up a real scare worth recording: a full-suite `capture
 - **Caught two false leads before they became bugs.** `.button .dot` and `.project-cta-band .about-cta-button .dot` are a *different* concept (a decorative accent dot inside CTA buttons) that happens to share the class name `.dot` — correctly left in place, not moved into the carousel file.
 - **A verification scare, resolved.** A full `capture:references` diff showed `project-390.webp` at a different page height (4499px vs 4617px) after the move — alarming at first glance. A control test (reverting to the pre-move partials via `git stash` and re-capturing) reproduced the *exact same* height difference with zero code changes, proving it's a pre-existing capture non-determinism in this stylesheet's `100svh`-based hero height (small-viewport-height units are inherently sensitive to headless-browser measurement timing), not something the carousel move caused. An interactive browser check surfaced the same kind of transient flakiness directly in the DOM (a hero image that failed to paint on first load, and one stale computed-style read that didn't match the DOM's actual inline style) — both resolved on a fresh read/repaint and were confirmed, via `npm run check`'s automated carousel interaction smoke test and direct DOM introspection, to reflect correct underlying state throughout.
 
-**Not done:** further by-topic regrouping (cards, forms, buttons) and reducing `body.page`-specificity reliance. Any future topic needs the same pre-check this one got — confirm the candidate selectors don't collide with anything already in the file — before relocating anything.
+**Not done:** further by-topic regrouping (cards, forms, buttons). Any future topic needs the same pre-check this one got — confirm the candidate selectors don't collide with anything already in the file — before relocating anything.
+
+**Reducing `body.page`-specificity reliance: done (16 July 2026).** Of 326 `body.<page>-page` prefixed selectors across the stylesheet, 222 were confirmed page-specific (only ever used under one body class, per a full cross-file audit) and had the redundant prefix stripped, lowering their specificity without changing which rule wins — the necessary cases (`.pill`, `.nav-pill`, `.pillmenu-toggle`, `.hero-brand`, `.top-left-logo`, `.button`, `.label-small`, and the intentionally-inert `.is-projects-band` cluster) are genuinely reused across multiple page types and stayed scoped, as did six selectors flagged as colliding with an already-existing unscoped rule of the same name.
+
+This mechanical pass surfaced two real regressions that a same-selector-text collision check alone couldn't have caught, because the conflict was with a *different* selector matching the same element:
+
+- **`.hidden`** (contact form's hide/show toggle) lost a specificity tie with `.contact-form, .service-enquiry__form { display: flex }` (a later file in the cascade) once its `body.contact-page` prefix was gone — the submitted contact form stopped disappearing behind the success message. Fixed by re-scoping just this one selector; `.service-enquiry .hidden` didn't have the same problem because its extra `.service-enquiry` ancestor class kept its specificity above the form rule regardless.
+- **`.project-wrap`** lost a specificity tie with `.section .container` (a generic width rule) once unscoped, because the project-article wrapper carries both `.container` and `.project-wrap` — the article column widened from 1050px to 1150px and reflowed text, shortening the page. Fixed by re-scoping this one selector.
+
+Both were found and fixed using the same pixel-diff discipline as the carousel move above, with one addition worth recording: `contact-success-1440`/`contact-error-1440`'s captures turned out to be **flaky even on an unmodified stylesheet** — three repeated captures of the exact same HEAD build returned 1827px, 1722px, and 1827px for `contact-success-1440`. This cost real time chasing `.contact-body` and `.project-cta-band` as suspected regressions before a repeated-control-capture test (not just a single before/after diff) proved the tool itself is non-deterministic for that specific page/width, independent of any CSS change. Lesson for future work on this stylesheet: a single-capture diff on a page/width combination you haven't already established as stable is not evidence by itself — repeat the exact same build 2–3 times before trusting a diff, not only when the diff looks unusually large.
+
+`.container`/`.section .container`-style collisions (a hoisted selector losing a tie to an unrelated selector that happens to share the same element via a second class) are the residual risk for any future `body.page`-prefix removal in this stylesheet; a same-selector-text collision check is not sufficient on its own.
 
 ### P2.3 — Define reusable interface components
 
@@ -510,6 +527,11 @@ Status must be real HTML text, not baked into artwork.
 - The global footer and the quote/testimonial block are not just undocumented — they're genuinely blocked. No `<footer>` exists anywhere in the codebase, and building one now would mean inventing footer content ahead of the open navigation/footer decision in `docs/overhaul/DECISIONS.md`. No genuine testimonial content exists to build a real quote block around.
 
 Consolidating the duplicated components (backlink, card) was not attempted here because it requires changing the CSS selectors those templates depend on — the same visual-regression risk as P2.2, and arguably part of the same piece of work. Recommended order: reconcile P2.2's duplicate-selector clusters first, then extract the now-unified backlink and card patterns into shared partials, verifying visually after each.
+
+**Update (16 July 2026): backlink extracted into a shared partial; card consolidation attempted and reverted — genuinely blocked, not just undone.**
+
+- **Backlink.** `src/_includes/partials/backlink.njk` now holds two Nunjucks macros, `pill(href, label)` and `hero(href, label)`, matching the `.backlink--pill`/`.backlink--hero` CSS split P2.2 already did. All four call sites (`app-pages.njk`, `legal-pages.njk`, `apps/legal-pages.njk`, `projects/project-pages.njk`) now import and call the macro instead of inlining the markup. Verified byte-identical generated HTML against the pre-change build on all four affected pages.
+- **Card.** The equivalent consolidation for `.card--project`/`.card--concept`/`.card--service` (used in `projects.njk` twice and `index.njk` once) was attempted the same way and found genuinely unsafe, not merely inconvenient: each card includes the async `{% image %}` shortcode, and Nunjucks/Eleventy's async rendering does not correctly isolate loop-scoped `{% set %}` variables when the async work is deferred behind a macro call or a `{% set %} + {% include %}` pair inside a `{% for %}` loop. In testing, this produced cards silently rendering with a *different* iteration's image and text (e.g. the "Styling" service card's content appeared under three different service cards) — a correctness bug, not a cosmetic one. The change was fully reverted (`git checkout -- src/projects.njk src/index.njk`) rather than shipped with a workaround guessed at under time pressure. The three card implementations remain duplicated markup for this reason; do not re-attempt a macro or `{% include %}`-based consolidation without first solving the async-shortcode-in-loop ordering problem (e.g. rendering all card image markup up front into an array before the loop, then interpolating pre-rendered strings — untested here, flagged as the likely direction for a future attempt).
 
 ### P2.4 — Split JavaScript into small initialisers
 
@@ -573,13 +595,13 @@ These are deliberately *not* wired into `npm run check` yet, because the codebas
 
 ### Phase 2 exit gate
 
-- [ ] Tokens and components are documented and used in at least one representative page.
-- [ ] New CSS structure compiles to one production asset.
-- [ ] Visual comparisons show no unintended regression on pages not yet redesigned.
-- [ ] JavaScript initialisers fail safely and contain no known dead DOM queries.
-- [ ] Layout metadata contract covers all public templates.
-- [ ] Asset URLs are based on content rather than checkout timestamps.
-- [ ] Runtime and development commands are pinned and documented.
+- [x] Tokens and components are documented and used in at least one representative page. Tokens: `docs/overhaul/DESIGN-TOKENS.md` (P2.1). Components: header/overlay menu, hero brand, CTA band, and (as of 16 July 2026) backlink are shared partials; the card component's CSS is unified but its markup remains duplicated for a documented technical reason (P2.3); footer content and a testimonial block remain blocked on content decisions, not implementation — see `docs/overhaul/COMPONENTS.md`.
+- [x] New CSS structure compiles to one production asset. `tools/build-css.js` concatenates `assets/css-partials/*.css` into `assets/css/styles.css` on every build.
+- [x] Visual comparisons show no unintended regression on pages not yet redesigned. Verified for every P2.2/P2.3 change via `capture-references.js` pixel diffing, including two real regressions caught and fixed during the `body.page`-specificity pass (see P2.2) and a false-alarm chase resolved by repeated-control captures.
+- [x] JavaScript initialisers fail safely and contain no known dead DOM queries (P2.4).
+- [x] Layout metadata contract covers all public templates (P2.5).
+- [x] Asset URLs are based on content rather than checkout timestamps (P2.6).
+- [x] Runtime and development commands are pinned and documented (P2.7).
 
 ## 9. Phase 3 — Information architecture and content migration
 
@@ -602,12 +624,14 @@ The footer should include:
 **Implementation note (16 July 2026):** done — the global footer half of this ticket is built (primary navigation is unchanged; no Services link, per the site-owner decision below). `src/_includes/partials/footer.njk` is included from `src/_includes/layouts/base.njk` on every page, right after `{{ content }}`. Content per the site-owner's decisions recorded in `docs/overhaul/DECISIONS.md` (16 July 2026):
 
 - **Contact route:** the studio email (`site.settings.email`) as a direct `mailto:` link, alongside the tagline in the brand column.
-- **Primary navigation:** Home, Work, Studio, Contact — mirrors `partials/nav.njk` exactly; no Services link (there's no Services index yet, and the owner confirmed not to add one for now).
+- **Primary navigation:** Home, Work, Studio, Contact — mirrors `partials/nav.njk` exactly; no Services link (a Services index was later built under P3.2, but the owner's decision keeps it out of primary nav/footer — it's reached via in-page links instead).
 - **Legal/company information:** all three existing legal pages (Terms of Business, Privacy Notice, Company Information), looped from the same `legal.pages` data the legal-page template itself uses — so a future fourth legal page appears in the footer automatically, no hand-maintained list to fall out of sync.
 - **App support:** shown as its own visible column (not de-emphasised), linking to the apps index plus each app by name, looped from `apps.items` for the same reason.
 - **Social links:** none — the owner confirmed there are no real social profiles to add, so the footer has no social section at all rather than a placeholder.
 
 Styling lives in `assets/css-partials/17-footer.css`: a dark band (`--color-surface-inverse`) matching the tone most pages already end on via `.about-cta-band`/`.project-cta-band`, a 4-column grid (brand + 3 nav columns) collapsing to 2 columns at 920px and 1 at 640px. Each footer `<nav>` has its own distinct `aria-label` ("Footer site navigation", "Legal and company information", "App support") so it doesn't collide with the header's "Primary navigation" landmark — axe's landmark-uniqueness check would otherwise flag it. A `site.currentYear` global (computed once at build time in `src/_data/site.js`) drives the copyright line, no build-time date entered by hand. Verified with `npm run check` (the accessibility gate's 8-page axe/contrast scan now covers the footer on every sampled page) and by reading back the rendered footer text/computed styles on multiple pages (Studio, a project detail page) against the intended content — no CMS schema changes were needed since the footer only reuses existing `site.settings`/`legal`/`apps` data.
+
+**Bug fix (16 July 2026):** the site owner reported the footer missing/not visible on the homepage. Root cause: `#bg` (the site's fixed decorative background image, `02-base.css`) is `position: fixed` with an explicit `z-index: 0`, which establishes its own stacking context above plain static in-flow content — `main.page-main` already opts out of this via its own `position: relative; z-index: 1`, but `.site-footer` never got the same treatment when it was built. In practice this meant the fixed background image painted over the footer at the bottom of every page, wherever page content was shorter than the fixed layer's coverage. Fixed by giving `.site-footer` the identical `position: relative; z-index: 1` treatment in `assets/css-partials/17-footer.css`. Verified via computed-style checks (correct position/z-index/background/text visibility) after the fix; `npm run check` passes.
 
 ### P3.2 — Create a Services index
 
@@ -621,7 +645,13 @@ Add `/services/` as the clear parent of the service pages. It should explain:
 
 Each service page must link back to the index through a breadcrumb or clear parent link.
 
-**Implementation note (16 July 2026):** not started — deliberately. The site owner confirmed no Services index is wanted for now (see `docs/overhaul/DECISIONS.md`), so there is no approved content to build this against. Revisit only if that decision changes.
+**Implementation note (16 July 2026):** reversed and implemented. The site owner initially confirmed no Services index was wanted (see `docs/overhaul/DECISIONS.md`), then asked for one to be built after all, scoped narrowly: a hub page at `/curated_services.html` (`src/curated_services.njk`) listing all six published services as cards (reusing the existing `.card--service` component and each service's already-published `summary`/`cardImage` — no new marketing copy invented), with the homepage's existing `servicesSection.lead` reused verbatim for its intro. It closes the loop that made each service page a dead end: previously a visitor landing on any one service page (e.g. from search) had no path to the other five.
+
+The primary nav/footer decision (no Services link) is unchanged — this page is reached only via in-page links, not global navigation: a "View all services" link on the homepage's Curated Services section (mirroring the Collections section's existing "more" link pattern), on the Studio page, and on the Work page (all three using the shared `backlink--pill` component); each individual service page now links back to the index the same way ("Back to Services"). Registered in `admin/config.yml` (`servicesPage` file entry) and `src/_data/site.js` so it's CMS-editable, and added to `tools/check-accessibility.js` and `tools/capture-references.js` for ongoing coverage. Verified in a live preview: the index renders all six services with working links, the CTA band at the bottom reuses the site-wide enquiry CTA, and all three new "View all services" links and the six "Back to Services" links resolve correctly.
+
+Deeper content (per-service "who it's for"/scope framing beyond what each service page already says, and an explicit "how services relate" narrative) was not added — the ticket's original ask for that depth is still open if wanted; what's built now is the structural hub plus honest reuse of existing copy.
+
+**Bug fixes (16 July 2026):** the site owner flagged two visual issues after the initial build. (1) The "View all services" link on the Studio and Work pages used the `.backlink--pill` bordered-button component, which reads as an appropriate visual language for "back to X" navigation but looked bolted-on for a forward-pointing link sitting under a paragraph. Replaced with a new `.header-more-link` component (`assets/css-partials/15-backlink.css`) matching the site's existing italic-serif "more" link idiom (the same visual language as `.home-collections__more-link`/`.home-services__more-link`) instead of a button. (2) The Services index page's primary nav (Work/Studio/Contact) rendered in the dark-page default white text, nearly invisible against the page's light background — every other light-background page (`about-page`, `projects-page`, `concept-page`) has its own `body.<page> .pill/.nav-pill/.pillmenu-toggle { color: var(--color-text-primary); }` override and this one was missed when `18-services-page.css` was written. Added the same override. Both verified live; `npm run check` passes.
 
 ### P3.3 — Restructure the Work index
 
@@ -680,7 +710,9 @@ Checked against the model's nine elements, using Marylebone Lobby (the one publi
 - **Image captions where they add meaning** — new optional `caption` field added alongside `imageType` on the same gallery-image schema entry, rendered the same way. No existing project has caption copy, so nothing renders differently today; the capability exists for when a content owner supplies real captions.
 - **Next-project or related-work path** — implemented as a functional, order-based, wrap-around "next project" link between the article body and the CTA band (`nextProject` filter in `.eleventy.js`, rendered in `project-pages.njk`, styled in `06-project-template.css`). It cycles through all listed projects regardless of status (coming-soon pages have real explanatory content, not empty shells, so linking to one is not a "link to an empty case-study shell" violation) and labels the target honestly — "Next project" for a published target, "Next — Coming soon" for a coming-soon one. Deeper visual/UX polish of this link (e.g. a thumbnail preview) is P4.4's job, not this ticket's; what's built here is the functional, accessible baseline P4.4 can refine.
 
-Both remaining gaps (outcome wording, image type/rights) are owner-dependent business decisions, not implementation work — see the updated entries in `docs/overhaul/CONTENT-INVENTORY.md`. Verified with `npm run check` and a live-preview read of Marylebone Lobby's project page: the next-project link renders and points at a real, non-empty coming-soon page; the caption/image-type render paths were smoke-tested by temporarily setting test values on one gallery image, confirming the label renders correctly, then reverting (no real project data was changed).
+Both remaining gaps (outcome wording, image type/rights) were owner-dependent business decisions, not implementation work — now resolved. Verified with `npm run check` and a live-preview read of Marylebone Lobby's project page: the next-project link renders and points at a real, non-empty coming-soon page; the caption/image-type render paths were smoke-tested by temporarily setting test values on one gallery image, confirming the label renders correctly, then reverting (no real project data was changed).
+
+**Update (16 July 2026):** the site owner confirmed both remaining gaps for Marylebone Lobby. Outcome: "a redesigned lobby area to welcome its residents and provide a waiting area for guests" — added as a new `extraSections` entry ("Outcome"), the last item in the list. Image rights: all of the project's images are the site owner's own photography — `imageType: Photography` is now set on both gallery images in `src/content/projects/marylebone_residence_lobby.md`. See the updated entries in `docs/overhaul/CONTENT-INVENTORY.md`. The case-study model is now content-complete for Marylebone Lobby against all nine elements. This does not extend to any other project — each remains individually unconfirmed.
 
 ### P3.5 — Rewrite the homepage content hierarchy
 
@@ -695,6 +727,10 @@ Prepare content for this sequence:
 7. **Enquiry CTA.**
 8. **Global footer.**
 
+**Declined (16 July 2026).** An implementation pass restructured the homepage along this sequence — pointed the featured carousel at the one published case study instead of two coming-soon projects, added hero primary/secondary CTAs, added a Process section reusing the Studio page's process copy, and suppressed a same-project duplication between the carousel and the Collections grid. The site owner reviewed the result and declined it — this was not an implementation problem to fix, but a rejection of the direction itself — so the changes were reverted in full (`src/index.njk`, `src/content/pages/home.json`, `assets/css-partials/08-homepage-redesign.css`, `tools/check-accessibility.js` all back to their pre-P3.5 state) rather than partially kept.
+
+**Do not restructure the homepage again without being explicitly asked**, even under a generic "continue the build plan" or "work on the next tasks" instruction — the current homepage layout (including the featured carousel still pointing at the two coming-soon projects) is the site owner's intentional preference for now, not an unaddressed gap. See `docs/overhaul/DECISIONS.md` for the recorded decision. If asked to revisit the homepage later, treat it as a fresh request and confirm scope/approach before implementing rather than reapplying this section's original outline unprompted.
+
 ### P3.6 — Strengthen Studio content
 
 The Studio page should answer:
@@ -708,11 +744,24 @@ The Studio page should answer:
 
 Move unrelated app documents out of the main Studio narrative while preserving their public destinations.
 
+**Site-owner decisions (16 July 2026):**
+- **"Documents & tools" section stays as-is.** An earlier pass proposed removing this section (legal pages + apps list) as duplicative of the global footer (P3.1). The site owner overruled this: the studio's foundation tools, company info, and documents are considered part of the studio page's own content, not clutter to remove.
+- **"Who is behind the work" stays intentionally unnamed/vague.** The site owner is a solo practitioner with a few years of experience and is concerned that stating this explicitly (name, years, solo status) could worry some prospective clients before they've had a chance to see the work speak for itself. This is a deliberate business call, not an unaddressed content gap — do not add a named bio or experience/credentials section without being explicitly asked again.
+- **No contact CTA added.** The page's existing ending (after "Locations & scope") is kept as-is; a closing CTA band was proposed and declined.
+- **"What clients can expect" — implemented.** Per the site owner's answers: leads with hands-on involvement (without stating team size or years of experience), includes one soft general line about being responsive/easy to reach (no specific timeframe), and closes the existing Process section rather than living elsewhere on the page. Added as a new optional `processNote` field (`src/content/pages/about.json`, rendered in `src/about.njk`, styled in `assets/css-partials/05-legacy-pages.css` as `.studio-process__note`, registered in `admin/config.yml`): "Throughout, you'll be closely involved — kept close to the decisions that matter without being buried in the ones that don't — with direct, responsive contact from first sketch to final install." Deliberately stays general — no specific scenario, timeframe, or team-size claim.
+
 ### P3.7 — Replace baked-in cover text
 
 Replace service and project imagery that contains status/title text with clean, text-free artwork. This prevents mobile cropping from removing essential information and ensures text remains readable, responsive, translatable, indexable, and accessible.
 
 If mobile crops remain unsuitable, use responsive art direction with a dedicated mobile crop through `<picture>`.
+
+**Findings (16 July 2026):** The site owner reported the symptom as mobile-width cropping cutting off the edges of baked-in image text and asked whether resizing (rather than cropping) the image would be a better fix. Investigated before touching anything:
+
+- Every image on the site currently renders with `object-fit: cover` (confirmed across all CSS partials) — full-bleed crop-to-fill is the site-wide convention, not something specific to this case. Switching the affected images to `object-fit: contain` would stop the edge-cropping, but introduces visible letterbox gaps in card grids (breaks the edge-to-edge look every other image on the site has, and needs a deliberate background fill), and the baked text would simply shrink with the rest of the photo rather than staying legible — it doesn't address the underlying reason this is a ticket: baked-in pixels aren't real text, so they can't be translated, resized independently of the photo, selected, or read by a screen reader.
+- **The six service cover images** (`assets/images/curated_services/page_brands/*_cover.webp`) each have "Curated Services / [Service Name]" baked in, confirmed by direct visual inspection of `concept_design_cover.webp`. No clean version of these exists in the repo — each service page's own `<h1>` already renders the same title as real HTML directly above the image, so the baked text is redundant there too, but replacing it needs either new text-free photography or, if the original layered source files still exist, a re-export without the text layer. **Still open** — remains blocked on new photography/re-exports, which is outside implementation scope.
+
+**Fixed (16 July 2026): Garden Restaurant's hero image.** Had "Coming Soon" baked in, centred, spanning nearly the full width, at `assets/images/projects/16-9_images/monet-terrace_coming_soon.webp`. A text-free version of the exact same photo already existed in the repo — `monet-terrace.webp`, already in use on the homepage's Design Philosophy section — and the site already renders a real, accessible "Coming soon" badge as HTML in two places independent of this image (the project card status chip from P3.3, and the project detail page's own status badge), so the baked text was fully redundant. Swapped `src/content/projects/garden_restaurant.md`'s `heroImage` to the clean file and deleted the now-unused `monet-terrace_coming_soon.webp`. Verified with `npm run check` (full gate passes) and by reading the actual generated hero derivative (`_site/img/ytXuRwZ7ZG-800.webp`) directly — confirms the rendered image is the clean photo, no baked text.
 
 ### P3.8 — Prepare unique page metadata
 
@@ -729,6 +778,21 @@ Write a unique title and description for:
 
 The homepage title should state the genuine service and location positioning—for example, “Interior Design Studio London | Curated Design”—only after the positioning is approved.
 
+**Implementation note (16 July 2026):** the site owner approved this exact positioning — London as primary location, “Interior Design Studio” as the service category, and confirmed the studio intentionally covers multiple project types rather than narrowing to one (see `docs/overhaul/DECISIONS.md`). Homepage metadata is implemented: `src/content/pages/home.json`'s `title` is now “Interior Design Studio London | Curated Design”, and a new `metaDescription` field (“A London-based interior design studio shaping distinctive residential, hospitality, and commercial spaces, from concept through completion.”) recombines only already-approved phrases already live elsewhere on the site (the hero subhead, the Work page intro, and the services heading) — no new claim was invented. `admin/config.yml` already exposed a Meta Description field for the homepage, so no schema change was needed.
+
+**Update (16 July 2026): the rest of P3.8 is now written**, following the homepage's precedent of recombining only already-published on-page copy — no new claims invented anywhere. A survey of every template first (see below) found titles were mostly already unique via each page's own computed `{{ metaTitle or title }} – Curated Design Studio` pattern; the real, consistent gap was `metaDescription` falling back to the single site-wide default sentence. Filled in:
+
+- **Work index** (`src/content/pages/projects.json`) — `metaDescription` added, combining the page's own hero subhead with its Completed/Concepts section structure.
+- **Services index** (`src/content/pages/services.json`) — `metaDescription` added from the page's own hero subhead, prefixed with the approved "Interior Design Studio London" positioning.
+- **All 6 service pages** (`src/content/services/*.md`) — each given a `metaDescription` equal to its own already-published `intro` field (richer and more specific than the `summary` line the fallback chain was previously using).
+- **Studio** (`about.json`) and **Contact** (`contact.json`) — titles were already set; added `metaDescription` reusing each page's own intro/lead copy (Contact's is the page's own lead sentence, near-verbatim).
+- **Marylebone Lobby** (the only indexable project) — `metaDescription` added, combining its existing `subtitle` with its own `facts.Location` value for clearer location keywords. The five coming-soon projects were deliberately left alone: they're `noindex` and excluded from the sitemap by design (P1.10), so investing dedicated SEO copy in them would be inconsistent with that status.
+- **Curiosity Tracker** (`src/_data/apps.js`) — added `metaTitle`/`metaDescription` at the app level and `pageMeta` for its privacy/support/terms pages, mirroring the pattern already established for ProcureCore. Each description reuses facts already published on that same page (local-storage/iCloud/no-server details from the privacy page, the support page's own topic list, the terms page's own topic list) or the app's own `privacySummary`/`description` fields — nothing invented. ProcureCore and the three general legal pages already had complete, unique metadata and needed no change.
+
+Verified by rebuilding and reading the rendered `<title>`/`<meta name="description">` tags directly on all 12 changed pages, and confirming in a live preview that `og:description`/`twitter:description` inherit the new copy automatically (both derive from the same `description` variable in `base.njk`). `npm run check` passes.
+
+**Still open:** the six service cover images' baked-in text (P3.7, blocked on new photography) has no bearing on metadata and remains separately tracked there.
+
 ### P3.9 — Prepare redirects and content migration
 
 If clean URLs were approved:
@@ -738,16 +802,44 @@ If clean URLs were approved:
 - preserve external app support/legal URLs or redirect them permanently;
 - test query strings and fragment links where relevant.
 
+**Scoped, not yet implemented (16 July 2026).** P0.4 approved clean directory URLs and gave four example patterns (`/work/`, `/studio/`, `/services/interior-design/`, `/contact/`) but left the project-page and legal-page patterns open. The site owner has now confirmed both: project pages nest under Work (`/work/{slug}/`, not `/projects/{slug}/`), and the three general legal pages move flat (`/terms-of-business/` etc.), not nested under `/legal/`. Full confirmed mapping:
+
+| Current | New | Notes |
+| --- | --- | --- |
+| `/` | `/` (no change) | already the root |
+| `/projects.html` | `/work/` | Work index |
+| `/curated_services.html` | `/services/` | Services index |
+| `/about.html` | `/studio/` | Studio |
+| `/contact.html` | `/contact/` | Contact |
+| `/projects/{slug}.html` (7 files; 1 published, 5 coming-soon, 1 archived/not generated) | `/work/{slug}/` | nests under Work per the confirmed decision |
+| `/curated_services/{slug}.html` (6 files) | `/services/{slug}/` | matches P0.4's own example |
+| `/terms-of-business.html`, `/privacy-notice.html`, `/company-information.html` | `/terms-of-business/`, `/privacy-notice/`, `/company-information/` | flat, per the confirmed decision — same slug, directory-style instead of `.html` |
+| `/apps/*` (index, and each app's own page + privacy/support/terms) | **unchanged** | already clean directory URLs; P0.4 requires these stay stable since real apps may reference them externally |
+| `/thank-you/`, `/admin/`, `/sitemap.xml` | **unchanged** | already clean or not part of the public IA this decision covers |
+
+20 of the site's 30 rendered HTML pages actually move; the other 10 (homepage, 9 apps/thank-you/admin pages) are untouched.
+
+**Files identified as needing edits when this is implemented** (permalinks, then every internal link/breadcrumb/next-project-link touching a moved URL, plus the redirect map itself):
+
+- Permalinks: `src/projects.njk`, `src/curated_services.njk`, `src/about.njk`, `src/contact.njk`, `src/projects/project-pages.njk`, `src/curated_services/service-pages.njk`, `src/legal-pages.njk`.
+- Internal links: `src/index.njk`, `src/_includes/partials/nav.njk`, `src/_includes/partials/footer.njk`, `src/_includes/partials/backlink.njk`, `src/content/pages/about.json`, `src/content/pages/home.json`, and the `nextProject`/service-card URL-building logic in `.eleventy.js`.
+- Sitemap: `src/sitemap.xml.njk` (both the hardcoded static-page list and the per-collection URL templates).
+- Redirect map: `public/_redirects` — the site already uses this mechanism (see its existing slug-migration redirects from a prior change) as the precedent to extend.
+- Tooling that encodes the old URLs and needs updating in lockstep: `tools/capture-references.js`, `tools/check-accessibility.js`, `tools/check-output.js`.
+- Canonicals and OG tags need no direct edit — `base.njk` derives them from `page.url`, so they follow the permalink change automatically.
+
+Not yet executed — this is real work for its own implementation pass (permalink changes, ~20 URL redirects, and a full link-reference sweep across the files above), not a documentation-only ticket. `docs/overhaul/DECISIONS.md` should record the confirmed URL mapping alongside this note.
+
 ### Phase 3 exit gate
 
-- [ ] Global navigation and footer architecture approved.
-- [ ] Services index has real content and working child-page paths.
-- [ ] Completed and incomplete work are clearly separated.
-- [ ] At least two or three launch-quality case studies are content-complete, or a reduced-scope launch is explicitly approved.
-- [ ] No essential wording remains baked into project/service artwork.
-- [ ] Homepage and Studio copy contain substantiated, specific claims.
-- [ ] Unique metadata is prepared for every indexable page.
-- [ ] Redirect map is complete if URLs are changing.
+- [x] Global navigation and footer architecture approved (P3.1) — see `docs/overhaul/DECISIONS.md`.
+- [x] Services index has real content and working child-page paths (P3.2) — all six services listed, each links back.
+- [x] Completed and incomplete work are clearly separated (P3.3) — Work index restructured into Completed / Concepts sections.
+- [x] At least two or three launch-quality case studies are content-complete, or a reduced-scope launch is explicitly approved. The site owner explicitly approved launching with the single published case study (Marylebone Lobby) — see `docs/overhaul/DECISIONS.md`.
+- [ ] No essential wording remains baked into project/service artwork. Garden Restaurant's hero fixed (16 July 2026, P3.7); the six service cover images still have baked-in "Curated Services / [Service Name]" text and remain blocked on new text-free photography or a re-export of the original source files.
+- [x] Homepage and Studio copy contain substantiated, specific claims. Homepage positioning (location, service category) and Studio content are both site-owner-approved (P3.6, P3.8); Studio's deliberate vagueness about the practitioner's identity/experience is an intentional business choice, not an unsubstantiated claim.
+- [x] Unique metadata is prepared for every indexable page (P3.8, 16 July 2026) — Work, Services, all 6 service pages, Studio, Contact, the one indexable project (Marylebone Lobby), and the Curiosity Tracker app pages all now have dedicated `metaDescription` copy; the five coming-soon projects are intentionally excluded since they're `noindex`/sitemap-excluded by design.
+- [ ] Redirect map is complete if URLs are changing. P3.9 is fully scoped — confirmed old→new URL mapping and the list of files to touch — but the permalinks, internal-link sweep, and `_redirects` entries themselves are not yet implemented.
 
 ## 10. Phase 4 — Page-by-page UI and UX overhaul
 
@@ -942,6 +1034,8 @@ The local server already benefits from loopback-only binding and path sanitisati
 
 If the editor cannot share the primary schema reliably, remove it from the supported publishing path.
 
+**Decided (16 July 2026, owner: site owner):** not retained — the custom visual CMS is out of the supported publishing path (P0.3, `docs/overhaul/DECISIONS.md`), so this ticket is moot. None of the hardening above is needed. `tools/visual-cms/` and the `npm run cms` script are left in place for now (removing them is a separate, low-risk cleanup that hasn't been asked for) but should not be used for real publishing, and no further investment should go into them.
+
 ### P5.9 — Review privacy and legal content
 
 - Update the privacy notice for the actual form, hosting, font, analytics, spam, and CMS services in use.
@@ -1109,7 +1203,7 @@ At approximately 48 hours and again after 2–4 weeks:
 
 This is the practical dependency order for issue tracking. Content work can run alongside engineering after the Phase 0 inventory.
 
-As of July 2026, groups 1–4 have largely landed (see the status summary in §1) and group 5 is underway with P2.1 and P2.7 complete. Group 6 has started ahead of group 5's formal close — the content-gate decisions in `docs/overhaul/DECISIONS.md` that were blocking it (case-study threshold, footer scope, testimonials) are now resolved, so P3.1, P3.3, and P3.4 have landed; P3.2 is not applicable per the no-Services-index decision. Group 7 (P4.1–P4.9) remains gated on groups 5–6 finishing.
+As of July 2026, groups 1–5 are closed (Phases 1 and 2 both have fully-checked exit gates; see the status summary in §1). Group 6 (Phase 3) is well advanced: P3.1, P3.2, P3.3, P3.4, P3.6, and P3.8 have landed; P3.5 was declined by the site owner — see the P3.5 section and `docs/overhaul/DECISIONS.md` — and should not be re-attempted without being explicitly asked. P3.7 is partially done (the Garden Restaurant image fix landed; the six service cover images remain blocked on new photography). P3.9 is fully scoped (confirmed URL mapping and file list) but not yet implemented — it's the one remaining item sized as its own dedicated pass. Group 7 (P4.1–P4.9) remains gated on Phase 3 finishing.
 
 | Order | Ticket group | Why it comes here |
 | ---: | --- | --- |

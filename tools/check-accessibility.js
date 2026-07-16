@@ -13,6 +13,7 @@ const scans = [
   { label: "Homepage mobile", route: "/", width: 390, height: 844, featuredProject: true },
   { label: "Homepage mobile menu", route: "/", width: 390, height: 844, openMenu: true },
   { label: "Work mobile", route: "/projects.html", width: 390, height: 844 },
+  { label: "Services index mobile", route: "/curated_services.html", width: 390, height: 844 },
   {
     label: "Published project mobile",
     route: "/projects/marylebone_residence_lobby.html",

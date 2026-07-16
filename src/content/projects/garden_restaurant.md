@@ -12,7 +12,7 @@ statusLabel: Coming soon
 showInProjects: true
 cardImage: /assets/images/projects/garden_restaurant/garden_restaurant_1.webp
 cardAlt: Garden Restaurant
-heroImage: /assets/images/projects/16-9_images/monet-terrace_coming_soon.webp
+heroImage: /assets/images/projects/16-9_images/monet-terrace.webp
 heroAlt: Garden Restaurant
 projectTags:
   - Concept design

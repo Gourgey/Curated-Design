@@ -1,0 +1,7 @@
+{% macro pill(href, label) -%}
+<p class="backlink-row"><a class="backlink backlink--pill" href="{{ href }}">{{ label }}</a></p>
+{%- endmacro %}
+
+{% macro hero(href, label) -%}
+<a class="backlink backlink--hero" href="{{ href }}"><span aria-hidden="true">← </span>{{ label }}</a>
+{%- endmacro %}

@@ -11,6 +11,7 @@ cardAlt: Styling service card
 coverImage: /assets/images/curated_services/page_brands/styling_cover.webp
 coverAlt: Styling, layering, and finishing details
 intro: The finishing layer that makes a space feel lived-in, intentional, and complete—art, objects, textiles, and final placement curated with restraint and rhythm.
+metaDescription: The finishing layer that makes a space feel lived-in, intentional, and complete—art, objects, textiles, and final placement curated with restraint and rhythm.
 glance:
   - label: Timeline
     text: typically 1–3 weeks (scope-dependent)

@@ -8,6 +8,7 @@ order: 4
 category: Residential
 kicker: Residential · 2026
 subtitle: A refined residential lobby moments from Regent’s Park, elevated through considered detailing, furniture, and lighting.
+metaDescription: A refined residential lobby redesign in Marylebone, London, moments from Regent’s Park — elevated through considered detailing, furniture, and lighting.
 statusLabel: ''
 showInProjects: true
 cardImage: /assets/images/projects/marylebone_residence_lobby/marylebone_residence_lobby_1.webp
@@ -54,6 +55,9 @@ extraSections:
     text: |
       - 3 weeks from design sign-off to installation completion
       - Minimal disruption to resident access
+  - heading: Outcome
+    text: |
+      A redesigned lobby that gives residents a warmer welcome on arrival and gives guests a proper waiting area.
 facts:
   - label: Location
     value: 'Marylebone, London'
@@ -73,8 +77,10 @@ gallery:
   images:
     - image: /assets/images/projects/marylebone_residence_lobby/marylebone_residence_lobby_2.webp
       alt: Marylebone Lobby detail image
+      imageType: Photography
     - image: /assets/images/projects/marylebone_residence_lobby/marylebone_residence_lobby_3.webp
       alt: Marylebone Lobby interior detail
+      imageType: Photography
 ctaHeading: Every brief begins with a conversation.
 ctaText: Whether you are at early concept stage or refining a live scheme, we would like to hear about your project.
 ---

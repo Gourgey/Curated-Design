@@ -1,5 +1,6 @@
 {
-  "title": "Curated Design Studio",
+  "title": "Interior Design Studio London | Curated Design",
+  "metaDescription": "A London-based interior design studio shaping distinctive residential, hospitality, and commercial spaces, from concept through completion.",
   "hero": {
     "headline": "Bespoke interiors to define your lifestyle.",
     "subhead": "A London-based interior design studio shaping distinctive spaces."
@@ -22,6 +23,9 @@
     "kicker": "Curated Services",
     "heading": "Full-service design from concept to completion.",
     "lead": "From early mood and space planning to specification and on-site coordination, we deliver quietly confident spaces tailored to the way you live.",
+    "moreLabel": "Index",
+    "moreLink": "View all services",
+    "moreHref": "/curated_services.html",
     "featuredServices": [
       {
         "service": "concept_design"

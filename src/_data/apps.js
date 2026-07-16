@@ -16,6 +16,26 @@ const items = [
     privacySummary: "No ads, no tracking, no analytics",
     appStoreUrl: "",
     supportPages: ["privacy", "support", "terms"],
+    metaTitle: "Curiosity Tracker — Curated Design",
+    metaDescription:
+      "Curiosity Tracker is a personal iOS app for capturing questions, organising curiosities, and resurfacing ideas over time. No ads, no tracking, no analytics.",
+    pageMeta: {
+      privacy: {
+        title: "Curiosity Tracker Privacy Policy — Curated Design",
+        description:
+          "How Curiosity Tracker handles your data. Content is stored locally on your device, and — when iCloud is enabled — synced through your own private iCloud database. Curated Design does not operate a server that receives or stores your content.",
+      },
+      support: {
+        title: "Curiosity Tracker Support — Curated Design",
+        description:
+          "Help with Curiosity Tracker: iCloud sync, PDFs, notifications, deleting data, and contact details for Curated Design.",
+      },
+      terms: {
+        title: "Curiosity Tracker Terms — Curated Design",
+        description:
+          "Terms of use for Curiosity Tracker, a personal organisation tool from Curated Design — your responsibilities, app availability, and support contact details.",
+      },
+    },
   },
   {
     name: "ProcureCore",

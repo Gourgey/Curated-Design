@@ -11,6 +11,7 @@ cardAlt: Interior architecture design service card
 coverImage: /assets/images/curated_services/page_brands/interior_architecture_design_cover.webp
 coverAlt: Interior architecture design cover image
 intro: Spatial planning, architectural details, and technical design direction to make rooms work beautifully before finishes and furnishings are layered in.
+metaDescription: Spatial planning, architectural details, and technical design direction to make rooms work beautifully before finishes and furnishings are layered in.
 glance:
   - label: Timeline
     text: typically 3–8 weeks

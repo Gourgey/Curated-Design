@@ -64,3 +64,31 @@
     background: transparent;
     color: #fff;
 }
+
+/* ===== Inline "see also" link =====
+   Forward-pointing link inside a header intro block (Studio, Work ->
+   Services) -- distinct from the two "back to X" treatments above, which
+   read wrong for a link pointing forward to a sibling section. Matches the
+   site's existing italic-serif "more" link idiom (see
+   .home-collections__more-link / .home-services__more-link) rather than a
+   bordered pill sitting under a paragraph. */
+.header-more-link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-top: 20px;
+    font-family: var(--font-family-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 2px;
+    transition: border-color 200ms ease, padding-right 200ms ease;
+}
+.header-more-link::after { content: "→"; font-style: normal; }
+.header-more-link:hover {
+    border-bottom-color: var(--color-text-primary);
+    padding-right: 6px;
+}

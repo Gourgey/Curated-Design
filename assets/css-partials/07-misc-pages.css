@@ -2,7 +2,7 @@
    Coming Soon badge (project pages)
    Paste at end of styles.css
    ========================= */
-body.project-page .coming-soon-badge {
+.coming-soon-badge {
     display: inline-flex;
     align-items: center;
     margin-left: 10px;

@@ -120,6 +120,42 @@
     color: rgba(237, 232, 221, 0.65);
 }
 
+/* "View all services" link — mirrors .home-collections__more below,
+   recoloured for the dark void background this section sits on. */
+.home-services__more {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(237, 232, 221, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.home-services__more-label {
+    font-family: var(--font-family-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(237, 232, 221, 0.55);
+    margin: 0;
+}
+.home-services__more-link {
+    font-family: var(--font-family-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20px;
+    color: rgba(237, 232, 221, 0.96);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(237, 232, 221, 0.3);
+    padding-bottom: 2px;
+    transition: border-color 200ms ease, padding-right 200ms ease;
+}
+.home-services__more-link::after { content: " →"; font-style: normal; }
+.home-services__more-link:hover {
+    border-bottom-color: rgba(237, 232, 221, 0.96);
+    padding-right: 6px;
+}
+
 /* ---- Featured Projects grid ---- */
 .home-collections {
     border-top: 1px solid var(--color-border-soft);
@@ -366,6 +402,7 @@
     .home-collections__grid { grid-template-columns: 1fr; gap: 48px; }
     .home-services__grid { grid-template-columns: 1fr; gap: 48px; }
     .home-collections__more { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .home-services__more { flex-direction: column; gap: 12px; align-items: flex-start; }
     .home-philosophy { padding: 72px 24px; }
     .home-cta { padding: 64px 24px 96px; }
 }

@@ -12,12 +12,13 @@ htmlClass: app-page
 bodyClass: app-page min-h-screen font-inter
 sectionTop: true
 ---
+{% from "partials/backlink.njk" import pill as backlinkPill -%}
 <main id="main-content" class="page-main" tabindex="-1">
     {% include "partials/hero-brand.njk" %}
 
     <section class="app-content">
         <div class="app-wrap app-wrap--legal">
-            <p class="backlink-row"><a class="backlink backlink--pill" href="/apps/{{ appPage.app.slug }}/">Back to {{ appPage.app.name }}</a></p>
+            {{ backlinkPill("/apps/" + appPage.app.slug + "/", "Back to " + appPage.app.name) }}
 
             <header class="app-header app-header--compact">
                 <p class="app-kicker">{{ appPage.app.name }}</p>

@@ -1,0 +1,49 @@
+/* =========================
+   Services Listing (curated_services.html)
+   Reuses the shared .projects-header/.projects-section/.projects-grid/
+   .card--service listing components (10-projects-listing-redesign.css,
+   16-card.css) -- despite the class names, those rules are page-agnostic;
+   only the background/label-small/title-size overrides below are specific
+   to this page, mirroring how body.projects-page/body.about-page each add
+   their own for the same shared components.
+   ========================= */
+
+html.services-page {
+    background: var(--color-canvas-light);
+}
+
+body.services-page {
+    background: var(--color-canvas-light);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-body);
+    min-height: 100vh;
+}
+
+/* Nav on light page — every other light-background page (about-page,
+   projects-page, concept-page) has this same override; missing it here
+   left the primary nav rendering in its dark-page default (near-invisible
+   white-on-cream). */
+body.services-page .pill,
+body.services-page .pillmenu-toggle,
+body.services-page .nav-pill {
+    color: var(--color-text-primary);
+}
+body.services-page .pillmenu-toggle .burger-line {
+    background: currentColor;
+}
+
+body.services-page .label-small {
+    font-family: var(--font-family-body);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+}
+
+@media (max-width: 1180px) {
+    body.services-page .projects-header__title { font-size: 64px; }
+}
+@media (max-width: 920px) {
+    body.services-page .projects-header__title { font-size: 48px; }
+}

@@ -1,5 +1,5 @@
 /* GENERATED FILE -- do not edit directly.
-   Source partials: assets/css-partials/ (01-tokens.css, 02-base.css, 03-navigation.css, 04-homepage.css, 05-legacy-pages.css, 06-project-template.css, 07-misc-pages.css, 08-homepage-redesign.css, 09-project-redesign.css, 10-projects-listing-redesign.css, 11-service-redesign.css, 12-carousels.css, 13-buttons-cta.css, 14-form-fields.css, 15-backlink.css, 16-card.css, 17-footer.css)
+   Source partials: assets/css-partials/ (01-tokens.css, 02-base.css, 03-navigation.css, 04-homepage.css, 05-legacy-pages.css, 06-project-template.css, 07-misc-pages.css, 08-homepage-redesign.css, 09-project-redesign.css, 10-projects-listing-redesign.css, 11-service-redesign.css, 12-carousels.css, 13-buttons-cta.css, 14-form-fields.css, 15-backlink.css, 16-card.css, 17-footer.css, 18-services-page.css)
    Rebuild with: node tools/build-css.js (also runs automatically as part of npm run build
    and npm start) */
 
@@ -979,7 +979,7 @@ body.pills-on-light #floatingNavPill.is-open .pillmenu .pill:hover {
 
 /* HERO text on projects page should be black (your global hero is light-on-dark) */
 body.projects-page .hero,
-body.projects-page .hero * {
+.hero * {
     color: #000;
 }
 
@@ -991,7 +991,7 @@ body.projects-page .nav-pill {
     color: #000;
 }
 
-body.projects-page .pill::after {
+.pill::after {
     background-color: #000; /* hover / active underline */
 }
 
@@ -1044,14 +1044,14 @@ body.about-page .pillmenu-toggle .burger-line {
 }
 
 /* Studio shell — outer rhythm */
-body.about-page main.studio {
+main.studio {
     max-width: 1280px;
     margin: 0 auto;
     padding: 144px 80px 80px;
 }
 
 /* 01 — Editorial header (no centred logo) */
-body.about-page .studio-header {
+.studio-header {
     padding-bottom: 96px;
     border-bottom: 1px solid var(--color-border-soft);
     display: grid;
@@ -1059,7 +1059,7 @@ body.about-page .studio-header {
     gap: 32px;
     align-items: start;
 }
-body.about-page .studio-header__eyebrow {
+.studio-header__eyebrow {
     font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
@@ -1068,7 +1068,7 @@ body.about-page .studio-header__eyebrow {
     color: var(--color-text-primary);
     margin: 14px 0 0;
 }
-body.about-page .studio-header__title {
+.studio-header__title {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -1081,7 +1081,7 @@ body.about-page .studio-header__title {
 }
 body.about-page .studio-header__title em { font-style: italic; }
 
-body.about-page .studio-header__intro {
+.studio-header__intro {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 18px;
@@ -1094,13 +1094,13 @@ body.about-page .studio-header__intro {
 }
 
 /* 02 — Two-column: defines / focus areas */
-body.about-page .studio-two {
+.studio-two {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 96px;
     padding: 80px 0 96px;
 }
-body.about-page .studio-two__heading {
+.studio-two__heading {
     font-family: var(--font-family-display);
     font-style: normal;
     font-weight: 400;
@@ -1112,7 +1112,7 @@ body.about-page .studio-two__heading {
     padding-top: 24px;
     border-top: 1px solid var(--color-border-soft);
 }
-body.about-page .studio-two__body p {
+.studio-two__body p {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 16px;
@@ -1123,14 +1123,14 @@ body.about-page .studio-two__body p {
     max-width: 34em;
 }
 body.about-page .studio-two__body p:last-child { margin-bottom: 0; }
-body.about-page .studio-two__list {
+.studio-two__list {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
 }
-body.about-page .studio-two__list li {
+.studio-two__list li {
     font-family: var(--font-family-display);
     font-weight: 300;
     font-size: 22px;
@@ -1144,18 +1144,18 @@ body.about-page .studio-two__list li:first-child { padding-top: 0; }
 body.about-page .studio-two__list li:last-child { border-bottom: none; }
 
 /* 03 — Process · i / ii / iii */
-body.about-page .studio-process {
+.studio-process {
     padding: 96px 0;
     border-top: 1px solid var(--color-border-soft);
 }
-body.about-page .studio-process__lead {
+.studio-process__lead {
     display: grid;
     grid-template-columns: 96px 1fr;
     gap: 32px;
     align-items: baseline;
     margin-bottom: 64px;
 }
-body.about-page .studio-process__eyebrow {
+.studio-process__eyebrow {
     font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
@@ -1164,7 +1164,7 @@ body.about-page .studio-process__eyebrow {
     color: var(--color-text-primary);
     margin: 0;
 }
-body.about-page .studio-process__title {
+.studio-process__title {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -1178,18 +1178,29 @@ body.about-page .studio-process__title {
 }
 body.about-page .studio-process__title em { font-style: italic; }
 
-body.about-page .studio-process__grid {
+.studio-process__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 48px;
 }
-body.about-page .step {
+.studio-process__note {
+    font-family: var(--font-family-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--color-text-muted);
+    margin: 48px 0 0;
+    max-width: 42em;
+    text-wrap: pretty;
+}
+.step {
     display: flex;
     flex-direction: column;
     padding-top: 24px;
     border-top: 1px solid var(--color-text-primary);
 }
-body.about-page .step__roman {
+.step__roman {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 400;
@@ -1198,7 +1209,7 @@ body.about-page .step__roman {
     color: var(--color-text-primary);
     margin: 0 0 32px;
 }
-body.about-page .step__label {
+.step__label {
     font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
@@ -1207,7 +1218,7 @@ body.about-page .step__label {
     color: var(--color-text-secondary);
     margin: 0 0 12px;
 }
-body.about-page .step__head {
+.step__head {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -1219,7 +1230,7 @@ body.about-page .step__head {
     text-wrap: balance;
     max-width: 14ch;
 }
-body.about-page .step__body {
+.step__body {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 15px;
@@ -1230,7 +1241,7 @@ body.about-page .step__body {
 }
 
 /* 04 — Locations & scope */
-body.about-page .studio-locations {
+.studio-locations {
     padding: 96px 0 80px;
     border-top: 1px solid var(--color-border-soft);
     display: grid;
@@ -1238,7 +1249,7 @@ body.about-page .studio-locations {
     gap: 32px;
     align-items: start;
 }
-body.about-page .studio-locations__eyebrow {
+.studio-locations__eyebrow {
     font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
@@ -1247,13 +1258,13 @@ body.about-page .studio-locations__eyebrow {
     color: var(--color-text-primary);
     margin: 6px 0 0;
 }
-body.about-page .studio-locations__body {
+.studio-locations__body {
     display: flex;
     flex-direction: column;
     gap: 24px;
     max-width: 56em;
 }
-body.about-page .studio-locations__heading {
+.studio-locations__heading {
     font-family: var(--font-family-display);
     font-weight: 400;
     font-size: 36px;
@@ -1262,7 +1273,7 @@ body.about-page .studio-locations__heading {
     color: var(--color-text-primary);
     margin: 0;
 }
-body.about-page .studio-locations__body p {
+.studio-locations__body p {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 17px;
@@ -1273,10 +1284,10 @@ body.about-page .studio-locations__body p {
 }
 
 /* 05 — Documents & tools — hairline list, no cards */
-body.about-page .studio-docs {
+.studio-docs {
     padding: 56px 0 120px;
 }
-body.about-page .studio-docs__intro {
+.studio-docs__intro {
     display: grid;
     grid-template-columns: 96px 1fr;
     gap: 32px;
@@ -1284,7 +1295,7 @@ body.about-page .studio-docs__intro {
     padding: 24px 0 32px;
     border-top: 1px solid var(--color-border-soft);
 }
-body.about-page .studio-docs__eyebrow {
+.studio-docs__eyebrow {
     font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
@@ -1293,7 +1304,7 @@ body.about-page .studio-docs__eyebrow {
     color: var(--color-text-primary);
     margin: 0;
 }
-body.about-page .studio-docs__hint {
+.studio-docs__hint {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -1302,12 +1313,12 @@ body.about-page .studio-docs__hint {
     margin: 0;
 }
 
-body.about-page .doc-list {
+.doc-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-body.about-page .doc-list__item {
+.doc-list__item {
     display: grid;
     grid-template-columns: 96px 1fr auto;
     gap: 32px;
@@ -1315,10 +1326,10 @@ body.about-page .doc-list__item {
     padding: 28px 0;
     border-top: 1px solid var(--color-text-primary);
 }
-body.about-page .doc-list__item:last-child {
+.doc-list__item:last-child {
     border-bottom: 1px solid var(--color-text-primary);
 }
-body.about-page .doc-list__label {
+.doc-list__label {
     font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
@@ -1327,7 +1338,7 @@ body.about-page .doc-list__label {
     color: var(--color-text-secondary);
     margin: 0;
 }
-body.about-page .doc-list__title {
+.doc-list__title {
     font-family: var(--font-family-display);
     font-weight: 400;
     font-size: 24px;
@@ -1336,7 +1347,7 @@ body.about-page .doc-list__title {
     color: var(--color-text-primary);
     margin: 0;
 }
-body.about-page .doc-list__title .meta {
+.doc-list__title .meta {
     display: block;
     margin-top: 4px;
     font-family: var(--font-family-body);
@@ -1346,7 +1357,7 @@ body.about-page .doc-list__title .meta {
     color: var(--color-text-muted);
     text-transform: none;
 }
-body.about-page .doc-list__link {
+.doc-list__link {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 400;
@@ -1359,11 +1370,11 @@ body.about-page .doc-list__link {
     white-space: nowrap;
     transition: border-color 200ms ease, padding-right 200ms ease;
 }
-body.about-page .doc-list__link:hover {
+.doc-list__link:hover {
     border-bottom-color: var(--color-text-primary);
     padding-right: 6px;
 }
-body.about-page .doc-list__link::after {
+.doc-list__link::after {
     content: " →";
     font-style: normal;
 }
@@ -1375,7 +1386,7 @@ body.about-page .doc-list__link::after {
 }
 @media (max-width: 920px) {
     body.about-page main.studio { padding: 120px 32px 0; }
-    body.about-page .studio-header {
+    .studio-header {
         grid-template-columns: 1fr;
         gap: 16px;
         padding-bottom: 56px;
@@ -1385,14 +1396,14 @@ body.about-page .doc-list__link::after {
     body.about-page .studio-process__lead { grid-template-columns: 1fr; gap: 16px; }
     body.about-page .studio-process__title { font-size: 32px; }
     body.about-page .studio-process__grid { grid-template-columns: 1fr; gap: 32px; }
-    body.about-page .studio-locations {
+    .studio-locations {
         grid-template-columns: 1fr;
         gap: 16px;
         padding: 56px 0;
     }
     body.about-page .studio-locations__heading { font-size: 28px; }
     body.about-page .studio-docs__intro { grid-template-columns: 1fr; gap: 12px; padding-top: 0; border-top: none; }
-    body.about-page .doc-list__item {
+    .doc-list__item {
         grid-template-columns: 1fr auto;
         grid-template-areas:
             "label link"
@@ -1439,7 +1450,7 @@ body.contact-page .hero-brand {
 /* ───────────────────────────────────────────────────────────
    Body — two-column editorial layout
    ─────────────────────────────────────────────────────────── */
-body.contact-page .contact-body {
+.contact-body {
     max-width: 1280px;
     margin: 0 auto;
     padding: 24px 80px 160px;
@@ -1450,7 +1461,7 @@ body.contact-page .contact-body {
 }
 
 /* Left column */
-body.contact-page .contact-headline {
+.contact-headline {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -1464,7 +1475,7 @@ body.contact-page .contact-headline {
 }
 
 body.contact-page .contact-headline em { font-style: italic; }
-body.contact-page .contact-subline {
+.contact-subline {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 17px;
@@ -1477,7 +1488,7 @@ body.contact-page .contact-subline {
 }
 
 /* Studio details — no subheading, hairline above */
-body.contact-page .studio-meta {
+.studio-meta {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -1485,7 +1496,7 @@ body.contact-page .studio-meta {
     border-top: 1px solid var(--color-border-soft);
     font-style: normal;
 }
-body.contact-page .studio-meta__name {
+.studio-meta__name {
     font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
@@ -1494,7 +1505,7 @@ body.contact-page .studio-meta__name {
     color: var(--color-text-primary);
     margin: 0;
 }
-body.contact-page .studio-meta__addr {
+.studio-meta__addr {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 17px;
@@ -1503,7 +1514,7 @@ body.contact-page .studio-meta__addr {
     margin: 0;
     font-style: normal;
 }
-body.contact-page .studio-meta__email {
+.studio-meta__email {
     font-family: var(--font-family-body);
     font-weight: 400;
     font-size: 17px;
@@ -1514,10 +1525,10 @@ body.contact-page .studio-meta__email {
     padding-bottom: 1px;
     transition: border-color 200ms ease;
 }
-body.contact-page .studio-meta__email:hover {
+.studio-meta__email:hover {
     border-bottom-color: var(--color-text-primary);
 }
-body.contact-page .studio-meta__note {
+.studio-meta__note {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -1530,7 +1541,7 @@ body.contact-page .studio-meta__note {
 }
 
 /* Right column / form — sits on page bg, no card */
-body.contact-page .contact-form-col {
+.contact-form-col {
     display: flex;
     flex-direction: column;
 }
@@ -1541,14 +1552,14 @@ body.contact-page .contact-form-col {
    reused by .service-enquiry__form in 11-service-redesign.css. */
 
 /* Submit row — editorial link-button, no pill */
-body.contact-page .contact-submit-row {
+.contact-submit-row {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
     gap: 24px;
     margin-top: 16px;
 }
-body.contact-page .contact-submit {
+.contact-submit {
     background: none;
     border: none;
     border-bottom: 1px solid var(--color-text-primary);
@@ -1562,23 +1573,23 @@ body.contact-page .contact-submit {
     letter-spacing: -0.005em;
     transition: padding-right 200ms ease;
 }
-body.contact-page .contact-submit:hover {
+.contact-submit:hover {
     padding-right: 12px;
 }
-body.contact-page .contact-submit__arrow {
+.contact-submit__arrow {
     font-style: normal;
     display: inline-block;
     margin-left: 8px;
     transition: transform 240ms ease;
 }
-body.contact-page .contact-submit:hover .contact-submit__arrow {
+.contact-submit:hover .contact-submit__arrow {
     transform: translateX(4px);
 }
-body.contact-page .contact-submit[disabled] {
+.contact-submit[disabled] {
     opacity: 0.7;
     cursor: wait;
 }
-body.contact-page .contact-submit-meta {
+.contact-submit-meta {
     font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
@@ -1587,7 +1598,7 @@ body.contact-page .contact-submit-meta {
     color: var(--color-text-muted);
 }
 
-body.contact-page .contact-form-privacy {
+.contact-form-privacy {
     font-family: var(--font-family-body);
     font-size: 12px;
     font-weight: 300;
@@ -1595,22 +1606,22 @@ body.contact-page .contact-form-privacy {
     color: var(--color-text-muted);
     margin: -10px 0 0;
 }
-body.contact-page .contact-form-privacy a {
+.contact-form-privacy a {
     color: inherit;
     text-underline-offset: 3px;
 }
 
 /* Error / success states */
-body.contact-page .contact-form-error {
+.contact-form-error {
     font-family: var(--font-family-body);
     font-size: 14px;
     color: var(--color-state-error);
     margin: 0;
 }
-body.contact-page .contact-form-success {
+.contact-form-success {
     padding-top: 18px;
 }
-body.contact-page .contact-form-success__title {
+.contact-form-success__title {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -1619,7 +1630,7 @@ body.contact-page .contact-form-success__title {
     color: var(--color-text-primary);
     margin: 0 0 12px;
 }
-body.contact-page .contact-form-success__text {
+.contact-form-success__text {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 17px;
@@ -1636,7 +1647,7 @@ body.contact-page .hidden {
     body.contact-page .contact-headline { font-size: 64px; }
 }
 @media (max-width: 920px) {
-    body.contact-page .contact-body {
+    .contact-body {
         grid-template-columns: 1fr;
         gap: 56px;
         padding: 24px 32px 96px;
@@ -1881,7 +1892,7 @@ body.project-page .top-left-logo:hover {
 }
 
 /* Topbar */
-body.project-page .project-topbar {
+.project-topbar {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -1908,7 +1919,7 @@ body.project-page .project-topbar {
    hero's text CONTENT styling below (overlay, kicker, title, subtitle,
    tags) stays here -- it's page content, not carousel mechanics. */
 
-body.project-page .project-hero-overlay {
+.project-hero-overlay {
     position: absolute;
     inset: 0;
     display: grid;
@@ -1923,14 +1934,14 @@ body.project-page .project-hero-overlay {
     padding: 0;
 }
 
-body.project-page .project-hero-inner {
+.project-hero-inner {
     margin-inline: auto;
     color: #fff;
     width: min(1320px, calc(100% - 64px));
     padding: 0 0 clamp(52px, 7vw, 96px);
 }
 
-body.project-page .project-kicker {
+.project-kicker {
     text-transform: uppercase;
     margin: 0 0 16px;
     font-family: "Inter", sans-serif;
@@ -1941,7 +1952,7 @@ body.project-page .project-kicker {
     opacity: 0.94;
 }
 
-body.project-page .project-title {
+.project-title {
     max-width: 9.6em;
     margin: 0 0 24px;
     font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
@@ -1952,7 +1963,7 @@ body.project-page .project-title {
     line-height: 0.86;
 }
 
-body.project-page .project-subtitle {
+.project-subtitle {
     max-width: 40em;
     margin: 0;
     font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
@@ -1963,14 +1974,14 @@ body.project-page .project-subtitle {
     opacity: 0.94;
 }
 
-body.project-page .project-tags {
+.project-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
     margin-top: clamp(34px, 4vw, 58px);
 }
 
-body.project-page .project-tag {
+.project-tag {
     border-radius: 999px;
     padding: 12px 18px;
     border: 1px solid rgba(255, 255, 255, 0.42);
@@ -1995,21 +2006,21 @@ body.project-page .project-wrap {
 
 /* Related-work / next-project link, between the article body and the
    enquiry CTA band (see build plan P3.4). */
-body.project-page .project-next {
+.project-next {
     padding: 56px 0;
     border-top: 1px solid var(--color-border-soft);
 }
-body.project-page .project-next__link {
+.project-next__link {
     display: flex;
     flex-direction: column;
     gap: 10px;
     text-decoration: none;
     color: inherit;
 }
-body.project-page .project-next__eyebrow {
+.project-next__eyebrow {
     color: var(--color-text-muted);
 }
-body.project-page .project-next__title {
+.project-next__title {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -2018,7 +2029,7 @@ body.project-page .project-next__title {
     color: var(--color-text-primary);
     transition: color 180ms ease;
 }
-body.project-page .project-next__link:hover .project-next__title {
+.project-next__link:hover .project-next__title {
     color: var(--color-text-secondary);
 }
 
@@ -2027,7 +2038,7 @@ body.project-page .project-next__link:hover .project-next__title {
    Coming Soon badge (project pages)
    Paste at end of styles.css
    ========================= */
-body.project-page .coming-soon-badge {
+.coming-soon-badge {
     display: inline-flex;
     align-items: center;
     margin-left: 10px;
@@ -2635,6 +2646,42 @@ body.legal-page .hero-brand {
     color: rgba(237, 232, 221, 0.65);
 }
 
+/* "View all services" link — mirrors .home-collections__more below,
+   recoloured for the dark void background this section sits on. */
+.home-services__more {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(237, 232, 221, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.home-services__more-label {
+    font-family: var(--font-family-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(237, 232, 221, 0.55);
+    margin: 0;
+}
+.home-services__more-link {
+    font-family: var(--font-family-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20px;
+    color: rgba(237, 232, 221, 0.96);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(237, 232, 221, 0.3);
+    padding-bottom: 2px;
+    transition: border-color 200ms ease, padding-right 200ms ease;
+}
+.home-services__more-link::after { content: " →"; font-style: normal; }
+.home-services__more-link:hover {
+    border-bottom-color: rgba(237, 232, 221, 0.96);
+    padding-right: 6px;
+}
+
 /* ---- Featured Projects grid ---- */
 .home-collections {
     border-top: 1px solid var(--color-border-soft);
@@ -2881,6 +2928,7 @@ body.legal-page .hero-brand {
     .home-collections__grid { grid-template-columns: 1fr; gap: 48px; }
     .home-services__grid { grid-template-columns: 1fr; gap: 48px; }
     .home-collections__more { flex-direction: column; gap: 12px; align-items: flex-start; }
+    .home-services__more { flex-direction: column; gap: 12px; align-items: flex-start; }
     .home-philosophy { padding: 72px 24px; }
     .home-cta { padding: 64px 24px 96px; }
 }
@@ -2894,7 +2942,7 @@ body.legal-page .hero-brand {
    ========================= */
 
 /* Two-column article wrapper */
-body.project-page .project-article {
+.project-article {
     display: grid;
     grid-template-columns: 1fr;
     gap: 40px;
@@ -2904,7 +2952,7 @@ body.project-page .project-article {
     padding: 0;
 }
 @media (min-width: 900px) {
-    body.project-page .project-article {
+    .project-article {
         grid-template-columns: 3fr 2fr;
         gap: 64px;
         align-items: start;
@@ -2913,7 +2961,7 @@ body.project-page .project-article {
 }
 
 /* Lead paragraph — Cormorant italic on the page background */
-body.project-page .project-article__heading {
+.project-article__heading {
     margin: 0 0 20px;
     font-family: "Cormorant Garamond", serif;
     font-size: clamp(28px, 3vw, 40px);
@@ -2922,7 +2970,7 @@ body.project-page .project-article__heading {
     line-height: 1.1;
 }
 
-body.project-page .project-lead {
+.project-lead {
     font-family: "Cormorant Garamond", serif;
     font-style: italic;
     font-size: clamp(18px, 2vw, 22px);
@@ -2932,7 +2980,7 @@ body.project-page .project-lead {
 }
 
 /* Pull-quote / callout */
-body.project-page .project-callout {
+.project-callout {
     border-top: 1px solid rgba(0, 0, 0, 0.15);
     border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     padding: 32px 0;
@@ -2942,11 +2990,11 @@ body.project-page .project-callout {
     border-right: 0;
     border-radius: 0;
 }
-body.project-page .project-callout .label-small {
+.project-callout .label-small {
     display: block;
     margin-bottom: 16px;
 }
-body.project-page .project-callout__text {
+.project-callout__text {
     font-family: "Cormorant Garamond", serif;
     font-style: italic;
     font-size: clamp(20px, 2.2vw, 26px);
@@ -2958,42 +3006,42 @@ body.project-page .project-callout__text {
 }
 
 /* Extra sections — hairline top rule, label-small heading */
-body.project-page .project-section {
+.project-section {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 24px;
     margin-top: 40px;
 }
-body.project-page .project-section__heading {
+.project-section__heading {
     margin-bottom: 16px;
 }
-body.project-page .project-section__body {
+.project-section__body {
     font-family: "Inter", sans-serif;
     font-weight: 300;
     font-size: 15px;
     line-height: 1.7;
 }
-body.project-page .project-section__body ul {
+.project-section__body ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-body.project-page .project-section__body li {
+.project-section__body li {
     padding: 10px 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
-body.project-page .project-section__body li:last-child {
+.project-section__body li:last-child {
     border-bottom: none;
 }
 
 /* Sidebar — sticky on desktop */
-body.project-page .project-aside {
+.project-aside {
     position: sticky;
     top: 32px;
     display: block;
 }
 
 /* Facts list */
-body.project-page .project-facts {
+.project-facts {
     list-style: none;
     padding: 0;
     margin: 16px 0 0 0;
@@ -3002,17 +3050,17 @@ body.project-page .project-facts {
     border-radius: 0;
     z-index: 2;
 }
-body.project-page .project-facts__row {
+.project-facts__row {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     padding: 10px 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-body.project-page .project-facts__row:first-child {
+.project-facts__row:first-child {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
-body.project-page .project-facts__label {
+.project-facts__label {
     font-family: "Inter", sans-serif;
     font-weight: 500;
     font-size: 12px;
@@ -3020,7 +3068,7 @@ body.project-page .project-facts__label {
     text-transform: uppercase;
     color: var(--color-text-muted);
 }
-body.project-page .project-facts__value {
+.project-facts__value {
     font-family: "Cormorant Garamond", serif;
     font-style: italic;
     font-size: 16px;
@@ -3031,7 +3079,7 @@ body.project-page .project-facts__value {
 }
 
 /* Aside note + CTA link */
-body.project-page .project-aside__note {
+.project-aside__note {
     font-family: "Inter", sans-serif;
     font-weight: 300;
     font-size: 13px;
@@ -3039,7 +3087,7 @@ body.project-page .project-aside__note {
     color: rgba(0, 0, 0, 0.55);
     margin-top: 24px;
 }
-body.project-page .project-aside__cta {
+.project-aside__cta {
     font-family: "Inter", sans-serif;
     font-size: 13px;
     font-weight: 500;
@@ -3082,7 +3130,7 @@ body.projects-page {
 }
 
 /* Editorial hero — eyebrow + Cormorant italic title + Inter intro */
-body.projects-page .projects-header {
+.projects-header {
     max-width: 1280px;
     margin: 0 auto;
     padding: 144px 80px 80px;
@@ -3092,7 +3140,7 @@ body.projects-page .projects-header {
     align-items: start;
     border-bottom: 1px solid var(--color-border-soft);
 }
-body.projects-page .projects-header__eyebrow {
+.projects-header__eyebrow {
     font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
@@ -3101,7 +3149,7 @@ body.projects-page .projects-header__eyebrow {
     color: var(--color-text-primary);
     margin: 14px 0 0;
 }
-body.projects-page .projects-header__title {
+.projects-header__title {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -3113,7 +3161,7 @@ body.projects-page .projects-header__title {
     text-wrap: balance;
 }
 body.projects-page .projects-header__title em { font-style: italic; }
-body.projects-page .projects-header__intro {
+.projects-header__intro {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 18px;
@@ -3125,10 +3173,10 @@ body.projects-page .projects-header__intro {
 }
 
 /* Per-category section */
-body.projects-page .projects-section {
+.projects-section {
     padding: 80px 0;
 }
-body.projects-page .projects-section + .projects-section {
+.projects-section + .projects-section {
     border-top: 1px solid var(--color-border-soft);
 }
 
@@ -3136,33 +3184,33 @@ body.projects-page .projects-section + .projects-section {
    completed-work section, with its own intro before the category
    subsections. Keeps concept work clearly separated per the build plan's
    guiding decision #4 (P3.3). */
-body.projects-page .projects-concepts {
+.projects-concepts {
     border-top: 1px solid var(--color-border-soft);
 }
-body.projects-page .projects-concepts__intro {
+.projects-concepts__intro {
     padding-top: 80px;
     padding-bottom: 40px;
 }
-body.projects-page .projects-concepts .projects-section:first-of-type {
+.projects-concepts .projects-section:first-of-type {
     border-top: none;
 }
-body.projects-page .projects-section__inner {
+.projects-section__inner {
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 80px;
 }
-body.projects-page .projects-section__head {
+.projects-section__head {
     display: grid;
     grid-template-columns: 96px 1fr;
     gap: 32px;
     align-items: baseline;
     margin-bottom: 64px;
 }
-body.projects-page .projects-section__eyebrow {
+.projects-section__eyebrow {
     grid-column: 1;
     margin: 0;
 }
-body.projects-page .projects-section__heading {
+.projects-section__heading {
     grid-column: 2;
     font-family: var(--font-family-display);
     font-weight: 400;
@@ -3174,7 +3222,7 @@ body.projects-page .projects-section__heading {
     text-wrap: balance;
     max-width: 22ch;
 }
-body.projects-page .projects-section__note {
+.projects-section__note {
     grid-column: 2;
     font-family: var(--font-family-display);
     font-style: italic;
@@ -3188,7 +3236,7 @@ body.projects-page .projects-section__note {
 }
 
 /* Grid of project cards */
-body.projects-page .projects-grid {
+.projects-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 56px 32px;
@@ -3228,38 +3276,38 @@ body.projects-page .pill.active {
     body.projects-page .projects-header__title { font-size: 64px; }
 }
 @media (max-width: 920px) {
-    body.projects-page .projects-header {
+    .projects-header {
         grid-template-columns: 1fr;
         gap: 16px;
         padding: 120px 32px 56px;
     }
     body.projects-page .projects-header__title { font-size: 48px; }
-    body.projects-page .projects-section {
+    .projects-section {
         padding: 56px 0;
     }
-    body.projects-page .projects-concepts__intro {
+    .projects-concepts__intro {
         padding-top: 56px;
         padding-bottom: 24px;
     }
-    body.projects-page .projects-section__inner {
+    .projects-section__inner {
         padding: 0 32px;
     }
-    body.projects-page .projects-section__head {
+    .projects-section__head {
         grid-template-columns: 1fr;
         gap: 12px;
         margin-bottom: 40px;
     }
-    body.projects-page .projects-section__heading,
-body.projects-page .projects-section__note {
+    .projects-section__heading,
+.projects-section__note {
         grid-column: 1;
     }
-    body.projects-page .projects-grid {
+    .projects-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 40px 24px;
     }
 }
 @media (max-width: 640px) {
-    body.projects-page .projects-grid {
+    .projects-grid {
         grid-template-columns: 1fr;
         gap: 40px;
     }
@@ -3284,21 +3332,21 @@ body.concept-page {
 }
 
 /* Outer rhythm */
-body.concept-page main.service {
+main.service {
     max-width: 1280px;
     margin: 0 auto;
     padding: 144px 80px 80px;
 }
 
 /* Header */
-body.concept-page .service-header {
+.service-header {
     display: grid;
     grid-template-columns: 96px 1fr;
     gap: 32px;
     align-items: start;
     padding-bottom: 64px;
 }
-body.concept-page .service-header__eyebrow {
+.service-header__eyebrow {
     font-family: var(--font-family-body);
     font-size: 11px;
     font-weight: 500;
@@ -3307,7 +3355,7 @@ body.concept-page .service-header__eyebrow {
     color: var(--color-text-primary);
     margin: 14px 0 0;
 }
-body.concept-page .service-header__title {
+.service-header__title {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -3319,7 +3367,7 @@ body.concept-page .service-header__title {
     text-wrap: balance;
 }
 body.concept-page .service-header__title em { font-style: italic; }
-body.concept-page .service-header__intro {
+.service-header__intro {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 18px;
@@ -3331,11 +3379,11 @@ body.concept-page .service-header__intro {
 }
 
 /* Cover image — clean editorial frame, no rounded corners or shadow */
-body.concept-page .service-hero {
+.service-hero {
     margin: 0 0 64px;
     overflow: hidden;
 }
-body.concept-page .service-hero img {
+.service-hero img {
     width: 100%;
     height: clamp(280px, 40vw, 520px);
     object-fit: cover;
@@ -3343,13 +3391,13 @@ body.concept-page .service-hero img {
 }
 
 /* Two-column body */
-body.concept-page .service-body {
+.service-body {
     display: grid;
     grid-template-columns: 1fr;
     gap: 40px;
 }
 @media (min-width: 900px) {
-    body.concept-page .service-body {
+    .service-body {
         grid-template-columns: 3fr 2fr;
         gap: 64px;
         align-items: start;
@@ -3357,18 +3405,18 @@ body.concept-page .service-body {
 }
 
 /* Left column — sections with hairline rule above each */
-body.concept-page .service-section {
+.service-section {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 24px;
     margin-top: 40px;
 }
-body.concept-page .service-section:first-child {
+.service-section:first-child {
     margin-top: 0;
 }
-body.concept-page .service-section__heading {
+.service-section__heading {
     margin: 0 0 16px;
 }
-body.concept-page .service-section__list {
+.service-section__list {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 15px;
@@ -3378,22 +3426,22 @@ body.concept-page .service-section__list {
     margin: 0;
     color: var(--color-text-secondary);
 }
-body.concept-page .service-section__list li {
+.service-section__list li {
     padding: 10px 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
-body.concept-page .service-section__list li:last-child {
+.service-section__list li:last-child {
     border-bottom: none;
 }
-body.concept-page ol.service-section__list {
+ol.service-section__list {
     counter-reset: srv-step;
 }
-body.concept-page ol.service-section__list li {
+ol.service-section__list li {
     counter-increment: srv-step;
     padding-left: 32px;
     position: relative;
 }
-body.concept-page ol.service-section__list li::before {
+ol.service-section__list li::before {
     content: counter(srv-step, lower-roman);
     position: absolute;
     left: 0;
@@ -3404,7 +3452,7 @@ body.concept-page ol.service-section__list li::before {
     font-size: 14px;
     letter-spacing: 0.04em;
 }
-body.concept-page .service-section__note {
+.service-section__note {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -3417,25 +3465,25 @@ body.concept-page .service-section__note {
 }
 
 /* Right column — sticky aside containing At-a-glance + enquiry form */
-body.concept-page .service-body__aside {
+.service-body__aside {
     display: flex;
     flex-direction: column;
     gap: 40px;
 }
 @media (min-width: 900px) {
-    body.concept-page .service-body__aside {
+    .service-body__aside {
         position: sticky;
         top: 32px;
     }
 }
 
 /* At-a-glance facts list */
-body.concept-page .service-glance__list {
+.service-glance__list {
     list-style: none;
     padding: 0;
     margin: 16px 0 0;
 }
-body.concept-page .service-glance__row {
+.service-glance__row {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -3443,10 +3491,10 @@ body.concept-page .service-glance__row {
     gap: 16px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-body.concept-page .service-glance__row:first-child {
+.service-glance__row:first-child {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
-body.concept-page .service-glance__label {
+.service-glance__label {
     font-family: var(--font-family-body);
     font-weight: 500;
     font-size: 12px;
@@ -3455,7 +3503,7 @@ body.concept-page .service-glance__label {
     color: var(--color-text-muted);
     margin: 0;
 }
-body.concept-page .service-glance__value {
+.service-glance__value {
     font-family: var(--font-family-display);
     font-style: italic;
     font-size: 16px;
@@ -3467,7 +3515,7 @@ body.concept-page .service-glance__value {
 }
 
 /* Enquiry block */
-body.concept-page .service-enquiry__title {
+.service-enquiry__title {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -3478,7 +3526,7 @@ body.concept-page .service-enquiry__title {
     margin: 0 0 12px;
     text-wrap: balance;
 }
-body.concept-page .service-enquiry__intro {
+.service-enquiry__intro {
     font-family: var(--font-family-body);
     font-weight: 300;
     font-size: 14px;
@@ -3493,30 +3541,30 @@ body.concept-page .service-enquiry__intro {
    same structure as .contact-form in 05-legacy-pages.css, just tuned to a
    smaller scale for this in-context aside. */
 
-body.concept-page .service-enquiry__privacy,
-body.concept-page .service-enquiry__error,
-body.concept-page .service-enquiry__success-text {
+.service-enquiry__privacy,
+.service-enquiry__error,
+.service-enquiry__success-text {
     font-family: var(--font-family-body);
     font-size: 12px;
     font-weight: 300;
     line-height: 1.55;
     margin: 0;
 }
-body.concept-page .service-enquiry__privacy {
+.service-enquiry__privacy {
     color: var(--color-text-muted);
     margin-top: -8px;
 }
-body.concept-page .service-enquiry__privacy a {
+.service-enquiry__privacy a {
     color: inherit;
     text-underline-offset: 3px;
 }
-body.concept-page .service-enquiry__error {
+.service-enquiry__error {
     color: var(--color-state-error);
 }
-body.concept-page .service-enquiry__success {
+.service-enquiry__success {
     padding-top: 8px;
 }
-body.concept-page .service-enquiry__success-title {
+.service-enquiry__success-title {
     font-family: var(--font-family-display);
     font-style: italic;
     font-weight: 300;
@@ -3525,22 +3573,22 @@ body.concept-page .service-enquiry__success-title {
     color: var(--color-text-primary);
     margin: 0 0 10px;
 }
-body.concept-page .service-enquiry__success-text {
+.service-enquiry__success-text {
     color: var(--color-text-secondary);
 }
-body.concept-page .service-enquiry__submit[disabled] {
+.service-enquiry__submit[disabled] {
     opacity: 0.7;
     cursor: wait;
 }
-body.concept-page .service-enquiry .hidden {
+.service-enquiry .hidden {
     display: none;
 }
 
 /* Submit — editorial link-button */
-body.concept-page .service-enquiry__submit-row {
+.service-enquiry__submit-row {
     margin-top: 8px;
 }
-body.concept-page .service-enquiry__submit {
+.service-enquiry__submit {
     background: none;
     border: none;
     border-bottom: 1px solid var(--color-text-primary);
@@ -3557,14 +3605,14 @@ body.concept-page .service-enquiry__submit {
     gap: 10px;
     transition: padding-right 200ms ease;
 }
-body.concept-page .service-enquiry__submit:hover {
+.service-enquiry__submit:hover {
     padding-right: 12px;
 }
-body.concept-page .service-enquiry__arrow {
+.service-enquiry__arrow {
     font-style: normal;
     transition: transform 240ms ease;
 }
-body.concept-page .service-enquiry__submit:hover .service-enquiry__arrow {
+.service-enquiry__submit:hover .service-enquiry__arrow {
     transform: translateX(4px);
 }
 
@@ -3581,24 +3629,24 @@ body.concept-page .label-small {
 
 /* Responsive */
 @media (max-width: 920px) {
-    body.concept-page main.service {
+    main.service {
         padding: 120px 32px 0;
     }
-    body.concept-page .service-header {
+    .service-header {
         grid-template-columns: 1fr;
         gap: 16px;
         padding-bottom: 56px;
     }
-    body.concept-page .service-header__title {
+    .service-header__title {
         font-size: 52px;
     }
-    body.concept-page .service-hero {
+    .service-hero {
         margin-bottom: 48px;
     }
-    body.concept-page .service-hero img {
+    .service-hero img {
         height: clamp(240px, 50vw, 400px);
     }
-    body.concept-page .service-body__aside {
+    .service-body__aside {
         gap: 32px;
     }
 }
@@ -3615,11 +3663,11 @@ body.project-page .nav-pill .pillmenu-toggle {
     box-shadow: none;
 }
 body.project-page .pill,
-body.project-page .nav-pill .pill {
+.nav-pill .pill {
     color: rgba(247, 244, 237, 0.94);
 }
 body.project-page .pill:hover,
-body.project-page .nav-pill .pill:hover {
+.nav-pill .pill:hover {
     color: #fff;
     background: rgba(255, 255, 255, 0.08);
 }
@@ -3628,17 +3676,17 @@ body.project-page .nav-pill .pill:hover {
    { height: 100% } rule that lived here moved to
    assets/css-partials/12-carousels.css (P2.2 by-topic regrouping). */
 
-body.project-page .project-cta-band {
+.project-cta-band {
     background: #12120f;
     color: rgba(237, 232, 221, 0.96);
     padding: clamp(92px, 12vw, 172px) 0 clamp(84px, 10vw, 144px);
 }
-body.project-page .project-cta__inner {
+.project-cta__inner {
     width: min(1320px, calc(100% - 64px));
     margin: 0 auto;
     text-align: left;
 }
-body.project-page .project-cta-band .h2 {
+.project-cta-band .h2 {
     max-width: 9.8em;
     margin: 0 0 68px;
     color: rgba(237, 232, 221, 0.98) !important;
@@ -3649,7 +3697,7 @@ body.project-page .project-cta-band .h2 {
     letter-spacing: 0;
     line-height: 0.98;
 }
-body.project-page .project-cta-band .h2::before {
+.project-cta-band .h2::before {
     content: "Contact";
     display: block;
     margin: 0 0 34px;
@@ -3662,7 +3710,7 @@ body.project-page .project-cta-band .h2::before {
     line-height: 1;
     text-transform: uppercase;
 }
-body.project-page .project-cta-band .lead {
+.project-cta-band .lead {
     max-width: 48em;
     margin: 0 0 42px;
     color: rgba(237, 232, 221, 0.74) !important;
@@ -3671,7 +3719,7 @@ body.project-page .project-cta-band .lead {
     font-weight: 300;
     line-height: 1.55;
 }
-body.project-page .project-cta-band .about-cta-button {
+.project-cta-band .about-cta-button {
     display: flex;
     width: 100%;
     align-items: baseline;
@@ -3690,11 +3738,11 @@ body.project-page .project-cta-band .about-cta-button {
     font-weight: 300;
     line-height: 1;
 }
-body.project-page .project-cta-band .about-cta-button:hover {
+.project-cta-band .about-cta-button:hover {
     background: transparent;
     color: #fff !important;
 }
-body.project-page .project-cta-band .about-cta-button::after {
+.project-cta-band .about-cta-button::after {
     content: "→";
     margin-left: 8px;
     font-family: "Inter", sans-serif;
@@ -3703,10 +3751,10 @@ body.project-page .project-cta-band .about-cta-button::after {
     line-height: 1;
     transition: transform 180ms ease;
 }
-body.project-page .project-cta-band .about-cta-button:hover::after {
+.project-cta-band .about-cta-button:hover::after {
     transform: translateX(6px);
 }
-body.project-page .project-cta-band .about-cta-button .dot {
+.project-cta-band .about-cta-button .dot {
     width: 8px;
     height: 8px;
     flex: 0 0 auto;
@@ -3715,35 +3763,35 @@ body.project-page .project-cta-band .about-cta-button .dot {
 }
 
 @media (max-width: 760px) {
-    body.project-page .project-topbar,
-body.project-page .project-hero-inner,
-body.project-page .project-cta__inner {
+    .project-topbar,
+.project-hero-inner,
+.project-cta__inner {
         width: min(100% - 32px, 1320px);
     }
-    body.project-page .project-topbar {
+    .project-topbar {
         top: 96px;
     }
-    body.project-page .project-hero,
-body.project-page .project-hero-media img {
+    .project-hero,
+.project-hero-media img {
         min-height: 720px;
         height: 86svh;
     }
-    body.project-page .project-title {
+    .project-title {
         font-size: clamp(56px, 18vw, 82px);
     }
-    body.project-page .project-subtitle {
+    .project-subtitle {
         font-size: 24px;
     }
-    body.project-page .project-tags {
+    .project-tags {
         margin-top: 30px;
     }
-    body.project-page .project-tag {
+    .project-tag {
         padding: 10px 14px;
     }
-    body.project-page .project-cta-band {
+    .project-cta-band {
         padding: 76px 0 84px;
     }
-    body.project-page .project-cta-band .h2 {
+    .project-cta-band .h2 {
         margin-bottom: 42px;
         font-size: clamp(46px, 15vw, 66px);
     }
@@ -3969,7 +4017,7 @@ body.project-page .project-hero-media img {
     line-height: 0;
 }
 /* Hero */
-body.project-page .project-hero {
+.project-hero {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
@@ -3980,23 +4028,23 @@ body.project-page .project-hero {
     min-height: clamp(620px, 100svh, 980px);
 }
 
-body.project-page .project-hero-media {
+.project-hero-media {
     margin: 0;
     width: 100%;
 }
 
-body.project-page .project-hero-track {
+.project-hero-track {
     display: flex;
     width: 100%;
     transform: translateX(0);
     transition: transform 360ms ease;
 }
 
-body.project-page .project-hero-slide {
+.project-hero-slide {
     min-width: 100%;
 }
 
-body.project-page .project-hero-media img {
+.project-hero-media img {
     width: 100%;
     object-fit: cover;
     display: block;
@@ -4006,7 +4054,7 @@ body.project-page .project-hero-media img {
     object-position: center center;
 }
 
-body.project-page .project-hero-control {
+.project-hero-control {
     position: absolute;
     top: 50%;
     z-index: 3;
@@ -4023,15 +4071,15 @@ body.project-page .project-hero-control {
     box-shadow: none;
 }
 
-body.project-page .project-hero-control--prev {
+.project-hero-control--prev {
     left: 18px;
 }
 
-body.project-page .project-hero-control--next {
+.project-hero-control--next {
     right: 18px;
 }
 
-body.project-page .project-hero-dots {
+.project-hero-dots {
     position: absolute;
     left: 50%;
     bottom: 34px;
@@ -4041,7 +4089,7 @@ body.project-page .project-hero-dots {
     transform: translateX(-50%);
 }
 
-body.project-page .project-hero-dots button {
+.project-hero-dots button {
     position: relative;
     width: 44px;
     height: 44px;
@@ -4051,11 +4099,11 @@ body.project-page .project-hero-dots button {
     cursor: pointer;
 }
 
-body.project-page .project-hero-dots button.active {
+.project-hero-dots button.active {
     background: transparent;
 }
 
-body.project-page .project-hero-dots button::before {
+.project-hero-dots button::before {
     content: "";
     position: absolute;
     top: 50%;
@@ -4068,12 +4116,12 @@ body.project-page .project-hero-dots button::before {
     transform: translate(-50%, -50%);
 }
 
-body.project-page .project-hero-dots button.active::before {
+.project-hero-dots button.active::before {
     background: #fff;
 }
-body.project-page .project-hero-media,
-body.project-page .project-hero-track,
-body.project-page .project-hero-slide {
+.project-hero-media,
+.project-hero-track,
+.project-hero-slide {
     height: 100%;
 }
 
@@ -4081,10 +4129,10 @@ body.project-page .project-hero-slide {
    gallery item sets caption or imageType (see build plan P3.4). Kept to
    the same dark-pill visual language as .coming-soon-badge and the hero
    controls. */
-body.project-page .project-hero-slide {
+.project-hero-slide {
     position: relative;
 }
-body.project-page .project-hero-slide__caption {
+.project-hero-slide__caption {
     position: absolute;
     left: 18px;
     bottom: 18px;
@@ -4103,7 +4151,7 @@ body.project-page .project-hero-slide__caption {
     font-size: 12px;
     line-height: 1.4;
 }
-body.project-page .project-hero-slide__caption-type {
+.project-hero-slide__caption-type {
     flex-shrink: 0;
     padding: 2px 8px;
     border-radius: 999px;
@@ -4397,6 +4445,34 @@ body.project-page .project-hero-slide__caption-type {
     background: transparent;
     color: #fff;
 }
+
+/* ===== Inline "see also" link =====
+   Forward-pointing link inside a header intro block (Studio, Work ->
+   Services) -- distinct from the two "back to X" treatments above, which
+   read wrong for a link pointing forward to a sibling section. Matches the
+   site's existing italic-serif "more" link idiom (see
+   .home-collections__more-link / .home-services__more-link) rather than a
+   bordered pill sitting under a paragraph. */
+.header-more-link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-top: 20px;
+    font-family: var(--font-family-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 2px;
+    transition: border-color 200ms ease, padding-right 200ms ease;
+}
+.header-more-link::after { content: "→"; font-style: normal; }
+.header-more-link:hover {
+    border-bottom-color: var(--color-text-primary);
+    padding-right: 6px;
+}
 /* ===== Shared project/service card component =====
    .projects-card (projects listing) and .home-service-card (homepage
    services grid) rendered the identical wrapper/media/hover shape, just
@@ -4501,6 +4577,12 @@ body.project-page .project-hero-slide__caption-type {
    social links (none exist to add). */
 
 .site-footer {
+    position: relative;
+    z-index: 1; /* #bg is position:fixed with z-index:0 (02-base.css) and
+                   establishes its own stacking context above plain static
+                   content; main.page-main already opts out the same way.
+                   Without this the footer rendered behind the fixed
+                   background image instead of on top of it. */
     background: var(--color-surface-inverse);
     color: var(--color-text-inverse);
 }
@@ -4619,4 +4701,53 @@ body.project-page .project-hero-slide__caption-type {
     .site-footer__base {
         padding-bottom: var(--space-lg);
     }
+}
+/* =========================
+   Services Listing (curated_services.html)
+   Reuses the shared .projects-header/.projects-section/.projects-grid/
+   .card--service listing components (10-projects-listing-redesign.css,
+   16-card.css) -- despite the class names, those rules are page-agnostic;
+   only the background/label-small/title-size overrides below are specific
+   to this page, mirroring how body.projects-page/body.about-page each add
+   their own for the same shared components.
+   ========================= */
+
+html.services-page {
+    background: var(--color-canvas-light);
+}
+
+body.services-page {
+    background: var(--color-canvas-light);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-body);
+    min-height: 100vh;
+}
+
+/* Nav on light page — every other light-background page (about-page,
+   projects-page, concept-page) has this same override; missing it here
+   left the primary nav rendering in its dark-page default (near-invisible
+   white-on-cream). */
+body.services-page .pill,
+body.services-page .pillmenu-toggle,
+body.services-page .nav-pill {
+    color: var(--color-text-primary);
+}
+body.services-page .pillmenu-toggle .burger-line {
+    background: currentColor;
+}
+
+body.services-page .label-small {
+    font-family: var(--font-family-body);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+}
+
+@media (max-width: 1180px) {
+    body.services-page .projects-header__title { font-size: 64px; }
+}
+@media (max-width: 920px) {
+    body.services-page .projects-header__title { font-size: 48px; }
 }

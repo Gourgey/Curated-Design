@@ -11,6 +11,7 @@ cardAlt: Plans and elevations service card
 coverImage: /assets/images/curated_services/page_brands/plans_and_elevations_cover.webp
 coverAlt: Plans and elevations cover image
 intro: Clear drawings that translate design intent into layouts, elevations, and dimensions that can be priced, discussed, and built from with confidence.
+metaDescription: Clear drawings that translate design intent into layouts, elevations, and dimensions that can be priced, discussed, and built from with confidence.
 glance:
   - label: Timeline
     text: typically 1–4 weeks

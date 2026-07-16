@@ -11,6 +11,7 @@ cardAlt: Concept design service card
 coverImage: /assets/images/curated_services/page_brands/concept_design_cover.webp
 coverAlt: Concept design tools laid out on a marble surface
 intro: 'A clear, considered direction for your space—defining layout, mood, material palette, and key pieces—before you commit to construction, joinery, or procurement.'
+metaDescription: 'A clear, considered direction for your space—defining layout, mood, material palette, and key pieces—before you commit to construction, joinery, or procurement.'
 glance:
   - label: Timeline
     text: typically 1–2 weeks

@@ -5,23 +5,31 @@ eleventyExcludeFromCollections: true
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {%- set base = site.settings.siteUrl -%}
-{%- for url in ['/', '/work/', '/services/', '/studio/', '/contact/', '/apps/'] %}
-<url><loc>{{ base }}{{ url }}</loc></url>
+{%- set staticPages = [
+    { url: "/", source: "./src/content/pages/home.json" },
+    { url: "/work/", source: "./src/content/pages/projects.json" },
+    { url: "/services/", source: "./src/content/pages/services.json" },
+    { url: "/studio/", source: "./src/content/pages/about.json" },
+    { url: "/contact/", source: "./src/content/pages/contact.json" },
+    { url: "/apps/", source: "./src/_data/apps.js" }
+] -%}
+{%- for page in staticPages %}
+<url><loc>{{ base }}{{ page.url }}</loc><lastmod>{{ page.source | lastmod }}</lastmod></url>
 {%- endfor %}
 {%- for legalPage in legal.pages %}
-<url><loc>{{ base }}/{{ legalPage.slug }}/</loc></url>
+<url><loc>{{ base }}/{{ legalPage.slug }}/</loc><lastmod>{{ "./src/_data/legal.js" | lastmod }}</lastmod></url>
 {%- endfor %}
 {%- for app in apps.items %}
-<url><loc>{{ base }}/apps/{{ app.slug }}/</loc></url>
+<url><loc>{{ base }}/apps/{{ app.slug }}/</loc><lastmod>{{ "./src/_data/apps.js" | lastmod }}</lastmod></url>
 {%- for kind in app.supportPages %}
-<url><loc>{{ base }}/apps/{{ app.slug }}/{{ kind }}/</loc></url>
+<url><loc>{{ base }}/apps/{{ app.slug }}/{{ kind }}/</loc><lastmod>{{ "./src/_data/apps.js" | lastmod }}</lastmod></url>
 {%- endfor %}
 {%- endfor %}
 {%- for service in collections.publishedService | sortByOrder %}
-<url><loc>{{ base }}/services/{{ service.data.slug }}/</loc></url>
+<url><loc>{{ base }}/services/{{ service.data.slug }}/</loc><lastmod>{{ service.inputPath | lastmod }}</lastmod></url>
 {%- endfor %}
 {%- set indexableProjects = collections.publishedProject | where("status", "published") -%}
 {%- for project in indexableProjects | sortByOrder %}
-<url><loc>{{ base }}/work/{{ project.data.slug }}/</loc></url>
+<url><loc>{{ base }}/work/{{ project.data.slug }}/</loc><lastmod>{{ project.inputPath | lastmod }}</lastmod></url>
 {%- endfor %}
 </urlset>

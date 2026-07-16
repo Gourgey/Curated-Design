@@ -1,6 +1,11 @@
 const fs = require("fs");
+const path = require("path");
+const crypto = require("crypto");
+const { execFileSync } = require("child_process");
 const markdownIt = require("markdown-it");
+const matter = require("gray-matter");
 const Image = require("@11ty/eleventy-img");
+const sharp = require("sharp");
 const { build: buildCss } = require("./tools/build-css.js");
 
 module.exports = function (eleventyConfig) {
@@ -41,6 +46,78 @@ module.exports = function (eleventyConfig) {
     return Image.generateHTML(metadata, attrs);
   }
   eleventyConfig.addAsyncShortcode("image", imageShortcode);
+
+  // Social share images (P5.5) need a real, fixed 1200x630 asset -- OG/Twitter
+  // crawlers don't do responsive selection, and the raw hero/cover photos
+  // this site otherwise uses are neither that size nor that aspect ratio.
+  // Rather than requiring new cropped photography, generate one deterministic
+  // cover-fit crop per source image (cached by a hash of the source path, in
+  // the same persistent generated dir + copy-after-build hook as the {%
+  // image %} shortcode above) and expose a src -> URL lookup to templates.
+  //
+  // This runs as a plain synchronous-lookup Nunjucks filter, not an async
+  // shortcode, and the actual image generation happens up front in
+  // "eleventy.before" (see below) rather than lazily during template
+  // rendering -- calling an async shortcode from inside a `{% set %}...
+  // {% endset %}` capture silently produced an empty string here (Nunjucks
+  // shortcodes are tags, not callable expressions, and this Eleventy/Nunjucks
+  // setup has a documented history of async work not resolving correctly
+  // when threaded through `{% set %}`, see P2.3's card-consolidation note).
+  // Width/height are always exactly 1200x630 by construction, so callers can
+  // hardcode the og:image:width/height meta values rather than needing them
+  // returned here.
+  const shareImageMap = new Map();
+  async function generateShareImage(src) {
+    if (!src || shareImageMap.has(src)) return;
+    const inputPath = src.startsWith("/") ? `.${src}` : src;
+    if (!fs.existsSync(inputPath)) return;
+    const hash = crypto.createHash("sha1").update(inputPath).digest("hex").slice(0, 10);
+    const outputDir = "./assets/_generated/img";
+    const outputName = `share-${hash}.jpg`;
+    const outputPath = `${outputDir}/${outputName}`;
+    if (!fs.existsSync(outputPath)) {
+      fs.mkdirSync(outputDir, { recursive: true });
+      await sharp(inputPath).resize(1200, 630, { fit: "cover" }).jpeg({ quality: 82 }).toFile(outputPath);
+    }
+    shareImageMap.set(src, `/img/${outputName}`);
+  }
+  eleventyConfig.on("eleventy.before", async () => {
+    const settings = JSON.parse(fs.readFileSync("./src/content/settings.json", "utf8"));
+    const sources = [settings.shareImage];
+    for (const dir of ["./src/content/projects", "./src/content/services"]) {
+      const key = dir.endsWith("projects") ? "heroImage" : "coverImage";
+      for (const file of fs.readdirSync(dir).filter((f) => f.endsWith(".md"))) {
+        const { data } = matter.read(path.join(dir, file));
+        if (data[key]) sources.push(data[key]);
+      }
+    }
+    await Promise.all(sources.filter(Boolean).map(generateShareImage));
+  });
+  eleventyConfig.addFilter("shareImageUrl", (src) => (src && shareImageMap.get(src)) || "");
+
+  // Sitemap <lastmod> (P5.5) -- the source file's last real commit date is a
+  // genuinely dependable content date for a git-backed site, unlike
+  // filesystem mtimes (a fresh checkout resets those to checkout time, not
+  // the actual last edit). Falls back to the build time only if git isn't
+  // available or the file has no history yet (e.g. uncommitted new content),
+  // so a missing/shallow git history never breaks the build.
+  const buildTime = new Date().toISOString();
+  const lastmodCache = new Map();
+  eleventyConfig.addFilter("lastmod", (inputPath) => {
+    if (!inputPath) return buildTime;
+    if (lastmodCache.has(inputPath)) return lastmodCache.get(inputPath);
+    let result = buildTime;
+    try {
+      const output = execFileSync("git", ["log", "-1", "--format=%cI", "--", inputPath], {
+        encoding: "utf8",
+      }).trim();
+      if (output) result = output;
+    } catch {
+      // Fall through to buildTime.
+    }
+    lastmodCache.set(inputPath, result);
+    return result;
+  });
 
   // Copy the persistent generated-images dir to /img/ in the deploy output.
   // This must run AFTER the build (not as a passthrough copy): the shortcode

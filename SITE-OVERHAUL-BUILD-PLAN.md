@@ -1002,6 +1002,14 @@ Verified with `npm run check` (full gate) and live-preview checks at both mobile
 - Remove the forced-reflow pattern observed around carousel initialisation and later navigation/layout reads.
 - Defer non-essential enhancement until after first render.
 
+**Audited (16 July 2026) — mostly already resolved by earlier work, nothing further to fix.** Read all three client-JS files (`assets/js/carousels.js`, `navigation.js`, `scroll-effects.js`) line by line looking for the specific anti-pattern this ticket names: a DOM write immediately followed by a layout-triggering read in the same synchronous tick (the classic forced-reflow/layout-thrashing pattern). Found none currently live:
+
+- `carousels.js`'s `go()` functions (both the homepage and project-hero carousels) only ever write (`style.transform`, `classList`, `setAttribute`) — they contain no layout reads at all, so there's nothing to interleave.
+- `scroll-effects.js` already separates reads from writes deliberately: all layout reads (`getBoundingClientRect` for header/pill heights, section positions, hero bottom) live in `measure()`; all writes (`style.transform`, `classList.toggle`) live in `update()`; both are scheduled via `requestAnimationFrame` rather than run synchronously inside scroll/resize handlers. The file's own comment states the scroll listener "just updates (no layout reads)" — this is precisely the fix this ticket asks for, already in place.
+- `navigation.js` has two isolated, one-off `getBoundingClientRect()` reads (anchor-scroll target position on click; focusable-item detection on menu open) — neither sits in a hot loop or a write-then-read chain.
+
+This tracks with the plan's own history: the P2.4 JS split (retiring the monolithic `main.js`) evidently already applied this discipline. Re-confirmed the other P5.3 items are already satisfied rather than assuming so: the production stylesheet is a single ~69KB minified file with immutable content-hash caching (small enough that critical-CSS extraction would add build complexity disproportionate to any gain, so not pursued), and every script tag in `base.njk` already carries `defer` (deferring all enhancement until after parsing, satisfying "defer non-essential enhancement until after first render").
+
 ### P5.4 — Establish a single LCP strategy
 
 Avoid giving both the homepage background and carousel media competing high priority. Identify the expected LCP element per major template and:
@@ -1010,6 +1018,12 @@ Avoid giving both the homepage background and carousel media competing high prio
 - provide the correct responsive source early;
 - avoid JavaScript-dependent discovery;
 - verify that font loading does not replace it as an avoidable bottleneck.
+
+**Fixed (16 July 2026): the exact bug this ticket describes was live.** Checked concretely rather than assuming: `showBackground` (which renders the fixed `#bg` element) is only ever set on the homepage — service and project templates each have exactly one hero image with `loading="eager"` and no competing element, so they already satisfy "one LCP element per template." The homepage did not. Measured both candidates' actual position and size at a 390×844 mobile viewport: `#bgImg` spans from above the viewport to `y=1141` (effectively the full visible viewport, `fetchpriority="high"`), while the homepage carousel's first slide — also `loading="eager"`, and the shortcode's `imageShortcode()` automatically sets `fetchpriority="high"` whenever `loading="eager"` — sits at `y=632–811`, a much smaller element only partially in view. `#bgImg` is by far the dominant visible element and the realistic LCP candidate; the carousel competing for the same browser-request priority during the critical initial-load window could only slow the true LCP element down, not help it.
+
+Fixed by dropping the carousel's conditional `("eager" if loop.first else "lazy")` to a flat `"lazy"` in `src/index.njk` — the homepage now has exactly one `fetchpriority="high"` element. Verified live: `bgImg` still resolves `fetchpriority="high"`/no explicit `loading`; the carousel's first slide now resolves `loading="lazy"` with no `fetchpriority` attribute at all, and both images still render correctly and promptly (confirmed with a screenshot at 390px — the carousel's Garden Restaurant slide is fully loaded and visible, not stalled by the lazy attribute, since it's already near/within the initial viewport where native lazy-loading fetches promptly).
+
+Font loading was already addressed by P5.1 — only two small (37–48KB) files are preloaded, well within the budget to avoid becoming a competing bottleneck for a fixed background image discovered at a similar point in the document.
 
 ### P5.5 — Complete technical SEO
 

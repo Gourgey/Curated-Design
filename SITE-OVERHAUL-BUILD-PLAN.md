@@ -22,7 +22,7 @@ The plan is tracked against these repository documents, which hold the evidence 
 - **Phase 0** is documentarily complete, but several decisions remain open with unassigned owners: final navigation structure, analytics, the case-study launch threshold, image permissions, and legal review. `docs/overhaul/DECISIONS.md` is the authoritative list.
 - **Phase 1** has largely landed: the `npm run check` gate, visual references, navigation accessibility and focus management, contrast and target-size corrections, carousel deduplication (rendered image count 80 → 79), standardised form feedback, and indexing controls for coming-soon teasers. Walk the Phase 1 exit-gate checklist before declaring the phase closed — the CMS save-and-build round trip (P1.8) and staged form submission (P1.9) in particular need explicit verification on a deploy preview.
 - **Phase 2** is in progress: P2.1 tokens and P2.7 runtime pinning are done; P2.2 stylesheet reorganisation is the active front.
-- **Hard content constraint:** only Marylebone Lobby is published; the two-to-three case-study target in §2 is not met. Engineering can proceed through Phase 2, but the Phase 3–4 homepage and Work redesign is blocked on content per the hard gate in §14.
+- **Content gate resolved (16 July 2026):** the site owner decided to launch with the single published case study (Marylebone Lobby) rather than wait for the two-to-three target in §2, and confirmed no testimonial content exists to publish for this launch — see `docs/overhaul/DECISIONS.md`. Phase 3–4 homepage and Work redesign is no longer blocked on this; it can proceed designed around one case study.
 
 ## 2. Target outcome
 

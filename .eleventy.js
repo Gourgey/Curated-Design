@@ -16,8 +16,8 @@ module.exports = function (eleventyConfig) {
   // `npm run clean`) and are passthrough-copied to `_site/img/` on each build.
   // This keeps incremental + clean builds fast — sharp only re-encodes when a
   // source image changes.
-  const HERO_WIDTHS = [400, 800, 1200, 1600, 2400];
-  const CARD_WIDTHS = [400, 800, 1200];
+  const HERO_WIDTHS = [400, 640, 800, 1200, 1600, 2400];
+  const CARD_WIDTHS = [400, 640, 800, 1200];
 
   async function imageShortcode(src, alt, sizes, loading, classNames, variant) {
     if (!src) return "";

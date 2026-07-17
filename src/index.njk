@@ -62,7 +62,7 @@ showBackground: true
                         {% for slide in carousel %}
                         <article class="slide" role="group"{% if carousel.length > 1 %} aria-roledescription="slide" aria-label="{{ loop.index }} of {{ carousel.length }}"{% endif %}{% if loop.first %} aria-current="true"{% endif %}>
                             <a class="featured-project" href="{{ slide.url }}">
-                                {% image slide.src, slide.alt, "(min-width: 1040px) 968px, calc(100vw - 72px)", "lazy" %}
+                                {% image slide.src, slide.alt, "(min-width: 1040px) 968px, calc(100vw - 72px)", ("eager" if loop.first else "lazy") %}
                                 <span class="featured-project__overlay">
                                     <span class="featured-project__kicker">{{ slide.kicker }}</span>
                                     {% if slide.statusLabel %}<span class="featured-project__status">{{ slide.statusLabel }}</span>{% endif %}

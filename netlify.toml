@@ -31,6 +31,17 @@
 # needed (a "/*.html" pattern would not match: Netlify splats must be the
 # final path segment).
 
+# Apple App Site Association -- lets the ProcureCore companion app offer
+# this site's saved credentials via iCloud Keychain/Passwords autofill.
+# Netlify serves extension-less files as application/octet-stream by
+# default; Apple requires application/json. No redirect exists that would
+# touch /.well-known/* (confirmed against public/_redirects), so this is
+# served directly with a plain 200.
+[[headers]]
+  for = "/.well-known/apple-app-site-association"
+  [headers.values]
+    Content-Type = "application/json"
+
 # Security headers (P5.6). These four are safe and identical everywhere,
 # admin included, so they live on the general "/*" rule.
 #

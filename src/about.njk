@@ -22,6 +22,22 @@ bodyClass: about-page min-h-screen font-inter
         </div>
     </header>
 
+    {% if site.about.founder %}
+    <section class="studio-founder">
+        {% if site.about.founder.eyebrow %}
+        <p class="studio-founder__eyebrow">{{ site.about.founder.eyebrow }}</p>
+        {% endif %}
+        <div class="studio-founder__body">
+            {% if site.about.founder.heading %}
+            <h2 class="studio-founder__heading">{{ site.about.founder.heading }}</h2>
+            {% endif %}
+            {% for paragraph in site.about.founder.paragraphs %}
+            <p>{{ paragraph }}</p>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
     <section class="studio-two">
         <div>
             <h2 class="studio-two__heading">{{ site.about.workHeading }}</h2>

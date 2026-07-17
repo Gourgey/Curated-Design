@@ -163,6 +163,16 @@ collections:
           - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false, hint: "Small label above the intro heading." }
           - { label: "Intro Heading", name: "introHeading", widget: "string" }
           - { label: "Intro Text", name: "introText", widget: "text" }
+          - label: "Founder"
+            name: "founder"
+            widget: "object"
+            required: false
+            collapsed: true
+            hint: "Introduces the person behind the studio. Leave the whole object empty to hide this section entirely."
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
+              - { label: "Heading", name: "heading", widget: "string", required: false, hint: "e.g. 'Josh Gourgey, Founder.'" }
+              - { label: "Paragraphs", name: "paragraphs", widget: "list", field: { label: "Paragraph", name: "paragraph", widget: "text" } }
           - { label: "Work Heading", name: "workHeading", widget: "string" }
           - { label: "Work Paragraphs", name: "workParagraphs", widget: "list", field: { label: "Paragraph", name: "paragraph", widget: "text" } }
           - { label: "Focus Heading", name: "focusHeading", widget: "string" }

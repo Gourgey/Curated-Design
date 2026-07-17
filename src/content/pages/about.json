@@ -4,6 +4,14 @@
   "eyebrow": "Studio",
   "introHeading": "Design with intention.<br>Execute with precision.",
   "introText": "Every interior begins with how it will be used day to day: the routines, the circulation, and the way light changes across a space. From there, we build a material language that feels calm, tactile, and quietly confident.",
+  "founder": {
+    "eyebrow": "Founder",
+    "heading": "Josh Gourgey, Founder.",
+    "paragraphs": [
+      "Curated Design was founded in 2026, built on a background of residential developments across London, hospitality projects — hotels and restaurants — and international work, particularly across the Middle East.",
+      "For us, interior design has never been a single calling so much as a range: hands-on site visits alongside the close, technical work of drawing up plans; problem-solving as much as the creative decisions; as much time spent with people as with drawings."
+    ]
+  },
   "workHeading": "What defines the work",
   "workParagraphs": [
     "Clean lines, warm proportions, and details that hold up at close range — joinery, hardware, finishes, and the way materials meet.",
@@ -20,22 +28,22 @@
     "eyebrow": "Process",
     "title": "Three movements, from <em>brief</em> to <em>install</em>."
   },
-  "processNote": "Throughout, you'll be closely involved — kept close to the decisions that matter without being buried in the ones that don't — with direct, responsive contact from first sketch to final install.",
+  "processNote": "No two projects are identical, but this is the shape most follow. Throughout, you'll be closely involved — kept close to the decisions that matter without being buried in the ones that don't — with direct, responsive contact from first sketch to final install.",
   "processSteps": [
     {
       "label": "Brief & concept",
       "head": "Listening, then sketching.",
-      "text": "We define needs, constraints, and priorities, then develop the initial concept with layouts and mood direction."
+      "text": "We meet, understand how the space is actually used, then visit and survey it in person before any concept work begins — from there we develop layouts and mood direction around what the site can support."
     },
     {
       "label": "Design development",
       "head": "Resolving the room.",
-      "text": "We refine plans, finishes, lighting, and joinery detail, aligning the design intent with budget realities."
+      "text": "We produce plans and elevations, then use visualisations to show how the design will actually look and feel before anything is committed to — refining finishes, lighting, and joinery detail through your feedback until the direction is approved."
     },
     {
       "label": "Delivery & styling",
       "head": "Bringing the space to life.",
-      "text": "We coordinate with contractors and suppliers as needed, then complete the space with furniture, art, and styling."
+      "text": "Once approved, we move into procurement and ordering, coordinate installation with contractors and suppliers, then complete the space with furniture, art, and styling."
     }
   ],
   "locationsEyebrow": "Scope",

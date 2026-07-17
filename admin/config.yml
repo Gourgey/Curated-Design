@@ -185,24 +185,6 @@ collections:
           - { label: "Locations Eyebrow", name: "locationsEyebrow", widget: "string", required: false }
           - { label: "Locations Heading", name: "locationsHeading", widget: "string" }
           - { label: "Locations Text", name: "locationsText", widget: "text" }
-          - label: "Documents & Tools"
-            name: "documents"
-            widget: "object"
-            required: false
-            collapsed: true
-            hint: "The legal/apps link list at the bottom of the Studio page."
-            fields:
-              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
-              - { label: "Hint", name: "hint", widget: "text", required: false }
-              - label: "Items"
-                name: "items"
-                widget: "list"
-                fields:
-                  - { label: "Label", name: "label", widget: "string", hint: "e.g. 'Legal · 01'" }
-                  - { label: "Title", name: "title", widget: "string" }
-                  - { label: "Meta", name: "meta", widget: "string", required: false }
-                  - { label: "Link Text", name: "link", widget: "string" }
-                  - { label: "Link URL", name: "href", widget: "string" }
       - name: "contact"
         label: "Contact Page"
         file: "src/content/pages/contact.json"

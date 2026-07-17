@@ -81,27 +81,4 @@ bodyClass: about-page min-h-screen font-inter
         </div>
     </section>
 
-    {% if site.about.documents %}
-    <section class="studio-docs">
-        <div class="studio-docs__intro">
-            <p class="studio-docs__eyebrow">{{ site.about.documents.eyebrow }}</p>
-            {% if site.about.documents.hint %}
-            <p class="studio-docs__hint">{{ site.about.documents.hint }}</p>
-            {% endif %}
-        </div>
-
-        <ul class="doc-list">
-            {% for item in site.about.documents.items %}
-            <li class="doc-list__item">
-                <p class="doc-list__label">{{ item.label }}</p>
-                <p class="doc-list__title">
-                    {{ item.title }}
-                    {% if item.meta %}<span class="meta">{{ item.meta }}</span>{% endif %}
-                </p>
-                <a class="doc-list__link" href="{{ item.href }}">{{ item.link }}</a>
-            </li>
-            {% endfor %}
-        </ul>
-    </section>
-    {% endif %}
 </main>

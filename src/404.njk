@@ -1,0 +1,35 @@
+---
+layout: layouts/base.njk
+permalink: 404.html
+title: Page not found – Curated Design Studio
+htmlClass: contact-page
+bodyClass: contact-page min-h-screen font-inter
+noindex: true
+topLogo: logo_no_text_on_transparent.svg
+---
+<main id="main-content" class="page-main" tabindex="-1">
+    {% include "partials/hero-brand.njk" %}
+
+    <section class="thanks">
+        <div class="thanks__inner">
+            <h1 class="h2">Page not found</h1>
+            <p class="lead">
+                The page you're looking for doesn't exist, or may have moved. Try one of these instead.
+            </p>
+            <nav class="not-found__links" aria-label="Suggested destinations">
+                <a href="/work/" class="button">
+                    <span class="dot" aria-hidden="true"></span>
+                    View our work
+                </a>
+                <a href="/services/" class="button">
+                    <span class="dot" aria-hidden="true"></span>
+                    Browse services
+                </a>
+                <a href="/contact/" class="button">
+                    <span class="dot" aria-hidden="true"></span>
+                    Contact us
+                </a>
+            </nav>
+        </div>
+    </section>
+</main>

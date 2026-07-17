@@ -1311,102 +1311,6 @@ body.about-page .studio-process__title em { font-style: italic; }
     text-wrap: pretty;
 }
 
-/* 05 — Documents & tools — hairline list, no cards */
-.studio-docs {
-    padding: 56px 0 120px;
-}
-.studio-docs__intro {
-    display: grid;
-    grid-template-columns: 96px 1fr;
-    gap: 32px;
-    align-items: baseline;
-    padding: 24px 0 32px;
-    border-top: 1px solid var(--color-border-soft);
-}
-.studio-docs__eyebrow {
-    font-family: var(--font-family-body);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--color-text-primary);
-    margin: 0;
-}
-.studio-docs__hint {
-    font-family: var(--font-family-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: 18px;
-    color: var(--color-text-muted);
-    margin: 0;
-}
-
-.doc-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.doc-list__item {
-    display: grid;
-    grid-template-columns: 96px 1fr auto;
-    gap: 32px;
-    align-items: baseline;
-    padding: 28px 0;
-    border-top: 1px solid var(--color-text-primary);
-}
-.doc-list__item:last-child {
-    border-bottom: 1px solid var(--color-text-primary);
-}
-.doc-list__label {
-    font-family: var(--font-family-body);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--color-text-secondary);
-    margin: 0;
-}
-.doc-list__title {
-    font-family: var(--font-family-display);
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 1.25;
-    letter-spacing: -0.005em;
-    color: var(--color-text-primary);
-    margin: 0;
-}
-.doc-list__title .meta {
-    display: block;
-    margin-top: 4px;
-    font-family: var(--font-family-body);
-    font-size: 13px;
-    font-weight: 300;
-    letter-spacing: 0;
-    color: var(--color-text-muted);
-    text-transform: none;
-}
-.doc-list__link {
-    font-family: var(--font-family-display);
-    font-style: italic;
-    font-weight: 400;
-    font-size: 18px;
-    letter-spacing: -0.005em;
-    color: var(--color-text-primary);
-    text-decoration: none;
-    border-bottom: 1px solid var(--color-border);
-    padding-bottom: 2px;
-    white-space: nowrap;
-    transition: border-color 200ms ease, padding-right 200ms ease;
-}
-.doc-list__link:hover {
-    border-bottom-color: var(--color-text-primary);
-    padding-right: 6px;
-}
-.doc-list__link::after {
-    content: " →";
-    font-style: normal;
-}
-
 /* Responsive (from prototype) */
 @media (max-width: 1180px) {
     body.about-page .studio-header__title { font-size: 72px; }
@@ -1430,17 +1334,6 @@ body.about-page .studio-process__title em { font-style: italic; }
         padding: 56px 0;
     }
     body.about-page .studio-locations__heading { font-size: 28px; }
-    body.about-page .studio-docs__intro { grid-template-columns: 1fr; gap: 12px; padding-top: 0; border-top: none; }
-    .doc-list__item {
-        grid-template-columns: 1fr auto;
-        grid-template-areas:
-            "label link"
-            "title title";
-        gap: 12px 24px;
-    }
-    body.about-page .doc-list__label { grid-area: label; }
-    body.about-page .doc-list__link { grid-area: link; align-self: start; }
-    body.about-page .doc-list__title { grid-area: title; }
 }
 
 /* =========================
@@ -2551,6 +2444,13 @@ body.legal-page .hero-brand {
     color: var(--color-text-secondary);
 }
 
+/* ===== 404 page ===== */
+.not-found__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
 
 /* ============================================================
    Homepage redesign — Featured Projects + Design Philosophy + CTA
@@ -2968,6 +2868,29 @@ body.legal-page .hero-brand {
    to neutralise legacy card styling defined earlier in this file for the
    same class names. Existing rules are intentionally left untouched.
    ========================= */
+
+/* No-JS gallery fallback -- only ever rendered inside <noscript>, see
+   src/projects/project-pages.njk and build plan P4.9. Plain stacked
+   images, no carousel chrome needed since there's nothing to enhance. */
+.project-noscript-gallery {
+    display: grid;
+    gap: 24px;
+    width: min(800px, calc(100% - 64px));
+    margin: 0 auto 48px;
+}
+.project-noscript-gallery__item {
+    margin: 0;
+}
+.project-noscript-gallery__item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.project-noscript-gallery__item figcaption {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--color-text-secondary, rgba(0, 0, 0, 0.6));
+}
 
 /* Two-column article wrapper */
 .project-article {
@@ -4452,10 +4375,14 @@ body.project-page .pill:hover,
 /* Hero treatment -- project detail page, over the dark hero image. Lives
    inside .project-topbar, which sets pointer-events: none so the topbar
    itself doesn't block the hero below; this restores pointer-events on
-   the link itself. */
+   the link itself. Vertical padding widens the click/tap target to clear
+   WCAG 2.2's 24px minimum (was ~20px tall, text-height-only) without
+   changing the visible text size -- .project-topbar's align-items: center
+   keeps the text glyphs anchored at the same visual position since the
+   padding grows the box symmetrically around that same centre. */
 .backlink--hero {
     gap: 7px;
-    padding: 0;
+    padding: 12px 0;
     border: 0;
     border-radius: 0;
     background: transparent;
@@ -4471,6 +4398,41 @@ body.project-page .pill:hover,
 .backlink--hero:hover {
     background: transparent;
     color: #fff;
+}
+
+/* ===== Breadcrumb =====
+   Home > Services > [service] parent navigation for the service detail
+   template (P4.5). Matches the BreadcrumbList JSON-LD already emitted in
+   base.njk -- this is that same hierarchy made visible. */
+.breadcrumb {
+    margin: 0 0 24px;
+}
+.breadcrumb__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    color: var(--color-text-secondary, rgba(0, 0, 0, 0.6));
+}
+.breadcrumb__item:not(:last-child)::after {
+    content: "/";
+    margin-left: 6px;
+    color: var(--color-border, rgba(0, 0, 0, 0.3));
+}
+.breadcrumb__link {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+.breadcrumb__link:hover {
+    border-bottom-color: currentColor;
+}
+.breadcrumb__item [aria-current="page"] {
+    color: var(--color-text-primary, #000);
 }
 
 /* ===== Inline "see also" link =====

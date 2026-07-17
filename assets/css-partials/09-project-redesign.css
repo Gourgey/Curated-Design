@@ -6,6 +6,29 @@
    same class names. Existing rules are intentionally left untouched.
    ========================= */
 
+/* No-JS gallery fallback -- only ever rendered inside <noscript>, see
+   src/projects/project-pages.njk and build plan P4.9. Plain stacked
+   images, no carousel chrome needed since there's nothing to enhance. */
+.project-noscript-gallery {
+    display: grid;
+    gap: 24px;
+    width: min(800px, calc(100% - 64px));
+    margin: 0 auto 48px;
+}
+.project-noscript-gallery__item {
+    margin: 0;
+}
+.project-noscript-gallery__item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.project-noscript-gallery__item figcaption {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--color-text-secondary, rgba(0, 0, 0, 0.6));
+}
+
 /* Two-column article wrapper */
 .project-article {
     display: grid;

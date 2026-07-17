@@ -40,39 +40,5 @@
   ],
   "locationsEyebrow": "Scope",
   "locationsHeading": "Locations & scope",
-  "locationsText": "Based in London, working across the UK and on selected international projects. Collaborations include architects, developers, and private clients on both new-build and refurbishment schemes.",
-  "documents": {
-    "eyebrow": "Documents & tools",
-    "hint": "Terms, privacy, and the small group of practical apps that sit alongside the studio.",
-    "items": [
-      {
-        "label": "Legal · 01",
-        "title": "Terms of Business",
-        "meta": "Engagement terms for studio commissions",
-        "link": "Studio terms",
-        "href": "/terms-of-business/"
-      },
-      {
-        "label": "Legal · 02",
-        "title": "Privacy Notice",
-        "meta": "How we handle enquiry and project data",
-        "link": "Privacy",
-        "href": "/privacy-notice/"
-      },
-      {
-        "label": "Legal · 03",
-        "title": "Company Information",
-        "meta": "Curated Design Ltd — registered details",
-        "link": "Company details",
-        "href": "/company-information/"
-      },
-      {
-        "label": "Digital · 04",
-        "title": "Practical apps",
-        "meta": "Support and policy references for active projects",
-        "link": "View apps",
-        "href": "/apps/"
-      }
-    ]
-  }
+  "locationsText": "Based in London, working across the UK and on selected international projects. Collaborations include architects, developers, and private clients on both new-build and refurbishment schemes."
 }

@@ -18,10 +18,6 @@ sectionTop: true
 {# Related-work path — order-based, wrap-around (see build plan P3.4) #}
 {% set nextProjectEntry = collections.publishedProject | nextProject(project.data.slug) %}
 
-{# Hero carousel only for published projects with at least one usable gallery image #}
-{% set galleryImages = (project.data.gallery.images if project.data.gallery else []) | withImage %}
-{% set hasHeroCarousel = (not isComingSoon) and galleryImages.length %}
-
 {# Lead text fallback chain — coming-soon may rely on summary/subtitle #}
 {% set leadText = project.data.lead or project.data.summary or project.data.subtitle %}
 {% set headingText = project.data.articleHeading or (project.data.statusLabel if isComingSoon) or ("Coming soon" if isComingSoon else "Overview") %}
@@ -36,9 +32,16 @@ sectionTop: true
 {% set hasFacts = project.data.facts and project.data.facts.length %}
 
 {# Hero image — fall back to first gallery image if heroImage is missing #}
+{% set rawGalleryImages = (project.data.gallery.images if project.data.gallery else []) | withImage %}
 {% set heroSrc = project.data.heroImage %}
-{% if not heroSrc and galleryImages.length %}{% set heroSrc = galleryImages[0].image %}{% endif %}
+{% if not heroSrc and rawGalleryImages.length %}{% set heroSrc = rawGalleryImages[0].image %}{% endif %}
 {% set heroAlt = project.data.heroAlt or project.data.title %}
+
+{# Deduplicated gallery — whichever image is used as the hero (explicit or
+   fallback) is dropped from the carousel loop below so it never repeats
+   (P4.4). #}
+{% set galleryImages = rawGalleryImages | excludeImage(heroSrc) %}
+{% set hasHeroCarousel = (not isComingSoon) and galleryImages.length %}
 {% set mediaCount = galleryImages.length + (1 if heroSrc else 0) %}
 
 {% from "partials/backlink.njk" import hero as backlinkHero -%}
@@ -99,6 +102,32 @@ sectionTop: true
             </div>
         </div>
     </header>
+
+    {% if hasHeroCarousel %}
+    {# Without JS, carousels.js never runs: the track stays at its resting
+       transform and the prev/next buttons do nothing, so only the first
+       (hero) slide is reachable. This plain, unpaginated fallback list
+       makes the rest of the gallery visible/readable without JavaScript --
+       see build plan P4.9. Browsers that support scripting skip <noscript>
+       content entirely, so JS users still get the enhanced carousel only. #}
+    <noscript>
+        <section class="project-noscript-gallery" aria-label="{{ project.data.title }} additional project images">
+            {% for item in galleryImages %}
+            <figure class="project-noscript-gallery__item">
+                {% image item.image, item.alt or project.data.title, "(min-width: 900px) 800px, 100vw", "lazy" %}
+                {% if item.caption or item.imageType %}
+                <figcaption>
+                    {% if item.caption and item.imageType %}{{ item.caption }} — {{ item.imageType }}
+                    {%- elif item.caption %}{{ item.caption }}
+                    {%- else %}{{ item.imageType }}
+                    {%- endif %}
+                </figcaption>
+                {% endif %}
+            </figure>
+            {% endfor %}
+        </section>
+    </noscript>
+    {% endif %}
 
     <section class="section project-body">
         <div class="container project-wrap">

@@ -487,4 +487,11 @@ body.legal-page .hero-brand {
     color: var(--color-text-secondary);
 }
 
+/* ===== 404 page ===== */
+.not-found__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
 

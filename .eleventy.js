@@ -243,6 +243,14 @@ module.exports = function (eleventyConfig) {
     return (items || []).filter((item) => item && item.image);
   });
 
+  // Drop a gallery item that repeats a given image path (the project hero,
+  // typically) so the hero and gallery carousel never show the same photo
+  // twice -- see build plan P4.4.
+  eleventyConfig.addFilter("excludeImage", (items, src) => {
+    if (!src) return items || [];
+    return (items || []).filter((item) => item.image !== src);
+  });
+
   // Group a project list by the supplied category list, returning only
   // categories that actually contain projects so the listing template can
   // skip empty sections + pill-menu links.

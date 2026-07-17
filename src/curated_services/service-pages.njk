@@ -20,9 +20,9 @@ scripts:
 {% set hasSections = service.data.sections and service.data.sections.length %}
 {% set coverAlt = service.data.coverAlt or service.data.title %}
 
-{% from "partials/backlink.njk" import pill as backlinkPill -%}
+{% from "partials/backlink.njk" import breadcrumb -%}
 <main id="main-content" class="service" tabindex="-1">
-    {{ backlinkPill("/services/", "Back to Services") }}
+    {{ breadcrumb([{ href: "/", label: "Home" }, { href: "/services/", label: "Services" }, { label: service.data.title }]) }}
 
     <header class="service-header">
         <p class="service-header__eyebrow">{{ service.data.eyebrow or "Service" }}</p>

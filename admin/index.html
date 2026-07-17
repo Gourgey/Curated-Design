@@ -8,8 +8,18 @@
   </head>
   <body>
     <!-- Pinned exact version: a floating range would silently run whatever
-         unpkg serves next on this admin page. Bump deliberately. -->
-    <script src="https://unpkg.com/decap-cms@3.6.3/dist/decap-cms.js"></script>
+         unpkg serves next on this admin page. Bump deliberately.
+         The integrity hash (P5.7) is the actual protection: it makes the
+         browser refuse to run this script at all if the bytes unpkg serves
+         ever stop matching decap-cms@3.6.3 exactly, whether from a CDN
+         compromise or a mistake in the URL. Recompute it whenever the
+         pinned version above changes:
+           curl -sL <the versioned URL> | openssl dgst -sha384 -binary | openssl base64 -A -->
+    <script
+      src="https://unpkg.com/decap-cms@3.6.3/dist/decap-cms.js"
+      integrity="sha384-N4qw0NBhK8AQx1OyKKP/cU4mtnrwcTHD3jtAhGcTxhgmbiRnCVnMo9FT8R6UdZ6S"
+      crossorigin="anonymous"
+    ></script>
     <script src="/admin/preview.js"></script>
   </body>
 </html>

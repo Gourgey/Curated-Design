@@ -1,7 +1,16 @@
+# Editorial workflow (P5.7): without this, every CMS save commits straight
+# to `main` with no review step -- the opposite of the "deploy-preview
+# safety net before anything publishes" reasoning DECISIONS.md gives for
+# keeping Decap as the primary CMS. With it, saves become "Draft" entries
+# on their own branch/PR (reviewable, with its own Netlify deploy preview)
+# until explicitly moved to "Ready" and merged -- the actual mechanism
+# that reasoning assumed was already in place.
 backend:
   name: github
   repo: Gourgey/Curated-Design
   branch: main
+
+publish_mode: editorial_workflow
 
 local_backend: true
 

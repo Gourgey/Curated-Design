@@ -42,27 +42,66 @@ const items = [
     slug: "procurecore",
     eyebrow: "Procurement",
     description:
-      "A procurement organiser for interior designers, holding projects, styles, areas, suppliers, products, and placements together.",
+      "A calm procurement and studio collaboration workspace for interior designers, available across iPhone and Mac.",
     overview:
-      "ProcureCore is a calmer place to keep procurement organised — projects, styles, areas, suppliers, products, and placements held together so a studio can work from one source of truth.",
-    platform: "Coming soon to the App Store · iOS and macOS",
-    sync: "Optional iCloud sync via Apple CloudKit",
-    privacySummary: "No ads, no tracking, no analytics, no third-party SDKs",
+      "ProcureCore brings projects, clients, suppliers, products, placements, approvals, attachments, and reporting into one considered workspace for interior-design studios.",
+    platform: "Coming soon to the App Store · iPhone and Mac",
+    lastUpdated: "26 July 2026",
+    information: [
+      {
+        label: "Platform",
+        value: "iOS and macOS",
+      },
+      {
+        label: "Account and sync",
+        value: "A ProcureCore account with secure cloud synchronisation",
+      },
+      {
+        label: "Collaboration",
+        value: "Owner, admin, member, and read-only viewer roles",
+      },
+      {
+        label: "Privacy",
+        value: "No advertising or cross-app tracking",
+      },
+      {
+        label: "Subscriptions",
+        value: "Some features require an auto-renewing App Store subscription",
+      },
+      {
+        label: "Support",
+        value: supportEmail,
+        url: supportEmailUrl,
+      },
+    ],
+    highlights: [
+      "Plan and track projects, clients, suppliers, products, placements, approvals, and procurement status.",
+      "Keep images, project covers, studio branding, file attachments, notes, and reporting with the work they support.",
+      "Collaborate across iPhone and Mac with permissions appropriate to each studio member.",
+    ],
     appStoreUrl: "",
-    supportPages: ["privacy", "support"],
-    metaTitle: "ProcureCore — Curated Design",
+    supportPages: ["privacy", "terms", "support"],
+    pageTitles: {
+      terms: "Terms of Use",
+    },
+    metaTitle: "ProcureCore — Procurement for Interior-Design Studios",
     metaDescription:
-      "ProcureCore is a procurement organiser for interior designers. Track projects, styles, areas, suppliers, products, and placements in one calm, considered workspace. Coming soon to the App Store.",
+      "ProcureCore is a calm procurement and collaboration workspace for interior-design studios, with secure account-based sync across iPhone and Mac.",
     pageMeta: {
       privacy: {
         title: "ProcureCore Privacy Policy — Curated Design",
         description:
-          "How ProcureCore handles your data. ProcureCore stores your work locally on your device, and — when iCloud is enabled — in your own private iCloud database. Curated Design Limited does not operate a server that receives or stores ProcureCore content.",
+          "How ProcureCore handles account, workspace, subscription, import, and optional AI information across its iOS, macOS, and cloud services.",
       },
       support: {
         title: "ProcureCore Support — Curated Design",
         description:
-          "Help with ProcureCore: iCloud sync, product import, missing data, and contact details for Curated Design Limited.",
+          "Help with ProcureCore accounts, studio access, cloud sync, product imports, attachments, subscriptions, AI, and account deletion.",
+      },
+      terms: {
+        title: "ProcureCore Terms of Use — Curated Design",
+        description:
+          "Terms of Use for ProcureCore, covering accounts, studio workspaces, subscriptions, imported content, optional AI, and responsible professional use.",
       },
     },
   },
@@ -85,7 +124,7 @@ module.exports = {
     (app.supportPages || defaultSupportPages).map((kind) => ({
       kind,
       app,
-      title: titleByKind[kind] || kind,
+      title: (app.pageTitles && app.pageTitles[kind]) || titleByKind[kind] || kind,
       meta: (app.pageMeta && app.pageMeta[kind]) || null,
     })),
   ),

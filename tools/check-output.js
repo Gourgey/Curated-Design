@@ -82,10 +82,10 @@ htmlFiles.forEach((file) => {
     seenIds.add(id);
   });
 
-  const attributes = Array.from(
-    html.matchAll(/\s(href|src)=["']([^"']+)["']/gi),
-    (match) => ({ name: match[1].toLowerCase(), value: match[2] }),
-  );
+  const attributes = Array.from(html.matchAll(/\s(href|src)=["']([^"']+)["']/gi), (match) => ({
+    name: match[1].toLowerCase(),
+    value: match[2],
+  }));
   internalLinkCount += Array.from(
     html.matchAll(/<a\b[^>]*\bhref=["']([^"']+)["']/gi),
     (match) => match[1],
@@ -100,7 +100,9 @@ htmlFiles.forEach((file) => {
       return;
     }
 
-    const fragment = value.includes("#") ? value.slice(value.indexOf("#") + 1).split("?", 1)[0] : "";
+    const fragment = value.includes("#")
+      ? value.slice(value.indexOf("#") + 1).split("?", 1)[0]
+      : "";
     if (fragment && target.endsWith(".html")) {
       const targetHtml = fs.readFileSync(target, "utf8");
       const escapedFragment = fragment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -126,6 +128,93 @@ htmlFiles.forEach((file) => {
 
 const sitemapPath = path.join(outputRoot, "sitemap.xml");
 const sitemap = fs.readFileSync(sitemapPath, "utf8");
+const procureCoreRoutes = [
+  "/apps/procurecore/",
+  "/apps/procurecore/privacy/",
+  "/apps/procurecore/terms/",
+  "/apps/procurecore/support/",
+];
+const procureCorePolicyRoutes = procureCoreRoutes.slice(1);
+const staleProcureCoreClaims = [
+  /optional iCloud sync/i,
+  /private iCloud database/i,
+  /does not operate a server/i,
+  /does not require (?:you to create )?an account/i,
+  /there is no Curated Design login/i,
+  /does not include any third-party SDKs/i,
+  /does not include analytics/i,
+  /placements? that reference it will reconcile/i,
+  /delete the app and remove ProcureCore data/i,
+  /iCloud Drive/i,
+];
+
+procureCoreRoutes.forEach((route) => {
+  const file = path.join(outputRoot, route.slice(1), "index.html");
+  if (!fs.existsSync(file)) {
+    fail(sitemapPath, `ProcureCore page was not generated: ${route}`);
+    return;
+  }
+
+  const html = fs.readFileSync(file, "utf8");
+  const expectedCanonical = `https://curateddesign.studio${route}`;
+  if (!html.includes(`<link rel="canonical" href="${expectedCanonical}"`)) {
+    fail(file, `canonical URL is not ${expectedCanonical}`);
+  }
+  if (!sitemap.includes(`<loc>${expectedCanonical}</loc>`)) {
+    fail(sitemapPath, `ProcureCore route is missing from sitemap: ${route}`);
+  }
+
+  staleProcureCoreClaims.forEach((pattern) => {
+    if (pattern.test(html)) fail(file, `contains stale ProcureCore claim matching ${pattern}`);
+  });
+
+  const descriptionTags = Array.from(
+    html.matchAll(
+      /<meta\s+(?:name=["'](?:description|twitter:description)["']|property=["']og:description["'])\s+content=["']([^"']+)["']/gi,
+    ),
+    (match) => match[1],
+  );
+  descriptionTags.forEach((description) => {
+    if (/(?:iCloud|CloudKit|no server|no third-party)/i.test(description)) {
+      fail(file, `metadata contains a stale service claim: "${description}"`);
+    }
+  });
+});
+
+const procureCoreLanding = fs.readFileSync(
+  path.join(outputRoot, "apps/procurecore/index.html"),
+  "utf8",
+);
+["privacy", "terms", "support"].forEach((kind) => {
+  const href = `/apps/procurecore/${kind}/`;
+  if (!procureCoreLanding.includes(`href="${href}"`)) {
+    fail(path.join(outputRoot, "apps/procurecore/index.html"), `missing ${kind} link`);
+  }
+});
+
+procureCorePolicyRoutes.forEach((route) => {
+  const file = path.join(outputRoot, route.slice(1), "index.html");
+  const html = fs.readFileSync(file, "utf8");
+  procureCorePolicyRoutes
+    .filter((otherRoute) => otherRoute !== route)
+    .forEach((otherRoute) => {
+      if (!html.includes(`href="${otherRoute}"`) && !html.includes(`href="${otherRoute}#`)) {
+        fail(file, `missing cross-link to ${otherRoute}`);
+      }
+    });
+});
+
+const procureCorePrivacy = fs.readFileSync(
+  path.join(outputRoot, "apps/procurecore/privacy/index.html"),
+  "utf8",
+);
+if (!procureCorePrivacy.includes('id="your-rights"')) {
+  fail(
+    path.join(outputRoot, "apps/procurecore/privacy/index.html"),
+    "missing #your-rights privacy-choices anchor",
+  );
+}
+
 const projectEntries = fs
   .readdirSync(path.join(root, "src/content/projects"))
   .filter((file) => file.endsWith(".md"))
@@ -158,24 +247,24 @@ projectEntries.forEach((project) => {
 
 htmlFiles.forEach((file) => {
   const html = fs.readFileSync(file, "utf8");
-  Array.from(html.matchAll(/<form\b[^>]*\bdata-netlify=["']true["'][^>]*>/gi), (match) => match[0]).forEach(
-    (formTag) => {
-      if (!/\baction=["']\/thank-you\/["']/i.test(formTag)) {
-        fail(file, "Netlify form must use /thank-you/ as its non-JavaScript success destination");
-      }
-    },
-  );
+  Array.from(
+    html.matchAll(/<form\b[^>]*\bdata-netlify=["']true["'][^>]*>/gi),
+    (match) => match[0],
+  ).forEach((formTag) => {
+    if (!/\baction=["']\/thank-you\/["']/i.test(formTag)) {
+      fail(file, "Netlify form must use /thank-you/ as its non-JavaScript success destination");
+    }
+  });
 });
 
-[
-  path.join(outputRoot, "admin/index.html"),
-  path.join(outputRoot, "thank-you/index.html"),
-].forEach((file) => {
-  const html = fs.readFileSync(file, "utf8");
-  if (!/<meta\s+name=["']robots["']\s+content=["']noindex,\s*follow["']/i.test(html)) {
-    fail(file, "support page must be noindex, follow");
-  }
-});
+[path.join(outputRoot, "admin/index.html"), path.join(outputRoot, "thank-you/index.html")].forEach(
+  (file) => {
+    const html = fs.readFileSync(file, "utf8");
+    if (!/<meta\s+name=["']robots["']\s+content=["']noindex,\s*follow["']/i.test(html)) {
+      fail(file, "support page must be noindex, follow");
+    }
+  },
+);
 
 if (errors.length) {
   errors.forEach((message) => console.error(`ERROR: ${message}`));

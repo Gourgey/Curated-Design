@@ -1,0 +1,213 @@
+<article class="app-prose">
+    <h2>1. Introduction and who we are</h2>
+    <p>
+        ProcureCore is a procurement and studio collaboration app for interior-design professionals on iOS and macOS. This policy covers the app and its associated cloud service.
+    </p>
+    <p>
+        ProcureCore is provided by Curated Design Ltd (“Curated Design”), a company registered in England and Wales under company number 13048992. Our registered office is Floor 1 8 Park Crescent, London, England, W1B 1PG. For privacy, account, or support questions, email <a href="{{ apps.supportEmailUrl }}">{{ apps.supportEmail }}</a>.
+    </p>
+
+    <h2>2. Roles and responsibilities</h2>
+    <p>
+        Curated Design decides how account, subscription, support, security, and service-operation information is used. Studios using ProcureCore decide which client, supplier, project, and team information they enter and why. Curated Design and the providers listed below process workspace content so that we can supply the service.
+    </p>
+    <p>
+        Each studio and user is responsible for having an appropriate reason and authority to add information about clients, suppliers, colleagues, and other people. If you use ProcureCore for an employer or studio, that organisation may be the appropriate contact for questions about the workspace information it controls.
+    </p>
+
+    <h2>3. Information ProcureCore handles</h2>
+    <h3>Account and identity</h3>
+    <ul>
+        <li>Email address, Supabase user identifier, and Sign in with Apple identifier where that sign-in method is used.</li>
+        <li>Authentication and session records.</li>
+        <li>Studio membership and role: owner, admin, member, or viewer.</li>
+    </ul>
+
+    <h3>Workspace and business content</h3>
+    <ul>
+        <li>Projects, descriptions, clients, suppliers, products, placements, and source URLs.</li>
+        <li>Client and supplier names, email addresses, phone numbers, physical addresses, and other contact details.</li>
+        <li>Budgets, prices, currencies, tax settings, procurement totals, and related financial records.</li>
+        <li>Placement, order, approval, payment, delivery, and tracking information.</li>
+        <li>Notes, comments, issues, audit history, team membership, and role information.</li>
+        <li>Product images, project-cover images, studio logos, file attachments, and studio branding.</li>
+        <li>Approval attestations and optional drawn signatures.</li>
+    </ul>
+
+    <h3>Subscription information</h3>
+    <ul>
+        <li>Subscription product, purchase, renewal, and expiration state.</li>
+        <li>Entitlement state and an opaque ProcureCore billing identifier.</li>
+    </ul>
+    <p>
+        Apple processes App Store payments. Curated Design does not receive your full payment-card details through ProcureCore.
+    </p>
+
+    <h3>Optional AI information</h3>
+    <ul>
+        <li>Your question and up to 12 earlier turns from the current in-memory conversation.</li>
+        <li>A freshly generated, limited studio or project snapshot, including studio name and currency, and relevant project budgets, spend, and order or delivery status.</li>
+        <li>Client names, placement issue notes, and tracking references only when you explicitly turn on “Include client &amp; notes”. This setting is off by default.</li>
+    </ul>
+
+    <h3>Operational information</h3>
+    <ul>
+        <li>Sync revisions, request identifiers, request state, quota state, error categories, and timestamps.</li>
+        <li>Limited diagnostics that you choose to include in a support request.</li>
+    </ul>
+
+    <h2>4. How information is collected</h2>
+    <p>
+        Information may come from you, authorised teammates, Apple authentication and App Store services, RevenueCat, supplier websites during product import, and the technical operation of the service. A supplier website receives an ordinary network request from your device and can observe information normally associated with that request, such as its IP address.
+    </p>
+
+    <h2>5. Where information is stored</h2>
+    <p>
+        ProcureCore keeps a local working copy or cache on your device. Workspace records synchronise to ProcureCore’s Supabase-hosted database, and images and attachments use private file storage. ProcureCore no longer stores application data in its own CloudKit container.
+    </p>
+    <p>
+        Authorised studio members can access workspace information according to their role. Curated Design technically operates the service and may access server-held information where reasonably necessary for support, security, maintenance, legal compliance, or service delivery. Operational access is restricted to legitimate needs.
+    </p>
+    <p>
+        We do not state a specific hosting region or backup-retention period because those details depend on the service configuration and provider arrangements.
+    </p>
+
+    <h2>6. Studio collaboration and sharing</h2>
+    <p>
+        Workspace content is shared with authorised members of that studio. Owners and admins manage access; members can work within the permissions given to them; viewers have read-only access. Do not upload information you are not entitled to share.
+    </p>
+    <p>
+        If someone leaves a studio or transfers ownership, shared business records may remain available to the other authorised members. Personal attribution is removed or anonymised where the service supports it.
+    </p>
+
+    <h2>7. Product importing</h2>
+    <p>
+        In the normal shipping configuration, ProcureCore retrieves a supplier product page from your device. The supplier site receives a normal web request. ProcureCore extracts suggested details for you to review and correct before saving.
+    </p>
+    <p>
+        Supplier content can be incomplete, outdated, or inaccurate. ProcureCore does not currently depend on or advertise a Curated Design-hosted import service.
+    </p>
+
+    <h2>8. Optional AI assistant</h2>
+    <p>
+        Studio Pro includes an optional AI assistant backed by Anthropic’s commercial API. For each request, ProcureCore may send your question, up to 12 previous turns from the current conversation, and a newly generated limited studio or project snapshot. The snapshot may include studio name and currency and relevant budgets, spend, and order or delivery status.
+    </p>
+    <p>
+        Client names, placement issue notes, and tracking references are included only when you turn on “Include client &amp; notes”, which is off by default. AI requests do not include images, supplier account details, or project or client addresses.
+    </p>
+    <p>
+        Chat messages are held in memory by the app and are not saved to its local database or to Supabase. The in-memory conversation disappears when you clear or dismiss it or when the app exits. Supabase stores only the request ID, studio ID, request state, and timestamps needed to enforce quotas and keep an operational audit; it does not store the question, snapshot, conversation, or answer.
+    </p>
+    <p>
+        Anthropic processes prompts and responses to generate an answer. Under Anthropic’s standard commercial API terms, inputs and outputs may be retained for up to 30 days, subject to legal, safety, and usage-policy exceptions. Anthropic states that commercial API content is not used to train its generative models by default. Read Anthropic’s current information about <a href="https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data">commercial data retention</a> and <a href="https://privacy.claude.com/en/articles/7996885-how-do-you-use-personal-data-in-model-training">commercial data and model training</a>.
+    </p>
+    <p>
+        AI responses may be incomplete, outdated, or wrong. Check important information before relying on it.
+    </p>
+
+    <h2>9. Subscriptions and RevenueCat</h2>
+    <p>
+        Apple handles App Store billing. RevenueCat helps ProcureCore manage subscription and entitlement information. It receives purchase history, subscription state, technical information needed to operate its service, and an opaque customer identifier. Public studio UUIDs and ordinary workspace content are not used as RevenueCat customer identities or provided for subscription processing.
+    </p>
+    <p>
+        Cancellation and refund requests are managed through Apple. Deleting your ProcureCore account does not cancel or refund an App Store subscription; you must manage the subscription separately through your Apple account.
+    </p>
+
+    <h2>10. Service providers</h2>
+    <ul>
+        <li><strong>Apple</strong> provides the device platform, Sign in with Apple, and App Store billing. See <a href="https://www.apple.com/legal/privacy/">Apple’s Privacy Policy</a>.</li>
+        <li><strong>Supabase</strong> provides authentication, hosted database synchronisation, private file storage, and Edge Functions. See <a href="https://supabase.com/privacy">Supabase’s Privacy Policy</a>.</li>
+        <li><strong>RevenueCat</strong> manages subscription status and entitlements. See <a href="https://www.revenuecat.com/privacy-policy">RevenueCat’s Privacy Policy</a>.</li>
+        <li><strong>Anthropic</strong> processes requests to the optional AI assistant. See the <a href="https://privacy.claude.com/">Anthropic Privacy Centre</a>.</li>
+        <li><strong>Supplier websites</strong> receive product-import requests made from your device.</li>
+    </ul>
+    <p>
+        ProcureCore includes the Supabase and RevenueCat SDKs. It contains no advertising SDK, does not use advertising identifiers, does not sell personal data, does not use cross-app behavioural tracking, and contains no behavioural analytics SDK. RevenueCat still processes purchase information, and ProcureCore keeps limited operational, billing, quota, and audit records needed to run the service.
+    </p>
+
+    <h2>11. Purposes and lawful bases</h2>
+    <p>We use information to:</p>
+    <ul>
+        <li>create accounts and provide ProcureCore;</li>
+        <li>synchronise and share work with authorised studio members;</li>
+        <li>manage subscriptions and entitlements;</li>
+        <li>provide optional AI responses;</li>
+        <li>protect the service, prevent abuse, and troubleshoot problems;</li>
+        <li>support account and data deletion; and</li>
+        <li>meet legal, regulatory, accounting, or dispute-resolution obligations.</li>
+    </ul>
+    <p>
+        Depending on the activity, the relevant UK data-protection basis is normally performance of a contract, Curated Design’s legitimate interests in operating and securing the service, compliance with a legal obligation, or consent where the law requires it. Where we rely on legitimate interests, we consider the impact on the people concerned.
+    </p>
+
+    <h2>12. Retention</h2>
+    <ul>
+        <li>Workspace content remains while the workspace is active and until someone with the relevant permission deletes it.</li>
+        <li>Soft-deleted records remain in Recently Deleted until restored or permanently removed; ProcureCore does not promise an automatic 30-day purge.</li>
+        <li>Permanent deletion is synchronised across the service.</li>
+        <li>Completed account deletion clears the initiating device’s local account data.</li>
+        <li>ProcureCore does not persist AI message content. AI quota and audit records remain until the studio is deleted.</li>
+        <li>Under the standard commercial API terms assumed here, Anthropic may retain API inputs and outputs for up to 30 days, subject to its legal, safety, and usage-policy exceptions.</li>
+        <li>A pseudonymised or redacted account-deletion recovery outcome may be retained for up to 30 days.</li>
+    </ul>
+    <p>
+        Limited billing, security, legal, or backup records may remain only for as long as reasonably needed for their purpose, subject to provider terms and legal obligations. Permanent deletion may not remove information immediately from every immutable backup.
+    </p>
+
+    <h2>13. User controls, account deletion, and subscriptions</h2>
+    <p>
+        You can edit workspace information and use the export tools available in the app. Roles with the appropriate permission can move records to Recently Deleted, restore them, or remove them permanently.
+    </p>
+    <p>
+        ProcureCore’s account-deletion process can be initiated in the app and requires recent authentication. A last owner may need to transfer a workspace or choose to delete it. The completed process removes the Supabase Auth account and active sessions, deletes selected workspaces and their private files, clears local account data on the initiating device, and attempts to revoke Sign in with Apple credentials where applicable and technically possible.
+    </p>
+    <p>
+        Shared studio records may remain after a member leaves or transfers ownership. Account deletion does not cancel an App Store subscription; manage subscriptions separately in Apple’s subscription settings.
+    </p>
+
+    <h2 id="your-rights">14. Your privacy rights</h2>
+    <p>
+        Depending on the circumstances, UK data-protection law may give you rights to access personal data, correct it, ask for erasure or restriction, object to certain processing, receive portable data, and withdraw consent where processing depends on consent. These rights can be limited by law and by other people’s rights.
+    </p>
+    <p>
+        Email <a href="{{ apps.supportEmailUrl }}">{{ apps.supportEmail }}</a> to exercise a right. For account, billing, support, and service-operation data controlled by Curated Design, we will respond directly. If your request concerns client or project information controlled by your employer or studio, we may direct you to that organisation or assist it in responding.
+    </p>
+    <p>
+        You may also complain to the UK Information Commissioner’s Office. See the ICO’s guidance on <a href="https://ico.org.uk/make-a-complaint/">making a complaint</a>.
+    </p>
+
+    <h2>15. International processing</h2>
+    <p>
+        Our service providers may process information outside the United Kingdom. Where UK data-protection law treats this as a restricted international transfer, the responsible organisation must use an applicable lawful mechanism, such as UK adequacy regulations, appropriate contractual safeguards, or another permitted basis.
+    </p>
+    <p>
+        Provider locations and transfer arrangements can change. Contact us if you need more information about the processing relevant to a particular privacy request.
+    </p>
+
+    <h2>16. Security</h2>
+    <p>
+        ProcureCore uses encrypted network connections, account authentication, private file storage, role-based workspace permissions, database row-level access controls, and restricted operational access. Users should protect their devices and credentials. No service can guarantee complete security.
+    </p>
+
+    <h2>17. Children</h2>
+    <p>
+        ProcureCore is a professional business tool for interior-design studios. It is not directed at children.
+    </p>
+
+    <h2>18. Changes and contact</h2>
+    <p>
+        We may update this policy when the app, providers, or legal requirements change. Material changes will be reflected on this page with a revised effective date and communicated where required.
+    </p>
+    <p>
+        Privacy and support enquiries: <a href="{{ apps.supportEmailUrl }}">{{ apps.supportEmail }}</a>.
+    </p>
+    <p>
+        You can also read the <a href="/apps/procurecore/terms/">ProcureCore Terms of Use</a> or visit <a href="/apps/procurecore/support/">ProcureCore Support</a>.
+    </p>
+    <p>
+        Curated Design Ltd<br />
+        Company number 13048992<br />
+        Floor 1 8 Park Crescent<br />
+        London, England, W1B 1PG
+    </p>
+</article>

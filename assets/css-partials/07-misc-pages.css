@@ -232,6 +232,10 @@ body.app-page .hero-brand {
     padding: 24px;
 }
 
+.app-prose--summary {
+    margin-bottom: 16px;
+}
+
 .app-prose h2 {
     margin-top: 28px;
 }
@@ -270,7 +274,6 @@ body.app-page .hero-brand {
 .app-prose em {
     color: rgba(0, 0, 0, 0.66);
 }
-
 
 /* =========================
    Studio legal pages
@@ -426,7 +429,7 @@ body.legal-page .hero-brand {
 
 @media (max-width: 820px) {
     .app-card-grid,
-.app-detail-grid {
+    .app-detail-grid {
         grid-template-columns: 1fr;
     }
 
@@ -441,10 +444,10 @@ body.legal-page .hero-brand {
     }
 
     .app-prose,
-.app-panel,
-.app-card,
-.legal-prose,
-.legal-note {
+    .app-panel,
+    .app-card,
+    .legal-prose,
+    .legal-note {
         border-radius: 16px;
         padding: 16px;
     }
@@ -453,10 +456,6 @@ body.legal-page .hero-brand {
         grid-template-columns: 1fr;
         gap: 4px;
     }
-
-
-
-
 }
 
 /* ===== Thank-you page (form success landing) =====
@@ -493,5 +492,3 @@ body.legal-page .hero-brand {
     flex-wrap: wrap;
     gap: 12px;
 }
-
-

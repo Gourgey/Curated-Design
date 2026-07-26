@@ -36,7 +36,55 @@ const scans = [
     height: 844,
     enquiryForm: "contact",
   },
+  {
+    label: "ProcureCore landing mobile",
+    route: "/apps/procurecore/",
+    width: 390,
+    height: 844,
+  },
+  {
+    label: "ProcureCore privacy mobile",
+    route: "/apps/procurecore/privacy/",
+    width: 390,
+    height: 844,
+  },
+  {
+    label: "ProcureCore terms mobile",
+    route: "/apps/procurecore/terms/",
+    width: 390,
+    height: 844,
+  },
+  {
+    label: "ProcureCore support mobile",
+    route: "/apps/procurecore/support/",
+    width: 390,
+    height: 844,
+  },
   { label: "Homepage desktop", route: "/", width: 1440, height: 1000 },
+  {
+    label: "ProcureCore landing desktop",
+    route: "/apps/procurecore/",
+    width: 1440,
+    height: 1000,
+  },
+  {
+    label: "ProcureCore privacy desktop",
+    route: "/apps/procurecore/privacy/",
+    width: 1440,
+    height: 1000,
+  },
+  {
+    label: "ProcureCore terms desktop",
+    route: "/apps/procurecore/terms/",
+    width: 1440,
+    height: 1000,
+  },
+  {
+    label: "ProcureCore support desktop",
+    route: "/apps/procurecore/support/",
+    width: 1440,
+    height: 1000,
+  },
 ];
 
 const contentTypes = {
@@ -125,8 +173,12 @@ async function checkFeaturedProject(page) {
     return {
       linkCount: links.length,
       hrefs: links.map((link) => link.getAttribute("href")),
-      titles: links.map((link) => link.querySelector(".featured-project__title")?.textContent.trim()),
-      statuses: links.map((link) => link.querySelector(".featured-project__status")?.textContent.trim()),
+      titles: links.map((link) =>
+        link.querySelector(".featured-project__title")?.textContent.trim(),
+      ),
+      statuses: links.map((link) =>
+        link.querySelector(".featured-project__status")?.textContent.trim(),
+      ),
       carouselControls: document.querySelectorAll("#portfolio .ctrl, #portfolio .dots").length,
       carouselLabel: carousel?.getAttribute("aria-label"),
       activeSlides: slides.filter((slide) => slide.getAttribute("aria-current") === "true").length,
@@ -156,7 +208,10 @@ async function checkFeaturedProject(page) {
   await page.waitForFunction(() => {
     const slides = document.querySelectorAll("#portfolio .slide");
     const dots = document.querySelectorAll("#portfolio .dots button");
-    return slides[1]?.getAttribute("aria-current") === "true" && dots[1]?.getAttribute("aria-current") === "true";
+    return (
+      slides[1]?.getAttribute("aria-current") === "true" &&
+      dots[1]?.getAttribute("aria-current") === "true"
+    );
   });
   await page.click("#portfolio .dots button:first-child");
 }
@@ -164,8 +219,12 @@ async function checkFeaturedProject(page) {
 async function checkProjectCarousel(page) {
   const initialState = await page.evaluate(() => {
     const carousel = document.querySelector("[data-project-carousel]");
-    const slides = Array.from(carousel?.querySelectorAll("[role='group'][aria-roledescription='slide']") || []);
-    const dots = Array.from(carousel?.querySelectorAll("[data-project-carousel-dots] button") || []);
+    const slides = Array.from(
+      carousel?.querySelectorAll("[role='group'][aria-roledescription='slide']") || [],
+    );
+    const dots = Array.from(
+      carousel?.querySelectorAll("[data-project-carousel-dots] button") || [],
+    );
     return {
       carouselLabel: carousel?.getAttribute("aria-label"),
       slideCount: slides.length,
@@ -193,15 +252,21 @@ async function checkProjectCarousel(page) {
   await page.focus("[data-project-carousel]");
   await page.keyboard.press("ArrowRight");
   await page.waitForFunction(() => {
-    const slides = document.querySelectorAll("[data-project-carousel] [aria-roledescription='slide']");
+    const slides = document.querySelectorAll(
+      "[data-project-carousel] [aria-roledescription='slide']",
+    );
     const dots = document.querySelectorAll("[data-project-carousel-dots] button");
-    return slides[1]?.getAttribute("aria-current") === "true" && dots[1]?.getAttribute("aria-current") === "true";
+    return (
+      slides[1]?.getAttribute("aria-current") === "true" &&
+      dots[1]?.getAttribute("aria-current") === "true"
+    );
   });
   await page.click("[data-project-carousel-dots] button:first-child");
-  await page.waitForFunction(() =>
-    document
-      .querySelector("[data-project-carousel] [aria-roledescription='slide']")
-      ?.getAttribute("aria-current") === "true",
+  await page.waitForFunction(
+    () =>
+      document
+        .querySelector("[data-project-carousel] [aria-roledescription='slide']")
+        ?.getAttribute("aria-current") === "true",
   );
 }
 
@@ -248,7 +313,8 @@ async function checkEnquiryForm(page, expectedName) {
     form.requestSubmit();
     return valid;
   }, selector);
-  if (!validBeforeSubmit) throw new Error(`${expectedName} test data did not satisfy form validation.`);
+  if (!validBeforeSubmit)
+    throw new Error(`${expectedName} test data did not satisfy form validation.`);
 
   await page.waitForFunction(
     (formSelector) => {
@@ -285,9 +351,11 @@ async function checkEnquiryForm(page, expectedName) {
     (formSelector) => {
       const form = document.querySelector(formSelector);
       const success = document.getElementById(form.getAttribute("data-success-target"));
-      return form.classList.contains("hidden") &&
+      return (
+        form.classList.contains("hidden") &&
         !success.classList.contains("hidden") &&
-        document.activeElement === success;
+        document.activeElement === success
+      );
     },
     {},
     selector,
@@ -349,7 +417,9 @@ async function main() {
         await page.keyboard.down("Shift");
         await page.keyboard.press("Tab");
         await page.keyboard.up("Shift");
-        const shiftTabTarget = await page.evaluate(() => document.activeElement.getAttribute("aria-controls"));
+        const shiftTabTarget = await page.evaluate(() =>
+          document.activeElement.getAttribute("aria-controls"),
+        );
         if (shiftTabTarget !== "floatingPillMenu") {
           throw new Error("Mobile menu focus trap did not move backwards to the menu trigger.");
         }
@@ -382,9 +452,11 @@ async function main() {
       if (scan.enquiryForm) await checkEnquiryForm(page, scan.enquiryForm);
       if (scan.openMenu) {
         await page.keyboard.press("Escape");
-        await page.waitForFunction(() =>
-          document.querySelector("[aria-controls='floatingPillMenu']").getAttribute("aria-expanded") ===
-          "false",
+        await page.waitForFunction(
+          () =>
+            document
+              .querySelector("[aria-controls='floatingPillMenu']")
+              .getAttribute("aria-expanded") === "false",
         );
         const closeState = await page.evaluate(() => ({
           focusRestored:
@@ -404,9 +476,7 @@ async function main() {
 
   if (failures.length) {
     failures.forEach((failure) => {
-      console.error(
-        `ERROR: ${failure.scan}: [${failure.impact}] ${failure.id} — ${failure.help}`,
-      );
+      console.error(`ERROR: ${failure.scan}: [${failure.impact}] ${failure.id} — ${failure.help}`);
       console.error(`  ${failure.targets.join("\n  ")}`);
     });
     throw new Error(`Accessibility check found ${failures.length} critical/serious violation(s).`);

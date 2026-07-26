@@ -26,10 +26,38 @@ sectionTop: true
                 <p class="app-lead">{{ app.overview }}</p>
             </header>
 
+            {% if app.highlights %}
+            <article class="app-prose app-prose--summary">
+                <h2>One calm place for studio procurement</h2>
+                <ul>
+                    {% for highlight in app.highlights %}
+                    <li>{{ highlight }}</li>
+                    {% endfor %}
+                </ul>
+                <p>
+                    Secure account-based cloud synchronisation keeps authorised studio members up to date. Owners, admins, members, and viewers have permissions appropriate to their role.
+                </p>
+                <p>
+                    ProcureCore has no advertising or cross-app tracking. Essential cloud and subscription providers, and the optional Studio Pro AI assistant, are explained in the <a href="/apps/procurecore/privacy/">Privacy Policy</a>.
+                </p>
+                <p>
+                    Some features require an auto-renewing App Store subscription. Apple shows the current price, billing period, and any eligible introductory offer in the app before purchase. ProcureCore is coming soon.
+                </p>
+            </article>
+            {% endif %}
+
             <div class="app-detail-grid">
                 <article class="app-panel">
                     <h2>App information</h2>
                     <dl class="app-meta-list">
+                        {% if app.information %}
+                        {% for item in app.information %}
+                        <div>
+                            <dt>{{ item.label }}</dt>
+                            <dd>{% if item.url %}<a href="{{ item.url }}">{{ item.value }}</a>{% else %}{{ item.value }}{% endif %}</dd>
+                        </div>
+                        {% endfor %}
+                        {% else %}
                         {% if app.appStoreUrl %}
                         <div>
                             <dt>App Store</dt>
@@ -52,9 +80,10 @@ sectionTop: true
                             <dt>Privacy</dt>
                             <dd>{{ app.privacySummary }}</dd>
                         </div>
+                        {% endif %}
                         <div>
                             <dt>Last updated</dt>
-                            <dd>{{ apps.lastUpdated }}</dd>
+                            <dd>{{ app.lastUpdated or apps.lastUpdated }}</dd>
                         </div>
                     </dl>
                 </article>

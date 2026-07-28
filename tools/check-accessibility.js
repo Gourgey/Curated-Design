@@ -60,6 +60,12 @@ const scans = [
     width: 390,
     height: 844,
   },
+  {
+    label: "ProcureCore recovery fallback mobile",
+    route: "/auth/recovery",
+    width: 390,
+    height: 844,
+  },
   { label: "Homepage desktop", route: "/", width: 1440, height: 1000 },
   {
     label: "ProcureCore landing desktop",
@@ -85,9 +91,16 @@ const scans = [
     width: 1440,
     height: 1000,
   },
+  {
+    label: "ProcureCore recovery fallback desktop",
+    route: "/auth/recovery",
+    width: 1440,
+    height: 1000,
+  },
 ];
 
 const contentTypes = {
+  "": "text/html; charset=utf-8",
   ".avif": "image/avif",
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",

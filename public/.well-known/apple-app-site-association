@@ -1,4 +1,17 @@
 {
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["5865Y52YG7.studio.curateddesign.ProcureCore"],
+        "components": [
+          {
+            "/": "/auth/recovery",
+            "comment": "ProcureCore password recovery"
+          }
+        ]
+      }
+    ]
+  },
   "webcredentials": {
     "apps": ["5865Y52YG7.studio.curateddesign.ProcureCore"]
   }

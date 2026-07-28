@@ -492,3 +492,92 @@ body.legal-page .hero-brand {
     flex-wrap: wrap;
     gap: 12px;
 }
+
+/* ===== ProcureCore recovery fallback =====
+   This route is deliberately independent from the shared site shell: it has
+   no client-side JavaScript, form, or dynamic URL handling. */
+html.recovery-page,
+body.recovery-page {
+    min-height: 100%;
+    background: var(--color-surface-muted);
+}
+
+body.recovery-page {
+    color: var(--color-text-primary);
+    font-family: var(--font-family-body);
+}
+
+.recovery-main {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: clamp(32px, 8vw, 96px) 20px;
+}
+
+.recovery-card {
+    width: min(680px, 100%);
+    padding: clamp(28px, 6vw, 56px);
+    border: var(--border-width-hairline) solid rgba(27, 26, 23, 0.14);
+    border-radius: var(--radius-panel);
+    background: rgba(255, 255, 255, 0.48);
+    box-shadow: 0 24px 70px rgba(27, 26, 23, 0.08);
+}
+
+.recovery-kicker {
+    margin: 0 0 var(--space-sm);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-label);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing-label);
+    text-transform: uppercase;
+}
+
+.recovery-title {
+    max-width: 12ch;
+    margin: 0 0 var(--space-md);
+    font-family: var(--font-family-display);
+    font-size: clamp(42px, 8vw, 72px);
+    font-weight: var(--font-weight-regular);
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: 0.98;
+}
+
+.recovery-copy {
+    max-width: 58ch;
+    margin: 0 0 var(--space-lg);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-relaxed);
+}
+
+.recovery-support-link {
+    display: inline-flex;
+    min-height: var(--control-target-min);
+    align-items: center;
+    justify-content: center;
+    padding: 12px 18px;
+    border: var(--border-width-hairline) solid var(--color-text-primary);
+    border-radius: var(--radius-pill);
+    font-size: var(--font-size-body-small);
+    font-weight: var(--font-weight-medium);
+    transition:
+        color var(--motion-duration-fast) var(--motion-easing-standard),
+        background var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.recovery-support-link:hover {
+    color: var(--color-text-inverse);
+    background: var(--color-text-primary);
+}
+
+.recovery-support-link:focus-visible {
+    outline: 3px solid var(--color-text-primary);
+    outline-offset: 4px;
+}
+
+@media (max-width: 480px) {
+    .recovery-card {
+        padding: 28px 22px;
+        border-radius: 16px;
+    }
+}

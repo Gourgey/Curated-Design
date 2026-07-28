@@ -128,6 +128,114 @@ htmlFiles.forEach((file) => {
 
 const sitemapPath = path.join(outputRoot, "sitemap.xml");
 const sitemap = fs.readFileSync(sitemapPath, "utf8");
+const procureCoreAppID = "5865Y52YG7.studio.curateddesign.ProcureCore";
+const recoveryRoute = "/auth/recovery";
+const recoveryPath = path.join(outputRoot, recoveryRoute.slice(1));
+const aasaPath = path.join(outputRoot, ".well-known/apple-app-site-association");
+const netlifyConfigPath = path.join(root, "netlify.toml");
+
+if (!fs.existsSync(recoveryPath) || !fs.statSync(recoveryPath).isFile()) {
+  fail(recoveryPath, `recovery fallback was not generated at ${recoveryRoute}`);
+} else {
+  const recoveryHtml = fs.readFileSync(recoveryPath, "utf8");
+  if (!/<h1\b[^>]*>\s*Open this link in ProcureCore\s*<\/h1>/i.test(recoveryHtml)) {
+    fail(recoveryPath, "missing the recovery fallback heading");
+  }
+  if (!/<main\b[^>]*\bid=["']main-content["']/i.test(recoveryHtml)) {
+    fail(recoveryPath, "main landmark must provide the #main-content skip-link target");
+  }
+  if (!/<meta\s+name=["']referrer["']\s+content=["']no-referrer["']/i.test(recoveryHtml)) {
+    fail(recoveryPath, "must prevent the recovery URL from being sent as a referrer");
+  }
+  if (/<script\b/i.test(recoveryHtml)) {
+    fail(recoveryPath, "must not contain client-side scripts");
+  }
+  if (/<form\b/i.test(recoveryHtml)) {
+    fail(recoveryPath, "must not contain a form");
+  }
+  const recoveryLinks = Array.from(
+    recoveryHtml.matchAll(/<a\b[^>]*\bhref=["']([^"']+)["']/gi),
+    (match) => match[1],
+  );
+  if (!recoveryLinks.includes("/apps/procurecore/support/")) {
+    fail(recoveryPath, "missing the ProcureCore support link");
+  }
+  recoveryLinks.forEach((href) => {
+    if (href.includes("?") || href.includes("#TEST_VALUE")) {
+      fail(recoveryPath, `link must not include recovery parameters or probe values: "${href}"`);
+    }
+  });
+  [
+    "TEST_VALUE",
+    "URLSearchParams",
+    "location.search",
+    "location.hash",
+    "document.URL",
+    "document.referrer",
+  ].forEach((unsafeValue) => {
+    if (recoveryHtml.includes(unsafeValue)) {
+      fail(recoveryPath, `must not read or render URL data: "${unsafeValue}"`);
+    }
+  });
+}
+
+if (!fs.existsSync(aasaPath) || !fs.statSync(aasaPath).isFile()) {
+  fail(aasaPath, "Apple App Site Association document was not generated");
+} else {
+  let aasa;
+  try {
+    aasa = JSON.parse(fs.readFileSync(aasaPath, "utf8"));
+  } catch (error) {
+    fail(aasaPath, `invalid JSON: ${error.message}`);
+  }
+
+  if (aasa) {
+    if (
+      !Array.isArray(aasa.webcredentials && aasa.webcredentials.apps) ||
+      !aasa.webcredentials.apps.includes(procureCoreAppID)
+    ) {
+      fail(aasaPath, `webcredentials.apps is missing ${procureCoreAppID}`);
+    }
+
+    const details = aasa.applinks && aasa.applinks.details;
+    const hasRecoveryComponent =
+      Array.isArray(details) &&
+      details.some(
+        (detail) =>
+          Array.isArray(detail.appIDs) &&
+          detail.appIDs.includes(procureCoreAppID) &&
+          Array.isArray(detail.components) &&
+          detail.components.some((component) => component["/"] === recoveryRoute),
+      );
+    if (!hasRecoveryComponent) {
+      fail(
+        aasaPath,
+        `applinks.details is missing ${procureCoreAppID} with the exact ${recoveryRoute} component`,
+      );
+    }
+  }
+}
+
+const netlifyConfig = fs.readFileSync(netlifyConfigPath, "utf8");
+const netlifyHeaderBlocks = netlifyConfig.split(/(?=\[\[headers\]\])/);
+const recoveryHeaderBlock = netlifyHeaderBlocks.find((block) =>
+  /^\s*for\s*=\s*["']\/auth\/recovery["']/m.test(block),
+);
+if (!recoveryHeaderBlock) {
+  fail(netlifyConfigPath, "missing the /auth/recovery header configuration");
+} else {
+  [
+    [/Content-Type\s*=\s*"text\/html;\s*charset=UTF-8"/, "text/html content type"],
+    [/Cache-Control\s*=\s*"no-store"/, "no-store cache policy"],
+    [/Referrer-Policy\s*=\s*"no-referrer"/, "no-referrer policy"],
+    [/X-Robots-Tag\s*=\s*"noindex,\s*nofollow,\s*noarchive"/, "noindex policy"],
+  ].forEach(([pattern, label]) => {
+    if (!pattern.test(recoveryHeaderBlock)) {
+      fail(netlifyConfigPath, `/auth/recovery is missing its ${label}`);
+    }
+  });
+}
+
 const procureCoreRoutes = [
   "/apps/procurecore/",
   "/apps/procurecore/privacy/",

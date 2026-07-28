@@ -79,6 +79,21 @@
   [headers.values]
     Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
 
+# ProcureCore recovery fallback. This is emitted as an extension-less HTML
+# file so the exact universal-link callback can be served directly without
+# Netlify's Pretty URLs adding a trailing slash. The page is fully static and
+# contains no scripts or forms. no-referrer prevents the callback URL (and any
+# query string it carries) from becoming the Referer when support is opened;
+# no-store avoids retaining a response under a credential-bearing request URL.
+[[headers]]
+  for = "/auth/recovery"
+  [headers.values]
+    Cache-Control = "no-store"
+    Content-Type = "text/html; charset=UTF-8"
+    Content-Security-Policy = "default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+    Referrer-Policy = "no-referrer"
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+
 # Admin-page CSP override (more specific path, declared after the general
 # rule above so it wins for this path). NOT independently verified against
 # a live login/edit/save/publish round trip -- Decap CMS's actual runtime

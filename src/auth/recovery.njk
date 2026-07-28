@@ -1,0 +1,57 @@
+---
+permalink: auth/recovery
+eleventyExcludeFromCollections: true
+eleventyAllowMissingExtension: true
+---
+
+<!doctype html>
+<html lang="en" class="recovery-page">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Open this link in ProcureCore – Curated Design Studio</title>
+    <meta
+      name="description"
+      content="A safe fallback page for ProcureCore password-reset links that were not opened by the app."
+    />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta name="referrer" content="no-referrer" />
+    <link rel="canonical" href="https://curateddesign.studio/auth/recovery" />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link
+      rel="preload"
+      href="/assets/fonts/inter-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/cormorant-garamond-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/assets/css/styles.css?v={{ site.cssVersion }}" />
+  </head>
+  <body class="recovery-page">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <main id="main-content" class="recovery-main" tabindex="-1">
+      <section class="recovery-card" aria-labelledby="recovery-title">
+        <p class="recovery-kicker">ProcureCore</p>
+        <h1 id="recovery-title" class="recovery-title">Open this link in ProcureCore</h1>
+        <p class="recovery-copy">
+          This password-reset link is intended to open in the ProcureCore app. Install or open
+          ProcureCore on this device, then return to the reset email and tap the link again. If the
+          link has expired, request a new one from the app.
+        </p>
+        <a class="recovery-support-link" href="/apps/procurecore/support/" rel="noreferrer">
+          Visit ProcureCore Support
+        </a>
+      </section>
+    </main>
+  </body>
+</html>

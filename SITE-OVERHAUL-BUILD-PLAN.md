@@ -1148,6 +1148,8 @@ If the editor cannot share the primary schema reliably, remove it from the suppo
 - Obtain professional review where required.
 - Reassess consent UI only if the final service selection requires it.
 
+**Interim factual correction (28 July 2026):** all public pages now use the authoritative entity details for Curated Design Limited (company number 16720521; registered office Floor 1, 8 Park Crescent, London W1B 1PG; privacy/support contact info@curateddesign.studio). ProcureCore remains pre-release. Its Privacy Policy, Terms, and Support pages now state that self-service account deletion will be available before public launch and provide email assistance only for pre-release test accounts; they do not present email as the permanent deletion route. Password-recovery guidance now distinguishes the working iPhone/iPad flow from the Mac flow still being completed. The universal-link fallback is explicitly iPhone/iPad-only. This correction is compliance evidence, not final legal approval. Final account-deletion wording remains deferred until the feature passes destructive production-equivalent testing.
+
 ### P5.10 — Enforce quality budgets
 
 Use production-like builds and the median of three mobile runs. Target:

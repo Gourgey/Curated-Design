@@ -1,5 +1,5 @@
-const lastUpdated = "16 May 2026";
-const registeredOffice = "Floor 1 8 Park Crescent, London, England, W1B 1PG";
+const lastUpdated = "28 July 2026";
+const registeredOffice = "Floor 1, 8 Park Crescent, London W1B 1PG";
 
 const pages = [
   {
@@ -7,39 +7,39 @@ const pages = [
     title: "Terms of Business",
     kicker: "Studio terms",
     summary:
-      "The terms on which Curated Design Ltd provides interior design, procurement, styling, installation, and related services.",
+      "The terms on which Curated Design Limited provides interior design, procurement, styling, installation, and related services.",
     metaDescription:
-      "Terms of Business for Curated Design Ltd interior design, procurement, styling, installation, and related services.",
+      "Terms of Business for Curated Design Limited interior design, procurement, styling, installation, and related services.",
     lastUpdated,
     content: `
 ## Introduction
 
-These Terms of Business set out the terms on which Curated Design Ltd provides interior design, procurement, styling, installation, and related services.
+These Terms of Business set out the terms on which Curated Design Limited provides interior design, procurement, styling, installation, and related services.
 
-By approving a proposal, instructing us to proceed, paying an invoice or payment request, or otherwise confirming that work should begin, the client agrees to these Terms of Business unless different written terms have been agreed by Curated Design Ltd.
+By approving a proposal, instructing us to proceed, paying an invoice or payment request, or otherwise confirming that work should begin, the client agrees to these Terms of Business unless different written terms have been agreed by Curated Design Limited.
 
 ## 1. Company information
 
-Curated Design Ltd is a company registered in England and Wales.
+Curated Design Limited is a company registered in England and Wales.
 
-- Company name: Curated Design Ltd
-- Company number: 13048992
+- Company name: Curated Design Limited
+- Company number: 16720521
 - Registered office: ${registeredOffice}
 - Trading address: ${registeredOffice}
 - Email: info@curateddesign.studio
 - Website: https://curateddesign.studio
 
-Curated Design Ltd is not currently VAT registered. VAT is therefore not charged on our invoices unless and until we become VAT registered.
+Curated Design Limited is not currently VAT registered. VAT is therefore not charged on our invoices unless and until we become VAT registered.
 
 ## 2. Definitions
 
 In these Terms:
 
-"Curated Design", "we", "us" or "our" means Curated Design Ltd.
+"Curated Design", "we", "us" or "our" means Curated Design Limited.
 
-"Client", "you" or "your" means the person, company, landlord, developer, property owner, managing agent, estate agency, or other party instructing Curated Design Ltd.
+"Client", "you" or "your" means the person, company, landlord, developer, property owner, managing agent, estate agency, or other party instructing Curated Design Limited.
 
-"Project" means the design, procurement, styling, installation, advisory, or related work agreed between the Client and Curated Design Ltd.
+"Project" means the design, procurement, styling, installation, advisory, or related work agreed between the Client and Curated Design Limited.
 
 "Proposal" means the written project proposal, quote, scope of works, fee proposal, estimate, email confirmation, or other written document setting out the agreed services.
 
@@ -49,7 +49,7 @@ In these Terms:
 
 ## 3. Scope of services
 
-Curated Design Ltd provides interior design and related services, which may include:
+Curated Design Limited provides interior design and related services, which may include:
 
 - interior design concepts;
 - furniture, fixtures and equipment selection;
@@ -70,7 +70,7 @@ Any services not expressly included in the agreed scope are excluded unless agre
 
 A Proposal, quote, product schedule, or cost schedule is an estimate unless expressly stated to be fixed.
 
-Prices, availability, lead times, delivery charges, import costs, and supplier terms may change before an order is placed. Curated Design Ltd will use reasonable care when preparing estimates, but we cannot guarantee third-party supplier pricing, availability, stock levels, or delivery times.
+Prices, availability, lead times, delivery charges, import costs, and supplier terms may change before an order is placed. Curated Design Limited will use reasonable care when preparing estimates, but we cannot guarantee third-party supplier pricing, availability, stock levels, or delivery times.
 
 The Client is responsible for reviewing and approving all Project details before orders are placed, including:
 
@@ -86,7 +86,7 @@ The Client is responsible for reviewing and approving all Project details before
 - import duties, taxes, clearance fees, or logistics costs;
 - installation or access requirements.
 
-Written approval may be given by email, signed document, payment of a payment request, or another written confirmation accepted by Curated Design Ltd.
+Written approval may be given by email, signed document, payment of a payment request, or another written confirmation accepted by Curated Design Limited.
 
 ## 5. Fees
 
@@ -113,15 +113,15 @@ Payment terms will be stated on the relevant invoice or payment request.
 
 Unless otherwise agreed in writing, payment is due in full by the due date shown on the invoice or payment request.
 
-Curated Design Ltd may require payment in advance before starting work, placing supplier orders, reserving goods, arranging delivery, booking installers, or incurring third-party costs.
+Curated Design Limited may require payment in advance before starting work, placing supplier orders, reserving goods, arranging delivery, booking installers, or incurring third-party costs.
 
-No goods will be ordered and no third-party costs will be committed until cleared funds have been received, unless Curated Design Ltd agrees otherwise in writing.
+No goods will be ordered and no third-party costs will be committed until cleared funds have been received, unless Curated Design Limited agrees otherwise in writing.
 
 The Client must pay all invoices without set-off, deduction, withholding, or delay, unless required by law.
 
 ## 7. Late payment
 
-If payment is not received by the due date, Curated Design Ltd may:
+If payment is not received by the due date, Curated Design Limited may:
 
 - pause work on the Project;
 - delay placing orders;
@@ -131,21 +131,21 @@ If payment is not received by the due date, Curated Design Ltd may:
 - recover reasonable costs of debt recovery;
 - terminate or suspend the Project.
 
-For business clients, Curated Design Ltd may charge statutory interest and fixed recovery costs under the Late Payment of Commercial Debts legislation where applicable.
+For business clients, Curated Design Limited may charge statutory interest and fixed recovery costs under the Late Payment of Commercial Debts legislation where applicable.
 
-Any delay in payment may affect supplier availability, stock levels, delivery dates, installation dates, and final Project costs. Curated Design Ltd is not responsible for losses, delays, or price changes caused by late payment.
+Any delay in payment may affect supplier availability, stock levels, delivery dates, installation dates, and final Project costs. Curated Design Limited is not responsible for losses, delays, or price changes caused by late payment.
 
 ## 8. VAT
 
-Curated Design Ltd is not currently VAT registered. VAT is therefore not charged on our services unless and until we become VAT registered.
+Curated Design Limited is not currently VAT registered. VAT is therefore not charged on our services unless and until we become VAT registered.
 
-If Curated Design Ltd becomes VAT registered, VAT may be charged where required by law. In that case, VAT will be added to relevant fees, goods, recharges, and services at the applicable rate unless otherwise stated.
+If Curated Design Limited becomes VAT registered, VAT may be charged where required by law. In that case, VAT will be added to relevant fees, goods, recharges, and services at the applicable rate unless otherwise stated.
 
 The Client remains responsible for any VAT, import VAT, duties, customs charges, taxes, or similar charges relating to goods, deliveries, imports, or supplier transactions where applicable.
 
 ## 9. Procurement and supplier orders
 
-Where Curated Design Ltd assists with procurement, we may source, specify, coordinate, or purchase goods from third-party suppliers.
+Where Curated Design Limited assists with procurement, we may source, specify, coordinate, or purchase goods from third-party suppliers.
 
 Supplier orders are subject to the supplier's own terms and conditions, including terms relating to:
 
@@ -164,17 +164,17 @@ Supplier orders are subject to the supplier's own terms and conditions, includin
 - international shipping;
 - customs and import charges.
 
-Curated Design Ltd is not the manufacturer of third-party goods and is not responsible for supplier defects, supplier delays, discontinued items, stock shortages, courier issues, manufacturing variation, or supplier insolvency.
+Curated Design Limited is not the manufacturer of third-party goods and is not responsible for supplier defects, supplier delays, discontinued items, stock shortages, courier issues, manufacturing variation, or supplier insolvency.
 
-We will use reasonable care when dealing with suppliers, but the Client accepts that third-party goods and supplier services are outside Curated Design Ltd's direct control.
+We will use reasonable care when dealing with suppliers, but the Client accepts that third-party goods and supplier services are outside Curated Design Limited's direct control.
 
 ## 10. Client approval before ordering
 
-Before placing orders, Curated Design Ltd may issue a product schedule, procurement schedule, invoice, payment request, or approval document.
+Before placing orders, Curated Design Limited may issue a product schedule, procurement schedule, invoice, payment request, or approval document.
 
 The Client is responsible for checking all details before approving an order.
 
-Once the Client has approved an order, Curated Design Ltd may proceed to place the order and commit funds to suppliers.
+Once the Client has approved an order, Curated Design Limited may proceed to place the order and commit funds to suppliers.
 
 After approval, the Client may be liable for the full cost of the goods and any related costs, including delivery, cancellation charges, return charges, restocking fees, import costs, storage charges, and procurement fees.
 
@@ -182,7 +182,7 @@ After approval, the Client may be liable for the full cost of the goods and any 
 
 Goods ordered for a Project may be non-refundable, bespoke, made-to-order, imported, customised, or subject to supplier cancellation charges.
 
-If the Client wishes to cancel or change an order after approval, Curated Design Ltd will ask the relevant supplier whether cancellation or amendment is possible. Any refund, exchange, cancellation, or amendment is subject to the supplier's terms and approval.
+If the Client wishes to cancel or change an order after approval, Curated Design Limited will ask the relevant supplier whether cancellation or amendment is possible. Any refund, exchange, cancellation, or amendment is subject to the supplier's terms and approval.
 
 The Client is responsible for any costs arising from cancellation or changes, including:
 
@@ -196,15 +196,15 @@ The Client is responsible for any costs arising from cancellation or changes, in
 - storage fees;
 - additional administration or procurement time.
 
-Curated Design Ltd's fees remain payable for work already carried out, whether or not the Client proceeds with the whole Project.
+Curated Design Limited's fees remain payable for work already carried out, whether or not the Client proceeds with the whole Project.
 
 ## 12. Consumer clients and cancellation rights
 
 If the Client is a consumer, statutory consumer rights may apply.
 
-Where a contract is made at a distance or away from Curated Design Ltd's business premises, the Client may have a legal right to cancel within a cooling-off period, unless an exemption applies.
+Where a contract is made at a distance or away from Curated Design Limited's business premises, the Client may have a legal right to cancel within a cooling-off period, unless an exemption applies.
 
-If the Client asks Curated Design Ltd to begin work or place orders during any applicable cancellation period, the Client may be required to pay for work carried out and costs incurred before cancellation.
+If the Client asks Curated Design Limited to begin work or place orders during any applicable cancellation period, the Client may be required to pay for work carried out and costs incurred before cancellation.
 
 Bespoke, made-to-order, personalised, or custom goods may not be cancellable once ordered, depending on the applicable law and supplier terms.
 
@@ -216,7 +216,7 @@ This section should be read subject to applicable consumer law and any specific 
 
 The Client is responsible for ensuring that the delivery and installation location is ready, safe, accessible, and suitable.
 
-The Client must tell Curated Design Ltd in advance about any access issues, including:
+The Client must tell Curated Design Limited in advance about any access issues, including:
 
 - parking restrictions;
 - loading restrictions;
@@ -232,11 +232,11 @@ The Client must tell Curated Design Ltd in advance about any access issues, incl
 - health and safety rules;
 - fragile flooring, walls, finishes, or existing furniture.
 
-The Client is responsible for checking that goods will fit through all access routes and into the intended space, unless Curated Design Ltd has expressly agreed in writing to carry out access checks.
+The Client is responsible for checking that goods will fit through all access routes and into the intended space, unless Curated Design Limited has expressly agreed in writing to carry out access checks.
 
 Failed deliveries, refused deliveries, missed appointments, waiting time, redelivery charges, parking charges, storage charges, or access-related costs are the Client's responsibility.
 
-Curated Design Ltd is not responsible for delays or additional costs caused by site conditions, building rules, restricted access, unavailable lifts, lack of parking, incomplete works, unsafe conditions, or the Client's failure to provide accurate information.
+Curated Design Limited is not responsible for delays or additional costs caused by site conditions, building rules, restricted access, unavailable lifts, lack of parking, incomplete works, unsafe conditions, or the Client's failure to provide accurate information.
 
 ## 14. Site readiness
 
@@ -254,15 +254,15 @@ Unless otherwise agreed, the site must be:
 - cleared of obstructions;
 - ready to receive the agreed goods.
 
-If the site is not ready, Curated Design Ltd may charge for wasted time, waiting time, redelivery, rescheduling, storage, or additional attendance.
+If the site is not ready, Curated Design Limited may charge for wasted time, waiting time, redelivery, rescheduling, storage, or additional attendance.
 
 ## 15. Damaged, faulty or missing goods
 
 The Client must inspect goods as soon as reasonably possible after delivery or installation.
 
-Any damage, defect, fault, missing item, or incorrect item must be reported to Curated Design Ltd in writing as soon as possible, with clear photographs and details.
+Any damage, defect, fault, missing item, or incorrect item must be reported to Curated Design Limited in writing as soon as possible, with clear photographs and details.
 
-Curated Design Ltd will assist in raising the issue with the relevant supplier or delivery provider, but the outcome will depend on supplier terms, courier terms, warranties, evidence, and time limits.
+Curated Design Limited will assist in raising the issue with the relevant supplier or delivery provider, but the outcome will depend on supplier terms, courier terms, warranties, evidence, and time limits.
 
 The Client must not use, move, alter, repair, install, or dispose of damaged goods unless agreed in writing, as this may affect the ability to make a supplier claim.
 
@@ -278,9 +278,9 @@ Colours may also appear differently on screens, printed materials, samples, rend
 
 ## 17. Trade accounts, discounts and savings
 
-Curated Design Ltd may have access to trade accounts, supplier relationships, trade discounts, or preferential terms.
+Curated Design Limited may have access to trade accounts, supplier relationships, trade discounts, or preferential terms.
 
-Access to trade pricing is at Curated Design Ltd's discretion and may depend on supplier rules, project type, order value, availability, account status, and other factors.
+Access to trade pricing is at Curated Design Limited's discretion and may depend on supplier rules, project type, order value, availability, account status, and other factors.
 
 Any trade discount, procurement saving, or supplier benefit may be shared, retained, passed on, or used as part of our fee structure as set out in the relevant Proposal or invoice.
 
@@ -290,19 +290,19 @@ The Client is not automatically entitled to receive the full amount of any trade
 
 Ownership and risk in goods may pass according to the relevant supplier's terms.
 
-Where Curated Design Ltd purchases goods on behalf of the Client using funds provided by the Client, the Client is responsible for the cost of those goods and related supplier charges.
+Where Curated Design Limited purchases goods on behalf of the Client using funds provided by the Client, the Client is responsible for the cost of those goods and related supplier charges.
 
-Curated Design Ltd may withhold release, delivery, installation, or transfer of goods where invoices, fees, reimbursable costs, or supplier costs remain unpaid.
+Curated Design Limited may withhold release, delivery, installation, or transfer of goods where invoices, fees, reimbursable costs, or supplier costs remain unpaid.
 
 Where goods are stored, held, or delayed because of Client instructions, late payment, site delays, or access issues, the Client is responsible for any storage, handling, insurance, redelivery, or related costs.
 
 ## 19. Third-party contractors and suppliers
 
-Curated Design Ltd may recommend or coordinate third-party contractors, suppliers, delivery companies, installers, tradespeople, or consultants.
+Curated Design Limited may recommend or coordinate third-party contractors, suppliers, delivery companies, installers, tradespeople, or consultants.
 
 Unless expressly agreed otherwise, third parties remain independent providers and are responsible for their own work, goods, advice, insurance, conduct, and compliance.
 
-Curated Design Ltd is not responsible for the acts, omissions, delays, defects, negligence, or failures of third parties.
+Curated Design Limited is not responsible for the acts, omissions, delays, defects, negligence, or failures of third parties.
 
 Where the Client directly appoints or pays a third party, the contract is between the Client and that third party.
 
@@ -319,13 +319,13 @@ The Client must:
 - ensure access is available;
 - obtain landlord, freeholder, building management, listed building, planning, or other permissions where required;
 - ensure the property is safe and suitable for the agreed work;
-- keep Curated Design Ltd updated about changes affecting the Project.
+- keep Curated Design Limited updated about changes affecting the Project.
 
-Curated Design Ltd is not responsible for delays, costs, or losses caused by incomplete, inaccurate, or late information from the Client.
+Curated Design Limited is not responsible for delays, costs, or losses caused by incomplete, inaccurate, or late information from the Client.
 
 ## 21. Project delays
 
-Curated Design Ltd will use reasonable care to meet agreed dates, but dates are estimates unless expressly stated to be fixed and binding.
+Curated Design Limited will use reasonable care to meet agreed dates, but dates are estimates unless expressly stated to be fixed and binding.
 
 Project timelines may be affected by:
 
@@ -340,13 +340,13 @@ Project timelines may be affected by:
 - access issues;
 - contractor delays;
 - changes to scope;
-- events outside Curated Design Ltd's control.
+- events outside Curated Design Limited's control.
 
-Curated Design Ltd is not liable for delay caused by third parties, the Client, or events beyond our reasonable control.
+Curated Design Limited is not liable for delay caused by third parties, the Client, or events beyond our reasonable control.
 
 ## 22. Changes to scope
 
-If the Client requests additional work or changes the agreed scope, Curated Design Ltd may charge additional fees.
+If the Client requests additional work or changes the agreed scope, Curated Design Limited may charge additional fees.
 
 Additional work may include:
 
@@ -361,15 +361,15 @@ Additional work may include:
 - additional procurement administration;
 - urgent turnaround work.
 
-Curated Design Ltd will notify the Client where additional fees are likely to apply.
+Curated Design Limited will notify the Client where additional fees are likely to apply.
 
 ## 23. Design materials and intellectual property
 
-All design concepts, layouts, drawings, schedules, presentations, visuals, specifications, procurement schedules, documents, written content, images, and other materials created by Curated Design Ltd remain the intellectual property of Curated Design Ltd unless otherwise agreed in writing.
+All design concepts, layouts, drawings, schedules, presentations, visuals, specifications, procurement schedules, documents, written content, images, and other materials created by Curated Design Limited remain the intellectual property of Curated Design Limited unless otherwise agreed in writing.
 
 The Client may use the final agreed design materials for the specific Project for which they were created, once all fees and costs have been paid in full.
 
-The Client must not copy, reproduce, adapt, share, publish, sell, or use Curated Design Ltd's design materials for another project or property without written permission.
+The Client must not copy, reproduce, adapt, share, publish, sell, or use Curated Design Limited's design materials for another project or property without written permission.
 
 ## 24. Renders, visuals and presentation materials
 
@@ -391,25 +391,25 @@ Renders and visuals are illustrative unless expressly stated otherwise.
 
 ## 25. Photography and portfolio use
 
-Curated Design Ltd may request permission to photograph completed work for portfolio, website, social media, press, awards, or marketing purposes.
+Curated Design Limited may request permission to photograph completed work for portfolio, website, social media, press, awards, or marketing purposes.
 
 We will not publish private residential addresses, personal information, or confidential Client details without consent.
 
-For private residential projects, Curated Design Ltd will seek the Client's permission before publishing identifiable project photography.
+For private residential projects, Curated Design Limited will seek the Client's permission before publishing identifiable project photography.
 
-For commercial, landlord, developer, estate agency, or publicly marketed property projects, Curated Design Ltd may use photography and project imagery unless otherwise agreed in writing.
+For commercial, landlord, developer, estate agency, or publicly marketed property projects, Curated Design Limited may use photography and project imagery unless otherwise agreed in writing.
 
 ## 26. Confidentiality
 
-Curated Design Ltd will treat confidential Client information with reasonable care.
+Curated Design Limited will treat confidential Client information with reasonable care.
 
-The Client must also keep confidential any private pricing, supplier information, trade discounts, business methods, unpublished design materials, and commercial information provided by Curated Design Ltd.
+The Client must also keep confidential any private pricing, supplier information, trade discounts, business methods, unpublished design materials, and commercial information provided by Curated Design Limited.
 
 Confidential information may be disclosed where required by law, regulation, court order, insurer, accountant, solicitor, or professional adviser.
 
 ## 27. Data protection and privacy
 
-Curated Design Ltd will process personal information in accordance with its Privacy Notice.
+Curated Design Limited will process personal information in accordance with its Privacy Notice.
 
 The Privacy Notice explains what personal information we collect, how we use it, who we share it with, and the rights available to individuals.
 
@@ -417,9 +417,9 @@ The Privacy Notice is available at: https://curateddesign.studio/privacy-notice/
 
 ## 28. Liability
 
-Curated Design Ltd will provide services with reasonable care and skill.
+Curated Design Limited will provide services with reasonable care and skill.
 
-Curated Design Ltd is not liable for:
+Curated Design Limited is not liable for:
 
 - supplier delays;
 - supplier defects;
@@ -435,13 +435,13 @@ Curated Design Ltd is not liable for:
 - losses caused by changes to scope, budget, or availability;
 - indirect, consequential, or speculative losses.
 
-Curated Design Ltd does not exclude or limit liability where it would be unlawful to do so, including liability for death or personal injury caused by negligence, fraud, or fraudulent misrepresentation.
+Curated Design Limited does not exclude or limit liability where it would be unlawful to do so, including liability for death or personal injury caused by negligence, fraud, or fraudulent misrepresentation.
 
-Subject to the above, Curated Design Ltd's total liability in connection with a Project shall not exceed the total fees paid to Curated Design Ltd for that Project, excluding third-party supplier costs, goods, delivery charges, taxes, duties, and reimbursable expenses.
+Subject to the above, Curated Design Limited's total liability in connection with a Project shall not exceed the total fees paid to Curated Design Limited for that Project, excluding third-party supplier costs, goods, delivery charges, taxes, duties, and reimbursable expenses.
 
 ## 29. Insurance
 
-Curated Design Ltd will maintain appropriate business insurance for its services.
+Curated Design Limited will maintain appropriate business insurance for its services.
 
 The Client is responsible for maintaining appropriate property, contents, landlord, building, renovation, and other insurance relating to the Project site and goods.
 
@@ -449,13 +449,13 @@ The Client should ensure that valuable goods are insured once delivered to the p
 
 ## 30. Force majeure
 
-Curated Design Ltd is not responsible for delay or failure to perform caused by events beyond its reasonable control.
+Curated Design Limited is not responsible for delay or failure to perform caused by events beyond its reasonable control.
 
-This may include supplier failure, shipping disruption, strikes, transport disruption, extreme weather, fire, flood, pandemic, illness, war, terrorism, civil unrest, government action, customs delays, utility failure, or other events outside Curated Design Ltd's reasonable control.
+This may include supplier failure, shipping disruption, strikes, transport disruption, extreme weather, fire, flood, pandemic, illness, war, terrorism, civil unrest, government action, customs delays, utility failure, or other events outside Curated Design Limited's reasonable control.
 
 ## 31. Suspension and termination
 
-Curated Design Ltd may suspend or terminate work if:
+Curated Design Limited may suspend or terminate work if:
 
 - invoices are overdue;
 - the Client fails to provide required information;
@@ -463,7 +463,7 @@ Curated Design Ltd may suspend or terminate work if:
 - the Client changes the scope materially;
 - the site is unsafe or unsuitable;
 - the Client behaves abusively or unreasonably;
-- continuing the Project would expose Curated Design Ltd to unreasonable commercial, legal, safety, or reputational risk.
+- continuing the Project would expose Curated Design Limited to unreasonable commercial, legal, safety, or reputational risk.
 
 The Client may terminate the Project by written notice.
 
@@ -471,9 +471,9 @@ On termination, the Client must pay for all work completed, goods ordered, suppl
 
 ## 32. Complaints
 
-If the Client is unhappy with any aspect of the service, they should contact Curated Design Ltd in writing as soon as possible.
+If the Client is unhappy with any aspect of the service, they should contact Curated Design Limited in writing as soon as possible.
 
-Curated Design Ltd will review the issue and respond within a reasonable time.
+Curated Design Limited will review the issue and respond within a reasonable time.
 
 The Client should provide clear details, photographs where relevant, and any supporting information so that the issue can be properly reviewed.
 
@@ -481,15 +481,15 @@ The Client should provide clear details, photographs where relevant, and any sup
 
 Formal notices should be sent by email to: info@curateddesign.studio
 
-Curated Design Ltd may contact the Client using the email address, phone number, postal address, or other contact details provided by the Client.
+Curated Design Limited may contact the Client using the email address, phone number, postal address, or other contact details provided by the Client.
 
 The Client is responsible for keeping contact details up to date.
 
 ## 34. Updates to these Terms
 
-Curated Design Ltd may update these Terms of Business from time to time.
+Curated Design Limited may update these Terms of Business from time to time.
 
-The version that applies to a Project will usually be the version in force at the time the Client approves the relevant Proposal or instructs Curated Design Ltd to proceed, unless otherwise agreed in writing.
+The version that applies to a Project will usually be the version in force at the time the Client approves the relevant Proposal or instructs Curated Design Limited to proceed, unless otherwise agreed in writing.
 
 ## 35. Governing law and jurisdiction
 
@@ -503,28 +503,28 @@ The courts of England and Wales shall have jurisdiction, except where consumer l
     title: "Privacy Notice",
     kicker: "Privacy",
     summary:
-      "How Curated Design Ltd collects, uses, stores, and protects personal information.",
+      "How Curated Design Limited collects, uses, stores, and protects personal information.",
     metaDescription:
-      "Privacy Notice for Curated Design Ltd, explaining how personal information is collected, used, stored, and protected.",
+      "Privacy Notice for Curated Design Limited, explaining how personal information is collected, used, stored, and protected.",
     lastUpdated,
     content: `
 ## Introduction
 
-This Privacy Notice explains how Curated Design Ltd collects, uses, stores, and protects personal information.
+This Privacy Notice explains how Curated Design Limited collects, uses, stores, and protects personal information.
 
-Curated Design Ltd is committed to respecting your privacy and handling your personal information responsibly.
+Curated Design Limited is committed to respecting your privacy and handling your personal information responsibly.
 
 ## 1. Who we are
 
-Curated Design Ltd is an interior design and procurement studio registered in England and Wales.
+Curated Design Limited is an interior design and procurement studio registered in England and Wales.
 
-- Company name: Curated Design Ltd
-- Company number: 13048992
+- Company name: Curated Design Limited
+- Company number: 16720521
 - Registered office: ${registeredOffice}
 - Email: info@curateddesign.studio
 - Website: https://curateddesign.studio
 
-For the purposes of UK data protection law, Curated Design Ltd is the data controller for the personal information described in this Privacy Notice.
+For the purposes of UK data protection law, Curated Design Limited is the data controller for the personal information described in this Privacy Notice.
 
 ## 2. Information we collect
 
@@ -727,19 +727,19 @@ The latest version will be published on our website with the date it was last up
     title: "Company Information",
     kicker: "Company details",
     summary:
-      "Registered company details and core business information for Curated Design Ltd.",
+      "Registered company details and core business information for Curated Design Limited.",
     metaDescription:
-      "Company information for Curated Design Ltd, registered in England and Wales.",
+      "Company information for Curated Design Limited, registered in England and Wales.",
     lastUpdated,
     content: `
 ## Overview
 
-Curated Design Ltd is an interior design and procurement studio registered in England and Wales.
+Curated Design Limited is an interior design and procurement studio registered in England and Wales.
 
 ## Registered company details
 
-- Company name: Curated Design Ltd
-- Company number: 13048992
+- Company name: Curated Design Limited
+- Company number: 16720521
 - Registered in: England and Wales
 - Registered office: ${registeredOffice}
 - Trading address: ${registeredOffice}
@@ -748,13 +748,13 @@ Curated Design Ltd is an interior design and procurement studio registered in En
 
 ## VAT status
 
-Curated Design Ltd is not currently VAT registered.
+Curated Design Limited is not currently VAT registered.
 
-VAT is therefore not charged on invoices unless and until Curated Design Ltd becomes VAT registered.
+VAT is therefore not charged on invoices unless and until Curated Design Limited becomes VAT registered.
 
 ## Business activity
 
-Curated Design Ltd provides interior design, procurement, styling, installation coordination, and related services for residential, rental, commercial, and property-focused projects.
+Curated Design Limited provides interior design, procurement, styling, installation coordination, and related services for residential, rental, commercial, and property-focused projects.
 
 ## Legal documents
 

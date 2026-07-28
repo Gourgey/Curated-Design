@@ -141,6 +141,13 @@ if (!fs.existsSync(recoveryPath) || !fs.statSync(recoveryPath).isFile()) {
   if (!/<h1\b[^>]*>\s*Open this link in ProcureCore\s*<\/h1>/i.test(recoveryHtml)) {
     fail(recoveryPath, "missing the recovery fallback heading");
   }
+  if (
+    !recoveryHtml.includes(
+      "This password-reset universal link is currently for iPhone or iPad.",
+    )
+  ) {
+    fail(recoveryPath, "must identify the current universal-link flow as iPhone/iPad-only");
+  }
   if (!/<main\b[^>]*\bid=["']main-content["']/i.test(recoveryHtml)) {
     fail(recoveryPath, "main landmark must provide the #main-content skip-link target");
   }
@@ -243,6 +250,10 @@ const procureCoreRoutes = [
   "/apps/procurecore/support/",
 ];
 const procureCorePolicyRoutes = procureCoreRoutes.slice(1);
+const currentCompanyName = "Curated Design Limited";
+const currentCompanyNumber = "16720521";
+const currentRegisteredOffice = "Floor 1, 8 Park Crescent, London W1B 1PG";
+const supportEmail = "info@curateddesign.studio";
 const staleProcureCoreClaims = [
   /optional iCloud sync/i,
   /private iCloud database/i,
@@ -254,6 +265,10 @@ const staleProcureCoreClaims = [
   /placements? that reference it will reconcile/i,
   /delete the app and remove ProcureCore data/i,
   /iCloud Drive/i,
+  /Start account deletion from/i,
+  /initiate account deletion/i,
+  /account-deletion process can be initiated/i,
+  /does not currently provide a self-service password-reset control/i,
 ];
 
 procureCoreRoutes.forEach((route) => {
@@ -275,6 +290,10 @@ procureCoreRoutes.forEach((route) => {
   staleProcureCoreClaims.forEach((pattern) => {
     if (pattern.test(html)) fail(file, `contains stale ProcureCore claim matching ${pattern}`);
   });
+
+  if (/(?:Curated Design Ltd|13048992)/i.test(html)) {
+    fail(file, "contains superseded company identity");
+  }
 
   const descriptionTags = Array.from(
     html.matchAll(
@@ -322,6 +341,68 @@ if (!procureCorePrivacy.includes('id="your-rights"')) {
     "missing #your-rights privacy-choices anchor",
   );
 }
+
+const publicHtml = htmlFiles.map((file) => fs.readFileSync(file, "utf8")).join("\n");
+if (/(?:Curated Design Ltd|13048992)/i.test(publicHtml)) {
+  fail(outputRoot, "generated public HTML contains superseded company identity");
+}
+
+["/company-information/", "/privacy-notice/", "/terms-of-business/"].forEach((route) => {
+  const file = path.join(outputRoot, route.slice(1), "index.html");
+  const html = fs.readFileSync(file, "utf8");
+  [currentCompanyName, currentCompanyNumber, currentRegisteredOffice, supportEmail].forEach(
+    (expected) => {
+      if (!html.includes(expected)) fail(file, `missing current company detail: ${expected}`);
+    },
+  );
+});
+
+procureCorePolicyRoutes.forEach((route) => {
+  const file = path.join(outputRoot, route.slice(1), "index.html");
+  const html = fs.readFileSync(file, "utf8");
+  [currentCompanyName, supportEmail].forEach((expected) => {
+    if (!html.includes(expected)) fail(file, `missing current company detail: ${expected}`);
+  });
+});
+
+["/apps/procurecore/privacy/", "/apps/procurecore/terms/"].forEach((route) => {
+  const file = path.join(outputRoot, route.slice(1), "index.html");
+  const html = fs.readFileSync(file, "utf8");
+  [currentCompanyNumber, currentRegisteredOffice].forEach((expected) => {
+    if (!html.includes(expected)) fail(file, `missing current company detail: ${expected}`);
+  });
+});
+
+procureCorePolicyRoutes.forEach((route) => {
+  const file = path.join(outputRoot, route.slice(1), "index.html");
+  const html = fs.readFileSync(file, "utf8");
+  [
+    "ProcureCore is currently pre-release.",
+    "Self-service account deletion will be available inside ProcureCore before public launch.",
+    "Deleting an account does not automatically cancel an Apple subscription.",
+    `href="mailto:${supportEmail}"`,
+  ].forEach((expected) => {
+    if (!html.includes(expected)) fail(file, `missing interim account-deletion content: ${expected}`);
+  });
+});
+
+const procureCoreSupport = fs.readFileSync(
+  path.join(outputRoot, "apps/procurecore/support/index.html"),
+  "utf8",
+);
+[
+  "On iPhone or iPad, select",
+  "Forgot password?",
+  "Self-service password recovery for Mac is being completed before public launch.",
+  `href="mailto:${supportEmail}"`,
+].forEach((expected) => {
+  if (!procureCoreSupport.includes(expected)) {
+    fail(
+      path.join(outputRoot, "apps/procurecore/support/index.html"),
+      `missing platform-specific password-recovery content: ${expected}`,
+    );
+  }
+});
 
 const projectEntries = fs
   .readdirSync(path.join(root, "src/content/projects"))

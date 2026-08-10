@@ -23,7 +23,7 @@ sectionTop: true
             <header class="app-header app-header--compact">
                 <p class="app-kicker">{{ appPage.app.name }}</p>
                 <h1 class="app-title">{{ appPage.title }}</h1>
-                <p class="app-lead">{% if appPage.kind == "terms" %}Effective date{% else %}Last updated{% endif %}: {{ appPage.app.lastUpdated or apps.lastUpdated }}</p>
+                <p class="app-lead">{% if appPage.kind == "terms" %}Effective date{% else %}Last updated{% endif %}: {{ appPage.pageLastUpdated or appPage.app.lastUpdated or apps.lastUpdated }}</p>
             </header>
 
             {% if appPage.app.slug == "curiosity-tracker" and appPage.kind == "privacy" %}

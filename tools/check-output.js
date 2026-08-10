@@ -377,12 +377,12 @@ procureCorePolicyRoutes.forEach((route) => {
   const file = path.join(outputRoot, route.slice(1), "index.html");
   const html = fs.readFileSync(file, "utf8");
   [
-    "ProcureCore is currently pre-release.",
-    "Self-service account deletion will be available inside ProcureCore before public launch.",
-    "Deleting an account does not automatically cancel an Apple subscription.",
+    "You can delete your account from Settings, then Delete Account.",
+    "Deletion is permanent and cannot be undone.",
+    "Cancel that separately in your Apple account settings.",
     `href="mailto:${supportEmail}"`,
   ].forEach((expected) => {
-    if (!html.includes(expected)) fail(file, `missing interim account-deletion content: ${expected}`);
+    if (!html.includes(expected)) fail(file, `missing account-deletion content: ${expected}`);
   });
 });
 

@@ -506,13 +506,15 @@ The courts of England and Wales shall have jurisdiction, except where consumer l
       "How Curated Design Limited collects, uses, stores, and protects personal information.",
     metaDescription:
       "Privacy Notice for Curated Design Limited, explaining how personal information is collected, used, stored, and protected.",
-    lastUpdated,
+    lastUpdated: "10 August 2026",
     content: `
 ## Introduction
 
 This Privacy Notice explains how Curated Design Limited collects, uses, stores, and protects personal information.
 
 Curated Design Limited is committed to respecting your privacy and handling your personal information responsibly.
+
+This notice covers Curated Design Limited's interior design services. If you use ProcureCore, our software product, that service is covered by the ProcureCore Privacy Policy at [curateddesign.studio/apps/procurecore/privacy/](https://curateddesign.studio/apps/procurecore/privacy/).
 
 ## 1. Who we are
 
@@ -730,7 +732,7 @@ The latest version will be published on our website with the date it was last up
       "Registered company details and core business information for Curated Design Limited.",
     metaDescription:
       "Company information for Curated Design Limited, registered in England and Wales.",
-    lastUpdated,
+    lastUpdated: "10 August 2026",
     content: `
 ## Overview
 
@@ -754,15 +756,22 @@ VAT is therefore not charged on invoices unless and until Curated Design Limited
 
 ## Business activity
 
-Curated Design Limited provides interior design, procurement, styling, installation coordination, and related services for residential, rental, commercial, and property-focused projects.
+Curated Design Limited provides interior design, procurement, styling, installation coordination, and related services for residential, rental, commercial, and property-focused projects. The company also develops and publishes ProcureCore, a procurement and project management application for design studios, available on the Apple App Store.
 
 ## Legal documents
 
 The following documents apply to our website, services, and business operations where relevant:
 
+Interior design business:
+
 - Terms of Business: [https://curateddesign.studio/terms-of-business/](https://curateddesign.studio/terms-of-business/)
 - Privacy Notice: [https://curateddesign.studio/privacy-notice/](https://curateddesign.studio/privacy-notice/)
 - Company Information: [https://curateddesign.studio/company-information/](https://curateddesign.studio/company-information/)
+
+ProcureCore (software product):
+
+- ProcureCore Terms of Use: [https://curateddesign.studio/apps/procurecore/terms/](https://curateddesign.studio/apps/procurecore/terms/)
+- ProcureCore Privacy Policy: [https://curateddesign.studio/apps/procurecore/privacy/](https://curateddesign.studio/apps/procurecore/privacy/)
 
 ## Contact
 

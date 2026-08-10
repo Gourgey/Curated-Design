@@ -47,6 +47,11 @@ const items = [
       "ProcureCore brings projects, clients, suppliers, products, placements, approvals, attachments, and reporting into one considered workspace for interior-design studios.",
     platform: "Coming soon to the App Store · iPhone and Mac",
     lastUpdated: "28 July 2026",
+    pageLastUpdated: {
+      privacy: "10 August 2026",
+      terms: "10 August 2026",
+      support: "10 August 2026",
+    },
     information: [
       {
         label: "Platform",
@@ -126,6 +131,7 @@ module.exports = {
       app,
       title: (app.pageTitles && app.pageTitles[kind]) || titleByKind[kind] || kind,
       meta: (app.pageMeta && app.pageMeta[kind]) || null,
+      pageLastUpdated: (app.pageLastUpdated && app.pageLastUpdated[kind]) || null,
     })),
   ),
 };

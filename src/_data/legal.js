@@ -506,7 +506,7 @@ The courts of England and Wales shall have jurisdiction, except where consumer l
       "How Curated Design Limited collects, uses, stores, and protects personal information.",
     metaDescription:
       "Privacy Notice for Curated Design Limited, explaining how personal information is collected, used, stored, and protected.",
-    lastUpdated: "10 August 2026",
+    lastUpdated: "11 August 2026",
     content: `
 ## Introduction
 
@@ -588,11 +588,13 @@ We do not sell personal information.
 
 We use personal information only where we have a lawful basis to do so.
 
-Depending on the circumstances, we may rely on the following lawful bases:
+We allocate a lawful basis to each of the purposes listed above.
 
 ### Contract
 
 We may use personal information where it is necessary to provide services, prepare proposals, manage a project, issue invoices, order goods, arrange delivery, or otherwise perform a contract with you.
+
+This covers responding to enquiries, providing proposals, quotes, invoices and payment requests, managing client relationships, providing our services, understanding project requirements, sourcing products and suppliers, arranging deliveries, installations and site visits, and processing payments.
 
 ### Legitimate interests
 
@@ -600,15 +602,21 @@ We may use personal information where it is necessary for our legitimate busines
 
 This may include managing enquiries, communicating with clients and suppliers, keeping project records, improving our services, protecting our business, and maintaining professional relationships.
 
+This covers communicating with suppliers, contractors, delivery companies and project partners, managing accounts, improving our services and website, and managing disputes, complaints or claims. Where we rely on legitimate interests we consider the impact on the people concerned.
+
 ### Legal obligation
 
 We may use personal information where required to comply with legal, tax, accounting, regulatory, or statutory obligations.
+
+This covers keeping business, accounting, tax and legal records, and meeting regulatory or statutory requirements.
 
 ### Consent
 
 We may rely on consent where required, for example for certain marketing communications or where you have given specific permission for a particular use.
 
 Where we rely on consent, you may withdraw that consent at any time.
+
+This covers sending business communications where consent is required.
 
 ## 6. Sharing information
 

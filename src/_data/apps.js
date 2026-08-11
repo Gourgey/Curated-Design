@@ -48,9 +48,9 @@ const items = [
     platform: "Coming soon to the App Store · iPhone and Mac",
     lastUpdated: "28 July 2026",
     pageLastUpdated: {
-      privacy: "10 August 2026",
+      privacy: "11 August 2026",
       terms: "10 August 2026",
-      support: "10 August 2026",
+      support: "11 August 2026",
     },
     information: [
       {

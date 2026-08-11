@@ -732,7 +732,7 @@ The latest version will be published on our website with the date it was last up
       "Registered company details and core business information for Curated Design Limited.",
     metaDescription:
       "Company information for Curated Design Limited, registered in England and Wales.",
-    lastUpdated: "10 August 2026",
+    lastUpdated: "11 August 2026",
     content: `
 ## Overview
 
@@ -756,7 +756,7 @@ VAT is therefore not charged on invoices unless and until Curated Design Limited
 
 ## Business activity
 
-Curated Design Limited provides interior design, procurement, styling, installation coordination, and related services for residential, rental, commercial, and property-focused projects. The company also develops and publishes ProcureCore, a procurement and project management application for design studios, available on the Apple App Store.
+Curated Design Limited provides interior design, procurement, styling, installation coordination, and related services for residential, rental, commercial, and property-focused projects. The company also develops and publishes ProcureCore, a procurement and project management application for design studios, currently in development and releasing on the Apple App Store.
 
 ## Legal documents
 

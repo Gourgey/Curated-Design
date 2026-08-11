@@ -391,15 +391,15 @@ const procureCoreSupport = fs.readFileSync(
   "utf8",
 );
 [
-  "On iPhone or iPad, select",
   "Forgot password?",
-  "Self-service password recovery for Mac is being completed before public launch.",
+  "on the ProcureCore sign-in screen and follow the emailed link on the same device.",
+  "This works on iPhone, iPad and Mac.",
   `href="mailto:${supportEmail}"`,
 ].forEach((expected) => {
   if (!procureCoreSupport.includes(expected)) {
     fail(
       path.join(outputRoot, "apps/procurecore/support/index.html"),
-      `missing platform-specific password-recovery content: ${expected}`,
+      `missing password-recovery content: ${expected}`,
     );
   }
 });

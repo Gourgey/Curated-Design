@@ -742,6 +742,7 @@ Curated Design Limited is an interior design and procurement studio registered i
 
 - Company name: Curated Design Limited
 - Company number: 16720521
+- ICO registration number: ZC116146
 - Registered in: England and Wales
 - Registered office: ${registeredOffice}
 - Trading address: ${registeredOffice}

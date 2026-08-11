@@ -522,6 +522,7 @@ Curated Design Limited is an interior design and procurement studio registered i
 
 - Company name: Curated Design Limited
 - Company number: 16720521
+- ICO registration number: ZC116146
 - Registered office: ${registeredOffice}
 - Email: info@curateddesign.studio
 - Website: https://curateddesign.studio
@@ -602,7 +603,7 @@ We may use personal information where it is necessary for our legitimate busines
 
 This may include managing enquiries, communicating with clients and suppliers, keeping project records, improving our services, protecting our business, and maintaining professional relationships.
 
-This covers communicating with suppliers, contractors, delivery companies and project partners, managing accounts, improving our services and website, and managing disputes, complaints or claims. Where we rely on legitimate interests we consider the impact on the people concerned.
+This covers communicating with suppliers, contractors, delivery companies and project partners, managing accounts, improving our services and website, managing disputes, complaints or claims, and sending business communications to business contacts where consent is not required. Where we rely on legitimate interests we consider the impact on the people concerned.
 
 ### Legal obligation
 

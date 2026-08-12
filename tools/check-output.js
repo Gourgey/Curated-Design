@@ -410,6 +410,57 @@ const procureCoreSupport = fs.readFileSync(
   }
 });
 
+const procureCoreTermsPath = path.join(outputRoot, "apps/procurecore/terms/index.html");
+const procureCoreSchedulePath = path.join(
+  outputRoot,
+  "apps/procurecore/data-processing/index.html",
+);
+const procureCoreTerms = fs.readFileSync(procureCoreTermsPath, "utf8");
+const procureCoreSchedule = fs.readFileSync(procureCoreSchedulePath, "utf8");
+
+// The data processing schedule cross-references the Terms' section 5 heading by name.
+// Renaming that heading would leave a processor contract pointing at a section that does
+// not exist, so each side is asserted against the other.
+const confidentialityHeading = "User content and confidentiality";
+const termsSectionTitles = Array.from(
+  procureCoreTerms.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/gi),
+  (match) =>
+    match[1]
+      .replace(/<[^>]+>/g, "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .replace(/^\d+\.\s*/, ""),
+);
+if (!termsSectionTitles.includes(confidentialityHeading)) {
+  fail(
+    procureCoreTermsPath,
+    `no Terms section is titled "${confidentialityHeading}", which the data processing schedule references by name; rename both together`,
+  );
+}
+if (!procureCoreSchedule.includes(`${confidentialityHeading} section of the Terms`)) {
+  fail(
+    procureCoreSchedulePath,
+    `schedule must reference the "${confidentialityHeading} section of the Terms"; update it together with the Terms section 5 heading`,
+  );
+}
+
+// The liability cap is struck out whole rather than read down if a court finds it
+// unreasonable, so both of its load-bearing properties are asserted.
+if (!procureCoreTerms.includes("£150")) {
+  fail(
+    procureCoreTermsPath,
+    "liability cap is missing its £150 floor; without it the cap is a total exclusion for any customer who has paid nothing",
+  );
+}
+const capSubordinations =
+  procureCoreTerms.match(/Subject to the first paragraph of this section/g) || [];
+if (capSubordinations.length !== 2) {
+  fail(
+    procureCoreTermsPath,
+    `"Subject to the first paragraph of this section" must appear exactly twice (found ${capSubordinations.length}): once for the monetary cap and once for the indirect-loss exclusion, each subordinating it to the statutory carve-outs`,
+  );
+}
+
 const projectEntries = fs
   .readdirSync(path.join(root, "src/content/projects"))
   .filter((file) => file.endsWith(".md"))

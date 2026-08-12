@@ -91,7 +91,7 @@ sectionTop: true
                 <aside class="app-panel app-panel--links" aria-label="{{ app.name }} links">
                     <h2>Support and policies</h2>
                     {% for kind in app.supportPages %}
-                    <a href="/apps/{{ app.slug }}/{{ kind }}/">{% if kind == "privacy" %}Privacy Policy{% elif kind == "support" %}Support{% else %}Terms{% endif %}</a>
+                    <a href="/apps/{{ app.slug }}/{{ kind }}/">{% if kind == "privacy" %}Privacy Policy{% elif kind == "support" %}Support{% elif kind == "data-processing" %}Data Processing Schedule{% else %}Terms{% endif %}</a>
                     {% endfor %}
                 </aside>
             </div>

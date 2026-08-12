@@ -48,9 +48,10 @@ const items = [
     platform: "Coming soon to the App Store · iPhone and Mac",
     lastUpdated: "28 July 2026",
     pageLastUpdated: {
-      privacy: "11 August 2026",
-      terms: "10 August 2026",
-      support: "11 August 2026",
+      privacy: "12 August 2026",
+      terms: "12 August 2026",
+      support: "12 August 2026",
+      "data-processing": "12 August 2026",
     },
     information: [
       {
@@ -85,9 +86,10 @@ const items = [
       "Collaborate across iPhone and Mac with permissions appropriate to each studio member.",
     ],
     appStoreUrl: "",
-    supportPages: ["privacy", "terms", "support"],
+    supportPages: ["privacy", "terms", "support", "data-processing"],
     pageTitles: {
       terms: "Terms of Use",
+      "data-processing": "Data Processing Schedule",
     },
     metaTitle: "ProcureCore — Procurement for Interior-Design Studios",
     metaDescription:
@@ -107,6 +109,11 @@ const items = [
         title: "ProcureCore Terms of Use — Curated Design",
         description:
           "Terms of Use for ProcureCore, covering accounts, studio workspaces, subscriptions, imported content, optional AI, and responsible professional use.",
+      },
+      "data-processing": {
+        title: "ProcureCore Data Processing Schedule — Curated Design",
+        description:
+          "The data processing schedule forming part of the ProcureCore Terms of Use, covering roles, instructions, sub-processors, security, deletion, and international transfers.",
       },
     },
   },

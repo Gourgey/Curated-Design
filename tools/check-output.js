@@ -248,8 +248,14 @@ const procureCoreRoutes = [
   "/apps/procurecore/privacy/",
   "/apps/procurecore/terms/",
   "/apps/procurecore/support/",
+  "/apps/procurecore/data-processing/",
 ];
 const procureCorePolicyRoutes = procureCoreRoutes.slice(1);
+// The data processing schedule is a processor contract, not a user-controls page, so it
+// carries no account-deletion copy. That assertion covers the pages that do.
+const procureCoreAccountRoutes = procureCorePolicyRoutes.filter(
+  (route) => route !== "/apps/procurecore/data-processing/",
+);
 const currentCompanyName = "Curated Design Limited";
 const currentCompanyNumber = "16720521";
 const currentRegisteredOffice = "Floor 1, 8 Park Crescent, London W1B 1PG";
@@ -312,7 +318,7 @@ const procureCoreLanding = fs.readFileSync(
   path.join(outputRoot, "apps/procurecore/index.html"),
   "utf8",
 );
-["privacy", "terms", "support"].forEach((kind) => {
+["privacy", "terms", "support", "data-processing"].forEach((kind) => {
   const href = `/apps/procurecore/${kind}/`;
   if (!procureCoreLanding.includes(`href="${href}"`)) {
     fail(path.join(outputRoot, "apps/procurecore/index.html"), `missing ${kind} link`);
@@ -373,7 +379,7 @@ procureCorePolicyRoutes.forEach((route) => {
   });
 });
 
-procureCorePolicyRoutes.forEach((route) => {
+procureCoreAccountRoutes.forEach((route) => {
   const file = path.join(outputRoot, route.slice(1), "index.html");
   const html = fs.readFileSync(file, "utf8");
   [

@@ -37,6 +37,22 @@ const items = [
       },
     },
   },
+  // Launch-dependent copy. Three strings on this site stop being true the day
+  // ProcureCore is listed on the App Store: "ProcureCore is coming soon." on
+  // /apps/procurecore/, the two "Coming soon" strings on the home page, and
+  // "currently in development and releasing on the Apple App Store" on
+  // /company-information/. They are correct today. They are tracked in the
+  // ProcureCore application repository, in POST_RELEASE_WEBSITE_CHECKLIST.md,
+  // which is where the launch sequence that changes them lives — not here.
+  //
+  // If you are editing this entry because ProcureCore has been released, those
+  // three strings are the change, and the site must not sit half-launched with
+  // one page saying "coming soon" while another links to a live listing.
+  //
+  // A fourth string was removed on 2026-08-13 (commit d5b5689): an unrendered
+  // `platform` value that would have published an availability claim if this
+  // entry's `information` array were ever emptied. `platform` remains a live
+  // field for Curiosity Tracker — see app-pages.njk:73.
   {
     name: "ProcureCore",
     slug: "procurecore",

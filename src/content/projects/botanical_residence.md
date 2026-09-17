@@ -1,25 +1,25 @@
 ---
 tags: project
 permalink: false
-title: Botanical Residence
+title: Notting Hill Residence
 slug: botanical_residence
 status: coming_soon
 order: 2
 category: Residential
 kicker: Residential · 2026
-subtitle: A short, image-led case study is in progress — details and visuals will be added soon.
+subtitle: A light-filled London bedroom shaped by quiet materials, soft daylight, and a view onto the city.
 statusLabel: Coming soon
 showInProjects: true
 cardImage: /assets/images/projects/botanical_residence/botanical_residence_1.webp
-cardAlt: Botanical Residence concept visual
+cardAlt: Notting Hill Residence bedroom
 heroImage: /assets/images/projects/botanical_residence/botanical_residence_1.webp
-heroAlt: Botanical Residence concept visual
+heroAlt: Notting Hill Residence bedroom
 projectTags:
   - Concept design
   - Space planning
   - Material direction
 articleHeading: Coming soon
-lead: Botanical Residence is being prepared as a concise case study.
+lead: Notting Hill Residence is being prepared as a concise case study of calm, layered residential design in west London.
 body: |
   The final page will include a brief overview of the brief and design intent, plus a small set of visuals to clearly communicate the direction.
 callout:
@@ -35,7 +35,7 @@ facts:
   - label: Type
     value: Residential
   - label: Project
-    value: Botanical Residence
+    value: Notting Hill Residence
   - label: Year
     value: "2026"
   - label: Scope

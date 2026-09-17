@@ -1,42 +1,42 @@
 ---
 tags: project
 permalink: false
-title: Garden Restaurant
+title: Hampstead Kitchen
 slug: garden_restaurant
 status: coming_soon
 order: 5
-category: Hospitality
-kicker: Hospitality · 2026
-subtitle: A hospitality concept focused on calm, sunlit atmosphere — where architecture, planting, and furniture feel composed rather than “decorated”.
+category: Residential
+kicker: Residential · 2026
+subtitle: A warm Hampstead kitchen shaped around natural stone, oak, and the easy rituals of everyday London life.
 statusLabel: Coming soon
 showInProjects: true
 cardImage: /assets/images/projects/garden_restaurant/garden_restaurant_1.webp
-cardAlt: Garden Restaurant
-heroImage: /assets/images/projects/16-9_images/monet-terrace.webp
-heroAlt: Garden Restaurant
+cardAlt: Hampstead Kitchen
+heroImage: /assets/images/projects/garden_restaurant/garden_restaurant_1.webp
+heroAlt: Hampstead Kitchen
 projectTags:
-  - Concept design
+  - Kitchen design
   - Spatial planning
-  - Lighting mood
+  - Material direction
 articleHeading: Overview
-lead: "A garden-led restaurant concept designed around threshold moments: arrival, pause, and flow — with seating and lighting that support service without killing the vibe."
+lead: Hampstead Kitchen is designed around the everyday rituals of cooking, gathering, and slowing down — with a calm material palette that feels grounded in its London setting.
 body: |
-  The intent is to create a space that feels airy and restorative in the day, then more intimate in the evening through layered lighting and careful material contrast.
+  The intent is to create a kitchen that feels generous and restorative in the day, then more intimate in the evening through layered lighting and careful material contrast.
 callout:
   title: Design intent
-  text: Let the architecture and planting do the heavy lifting — then use furniture scale, circulation rhythm, and warm light to make it feel effortlessly “held together”.
+  text: Let the architecture and natural materials do the heavy lifting — then use furniture scale, circulation rhythm, and warm light to make the room feel effortlessly held together.
 facts:
   - label: Status
     value: Coming soon
   - label: Type
-    value: Hospitality
-  - label: Project
-    value: Garden Restaurant
+    value: Residential kitchen
+  - label: Location
+    value: Hampstead, London
   - label: Year
     value: "2026"
   - label: Scope
-    value: Concept · Layout · FF&E direction · Lighting
-asideText: Working on a hospitality space? A short note is enough — I’ll reply with next steps.
-ctaHeading: Discuss a hospitality project
+    value: Concept · Layout · Joinery · Lighting
+asideText: Planning a kitchen or renovation? A short note is enough — I’ll reply with next steps.
+ctaHeading: Discuss a residential project
 ctaText: From early concept to refined layouts and material direction — the studio can support with full design or focused input for key areas.
 ---

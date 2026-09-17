@@ -9,13 +9,13 @@
     "slides": [
       {
         "project": "garden_restaurant",
-        "image": "/assets/images/projects/16-9_images/monet-living.webp",
-        "alt": "Living room interior"
+        "image": "/assets/images/projects/garden_restaurant/garden_restaurant_1.webp",
+        "alt": "Hampstead Kitchen interior"
       },
       {
         "project": "shoreditch_office",
-        "image": "/assets/images/projects/16-9_images/gwape_living.webp",
-        "alt": "Living interior"
+        "image": "/assets/images/projects/shoreditch_office/shoreditch_office_1.webp",
+        "alt": "Bloomsbury Study interior"
       }
     ]
   },
@@ -63,8 +63,8 @@
   },
   "philosophy": {
     "kicker": "Design Philosophy",
-    "image": "/assets/images/projects/16-9_images/monet-terrace.webp",
-    "imageAlt": "",
+    "image": "/assets/images/projects/botanical_residence/botanical_residence_1.webp",
+    "imageAlt": "Notting Hill Residence bedroom",
     "heading": "Quietly confident interiors with lasting impact.",
     "paragraphs": [
       "We combine research, material sensibility, and careful proportion to create spaces that feel calm and complete—never loud, always liveable.",

@@ -461,6 +461,64 @@ if (capSubordinations.length !== 2) {
   );
 }
 
+// concinnity is a local-first app with no Curated Design account or server, and it has
+// no App Store listing yet. These are the claims its pages must never make until the
+// product changes: an account, a subscription or payment, server-side storage, a
+// download badge, or a statement that turning sync off deletes iCloud data.
+const concinnityRoutes = [
+  "/apps/concinnity/",
+  "/apps/concinnity/privacy/",
+  "/apps/concinnity/support/",
+];
+const unsupportedConcinnityClaims = [
+  /\b(?:create|sign in to|sign up for) (?:an? |your )?(?:concinnity )?account/i,
+  /\bsubscription/i,
+  /\bin-app purchase/i,
+  /apps\.apple\.com/i,
+  /Download on the App Store/i,
+  /our (?:servers?|backend)/i,
+  /turning (?:iCloud )?sync off (?:deletes|removes|erases)/i,
+];
+const appsIndexHtml = fs.readFileSync(path.join(outputRoot, "apps/index.html"), "utf8");
+concinnityRoutes.forEach((route) => {
+  const file = path.join(outputRoot, route.slice(1), "index.html");
+  if (!fs.existsSync(file)) {
+    fail(sitemapPath, `concinnity page was not generated: ${route}`);
+    return;
+  }
+  const html = fs.readFileSync(file, "utf8");
+  const expectedCanonical = `https://curateddesign.studio${route}`;
+  if (!html.includes(`<link rel="canonical" href="${expectedCanonical}"`)) {
+    fail(file, `canonical URL is not ${expectedCanonical}`);
+  }
+  if (!sitemap.includes(`<loc>${expectedCanonical}</loc>`)) {
+    fail(sitemapPath, `concinnity route is missing from sitemap: ${route}`);
+  }
+  if (/<meta\s+name=["']robots["']\s+content=["'][^"']*noindex/i.test(html)) {
+    fail(file, "concinnity page must be indexable");
+  }
+  if (!html.includes(`href="mailto:${supportEmail}"`)) {
+    fail(file, `missing a mailto link to ${supportEmail}`);
+  }
+  const main = (html.match(/<main\b[\s\S]*?<\/main>/i) || [""])[0];
+  unsupportedConcinnityClaims.forEach((pattern) => {
+    if (pattern.test(main))
+      fail(file, `contains an unsupported concinnity claim matching ${pattern}`);
+  });
+});
+if (!appsIndexHtml.includes('href="/apps/concinnity/"')) {
+  fail(path.join(outputRoot, "apps/index.html"), "missing the concinnity card");
+}
+const concinnityLandingPath = path.join(outputRoot, "apps/concinnity/index.html");
+if (fs.existsSync(concinnityLandingPath)) {
+  const concinnityLanding = fs.readFileSync(concinnityLandingPath, "utf8");
+  ["privacy", "support"].forEach((kind) => {
+    if (!concinnityLanding.includes(`href="/apps/concinnity/${kind}/"`)) {
+      fail(concinnityLandingPath, `missing ${kind} link`);
+    }
+  });
+}
+
 const projectEntries = fs
   .readdirSync(path.join(root, "src/content/projects"))
   .filter((file) => file.endsWith(".md"))

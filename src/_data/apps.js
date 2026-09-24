@@ -52,7 +52,7 @@ const items = [
   // A fourth string was removed on 2026-08-13 (commit d5b5689): an unrendered
   // `platform` value that would have published an availability claim if this
   // entry's `information` array were ever emptied. `platform` remains a live
-  // field for Curiosity Tracker — see app-pages.njk:73.
+  // field for Curiosity Tracker — see app-pages.njk:57.
   {
     name: "ProcureCore",
     slug: "procurecore",
@@ -100,6 +100,7 @@ const items = [
       "Keep images, project covers, studio branding, file attachments, notes, and reporting with the work they support.",
       "Collaborate across iPhone and Mac with permissions appropriate to each studio member.",
     ],
+    summaryInclude: "apps/procurecore-summary.njk",
     appStoreUrl: "",
     supportPages: ["privacy", "terms", "support", "data-processing"],
     pageTitles: {
@@ -129,6 +130,65 @@ const items = [
         title: "ProcureCore Data Processing Schedule — Curated Design",
         description:
           "The data processing schedule forming part of the ProcureCore Terms of Use, covering roles, instructions, sub-processors, security, deletion, and international transfers.",
+      },
+    },
+  },
+  // The name is lowercase by design, including at the start of a sentence.
+  // No App Store badge or link until there is a real listing URL: leave
+  // appStoreUrl empty and the information list free of availability claims.
+  {
+    name: "concinnity",
+    slug: "concinnity",
+    eyebrow: "Daily planning",
+    description:
+      "A native daily planner for iPhone, iPad, and Mac that brings tasks, calendar events, and focus sessions into one calm view of the day.",
+    overview:
+      "concinnity is a daily planner for capturing tasks, planning days and weeks, seeing calendar events alongside planned work, and making time for focused sessions.",
+    lastUpdated: "24 September 2026",
+    information: [
+      {
+        label: "Platform",
+        value: "iPhone, iPad, and Mac",
+      },
+      {
+        label: "Storage and sync",
+        value: "Works offline and stores data on your device, with optional iCloud sync",
+      },
+      {
+        label: "Calendar",
+        value: "Optional, with your permission",
+      },
+      {
+        label: "Privacy",
+        value: "No advertising, tracking, or third-party analytics",
+      },
+      {
+        label: "Support",
+        value: supportEmail,
+        url: supportEmailUrl,
+      },
+    ],
+    highlights: [
+      "Capture tasks as they come up, and keep them organised with projects, tags, and notes.",
+      "Plan your days and weeks, with calendar events shown alongside the work you have planned.",
+      "Schedule focus sessions, and keep the day in view with widgets and Live Activities.",
+    ],
+    summaryInclude: "apps/concinnity-summary.njk",
+    appStoreUrl: "",
+    supportPages: ["privacy", "support"],
+    metaTitle: "concinnity — Daily Planner for iPhone, iPad and Mac",
+    metaDescription:
+      "concinnity is a native daily planner for iPhone, iPad, and Mac. Capture tasks, plan days and weeks alongside your calendar, and schedule focus sessions. No ads, no tracking, no analytics.",
+    pageMeta: {
+      privacy: {
+        title: "concinnity Privacy Policy — Curated Design",
+        description:
+          "How concinnity handles your planner data: stored on your device, optionally synced through your private iCloud database, with no advertising, tracking, analytics, or Curated Design server.",
+      },
+      support: {
+        title: "concinnity Support — Curated Design",
+        description:
+          "Help with concinnity: getting started, calendar access, iCloud sync, notifications, widgets, Live Activities, and how to report a problem.",
       },
     },
   },

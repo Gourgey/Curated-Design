@@ -66,6 +66,24 @@ const scans = [
     width: 390,
     height: 844,
   },
+  {
+    label: "concinnity landing mobile",
+    route: "/apps/concinnity/",
+    width: 390,
+    height: 844,
+  },
+  {
+    label: "concinnity privacy mobile",
+    route: "/apps/concinnity/privacy/",
+    width: 390,
+    height: 844,
+  },
+  {
+    label: "concinnity support mobile",
+    route: "/apps/concinnity/support/",
+    width: 390,
+    height: 844,
+  },
   { label: "Homepage desktop", route: "/", width: 1440, height: 1000 },
   {
     label: "ProcureCore landing desktop",
@@ -94,6 +112,24 @@ const scans = [
   {
     label: "ProcureCore recovery fallback desktop",
     route: "/auth/recovery",
+    width: 1440,
+    height: 1000,
+  },
+  {
+    label: "concinnity landing desktop",
+    route: "/apps/concinnity/",
+    width: 1440,
+    height: 1000,
+  },
+  {
+    label: "concinnity privacy desktop",
+    route: "/apps/concinnity/privacy/",
+    width: 1440,
+    height: 1000,
+  },
+  {
+    label: "concinnity support desktop",
+    route: "/apps/concinnity/support/",
     width: 1440,
     height: 1000,
   },

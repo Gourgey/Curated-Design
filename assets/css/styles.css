@@ -2272,6 +2272,12 @@ body.app-page .hero-brand {
     margin-top: 8px;
 }
 
+/* Full URLs written out as link text (e.g. a policy's own address) must wrap
+   on phones rather than widen the page. */
+.app-prose a {
+    overflow-wrap: anywhere;
+}
+
 .app-prose h3 {
     margin: 22px 0 8px;
     font-size: 17px;

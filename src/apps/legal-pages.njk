@@ -152,6 +152,10 @@ sectionTop: true
             {% include "apps/procurecore-terms.njk" %}
             {% elif appPage.app.slug == "procurecore" and appPage.kind == "data-processing" %}
             {% include "apps/procurecore-data-processing.njk" %}
+            {% elif appPage.app.slug == "concinnity" and appPage.kind == "privacy" %}
+            {% include "apps/concinnity-privacy.njk" %}
+            {% elif appPage.app.slug == "concinnity" and appPage.kind == "support" %}
+            {% include "apps/concinnity-support.njk" %}
             {% endif %}
         </div>
     </section>

@@ -461,17 +461,13 @@ if (capSubordinations.length !== 2) {
   );
 }
 
-// concinnity is a local-first app with no Curated Design account or server, and it has
-// no App Store listing yet. These are the claims its pages must never make until the
-// product changes: an account, a subscription or payment, server-side storage, a
-// download badge, or a statement that turning sync off deletes iCloud data.
-const concinnityRoutes = [
-  "/apps/concinnity/",
-  "/apps/concinnity/privacy/",
-  "/apps/concinnity/support/",
-];
-const unsupportedConcinnityClaims = [
-  /\b(?:create|sign in to|sign up for) (?:an? |your )?(?:concinnity )?account/i,
+// concinnity and CuratedLedger are local-first apps with no Curated Design account or
+// server, and neither has an App Store listing yet. Every such app's pages must never
+// claim an account, a subscription or payment, server-side storage, a download badge,
+// or that turning sync off deletes iCloud data. Each app then lists the features it
+// does not have, so copy borrowed from a sibling app cannot publish them.
+const localFirstClaims = [
+  /\b(?:create|sign in to|sign up for) (?:an? |your )?(?:[a-z]+ )?account/i,
   /\bsubscription/i,
   /\bin-app purchase/i,
   /apps\.apple\.com/i,
@@ -479,44 +475,74 @@ const unsupportedConcinnityClaims = [
   /our (?:servers?|backend)/i,
   /turning (?:iCloud )?sync off (?:deletes|removes|erases)/i,
 ];
-const appsIndexHtml = fs.readFileSync(path.join(outputRoot, "apps/index.html"), "utf8");
-concinnityRoutes.forEach((route) => {
-  const file = path.join(outputRoot, route.slice(1), "index.html");
-  if (!fs.existsSync(file)) {
-    fail(sitemapPath, `concinnity page was not generated: ${route}`);
-    return;
-  }
-  const html = fs.readFileSync(file, "utf8");
-  const expectedCanonical = `https://curateddesign.studio${route}`;
-  if (!html.includes(`<link rel="canonical" href="${expectedCanonical}"`)) {
-    fail(file, `canonical URL is not ${expectedCanonical}`);
-  }
-  if (!sitemap.includes(`<loc>${expectedCanonical}</loc>`)) {
-    fail(sitemapPath, `concinnity route is missing from sitemap: ${route}`);
-  }
-  if (/<meta\s+name=["']robots["']\s+content=["'][^"']*noindex/i.test(html)) {
-    fail(file, "concinnity page must be indexable");
-  }
-  if (!html.includes(`href="mailto:${supportEmail}"`)) {
-    fail(file, `missing a mailto link to ${supportEmail}`);
-  }
-  const main = (html.match(/<main\b[\s\S]*?<\/main>/i) || [""])[0];
-  unsupportedConcinnityClaims.forEach((pattern) => {
-    if (pattern.test(main))
-      fail(file, `contains an unsupported concinnity claim matching ${pattern}`);
-  });
-});
-if (!appsIndexHtml.includes('href="/apps/concinnity/"')) {
-  fail(path.join(outputRoot, "apps/index.html"), "missing the concinnity card");
-}
-const concinnityLandingPath = path.join(outputRoot, "apps/concinnity/index.html");
-if (fs.existsSync(concinnityLandingPath)) {
-  const concinnityLanding = fs.readFileSync(concinnityLandingPath, "utf8");
-  ["privacy", "support"].forEach((kind) => {
-    if (!concinnityLanding.includes(`href="/apps/concinnity/${kind}/"`)) {
-      fail(concinnityLandingPath, `missing ${kind} link`);
+const localFirstApps = [
+  { name: "concinnity", slug: "concinnity", unsupportedClaims: [] },
+  {
+    name: "CuratedLedger",
+    slug: "curatedledger",
+    // No in-app sync switch, widgets, Live Activities, Siri or Shortcuts, calendar
+    // access, or Mac version.
+    unsupportedClaims: [
+      /sync (?:on or off|off) in (?:the app|CuratedLedger)/i,
+      /\bwidgets?\b/i,
+      /Live Activit/i,
+      /\bSiri\b/i,
+      /\bShortcuts\b/i,
+      /\bApp Intents\b/i,
+      /\bcalendars?\b/i,
+      /\bMac\b|\bmacOS\b/,
+    ],
+  },
+];
+const appsIndexPath = path.join(outputRoot, "apps/index.html");
+const appsIndexHtml = fs.readFileSync(appsIndexPath, "utf8");
+localFirstApps.forEach((app) => {
+  const routes = [`/apps/${app.slug}/`, `/apps/${app.slug}/privacy/`, `/apps/${app.slug}/support/`];
+  routes.forEach((route) => {
+    const file = path.join(outputRoot, route.slice(1), "index.html");
+    if (!fs.existsSync(file)) {
+      fail(sitemapPath, `${app.name} page was not generated: ${route}`);
+      return;
     }
+    const html = fs.readFileSync(file, "utf8");
+    const expectedCanonical = `https://curateddesign.studio${route}`;
+    if (!html.includes(`<link rel="canonical" href="${expectedCanonical}"`)) {
+      fail(file, `canonical URL is not ${expectedCanonical}`);
+    }
+    if (!sitemap.includes(`<loc>${expectedCanonical}</loc>`)) {
+      fail(sitemapPath, `${app.name} route is missing from sitemap: ${route}`);
+    }
+    if (/<meta\s+name=["']robots["']\s+content=["'][^"']*noindex/i.test(html)) {
+      fail(file, `${app.name} page must be indexable`);
+    }
+    if (!html.includes(`href="mailto:${supportEmail}"`)) {
+      fail(file, `missing a mailto link to ${supportEmail}`);
+    }
+    const main = (html.match(/<main\b[\s\S]*?<\/main>/i) || [""])[0];
+    localFirstClaims.concat(app.unsupportedClaims).forEach((pattern) => {
+      if (pattern.test(main)) {
+        fail(file, `contains an unsupported ${app.name} claim matching ${pattern}`);
+      }
+    });
   });
+  if (!appsIndexHtml.includes(`href="/apps/${app.slug}/"`)) {
+    fail(appsIndexPath, `missing the ${app.name} card`);
+  }
+  const landingPath = path.join(outputRoot, `apps/${app.slug}/index.html`);
+  if (fs.existsSync(landingPath)) {
+    const landing = fs.readFileSync(landingPath, "utf8");
+    ["privacy", "support"].forEach((kind) => {
+      if (!landing.includes(`href="/apps/${app.slug}/${kind}/"`)) {
+        fail(landingPath, `missing ${kind} link`);
+      }
+    });
+  }
+});
+if (
+  appsIndexHtml.indexOf('class="app-card" href="/apps/curatedledger/"') <
+  appsIndexHtml.indexOf('class="app-card" href="/apps/concinnity/"')
+) {
+  fail(appsIndexPath, "the CuratedLedger card must come after concinnity");
 }
 
 const projectEntries = fs

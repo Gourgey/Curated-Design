@@ -84,6 +84,24 @@ const scans = [
     width: 390,
     height: 844,
   },
+  {
+    label: "CuratedLedger landing mobile",
+    route: "/apps/curatedledger/",
+    width: 390,
+    height: 844,
+  },
+  {
+    label: "CuratedLedger privacy mobile",
+    route: "/apps/curatedledger/privacy/",
+    width: 390,
+    height: 844,
+  },
+  {
+    label: "CuratedLedger support mobile",
+    route: "/apps/curatedledger/support/",
+    width: 390,
+    height: 844,
+  },
   { label: "Homepage desktop", route: "/", width: 1440, height: 1000 },
   {
     label: "ProcureCore landing desktop",
@@ -130,6 +148,24 @@ const scans = [
   {
     label: "concinnity support desktop",
     route: "/apps/concinnity/support/",
+    width: 1440,
+    height: 1000,
+  },
+  {
+    label: "CuratedLedger landing desktop",
+    route: "/apps/curatedledger/",
+    width: 1440,
+    height: 1000,
+  },
+  {
+    label: "CuratedLedger privacy desktop",
+    route: "/apps/curatedledger/privacy/",
+    width: 1440,
+    height: 1000,
+  },
+  {
+    label: "CuratedLedger support desktop",
+    route: "/apps/curatedledger/support/",
     width: 1440,
     height: 1000,
   },

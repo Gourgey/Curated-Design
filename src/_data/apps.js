@@ -192,6 +192,66 @@ const items = [
       },
     },
   },
+  // Written CuratedLedger: one word, capital C and L. iPhone and iPad only. It has no
+  // in-app sync switch, widgets, Siri or Shortcuts, calendar access, or Mac version,
+  // so none of concinnity's copy about those carries over. No App Store badge or
+  // link until there is a real listing URL.
+  {
+    name: "CuratedLedger",
+    slug: "curatedledger",
+    eyebrow: "Personal finance",
+    description:
+      "A calm financial planner that shows what is safe to spend, how long your money lasts, and how your estimates compare with what actually happened.",
+    overview:
+      "CuratedLedger is a personal finance planner for understanding what is safe to spend, how long your money will last, and whether your plans match what actually happens.",
+    lastUpdated: "25 September 2026",
+    information: [
+      {
+        label: "Platform",
+        value: "iPhone and iPad",
+      },
+      {
+        label: "Storage and sync",
+        value: "Stores data on your device, with iCloud sync through your private iCloud database",
+      },
+      {
+        label: "Statement import",
+        value: "Optional; CSV files are read on your device",
+      },
+      {
+        label: "Privacy",
+        value: "No advertising, tracking, or third-party analytics",
+      },
+      {
+        label: "Support",
+        value: supportEmail,
+        url: supportEmailUrl,
+      },
+    ],
+    highlights: [
+      "See what is safe to spend, after bills, debts, tax set aside and your safety buffer.",
+      "Plan recurring costs, irregular expenses and income on a timeline of the year ahead, across lifestyle modes from bare bones to comfortable.",
+      "Check in weekly with your balances and spending, import bank and card statements, and compare your estimates with what actually happened.",
+    ],
+    summaryInclude: "apps/curatedledger-summary.njk",
+    appStoreUrl: "",
+    supportPages: ["privacy", "support"],
+    metaTitle: "CuratedLedger — Personal Finance Planner for iPhone and iPad",
+    metaDescription:
+      "CuratedLedger is a personal finance planner for iPhone and iPad. See what is safe to spend, plan the year ahead, import statements, and compare estimates with what actually happened. No ads, no tracking, no analytics.",
+    pageMeta: {
+      privacy: {
+        title: "CuratedLedger Privacy Policy — Curated Design",
+        description:
+          "How CuratedLedger handles your financial information: stored on your device, synced through your private iCloud database, statements read on your device, with no advertising, tracking, analytics, or Curated Design server.",
+      },
+      support: {
+        title: "CuratedLedger Support — Curated Design",
+        description:
+          "Help with CuratedLedger: getting started, importing statements, iCloud sync, check-in reminders, exports, and how to report a problem.",
+      },
+    },
+  },
 ];
 
 const defaultSupportPages = ["privacy", "support", "terms"];

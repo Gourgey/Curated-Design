@@ -156,6 +156,10 @@ sectionTop: true
             {% include "apps/concinnity-privacy.njk" %}
             {% elif appPage.app.slug == "concinnity" and appPage.kind == "support" %}
             {% include "apps/concinnity-support.njk" %}
+            {% elif appPage.app.slug == "curatedledger" and appPage.kind == "privacy" %}
+            {% include "apps/curatedledger-privacy.njk" %}
+            {% elif appPage.app.slug == "curatedledger" and appPage.kind == "support" %}
+            {% include "apps/curatedledger-support.njk" %}
             {% endif %}
         </div>
     </section>

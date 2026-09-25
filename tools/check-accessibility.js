@@ -102,6 +102,30 @@ const scans = [
     width: 390,
     height: 844,
   },
+  {
+    label: "Mythos Log landing mobile",
+    route: "/apps/mythos-log/",
+    width: 390,
+    height: 844,
+  },
+  {
+    label: "Mythos Log privacy mobile",
+    route: "/apps/mythos-log/privacy/",
+    width: 390,
+    height: 844,
+  },
+  {
+    label: "Mythos Log support mobile",
+    route: "/apps/mythos-log/support/",
+    width: 390,
+    height: 844,
+  },
+  {
+    label: "Mythos Log terms mobile",
+    route: "/apps/mythos-log/terms/",
+    width: 390,
+    height: 844,
+  },
   { label: "Homepage desktop", route: "/", width: 1440, height: 1000 },
   {
     label: "ProcureCore landing desktop",
@@ -166,6 +190,30 @@ const scans = [
   {
     label: "CuratedLedger support desktop",
     route: "/apps/curatedledger/support/",
+    width: 1440,
+    height: 1000,
+  },
+  {
+    label: "Mythos Log landing desktop",
+    route: "/apps/mythos-log/",
+    width: 1440,
+    height: 1000,
+  },
+  {
+    label: "Mythos Log privacy desktop",
+    route: "/apps/mythos-log/privacy/",
+    width: 1440,
+    height: 1000,
+  },
+  {
+    label: "Mythos Log support desktop",
+    route: "/apps/mythos-log/support/",
+    width: 1440,
+    height: 1000,
+  },
+  {
+    label: "Mythos Log terms desktop",
+    route: "/apps/mythos-log/terms/",
     width: 1440,
     height: 1000,
   },

@@ -33,7 +33,7 @@ sectionTop: true
                     Curiosity Tracker is a native iOS app for capturing questions, notes, links, PDFs, tags, statuses, dates, and resurfacing prompts. This policy explains the information the app may handle and how it is stored.
                 </p>
                 <p>
-                    The app is published by Curated Design Studio, based in London, United Kingdom.
+                    Curiosity Tracker is published by Curated Design Limited (“Curated Design”, “we”), a company registered in England and Wales under company number 16720521. Our registered office is Floor 1, 8 Park Crescent, London W1B 1PG.
                 </p>
 
                 <h2>Information the app may handle</h2>
@@ -131,6 +131,9 @@ sectionTop: true
             <article class="app-prose">
                 <h2>Use of the app</h2>
                 <p>
+                    Curiosity Tracker is published by Curated Design Limited (“Curated Design”, “we”), a company registered in England and Wales under company number 16720521. Our registered office is Floor 1, 8 Park Crescent, London W1B 1PG.
+                </p>
+                <p>
                     Curiosity Tracker is provided as a personal organisation tool. You are responsible for the content you add to the app and for keeping your device, Apple account, and backups secure.
                 </p>
 
@@ -160,6 +163,12 @@ sectionTop: true
             {% include "apps/curatedledger-privacy.njk" %}
             {% elif appPage.app.slug == "curatedledger" and appPage.kind == "support" %}
             {% include "apps/curatedledger-support.njk" %}
+            {% elif appPage.app.slug == "mythos-log" and appPage.kind == "privacy" %}
+            {% include "apps/mythos-log-privacy.njk" %}
+            {% elif appPage.app.slug == "mythos-log" and appPage.kind == "support" %}
+            {% include "apps/mythos-log-support.njk" %}
+            {% elif appPage.app.slug == "mythos-log" and appPage.kind == "terms" %}
+            {% include "apps/mythos-log-terms.njk" %}
             {% endif %}
         </div>
     </section>

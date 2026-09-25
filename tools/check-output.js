@@ -3,6 +3,7 @@
 const fs = require("fs");
 const path = require("path");
 const matter = require("gray-matter");
+const apps = require("../src/_data/apps.js");
 
 const root = path.resolve(__dirname, "..");
 const outputRoot = path.join(root, "_site");
@@ -493,11 +494,19 @@ const localFirstApps = [
       /\bMac\b|\bmacOS\b/,
     ],
   },
+  {
+    name: "Mythos Log",
+    slug: "mythos-log",
+    kinds: ["privacy", "support", "terms"],
+    // iPhone and iPad only, with no Live Activities or calendar access.
+    unsupportedClaims: [/Live Activit/i, /\bcalendars?\b/i, /\bMac\b|\bmacOS\b/],
+  },
 ];
 const appsIndexPath = path.join(outputRoot, "apps/index.html");
 const appsIndexHtml = fs.readFileSync(appsIndexPath, "utf8");
 localFirstApps.forEach((app) => {
-  const routes = [`/apps/${app.slug}/`, `/apps/${app.slug}/privacy/`, `/apps/${app.slug}/support/`];
+  const kinds = app.kinds || ["privacy", "support"];
+  const routes = [`/apps/${app.slug}/`, ...kinds.map((kind) => `/apps/${app.slug}/${kind}/`)];
   routes.forEach((route) => {
     const file = path.join(outputRoot, route.slice(1), "index.html");
     if (!fs.existsSync(file)) {
@@ -531,7 +540,7 @@ localFirstApps.forEach((app) => {
   const landingPath = path.join(outputRoot, `apps/${app.slug}/index.html`);
   if (fs.existsSync(landingPath)) {
     const landing = fs.readFileSync(landingPath, "utf8");
-    ["privacy", "support"].forEach((kind) => {
+    kinds.forEach((kind) => {
       if (!landing.includes(`href="/apps/${app.slug}/${kind}/"`)) {
         fail(landingPath, `missing ${kind} link`);
       }
@@ -544,6 +553,53 @@ if (
 ) {
   fail(appsIndexPath, "the CuratedLedger card must come after concinnity");
 }
+if (
+  appsIndexHtml.indexOf('class="app-card" href="/apps/mythos-log/"') <
+  appsIndexHtml.indexOf('class="app-card" href="/apps/curatedledger/"')
+) {
+  fail(appsIndexPath, "the Mythos Log card must come after CuratedLedger");
+}
+
+// App Review checks the Mythos Log privacy policy's Apple Health disclosures against the
+// app's HealthKit entitlement: read-only workout access that is off until connected.
+const mythosPrivacyPath = path.join(outputRoot, "apps/mythos-log/privacy/index.html");
+const mythosPrivacy = fs.readFileSync(mythosPrivacyPath, "utf8");
+[
+  "<h2>Apple Health</h2>",
+  "Mythos Log does not write any data to Apple Health.",
+  "Health data is never used for advertising or marketing, never sold, and never shared with third parties.",
+  "Settings &gt; Health &gt; Data Access &amp; Devices &gt; Mythos Log",
+  "Settings &gt; [your name] &gt; iCloud &gt; Manage Storage &gt; Mythos Log",
+  "not directed at children under 13",
+].forEach((expected) => {
+  if (!mythosPrivacy.includes(expected)) {
+    fail(mythosPrivacyPath, `missing required privacy content: ${expected}`);
+  }
+});
+const mythosHealthRemoval =
+  "access in Settings &gt; Health &gt; Data Access &amp; Devices stops workout reading and does not delete anything from Apple Health.";
+[mythosPrivacyPath, path.join(outputRoot, "apps/mythos-log/support/index.html")].forEach((file) => {
+  if (!fs.readFileSync(file, "utf8").includes(mythosHealthRemoval)) {
+    fail(file, "Deleting Data must say that removing Health access stops workout reading");
+  }
+});
+
+// Every app privacy policy and terms page names the publisher as Curated Design Limited,
+// with its company number, as concinnity's policy does.
+apps.items.forEach((app) => {
+  (app.supportPages || ["privacy", "support", "terms"])
+    .filter((kind) => kind === "privacy" || kind === "terms")
+    .forEach((kind) => {
+      const file = path.join(outputRoot, `apps/${app.slug}/${kind}/index.html`);
+      const html = fs.readFileSync(file, "utf8");
+      if (!html.includes("Curated Design Limited") || !html.includes("16720521")) {
+        fail(file, "must name Curated Design Limited and its company number as the publisher");
+      }
+      if (/published by Curated Design Studio/i.test(html)) {
+        fail(file, "names Curated Design Studio as the publisher; use Curated Design Limited");
+      }
+    });
+});
 
 const projectEntries = fs
   .readdirSync(path.join(root, "src/content/projects"))

@@ -12,6 +12,11 @@ const items = [
     overview:
       "Curiosity Tracker is a quiet place to hold questions, notes, links, PDFs, tags, and resurfacing dates so ideas can return at the right moment.",
     platform: "Available on iOS",
+    // The publisher details on the privacy policy and terms were changed on this date.
+    pageLastUpdated: {
+      privacy: "25 September 2026",
+      terms: "25 September 2026",
+    },
     sync: "Optional iCloud sync via Apple CloudKit",
     privacySummary: "No ads, no tracking, no analytics",
     appStoreUrl: "",
@@ -249,6 +254,64 @@ const items = [
         title: "CuratedLedger Support — Curated Design",
         description:
           "Help with CuratedLedger: getting started, importing statements, iCloud sync, check-in reminders, exports, and how to report a problem.",
+      },
+    },
+  },
+  // iPhone and iPad only. Apple Health access is read-only (workouts) and off until the
+  // user connects it; the privacy policy's Apple Health section is checked by App Review.
+  // No App Store badge or link until there is a real listing URL.
+  {
+    name: "Mythos Log",
+    slug: "mythos-log",
+    eyebrow: "Self-improvement",
+    description:
+      "A self-improvement app that treats real habits like character training: log effort, build stats, and let a weekly review decide what levels up.",
+    overview:
+      "Mythos Log treats real habits like stat training. Each skill has a baseline, extra effort becomes charges, and a weekly review is where progress, stagnation, decay and level-ups are resolved.",
+    lastUpdated: "25 September 2026",
+    information: [
+      {
+        label: "Support email",
+        value: supportEmail,
+        url: supportEmailUrl,
+      },
+      {
+        label: "Platform",
+        value: "Available on iPhone and iPad (iOS 17 or later)",
+      },
+      {
+        label: "Sync",
+        value: "iCloud sync via Apple CloudKit when iCloud is available",
+      },
+      {
+        label: "Health",
+        value: "Optional workout import from Apple Health",
+      },
+      {
+        label: "Privacy",
+        value: "No ads, no tracking, no analytics",
+      },
+    ],
+    appStoreUrl: "",
+    supportPages: ["privacy", "support", "terms"],
+    metaTitle: "Mythos Log — Curated Design",
+    metaDescription:
+      "Mythos Log is a self-improvement app for iPhone and iPad that treats real habits like character training, with weekly reviews that decide what levels up. No ads, no tracking, no analytics.",
+    pageMeta: {
+      privacy: {
+        title: "Mythos Log Privacy Policy — Curated Design",
+        description:
+          "How Mythos Log handles your data: stored on your device, synced through your private iCloud database, optional read-only workout import from Apple Health, and no ads, tracking, analytics, or Curated Design server.",
+      },
+      support: {
+        title: "Mythos Log Support — Curated Design",
+        description:
+          "Help with Mythos Log: weekly reviews, connecting Apple Health, workout import, iCloud sync between iPhone and iPad, exporting and deleting data.",
+      },
+      terms: {
+        title: "Mythos Log Terms — Curated Design",
+        description:
+          "Terms of use for Mythos Log, a self-improvement app from Curated Design — your responsibilities, health and fitness notice, app availability, and support contact details.",
       },
     },
   },

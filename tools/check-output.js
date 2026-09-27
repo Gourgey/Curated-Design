@@ -548,14 +548,14 @@ localFirstApps.forEach((app) => {
   }
 });
 if (
-  appsIndexHtml.indexOf('class="app-card" href="/apps/curatedledger/"') <
-  appsIndexHtml.indexOf('class="app-card" href="/apps/concinnity/"')
+  appsIndexHtml.indexOf('id="app-curatedledger"') <
+  appsIndexHtml.indexOf('id="app-concinnity"')
 ) {
   fail(appsIndexPath, "the CuratedLedger card must come after concinnity");
 }
 if (
-  appsIndexHtml.indexOf('class="app-card" href="/apps/mythos-log/"') <
-  appsIndexHtml.indexOf('class="app-card" href="/apps/curatedledger/"')
+  appsIndexHtml.indexOf('id="app-mythos-log"') <
+  appsIndexHtml.indexOf('id="app-curatedledger"')
 ) {
   fail(appsIndexPath, "the Mythos Log card must come after CuratedLedger");
 }

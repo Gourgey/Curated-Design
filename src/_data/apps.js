@@ -6,6 +6,12 @@ const items = [
   {
     name: "Curiosity Tracker",
     slug: "curiosity-tracker",
+    // Phone screenshots for the /apps/ showcase; the first is shown front and centre.
+    screenshots: [
+      { src: "/assets/images/app_screenshots/curiosity_tracker/01-home.webp", alt: "Curiosity Tracker home screen with an overview of curiosities and a weekly research goal" },
+      { src: "/assets/images/app_screenshots/curiosity_tracker/02-library.webp", alt: "Curiosity Tracker library of saved questions, filterable by status" },
+      { src: "/assets/images/app_screenshots/curiosity_tracker/03-curiosity.webp", alt: "A single curiosity with its notes, source link, tags and timeline" },
+    ],
     eyebrow: "Personal research",
     description:
       "A personal app for capturing questions, organising curiosities, and resurfacing ideas over time.",
@@ -144,6 +150,12 @@ const items = [
   {
     name: "concinnity",
     slug: "concinnity",
+    // Phone screenshots for the /apps/ showcase; the first is shown front and centre.
+    screenshots: [
+      { src: "/assets/images/app_screenshots/concinnity/01-today.webp", alt: "concinnity Today view with planned time, a Top 3, and the day timeline" },
+      { src: "/assets/images/app_screenshots/concinnity/04-matrix.webp", alt: "concinnity priority matrix" },
+      { src: "/assets/images/app_screenshots/concinnity/06-insights.webp", alt: "concinnity insights view" },
+    ],
     eyebrow: "Daily planning",
     description:
       "A native daily planner for iPhone, iPad, and Mac that brings tasks, calendar events, and focus sessions into one calm view of the day.",
@@ -204,6 +216,12 @@ const items = [
   {
     name: "CuratedLedger",
     slug: "curatedledger",
+    // Phone screenshots for the /apps/ showcase; the first is shown front and centre.
+    screenshots: [
+      { src: "/assets/images/app_screenshots/curated_ledger/01-overview.webp", alt: "CuratedLedger overview showing safe to spend, runway if no further income arrives, and what life costs" },
+      { src: "/assets/images/app_screenshots/curated_ledger/02-projections.webp", alt: "CuratedLedger projections chart of the balance over the next twelve months" },
+      { src: "/assets/images/app_screenshots/curated_ledger/03-money.webp", alt: "CuratedLedger money view with the current balance and recurring expenses" },
+    ],
     eyebrow: "Personal finance",
     description:
       "A calm financial planner that shows what is safe to spend, how long your money lasts, and how your estimates compare with what actually happened.",
@@ -263,6 +281,12 @@ const items = [
   {
     name: "Mythos Log",
     slug: "mythos-log",
+    // Phone screenshots for the /apps/ showcase; the first is shown front and centre.
+    screenshots: [
+      { src: "/assets/images/app_screenshots/mythos_log/01-dashboard.webp", alt: "Mythos Log dashboard with skill rings for creativity, focus, strength and more" },
+      { src: "/assets/images/app_screenshots/mythos_log/04-weekly-review.webp", alt: "Mythos Log weekly review" },
+      { src: "/assets/images/app_screenshots/mythos_log/02-skill-strength.webp", alt: "Mythos Log strength skill detail" },
+    ],
     eyebrow: "Self-improvement",
     description:
       "A self-improvement app that treats real habits like character training: log effort, build stats, and let a weekly review decide what levels up.",

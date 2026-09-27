@@ -19,18 +19,42 @@ sectionTop: true
                     A small collection of practical tools developed alongside the studio. They sit quietly here for support and privacy reference.
                 </p>
             </header>
+        </div>
 
-            <div class="app-card-grid" aria-label="Apps">
-                {% for app in apps.items %}
-                <a class="app-card" href="/apps/{{ app.slug }}/">
-                    <p class="app-card-kicker">{{ app.eyebrow }}</p>
-                    <h2>{{ app.name }}</h2>
-                    <p>{{ app.description }}</p>
-                    <span class="app-card-link">View details</span>
-                </a>
-                {% endfor %}
-            </div>
+        <div class="app-showcase">
+            {% for app in apps.items %}
+            <article class="app-feature{% if loop.index is even %} app-feature--reverse{% endif %}" id="app-{{ app.slug }}" aria-labelledby="app-{{ app.slug }}-title">
+                <div class="app-feature-inner">
+                    <div class="app-feature-copy">
+                        <p class="app-feature-kicker"><span class="app-feature-index">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span>{{ app.eyebrow }}</p>
+                        <h2 class="app-feature-title" id="app-{{ app.slug }}-title">
+                            <a href="/apps/{{ app.slug }}/">{{ app.name }}</a>
+                        </h2>
+                        <p class="app-feature-desc">{{ app.description }}</p>
+                        {% if app.platform %}<p class="app-feature-platform">{{ app.platform }}</p>{% endif %}
+                        <a class="app-feature-link" href="/apps/{{ app.slug }}/" aria-label="View {{ app.name }} details">View details<span aria-hidden="true">&rarr;</span></a>
+                    </div>
 
+                    {% if app.screenshots and app.screenshots.length %}
+                    <div class="app-feature-stage">
+                        {% for shot in app.screenshots %}{% if loop.index0 < 3 %}
+                        <figure class="app-phone app-phone--{{ ['front', 'back-start', 'back-end'][loop.index0] }}">
+                            {% image shot.src, shot.alt, "(max-width: 820px) 40vw, 300px", "lazy", "app-phone-screen", "card" %}
+                        </figure>
+                        {% endif %}{% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="app-feature-stage app-feature-stage--type" aria-hidden="true">
+                        <span class="app-feature-wordmark">{{ app.name }}</span>
+                        <span class="app-feature-soon">Screens coming soon</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        <div class="app-wrap">
             <p class="app-small-note">
                 The main studio remains focused on interiors, procurement, and design work. These pages provide public app information and support links.
             </p>

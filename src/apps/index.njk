@@ -36,11 +36,18 @@ sectionTop: true
                     </div>
 
                     {% if app.screenshots and app.screenshots.length %}
-                    <div class="app-feature-stage">
+                    {% set isDesktop = app.screenshotLayout == "desktop" %}
+                    <div class="app-feature-stage{% if isDesktop %} app-feature-stage--desktop{% endif %}">
                         {% for shot in app.screenshots %}{% if loop.index0 < 3 %}
+                        {% if isDesktop %}
+                        <figure class="app-window app-window--{{ ['front', 'back-start', 'back-end'][loop.index0] }}">
+                            {% image shot.src, shot.alt, "(max-width: 820px) 80vw, 560px", "lazy", "app-window-screen", "card" %}
+                        </figure>
+                        {% else %}
                         <figure class="app-phone app-phone--{{ ['front', 'back-start', 'back-end'][loop.index0] }}">
                             {% image shot.src, shot.alt, "(max-width: 820px) 40vw, 300px", "lazy", "app-phone-screen", "card" %}
                         </figure>
+                        {% endif %}
                         {% endif %}{% endfor %}
                     </div>
                     {% else %}

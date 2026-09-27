@@ -67,6 +67,14 @@ const items = [
   {
     name: "ProcureCore",
     slug: "procurecore",
+    // Mac window screenshots for the /apps/ showcase, shown as stacked windows
+    // rather than phones; the first is shown front and centre.
+    screenshotLayout: "desktop",
+    screenshots: [
+      { src: "/assets/images/app_screenshots/procurecore/01-dashboard.webp", alt: "ProcureCore dashboard with what needs action today and each project's budget by style" },
+      { src: "/assets/images/app_screenshots/procurecore/02-projects.webp", alt: "ProcureCore projects view with photographed project cards" },
+      { src: "/assets/images/app_screenshots/procurecore/04-product-library.webp", alt: "ProcureCore product library showing retail and trade prices and lead times" },
+    ],
     eyebrow: "Procurement",
     description:
       "A calm procurement and studio collaboration workspace for interior designers, available across iPhone and Mac.",

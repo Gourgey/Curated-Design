@@ -1,69 +1,48 @@
-// Carousels: the homepage featured-work carousel and the project hero
-// gallery carousel. Split from main.js (P2.4).
+// Carousels: the homepage process carousel and the project hero gallery
+// carousel. Split from main.js (P2.4).
 window.addEventListener("DOMContentLoaded", () => {
   /* --------------------------------------------------------------------------
-   * MINIMAL CAROUSEL LOGIC
+   * HOMEPAGE PROCESS CAROUSEL
+   * Every step is server-rendered with the first open; this only moves the
+   * open step (arrows, clicking a step, or ArrowLeft/ArrowRight).
    * -------------------------------------------------------------------------- */
   (function () {
-    const track = document.getElementById("track");
-    const slides = track ? Array.from(track.children) : [];
-    const prev = document.getElementById("prev");
-    const next = document.getElementById("next");
-    const dotsWrap = document.getElementById("dots");
-    const carousel = track && track.closest(".carousel");
+    const carousel = document.querySelector("[data-process-carousel]");
+    if (!carousel) return;
 
-    if (!track || !prev || !next || !dotsWrap || !carousel || slides.length <= 1) return;
+    const steps = Array.from(carousel.querySelectorAll("[data-process-step]"));
+    const bars = Array.from(carousel.querySelectorAll(".process-dock__progress span"));
+    const count = carousel.querySelector("[data-process-count]");
+    const prev = carousel.querySelector("[data-process-prev]");
+    const next = carousel.querySelector("[data-process-next]");
+    if (steps.length <= 1) return;
 
+    const pad = (n) => (n < 10 ? "0" + n : String(n));
     let index = 0;
 
-    dotsWrap.innerHTML = "";
-    slides.forEach((_, i) => {
-      const b = document.createElement("button");
-      b.type = "button";
-      b.className = "dot" + (i === 0 ? " active" : "");
-      b.setAttribute("aria-label", "Go to slide " + (i + 1));
-      b.addEventListener("click", () => go(i));
-      dotsWrap.appendChild(b);
-    });
-
-    function go(i) {
-      index = (i + slides.length) % slides.length;
-      track.style.transform = "translateX(" + -index * 100 + "%)";
-      slides.forEach((slide, slideIndex) => {
-        const isActive = slideIndex === index;
-        if (isActive) slide.setAttribute("aria-current", "true");
-        else slide.removeAttribute("aria-current");
-        slide.setAttribute("aria-hidden", isActive ? "false" : "true");
-        slide.inert = !isActive;
+    function go(nextIndex) {
+      index = (nextIndex + steps.length) % steps.length;
+      steps.forEach((step, stepIndex) => {
+        const isActive = stepIndex === index;
+        step.classList.toggle("is-active", isActive);
+        step.querySelector("[data-process-toggle]").setAttribute("aria-expanded", isActive ? "true" : "false");
+        step.querySelector(".process-step__detail").hidden = !isActive;
       });
-      [...dotsWrap.children].forEach((d, dotIndex) => {
-        const isActive = dotIndex === index;
-        d.classList.toggle("active", isActive);
-        d.setAttribute("aria-current", isActive ? "true" : "false");
-      });
+      bars.forEach((bar, barIndex) => bar.classList.toggle("is-done", barIndex <= index));
+      if (count) count.textContent = pad(index + 1) + " / " + pad(steps.length);
     }
 
-    prev.addEventListener("click", () => go(index - 1));
-    next.addEventListener("click", () => go(index + 1));
+    steps.forEach((step, stepIndex) => {
+      step.querySelector("[data-process-toggle]").addEventListener("click", () => go(stepIndex));
+    });
+    if (prev) prev.addEventListener("click", () => go(index - 1));
+    if (next) next.addEventListener("click", () => go(index + 1));
     carousel.addEventListener("keydown", (event) => {
       if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      if (event.target.closest("input, textarea, select")) return;
       event.preventDefault();
       go(index + (event.key === "ArrowRight" ? 1 : -1));
     });
-
-    let startX = null;
-    track.addEventListener(
-      "touchstart",
-      (e) => (startX = e.touches[0].clientX),
-      { passive: true },
-    );
-    track.addEventListener("touchend", (e) => {
-      if (startX == null) return;
-      const dx = e.changedTouches[0].clientX - startX;
-      if (Math.abs(dx) > 40) go(index + (dx < 0 ? 1 : -1));
-      startX = null;
-    });
-    go(0);
   })();
 
   /* --------------------------------------------------------------------------

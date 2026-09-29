@@ -29,62 +29,82 @@ showBackground: true
             <span class="pills-toggle-label">Menu</span>
         </button>
 
+        {% set processLabel = site.home.process.kicker or "The Process" %}
         <ul class="pillmenu pills-desktop">
-            <li><a class="pill active" href="#portfolio">Featured Projects</a></li>
+            <li><a class="pill active" href="#process">{{ processLabel }}</a></li>
             <li><a class="pill" href="#services">Curated Services</a></li>
             <li><a class="pill" href="#selected-work">Collections</a></li>
             <li><a class="pill" href="#about">Design Philosophy</a></li>
         </ul>
 
         <div id="pillsPanel" class="pills-panel" hidden>
-            <a class="pill" href="#portfolio">Featured Projects</a>
+            <a class="pill" href="#process">{{ processLabel }}</a>
             <a class="pill" href="#services">Curated Services</a>
             <a class="pill" href="#selected-work">Collections</a>
             <a class="pill" href="#about">Design Philosophy</a>
         </div>
     </nav>
 
+    {# The Process — a step carousel in the hero dock. Every step is in the
+       markup with the first one open, so it reads fully without JS;
+       carousels.js adds the stepping. #}
+    {% set steps = site.home.process.steps or [] %}
+    {% if steps.length %}
     <section
-        id="portfolio"
-        class="dock-panel narrow"
+        id="process"
+        class="process-dock"
         data-theme="dark"
-        aria-label="Featured work"
+        data-process-carousel
+        aria-roledescription="carousel"
+        aria-label="{{ processLabel }}"
     >
-        {% set carousel = site.home.carousel.slides | carouselSlides(collections.publishedProject) %}
-        <div class="carousel{% if carousel.length == 1 %} carousel--single{% endif %}"{% if carousel.length > 1 %} role="region" aria-roledescription="carousel" aria-label="Featured projects" tabindex="0"{% endif %}>
-            {% if carousel.length > 1 %}
-            <button class="ctrl prev" id="prev" type="button" aria-label="Previous featured project">‹</button>
+        <div class="process-dock__head">
+            <p class="process-dock__kicker">{{ processLabel }}</p>
+            {% if site.home.process.heading %}
+            <h2 class="process-dock__title">{{ site.home.process.heading }}</h2>
             {% endif %}
-
-            <div class="viewport">
-                <div class="viewport-clip">
-                    <div class="track" id="track">
-                        {% for slide in carousel %}
-                        <article class="slide" role="group"{% if carousel.length > 1 %} aria-roledescription="slide" aria-label="{{ loop.index }} of {{ carousel.length }}"{% endif %}{% if loop.first %} aria-current="true"{% endif %}>
-                            <a class="featured-project" href="{{ slide.url }}">
-                                {% image slide.src, slide.alt, "(min-width: 1040px) 968px, calc(100vw - 72px)", ("eager" if loop.first else "lazy") %}
-                                <span class="featured-project__overlay">
-                                    <span class="featured-project__kicker">{{ slide.kicker }}</span>
-                                    {% if slide.statusLabel %}<span class="featured-project__status">{{ slide.statusLabel }}</span>{% endif %}
-                                    <span class="featured-project__title">{{ slide.title }}</span>
-                                    <span class="featured-project__action">View project <span aria-hidden="true">→</span></span>
-                                </span>
-                            </a>
-                        </article>
-                        {% endfor %}
-                    </div>
-                </div>
+            <div class="process-dock__controls">
+                <span class="process-dock__count" data-process-count aria-live="polite">01 / {{ "0" + steps.length if steps.length < 10 else steps.length }}</span>
+                <button class="process-dock__arrow" type="button" data-process-prev aria-label="Previous step">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2 4 6l4 4"/></svg>
+                </button>
+                <button class="process-dock__arrow" type="button" data-process-next aria-label="Next step">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m4 2 4 4-4 4"/></svg>
+                </button>
             </div>
-
-            {% if carousel.length > 1 %}
-            <button class="ctrl next" id="next" type="button" aria-label="Next featured project">›</button>
-            {% endif %}
         </div>
 
-        {% if carousel.length > 1 %}
-        <div id="dots" class="dots" role="group" aria-label="Choose featured project"></div>
-        {% endif %}
+        <ol class="process-dock__steps">
+            {% for step in steps %}
+            <li class="process-step{% if loop.first %} is-active{% endif %}" data-process-step>
+                <button class="process-step__toggle" type="button" aria-expanded="{{ 'true' if loop.first else 'false' }}" aria-controls="process-step-{{ loop.index }}" data-process-toggle>
+                    <span class="process-step__num">{{ "0" + loop.index if loop.index < 10 else loop.index }}</span>
+                    <span class="process-step__label">{{ step.label }}</span>
+                    <span class="process-step__title">{{ step.title }}</span>
+                </button>
+                <div class="process-step__detail" id="process-step-{{ loop.index }}"{% if not loop.first %} hidden{% endif %}>
+                    <p class="process-step__text">{{ step.text }}</p>
+                    {% if step.receive %}
+                    <p class="process-step__receive">You receive · {{ step.receive }}</p>
+                    {% endif %}
+                </div>
+            </li>
+            {% endfor %}
+        </ol>
+
+        <div class="process-dock__foot">
+            <div class="process-dock__progress" aria-hidden="true">
+                {% for step in steps %}<span{% if loop.first %} class="is-done"{% endif %}></span>{% endfor %}
+            </div>
+            {% if site.home.process.closing %}
+            <p class="process-dock__closing">{{ site.home.process.closing }}</p>
+            {% endif %}
+            {% if site.home.process.linkLabel %}
+            <a class="process-dock__link" href="/contact/">{{ site.home.process.linkLabel }}</a>
+            {% endif %}
+        </div>
     </section>
+    {% endif %}
 
     <section id="services" class="home-section home-services" data-theme="dark">
         <div class="home-section__inner">
@@ -137,7 +157,42 @@ showBackground: true
             </div>
 
             {% set featuredProjects = site.home.collectionsSection.featuredProjects | resolveEntries(collections.publishedProject, "project") %}
-            <div class="home-collections__grid{% if featuredProjects.length == 1 %} home-collections__grid--single{% endif %}">
+            {% if featuredProjects.length == 1 %}
+            {# One featured project: a larger spread — main image, a detail
+               image from its gallery, and an info tile. #}
+            {% set featured = featuredProjects[0] %}
+            {% set projectCardSrc = featured.relation.image or featured.data.cardImage %}
+            {% set detailImage = featured.data.gallery.images[0] if (featured.data.gallery and featured.data.gallery.images and featured.data.gallery.images.length) else null %}
+            <div class="home-feature">
+                <a class="home-feature__main" href="/work/{{ featured.data.slug }}/">
+                    {% image projectCardSrc, featured.data.cardAlt or featured.data.title, "(min-width: 1280px) 840px, (min-width: 761px) 66vw, 100vw", "lazy" %}
+                    <span class="home-feature__badge">Completed</span>
+                </a>
+                <div class="home-feature__side">
+                    {% if detailImage %}
+                    <div class="home-feature__detail">
+                        {% image detailImage.image, detailImage.alt or featured.data.title, "(min-width: 1280px) 400px, (min-width: 761px) 33vw, 100vw", "lazy" %}
+                    </div>
+                    {% endif %}
+                    <div class="home-feature__info">
+                        <div>
+                            {% if featured.data.kicker %}<p class="home-project__kicker">{{ featured.data.kicker }}</p>{% endif %}
+                            <h3 class="home-feature__title"><a href="/work/{{ featured.data.slug }}/">{{ featured.data.title }}</a></h3>
+                            {% if featured.data.projectTags and featured.data.projectTags.length %}
+                            <p class="home-feature__tags">{{ featured.data.projectTags | join(" · ") }}</p>
+                            {% endif %}
+                        </div>
+                        {% if site.home.collectionsSection.moreLink %}
+                        <div class="home-feature__more">
+                            {% if site.home.collectionsSection.moreLabel %}<span class="home-collections__more-label">{{ site.home.collectionsSection.moreLabel }}</span>{% endif %}
+                            <a class="home-collections__more-link" href="{{ site.home.collectionsSection.moreHref or '/work/' }}">{{ site.home.collectionsSection.moreLink }}</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="home-collections__grid">
                 {% for project in featuredProjects %}
                 {% set projectCardSrc = project.relation.image or project.data.cardImage %}
                 <a class="home-project" href="/work/{{ project.data.slug }}/">
@@ -159,6 +214,7 @@ showBackground: true
                 {% endif %}
                 <a class="home-collections__more-link" href="{{ site.home.collectionsSection.moreHref or '/work/' }}">{{ site.home.collectionsSection.moreLink }}</a>
             </div>
+            {% endif %}
             {% endif %}
         </div>
     </section>

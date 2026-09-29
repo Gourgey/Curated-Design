@@ -2,11 +2,18 @@
   "title": "Studio – Curated Design Studio",
   "metaDescription": "A London-based interior design studio shaping calm, tactile, and quietly confident interiors — working across the UK and on selected international projects.",
   "eyebrow": "Studio",
-  "introHeading": "Design with intention.<br>Execute with precision.",
+  "introHeading": "Design with <em>intention.</em><br>Execute with <em>precision.</em>",
   "introText": "Every interior begins with how it will be used day to day: the routines, the circulation, and the way light changes across a space. From there, we build a material language that feels calm, tactile, and quietly confident.",
+  "heroImage": "/assets/images/projects/shoreditch_office/shoreditch_office_1.webp",
+  "heroImageAlt": "A warm London study with built-in joinery and a stone desk",
   "founder": {
     "eyebrow": "Founder",
-    "heading": "Josh Gourgey, Founder.",
+    "heading": "Josh Gourgey, <em>Founder.</em>",
+    "tags": [
+      "Est. 2026",
+      "London",
+      "UK & Middle East"
+    ],
     "paragraphs": [
       "Curated Design was founded in 2026, built on a background of residential developments across London, hospitality projects — hotels and restaurants — and international work, particularly across the Middle East.",
       "For us, interior design has never been a single calling so much as a range: hands-on site visits alongside the close, technical work of drawing up plans; problem-solving as much as the creative decisions; as much time spent with people as with drawings."
@@ -33,7 +40,7 @@
     {
       "label": "Brief & concept",
       "head": "Listening, then sketching.",
-      "text": "We meet, understand how the space is actually used, then visit and survey it in person before any concept work begins — from there we develop layouts and mood direction around what the site can support."
+      "text": "We meet and understand how the space is actually used — with an optional site visit and measurements if it helps — then develop layouts and mood direction around what the site can support."
     },
     {
       "label": "Design development",

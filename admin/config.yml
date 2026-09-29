@@ -55,29 +55,25 @@ collections:
             fields:
               - { label: "Headline", name: "headline", widget: "string" }
               - { label: "Subhead", name: "subhead", widget: "text" }
-          - label: "Carousel"
-            name: "carousel"
+          - label: "The Process"
+            name: "process"
             widget: "object"
             collapsed: false
-            hint: "Each slide references a Project and selects one image from that Project. Upload new carousel imagery through the Project first."
+            hint: "The step-by-step carousel under the homepage hero. Keep each step to one short sentence so visitors can scan it."
             fields:
-              - label: "Slides"
-                name: "slides"
+              - { label: "Kicker", name: "kicker", widget: "string", hint: "Small label on the carousel and its section pill (e.g. 'The Process')." }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Closing Line", name: "closing", widget: "string", required: false, hint: "Short reassuring line under the steps." }
+              - { label: "Link Label", name: "linkLabel", widget: "string", required: false, hint: "Links to the contact page. Leave empty to hide it." }
+              - label: "Steps"
+                name: "steps"
                 widget: "list"
-                summary: "{{fields.project}} · {{fields.image}}"
+                summary: "{{fields.label}} · {{fields.title}}"
                 fields:
-                  - label: "Project"
-                    name: "project"
-                    widget: "relation"
-                    collection: "projects"
-                    value_field: "slug"
-                    search_fields: ["title", "slug", "category", "kicker"]
-                    display_fields: ["title", "slug", "cardImage", "heroImage"]
-                    filters:
-                      - field: "status"
-                        values: ["published", "coming_soon"]
-                  - { label: "Selected Project Image", name: "image", widget: "string", hint: "Use a path from the selected Project's card, hero, gallery, or project image folder." }
-                  - { label: "Alt Text Override", name: "alt", widget: "string", required: false }
+                  - { label: "Label", name: "label", widget: "string", hint: "e.g. 'Brief'." }
+                  - { label: "Title", name: "title", widget: "string", hint: "A plain, benefit-led line (e.g. 'Know the cost upfront.')." }
+                  - { label: "Text", name: "text", widget: "text" }
+                  - { label: "What the client receives", name: "receive", widget: "string", hint: "Shown as 'You receive · …'." }
           - label: "Homepage Services Section"
             name: "servicesSection"
             widget: "object"
@@ -161,8 +157,10 @@ collections:
           - { label: "Title", name: "title", widget: "string", hint: "Browser tab title for the About page." }
           - { label: "Meta Description (SEO)", name: "metaDescription", widget: "text", required: false, hint: "Optional. Falls back to the site-wide default in Site Settings." }
           - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false, hint: "Small label above the intro heading." }
-          - { label: "Intro Heading", name: "introHeading", widget: "string" }
+          - { label: "Intro Heading", name: "introHeading", widget: "string", hint: "May contain <em> for the italic accent words and <br> for a line break." }
           - { label: "Intro Text", name: "introText", widget: "text" }
+          - { label: "Hero Image", name: "heroImage", widget: "image", required: false, hint: "Photo behind the Studio intro panel." }
+          - { label: "Hero Image Alt", name: "heroImageAlt", widget: "string", required: false }
           - label: "Founder"
             name: "founder"
             widget: "object"
@@ -171,7 +169,8 @@ collections:
             hint: "Introduces the person behind the studio. Leave the whole object empty to hide this section entirely."
             fields:
               - { label: "Eyebrow", name: "eyebrow", widget: "string", required: false }
-              - { label: "Heading", name: "heading", widget: "string", required: false, hint: "e.g. 'Josh Gourgey, Founder.'" }
+              - { label: "Heading", name: "heading", widget: "string", required: false, hint: "e.g. 'Josh Gourgey, <em>Founder.</em>' — <em> sets the italic accent." }
+              - { label: "Tags", name: "tags", widget: "list", required: false, hint: "Short chips under the heading (e.g. 'Est. 2026', 'London').", field: { label: "Tag", name: "tag", widget: "string" } }
               - { label: "Paragraphs", name: "paragraphs", widget: "list", field: { label: "Paragraph", name: "paragraph", widget: "text" } }
           - { label: "Work Heading", name: "workHeading", widget: "string" }
           - { label: "Work Paragraphs", name: "workParagraphs", widget: "list", field: { label: "Paragraph", name: "paragraph", widget: "text" } }

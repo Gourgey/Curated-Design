@@ -9,6 +9,7 @@ bodyClass: projects-page font-inter
 topLogo: logo_no_text_on_transparent.svg
 ---
 <main id="main-content" class="page-main" tabindex="-1">
+    <div class="projects-band">
     <header class="projects-header">
         {% if site.projectsPage.eyebrow %}
         <p class="projects-header__eyebrow">{{ site.projectsPage.eyebrow }}</p>
@@ -21,6 +22,7 @@ topLogo: logo_no_text_on_transparent.svg
             <a class="header-more-link" href="/services/">View all services</a>
         </div>
     </header>
+    </div>
 
     {% set listedProjects = collections.publishedProject | sortByOrder | where("showInProjects", true) %}
     {% set completedProjects = listedProjects | where("status", "published") %}
@@ -40,21 +42,43 @@ topLogo: logo_no_text_on_transparent.svg
                 {% endif %}
             </header>
 
-            <div class="projects-grid">
-                {% for project in completedProjects %}
-                <a class="card card--project" href="/work/{{ project.data.slug }}/">
-                    <div class="card__media">
-                        {% image project.data.cardImage, project.data.cardAlt or project.data.title, "(min-width: 1024px) 33vw, (min-width: 641px) 50vw, 100vw", "lazy", "", "card" %}
-                    </div>
-                    <div class="card__body">
-                        <p class="card__title">{{ project.data.title }}</p>
-                        {% if project.data.kicker %}
-                        <p class="card__kicker">{{ project.data.kicker }}</p>
-                        {% endif %}
-                    </div>
+            {# Each completed project gets a full-width feature card: the photo,
+               with a frosted stone panel carrying the case-study details. #}
+            {% for project in completedProjects %}
+            {% set galleryImages = project.data.gallery.images if (project.data.gallery and project.data.gallery.images) else [] %}
+            <article class="work-feature">
+                <a class="work-feature__media" href="/work/{{ project.data.slug }}/" tabindex="-1" aria-hidden="true">
+                    {% image project.data.cardImage, project.data.cardAlt or project.data.title, "(min-width: 1360px) 1280px, 100vw", "eager" %}
                 </a>
-                {% endfor %}
-            </div>
+                <div class="work-feature__panel">
+                    <div class="work-feature__top">
+                        {% if project.data.kicker %}<p class="work-feature__kicker">{{ project.data.kicker }}</p>{% endif %}
+                        <span class="work-feature__num" aria-hidden="true">{{ "0" + loop.index if loop.index < 10 else loop.index }}</span>
+                    </div>
+                    <div class="work-feature__body">
+                        <h3 class="work-feature__title"><a href="/work/{{ project.data.slug }}/">{{ project.data.title }}</a></h3>
+                        {% if project.data.subtitle %}<p class="work-feature__text">{{ project.data.subtitle }}</p>{% endif %}
+                        {% if galleryImages.length %}
+                        <div class="work-feature__thumbs">
+                            {% for item in galleryImages %}{% if loop.index <= 2 %}
+                            <div class="work-feature__thumb">
+                                {% image item.image, item.alt or project.data.title, "120px", "lazy" %}
+                            </div>
+                            {% endif %}{% endfor %}
+                        </div>
+                        {% endif %}
+                        <div class="work-feature__foot">
+                            {% if project.data.projectTags and project.data.projectTags.length %}
+                            <ul class="work-feature__tags">
+                                {% for tag in project.data.projectTags %}<li>{{ tag }}</li>{% endfor %}
+                            </ul>
+                            {% endif %}
+                            <a class="work-feature__link" href="/work/{{ project.data.slug }}/">Case study</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
         </div>
     </section>
     {% endif %}
@@ -126,8 +150,8 @@ topLogo: logo_no_text_on_transparent.svg
                             {% if project.data.kicker %}
                             <p class="card__kicker">{{ project.data.kicker }}</p>
                             {% endif %}
-                            <p class="card__status">{{ project.data.statusLabel or "Coming soon" }}</p>
                         </div>
+                        <p class="card__status">{{ project.data.statusLabel or "Coming soon" }}</p>
                     </a>
                     {% endfor %}
                 </div>

@@ -3,19 +3,37 @@
   "metaDescription": "A London-based interior design studio shaping distinctive residential, hospitality, and commercial spaces, from concept through completion.",
   "hero": {
     "headline": "Bespoke interiors to define your lifestyle.",
-    "subhead": "A London-based interior design studio shaping distinctive spaces."
+    "subhead": "A London studio designing and furnishing homes and hospitality spaces end to end"
   },
-  "carousel": {
-    "slides": [
+  "process": {
+    "kicker": "The Process",
+    "heading": "From first conversation to finished room.",
+    "closing": "You bring the space. We carry it from brief to install.",
+    "linkLabel": "Start a conversation",
+    "steps": [
       {
-        "project": "garden_restaurant",
-        "image": "/assets/images/projects/garden_restaurant/garden_restaurant_1.webp",
-        "alt": "Hampstead Kitchen interior"
+        "label": "Brief",
+        "title": "Tell us about the space.",
+        "text": "Share the property, how you use it, and your timeline. If it helps, we can visit in person and take measurements before design begins.",
+        "receive": "a clear brief, with an optional site visit"
       },
       {
-        "project": "shoreditch_office",
-        "image": "/assets/images/projects/shoreditch_office/shoreditch_office_1.webp",
-        "alt": "Bloomsbury Study interior"
+        "label": "Concept & visuals",
+        "title": "See it before you commit.",
+        "text": "Layouts, a material palette, and photo-realistic visuals show exactly how each room will look and feel.",
+        "receive": "layouts, palette and visuals"
+      },
+      {
+        "label": "Specification & cost",
+        "title": "Know the cost upfront.",
+        "text": "Every piece is specified for the property it sits in and set out in an itemised plan, priced openly before anything is ordered.",
+        "receive": "an itemised, priced plan"
+      },
+      {
+        "label": "Delivery & styling",
+        "title": "Walk into a finished room.",
+        "text": "We handle procurement, coordinate contractors and installation, then style the space down to the final object.",
+        "receive": "a procured, installed and styled space"
       }
     ]
   },

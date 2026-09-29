@@ -10,7 +10,7 @@ const outputRoot = path.join(root, "_site");
 const axePath = require.resolve("axe-core/axe.min.js");
 
 const scans = [
-  { label: "Homepage mobile", route: "/", width: 390, height: 844, featuredProject: true },
+  { label: "Homepage mobile", route: "/", width: 390, height: 844, processCarousel: true },
   { label: "Homepage mobile menu", route: "/", width: 390, height: 844, openMenu: true },
   { label: "Work mobile", route: "/work/", width: 390, height: 844 },
   { label: "Services index mobile", route: "/services/", width: 390, height: 844 },
@@ -297,56 +297,43 @@ async function checkViewportLayout(page) {
   }
 }
 
-async function checkFeaturedProject(page) {
-  const state = await page.evaluate(() => {
-    const carousel = document.querySelector("#portfolio .carousel");
-    const links = Array.from(document.querySelectorAll("#portfolio .featured-project"));
-    const slides = Array.from(document.querySelectorAll("#portfolio .slide"));
-    const dots = Array.from(document.querySelectorAll("#portfolio .dots button"));
-    return {
-      linkCount: links.length,
-      hrefs: links.map((link) => link.getAttribute("href")),
-      titles: links.map((link) =>
-        link.querySelector(".featured-project__title")?.textContent.trim(),
-      ),
-      statuses: links.map((link) =>
-        link.querySelector(".featured-project__status")?.textContent.trim(),
-      ),
-      carouselControls: document.querySelectorAll("#portfolio .ctrl, #portfolio .dots").length,
-      carouselLabel: carousel?.getAttribute("aria-label"),
-      activeSlides: slides.filter((slide) => slide.getAttribute("aria-current") === "true").length,
-      hiddenSlides: slides.filter((slide) => slide.getAttribute("aria-hidden") === "true").length,
-      dotCount: dots.length,
-      activeDots: dots.filter((dot) => dot.getAttribute("aria-current") === "true").length,
-    };
-  });
-  const expectedHrefs = ["/work/garden_restaurant/", "/work/shoreditch_office/"];
+async function checkProcessCarousel(page) {
+  const readState = () =>
+    page.evaluate(() => {
+      const carousel = document.querySelector("#process[data-process-carousel]");
+      const toggles = Array.from(document.querySelectorAll("#process [data-process-toggle]"));
+      const details = Array.from(document.querySelectorAll("#process .process-step__detail"));
+      return {
+        carouselLabel: carousel?.getAttribute("aria-label"),
+        stepCount: toggles.length,
+        buttonToggles: toggles.filter((toggle) => toggle.tagName === "BUTTON").length,
+        expanded: toggles.map((toggle) => toggle.getAttribute("aria-expanded")),
+        visibleDetails: details.filter((detail) => !detail.hidden).length,
+        arrows: document.querySelectorAll("#process [data-process-prev], #process [data-process-next]").length,
+        count: document.querySelector("#process [data-process-count]")?.textContent.trim(),
+      };
+    });
+
+  const state = await readState();
   if (
-    state.linkCount !== 2 ||
-    JSON.stringify(state.hrefs) !== JSON.stringify(expectedHrefs) ||
-    state.titles.some((title) => !title) ||
-    state.statuses.some((status) => status !== "Coming soon") ||
-    state.carouselControls !== 3 ||
     !state.carouselLabel ||
-    state.activeSlides !== 1 ||
-    state.hiddenSlides !== 1 ||
-    state.dotCount !== 2 ||
-    state.activeDots !== 1
+    state.stepCount < 2 ||
+    state.buttonToggles !== state.stepCount ||
+    state.expanded[0] !== "true" ||
+    state.expanded.filter((value) => value === "true").length !== 1 ||
+    state.visibleDetails !== 1 ||
+    state.arrows !== 2 ||
+    !state.count
   ) {
-    throw new Error(`Homepage featured-project contract failed: ${JSON.stringify(state)}`);
+    throw new Error(`Homepage process carousel contract failed: ${JSON.stringify(state)}`);
   }
 
-  await page.focus("#portfolio .carousel");
-  await page.keyboard.press("ArrowRight");
-  await page.waitForFunction(() => {
-    const slides = document.querySelectorAll("#portfolio .slide");
-    const dots = document.querySelectorAll("#portfolio .dots button");
-    return (
-      slides[1]?.getAttribute("aria-current") === "true" &&
-      dots[1]?.getAttribute("aria-current") === "true"
-    );
-  });
-  await page.click("#portfolio .dots button:first-child");
+  await page.click("#process [data-process-next]");
+  const afterNext = await readState();
+  if (afterNext.expanded[1] !== "true" || afterNext.visibleDetails !== 1) {
+    throw new Error(`Process carousel did not advance: ${JSON.stringify(afterNext)}`);
+  }
+  await page.click("#process [data-process-toggle]");
 }
 
 async function checkProjectCarousel(page) {
@@ -539,7 +526,7 @@ async function main() {
         waitUntil: "domcontentloaded",
       });
       await checkViewportLayout(page);
-      if (scan.featuredProject) await checkFeaturedProject(page);
+      if (scan.processCarousel) await checkProcessCarousel(page);
       if (scan.projectCarousel) await checkProjectCarousel(page);
       if (scan.openMenu) {
         await page.click("[aria-controls='floatingPillMenu']");
@@ -616,7 +603,7 @@ async function main() {
   }
 
   console.log(
-    `Accessibility check passed: ${scans.length} representative Axe and viewport-layout scans plus navigation, featured-project, carousel, and enquiry-form interaction smoke tests; no critical/serious violations, ${nonBlockingViolationCount} non-blocking violation(s).`,
+    `Accessibility check passed: ${scans.length} representative Axe and viewport-layout scans plus navigation, process-carousel, project-carousel, and enquiry-form interaction smoke tests; no critical/serious violations, ${nonBlockingViolationCount} non-blocking violation(s).`,
   );
 }
 

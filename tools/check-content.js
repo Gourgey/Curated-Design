@@ -209,13 +209,13 @@ validateLocalImage(settings.shareImage, "src/content/settings.json: shareImage")
 
 const projectsBySlug = new Map(projects.map((entry) => [entry.data.slug, entry]));
 const servicesBySlug = new Map(services.map((entry) => [entry.data.slug, entry]));
-validateRelationList(
-  home.carousel && home.carousel.slides,
-  "project",
-  projectsBySlug,
-  "home.carousel.slides",
-  { allowedStatuses: ["published", "coming_soon"] },
-);
+const processSteps = (home.process && home.process.steps) || [];
+if (!processSteps.length) fail("home.process.steps must list at least one step");
+processSteps.forEach((step, index) => {
+  requireValue(step.label, `home.process.steps[${index}].label`);
+  requireValue(step.title, `home.process.steps[${index}].title`);
+  requireValue(step.text, `home.process.steps[${index}].text`);
+});
 validateRelationList(
   home.collectionsSection && home.collectionsSection.featuredProjects,
   "project",

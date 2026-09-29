@@ -109,9 +109,7 @@
           headline: data.heroHeadline,
           subhead: data.heroSubhead,
         },
-        carousel: data.carousel || {
-          slides: data.carouselSlides || [],
-        },
+        process: data.process || {},
         servicesSection: data.servicesSection || {
           kicker: data.servicesKicker,
           heading: data.servicesHeading,
@@ -283,7 +281,7 @@
           var data = toData(this.props.entry);
           var model = homeModel(data);
           var related = this.state && this.state.previewData ? this.state.previewData : previewData;
-          var slides = model.carousel.slides || [];
+          var steps = model.process.steps || [];
           var serviceRelations = model.servicesSection.featuredServices || [];
           var projectRelations = model.collectionsSection.featuredProjects || [];
 
@@ -300,23 +298,25 @@
             h(
               "section",
               { className: "cms-preview-section" },
-          h("p", { className: "cms-preview-note" }, "Homepage carousel, populated from Project entries"),
-          h("p", { className: "cms-preview-help" }, "Each slide references a Project and uses one selected image from that Project."),
+          h("p", { className: "cms-preview-note" }, "Homepage process carousel"),
+          h("span", { className: "kicker" }, text(model.process.kicker, "The Process")),
+          h("h2", { className: "h2" }, text(model.process.heading, "")),
           h(
-            "div",
-            { className: "cms-preview-slides" },
-            slides.length
-              ? slides.map(function (slide) {
-                      var project = resolve(related.projects, slide.project);
+            "ol",
+            {},
+            steps.length
+              ? steps.map(function (step, index) {
                       return h(
-                        "div",
-                        {},
-                        h("img", { src: asset(this.props, slide.image || (project && (project.heroImage || project.cardImage))), alt: slide.alt || (project && project.title) || "" }),
-                        h("span", { className: "cms-preview-source" }, project ? "Links/source Project: " + project.title : "No project selected"),
+                        "li",
+                        { key: index },
+                        h("strong", {}, text(step.label, "Step") + " — " + text(step.title, "")),
+                        h("p", {}, text(step.text, "")),
+                        step.receive ? h("span", { className: "cms-preview-source" }, "You receive · " + step.receive) : null,
                       );
-                    }, this)
-                  : h("p", {}, "No carousel slides selected."),
+                    })
+                  : h("li", {}, "No process steps added."),
           ),
+          h("p", { className: "lead" }, text(model.process.closing, "")),
             ),
             h(
               "section",

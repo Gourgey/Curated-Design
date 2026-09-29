@@ -9,28 +9,40 @@ bodyClass: about-page min-h-screen font-inter
 ---
 {% set romans = ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"] %}
 <main id="main-content" class="studio" tabindex="-1">
-    {% include "partials/hero-brand.njk" %}
-
-    <header class="studio-header">
-        {% if site.about.eyebrow %}
-        <p class="studio-header__eyebrow">{{ site.about.eyebrow }}</p>
+    {# Hero — photo card with the intro on a frosted stone panel. #}
+    <header class="studio-hero{% if not site.about.heroImage %} studio-hero--plain{% endif %}">
+        {% if site.about.heroImage %}
+        <div class="studio-hero__media">
+            {% image site.about.heroImage, site.about.heroImageAlt or "", "(min-width: 1360px) 1280px, 100vw", "eager" %}
+        </div>
         {% endif %}
-        <div>
-            <h1 class="studio-header__title">{{ site.about.introHeading | safe }}</h1>
-            <p class="studio-header__intro">{{ site.about.introText }}</p>
+        <div class="studio-hero__panel">
+            {% if site.about.eyebrow %}
+            <p class="studio-hero__eyebrow">{{ site.about.eyebrow }} · {{ site.settings.location | replace(", United Kingdom", "") }}</p>
+            {% endif %}
+            <h1 class="studio-hero__title">{{ site.about.introHeading | safe }}</h1>
+            <p class="studio-hero__intro">{{ site.about.introText }}</p>
             <a class="header-more-link" href="/services/">View all services</a>
         </div>
+        <p class="studio-hero__word" aria-hidden="true">Studio.</p>
     </header>
 
     {% if site.about.founder %}
     <section class="studio-founder">
-        {% if site.about.founder.eyebrow %}
-        <p class="studio-founder__eyebrow">{{ site.about.founder.eyebrow }}</p>
-        {% endif %}
-        <div class="studio-founder__body">
-            {% if site.about.founder.heading %}
-            <h2 class="studio-founder__heading">{{ site.about.founder.heading }}</h2>
+        <div class="studio-founder__lead">
+            {% if site.about.founder.eyebrow %}
+            <p class="studio-founder__eyebrow">{{ site.about.founder.eyebrow }}</p>
             {% endif %}
+            {% if site.about.founder.heading %}
+            <h2 class="studio-founder__heading">{{ site.about.founder.heading | safe }}</h2>
+            {% endif %}
+            {% if site.about.founder.tags and site.about.founder.tags.length %}
+            <ul class="studio-founder__tags">
+                {% for tag in site.about.founder.tags %}<li>{{ tag }}</li>{% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="studio-founder__body">
             {% for paragraph in site.about.founder.paragraphs %}
             <p>{{ paragraph }}</p>
             {% endfor %}
@@ -38,20 +50,31 @@ bodyClass: about-page min-h-screen font-inter
     </section>
     {% endif %}
 
-    <section class="studio-two">
-        <div>
-            <h2 class="studio-two__heading">{{ site.about.workHeading }}</h2>
-            <div class="studio-two__body">
-                {% for paragraph in site.about.workParagraphs %}
-                <p>{{ paragraph }}</p>
-                {% endfor %}
-            </div>
+    {# What defines the work — frosted panels on a plain plaster ground. #}
+    {% set focusIcons = [
+        '<path d="M4 21V10a8 8 0 0 1 16 0v11M4 21h16M9 21v-6a3 3 0 0 1 6 0v6"/>',
+        '<path d="M7 3h10l-1 7a4 4 0 0 1-8 0L7 3ZM12 14v7M8 21h8"/>',
+        '<path d="M3 3h18v18H3zM3 10h8V3M11 10v11M11 15h10"/>',
+        '<path d="M8 3h8l3 8H5l3-8ZM12 11v8M8 21h8"/>'
+    ] %}
+    <section class="studio-defines">
+        <div class="studio-defines__panel">
+            <h2 class="studio-defines__eyebrow">{{ site.about.workHeading }}</h2>
+            {% for paragraph in site.about.workParagraphs %}
+            <p class="{{ 'studio-defines__lead' if loop.first else 'studio-defines__text' }}">{{ paragraph }}</p>
+            {% endfor %}
         </div>
-        <div>
-            <h2 class="studio-two__heading">{{ site.about.focusHeading }}</h2>
-            <ul class="studio-two__list">
+        <div class="studio-defines__focus">
+            <h2 class="studio-defines__focus-heading">{{ site.about.focusHeading }}</h2>
+            <ul class="studio-defines__grid">
                 {% for area in site.about.focusAreas %}
-                <li>{{ area }}</li>
+                <li class="studio-focus">
+                    <span class="studio-focus__top">
+                        <span class="studio-focus__num">{{ "0" + loop.index if loop.index < 10 else loop.index }}</span>
+                        <span class="studio-focus__icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">{{ focusIcons[loop.index0 % 4] | safe }}</svg></span>
+                    </span>
+                    <span class="studio-focus__title">{{ area }}</span>
+                </li>
                 {% endfor %}
             </ul>
         </div>
@@ -73,8 +96,7 @@ bodyClass: about-page min-h-screen font-inter
         <div class="studio-process__grid">
             {% for step in site.about.processSteps %}
             <article class="step">
-                <p class="step__roman">{{ romans[loop.index0] }}</p>
-                {% if step.label %}<p class="step__label">{{ step.label }}</p>{% endif %}
+                <p class="step__top"><span class="step__roman">{{ romans[loop.index0] }}</span>{% if step.label %}<span class="step__label">{{ step.label }}</span>{% endif %}</p>
                 {% if step.head %}<h3 class="step__head">{{ step.head }}</h3>{% endif %}
                 {% if step.text %}<p class="step__body">{{ step.text }}</p>{% endif %}
             </article>

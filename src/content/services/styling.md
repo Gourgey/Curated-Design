@@ -7,9 +7,9 @@ status: published
 order: 6
 summary: Accessory selection and placement to enhance the overall aesthetic and functionality of the space.
 cardImage: /assets/images/curated_services/styling.webp
-cardAlt: Styling service card
-coverImage: /assets/images/curated_services/page_brands/styling_cover.webp
-coverAlt: Styling, layering, and finishing details
+cardAlt: A stone console styled with ceramics, books, a sculpture, and a framed sketch
+coverImage: /assets/images/curated_services/styling.webp
+coverAlt: A stone console styled with ceramics, books, a sculpture, and a framed sketch
 intro: The finishing layer that makes a space feel lived-in, intentional, and complete—art, objects, textiles, and final placement curated with restraint and rhythm.
 metaDescription: The finishing layer that makes a space feel lived-in, intentional, and complete—art, objects, textiles, and final placement curated with restraint and rhythm.
 glance:

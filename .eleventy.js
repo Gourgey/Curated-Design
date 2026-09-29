@@ -161,6 +161,12 @@ module.exports = function (eleventyConfig) {
     });
   });
 
+  // Position of an entry (by slug) in a list, or 0 if it isn't there.
+  eleventyConfig.addFilter("indexBySlug", (items, slug) => {
+    const index = (items || []).findIndex((item) => item.data && item.data.slug === slug);
+    return index < 0 ? 0 : index;
+  });
+
   eleventyConfig.addFilter("where", (items, key, value) => {
     return (items || []).filter((item) => item.data && item.data[key] === value);
   });

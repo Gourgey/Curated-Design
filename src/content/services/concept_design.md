@@ -7,9 +7,9 @@ status: published
 order: 1
 summary: 'A thoughtful approach to design that considers the client''s needs, lifestyle, and budget.'
 cardImage: /assets/images/curated_services/concept_design.webp
-cardAlt: Concept design service card
-coverImage: /assets/images/curated_services/page_brands/concept_design_cover.webp
-coverAlt: Concept design tools laid out on a marble surface
+cardAlt: Design sketches, a tablet drawing, and material samples laid out on a marble desk
+coverImage: /assets/images/curated_services/concept_design.webp
+coverAlt: Design sketches, a tablet drawing, and material samples laid out on a marble desk
 intro: 'A clear, considered direction for your space—defining layout, mood, material palette, and key pieces—before you commit to construction, joinery, or procurement.'
 metaDescription: 'A clear, considered direction for your space—defining layout, mood, material palette, and key pieces—before you commit to construction, joinery, or procurement.'
 glance:

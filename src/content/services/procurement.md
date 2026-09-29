@@ -7,9 +7,9 @@ status: published
 order: 5
 summary: Purchasing, delivery, and installation of materials, fixtures, and furniture for the project.
 cardImage: /assets/images/curated_services/procurement.webp
-cardAlt: Procurement service card
-coverImage: /assets/images/curated_services/page_brands/procurement_cover.webp
-coverAlt: Procurement cover image
+cardAlt: Furniture wrapped and crated for delivery on a marble floor
+coverImage: /assets/images/curated_services/procurement.webp
+coverAlt: Furniture wrapped and crated for delivery on a marble floor
 intro: Order management, supplier coordination, and delivery tracking so approved pieces move from specification to site with less friction.
 metaDescription: Order management, supplier coordination, and delivery tracking so approved pieces move from specification to site with less friction.
 glance:

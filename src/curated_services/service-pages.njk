@@ -19,26 +19,43 @@ scripts:
 {% set hasGlance = service.data.glance and service.data.glance.length %}
 {% set hasSections = service.data.sections and service.data.sections.length %}
 {% set coverAlt = service.data.coverAlt or service.data.title %}
+{% set allServices = collections.publishedService | sortByOrder %}
+{% set serviceIndex = allServices | indexBySlug(service.data.slug) %}
+{% set prevService = allServices[(serviceIndex - 1 + allServices.length) % allServices.length] %}
+{% set nextService = allServices[(serviceIndex + 1) % allServices.length] %}
 
 {% from "partials/backlink.njk" import breadcrumb -%}
 <main id="main-content" class="service" tabindex="-1">
     {{ breadcrumb([{ href: "/", label: "Home" }, { href: "/services/", label: "Services" }, { label: service.data.title }]) }}
 
-    <header class="service-header">
-        <p class="service-header__eyebrow">{{ service.data.eyebrow or "Service" }}</p>
-        <div>
-            <h1 class="service-header__title">{{ service.data.title | safe }}</h1>
+    {# Hero — the service image with the title, intro and key facts on a
+       frosted stone panel, so the essentials read at a glance. #}
+    <header class="service-hero{% if not service.data.coverImage %} service-hero--plain{% endif %}">
+        {% if service.data.coverImage %}
+        <div class="service-hero__media">
+            {% image service.data.coverImage, coverAlt, "(min-width: 1360px) 1280px, 100vw", "eager" %}
+        </div>
+        {% endif %}
+        <div class="service-hero__panel">
+            <p class="service-hero__eyebrow">{{ service.data.eyebrow or "Service" }} · {{ "0" + (serviceIndex + 1) if serviceIndex < 9 else serviceIndex + 1 }} / {{ "0" + allServices.length if allServices.length < 10 else allServices.length }}</p>
+            <h1 class="service-hero__title">{{ service.data.title | safe }}</h1>
             {% if service.data.intro %}
-            <p class="service-header__intro">{{ service.data.intro }}</p>
+            <p class="service-hero__intro">{{ service.data.intro }}</p>
+            {% endif %}
+            {% if hasGlance %}
+            <dl class="service-glance__list" aria-label="At a glance">
+                {% for item in service.data.glance %}
+                {% if item.label or item.text %}
+                <div class="service-glance__row">
+                    {% if item.label %}<dt class="service-glance__label">{{ item.label }}</dt>{% endif %}
+                    {% if item.text %}<dd class="service-glance__value">{{ item.text }}</dd>{% endif %}
+                </div>
+                {% endif %}
+                {% endfor %}
+            </dl>
             {% endif %}
         </div>
     </header>
-
-    {% if service.data.coverImage %}
-    <figure class="service-hero" aria-label="{{ service.data.title }} hero image">
-        {% image service.data.coverImage, coverAlt, "100vw", "eager" %}
-    </figure>
-    {% endif %}
 
     <section class="service-body">
         <div class="service-body__main">
@@ -66,22 +83,6 @@ scripts:
         </div>
 
         <aside class="service-body__aside" aria-label="Service details">
-            {% if hasGlance %}
-            <div class="service-glance">
-                <h2 class="label-small">At a glance</h2>
-                <dl class="service-glance__list">
-                    {% for item in service.data.glance %}
-                    {% if item.label or item.text %}
-                    <div class="service-glance__row">
-                        {% if item.label %}<dt class="service-glance__label">{{ item.label }}</dt>{% endif %}
-                        {% if item.text %}<dd class="service-glance__value">{{ item.text }}</dd>{% endif %}
-                    </div>
-                    {% endif %}
-                    {% endfor %}
-                </dl>
-            </div>
-            {% endif %}
-
             <div class="service-enquiry">
                 {% if service.data.enquiryHeading %}
                 <h2 class="service-enquiry__title">{{ service.data.enquiryHeading }}</h2>
@@ -166,14 +167,30 @@ scripts:
         </aside>
     </section>
 
+    <nav class="service-pager" aria-label="More services">
+        <a class="service-pager__link service-pager__link--prev" href="/services/{{ prevService.data.slug }}/">
+            <span class="service-pager__label">Previous service</span>
+            <span class="service-pager__title">{{ prevService.data.title }}</span>
+        </a>
+        <a class="service-pager__all" href="/services/">All services</a>
+        <a class="service-pager__link service-pager__link--next" href="/services/{{ nextService.data.slug }}/">
+            <span class="service-pager__label">Next service</span>
+            <span class="service-pager__title">{{ nextService.data.title }}</span>
+        </a>
+    </nav>
 </main>
 
 {% if service.data.ctaHeading or service.data.ctaText %}
-{% set heading = service.data.ctaHeading %}
-{% set text = service.data.ctaText %}
-{% set href = "/contact/" %}
-{% set ctaClass = "about-cta-band section" %}
-{% set ctaContainerClass = "container text-center" %}
-{% set label = "Contact the studio" %}
-{% include "partials/cta-band.njk" %}
+{# Same closing band as the homepage's "Have a project in mind?". #}
+<section class="home-cta service-cta" aria-label="Contact call to action">
+    <div class="home-cta__inner">
+        <p class="home-cta__eyebrow">Contact</p>
+        {% if service.data.ctaHeading %}<h2 class="home-cta__title">{{ service.data.ctaHeading }}</h2>{% endif %}
+        {% if service.data.ctaText %}<p class="home-cta__subline">{{ service.data.ctaText }}</p>{% endif %}
+        <a class="home-cta__link" href="/contact/">
+            <span class="home-cta__dot" aria-hidden="true"></span>
+            Contact the studio
+        </a>
+    </div>
+</section>
 {% endif %}

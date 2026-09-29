@@ -7,9 +7,9 @@ status: published
 order: 3
 summary: Designing and creating unique furniture pieces tailored to the client's preferences and space.
 cardImage: /assets/images/curated_services/bespoke_furnishing.webp
-cardAlt: Bespoke furnishing service card
-coverImage: /assets/images/curated_services/page_brands/bespoke_furnishing_cover.webp
-coverAlt: Bespoke furnishing and material selection
+cardAlt: A curved bouclé sofa, stone coffee table, and timber armchair in a bright panelled room
+coverImage: /assets/images/curated_services/bespoke_furnishing.webp
+coverAlt: A curved bouclé sofa, stone coffee table, and timber armchair in a bright panelled room
 intro: Furniture and key pieces sourced (or made) to fit your space and the way you use it—proportion, comfort, and longevity first.
 metaDescription: Furniture and key pieces sourced (or made) to fit your space and the way you use it—proportion, comfort, and longevity first.
 glance:

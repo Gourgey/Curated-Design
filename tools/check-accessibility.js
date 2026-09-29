@@ -308,7 +308,7 @@ async function checkProcessCarousel(page) {
         stepCount: toggles.length,
         buttonToggles: toggles.filter((toggle) => toggle.tagName === "BUTTON").length,
         expanded: toggles.map((toggle) => toggle.getAttribute("aria-expanded")),
-        visibleDetails: details.filter((detail) => !detail.hidden).length,
+        visibleDetails: details.filter((detail) => getComputedStyle(detail).visibility === "visible").length,
         arrows: document.querySelectorAll("#process [data-process-prev], #process [data-process-next]").length,
         count: document.querySelector("#process [data-process-count]")?.textContent.trim(),
       };
@@ -329,6 +329,11 @@ async function checkProcessCarousel(page) {
   }
 
   await page.click("#process [data-process-next]");
+  // The previous step's text fades out over the transition; wait for it.
+  await page.waitForFunction(() => {
+    const details = Array.from(document.querySelectorAll("#process .process-step__detail"));
+    return details.filter((detail) => getComputedStyle(detail).visibility === "visible").length === 1;
+  });
   const afterNext = await readState();
   if (afterNext.expanded[1] !== "true" || afterNext.visibleDetails !== 1) {
     throw new Error(`Process carousel did not advance: ${JSON.stringify(afterNext)}`);

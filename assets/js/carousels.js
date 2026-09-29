@@ -26,7 +26,6 @@ window.addEventListener("DOMContentLoaded", () => {
         const isActive = stepIndex === index;
         step.classList.toggle("is-active", isActive);
         step.querySelector("[data-process-toggle]").setAttribute("aria-expanded", isActive ? "true" : "false");
-        step.querySelector(".process-step__detail").hidden = !isActive;
       });
       bars.forEach((bar, barIndex) => bar.classList.toggle("is-done", barIndex <= index));
       if (count) count.textContent = pad(index + 1) + " / " + pad(steps.length);

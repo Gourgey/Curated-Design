@@ -82,11 +82,16 @@ showBackground: true
                     <span class="process-step__label">{{ step.label }}</span>
                     <span class="process-step__title">{{ step.title }}</span>
                 </button>
-                <div class="process-step__detail" id="process-step-{{ loop.index }}"{% if not loop.first %} hidden{% endif %}>
-                    <p class="process-step__text">{{ step.text }}</p>
-                    {% if step.receive %}
-                    <p class="process-step__receive">You receive · {{ step.receive }}</p>
-                    {% endif %}
+                {# Shown/hidden by the .is-active class (CSS), so the switch can
+                   animate; visibility:hidden keeps closed steps out of the
+                   accessibility tree. #}
+                <div class="process-step__detail" id="process-step-{{ loop.index }}">
+                    <div class="process-step__detail-inner">
+                        <p class="process-step__text">{{ step.text }}</p>
+                        {% if step.receive %}
+                        <p class="process-step__receive">You receive · {{ step.receive }}</p>
+                        {% endif %}
+                    </div>
                 </div>
             </li>
             {% endfor %}

@@ -3606,7 +3606,8 @@ body.recovery-page {
     padding: 0;
     display: flex;
     gap: 14px;
-    min-height: 270px;
+    /* A steady height, so switching steps never makes the dock grow. */
+    height: 320px;
 }
 .process-step {
     flex: 2 1 0;
@@ -3617,7 +3618,12 @@ body.recovery-page {
     border: 1px solid rgba(255, 255, 255, 0.12);
     background: rgba(255, 255, 255, 0.07);
     color: #f2f2f2;
-    transition: flex-grow 450ms cubic-bezier(0.2, 0.7, 0.2, 1), background 300ms ease;
+    overflow: hidden;
+    transition:
+        flex-grow 500ms cubic-bezier(0.2, 0.7, 0.2, 1),
+        background-color 400ms ease,
+        border-color 400ms ease,
+        color 400ms ease;
 }
 .process-step.is-active {
     flex-grow: 5;
@@ -3640,6 +3646,7 @@ body.recovery-page {
     font: inherit;
     text-align: left;
     cursor: pointer;
+    transition: padding 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .process-step:not(.is-active) .process-step__toggle { padding-bottom: 24px; }
 .process-step__toggle:focus-visible {
@@ -3670,14 +3677,42 @@ body.recovery-page {
     font-size: 26px;
     line-height: 1.08;
     letter-spacing: -0.01em;
+    transition: font-size 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .process-step.is-active .process-step__title {
     font-weight: 400;
     font-size: clamp(30px, 3vw, 42px);
     line-height: 1;
 }
+/* The open step's text: its row eases open while the card widens, then
+   the text fades in. It is laid out at the open card's width from the
+   start, so it never re-wraps (and jumps) while the card grows. */
 .process-step__detail {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        grid-template-rows 500ms cubic-bezier(0.2, 0.7, 0.2, 1),
+        opacity 150ms ease,
+        visibility 0s linear 500ms;
+}
+.process-step.is-active .process-step__detail {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    visibility: visible;
+    transition:
+        grid-template-rows 500ms cubic-bezier(0.2, 0.7, 0.2, 1),
+        opacity 350ms ease 300ms,
+        visibility 0s;
+}
+.process-step__detail-inner {
+    min-height: 0;
+    overflow: hidden;
     padding: 12px 26px 26px;
+}
+@media (min-width: 1001px) {
+    .process-step__detail-inner { width: 460px; }
 }
 .process-step__text {
     margin: 0;
@@ -3742,12 +3777,12 @@ body.recovery-page {
     .process-dock { padding: 28px 24px 24px; margin-bottom: 96px; }
     .process-dock__head { flex-wrap: wrap; row-gap: 8px; }
     .process-dock__title { order: 3; flex-basis: 100%; }
-    .process-dock__steps { flex-direction: column; min-height: 0; }
+    .process-dock__steps { flex-direction: column; height: auto; }
     .process-step { flex: none; }
     .process-step__toggle { padding: 20px 20px 0; }
     .process-step:not(.is-active) .process-step__toggle { padding-bottom: 20px; }
     .process-step:not(.is-active) .process-step__title { font-size: 22px; }
-    .process-step__detail { padding: 10px 20px 22px; }
+    .process-step__detail-inner { padding: 10px 20px 22px; }
     .process-dock__foot { flex-direction: column; align-items: flex-start; gap: 16px; }
     .process-dock__progress { width: 100%; }
     .process-dock__closing { text-align: left; }

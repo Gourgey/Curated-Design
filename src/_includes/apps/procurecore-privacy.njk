@@ -48,7 +48,7 @@
 
     <h3>Optional AI information</h3>
     <ul>
-        <li>Your question and up to 12 earlier turns from the current in-memory conversation.</li>
+        <li>Your question and up to 12 earlier turns from the current conversation.</li>
         <li>A freshly generated, limited studio or project snapshot, including studio name and currency, and relevant project budgets, spend, and order or delivery status.</li>
         <li>Client names, placement issue notes, and tracking references only when you explicitly turn on “Include client &amp; notes”. This setting is off by default.</li>
     </ul>
@@ -99,7 +99,7 @@
         Client names, placement issue notes, and tracking references are included only when you turn on “Include client &amp; notes”, which is off by default. AI requests do not include images, supplier account details, or project or client addresses.
     </p>
     <p>
-        Chat messages are held in memory by the app and are not saved to its local database or to Supabase. The in-memory conversation disappears when you clear or dismiss it or when the app exits. Supabase stores only the request ID, studio ID, request state, and timestamps needed to enforce quotas and keep an operational audit; it does not store the question, snapshot, conversation, or answer.
+        Your AI conversations are saved on your device, separately for each studio and for your account only, so you can come back to them. They are not saved to ProcureCore’s servers or to Supabase. You can remove a conversation at any time with Clear Chat, and deleting your ProcureCore account removes the conversations saved on that device. Supabase stores only the request ID, studio ID, request state, and timestamps needed to enforce quotas and keep an operational audit; it does not store the question, snapshot, conversation, or answer.
     </p>
     <p>
         Anthropic processes prompts and responses to generate an answer. Under Anthropic’s standard commercial API terms, inputs and outputs may be retained for up to 30 days, subject to legal, safety, and usage-policy exceptions. Anthropic states that commercial API content is not used to train its generative models by default. Read Anthropic’s current information about <a href="https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data">commercial data retention</a> and <a href="https://privacy.claude.com/en/articles/7996885-how-do-you-use-personal-data-in-model-training">commercial data and model training</a>.
@@ -174,7 +174,7 @@
         Deleting a workspace removes its records and the files uploaded to it — product images, project covers, attachments and the workspace logo — from our servers.
     </p>
     <ul>
-        <li>ProcureCore does not persist AI message content. AI quota and audit records remain until the studio is deleted.</li>
+        <li>ProcureCore does not store AI message content on its servers. Conversations saved on your device are removed with Clear Chat or when you delete your account. AI quota and audit records remain until the studio is deleted.</li>
         <li>Under the standard commercial API terms assumed here, Anthropic may retain API inputs and outputs for up to 30 days, subject to its legal, safety, and usage-policy exceptions.</li>
     </ul>
     <p>

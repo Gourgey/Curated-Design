@@ -38,7 +38,7 @@ const items = [
     lastUpdated: "28 July 2026",
     pageLastUpdated: {
       privacy: "29 September 2026",
-      terms: "28 September 2026",
+      terms: "29 September 2026",
       support: "29 September 2026",
       "data-processing": "12 August 2026",
     },

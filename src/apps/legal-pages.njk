@@ -169,6 +169,10 @@ sectionTop: true
             {% include "apps/mythos-log-support.njk" %}
             {% elif appPage.app.slug == "mythos-log" and appPage.kind == "terms" %}
             {% include "apps/mythos-log-terms.njk" %}
+            {% elif appPage.app.slug == "locis" and appPage.kind == "privacy" %}
+            {% include "apps/locis-privacy.njk" %}
+            {% elif appPage.app.slug == "locis" and appPage.kind == "support" %}
+            {% include "apps/locis-support.njk" %}
             {% endif %}
         </div>
     </section>

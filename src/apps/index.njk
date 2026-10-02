@@ -52,7 +52,11 @@ sectionTop: true
                     </div>
                     {% else %}
                     <div class="app-feature-stage app-feature-stage--type" aria-hidden="true">
+                        {% if app.logo %}
+                        <img class="app-feature-logo" src="{{ app.logo }}" alt="" width="220" height="220" loading="lazy" decoding="async">
+                        {% else %}
                         <span class="app-feature-wordmark">{{ app.name }}</span>
+                        {% endif %}
                         <span class="app-feature-soon">Screens coming soon</span>
                     </div>
                     {% endif %}

@@ -79,6 +79,13 @@ sectionTop: true
                     {% endfor %}
                 </aside>
             </div>
+
+            {% if app.notice %}
+            <article class="app-prose app-prose--notice">
+                <h2>Important notice</h2>
+                <p>{{ app.notice }}</p>
+            </article>
+            {% endif %}
         </div>
     </section>
 </main>

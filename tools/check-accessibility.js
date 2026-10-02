@@ -126,6 +126,24 @@ const scans = [
     width: 390,
     height: 844,
   },
+  {
+    label: "Locis landing mobile",
+    route: "/apps/locis/",
+    width: 390,
+    height: 844,
+  },
+  {
+    label: "Locis privacy mobile",
+    route: "/apps/locis/privacy/",
+    width: 390,
+    height: 844,
+  },
+  {
+    label: "Locis support mobile",
+    route: "/apps/locis/support/",
+    width: 390,
+    height: 844,
+  },
   { label: "Homepage desktop", route: "/", width: 1440, height: 1000 },
   {
     label: "ProcureCore landing desktop",
@@ -214,6 +232,24 @@ const scans = [
   {
     label: "Mythos Log terms desktop",
     route: "/apps/mythos-log/terms/",
+    width: 1440,
+    height: 1000,
+  },
+  {
+    label: "Locis landing desktop",
+    route: "/apps/locis/",
+    width: 1440,
+    height: 1000,
+  },
+  {
+    label: "Locis privacy desktop",
+    route: "/apps/locis/privacy/",
+    width: 1440,
+    height: 1000,
+  },
+  {
+    label: "Locis support desktop",
+    route: "/apps/locis/support/",
     width: 1440,
     height: 1000,
   },

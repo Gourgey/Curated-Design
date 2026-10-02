@@ -347,6 +347,72 @@ const items = [
       },
     },
   },
+  // iPhone only. No account, server, sync, adverts or analytics. Parking rules are
+  // downloaded as data files from a static host (currently GitHub Pages), which the
+  // privacy policy names: update that paragraph first if the host ever changes, or if
+  // the app starts sending anything else off the device.
+  // No screenshots yet, so the /apps/ showcase shows the logo instead. No App Store
+  // badge or link until there is a real listing URL.
+  {
+    name: "Locis",
+    slug: "locis",
+    logo: "/assets/images/app_logos/locis.svg",
+    eyebrow: "Parking",
+    description:
+      "A free iPhone app that shows whether you can legally park on a UK kerb for your whole stay, using open government data.",
+    overview:
+      "Locis shows where you can legally park for the whole of your stay. Choose when you will arrive and leave, and the kerbs around your destination are coloured by what the published traffic orders allow: free, paid, permit holders, reserved bays, or not allowed. It is guidance, not a guarantee, and it does not show whether a space is free.",
+    lastUpdated: "2 October 2026",
+    information: [
+      {
+        label: "Support",
+        value: supportEmail,
+        url: supportEmailUrl,
+      },
+      {
+        label: "Platform",
+        value: "iPhone (iOS 18 or later)",
+      },
+      {
+        label: "Price",
+        value: "Free",
+      },
+      {
+        label: "Coverage",
+        value:
+          "UK, starting with London. Depends on which councils have published their traffic orders",
+      },
+      {
+        label: "Data",
+        value:
+          "Department for Transport D-TRO service. Contains public sector information licensed under the Open Government Licence v3.0",
+      },
+      {
+        label: "Privacy",
+        value: "No account, adverts, tracking or analytics",
+      },
+    ],
+    // Closing section on the app page and the support page.
+    notice:
+      "Parking information is provided as guidance. Always check local signs, road markings and temporary restrictions before parking. Curated Design cannot accept responsibility for penalty charges.",
+    appStoreUrl: "",
+    supportPages: ["privacy", "support"],
+    metaTitle: "Locis — Curated Design",
+    metaDescription:
+      "Locis is a free iPhone app that shows whether you can legally park on a UK kerb for your whole stay, using open government data. No account, adverts, tracking or analytics.",
+    pageMeta: {
+      privacy: {
+        title: "Locis Privacy Policy — Curated Design",
+        description:
+          "How Locis handles your information: no accounts, no personal information collected, and your location, searches, chosen times and settings are not sent to Curated Design.",
+      },
+      support: {
+        title: "Locis Support — Curated Design",
+        description:
+          "Help with Locis: missing or grey kerb lines, amber lines, missing prices, location access, deleting data, and contact details for Curated Design.",
+      },
+    },
+  },
 ];
 
 const defaultSupportPages = ["privacy", "support", "terms"];

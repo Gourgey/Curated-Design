@@ -501,6 +501,20 @@ const localFirstApps = [
     // iPhone and iPad only, with no Live Activities or calendar access.
     unsupportedClaims: [/Live Activit/i, /\bcalendars?\b/i, /\bMac\b|\bmacOS\b/],
   },
+  {
+    name: "Locis",
+    slug: "locis",
+    // iPhone only, with nothing stored off the device: no iCloud sync, iPad or Mac
+    // version, widgets, or notifications.
+    unsupportedClaims: [
+      /\biCloud\b/i,
+      /\bCloudKit\b/i,
+      /\biPad\b/,
+      /\bMac\b|\bmacOS\b/,
+      /\bwidgets?\b/i,
+      /\bnotifications?\b/i,
+    ],
+  },
 ];
 const appsIndexPath = path.join(outputRoot, "apps/index.html");
 const appsIndexHtml = fs.readFileSync(appsIndexPath, "utf8");

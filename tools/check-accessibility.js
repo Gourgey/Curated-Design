@@ -375,6 +375,20 @@ async function checkProcessCarousel(page) {
     throw new Error(`Process carousel did not advance: ${JSON.stringify(afterNext)}`);
   }
   await page.click("#process [data-process-toggle]");
+  // Closing a step cross-fades its colours; let every transition settle so
+  // Axe measures the resting contrast, not a mid-fade frame.
+  await page.evaluate(() =>
+    Promise.allSettled(
+      document
+        .querySelector("#process")
+        .getAnimations({ subtree: true })
+        .map((animation) => animation.finished),
+    ),
+  );
+  const afterReset = await readState();
+  if (afterReset.expanded[0] !== "true" || afterReset.visibleDetails !== 1) {
+    throw new Error(`Process carousel did not return to the first step: ${JSON.stringify(afterReset)}`);
+  }
 }
 
 async function checkProjectCarousel(page) {

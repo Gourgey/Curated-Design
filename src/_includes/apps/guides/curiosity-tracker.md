@@ -1,4 +1,4 @@
-Curiosity Tracker is a place to capture the questions you want to explore, come back to them at the right time, and see what you've been curious about over time.
+CuriosityTracker is a place to capture the questions you want to explore, come back to them at the right time, and see what you've been curious about over time.
 
 ## Getting Started
 
@@ -28,17 +28,17 @@ The home screen shows a quick overview: how many curiosities you have, how many 
 
 ## Saving From Other Apps
 
-You can send webpages, text, PDFs, and files straight into Curiosity Tracker from Safari and other apps.
+You can send webpages, text, PDFs, and files straight into CuriosityTracker from Safari and other apps.
 
 1. Tap the **Share** button in the other app.
-2. Choose **Curiosity Tracker**.
+2. Choose **CuriosityTracker**.
 3. Choose to create a new curiosity or add the item to an existing one, then tap **Save**.
 
 Shared files appear as attachments on the curiosity. Tap one to preview it.
 
 ## Adding With Siri and Shortcuts
 
-Say **"Add curiosity in Curiosity Tracker"** to Siri, or use the **Add Curiosity** action in the Shortcuts app. Your curiosity is saved without opening the app.
+Say **"Add curiosity in CuriosityTracker"** to Siri, or use the **Add Curiosity** action in the Shortcuts app. Your curiosity is saved without opening the app.
 
 ## Your Library
 
@@ -87,17 +87,17 @@ Your data is stored in your own iCloud account and isn't shared with anyone else
 ## Troubleshooting
 
 **My curiosities aren't showing up on my other device.**
-Check that you're signed in to the same Apple Account on both devices and that iCloud is turned on for Curiosity Tracker. Syncing can take a few minutes.
+Check that you're signed in to the same Apple Account on both devices and that iCloud is turned on for CuriosityTracker. Syncing can take a few minutes.
 
 **I'm not getting reminders.**
-Make sure the reminder is turned on in your research goal, and that notifications are allowed for Curiosity Tracker in **Settings › Notifications**. Reminders pause once you've met your goal for the current day or week.
+Make sure the reminder is turned on in your research goal, and that notifications are allowed for CuriosityTracker in **Settings › Notifications**. Reminders pause once you've met your goal for the current day or week.
 
-**Curiosity Tracker doesn't appear in the Share menu.**
-Tap **More** at the end of the app row in the Share menu and turn on Curiosity Tracker.
+**CuriosityTracker doesn't appear in the Share menu.**
+Tap **More** at the end of the app row in the Share menu and turn on CuriosityTracker.
 
 **A curiosity disappeared from Resurface.**
 It's either marked as Answered or scheduled for a later day. Check the **Tomorrow** and **Next Week** sections, or find it in your library.
 
 ## Need more help?
 
-Read [Curiosity Tracker Support](/apps/curiosity-tracker/support/), or email [info@curateddesign.studio](mailto:info@curateddesign.studio).
+Read [CuriosityTracker Support](/apps/curiosity-tracker/support/), or email [info@curateddesign.studio](mailto:info@curateddesign.studio).

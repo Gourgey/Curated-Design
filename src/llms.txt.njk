@@ -49,6 +49,10 @@ eleventyExcludeFromCollections: true
 Curated Design also makes apps, developed alongside the studio. Each has its own page with a how-to guide, privacy, and support information.
 {% for app in apps.items %}
 ### {{ app.name | safe }}
+{%- if app.alternateNames and app.alternateNames.length %}
+
+Also written as: {{ app.alternateNames | join(", ") | safe }}.
+{%- endif %}
 
 - Page: {{ base | safe }}/apps/{{ app.slug | safe }}/
 {%- if app.guide %}

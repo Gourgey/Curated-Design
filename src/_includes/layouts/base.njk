@@ -177,6 +177,7 @@
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
             "name": {{ app.name | dump | safe }},
+            {% if app.alternateNames and app.alternateNames.length %}"alternateName": {{ app.alternateNames | dump | safe }},{% endif %}
             "url": "{{ canonicalUrl }}",
             "description": {{ (app.metaDescription or app.description) | dump | safe }},
             {% if app.applicationCategory %}"applicationCategory": {{ app.applicationCategory | dump | safe }},{% endif %}

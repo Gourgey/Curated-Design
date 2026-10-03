@@ -28,7 +28,7 @@ const items = [
   // A fourth string was removed on 2026-08-13 (commit d5b5689): an unrendered
   // `platform` value that would have published an availability claim if this
   // entry's `information` array were ever emptied. `platform` remains a live
-  // field for Curiosity Tracker — see app-pages.njk:57.
+  // field for CuriosityTracker — see app-pages.njk:57.
   {
     name: "ProcureCore",
     slug: "procurecore",
@@ -93,6 +93,10 @@ const items = [
       "data-processing": "Data Processing Schedule",
     },
     // Schema.org SoftwareApplication fields for the app page's structured data.
+    // Other spellings people may search for. Published only in structured
+    // data and /llms.txt, so search engines and AI assistants treat them as
+    // this app; the visible pages always use the App Store spelling (`name`).
+    alternateNames: ["Procure Core"],
     applicationCategory: "BusinessApplication",
     operatingSystem: "iOS, macOS",
     // Shown as a visible FAQ on /apps/procurecore/ and mirrored as FAQPage
@@ -313,6 +317,7 @@ const items = [
     appStoreUrl: "",
     guide: readGuide("curatedledger"),
     supportPages: ["guide", "privacy", "support"],
+    alternateNames: ["Curated Ledger"],
     applicationCategory: "FinanceApplication",
     operatingSystem: "iOS, iPadOS",
     faqs: [
@@ -406,6 +411,7 @@ const items = [
     appStoreUrl: "",
     guide: readGuide("mythos-log"),
     supportPages: ["guide", "privacy", "support", "terms"],
+    alternateNames: ["MythosLog"],
     applicationCategory: "HealthApplication",
     operatingSystem: "iOS 17 or later, iPadOS",
     faqs: [
@@ -461,19 +467,19 @@ const items = [
     },
   },
   {
-    name: "Curiosity Tracker",
+    name: "CuriosityTracker",
     slug: "curiosity-tracker",
     // Phone screenshots for the /apps/ showcase; the first is shown front and centre.
     screenshots: [
-      { src: "/assets/images/app_screenshots/curiosity_tracker/01-home.webp", alt: "Curiosity Tracker home screen with an overview of curiosities and a weekly research goal" },
-      { src: "/assets/images/app_screenshots/curiosity_tracker/02-library.webp", alt: "Curiosity Tracker library of saved questions, filterable by status" },
+      { src: "/assets/images/app_screenshots/curiosity_tracker/01-home.webp", alt: "CuriosityTracker home screen with an overview of curiosities and a weekly research goal" },
+      { src: "/assets/images/app_screenshots/curiosity_tracker/02-library.webp", alt: "CuriosityTracker library of saved questions, filterable by status" },
       { src: "/assets/images/app_screenshots/curiosity_tracker/03-curiosity.webp", alt: "A single curiosity with its notes, source link, tags and timeline" },
     ],
     eyebrow: "Personal research",
     description:
       "A personal app for capturing questions, organising curiosities, and resurfacing ideas over time.",
     overview:
-      "Curiosity Tracker is a quiet place to hold questions, notes, links, PDFs, tags, and resurfacing dates so ideas can return at the right moment.",
+      "CuriosityTracker is a quiet place to hold questions, notes, links, PDFs, tags, and resurfacing dates so ideas can return at the right moment.",
     platform: "Available on iOS",
     // The publisher details on the privacy policy and terms were changed on this date.
     pageLastUpdated: {
@@ -485,15 +491,16 @@ const items = [
     appStoreUrl: "",
     guide: readGuide("curiosity-tracker"),
     supportPages: ["guide", "privacy", "support", "terms"],
+    alternateNames: ["Curiosity Tracker"],
     applicationCategory: "ReferenceApplication",
     operatingSystem: "iOS",
     faqs: [
       {
-        q: "What is Curiosity Tracker?",
-        a: "Curiosity Tracker is a personal iOS app for capturing questions, organising curiosities, and resurfacing ideas over time.",
+        q: "What is CuriosityTracker?",
+        a: "CuriosityTracker is a personal iOS app for capturing questions, organising curiosities, and resurfacing ideas over time.",
       },
       {
-        q: "Who is Curiosity Tracker for?",
+        q: "Who is CuriosityTracker for?",
         a: "Curious people, students, researchers, and lifelong learners who collect questions and ideas and want them to come back at the right moment instead of getting lost in notes.",
       },
       {
@@ -501,37 +508,37 @@ const items = [
         a: "Questions, notes, links, PDFs, tags, statuses, dates, and resurfacing prompts. Each curiosity keeps its notes, source link, tags, and timeline together, and the library can be filtered by status.",
       },
       {
-        q: "Does Curiosity Tracker sync?",
+        q: "Does CuriosityTracker sync?",
         a: "Optionally. Content is stored on your device, and when iCloud is enabled it syncs through your own private iCloud database.",
       },
       {
-        q: "Does Curiosity Tracker track me?",
-        a: "No. Curiosity Tracker has no ads, no tracking, and no analytics.",
+        q: "Does CuriosityTracker track me?",
+        a: "No. CuriosityTracker has no ads, no tracking, and no analytics.",
       },
     ],
-    metaTitle: "Curiosity Tracker — Curated Design",
+    metaTitle: "CuriosityTracker — Curated Design",
     metaDescription:
-      "Curiosity Tracker is a personal iOS app for capturing questions, organising curiosities, and resurfacing ideas over time. No ads, no tracking, no analytics.",
+      "CuriosityTracker is a personal iOS app for capturing questions, organising curiosities, and resurfacing ideas over time. No ads, no tracking, no analytics.",
     pageMeta: {
       guide: {
-        title: "How to Use Curiosity Tracker — Curated Design",
+        title: "How to Use CuriosityTracker — Curated Design",
         description:
-          "How to use Curiosity Tracker: adding curiosities, statuses, saving from other apps, Resurface, Insights, and research goals.",
+          "How to use CuriosityTracker: adding curiosities, statuses, saving from other apps, Resurface, Insights, and research goals.",
       },
       privacy: {
-        title: "Curiosity Tracker Privacy Policy — Curated Design",
+        title: "CuriosityTracker Privacy Policy — Curated Design",
         description:
-          "How Curiosity Tracker handles your data. Content is stored locally on your device, and — when iCloud is enabled — synced through your own private iCloud database. Curated Design does not operate a server that receives or stores your content.",
+          "How CuriosityTracker handles your data. Content is stored locally on your device, and — when iCloud is enabled — synced through your own private iCloud database. Curated Design does not operate a server that receives or stores your content.",
       },
       support: {
-        title: "Curiosity Tracker Support — Curated Design",
+        title: "CuriosityTracker Support — Curated Design",
         description:
-          "Help with Curiosity Tracker: iCloud sync, PDFs, notifications, deleting data, and contact details for Curated Design.",
+          "Help with CuriosityTracker: iCloud sync, PDFs, notifications, deleting data, and contact details for Curated Design.",
       },
       terms: {
-        title: "Curiosity Tracker Terms — Curated Design",
+        title: "CuriosityTracker Terms — Curated Design",
         description:
-          "Terms of use for Curiosity Tracker, a personal organisation tool from Curated Design — your responsibilities, app availability, and support contact details.",
+          "Terms of use for CuriosityTracker, a personal organisation tool from Curated Design — your responsibilities, app availability, and support contact details.",
       },
     },
   },

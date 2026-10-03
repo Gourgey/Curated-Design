@@ -9,7 +9,7 @@ module.exports = [
   },
   js.configs.recommended,
   {
-    files: ["assets/js/**/*.js", "src/admin/**/*.js", "admin/**/*.js"],
+    files: ["assets/js/**/*.js"],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "script",
@@ -24,7 +24,6 @@ module.exports = [
       ".eleventy.js",
       "eslint.config.js",
     ],
-    ignores: ["tools/visual-cms/web/**"],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "commonjs",
@@ -40,14 +39,6 @@ module.exports = [
       ecmaVersion: "latest",
       sourceType: "commonjs",
       globals: { ...globals.node, ...globals.browser },
-    },
-  },
-  {
-    files: ["tools/visual-cms/web/**/*.js"],
-    languageOptions: {
-      ecmaVersion: "latest",
-      sourceType: "script",
-      globals: { ...globals.browser },
     },
   },
 ];

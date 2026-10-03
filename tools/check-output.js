@@ -52,9 +52,7 @@ if (!fs.existsSync(outputRoot)) {
 
 const files = walk(outputRoot);
 const htmlFiles = files.filter((file) => file.endsWith(".html")).sort();
-const publicHtmlFiles = htmlFiles.filter(
-  (file) => path.relative(outputRoot, file) !== path.join("admin", "index.html"),
-);
+const publicHtmlFiles = htmlFiles;
 let imageCount = 0;
 let formCount = 0;
 let internalLinkCount = 0;
@@ -315,6 +313,20 @@ procureCoreRoutes.forEach((route) => {
   });
 });
 
+// The ProcureCore how-to guide is not a policy page (so it is outside the
+// cross-link rule above), but it must not repeat a superseded claim either.
+{
+  const file = path.join(outputRoot, "apps/procurecore/guide/index.html");
+  if (!fs.existsSync(file)) {
+    fail(sitemapPath, "ProcureCore guide was not generated: /apps/procurecore/guide/");
+  } else {
+    const html = fs.readFileSync(file, "utf8");
+    staleProcureCoreClaims.forEach((pattern) => {
+      if (pattern.test(html)) fail(file, `contains stale ProcureCore claim matching ${pattern}`);
+    });
+  }
+}
+
 const procureCoreLanding = fs.readFileSync(
   path.join(outputRoot, "apps/procurecore/index.html"),
   "utf8",
@@ -519,7 +531,9 @@ const localFirstApps = [
 const appsIndexPath = path.join(outputRoot, "apps/index.html");
 const appsIndexHtml = fs.readFileSync(appsIndexPath, "utf8");
 localFirstApps.forEach((app) => {
-  const kinds = app.kinds || ["privacy", "support"];
+  // Every local-first app except Locis also has a how-to guide; it is held to
+  // the same claim rules as the app's support and policy pages.
+  const kinds = (app.kinds || ["privacy", "support"]).concat(app.slug === "locis" ? [] : ["guide"]);
   const routes = [`/apps/${app.slug}/`, ...kinds.map((kind) => `/apps/${app.slug}/${kind}/`)];
   routes.forEach((route) => {
     const file = path.join(outputRoot, route.slice(1), "index.html");
@@ -657,7 +671,7 @@ htmlFiles.forEach((file) => {
   });
 });
 
-[path.join(outputRoot, "admin/index.html"), path.join(outputRoot, "thank-you/index.html")].forEach(
+[path.join(outputRoot, "thank-you/index.html")].forEach(
   (file) => {
     const html = fs.readFileSync(file, "utf8");
     if (!/<meta\s+name=["']robots["']\s+content=["']noindex,\s*follow["']/i.test(html)) {

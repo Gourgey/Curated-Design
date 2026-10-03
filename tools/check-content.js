@@ -235,21 +235,6 @@ if (home.philosophy && home.philosophy.image && !home.philosophy.imageAlt) {
   warn("home.philosophy.imageAlt is empty; confirm whether the image is decorative");
 }
 
-const cmsConfig = fs.readFileSync(path.join(root, "admin/config.yml"), "utf8");
-[
-  "primaryCtaUrl",
-  "shareImage",
-  "shareImageAlt",
-  "gallery",
-  "articleHeading",
-  "status",
-].forEach((field) => {
-  const fieldPattern = new RegExp(`name:\\s*["']?${field}["']?`);
-  if (!fieldPattern.test(cmsConfig)) {
-    fail(`admin/config.yml does not preserve editable field "${field}"`);
-  }
-});
-
 const publishedProjects = projects.filter((entry) => entry.data.status === "published");
 if (publishedProjects.length < 3) {
   warn(

@@ -1,6 +1,6 @@
 ---
 layout: layouts/base.njk
-title: Services – Curated Design Studio
+title: Interior Design Services in London – Curated Design Studio
 eleventyComputed:
   description: "{{ site.servicesPage.metaDescription or site.settings.description }}"
 permalink: services/index.html
@@ -39,6 +39,26 @@ topLogo: logo_no_text_on_transparent.svg
             </div>
         </div>
     </section>
+
+    {# Mirrored as FAQPage structured data in layouts/base.njk. #}
+    {% set faqs = site.servicesPage.faqs %}
+    {% if faqs and faqs.length %}
+    <section class="projects-section services-faq" aria-labelledby="services-faq-title">
+        <div class="projects-section__inner">
+            <h2 class="services-faq__title" id="services-faq-title">{{ site.servicesPage.faqHeading or "Frequently asked questions" }}</h2>
+            <div class="services-faq__list">
+                {% for faq in faqs %}
+                {% if faq.question and faq.answer %}
+                <div class="services-faq__item">
+                    <h3 class="services-faq__question">{{ faq.question }}</h3>
+                    <p class="services-faq__answer">{{ faq.answer }}</p>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
 
     {% set heading = site.settings.ctaHeading %}
     {% set text = site.settings.ctaText %}

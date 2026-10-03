@@ -1,3 +1,13 @@
+const fs = require("fs");
+const path = require("path");
+
+// How-to guides, written as Markdown in src/_includes/apps/guides/<slug>.md
+// and published at /apps/<slug>/guide/. Returns "" for an app with no guide.
+function readGuide(slug) {
+  const file = path.join(__dirname, "..", "_includes", "apps", "guides", `${slug}.md`);
+  return fs.existsSync(file) ? fs.readFileSync(file, "utf8") : "";
+}
+
 const lastUpdated = "29 April 2026";
 const supportEmail = "info@curateddesign.studio";
 const supportEmailUrl = `mailto:${supportEmail}`;
@@ -76,15 +86,61 @@ const items = [
     ],
     summaryInclude: "apps/procurecore-summary.njk",
     appStoreUrl: "",
-    supportPages: ["privacy", "terms", "support", "data-processing"],
+    guide: readGuide("procurecore"),
+    supportPages: ["guide", "privacy", "terms", "support", "data-processing"],
     pageTitles: {
       terms: "Terms of Use",
       "data-processing": "Data Processing Schedule",
     },
+    // Schema.org SoftwareApplication fields for the app page's structured data.
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "iOS, macOS",
+    // Shown as a visible FAQ on /apps/procurecore/ and mirrored as FAQPage
+    // structured data. Do not add an availability answer here: "coming soon"
+    // is launch-dependent copy (see the note at the top of this array).
+    faqs: [
+      {
+        q: "What is ProcureCore?",
+        a: "ProcureCore is a procurement and studio collaboration app for interior designers. It brings projects, clients, suppliers, products, placements, approvals, attachments, and reporting into one workspace across iPhone and Mac.",
+      },
+      {
+        q: "Who is ProcureCore for?",
+        a: "Interior-design studios and interior designers who specify furniture, lighting, finishes, and other products for client projects, and want one place to track each item from specification and client approval through to procurement status.",
+      },
+      {
+        q: "Who makes ProcureCore?",
+        a: "ProcureCore is made by Curated Design, a London interior design studio. It was developed alongside the studio's own design and procurement work.",
+      },
+      {
+        q: "Can my whole studio use it?",
+        a: "Yes. A studio workspace can have owners, admins, members, and read-only viewers, each with permissions appropriate to their role. Secure account-based cloud synchronisation keeps authorised studio members up to date across iPhone and Mac.",
+      },
+      {
+        q: "Can I import products from supplier websites?",
+        a: "Yes. ProcureCore can suggest a product's name, price, images, dimensions, and other details from a supplier website. Supplier websites vary, so review every suggested field before saving. The product library keeps retail and trade prices and lead times together.",
+      },
+      {
+        q: "Does ProcureCore use AI?",
+        a: "Only if you choose to. The Studio Pro AI assistant is optional. Client names, placement issue notes, and tracking references are excluded from it unless you turn on “Include client & notes”, which is off by default.",
+      },
+      {
+        q: "How much does ProcureCore cost?",
+        a: "There is a Free plan for up to 3 projects, 30 products, and 1 editor. Studio+ and Studio Pro are auto-renewing App Store subscriptions, monthly or annual, with higher limits, unlimited read-only viewers, and your studio name on exports; Studio Pro adds the AI assistant and includes a 7-day free trial. Apple shows the current price in the app before purchase.",
+      },
+      {
+        q: "Does ProcureCore show adverts or track me?",
+        a: "No. ProcureCore has no advertising or cross-app tracking.",
+      },
+    ],
     metaTitle: "ProcureCore — Procurement for Interior-Design Studios",
     metaDescription:
       "ProcureCore is a calm procurement and collaboration workspace for interior-design studios, with secure account-based sync across iPhone and Mac.",
     pageMeta: {
+      guide: {
+        title: "How to Use ProcureCore — Curated Design",
+        description:
+          "How to use ProcureCore: setting up a studio, adding products from a link, placing products, the Procurement Board, budgets, exports, team roles, plans, and the AI assistant.",
+      },
       privacy: {
         title: "ProcureCore Privacy Policy — Curated Design",
         description:
@@ -155,11 +211,45 @@ const items = [
     ],
     summaryInclude: "apps/concinnity-summary.njk",
     appStoreUrl: "",
-    supportPages: ["privacy", "support"],
+    guide: readGuide("concinnity"),
+    supportPages: ["guide", "privacy", "support"],
+    applicationCategory: "ProductivityApplication",
+    operatingSystem: "iOS, iPadOS, macOS",
+    faqs: [
+      {
+        q: "What is concinnity?",
+        a: "concinnity is a native daily planner for iPhone, iPad, and Mac. It brings tasks, calendar events, and focus sessions into one calm view of the day.",
+      },
+      {
+        q: "Who is concinnity for?",
+        a: "Anyone who wants a single, calm plan for the day: somewhere to capture tasks as they come up, see them next to calendar events, plan days and weeks, and set aside time for focused work.",
+      },
+      {
+        q: "Does concinnity work offline?",
+        a: "Yes. concinnity works offline and stores your planner on your device. Optional iCloud sync keeps your iPhone, iPad, and Mac up to date through your own private iCloud database.",
+      },
+      {
+        q: "Does concinnity connect to my calendar?",
+        a: "Only if you allow it. With your permission, concinnity shows events from your calendars on its timeline next to your planned work, and it only creates or changes an event when you choose to.",
+      },
+      {
+        q: "Can I see my plan without opening the app?",
+        a: "Yes. concinnity offers widgets for the Home Screen and Lock Screen on iPhone and iPad and for the Mac, and Live Activities keep the day in view.",
+      },
+      {
+        q: "Does concinnity track me?",
+        a: "No. concinnity has no advertising, tracking, or third-party analytics, and Curated Design cannot see your planner content.",
+      },
+    ],
     metaTitle: "concinnity — Daily Planner for iPhone, iPad and Mac",
     metaDescription:
       "concinnity is a native daily planner for iPhone, iPad, and Mac. Capture tasks, plan days and weeks alongside your calendar, and schedule focus sessions. No ads, no tracking, no analytics.",
     pageMeta: {
+      guide: {
+        title: "How to Use concinnity — Curated Design",
+        description:
+          "How to use concinnity: adding tasks, planning your day, Top 3, projects, focus sessions, calendars, reminders, and sync.",
+      },
       privacy: {
         title: "concinnity Privacy Policy — Curated Design",
         description:
@@ -221,11 +311,45 @@ const items = [
     ],
     summaryInclude: "apps/curatedledger-summary.njk",
     appStoreUrl: "",
-    supportPages: ["privacy", "support"],
+    guide: readGuide("curatedledger"),
+    supportPages: ["guide", "privacy", "support"],
+    applicationCategory: "FinanceApplication",
+    operatingSystem: "iOS, iPadOS",
+    faqs: [
+      {
+        q: "What is CuratedLedger?",
+        a: "CuratedLedger is a personal finance planner for iPhone and iPad. It shows what is safe to spend, how long your money will last, and how your estimates compare with what actually happened.",
+      },
+      {
+        q: "Who is CuratedLedger for?",
+        a: "People who want a forward-looking view of their money rather than a record of past spending, including anyone with irregular income or expenses who needs to know how long their money lasts if no further income arrives.",
+      },
+      {
+        q: "What does “safe to spend” mean?",
+        a: "It is what remains after bills, debts, tax set aside, and your safety buffer are accounted for.",
+      },
+      {
+        q: "Can I import bank statements?",
+        a: "Yes, optionally. Choose a CSV statement from your bank or card provider and CuratedLedger reads it on your device. It is never uploaded to Curated Design.",
+      },
+      {
+        q: "Is CuratedLedger financial advice?",
+        a: "No. CuratedLedger is a planning tool. Its figures are estimates based on what you enter.",
+      },
+      {
+        q: "Who can see my financial information?",
+        a: "Only you. CuratedLedger keeps your ledger on your device and syncs through your own private iCloud database. It has no advertising, tracking, or third-party analytics, and Curated Design cannot see your financial information.",
+      },
+    ],
     metaTitle: "CuratedLedger — Personal Finance Planner for iPhone and iPad",
     metaDescription:
       "CuratedLedger is a personal finance planner for iPhone and iPad. See what is safe to spend, plan the year ahead, import statements, and compare estimates with what actually happened. No ads, no tracking, no analytics.",
     pageMeta: {
+      guide: {
+        title: "How to Use CuratedLedger — Curated Design",
+        description:
+          "How to use CuratedLedger: income and costs, safe to spend, projections, weekly check-ins, importing statements, profiles, and exports.",
+      },
       privacy: {
         title: "CuratedLedger Privacy Policy — Curated Design",
         description:
@@ -280,11 +404,45 @@ const items = [
       },
     ],
     appStoreUrl: "",
-    supportPages: ["privacy", "support", "terms"],
+    guide: readGuide("mythos-log"),
+    supportPages: ["guide", "privacy", "support", "terms"],
+    applicationCategory: "HealthApplication",
+    operatingSystem: "iOS 17 or later, iPadOS",
+    faqs: [
+      {
+        q: "What is Mythos Log?",
+        a: "Mythos Log is a self-improvement app for iPhone and iPad that treats real habits like character training. You log effort against skills such as creativity, focus, and strength, build stats over time, and a weekly review decides what levels up.",
+      },
+      {
+        q: "Who is Mythos Log for?",
+        a: "People building habits who enjoy the structure of a role-playing game, with stats and levels, but want progress to come from real effort rather than streaks alone.",
+      },
+      {
+        q: "How does levelling up work?",
+        a: "Each skill has a baseline, and extra effort becomes charges. Once a week, the Weekly Review resolves progress, stagnation, decay, and level-ups.",
+      },
+      {
+        q: "Does Mythos Log work with Apple Health?",
+        a: "Optionally. Turn on workout import in the app's settings and eligible Strength and Cardio workouts are read from Apple Health. Mythos Log does not delete anything from Apple Health.",
+      },
+      {
+        q: "Which devices does Mythos Log run on?",
+        a: "iPhone and iPad running iOS 17 or later. Signing in to the same iCloud account on both keeps them in sync, and Export saves your data to a file you choose.",
+      },
+      {
+        q: "Does Mythos Log track me?",
+        a: "No. Mythos Log has no ads, no tracking, and no analytics.",
+      },
+    ],
     metaTitle: "Mythos Log — Curated Design",
     metaDescription:
       "Mythos Log is a self-improvement app for iPhone and iPad that treats real habits like character training, with weekly reviews that decide what levels up. No ads, no tracking, no analytics.",
     pageMeta: {
+      guide: {
+        title: "How to Use Mythos Log — Curated Design",
+        description:
+          "How to use Mythos Log: skills, habits and baselines, logging activity, Charge and ranks, the weekly review, goals, and Apple Health.",
+      },
       privacy: {
         title: "Mythos Log Privacy Policy — Curated Design",
         description:
@@ -325,11 +483,41 @@ const items = [
     sync: "Optional iCloud sync via Apple CloudKit",
     privacySummary: "No ads, no tracking, no analytics",
     appStoreUrl: "",
-    supportPages: ["privacy", "support", "terms"],
+    guide: readGuide("curiosity-tracker"),
+    supportPages: ["guide", "privacy", "support", "terms"],
+    applicationCategory: "ReferenceApplication",
+    operatingSystem: "iOS",
+    faqs: [
+      {
+        q: "What is Curiosity Tracker?",
+        a: "Curiosity Tracker is a personal iOS app for capturing questions, organising curiosities, and resurfacing ideas over time.",
+      },
+      {
+        q: "Who is Curiosity Tracker for?",
+        a: "Curious people, students, researchers, and lifelong learners who collect questions and ideas and want them to come back at the right moment instead of getting lost in notes.",
+      },
+      {
+        q: "What can I save?",
+        a: "Questions, notes, links, PDFs, tags, statuses, dates, and resurfacing prompts. Each curiosity keeps its notes, source link, tags, and timeline together, and the library can be filtered by status.",
+      },
+      {
+        q: "Does Curiosity Tracker sync?",
+        a: "Optionally. Content is stored on your device, and when iCloud is enabled it syncs through your own private iCloud database.",
+      },
+      {
+        q: "Does Curiosity Tracker track me?",
+        a: "No. Curiosity Tracker has no ads, no tracking, and no analytics.",
+      },
+    ],
     metaTitle: "Curiosity Tracker — Curated Design",
     metaDescription:
       "Curiosity Tracker is a personal iOS app for capturing questions, organising curiosities, and resurfacing ideas over time. No ads, no tracking, no analytics.",
     pageMeta: {
+      guide: {
+        title: "How to Use Curiosity Tracker — Curated Design",
+        description:
+          "How to use Curiosity Tracker: adding curiosities, statuses, saving from other apps, Resurface, Insights, and research goals.",
+      },
       privacy: {
         title: "Curiosity Tracker Privacy Policy — Curated Design",
         description:
@@ -397,6 +585,35 @@ const items = [
       "Parking information is provided as guidance. Always check local signs, road markings and temporary restrictions before parking. Curated Design cannot accept responsibility for penalty charges.",
     appStoreUrl: "",
     supportPages: ["privacy", "support"],
+    applicationCategory: "TravelApplication",
+    operatingSystem: "iOS 18 or later",
+    price: "0",
+    faqs: [
+      {
+        q: "What is Locis?",
+        a: "Locis is a free iPhone app that shows whether you can legally park on a UK kerb for the whole of your stay, using traffic orders that councils publish through the Department for Transport.",
+      },
+      {
+        q: "How does Locis work?",
+        a: "Choose when you will arrive and leave, and the kerbs around your destination are coloured by what the published traffic orders allow for that whole period: free, paid, permit holders, reserved bays, or not allowed.",
+      },
+      {
+        q: "Where does Locis work?",
+        a: "In the UK, starting with London. Coverage depends on which councils have published their traffic orders. No coloured line never means parking is unrestricted.",
+      },
+      {
+        q: "Does Locis show free parking spaces?",
+        a: "No. Locis shows what the rules allow on each kerb, not whether a space is currently empty.",
+      },
+      {
+        q: "Can I rely on Locis instead of the signs?",
+        a: "No. Locis is guidance, not a guarantee. Published data can be incomplete, out of date, or wrong, and temporary restrictions may not be included. Always check local signs and road markings before parking.",
+      },
+      {
+        q: "Is Locis free?",
+        a: "Yes. Locis is free, with no adverts, tracking, or analytics, and no account to set up. Your settings and saved parking data stay on your device.",
+      },
+    ],
     metaTitle: "Locis — Curated Design",
     metaDescription:
       "Locis is a free iPhone app that shows whether you can legally park on a UK kerb for your whole stay, using open government data. No account, adverts, tracking or analytics.",
@@ -418,6 +635,7 @@ const items = [
 const defaultSupportPages = ["privacy", "support", "terms"];
 
 const titleByKind = {
+  guide: "How to Use",
   privacy: "Privacy Policy",
   support: "Support",
   terms: "Terms",

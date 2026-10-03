@@ -141,7 +141,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets/fonts");
   eleventyConfig.addPassthroughCopy("assets/images");
   eleventyConfig.addPassthroughCopy("assets/js");
-  eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy({ public: "/" });
 
   const isDraft = (item) => {

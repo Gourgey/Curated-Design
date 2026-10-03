@@ -40,6 +40,15 @@ sections:
       - Delivery coordination with site or property access
       - Resolution of any issues prior to installation
     note: Procurement can run quietly in the background or be closely coordinated with contractors and installers, depending on the project.
+  - heading: How it saves you money
+    listType: ul
+    items:
+      - Trade pricing from suppliers that is not available at retail
+      - A share of that trade saving passed on to you
+      - No separate design fee where the studio supplies the pieces
+      - The same pieces and specification, for less than buying them yourself
+      - An itemised plan, priced openly before anything is ordered
+    note: As an example, a room planned at £10,000 in retail prices could come in at around £8,000 through the studio. Savings vary by supplier and project.
   - heading: Ideal for
     listType: ul
     items:

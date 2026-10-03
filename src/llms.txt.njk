@@ -1,0 +1,85 @@
+---
+permalink: llms.txt
+eleventyExcludeFromCollections: true
+---
+{#- A plain-Markdown summary of the site for AI assistants and LLM crawlers,
+    following the llms.txt convention (https://llmstxt.org). Generated from the
+    same content files as the pages, so it never says more than the site does.
+    Output is plain text, not HTML, so every value is marked `safe` to stop
+    Nunjucks HTML-escaping apostrophes and ampersands. -#}
+{%- set base = site.settings.siteUrl -%}
+# Curated Design
+
+> Curated Design (Curated Design Studio) is an interior design studio based in London, United Kingdom, founded in 2026 by Josh Gourgey after seven years in interior design. It designs residential, hospitality, and commercial interiors across the UK and on selected international projects, particularly in the Middle East, and also publishes a small collection of iPhone, iPad, and Mac apps, including ProcureCore, a procurement app for interior designers.
+
+{{ site.about.introText | safe }}
+
+- Location: {{ site.settings.location | safe }}
+- Areas served: London, the United Kingdom, and selected international projects (particularly the Middle East); remote and overseas clients are supported
+- Founder: Josh Gourgey, interior designer, with seven years in interior design across London residential developments, hospitality (hotels and restaurants), and international work
+- Free photo-realistic render: the studio produces a free photo-realistic render of your space before you commit to anything
+- Pricing: no design fee on furnishing projects where the studio supplies the pieces; clients receive a share of the studio's trade pricing, so the same pieces can cost less than buying them at retail
+- Clients: private clients, architects, and developers, on new-build and refurbishment schemes
+- Contact: {{ site.settings.email | safe }} or {{ base | safe }}/contact/
+- Company: Curated Design Limited, registered in England and Wales (company number 16720521)
+
+## Interior design focus areas
+{% for area in site.about.focusAreas %}
+- {{ area | safe }}
+{%- endfor %}
+
+## Interior design services
+{% for service in collections.publishedService | sortByOrder %}
+- [{{ service.data.title | safe }}]({{ base | safe }}/services/{{ service.data.slug | safe }}/): {{ (service.data.intro or service.data.summary) | safe }}{% for row in service.data.glance %}{% if row.label == "Timeline" %} Timeline: {{ row.text | safe }}.{% endif %}{% endfor %}
+{%- endfor %}
+
+## How a project works
+{% for step in site.about.processSteps %}
+{{ loop.index | safe }}. {{ step.label | safe }}: {{ step.text | safe }}
+{%- endfor %}
+
+## Frequently asked questions
+{% for faq in site.servicesPage.faqs %}
+### {{ faq.question | safe }}
+
+{{ faq.answer | safe }}
+{% endfor %}
+## Apps by Curated Design
+
+Curated Design also makes apps, developed alongside the studio. Each has its own page with a how-to guide, privacy, and support information.
+{% for app in apps.items %}
+### {{ app.name | safe }}
+
+- Page: {{ base | safe }}/apps/{{ app.slug | safe }}/
+{%- if app.guide %}
+- How-to guide: {{ base | safe }}/apps/{{ app.slug | safe }}/guide/
+{%- endif %}
+- Category: {{ app.eyebrow | safe }}
+- Summary: {{ app.description | safe }}
+{%- if app.highlights %}
+- Features:
+{%- for highlight in app.highlights %}
+  - {{ highlight | safe }}
+{%- endfor %}
+{%- endif %}
+{%- for row in app.information %}{% if row.label != "Support" and row.label != "Support email" %}
+- {{ row.label | safe }}: {{ row.value | safe }}
+{%- endif %}{% endfor %}
+{%- if app.platform %}
+- Platform: {{ app.platform | safe }}
+{%- endif %}
+{%- if app.privacySummary %}
+- Privacy: {{ app.privacySummary | safe }}
+{%- endif %}
+{%- for faq in app.faqs %}
+- {{ faq.q | safe }} {{ faq.a | safe }}
+{%- endfor %}
+{% endfor %}
+## Key pages
+
+- [Home]({{ base | safe }}/)
+- [Services]({{ base | safe }}/services/)
+- [Work]({{ base | safe }}/work/): selected residential, hospitality, and commercial interiors
+- [Studio]({{ base | safe }}/studio/): the studio, its founder, and its process
+- [Contact]({{ base | safe }}/contact/)
+- [Apps]({{ base | safe }}/apps/)

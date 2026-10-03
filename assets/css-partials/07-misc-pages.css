@@ -495,6 +495,52 @@ body.app-page .hero-brand {
     margin-bottom: 0;
 }
 
+.app-prose--faq {
+    margin-top: 16px;
+}
+
+.app-prose--faq p:last-child {
+    margin-bottom: 0;
+}
+
+/* How-to guides (rendered from Markdown) are the only app pages with
+   tables. They scroll sideways inside the panel on narrow phones rather than
+   widening the page. */
+.app-prose--guide table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    margin: 0 0 18px;
+    border-collapse: collapse;
+    font-size: 15px;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.78);
+}
+
+.app-prose--guide th,
+.app-prose--guide td {
+    padding: 10px 16px 10px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    text-align: left;
+    vertical-align: top;
+}
+
+.app-prose--guide th {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.app-prose--guide td:first-child {
+    white-space: nowrap;
+}
+
+.app-prose--guide li > p {
+    margin-bottom: 0;
+}
+
 .app-prose h2 {
     margin-top: 28px;
 }

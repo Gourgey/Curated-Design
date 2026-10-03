@@ -375,6 +375,13 @@ async function checkProcessCarousel(page) {
     throw new Error(`Process carousel did not advance: ${JSON.stringify(afterNext)}`);
   }
   await page.click("#process [data-process-toggle]");
+  // Switching steps fades each card's background and text colour. Axe runs
+  // straight after this, so let those transitions finish first: scanning
+  // mid-fade measures a half-light card against half-dark text and reports
+  // a colour-contrast failure no visitor sees once the switch has settled.
+  await page.waitForFunction(
+    () => document.querySelector("#process").getAnimations({ subtree: true }).length === 0,
+  );
 }
 
 async function checkProjectCarousel(page) {

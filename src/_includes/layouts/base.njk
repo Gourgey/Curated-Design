@@ -76,9 +76,26 @@
         {
             "@context": "https://schema.org",
             "@type": ["Organization", "ProfessionalService"],
+            "@id": "{{ site.settings.siteUrl }}/#organization",
             "name": "Curated Design",
             "alternateName": "{{ site.settings.studioName }}",
+            "legalName": "Curated Design Limited",
             "url": "{{ site.settings.siteUrl }}/",
+            "foundingDate": "2026",
+            "founder": {
+                "@type": "Person",
+                "@id": "{{ site.settings.siteUrl }}/studio/#founder",
+                "name": "Josh Gourgey",
+                "jobTitle": "Founder",
+                "description": "Interior designer with seven years in interior design."
+            },
+            "knowsAbout": [
+                "Interior design",
+                {%- for area in site.about.focusAreas %}
+                {{ area | dump | safe }},
+                {%- endfor %}
+                "Interior design procurement"
+            ],
             "logo": "{{ site.settings.siteUrl }}/images/curated-design-logo.png",
             "email": "{{ site.settings.email }}",
             "description": {{ site.settings.description | dump | safe }},
@@ -133,6 +150,112 @@
                 { "@type": "ListItem", "position": 2, "name": "Services", "item": "{{ site.settings.siteUrl }}/services/" },
                 { "@type": "ListItem", "position": 3, "name": {{ service.data.title | dump | safe }}, "item": "{{ canonicalUrl }}" }
             ]
+        }
+        </script>
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": {{ service.data.title | dump | safe }},
+            "serviceType": {{ ("Interior design: " + service.data.title) | dump | safe }},
+            "description": {{ (service.data.intro or service.data.summary) | dump | safe }},
+            "url": "{{ canonicalUrl }}",
+            "provider": {
+                "@type": "ProfessionalService",
+                "@id": "{{ site.settings.siteUrl }}/#organization",
+                "name": "Curated Design",
+                "url": "{{ site.settings.siteUrl }}/"
+            },
+            "areaServed": ["London", "United Kingdom"]
+        }
+        </script>
+        {% elif app %}
+        {# App landing pages (/apps/<slug>/) -- `app` is that template's
+           pagination alias. Every value comes from src/_data/apps.js. #}
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": {{ app.name | dump | safe }},
+            "url": "{{ canonicalUrl }}",
+            "description": {{ (app.metaDescription or app.description) | dump | safe }},
+            {% if app.applicationCategory %}"applicationCategory": {{ app.applicationCategory | dump | safe }},{% endif %}
+            {% if app.operatingSystem %}"operatingSystem": {{ app.operatingSystem | dump | safe }},{% endif %}
+            {% if app.highlights and app.highlights.length %}"featureList": {{ app.highlights | dump | safe }},{% endif %}
+            {% if app.screenshots and app.screenshots.length %}"screenshot": [{% for shot in app.screenshots %}"{{ siteUrl }}{{ shot.src }}"{% if not loop.last %}, {% endif %}{% endfor %}],{% endif %}
+            {% if app.price %}"offers": { "@type": "Offer", "price": {{ app.price | dump | safe }}, "priceCurrency": "GBP" },{% endif %}
+            "publisher": {
+                "@type": "Organization",
+                "@id": "{{ siteUrl }}/#organization",
+                "name": "Curated Design",
+                "legalName": "Curated Design Limited",
+                "url": "{{ siteUrl }}/"
+            }
+        }
+        </script>
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ siteUrl }}/" },
+                { "@type": "ListItem", "position": 2, "name": "Apps", "item": "{{ siteUrl }}/apps/" },
+                { "@type": "ListItem", "position": 3, "name": {{ app.name | dump | safe }}, "item": "{{ canonicalUrl }}" }
+            ]
+        }
+        </script>
+        {% endif %}
+
+        {# FAQPage structured data mirrors the visible FAQ on the same page:
+           the Services listing (question/answer, from src/content/pages/services.json) and each app
+           landing page (q/a, from apps.js). #}
+        {% set pageFaqs = [] %}
+        {% if page.url == "/services/" and site.servicesPage.faqs %}
+        {% set pageFaqs = site.servicesPage.faqs %}
+        {% elif app and app.faqs %}
+        {% set pageFaqs = app.faqs %}
+        {% endif %}
+        {% if pageFaqs.length %}
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {%- for faq in pageFaqs %}
+                {
+                    "@type": "Question",
+                    "name": {{ (faq.q or faq.question) | dump | safe }},
+                    "acceptedAnswer": { "@type": "Answer", "text": {{ (faq.a or faq.answer) | dump | safe }} }
+                }{% if not loop.last %},{% endif %}
+                {%- endfor %}
+            ]
+        }
+        </script>
+        {% endif %}
+
+        {# Studio page -- the founder as a Person, linked to the organisation
+           described on the homepage. Facts from src/content/pages/about.json. #}
+        {% if page.url == "/studio/" %}
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            "url": "{{ canonicalUrl }}",
+            "mainEntity": {
+                "@type": "Person",
+                "@id": "{{ siteUrl }}/studio/#founder",
+                "name": "Josh Gourgey",
+                "jobTitle": "Founder and interior designer",
+                "description": {{ site.about.founder.paragraphs[0] | dump | safe }},
+                "knowsAbout": {{ site.about.focusAreas | dump | safe }},
+                "workLocation": { "@type": "Place", "name": "London, United Kingdom" },
+                "worksFor": {
+                    "@type": "ProfessionalService",
+                    "@id": "{{ siteUrl }}/#organization",
+                    "name": "Curated Design",
+                    "url": "{{ siteUrl }}/"
+                }
+            }
         }
         </script>
         {% endif %}

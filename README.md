@@ -1,10 +1,10 @@
 # Curated Design Website
 
-This site is a static Netlify site generated with Eleventy and edited through Decap CMS. The visual design lives in the existing CSS and JavaScript files; content lives in `src/content`.
+This site is a static Netlify site generated with Eleventy. Content is edited directly in the repository's JSON and Markdown files. The visual design lives in the existing CSS and JavaScript files; content lives in `src/content`.
 
 `assets/css/styles.css` is a **generated file** — edit the source partials in `assets/css-partials/` instead (numbered `01-`–`11-`, concatenated in filename order). It rebuilds automatically as part of `npm run build`, `npm start`, and `npm run check`; run `npm run build:css` directly if you just want to regenerate it without a full build. See `docs/overhaul/DESIGN-TOKENS.md` for how the partials are organised.
 
-> **Editing content?** See [CONTENT-GUIDE.md](CONTENT-GUIDE.md) for a non-developer walkthrough of adding projects, services, and homepage sections through the CMS.
+> **Editing content?** See [CONTENT-GUIDE.md](CONTENT-GUIDE.md) for where every piece of content lives and how to change it.
 
 ## Local Development
 
@@ -49,35 +49,7 @@ npm run lint:js       # ESLint over repository JavaScript
 npm run lint:css      # Stylelint over assets/css-partials/ (the CSS source of truth)
 ```
 
-`lint:css` targets `assets/css-partials/` rather than the generated `assets/css/styles.css`. `format:check` reports pre-existing formatting differences across the wider repository (docs, CMS config, `tools/`); Prettier has not been run repository-wide, so treat that as a baseline rather than a bug list.
-
-## CMS Access
-
-The Decap CMS admin area is available at:
-
-```text
-/admin/
-```
-
-The CMS uses the GitHub backend for `Gourgey/Curated-Design` on the `main` branch. Anyone editing through the CMS needs GitHub access to this repository. On Netlify, keep the build command as `npm run build` and the publish directory as `_site`.
-
-### Editing the CMS locally
-
-`admin/config.yml` has `local_backend: true`, so you can run Decap against the local file system instead of GitHub. This is the safest way to test schema changes or content edits before they hit `main`.
-
-In one terminal, start the dev server:
-
-```sh
-npm start
-```
-
-In a second terminal, start the Decap proxy:
-
-```sh
-npm run cms:local
-```
-
-Then open `http://localhost:8080/admin/`. Saves write directly to local files under `src/content/`. Commit manually after testing.
+`lint:css` targets `assets/css-partials/` rather than the generated `assets/css/styles.css`. `format:check` reports pre-existing formatting differences across the wider repository (docs, `tools/`); Prettier has not been run repository-wide, so treat that as a baseline rather than a bug list.
 
 ## Editing Projects
 
@@ -87,7 +59,7 @@ Projects are stored as Markdown files in:
 src/content/projects/
 ```
 
-Each project controls its title, slug, category, listing image, hero image, tags, facts, article copy, optional gallery, and CTA copy. To add a project in the CMS, use the `Projects` collection. To add one manually, duplicate an existing project file, change the `slug`, update the content, and rebuild.
+Each project controls its title, slug, category, listing image, hero image, tags, facts, article copy, optional gallery, and CTA copy. To add one, duplicate an existing project file, change the `slug`, update the content, and rebuild.
 
 Project URLs are generated from the slug:
 
@@ -95,7 +67,7 @@ Project URLs are generated from the slug:
 /work/project_slug/
 ```
 
-Set `showInProjects: true` to include a project on `/work/`. Homepage project cards are curated from the Homepage entry in Decap, which references Project entries by slug and uses each Project's card image, title, kicker, and URL.
+Set `showInProjects: true` to include a project on `/work/`. Homepage project cards are curated in `src/content/pages/home.json`, which references projects by slug and uses each Project's card image, title, kicker, and URL.
 
 ## Editing Services
 
@@ -105,7 +77,7 @@ Services are stored as Markdown files in:
 src/content/services/
 ```
 
-Each service controls its reusable card image, card alt text, detail page cover image, intro, at-a-glance rows, content sections, enquiry copy, and CTA. To feature a service on the homepage, add it to the Homepage entry's featured services list in Decap. To add a service in the CMS, use the `Services` collection. To add one manually, duplicate an existing service file, change the `slug`, update the `order`, and rebuild.
+Each service controls its reusable card image, card alt text, detail page cover image, intro, at-a-glance rows, content sections, enquiry copy, and CTA. To feature a service on the homepage, add its slug to `servicesSection.featuredServices` in `src/content/pages/home.json`. To add one, duplicate an existing service file, change the `slug`, update the `order`, and rebuild.
 
 Service URLs are generated from the slug:
 

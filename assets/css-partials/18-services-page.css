@@ -47,3 +47,52 @@ body.services-page .label-small {
 @media (max-width: 920px) {
     body.services-page .projects-header__title { font-size: 48px; }
 }
+
+/* Services FAQ -- the questions block under the service cards. Reuses the
+   listing's .projects-section band (and its top border); the heading matches
+   .projects-section__heading. */
+.services-faq__title {
+    font-family: var(--font-family-display);
+    font-weight: 400;
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: var(--line-height-tight);
+    letter-spacing: -0.012em;
+    color: var(--color-text-primary);
+    margin: 0 0 var(--space-2xl);
+    max-width: 22ch;
+    text-wrap: balance;
+}
+
+.services-faq__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-xl) var(--layout-grid-gap);
+}
+
+.services-faq__item {
+    border-top: var(--border-width-hairline) solid var(--color-border);
+    padding-top: var(--space-md);
+}
+
+.services-faq__question {
+    font-family: var(--font-family-body);
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.4;
+    color: var(--color-text-primary);
+    margin: 0 0 var(--space-xs);
+}
+
+.services-faq__answer {
+    font-size: var(--font-size-body-small);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
+    margin: 0;
+    max-width: var(--layout-reading-width);
+}
+
+@media (max-width: 820px) {
+    .services-faq__list {
+        grid-template-columns: 1fr;
+    }
+}

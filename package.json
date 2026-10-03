@@ -16,8 +16,6 @@
     "check:js": "node tools/check-js.js",
     "check:site": "node tools/check-output.js",
     "start": "eleventy --serve",
-    "cms": "node tools/visual-cms/server.js",
-    "cms:local": "npx -y decap-server",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint:js": "eslint .",

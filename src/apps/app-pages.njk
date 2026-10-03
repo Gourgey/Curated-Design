@@ -73,9 +73,9 @@ sectionTop: true
                 </article>
 
                 <aside class="app-panel app-panel--links" aria-label="{{ app.name }} links">
-                    <h2>Support and policies</h2>
+                    <h2>Guides, support and policies</h2>
                     {% for kind in app.supportPages %}
-                    <a href="/apps/{{ app.slug }}/{{ kind }}/">{% if kind == "privacy" %}Privacy Policy{% elif kind == "support" %}Support{% elif kind == "data-processing" %}Data Processing Schedule{% else %}Terms{% endif %}</a>
+                    <a href="/apps/{{ app.slug }}/{{ kind }}/">{% if kind == "guide" %}How to use {{ app.name }}{% elif kind == "privacy" %}Privacy Policy{% elif kind == "support" %}Support{% elif kind == "data-processing" %}Data Processing Schedule{% else %}Terms{% endif %}</a>
                     {% endfor %}
                 </aside>
             </div>
@@ -84,6 +84,17 @@ sectionTop: true
             <article class="app-prose app-prose--notice">
                 <h2>Important notice</h2>
                 <p>{{ app.notice }}</p>
+            </article>
+            {% endif %}
+
+            {# Mirrored as FAQPage structured data in layouts/base.njk. #}
+            {% if app.faqs and app.faqs.length %}
+            <article class="app-prose app-prose--faq" aria-labelledby="{{ app.slug }}-faq-title">
+                <h2 id="{{ app.slug }}-faq-title">Frequently asked questions</h2>
+                {% for faq in app.faqs %}
+                <h3>{{ faq.q }}</h3>
+                <p>{{ faq.a }}</p>
+                {% endfor %}
             </article>
             {% endif %}
         </div>

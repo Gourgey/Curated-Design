@@ -50,7 +50,7 @@ const items = [
       privacy: "13 November 2026",
       terms: "29 September 2026",
       support: "29 September 2026",
-      "data-processing": "12 August 2026",
+      "data-processing": "13 November 2026",
     },
     information: [
       {

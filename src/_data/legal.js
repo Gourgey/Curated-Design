@@ -766,7 +766,7 @@ VAT is therefore not charged on invoices unless and until Curated Design Limited
 
 ## Business activity
 
-Curated Design Limited provides interior design, procurement, styling, installation coordination, and related services for residential, rental, commercial, and property-focused projects. The company also develops and publishes ProcureCore, a procurement and project management application for design studios, currently in development and releasing on the Apple App Store.
+Curated Design Limited provides interior design, procurement, styling, installation coordination, and related services for residential, rental, commercial, and property-focused projects. The company also develops and publishes ProcureCore, a procurement and project management application for design studios, available on the Apple App Store ([Download ProcureCore on the App Store](https://apps.apple.com/gb/app/id6767230930)).
 
 ## Legal documents
 

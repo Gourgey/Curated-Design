@@ -33,6 +33,7 @@ sectionTop: true
                         <p class="app-feature-desc">{{ app.description }}</p>
                         {% if app.platform %}<p class="app-feature-platform">{{ app.platform }}</p>{% endif %}
                         <a class="app-feature-link" href="/apps/{{ app.slug }}/" aria-label="View {{ app.name }} details">View details<span aria-hidden="true">&rarr;</span></a>
+                        {% if app.appStoreUrl %}<a class="app-feature-link" href="{{ app.appStoreUrl }}" aria-label="Download {{ app.name }} on the App Store">Download on the App Store<span aria-hidden="true">&rarr;</span></a>{% endif %}
                     </div>
 
                     {% if app.screenshots and app.screenshots.length %}

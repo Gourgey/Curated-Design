@@ -45,7 +45,8 @@ const items = [
       "A calm procurement and studio collaboration workspace for interior designers, available across iPhone and Mac.",
     overview:
       "ProcureCore brings projects, clients, suppliers, products, placements, approvals, attachments, and reporting into one considered workspace for interior-design studios.",
-    lastUpdated: "28 July 2026",
+    lastUpdated: "13 November 2026",
+    appStoreUrl: "https://apps.apple.com/gb/app/id6767230930",
     pageLastUpdated: {
       privacy: "13 November 2026",
       terms: "29 September 2026",

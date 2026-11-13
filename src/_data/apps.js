@@ -290,6 +290,7 @@ const items = [
       "If work dried up tomorrow, how long would your money last? CuratedLedger answers from the cash you already have, never from money you're still waiting to be paid.",
     lastUpdated: "13 November 2026",
     installUrl: "https://apps.apple.com/gb/app/id6814667809",
+    showScreenshotGallery: true,
     information: [
       {
         label: "Platform",

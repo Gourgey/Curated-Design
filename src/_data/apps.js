@@ -47,7 +47,7 @@ const items = [
       "ProcureCore brings projects, clients, suppliers, products, placements, approvals, attachments, and reporting into one considered workspace for interior-design studios.",
     lastUpdated: "28 July 2026",
     pageLastUpdated: {
-      privacy: "29 September 2026",
+      privacy: "13 November 2026",
       terms: "29 September 2026",
       support: "29 September 2026",
       "data-processing": "12 August 2026",

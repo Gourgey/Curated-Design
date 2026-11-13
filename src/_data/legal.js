@@ -741,7 +741,7 @@ The latest version will be published on our website with the date it was last up
       "Registered company details and core business information for Curated Design Limited.",
     metaDescription:
       "Company information for Curated Design Limited, registered in England and Wales.",
-    lastUpdated: "11 August 2026",
+    lastUpdated: "13 November 2026",
     content: `
 ## Overview
 
@@ -782,6 +782,7 @@ ProcureCore (software product):
 
 - ProcureCore Terms of Use: [https://curateddesign.studio/apps/procurecore/terms/](https://curateddesign.studio/apps/procurecore/terms/)
 - ProcureCore Privacy Policy: [https://curateddesign.studio/apps/procurecore/privacy/](https://curateddesign.studio/apps/procurecore/privacy/)
+- ProcureCore Data Processing Schedule: [https://curateddesign.studio/apps/procurecore/data-processing/](https://curateddesign.studio/apps/procurecore/data-processing/)
 
 ## Contact
 

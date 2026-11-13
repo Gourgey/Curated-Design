@@ -475,21 +475,24 @@ if (capSubordinations.length !== 2) {
 }
 
 // concinnity and CuratedLedger are local-first apps with no Curated Design account or
-// server, and neither has an App Store listing yet. Every such app's pages must never
-// claim an account, a subscription or payment, server-side storage, a download badge,
+// server. Every such app's pages must never
+// claim an account, a subscription or payment, server-side storage,
 // or that turning sync off deletes iCloud data. Each app then lists the features it
 // does not have, so copy borrowed from a sibling app cannot publish them.
 const localFirstClaims = [
   /\b(?:create|sign in to|sign up for) (?:an? |your )?(?:[a-z]+ )?account/i,
   /\bsubscription/i,
   /\bin-app purchase/i,
-  /apps\.apple\.com/i,
-  /Download on the App Store/i,
   /our (?:servers?|backend)/i,
   /turning (?:iCloud )?sync off (?:deletes|removes|erases)/i,
 ];
 const localFirstApps = [
-  { name: "concinnity", slug: "concinnity", unsupportedClaims: [] },
+  {
+    name: "concinnity",
+    slug: "concinnity",
+    // No App Store listing yet.
+    unsupportedClaims: [/apps\.apple\.com/i, /Download on the App Store/i],
+  },
   {
     name: "CuratedLedger",
     slug: "curatedledger",
@@ -511,7 +514,13 @@ const localFirstApps = [
     slug: "mythos-log",
     kinds: ["privacy", "support", "terms"],
     // iPhone and iPad only, with no Live Activities or calendar access.
-    unsupportedClaims: [/Live Activit/i, /\bcalendars?\b/i, /\bMac\b|\bmacOS\b/],
+    unsupportedClaims: [
+      /apps\.apple\.com/i,
+      /Download on the App Store/i,
+      /Live Activit/i,
+      /\bcalendars?\b/i,
+      /\bMac\b|\bmacOS\b/,
+    ],
   },
   {
     name: "Locis",
@@ -519,6 +528,8 @@ const localFirstApps = [
     // iPhone only, with nothing stored off the device: no iCloud sync, iPad or Mac
     // version, widgets, or notifications.
     unsupportedClaims: [
+      /apps\.apple\.com/i,
+      /Download on the App Store/i,
       /\biCloud\b/i,
       /\bCloudKit\b/i,
       /\biPad\b/,

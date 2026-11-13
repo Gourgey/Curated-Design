@@ -3184,6 +3184,35 @@ body.recovery-page {
         border-radius: 16px;
     }
 }
+
+.app-shots {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 24px;
+    margin: 32px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.app-shots--ipad {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.app-shots figure {
+    margin: 0;
+}
+
+.app-shots .app-shot-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+}
+
+.app-shots figcaption {
+    margin-top: 8px;
+    font-size: var(--font-size-body-small);
+}
 /* ============================================================
    Homepage redesign — Featured Projects + Design Philosophy + CTA
    Prototype: Website Redesign : Stage X / Homepage - Standalone.

@@ -6,6 +6,8 @@ pagination:
 permalink: "apps/{{ app.slug }}/index.html"
 layout: layouts/base.njk
 eleventyComputed:
+  ogImageFinal: "{{ app.ogImage }}"
+  ogImageAlt: "{{ app.ogImageAlt }}"
   title: "{% if app.metaTitle %}{{ app.metaTitle }}{% else %}{{ app.name }} – Apps by Curated Design{% endif %}"
   description: "{% if app.metaDescription %}{{ app.metaDescription }}{% else %}{{ app.description }}{% endif %}"
 htmlClass: app-page
@@ -28,6 +30,37 @@ sectionTop: true
 
             {% if app.summaryInclude %}
             {% include app.summaryInclude %}
+            {% endif %}
+
+            {# Image shortcodes are async and render nothing inside an include, so the
+               screenshot galleries live here rather than in the summary partial. #}
+            {% if app.showScreenshotGallery %}
+            <section class="app-prose" aria-labelledby="app-shots-title">
+                <h2 id="app-shots-title">Screenshots</h2>
+                <ul class="app-shots" aria-label="{{ app.name }} screenshots on iPhone">
+                    {% for shot in app.screenshots %}
+                    <li>
+                        <figure>
+                            {% image shot.src, shot.alt, "(max-width: 820px) 45vw, 220px", "lazy", "app-shot-image", "card" %}
+                            <figcaption>{{ shot.caption }}</figcaption>
+                        </figure>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% if app.ipadScreenshots %}
+                <h3>On iPad</h3>
+                <ul class="app-shots app-shots--ipad" aria-label="{{ app.name }} screenshots on iPad">
+                    {% for shot in app.ipadScreenshots %}
+                    <li>
+                        <figure>
+                            {% image shot.src, shot.alt, "(max-width: 820px) 90vw, 320px", "lazy", "app-shot-image", "card" %}
+                            <figcaption>{{ shot.caption }}</figcaption>
+                        </figure>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </section>
             {% endif %}
 
             <div class="app-detail-grid">

@@ -262,27 +262,47 @@ const items = [
   },
   // Written CuratedLedger: one word, capital C and L. iPhone and iPad only. It has no
   // in-app sync switch, widgets, Siri or Shortcuts, calendar access, or Mac version,
-  // so none of concinnity's copy about those carries over. No App Store badge or
-  // link until there is a real listing URL.
+  // so none of concinnity's copy about those carries over. Released on the App Store
+  // on 9 November 2026. The listing is the source for the wording below.
   {
     name: "CuratedLedger",
     slug: "curatedledger",
-    // Phone screenshots for the /apps/ showcase; the first is shown front and centre.
+    // Phone screenshots, in App Store order: the first three are shown on the /apps/
+    // showcase (the first front and centre) and all five on the app's own page.
     screenshots: [
-      { src: "/assets/images/app_screenshots/curated_ledger/01-overview.webp", alt: "CuratedLedger overview showing safe to spend, runway if no further income arrives, and what life costs" },
-      { src: "/assets/images/app_screenshots/curated_ledger/02-projections.webp", alt: "CuratedLedger projections chart of the balance over the next twelve months" },
-      { src: "/assets/images/app_screenshots/curated_ledger/03-money.webp", alt: "CuratedLedger money view with the current balance and recurring expenses" },
+      { src: "/assets/images/app_screenshots/curated_ledger/01-runway-iphone.jpg", caption: "How long would your money last?", alt: "Overview screen showing 7.4 months of cash if no further income arrives at the Normal cost level, and 9.8 months on Bare Bones." },
+      { src: "/assets/images/app_screenshots/curated_ledger/02-only-money-iphone.jpg", caption: "Only money you have", alt: "Overview screen highlighting safe to spend: £12,830, from £22,650 available less £8,540 reserved and £1,280 owed, with a note that expected work isn't counted." },
+      { src: "/assets/images/app_screenshots/curated_ledger/03-certainty-iphone.jpg", caption: "Plan by how certain the work is", alt: "Projections screen with a 12-month projected balance chart and the lowest point in the period." },
+      { src: "/assets/images/app_screenshots/curated_ledger/04-rough-totals-iphone.jpg", caption: "Rough totals, not every coffee", alt: "Check-in screen with weekly and monthly tabs, an estimates versus actual link, and current account and savings balances." },
+      { src: "/assets/images/app_screenshots/curated_ledger/05-money-iphone.jpg", caption: "Every figure explained", alt: "Money screen showing £22,650 available now and recurring expenses of £2,691 a month, listed item by item." },
     ],
-    eyebrow: "Personal finance",
+    ipadScreenshots: [
+      { src: "/assets/images/app_screenshots/curated_ledger/01-runway-ipad.jpg", caption: "How long would your money last?", alt: "iPad: Overview screen showing 7.4 months of cash if no further income arrives at the Normal cost level, and 9.8 months on Bare Bones." },
+      { src: "/assets/images/app_screenshots/curated_ledger/02-only-money-ipad.jpg", caption: "Only money you have", alt: "iPad: Overview screen highlighting safe to spend: £12,830, from £22,650 available less £8,540 reserved and £1,280 owed, with a note that expected work isn't counted." },
+      { src: "/assets/images/app_screenshots/curated_ledger/03-certainty-ipad.jpg", caption: "Plan by how certain the work is", alt: "iPad: Projections screen with a 12-month projected balance chart and the lowest point in the period." },
+      { src: "/assets/images/app_screenshots/curated_ledger/04-rough-totals-ipad.jpg", caption: "Rough totals, not every coffee", alt: "iPad: Check-in screen with weekly and monthly tabs, an estimates versus actual link, and current account and savings balances." },
+      { src: "/assets/images/app_screenshots/curated_ledger/05-money-ipad.jpg", caption: "Every figure explained", alt: "iPad: Money screen showing £22,650 available now and recurring expenses of £2,691 a month, listed item by item." },
+    ],
+    eyebrow: "Cash-flow planning",
     description:
-      "A calm financial planner that shows what is safe to spend, how long your money lasts, and how your estimates compare with what actually happened.",
+      "How long your money would last. Cash-flow planning for income that comes in lumps, worked out from the cash you already have and never from money you are still waiting to be paid.",
     overview:
-      "CuratedLedger is a personal finance planner for understanding what is safe to spend, how long your money will last, and whether your plans match what actually happens.",
-    lastUpdated: "25 September 2026",
+      "If work dried up tomorrow, how long would your money last? CuratedLedger answers from the cash you already have, never from money you're still waiting to be paid.",
+    lastUpdated: "13 November 2026",
+    installUrl: "https://apps.apple.com/gb/app/id6814667809",
+    showScreenshotGallery: true,
+    // Finished 1200x630 share image, used for og:image and twitter:image on this page only.
+    ogImage: "/assets/images/og/curatedledger-og.jpg",
+    ogImageAlt: "CuratedLedger, with the tagline How long your money would last, next to an iPhone screenshot showing 7.4 months of cash if no further income arrives.",
     information: [
       {
         label: "Platform",
-        value: "iPhone and iPad",
+        value: "iPhone and iPad, in pounds sterling",
+      },
+      {
+        label: "App Store",
+        value: "Download on the App Store",
+        url: "https://apps.apple.com/gb/app/id6814667809",
       },
       {
         label: "Storage and sync",
@@ -294,7 +314,7 @@ const items = [
       },
       {
         label: "Privacy",
-        value: "No advertising, tracking, or third-party analytics",
+        value: "No bank connection, no account, no advertising, no tracking, and no analytics",
       },
       {
         label: "Support",
@@ -303,12 +323,12 @@ const items = [
       },
     ],
     highlights: [
-      "See what is safe to spend, after bills, debts, tax set aside and your safety buffer.",
-      "Plan recurring costs, irregular expenses and income on a timeline of the year ahead, across lifestyle modes from bare bones to comfortable.",
-      "Check in weekly with your balances and spending, import bank and card statements, and compare your estimates with what actually happened.",
+      "See how many months your cash would last if no more income arrived, with leaner and more comfortable versions of your costs.",
+      "Work out what is free to spend today from cash you already hold, after tax, bills due in the next 30 days, debts and a buffer you choose. An unpaid invoice never makes the number look better.",
+      "Plan the next 12 months by how certain the work is: confirmed only, what you expect, or including work you are still pitching for, with the lowest balance point in each case.",
     ],
     summaryInclude: "apps/curatedledger-summary.njk",
-    appStoreUrl: "",
+    appStoreUrl: "https://apps.apple.com/gb/app/id6814667809",
     guide: readGuide("curatedledger"),
     supportPages: ["guide", "privacy", "support"],
     alternateNames: ["Curated Ledger"],
@@ -317,15 +337,19 @@ const items = [
     faqs: [
       {
         q: "What is CuratedLedger?",
-        a: "CuratedLedger is a personal finance planner for iPhone and iPad. It shows what is safe to spend, how long your money will last, and how your estimates compare with what actually happened.",
+        a: "CuratedLedger is cash-flow planning for iPhone and iPad, for people whose income comes in lumps rather than a monthly salary. It shows how long your money would last if work stopped, using only the cash you already have.",
       },
       {
         q: "Who is CuratedLedger for?",
-        a: "People who want a forward-looking view of their money rather than a record of past spending, including anyone with irregular income or expenses who needs to know how long their money lasts if no further income arrives.",
+        a: "People whose income comes in lumps rather than a monthly salary, and who want to know how long their money would last if no more income arrived.",
       },
       {
-        q: "What does “safe to spend” mean?",
-        a: "It is what remains after bills, debts, tax set aside, and your safety buffer are accounted for.",
+        q: "Does it count money I am still waiting to be paid?",
+        a: "No. What is free to spend today is worked out from cash you already hold, after tax, bills due in the next 30 days, debts and a buffer you choose. An unpaid invoice never makes the number look better.",
+      },
+      {
+        q: "How does CuratedLedger plan future income?",
+        a: "By how certain it is: confirmed, expected or speculative. You can view the next 12 months on confirmed work only, on what you expect, or including work you are still pitching for, with the lowest balance point in each case. What you enter about the future never changes what you can spend today.",
       },
       {
         q: "Can I import bank statements?",
@@ -337,17 +361,22 @@ const items = [
       },
       {
         q: "Who can see my financial information?",
-        a: "Only you. CuratedLedger keeps your ledger on your device and syncs through your own private iCloud database. It has no advertising, tracking, or third-party analytics, and Curated Design cannot see your financial information.",
+        a: "Only you. CuratedLedger has no bank connection, no account, no advertising, no tracking and no analytics, and only exports you start yourself leave your device. It keeps your ledger on your device and syncs through your own private iCloud database, and Curated Design cannot see your financial information.",
       },
     ],
-    metaTitle: "CuratedLedger — Personal Finance Planner for iPhone and iPad",
+    metaTitle: "CuratedLedger — How Long Your Money Would Last | iPhone and iPad",
     metaDescription:
-      "CuratedLedger is a personal finance planner for iPhone and iPad. See what is safe to spend, plan the year ahead, import statements, and compare estimates with what actually happened. No ads, no tracking, no analytics.",
+      "How long would your money last if work stopped? CuratedLedger plans from the cash you already have, never from money you are owed. For iPhone and iPad. No bank connection.",
+    pageLastUpdated: {
+      guide: "25 September 2026",
+      privacy: "25 September 2026",
+      support: "25 September 2026",
+    },
     pageMeta: {
       guide: {
         title: "How to Use CuratedLedger — Curated Design",
         description:
-          "How to use CuratedLedger: income and costs, safe to spend, projections, weekly check-ins, importing statements, profiles, and exports.",
+          "How to use CuratedLedger: income and costs, how long your money would last, projections, weekly check-ins, importing statements, profiles, and exports.",
       },
       privacy: {
         title: "CuratedLedger Privacy Policy — Curated Design",

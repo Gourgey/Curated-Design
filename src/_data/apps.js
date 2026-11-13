@@ -13,17 +13,11 @@ const supportEmail = "info@curateddesign.studio";
 const supportEmailUrl = `mailto:${supportEmail}`;
 
 const items = [
-  // Launch-dependent copy. Three strings on this site stop being true the day
-  // ProcureCore is listed on the App Store: "ProcureCore is coming soon." on
-  // /apps/procurecore/, the two "Coming soon" strings on the home page, and
-  // "currently in development and releasing on the Apple App Store" on
-  // /company-information/. They are correct today. They are tracked in the
-  // ProcureCore application repository, in POST_RELEASE_WEBSITE_CHECKLIST.md,
-  // which is where the launch sequence that changes them lives — not here.
-  //
-  // If you are editing this entry because ProcureCore has been released, those
-  // three strings are the change, and the site must not sit half-launched with
-  // one page saying "coming soon" while another links to a live listing.
+  // ProcureCore was released on the App Store on 2026-11-13. The "coming soon" and
+  // "in development and releasing" wording has been replaced with "available now"
+  // wording and a link to the listing (appStoreUrl below), on /apps/procurecore/,
+  // /company-information/ and the /apps/ card. If the listing URL changes, update
+  // it here, in apps/procurecore-summary.njk and in src/_data/legal.js.
   //
   // A fourth string was removed on 2026-08-13 (commit d5b5689): an unrendered
   // `platform` value that would have published an availability claim if this
@@ -85,7 +79,7 @@ const items = [
       "Collaborate across iPhone and Mac with permissions appropriate to each studio member.",
     ],
     summaryInclude: "apps/procurecore-summary.njk",
-    appStoreUrl: "https://apps.apple.com/gb/app/id6767230930",
+    appStoreUrl: "https://apps.apple.com/app/id6767230930",
     guide: readGuide("procurecore"),
     supportPages: ["guide", "privacy", "terms", "support", "data-processing"],
     pageTitles: {

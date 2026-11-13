@@ -1,19 +1,70 @@
 <article class="app-prose app-prose--summary">
-    <h2>A calm financial planner for iPhone and iPad</h2>
-    <ul>
-        {% for highlight in app.highlights %}
-        <li>{{ highlight }}</li>
+    <h2>How long your money would last</h2>
+    <p>
+        CuratedLedger is cash-flow planning for people whose income comes in lumps rather than a monthly salary. It is for iPhone and iPad, in pounds sterling.
+    </p>
+    <p>
+        <a href="{{ app.appStoreUrl }}">Download on the App Store</a>
+    </p>
+
+    <h3>If work stopped tomorrow</h3>
+    <p>
+        See how many months your cash would last if no more income arrived. You can add leaner and more comfortable versions of your costs.
+    </p>
+
+    <h3>Only money you have</h3>
+    <p>
+        CuratedLedger works out what is free to spend today from cash already held, after tax, bills due in the next 30 days, debts and a buffer you choose. An unpaid invoice never makes the number look better.
+    </p>
+
+    <h3>Plan by how certain the work is</h3>
+    <p>
+        See the next 12 months on confirmed work only, on what you expect, or including work you are still pitching for, with the lowest balance point in each case. What you enter about the future never changes what you can spend today.
+    </p>
+
+    <ul class="app-shots" aria-label="CuratedLedger screenshots on iPhone">
+        {% for shot in app.screenshots %}
+        <li>
+            <figure>
+                {% image shot.src, shot.alt, "(max-width: 820px) 45vw, 220px", "lazy", "app-shot-image", "card" %}
+                <figcaption>{{ shot.caption }}</figcaption>
+            </figure>
+        </li>
         {% endfor %}
     </ul>
+
+    <h3>Rough totals, not every coffee</h3>
     <p>
-        CuratedLedger keeps your ledger on your device. When your device is signed in to iCloud, it also syncs through your own private iCloud database, so your iPhone and iPad stay up to date.
+        Check in weekly or monthly with rough spending totals, and compare estimates with actual spending. An optional monthly reminder is available.
     </p>
+
+    <h3>Every figure explained</h3>
     <p>
-        Statement import is optional. When you choose a CSV statement from your bank or card provider, CuratedLedger reads it on your device and never uploads it to Curated Design.
+        Tap any number to see what was counted, set aside and left out.
     </p>
+
+    <h3>Personal and business, separate or together</h3>
     <p>
-        CuratedLedger has no advertising, tracking, third-party analytics, or Curated Design server, and Curated Design cannot see your financial information. The <a href="/apps/curatedledger/privacy/">Privacy Policy</a> explains this in full.
+        Keep profiles apart, or view them combined.
     </p>
+
+    <h3>Private by design</h3>
+    <p>
+        CuratedLedger has no bank connection, no account and no analytics. Your figures stay on your device and sync only through your own iCloud. Bank statements can be imported from CSV; they are read on your device and never uploaded to Curated Design. You can export to PDF, spreadsheet or summary. The <a href="/apps/curatedledger/privacy/">Privacy Policy</a> explains this in full.
+    </p>
+
+    <h3>On iPad</h3>
+    <ul class="app-shots app-shots--ipad" aria-label="CuratedLedger screenshots on iPad">
+        {% for shot in app.ipadScreenshots %}
+        <li>
+            <figure>
+                {% image shot.src, shot.alt, "(max-width: 820px) 90vw, 320px", "lazy", "app-shot-image", "card" %}
+                <figcaption>{{ shot.caption }}</figcaption>
+            </figure>
+        </li>
+        {% endfor %}
+    </ul>
+
     <p>
         CuratedLedger is a planning tool, not financial advice. Its figures are estimates based on what you enter.
     </p>

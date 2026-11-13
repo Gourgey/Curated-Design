@@ -180,6 +180,7 @@
             {% if app.alternateNames and app.alternateNames.length %}"alternateName": {{ app.alternateNames | dump | safe }},{% endif %}
             "url": "{{ canonicalUrl }}",
             "description": {{ (app.metaDescription or app.description) | dump | safe }},
+            {% if app.installUrl %}"installUrl": "{{ app.installUrl }}",{% endif %}
             {% if app.applicationCategory %}"applicationCategory": {{ app.applicationCategory | dump | safe }},{% endif %}
             {% if app.operatingSystem %}"operatingSystem": {{ app.operatingSystem | dump | safe }},{% endif %}
             {% if app.highlights and app.highlights.length %}"featureList": {{ app.highlights | dump | safe }},{% endif %}

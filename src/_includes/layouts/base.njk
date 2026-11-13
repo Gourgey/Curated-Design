@@ -29,7 +29,8 @@
            real, fixed-size asset -- generate a 1200x630 cover-fit crop of
            whichever source image applies (P5.5) rather than serving the raw
            hero/cover photo at its native size and aspect ratio. #}
-        {% set ogImagePath = ogImageRaw | shareImageUrl %}
+        {# A page can supply a finished 1200x630 image of its own as ogImageFinal. #}
+        {% set ogImagePath = ogImageFinal or (ogImageRaw | shareImageUrl) %}
         {% set ogImage = (siteUrl + ogImagePath) if siteUrl and ogImagePath else "" %}
         {% set ogImageAlt = ogImageAlt or (project.data.heroAlt if project) or (service.data.coverAlt if service) or site.settings.shareImageAlt %}
         {% set ogType = ogType or ("article" if (project or service) else "website") %}

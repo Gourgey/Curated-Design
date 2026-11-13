@@ -291,6 +291,9 @@ const items = [
     lastUpdated: "13 November 2026",
     installUrl: "https://apps.apple.com/gb/app/id6814667809",
     showScreenshotGallery: true,
+    // Finished 1200x630 share image, used for og:image and twitter:image on this page only.
+    ogImage: "/assets/images/og/curatedledger-og.jpg",
+    ogImageAlt: "CuratedLedger, with the tagline How long your money would last, next to an iPhone screenshot showing 7.4 months of cash if no further income arrives.",
     information: [
       {
         label: "Platform",
@@ -311,7 +314,7 @@ const items = [
       },
       {
         label: "Privacy",
-        value: "No bank connection, no account, and no analytics",
+        value: "No bank connection, no account, no advertising, no tracking, and no analytics",
       },
       {
         label: "Support",
@@ -358,7 +361,7 @@ const items = [
       },
       {
         q: "Who can see my financial information?",
-        a: "Only you. CuratedLedger has no bank connection, no account and no analytics. It keeps your ledger on your device and syncs through your own private iCloud database, and Curated Design cannot see your financial information.",
+        a: "Only you. CuratedLedger has no bank connection, no account, no advertising, no tracking and no analytics, and only exports you start yourself leave your device. It keeps your ledger on your device and syncs through your own private iCloud database, and Curated Design cannot see your financial information.",
       },
     ],
     metaTitle: "CuratedLedger — How Long Your Money Would Last | iPhone and iPad",
@@ -373,7 +376,7 @@ const items = [
       guide: {
         title: "How to Use CuratedLedger — Curated Design",
         description:
-          "How to use CuratedLedger: income and costs, safe to spend, projections, weekly check-ins, importing statements, profiles, and exports.",
+          "How to use CuratedLedger: income and costs, how long your money would last, projections, weekly check-ins, importing statements, profiles, and exports.",
       },
       privacy: {
         title: "CuratedLedger Privacy Policy — Curated Design",

@@ -6,6 +6,8 @@ pagination:
 permalink: "apps/{{ app.slug }}/index.html"
 layout: layouts/base.njk
 eleventyComputed:
+  ogImageFinal: "{{ app.ogImage }}"
+  ogImageAlt: "{{ app.ogImageAlt }}"
   title: "{% if app.metaTitle %}{{ app.metaTitle }}{% else %}{{ app.name }} – Apps by Curated Design{% endif %}"
   description: "{% if app.metaDescription %}{{ app.metaDescription }}{% else %}{{ app.description }}{% endif %}"
 htmlClass: app-page

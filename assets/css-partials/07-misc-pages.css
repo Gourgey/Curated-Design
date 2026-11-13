@@ -889,7 +889,7 @@ body.recovery-page {
 
 .app-shots {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 24px;
     margin: 32px 0;
     padding: 0;

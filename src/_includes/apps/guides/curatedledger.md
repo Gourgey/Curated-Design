@@ -36,7 +36,7 @@ Open **Projections** to see how your balance may change over **8 weeks**, **3 mo
 
 Use **Assumptions** to compare lifestyle modes and forecast scenarios. **Confirmed only** uses income you are sure of against costs you might face; **Expected** uses what you reasonably expect; **Broader scenario** includes speculative income. Changing these views does not rewrite your financial records.
 
-To adjust what each lifestyle mode costs, open **More → Lifestyle modes**. Set different amounts for expenses that genuinely change between a leaner, normal, or more comfortable month. If every mode has the same amounts, switching modes will show the same result.
+Lifestyle modes are optional leaner and more comfortable versions of your costs. New profiles start with Normal only; Bare Bones and Luxury are opt-in. To adjust what each mode costs, open **More → Lifestyle modes**. Set different amounts for expenses that genuinely change between a Bare Bones, Normal, or Luxury month. If every mode has the same amounts, switching modes will show the same result.
 
 ## Doing a Check-in
 
@@ -75,7 +75,7 @@ Once you have more than one profile, tap the profile name at the top of the app 
 
 - **Savings target:** Open **More → Savings target** to enter an optional yearly goal and see the income your plan would need.
 - **Estimates vs actual:** Open **More → Estimates vs actual** to compare your plan with recorded spending.
-- **Export:** Open **More → Export**, choose a period, and share a PDF, spreadsheet CSV, or structured summary for an AI review. With multiple profiles, you can include every profile in the report; they remain separate.
+- **Export:** Open **More → Export**, choose a period, and share a PDF, spreadsheet CSV, or structured summary for an AI review. The AI review is a file you create and share yourself, and CuratedLedger makes no AI calls. With multiple profiles, you can include every profile in the report; they remain separate.
 - **Weekly reminder:** Turn on **More → Remind me weekly** if you want a check-in reminder on Sunday evenings. The app will ask for notification permission.
 
 ## Sync and Privacy

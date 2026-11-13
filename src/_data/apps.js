@@ -46,7 +46,6 @@ const items = [
     overview:
       "ProcureCore brings projects, clients, suppliers, products, placements, approvals, attachments, and reporting into one considered workspace for interior-design studios.",
     lastUpdated: "13 November 2026",
-    appStoreUrl: "https://apps.apple.com/gb/app/id6767230930",
     pageLastUpdated: {
       privacy: "13 November 2026",
       terms: "29 September 2026",
@@ -86,7 +85,7 @@ const items = [
       "Collaborate across iPhone and Mac with permissions appropriate to each studio member.",
     ],
     summaryInclude: "apps/procurecore-summary.njk",
-    appStoreUrl: "",
+    appStoreUrl: "https://apps.apple.com/gb/app/id6767230930",
     guide: readGuide("procurecore"),
     supportPages: ["guide", "privacy", "terms", "support", "data-processing"],
     pageTitles: {

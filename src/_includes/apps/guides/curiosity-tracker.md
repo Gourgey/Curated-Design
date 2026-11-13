@@ -1,4 +1,4 @@
-CuriosityTracker is a place to capture the questions you want to explore, come back to them at the right time, and see what you've been curious about over time.
+Curiosity Tracker is a place to capture the questions you want to explore, come back to them at the right time, and see what you've been curious about over time.
 
 ## Getting Started
 
@@ -28,7 +28,7 @@ The home screen shows a quick overview: how many curiosities you have, how many 
 
 ## Saving From Other Apps
 
-You can send webpages, text, PDFs, and files straight into CuriosityTracker from Safari and other apps.
+You can send webpages, text, PDFs, and files straight into Curiosity Tracker from Safari and other apps.
 
 1. Tap the **Share** button in the other app.
 2. Choose **CuriosityTracker**.
@@ -100,4 +100,4 @@ It's either marked as Answered or scheduled for a later day. Check the **Tomorro
 
 ## Need more help?
 
-Read [CuriosityTracker Support](/apps/curiosity-tracker/support/), or email [info@curateddesign.studio](mailto:info@curateddesign.studio).
+Read [Curiosity Tracker Support](/apps/curiosity-tracker/support/), or email [info@curateddesign.studio](mailto:info@curateddesign.studio).

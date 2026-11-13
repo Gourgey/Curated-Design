@@ -22,7 +22,7 @@ const items = [
   // A fourth string was removed on 2026-08-13 (commit d5b5689): an unrendered
   // `platform` value that would have published an availability claim if this
   // entry's `information` array were ever emptied. `platform` remains a live
-  // field for CuriosityTracker — see app-pages.njk:57.
+  // field for Curiosity Tracker — see app-pages.njk:57.
   {
     name: "ProcureCore",
     slug: "procurecore",
@@ -503,6 +503,9 @@ const items = [
       { src: "/assets/images/app_screenshots/curiosity_tracker/05-resurface.jpg", caption: "Ideas return when you're ready", alt: "Resurface screen with a Start Here curiosity, options to push it to next week, and curiosities to revisit today, tomorrow and next week." },
     ],
     showScreenshotGallery: true,
+    // Finished 1200x630 share image, used for og:image and twitter:image on this page only.
+    ogImage: "/assets/images/og/curiosity-tracker-og.jpg",
+    ogImageAlt: "Curiosity Tracker, with the tagline Capture and revisit questions, next to an iPhone screenshot of the Resurface screen showing curiosities ready for another look.",
     eyebrow: "Personal research",
     description:
       "Capture the questions and ideas you want to come back to, and have them resurface when you are ready. Free for iPhone and iPad.",
@@ -510,13 +513,13 @@ const items = [
       "Curiosity Tracker helps you capture the questions, ideas, links and topics you want to come back to. Save them the moment they come to you, and they resurface when you are ready for another look.",
     // Released on the App Store on 8 October 2026 (version 1.0).
     lastUpdated: "13 November 2026",
-    // The guide and support text were last changed on 29 April 2026; the publisher
-    // details on the privacy policy and terms were changed on 25 September 2026.
+    // The app name was changed from CuriosityTracker to Curiosity Tracker in the guide,
+    // support, privacy policy and terms on this date.
     pageLastUpdated: {
-      guide: "29 April 2026",
-      support: "29 April 2026",
-      privacy: "25 September 2026",
-      terms: "25 September 2026",
+      guide: "13 November 2026",
+      support: "13 November 2026",
+      privacy: "13 November 2026",
+      terms: "13 November 2026",
     },
     installUrl: "https://apps.apple.com/app/curiosity-tracker/id6764550299",
     price: "0",

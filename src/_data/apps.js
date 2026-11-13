@@ -490,78 +490,125 @@ const items = [
     },
   },
   {
-    name: "CuriosityTracker",
+    name: "Curiosity Tracker",
     slug: "curiosity-tracker",
-    // Phone screenshots for the /apps/ showcase; the first is shown front and centre.
+    // Phone screenshots, in App Store order: the first three are shown on the /apps/
+    // showcase (the first front and centre) and all five on the app's own page.
+    // Captions are suggestions from the app's own notes, not text on the App Store listing.
     screenshots: [
-      { src: "/assets/images/app_screenshots/curiosity_tracker/01-home.webp", alt: "CuriosityTracker home screen with an overview of curiosities and a weekly research goal" },
-      { src: "/assets/images/app_screenshots/curiosity_tracker/02-library.webp", alt: "CuriosityTracker library of saved questions, filterable by status" },
-      { src: "/assets/images/app_screenshots/curiosity_tracker/03-curiosity.webp", alt: "A single curiosity with its notes, source link, tags and timeline" },
+      { src: "/assets/images/app_screenshots/curiosity_tracker/01-home.jpg", caption: "Your curiosities at a glance", alt: "Home screen with an overview of total curiosities, those logged this week and those to revisit today, and a weekly research goal." },
+      { src: "/assets/images/app_screenshots/curiosity_tracker/02-new-curiosity.jpg", caption: "Capture a question in seconds", alt: "New Curiosity form with a question field, Open, Exploring and Answered status options, tags with a Suggest Tags button, and notes." },
+      { src: "/assets/images/app_screenshots/curiosity_tracker/03-library.jpg", caption: "Search and filter your library", alt: "Library of saved curiosities with a search field and status filter, listing questions such as one about milk kefir and water kefir." },
+      { src: "/assets/images/app_screenshots/curiosity_tracker/04-detail.jpg", caption: "Keep notes, links and tags together", alt: "A single curiosity showing its status, why it matters, a source webpage, a tag and a timeline of dates." },
+      { src: "/assets/images/app_screenshots/curiosity_tracker/05-resurface.jpg", caption: "Ideas return when you're ready", alt: "Resurface screen with a Start Here curiosity, options to push it to next week, and curiosities to revisit today, tomorrow and next week." },
     ],
+    showScreenshotGallery: true,
     eyebrow: "Personal research",
     description:
-      "A personal app for capturing questions, organising curiosities, and resurfacing ideas over time.",
+      "Capture the questions and ideas you want to come back to, and have them resurface when you are ready. Free for iPhone and iPad.",
     overview:
-      "CuriosityTracker is a quiet place to hold questions, notes, links, PDFs, tags, and resurfacing dates so ideas can return at the right moment.",
-    platform: "Available on iOS",
-    // The publisher details on the privacy policy and terms were changed on this date.
+      "Curiosity Tracker helps you capture the questions, ideas, links and topics you want to come back to. Save them the moment they come to you, and they resurface when you are ready for another look.",
+    // Released on the App Store on 8 October 2026 (version 1.0).
+    lastUpdated: "13 November 2026",
+    // The guide and support text were last changed on 29 April 2026; the publisher
+    // details on the privacy policy and terms were changed on 25 September 2026.
     pageLastUpdated: {
+      guide: "29 April 2026",
+      support: "29 April 2026",
       privacy: "25 September 2026",
       terms: "25 September 2026",
     },
-    sync: "Optional iCloud sync via Apple CloudKit",
-    privacySummary: "No ads, no tracking, no analytics",
-    appStoreUrl: "",
-    guide: readGuide("curiosity-tracker"),
-    supportPages: ["guide", "privacy", "support", "terms"],
-    alternateNames: ["Curiosity Tracker"],
-    applicationCategory: "ReferenceApplication",
-    operatingSystem: "iOS",
-    faqs: [
+    installUrl: "https://apps.apple.com/app/curiosity-tracker/id6764550299",
+    price: "0",
+    information: [
       {
-        q: "What is CuriosityTracker?",
-        a: "CuriosityTracker is a personal iOS app for capturing questions, organising curiosities, and resurfacing ideas over time.",
+        label: "Platform",
+        value: "iPhone and iPad, requires iOS 26.2 or iPadOS 26.2 or later",
       },
       {
-        q: "Who is CuriosityTracker for?",
+        label: "App Store",
+        value: "Download on the App Store",
+        url: "https://apps.apple.com/app/curiosity-tracker/id6764550299",
+      },
+      {
+        label: "Price",
+        value: "Free",
+      },
+      {
+        label: "Storage and sync",
+        value: "Stored on your device and synced through your own private iCloud",
+      },
+      {
+        label: "Privacy",
+        value: "No accounts, ads, tracking or third-party analytics",
+      },
+      {
+        label: "Support",
+        value: supportEmail,
+        url: supportEmailUrl,
+      },
+    ],
+    highlights: [
+      "Capture a question, idea, link or PDF the moment it comes to you, including by Siri and Shortcuts.",
+      "Older curiosities come back when they are ready for another look, or you can push an idea back to next week.",
+      "Quiet and private: no account, and your curiosities live on your device and in your own iCloud.",
+    ],
+    summaryInclude: "apps/curiosity-tracker-summary.njk",
+    appStoreUrl: "https://apps.apple.com/app/curiosity-tracker/id6764550299",
+    guide: readGuide("curiosity-tracker"),
+    supportPages: ["guide", "privacy", "support", "terms"],
+    alternateNames: ["CuriosityTracker"],
+    applicationCategory: "ReferenceApplication",
+    operatingSystem: "iOS, iPadOS",
+    faqs: [
+      {
+        q: "What is Curiosity Tracker?",
+        a: "Curiosity Tracker is a personal app for iPhone and iPad that helps you capture the questions, ideas, links and topics you want to come back to, and resurfaces them when you are ready.",
+      },
+      {
+        q: "Who is Curiosity Tracker for?",
         a: "Curious people, students, researchers, and lifelong learners who collect questions and ideas and want them to come back at the right moment instead of getting lost in notes.",
       },
       {
         q: "What can I save?",
-        a: "Questions, notes, links, PDFs, tags, statuses, dates, and resurfacing prompts. Each curiosity keeps its notes, source link, tags, and timeline together, and the library can be filtered by status.",
+        a: "Questions, notes, links, webpages, PDFs, tags and statuses. You can share webpages, text and PDFs in from Safari, Files and other apps, and add curiosities with Siri and Shortcuts. The library can be searched and filtered by status.",
       },
       {
-        q: "Does CuriosityTracker sync?",
-        a: "Optionally. Content is stored on your device, and when iCloud is enabled it syncs through your own private iCloud database.",
+        q: "Does Curiosity Tracker sync?",
+        a: "Yes. Your curiosities, links and PDFs sync across your devices through your own private iCloud when you are signed in to iCloud. If iCloud is not available, the app keeps saving on your device and tells you.",
       },
       {
-        q: "Does CuriosityTracker track me?",
-        a: "No. CuriosityTracker has no ads, no tracking, and no analytics.",
+        q: "Does Curiosity Tracker track me?",
+        a: "No. Curiosity Tracker has no accounts, ads, tracking or third-party analytics, and your content is stored on your device and in your iCloud, never on our servers.",
+      },
+      {
+        q: "Is Curiosity Tracker free?",
+        a: "Yes. It is free, with no in-app purchases or subscription.",
       },
     ],
-    metaTitle: "CuriosityTracker — Curated Design",
+    metaTitle: "Curiosity Tracker — Capture and Revisit Questions | iPhone and iPad",
     metaDescription:
-      "CuriosityTracker is a personal iOS app for capturing questions, organising curiosities, and resurfacing ideas over time. No ads, no tracking, no analytics.",
+      "Curiosity Tracker helps you capture questions, ideas, links and topics, and brings them back when you are ready. Free for iPhone and iPad. No accounts, ads or tracking.",
     pageMeta: {
       guide: {
-        title: "How to Use CuriosityTracker — Curated Design",
+        title: "How to Use Curiosity Tracker — Curated Design",
         description:
-          "How to use CuriosityTracker: adding curiosities, statuses, saving from other apps, Resurface, Insights, and research goals.",
+          "How to use Curiosity Tracker: adding curiosities, statuses, saving from other apps, Resurface, Insights, and research goals.",
       },
       privacy: {
-        title: "CuriosityTracker Privacy Policy — Curated Design",
+        title: "Curiosity Tracker Privacy Policy — Curated Design",
         description:
-          "How CuriosityTracker handles your data. Content is stored locally on your device, and — when iCloud is enabled — synced through your own private iCloud database. Curated Design does not operate a server that receives or stores your content.",
+          "How Curiosity Tracker handles your data. Content is stored locally on your device, and — when iCloud is enabled — synced through your own private iCloud database. Curated Design does not operate a server that receives or stores your content.",
       },
       support: {
-        title: "CuriosityTracker Support — Curated Design",
+        title: "Curiosity Tracker Support — Curated Design",
         description:
-          "Help with CuriosityTracker: iCloud sync, PDFs, notifications, deleting data, and contact details for Curated Design.",
+          "Help with Curiosity Tracker: iCloud sync, PDFs, notifications, deleting data, and contact details for Curated Design.",
       },
       terms: {
-        title: "CuriosityTracker Terms — Curated Design",
+        title: "Curiosity Tracker Terms — Curated Design",
         description:
-          "Terms of use for CuriosityTracker, a personal organisation tool from Curated Design — your responsibilities, app availability, and support contact details.",
+          "Terms of use for Curiosity Tracker, a personal organisation tool from Curated Design — your responsibilities, app availability, and support contact details.",
       },
     },
   },

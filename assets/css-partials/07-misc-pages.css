@@ -915,3 +915,18 @@ body.recovery-page {
     margin-top: 8px;
     font-size: var(--font-size-body-small);
 }
+
+.app-store-badge {
+    margin: 8px 0 24px;
+}
+
+.app-store-badge a {
+    display: inline-block;
+    padding: 10px;
+}
+
+.app-store-badge img {
+    display: block;
+    width: auto;
+    height: 48px;
+}

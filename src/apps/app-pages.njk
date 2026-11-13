@@ -28,6 +28,11 @@ sectionTop: true
                 <p class="app-lead">{{ app.overview }}</p>
             </header>
 
+            {% if app.appStoreUrl %}
+            {% set href = app.appStoreUrl %}
+            {% include "partials/app-store-badge.njk" %}
+            {% endif %}
+
             {% if app.summaryInclude %}
             {% include app.summaryInclude %}
             {% endif %}

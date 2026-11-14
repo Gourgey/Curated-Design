@@ -2,68 +2,45 @@
   "title": "Interior Design Studio London | Curated Design",
   "metaDescription": "A London-based interior design studio shaping distinctive residential, hospitality, and commercial spaces, from concept through completion.",
   "hero": {
-    "headline": "Bespoke interiors to define your lifestyle.",
-    "subhead": "A London studio designing and furnishing homes and hospitality spaces end to end"
+    "headline": "Interiors conceived, visualised and delivered.",
+    "subhead": "Curated Design is a London-based interior design studio creating distinctive residential and commercial spaces. From concept development and photorealistic visualisations to furniture sourcing, procurement and installation, we provide a considered approach to design from beginning to end."
   },
   "process": {
     "kicker": "The Process",
-    "heading": "From first conversation to finished room.",
-    "closing": "You bring the space. We carry it from brief to install.",
-    "linkLabel": "Start a conversation",
+    "heading": "A considered process, from concept to completion.",
     "steps": [
       {
-        "label": "Brief",
-        "title": "Tell us about the space.",
-        "text": "Share the property, how you use it, and your timeline. If it helps, we can visit in person and take measurements before design begins.",
-        "receive": "a clear brief, with an optional site visit"
+        "label": "Brief & Discovery",
+        "title": "Understanding your space.",
+        "text": "We establish your requirements, aesthetic preferences, budget and timescale, with site visits and measurements where required.",
+        "receive": "A clear project brief."
       },
       {
-        "label": "Concept & visuals",
-        "title": "See it before you commit.",
-        "text": "Layouts, a material palette, and photo-realistic visuals show exactly how each room will look and feel, starting with a free photo-realistic render of your space.",
-        "receive": "layouts, palette and visuals"
+        "label": "Concept & Visualisation",
+        "title": "Explore the possibilities.",
+        "text": "We develop layouts, material palettes and photorealistic visualisations, exploring alternative design directions where appropriate before final decisions are made.",
+        "receive": "Design concepts and visualisations."
       },
       {
-        "label": "Specification & cost",
-        "title": "Know the cost upfront.",
-        "text": "Every piece is specified for the property it sits in and set out in an itemised plan, priced openly before anything is ordered.",
-        "receive": "an itemised, priced plan"
+        "label": "Specification & Pricing",
+        "title": "A design grounded in reality.",
+        "text": "Furniture, lighting, finishes and accessories are carefully specified using real, sourceable products, accompanied by clear product information and itemised pricing.",
+        "receive": "A detailed, priced specification."
       },
       {
-        "label": "Delivery & styling",
-        "title": "Walk into a finished room.",
-        "text": "We handle procurement, coordinate contractors and installation, then style the space down to the final object.",
-        "receive": "a procured, installed and styled space"
+        "label": "Procurement & Installation",
+        "title": "Bringing the vision to life.",
+        "text": "We coordinate purchasing, deliveries and installation with the relevant suppliers and contractors, overseeing the final details that complete the space.",
+        "receive": "A furnished and finished interior."
       }
-    ]
+    ],
+    "intro": "Every project follows a structured approach, bringing together creative design, detailed specifications and practical coordination.",
+    "offer": "Layouts, a material palette, and photo-realistic visuals show exactly how each room will look and feel, starting with a free photo-realistic render of your space."
   },
   "servicesSection": {
     "kicker": "Curated Services",
-    "heading": "Full-service design from concept to completion.",
-    "lead": "From early mood and space planning to specification and on-site coordination, we deliver quietly confident spaces tailored to the way you live.",
-    "moreLabel": "Index",
-    "moreLink": "View all services",
-    "moreHref": "/services/",
-    "featuredServices": [
-      {
-        "service": "concept_design"
-      },
-      {
-        "service": "interior_architecture_design"
-      },
-      {
-        "service": "bespoke_furnishing"
-      },
-      {
-        "service": "plans_and_elevations"
-      },
-      {
-        "service": "procurement"
-      },
-      {
-        "service": "styling"
-      }
-    ]
+    "heading": "Interior design, procurement and visualisation.",
+    "moreLink": "View all services"
   },
   "collectionsSection": {
     "kicker": "Collections",
@@ -79,20 +56,20 @@
       }
     ]
   },
-  "philosophy": {
-    "kicker": "Design Philosophy",
-    "image": "/assets/images/projects/botanical_residence/botanical_residence_1.webp",
-    "imageAlt": "Notting Hill Residence bedroom",
-    "heading": "Quietly confident interiors with lasting impact.",
-    "paragraphs": [
-      "We combine research, material sensibility, and careful proportion to create spaces that feel calm and complete—never loud, always liveable.",
-      "Our process is collaborative and thorough: listening first, then designing with intent. The result is a home or venue that reflects your values and supports your routines."
+  "specification": {
+    "heading": "Visualised. Specified. Realised.",
+    "description": "Our designs are developed around real spaces, considered budgets and carefully sourced products. By combining detailed visualisations with furniture specifications, we help clients understand not only how their interiors could look, but how they can be brought to life.",
+    "views": [
+      {
+        "label": "Before · Empty room",
+        "image": "/assets/images/visualisation/empty-room.webp",
+        "alt": "Empty living room with classical wall panelling, arched windows and sunlit oak flooring."
+      },
+      {
+        "label": "After · Furnished concept",
+        "image": "/assets/images/visualisation/furnished-room.webp",
+        "alt": "The same room furnished with a sectional sofa, lounge chairs, a stone coffee table and a sculptural chandelier."
+      }
     ]
-  },
-  "cta": {
-    "kicker": "Contact",
-    "heading": "Have a project in mind?",
-    "text": "Tell us about your space and timeline—we’ll share how we can help.",
-    "buttonLabel": "Start a conversation"
   }
 }

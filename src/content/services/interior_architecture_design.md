@@ -1,7 +1,7 @@
 ---
 tags: service
 permalink: false
-title: Interior Architecture Design
+title: Interior Architecture
 slug: interior_architecture_design
 status: published
 order: 2

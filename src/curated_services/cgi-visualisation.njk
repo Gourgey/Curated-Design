@@ -1,0 +1,40 @@
+---
+layout: layouts/base.njk
+permalink: /services/cgi-visualisation/index.html
+title: Architectural CGI & Property Visualisation – Curated Design Studio
+description: Photorealistic interior CGI and three-dimensional property walkthroughs for design presentations, property marketing and refurbishment proposals.
+htmlClass: services-page
+bodyClass: services-page font-inter
+---
+{% from "partials/backlink.njk" import breadcrumb %}
+<main id="main-content" class="page-main" tabindex="-1">
+    {{ breadcrumb([{ href: "/", label: "Home" }, { href: "/services/", label: "Services" }, { label: "CGI & Visualisation" }]) }}
+    <header class="projects-header">
+        <p class="projects-header__eyebrow">CGI &amp; Visualisation</p>
+        <div>
+            <h1 class="projects-header__title">Architectural CGI &amp; Property Visualisation</h1>
+            <p class="projects-header__intro">Explore the potential of a property through photorealistic imagery and immersive three-dimensional walkthroughs.</p>
+        </div>
+    </header>
+    <section class="projects-section cgi-demonstration" aria-labelledby="walkthrough-title">
+        <div class="projects-section__inner">
+            <h2 id="walkthrough-title" class="projects-header__title">3D walkthrough demonstration</h2>
+            {% if site.servicesPage.walkthroughVideo %}
+            <video class="cgi-demonstration__video" controls playsinline preload="metadata" aria-labelledby="walkthrough-title"
+                {% if site.servicesPage.walkthroughPoster %}poster="{{ site.servicesPage.walkthroughPoster }}"{% endif %}>
+                <source src="{{ site.servicesPage.walkthroughVideo }}" type="video/mp4" />
+                {% if site.servicesPage.walkthroughCaptions %}
+                <track kind="captions" src="{{ site.servicesPage.walkthroughCaptions }}" srclang="en" label="English" />
+                {% endif %}
+                <a href="{{ site.servicesPage.walkthroughVideo }}">Watch the walkthrough</a>
+            </video>
+            {% else %}
+            <p class="asset-placeholder cgi-demonstration__video">Walkthrough video pending</p>
+            {% endif %}
+            <div class="cgi-demonstration__copy">
+                <p>Working from architectural drawings, photographs and site measurements where available, we create digital representations that help communicate spatial layouts, interior design proposals and the character of a property.</p>
+                <p>Suitable for design presentations, property marketing and visualising spaces before refurbishment or furnishing.</p>
+            </div>
+        </div>
+    </section>
+</main>

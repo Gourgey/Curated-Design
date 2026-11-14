@@ -160,10 +160,4 @@ topLogo: logo_no_text_on_transparent.svg
         {% endfor %}
     </div>
     {% endif %}
-
-    {% set heading = site.settings.ctaHeading %}
-    {% set text = site.settings.ctaText %}
-    {% set href = site.settings.primaryCtaUrl or ("mailto:" + site.settings.email) %}
-    {% set label = site.settings.primaryCtaText %}
-    {% include "partials/cta-band.njk" %}
 </main>

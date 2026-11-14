@@ -18,7 +18,7 @@ showBackground: true
         </div>
     </section>
 
-    <nav id="pills" class="pillmenu-wrap" aria-label="Quick filters">
+    <nav id="pills" class="pillmenu-wrap" aria-label="Homepage sections">
         <button
             id="pillsToggle"
             class="pillmenu-toggle pills-toggle"
@@ -30,109 +30,78 @@ showBackground: true
         </button>
 
         {% set processLabel = site.home.process.kicker or "The Process" %}
+        {% set sectionLinks = [
+            { id: "process", label: processLabel },
+            { id: "services", label: "Curated Services" },
+            { id: "selected-work", label: "Featured Project" },
+            { id: "cgi-specification", label: "CGI & Visualisation" }
+        ] %}
         <ul class="pillmenu pills-desktop">
-            <li><a class="pill active" href="#process">{{ processLabel }}</a></li>
-            <li><a class="pill" href="#services">Curated Services</a></li>
-            <li><a class="pill" href="#selected-work">Collections</a></li>
-            <li><a class="pill" href="#about">Design Philosophy</a></li>
+            {% for link in sectionLinks %}
+            <li><a class="pill{% if loop.first %} active{% endif %}" href="#{{ link.id }}">{{ link.label }}</a></li>
+            {% endfor %}
         </ul>
 
         <div id="pillsPanel" class="pills-panel" hidden>
-            <a class="pill" href="#process">{{ processLabel }}</a>
-            <a class="pill" href="#services">Curated Services</a>
-            <a class="pill" href="#selected-work">Collections</a>
-            <a class="pill" href="#about">Design Philosophy</a>
+            {% for link in sectionLinks %}
+            <a class="pill" href="#{{ link.id }}">{{ link.label }}</a>
+            {% endfor %}
         </div>
     </nav>
 
-    {# The Process — a step carousel in the hero dock. Every step is in the
-       markup with the first one open, so it reads fully without JS;
-       carousels.js adds the stepping. #}
-    {% set steps = site.home.process.steps or [] %}
-    {% if steps.length %}
-    <section
-        id="process"
-        class="process-dock"
-        data-theme="dark"
-        data-process-carousel
-        aria-roledescription="carousel"
-        aria-label="{{ processLabel }}"
-    >
-        <div class="process-dock__head">
-            <p class="process-dock__kicker">{{ processLabel }}</p>
-            {% if site.home.process.heading %}
-            <h2 class="process-dock__title">{{ site.home.process.heading }}</h2>
-            {% endif %}
-            <div class="process-dock__controls">
-                <span class="process-dock__count" data-process-count aria-live="polite">01 / {{ "0" + steps.length if steps.length < 10 else steps.length }}</span>
-                <button class="process-dock__arrow" type="button" data-process-prev aria-label="Previous step">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2 4 6l4 4"/></svg>
-                </button>
-                <button class="process-dock__arrow" type="button" data-process-next aria-label="Next step">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m4 2 4 4-4 4"/></svg>
-                </button>
+    <section id="process" class="process-timeline" data-theme="dark" data-process-timeline aria-labelledby="process-title">
+        <div class="process-timeline__inner home-section__inner">
+            <div class="process-timeline__intro">
+                <p class="home-section__eyebrow">{{ processLabel }}</p>
+                <h2 class="home-section__title" id="process-title">{{ site.home.process.heading }}</h2>
+                <p>{{ site.home.process.intro }}</p>
             </div>
-        </div>
-
-        <ol class="process-dock__steps">
-            {% for step in steps %}
-            <li class="process-step{% if loop.first %} is-active{% endif %}" data-process-step>
-                <button class="process-step__toggle" type="button" aria-expanded="{{ 'true' if loop.first else 'false' }}" aria-controls="process-step-{{ loop.index }}" data-process-toggle>
-                    <span class="process-step__num">{{ "0" + loop.index if loop.index < 10 else loop.index }}</span>
-                    <span class="process-step__label">{{ step.label }}</span>
-                    <span class="process-step__title">{{ step.title }}</span>
-                </button>
-                {# Shown/hidden by the .is-active class (CSS), so the switch can
-                   animate; visibility:hidden keeps closed steps out of the
-                   accessibility tree. #}
-                <div class="process-step__detail" id="process-step-{{ loop.index }}">
-                    <div class="process-step__detail-inner">
-                        <p class="process-step__text">{{ step.text }}</p>
-                        {% if step.receive %}
-                        <p class="process-step__receive">You receive · {{ step.receive }}</p>
-                        {% endif %}
-                    </div>
+            <div class="process-timeline__sequence">
+                <div class="process-timeline__meter">
+                    <span class="process-timeline__track" aria-hidden="true"></span>
+                    <span data-process-count>01 / 04</span>
                 </div>
-            </li>
-            {% endfor %}
-        </ol>
-
-        <div class="process-dock__foot">
-            <div class="process-dock__progress" aria-hidden="true">
-                {% for step in steps %}<span{% if loop.first %} class="is-done"{% endif %}></span>{% endfor %}
+                <ol class="process-timeline__steps">
+                    {% for step in site.home.process.steps %}
+                    <li class="process-timeline__step">
+                        <h3>
+                            <button type="button" disabled aria-expanded="true" aria-controls="process-stage-{{ loop.index }}">
+                                <span class="process-timeline__number">0{{ loop.index }}</span>
+                                <span>{{ step.label }}</span>
+                            </button>
+                        </h3>
+                        <div class="process-timeline__detail" id="process-stage-{{ loop.index }}">
+                            <div>
+                                <p class="process-timeline__subtitle">{{ step.title }}</p>
+                                <p>{{ step.text }}</p>
+                                <p class="process-timeline__receive">You receive: {{ step.receive }}</p>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ol>
             </div>
-            {% if site.home.process.closing %}
-            <p class="process-dock__closing">{{ site.home.process.closing }}</p>
-            {% endif %}
-            {% if site.home.process.linkLabel %}
-            <a class="process-dock__link" href="/contact/">{{ site.home.process.linkLabel }}</a>
-            {% endif %}
+            <p class="process-timeline__offer">{{ site.home.process.offer }}</p>
         </div>
     </section>
-    {% endif %}
 
     <section id="services" class="home-section home-services" data-theme="dark">
         <div class="home-section__inner">
-            <div class="home-section__head">
+            <header class="home-services__head">
                 <p class="home-section__eyebrow">{{ site.home.servicesSection.kicker }}</p>
-                <div>
-                    <h2 class="home-section__title">{{ site.home.servicesSection.heading | safe }}</h2>
-                    {% if site.home.servicesSection.lead %}
-                    <p class="home-section__intro">{{ site.home.servicesSection.lead }}</p>
-                    {% endif %}
-                </div>
-            </div>
+                <h2 class="home-section__title">{{ site.home.servicesSection.heading }}</h2>
+            </header>
 
-            {% set featuredServices = site.home.servicesSection.featuredServices | resolveEntries(collections.publishedService, "service") %}
             <div class="home-services__grid">
-                {% for service in featuredServices %}
-                <a class="card card--service" href="/services/{{ service.data.slug }}/">
+                {% for group in site.servicesPage.groups %}
+                <a class="card card--service" href="/services/#{{ group.id }}">
                     <div class="card__media">
-                        {% image service.data.cardImage, service.data.cardAlt or service.data.title, "(min-width: 1280px) 400px, (min-width: 761px) 33vw, 100vw", "lazy", "", "card" %}
+                        {% set imageSizes = "(min-width: 1440px) 740px, (min-width: 761px) 60vw, 100vw" if loop.first else "(min-width: 1440px) 500px, (min-width: 761px) 40vw, 100vw" %}
+                        {% image group.image, "", imageSizes, "lazy" %}
                     </div>
-                    <h3 class="card__title">{{ service.data.title }}</h3>
-                    {% if service.data.summary %}
-                    <p class="card__summary">{{ service.data.summary }}</p>
+                    <h3 class="card__title">{{ group.title }}</h3>
+                    {% if group.summary %}
+                    <p class="card__summary">{{ group.summary }}</p>
                     {% endif %}
                 </a>
                 {% endfor %}
@@ -224,34 +193,30 @@ showBackground: true
         </div>
     </section>
 
-    <section id="about" class="home-philosophy" data-theme="dark">
-        <div class="home-philosophy__inner">
-            <figure class="home-philosophy__media">
-                {% image site.home.philosophy.image, site.home.philosophy.imageAlt, "(min-width: 1280px) 600px, (min-width: 761px) 50vw, 100vw", "lazy" %}
-            </figure>
-            <div class="home-philosophy__body">
-                <p class="home-philosophy__eyebrow">{{ site.home.philosophy.kicker }}</p>
-                <h2 class="home-philosophy__title">{{ site.home.philosophy.heading | safe }}</h2>
-                {% for paragraph in site.home.philosophy.paragraphs %}
-                <p class="home-philosophy__text">{{ paragraph }}</p>
+    <section id="cgi-specification" class="home-section home-specification" data-theme="dark" aria-labelledby="specification-title">
+        <div class="home-section__inner">
+            <div class="home-specification__intro">
+                <h2 class="home-section__title" id="specification-title">{{ site.home.specification.heading }}</h2>
+                <p class="home-section__intro">{{ site.home.specification.description }}</p>
+            </div>
+            <div class="home-specification__spread">
+                {% for view in site.home.specification.views %}
+                <figure>
+                    {% image view.image, view.alt, "(min-width: 1440px) 628px, (min-width: 761px) 50vw, 100vw", "lazy" %}
+                    <figcaption>{{ view.label }}</figcaption>
+                </figure>
                 {% endfor %}
             </div>
-        </div>
-    </section>
-
-    <section class="home-cta" data-theme="dark" aria-label="Contact call to action">
-        <div class="home-cta__inner">
-            {% if site.home.cta.kicker %}
-            <p class="home-cta__eyebrow">{{ site.home.cta.kicker }}</p>
+            {% if site.home.specification.products and site.home.specification.products.length %}
+            <div class="home-specification__products">
+                {% for product in site.home.specification.products %}
+                <figure>
+                    {% image product.image, product.alt or "", "(min-width: 761px) 25vw, 50vw", "lazy" %}
+                    <figcaption>{{ product.label }}</figcaption>
+                </figure>
+                {% endfor %}
+            </div>
             {% endif %}
-            <h2 class="home-cta__title">{{ site.home.cta.heading | safe }}</h2>
-            {% if site.home.cta.text %}
-            <p class="home-cta__subline">{{ site.home.cta.text }}</p>
-            {% endif %}
-            <a class="home-cta__link" href="{{ site.settings.primaryCtaUrl or ('mailto:' + site.settings.email) }}">
-                <span class="home-cta__dot" aria-hidden="true"></span>
-                {{ site.home.cta.buttonLabel }}
-            </a>
         </div>
     </section>
 </main>

@@ -16,11 +16,9 @@
     </button>
 
     <ul id="floatingPillMenu" class="pillmenu">
-        <li class="overlay-home-only">
-            <a class="pill" href="/"{% if page.url == "/" %} aria-current="page"{% endif %}>Home</a>
-        </li>
+        <li class="primary-studio-mobile"><a class="pill" href="/studio/"{% if page.url == "/studio/" %} aria-current="page"{% endif %}>Studio</a></li>
         <li><a class="pill" href="/work/"{% if page.url == "/work/" or project %} aria-current="page"{% endif %}>Work</a></li>
-        <li><a class="pill" href="/studio/"{% if page.url == "/studio/" %} aria-current="page"{% endif %}>Studio</a></li>
+        <li><a class="pill" href="/services/"{% if page.url == "/services/" %} aria-current="page"{% endif %}>Services</a></li>
         <li><a class="pill" href="/contact/"{% if page.url == "/contact/" %} aria-current="page"{% endif %}>Contact</a></li>
     </ul>
 </nav>

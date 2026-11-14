@@ -1,49 +1,48 @@
 <footer class="site-footer">
+    {% if page.url == "/" or page.url == "/studio/" or page.url == "/services/" %}
+    <section class="home-cta site-footer__invitation" data-theme="light" aria-labelledby="footer-invitation">
+        <div class="home-cta__inner">
+            <h2 class="home-cta__title" id="footer-invitation">Have a project in mind?</h2>
+            <p class="home-cta__subline">Tell us about your space and what you would like to achieve.</p>
+            <a class="home-cta__link" href="/contact/">
+                <span class="home-cta__dot" aria-hidden="true"></span>
+                Start a conversation
+            </a>
+        </div>
+    </section>
+    {% endif %}
     <div class="site-footer__inner">
         <div class="site-footer__brand">
             <a href="/" class="site-footer__logo-link">
-                <img
-                    src="/assets/images/logos/logo_no_text_on_transparent.svg"
-                    alt="{{ site.settings.studioName }}"
-                    class="site-footer__logo"
-                />
+                <img src="/assets/images/logos/logo_no_text_on_transparent.svg" alt="Curated Design home" class="site-footer__logo" />
             </a>
-            <p class="site-footer__tagline">{{ site.settings.description }}</p>
-            <a class="site-footer__email" href="mailto:{{ site.settings.email }}">{{ site.settings.email }}</a>
+            <p class="site-footer__heading">Curated Design</p>
+            <p class="site-footer__tagline">Interior design, furnishing and visualisation.</p>
+            <p class="site-footer__location">{{ site.settings.location }}</p>
         </div>
-
-        <nav class="site-footer__col" aria-label="Footer site navigation">
-            <p class="site-footer__heading">Site</p>
+        <nav class="site-footer__col" aria-label="Explore">
+            <p class="site-footer__heading">Explore</p>
             <ul class="site-footer__list">
-                <li><a href="/">Home</a></li>
-                <li><a href="/work/">Work</a></li>
                 <li><a href="/studio/">Studio</a></li>
+                <li><a href="/work/">Work</a></li>
+                <li><a href="/services/">Services</a></li>
                 <li><a href="/contact/">Contact</a></li>
             </ul>
         </nav>
-
-        <nav class="site-footer__col" aria-label="Legal and company information">
-            <p class="site-footer__heading">Legal</p>
-            <ul class="site-footer__list">
-                {% for legalPage in legal.pages %}
-                <li><a href="/{{ legalPage.slug }}/">{{ legalPage.title }}</a></li>
-                {% endfor %}
-            </ul>
-        </nav>
-
-        <nav class="site-footer__col site-footer__col--apps" aria-label="App support">
-            <p class="site-footer__heading">App support</p>
-            <ul class="site-footer__list">
-                <li><a href="/apps/">Digital Tools</a></li>
-                {% for app in apps.items %}
-                <li><a href="/apps/{{ app.slug }}/">{{ app.name }}</a></li>
-                {% endfor %}
-            </ul>
+        <nav class="site-footer__col" aria-label="Digital products">
+            <p class="site-footer__heading">Digital Products</p>
+            <ul class="site-footer__list"><li><a href="/apps/">Apps &amp; Support</a></li></ul>
+            <p class="site-footer__tagline">Applications, information and support.</p>
         </nav>
     </div>
-
     <div class="site-footer__base">
         <p class="site-footer__copyright">© {{ site.currentYear }} Curated Design Limited</p>
-        <p class="site-footer__location">{{ site.settings.location }}</p>
+        <nav aria-label="Legal and company information">
+            <ul class="site-footer__legal">
+                <li><a href="/privacy-notice/">Privacy Notice</a></li>
+                <li><a href="/terms-of-business/">Terms of Business</a></li>
+                <li><a href="/company-information/">Company Information</a></li>
+            </ul>
+        </nav>
     </div>
 </footer>

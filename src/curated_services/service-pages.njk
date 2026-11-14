@@ -38,10 +38,13 @@ scripts:
         {% endif %}
         <div class="service-hero__panel">
             <p class="service-hero__eyebrow">{{ service.data.eyebrow or "Service" }} · {{ "0" + (serviceIndex + 1) if serviceIndex < 9 else serviceIndex + 1 }} / {{ "0" + allServices.length if allServices.length < 10 else allServices.length }}</p>
-            <h1 class="service-hero__title">{{ service.data.title | safe }}</h1>
+            <h1 class="service-hero__title">{{ (service.data.heading or service.data.title) | safe }}</h1>
             {% if service.data.intro %}
             <p class="service-hero__intro">{{ service.data.intro }}</p>
             {% endif %}
+            {% for paragraph in service.data.introDetails %}
+            <p class="service-hero__intro">{{ paragraph }}</p>
+            {% endfor %}
             {% if hasGlance %}
             <dl class="service-glance__list" aria-label="At a glance">
                 {% for item in service.data.glance %}

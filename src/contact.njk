@@ -19,6 +19,7 @@ scripts:
         <section class="contact-intro">
             <h1 class="contact-headline">{{ site.contact.heading | safe }}</h1>
             <p class="contact-subline">{{ site.contact.lead }}</p>
+            <p class="contact-subline">{{ site.contact.details }}</p>
 
             <address class="studio-meta">
                 <p class="studio-meta__name">{{ site.settings.studioName }}</p>
@@ -66,16 +67,17 @@ scripts:
                     <label class="field__label" for="project-type">Project type</label>
                     <select class="field__select" id="project-type" name="project-type">
                         <option value="" disabled selected>Select an option</option>
-                        <option value="residential">Residential home / apartment</option>
-                        <option value="hospitality">Hospitality (restaurant, bar, hotel)</option>
-                        <option value="workspace">Workspace / commercial</option>
+                        <option value="interior-design">Interior Design</option>
+                        <option value="furnishing-design">Furnishing Design</option>
+                        <option value="cgi-visualisation">CGI &amp; Visualisation</option>
+                        <option value="commercial-hospitality">Commercial / Hospitality</option>
                         <option value="other">Other</option>
                     </select>
                 </div>
 
                 <div class="field field--optional">
-                    <label class="field__label" for="budget">Approximate budget</label>
-                    <input class="field__input" type="text" id="budget" name="budget" placeholder="e.g. £80,000 – £150,000" />
+                    <label class="field__label" for="budget">Budget (optional)</label>
+                    <input class="field__input" type="text" id="budget" name="budget" placeholder="Estimated project budget (optional)" />
                 </div>
 
                 <div class="field">

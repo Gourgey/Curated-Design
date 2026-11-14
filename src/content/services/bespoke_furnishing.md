@@ -1,17 +1,19 @@
 ---
 tags: service
 permalink: false
-title: Bespoke Furnishing
+title: Furnishing Design
 slug: bespoke_furnishing
 status: published
 order: 3
-summary: Designing and creating unique furniture pieces tailored to the client's preferences and space.
+summary: "Carefully selected furniture, lighting, textiles and accessories, specified to complement the architecture, purpose and character of each space."
 cardImage: /assets/images/curated_services/bespoke_furnishing.webp
 cardAlt: A curved bouclé sofa, stone coffee table, and timber armchair in a bright panelled room
 coverImage: /assets/images/curated_services/bespoke_furnishing.webp
 coverAlt: A curved bouclé sofa, stone coffee table, and timber armchair in a bright panelled room
-intro: Furniture and key pieces sourced (or made) to fit your space and the way you use it—proportion, comfort, and longevity first.
-metaDescription: Furniture and key pieces sourced (or made) to fit your space and the way you use it—proportion, comfort, and longevity first.
+intro: "Carefully selected furniture, lighting, textiles and accessories, specified to complement the architecture, purpose and character of each space."
+introDetails:
+  - "We develop cohesive furnishing schemes using established suppliers and bespoke pieces where appropriate, balancing aesthetics, proportions, quality and budget."
+metaDescription: "Carefully selected furniture, lighting, textiles and accessories, specified to complement the architecture, purpose and character of each space."
 glance:
   - label: Timeline
     text: typically 2–6 weeks (scope-dependent)
@@ -46,8 +48,8 @@ sections:
       - Clients who want fewer, better options (not endless browsing)
       - Upgrades that need to fit awkward footprints or tight clearances
       - Projects where lead time and logistics must be managed calmly
-enquiryHeading: Enquire about Bespoke Furnishing
+enquiryHeading: Enquire about Furnishing Design
 enquiryText: Tell me what you need and I’ll respond with next steps and an estimated fee range based on scope.
 ctaHeading: Ready to furnish properly?
-ctaText: Bespoke Furnishing focuses on proportion, comfort, and lasting quality—so the space feels finished, not filled.
+ctaText: Furnishing Design focuses on proportion, comfort, and lasting quality—so the space feels finished, not filled.
 ---

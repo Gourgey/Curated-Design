@@ -32,9 +32,10 @@ eleventyExcludeFromCollections: true
 {% for service in collections.publishedService | sortByOrder %}
 - [{{ service.data.title | safe }}]({{ base | safe }}/services/{{ service.data.slug | safe }}/): {{ (service.data.intro or service.data.summary) | safe }}{% for row in service.data.glance %}{% if row.label == "Timeline" %} Timeline: {{ row.text | safe }}.{% endif %}{% endfor %}
 {%- endfor %}
+- [CGI & Visualisation]({{ base | safe }}/services/cgi-visualisation/): Photorealistic interior CGI and three-dimensional walkthroughs.
 
 ## How a project works
-{% for step in site.about.processSteps %}
+{% for step in site.home.process.steps %}
 {{ loop.index | safe }}. {{ step.label | safe }}: {{ step.text | safe }}
 {%- endfor %}
 

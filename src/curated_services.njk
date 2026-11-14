@@ -21,12 +21,20 @@ topLogo: logo_no_text_on_transparent.svg
         </div>
     </header>
 
-    <section class="projects-section">
+    {% for group in site.servicesPage.groups %}
+    <section class="projects-section service-group" id="{{ group.id }}" aria-labelledby="{{ group.id }}-title">
         <div class="projects-section__inner">
-            {% set allServices = collections.publishedService | sortByOrder %}
+            <header class="service-group__head">
+                <p class="label-small">0{{ loop.index }}</p>
+                <h2 class="projects-header__title" id="{{ group.id }}-title">{{ group.title }}</h2>
+                <p class="projects-header__intro">{{ group.intro }}</p>
+                <p class="projects-header__intro">{{ group.commissioning }}</p>
+            </header>
+            {% if group.entries %}
+            {% set entries = group.entries | resolveEntries(collections.publishedService, "service") %}
             <div class="projects-grid">
-                {% for service in allServices %}
-                <a class="card card--service" href="/services/{{ service.data.slug }}/">
+                {% for service in entries %}
+                <a class="card card--service"{% if service.data.slug == "bespoke_furnishing" %} id="furnishing-design"{% endif %} href="/services/{{ service.data.slug }}/">
                     <div class="card__media">
                         {% image service.data.cardImage, service.data.cardAlt or service.data.title, "(min-width: 1024px) 33vw, (min-width: 641px) 50vw, 100vw", "lazy", "", "card" %}
                     </div>
@@ -37,8 +45,17 @@ topLogo: logo_no_text_on_transparent.svg
                 </a>
                 {% endfor %}
             </div>
+            {% else %}
+            <ul class="service-group__capabilities">
+                <li>Photorealistic Interior CGI</li>
+                <li>3D Property Walkthroughs</li>
+                <li>Visualisation for Design Proposals</li>
+            </ul>
+            <a href="{{ group.url }}">Explore CGI &amp; Visualisation →</a>
+            {% endif %}
         </div>
     </section>
+    {% endfor %}
 
     {# Mirrored as FAQPage structured data in layouts/base.njk. #}
     {% set faqs = site.servicesPage.faqs %}
@@ -60,9 +77,13 @@ topLogo: logo_no_text_on_transparent.svg
     </section>
     {% endif %}
 
-    {% set heading = site.settings.ctaHeading %}
-    {% set text = site.settings.ctaText %}
-    {% set href = site.settings.primaryCtaUrl or ("mailto:" + site.settings.email) %}
-    {% set label = site.settings.primaryCtaText %}
-    {% include "partials/cta-band.njk" %}
+    <section class="projects-section property-professionals" aria-labelledby="property-professionals-title">
+        <div class="projects-section__inner">
+            <p class="label-small">For property professionals</p>
+            <h2 class="projects-header__title" id="property-professionals-title">Design-led solutions for the property market.</h2>
+            <p>We work with estate agents, developers and property owners to create thoughtful furnishing proposals, visualisations and interior schemes that help communicate the potential of residential properties.</p>
+            <p>From initial design concepts to furniture specification, procurement and installation, our approach can be tailored to individual properties and commercial objectives.</p>
+            <a href="/contact/">Enquire about a property project →</a>
+        </div>
+    </section>
 </main>

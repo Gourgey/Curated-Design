@@ -7,22 +7,18 @@
   "heroImage": "/assets/images/projects/shoreditch_office/shoreditch_office_1.webp",
   "heroImageAlt": "A warm London study with built-in joinery and a stone desk",
   "founder": {
-    "eyebrow": "Founder",
-    "heading": "Josh Gourgey, <em>Founder.</em>",
-    "tags": [
-      "Est. 2026",
-      "Seven years in interior design",
-      "London",
-      "UK & Middle East"
-    ],
+    "eyebrow": "",
+    "heading": "Josh Gourgey — Founder",
+    "tags": [],
     "paragraphs": [
-      "Curated Design was founded in 2026 by Josh Gourgey, after seven years in interior design: residential developments across London, hospitality projects — hotels and restaurants — and international work, particularly across the Middle East.",
-      "For us, interior design has never been a single calling so much as a range: hands-on site visits alongside the close, technical work of drawing up plans; problem-solving as much as the creative decisions; as much time spent with people as with drawings."
+      "Curated Design was established in London in 2026 by Josh Gourgey, drawing on seven years of experience across residential, hospitality and commercial interior design.",
+      "With a background encompassing creative concept development, technical detailing, furniture specification and project coordination, Josh brings a comprehensive approach to creating interiors that balance aesthetic quality with practical considerations.",
+      "The studio combines design expertise with modern visualisation techniques and an established network of furniture and interiors suppliers."
     ]
   },
   "workHeading": "What defines the work",
   "workParagraphs": [
-    "Clean lines, warm proportions, and details that hold up at close range — joinery, hardware, finishes, and the way materials meet.",
+    "We design around the architecture of each space, the people who use it and what it needs to do. Thoughtful proportions, materials and furnishings give each project its own character, whether the brief calls for something understated or expressive.",
     "Rather than chasing trends, the focus is on layouts that genuinely work, robust materials, and a palette that can evolve with your life or brand."
   ],
   "focusHeading": "Focus areas",

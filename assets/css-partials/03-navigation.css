@@ -1,3 +1,18 @@
+/* The logo and desktop Studio link share the left side of the header. */
+.header-brand {
+    position: fixed;
+    top: var(--pills-gap);
+    left: clamp(16px, 4vw, 40px);
+    z-index: 650;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+@media (max-width: 1280px) {
+    #siteHeader .header-studio-menu { display: none; }
+}
+
 /* ===== Mobile nav panel ===== */
 
 
@@ -6,10 +21,6 @@
    - Mirrors the style of the floating right-hand pill for consistency.
 */
 .top-left-logo {
-    position: fixed;
-    top: var(--pills-gap); /* vertically aligned with floating nav pill */
-    left: clamp(16px, 4vw, 40px);
-    z-index: 650; /* above background, under floating pill */
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -331,7 +342,8 @@ body.nav-open {
 }
 
 /* Inner pill menu styling when floating nav is in desktop mode */
-.nav-pill .pillmenu {
+.nav-pill .pillmenu,
+.header-studio-menu {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -347,9 +359,9 @@ body.nav-open {
 /* ===== Desktop-only behaviour (>= 1280px) =====
    - Show inline floating pills.
    - Hide burger toggle.
-   - Hide the Home item inside the overlay list (logo acts as Home on desktop).
+   - Use the Studio link beside the logo.
 */
-@media (min-width: 1280px) {
+@media (width > 1280px) {
     .pillmenu-toggle {
         display: none !important;
     }
@@ -358,7 +370,7 @@ body.nav-open {
         display: inline-flex !important;
     }
 
-    #floatingPillMenu .overlay-home-only {
+    #floatingPillMenu .primary-studio-mobile {
         display: none;
     }
 }
@@ -368,7 +380,7 @@ body.nav-open {
    - Burger button appears in the top-right.
    - Top-left logo shrinks to icon-only.
    - When nav has .is-open, it becomes a full-screen black overlay
-     with centred navigation items (Home, Work, Studio, Contact).
+     with centred navigation items (Studio, Work, Services, Contact).
 */
 @media (max-width: 1280px) {
     /* Hide inline floating pills under the header; burger takes over */
@@ -382,6 +394,8 @@ body.nav-open {
     .pillmenu-toggle {
         display: inline-flex;
     }
+
+    #floatingNavPill .pillmenu-toggle { flex-direction: column; }
 
     /* When overlay is open, pin the X in the top-right of the screen */
     #floatingNavPill.is-open .pillmenu-toggle {
@@ -426,9 +440,4 @@ body.nav-open {
         padding: 12px 24px;
     }
 
-    /* Ensure the Home item (overlay-home-only) is visible in the overlay */
-    #floatingNavPill.is-open .overlay-home-only {
-        display: block;
-    }
 }
-

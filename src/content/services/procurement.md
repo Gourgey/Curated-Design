@@ -2,6 +2,7 @@
 tags: service
 permalink: false
 title: Procurement
+heading: Considered sourcing. Seamless procurement.
 slug: procurement
 status: published
 order: 5
@@ -10,7 +11,10 @@ cardImage: /assets/images/curated_services/procurement.webp
 cardAlt: Furniture wrapped and crated for delivery on a marble floor
 coverImage: /assets/images/curated_services/procurement.webp
 coverAlt: Furniture wrapped and crated for delivery on a marble floor
-intro: Order management, supplier coordination, and delivery tracking so approved pieces move from specification to site with less friction.
+intro: "Through established relationships with furniture and interiors suppliers, Curated Design sources and procures products selected specifically for each project."
+introDetails:
+  - "We provide clear specifications and pricing, coordinate orders and lead times, and manage delivery arrangements through to installation."
+  - "Where trade pricing is available, clients may benefit from preferential rates, with savings and applicable fees explained before purchasing decisions are made."
 metaDescription: Order management, supplier coordination, and delivery tracking so approved pieces move from specification to site with less friction.
 glance:
   - label: Timeline
@@ -40,15 +44,6 @@ sections:
       - Delivery coordination with site or property access
       - Resolution of any issues prior to installation
     note: Procurement can run quietly in the background or be closely coordinated with contractors and installers, depending on the project.
-  - heading: How it saves you money
-    listType: ul
-    items:
-      - Trade pricing from suppliers that is not available at retail
-      - A share of that trade saving passed on to you
-      - No separate design fee where the studio supplies the pieces
-      - The same pieces and specification, for less than buying them yourself
-      - An itemised plan, priced openly before anything is ordered
-    note: As an example, a room planned at £10,000 in retail prices could come in at around £8,000 through the studio. Savings vary by supplier and project.
   - heading: Ideal for
     listType: ul
     items:

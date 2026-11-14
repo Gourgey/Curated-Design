@@ -1,49 +1,5 @@
-// Carousels: the homepage process carousel and the project hero gallery
-// carousel. Split from main.js (P2.4).
+// Project hero gallery carousel.
 window.addEventListener("DOMContentLoaded", () => {
-  /* --------------------------------------------------------------------------
-   * HOMEPAGE PROCESS CAROUSEL
-   * Every step is server-rendered with the first open; this only moves the
-   * open step (arrows, clicking a step, or ArrowLeft/ArrowRight).
-   * -------------------------------------------------------------------------- */
-  (function () {
-    const carousel = document.querySelector("[data-process-carousel]");
-    if (!carousel) return;
-
-    const steps = Array.from(carousel.querySelectorAll("[data-process-step]"));
-    const bars = Array.from(carousel.querySelectorAll(".process-dock__progress span"));
-    const count = carousel.querySelector("[data-process-count]");
-    const prev = carousel.querySelector("[data-process-prev]");
-    const next = carousel.querySelector("[data-process-next]");
-    if (steps.length <= 1) return;
-
-    const pad = (n) => (n < 10 ? "0" + n : String(n));
-    let index = 0;
-
-    function go(nextIndex) {
-      index = (nextIndex + steps.length) % steps.length;
-      steps.forEach((step, stepIndex) => {
-        const isActive = stepIndex === index;
-        step.classList.toggle("is-active", isActive);
-        step.querySelector("[data-process-toggle]").setAttribute("aria-expanded", isActive ? "true" : "false");
-      });
-      bars.forEach((bar, barIndex) => bar.classList.toggle("is-done", barIndex <= index));
-      if (count) count.textContent = pad(index + 1) + " / " + pad(steps.length);
-    }
-
-    steps.forEach((step, stepIndex) => {
-      step.querySelector("[data-process-toggle]").addEventListener("click", () => go(stepIndex));
-    });
-    if (prev) prev.addEventListener("click", () => go(index - 1));
-    if (next) next.addEventListener("click", () => go(index + 1));
-    carousel.addEventListener("keydown", (event) => {
-      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
-      if (event.target.closest("input, textarea, select")) return;
-      event.preventDefault();
-      go(index + (event.key === "ArrowRight" ? 1 : -1));
-    });
-  })();
-
   /* --------------------------------------------------------------------------
    * PROJECT HERO CAROUSEL
    * -------------------------------------------------------------------------- */

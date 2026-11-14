@@ -1,7 +1,7 @@
 ---
 tags: service
 permalink: false
-title: Plans and Elevations
+title: Plans & Elevations
 slug: plans_and_elevations
 status: published
 order: 4

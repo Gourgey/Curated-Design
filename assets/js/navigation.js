@@ -13,13 +13,10 @@ window.addEventListener("DOMContentLoaded", () => {
       const el = document.querySelector(hash);
       if (!el) return;
 
-      // Scroll to the section's exact document top so the viewport aligns
-      // precisely with the target section in Chrome and Safari.
-      const y = Math.round(el.getBoundingClientRect().top + window.scrollY);
-      const reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-      window.scrollTo({ top: y, behavior: reduceMotion ? "auto" : "smooth" });
+      const pillsBar = document.getElementById("pills");
+      const offset = pillsBar.offsetHeight + parseFloat(getComputedStyle(pillsBar).top) + 20;
+      const y = Math.ceil(el.getBoundingClientRect().top + window.scrollY - offset);
+      window.scrollTo({ top: y, behavior: "instant" });
     }
 
     pills.forEach((a) => {
@@ -49,7 +46,7 @@ window.addEventListener("DOMContentLoaded", () => {
     if (!navToggle || !menu) return;
 
     const siteHeader = nav.closest("header");
-    const logo = siteHeader && siteHeader.querySelector(".top-left-logo");
+    const brand = siteHeader && siteHeader.querySelector(".header-brand");
     let inertTargets = [];
 
     function setBackgroundInert(isInert) {
@@ -61,7 +58,7 @@ window.addEventListener("DOMContentLoaded", () => {
           child.dataset.navWasInert = child.inert ? "true" : "false";
           child.inert = true;
         });
-        if (logo) logo.inert = true;
+        if (brand) brand.inert = true;
         return;
       }
 
@@ -70,7 +67,7 @@ window.addEventListener("DOMContentLoaded", () => {
         delete child.dataset.navWasInert;
       });
       inertTargets = [];
-      if (logo) logo.inert = false;
+      if (brand) brand.inert = false;
     }
 
     function focusableMenuItems() {

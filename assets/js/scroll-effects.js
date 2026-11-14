@@ -4,7 +4,6 @@
 // deliberately rather than as two fully separate initialisers — see the
 // scheduler comment below.
 (function () {
-  const header = document.getElementById("siteHeader");
   const pillsBar = document.getElementById("pills");
   const links = Array.from(
     document.querySelectorAll("#pills .pillmenu a.pill"),
@@ -107,10 +106,9 @@
 
   function measure() {
     if (hasPillTracking) {
-      // Heights (use rects; avoid offsetHeight surprises)
-      const headerH = header ? header.getBoundingClientRect().height : 0;
-      const pillsH = pillsBar ? pillsBar.getBoundingClientRect().height : 0;
-      metrics.offset = headerH + pillsH + 8;
+      const pillsHeight = pillsBar.getBoundingClientRect().height;
+      const stickyTop = parseFloat(getComputedStyle(pillsBar).top);
+      metrics.offset = stickyTop + pillsHeight + 20;
 
       // Cache section top positions in document coordinates
       metrics.sectionTops = sections.map(
@@ -181,7 +179,7 @@
 
     if (!hasPillTracking) return;
 
-    const y = scrollY + metrics.offset + 1;
+    const y = scrollY + metrics.offset + 32;
 
     // Active pill highlight
     const idx = sectionIndexAt(y);
@@ -247,6 +245,6 @@
   // Optional-but-good: catch dynamic size changes (images loading, menu opening, etc.)
   if (hasPillTracking && "ResizeObserver" in window) {
     const ro = new ResizeObserver(() => scheduleMeasure());
-    [header, pillsBar, ...sections].forEach((el) => el && ro.observe(el));
+    [pillsBar, ...sections].forEach((el) => el && ro.observe(el));
   }
 })();

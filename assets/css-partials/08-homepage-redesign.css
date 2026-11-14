@@ -1,5 +1,5 @@
 /* ============================================================
-   Homepage redesign — Featured Projects + Design Philosophy + CTA
+   Homepage redesign — Featured Projects + CTA
    Prototype: Website Redesign : Stage X / Homepage - Standalone.
    Tokens scoped to wrappers so they don't leak into the rest of
    the site (notably the global --ink remains #f2f2f2).
@@ -87,16 +87,23 @@
 /* ---- Curated Services grid (mirrors Featured Projects with summary text) ---- */
 .home-services__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
     gap: 64px 48px;
     border-top: 1px solid var(--color-border-soft);
     padding-top: 56px;
 }
+@media (min-width: 761px) {
+    .home-services__grid .card__media {
+        height: clamp(220px, 29vw, 440px);
+        aspect-ratio: auto;
+    }
+}
+
 /* .home-service-card and its descendants moved to
    assets/css-partials/16-card.css as the shared .card/.card--service
    component (P2.2 follow-up). */
 
-/* Dark void variant — matches Design Philosophy band */
+/* Dark services band */
 .home-services {
     background: var(--color-surface-inverse);
     color: var(--color-text-inverse);
@@ -249,74 +256,7 @@
     padding-right: 6px;
 }
 
-/* ---- Design Philosophy band (dark, 50/50) ---- */
-.home-philosophy {
-    position: relative;
-    z-index: 1;
-    background: var(--color-surface-inverse);
-    color: var(--color-text-inverse);
-    padding: 144px 80px;
-    font-family: var(--font-family-body);
-}
-.home-philosophy__inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-}
-.home-philosophy__media {
-    aspect-ratio: 4 / 5;
-    background-color: var(--color-canvas-light);
-    margin: 0;
-    overflow: hidden;
-}
-.home-philosophy__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-.home-philosophy__body {
-    display: flex;
-    flex-direction: column;
-}
-.home-philosophy__eyebrow {
-    font-family: var(--font-family-body);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(237, 232, 221, 0.55);
-    margin: 0 0 32px;
-}
-.home-philosophy__title {
-    font-family: var(--font-family-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(40px, 4.6vw, 60px);
-    line-height: 1.06;
-    letter-spacing: -0.014em;
-    color: rgba(237, 232, 221, 0.96);
-    margin: 0 0 40px;
-    text-wrap: balance;
-    max-width: 18ch;
-}
-.home-philosophy__title em { font-style: italic; }
-.home-philosophy__text {
-    font-family: var(--font-family-body);
-    font-weight: 300;
-    font-size: 17px;
-    line-height: 1.65;
-    color: rgba(237, 232, 221, 0.78);
-    margin: 0 0 24px;
-    max-width: 32em;
-    text-wrap: pretty;
-}
-.home-philosophy__text:last-child { margin-bottom: 0; }
-
-/* ---- CTA band (dark, centred — continues from Philosophy) ---- */
+/* ---- Contact invitation ---- */
 .home-cta {
     position: relative;
     z-index: 1;
@@ -391,9 +331,6 @@
 /* ---- Responsive (from prototype) ---- */
 @media (max-width: 1120px) {
     .home-section { padding: 96px 40px; }
-    .home-philosophy { padding: 96px 40px; }
-    .home-philosophy__inner { grid-template-columns: 1fr; gap: 48px; }
-    .home-philosophy__media { aspect-ratio: 16 / 10; }
     .home-cta { padding: 80px 40px 48px; }
 }
 @media (max-width: 760px) {
@@ -403,268 +340,7 @@
     .home-services__grid { grid-template-columns: 1fr; gap: 48px; }
     .home-collections__more { flex-direction: column; gap: 12px; align-items: flex-start; }
     .home-services__more { flex-direction: column; gap: 12px; align-items: flex-start; }
-    .home-philosophy { padding: 72px 24px; }
     .home-cta { padding: 64px 24px 40px; }
-}
-
-/* ---- The Process — step carousel in the hero dock ----
-   Replaces the old featured-work dock. Sits on the fixed interior
-   background, so the dock is dark frosted glass; the open step is a
-   light card, the others stay as quiet frosted tabs. */
-.process-dock {
-    position: relative;
-    z-index: 1;
-    width: min(1280px, calc(100% - 48px));
-    margin: 28px auto 140px;
-    padding: 36px 40px 30px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 26px;
-    border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    background: rgba(24, 23, 19, 0.42);
-    backdrop-filter: blur(24px) saturate(1.1);
-    -webkit-backdrop-filter: blur(24px) saturate(1.1);
-    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45);
-    color: #f2f2f2;
-    font-family: var(--font-family-body);
-}
-.process-dock__head {
-    display: flex;
-    align-items: baseline;
-    gap: 20px;
-}
-.process-dock__kicker {
-    margin: 0;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-}
-.process-dock__title {
-    margin: 0;
-    font-family: var(--font-family-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: 26px;
-    letter-spacing: -0.01em;
-}
-.process-dock__controls {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    align-self: center;
-}
-.process-dock__count {
-    margin-right: 4px;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    color: rgba(237, 232, 221, 0.78);
-    font-variant-numeric: tabular-nums;
-}
-.process-dock__arrow {
-    width: 44px;
-    height: 44px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    background: rgba(255, 255, 255, 0.08);
-    color: #f2f2f2;
-    cursor: pointer;
-    transition: background 200ms ease;
-}
-.process-dock__arrow:hover { background: rgba(255, 255, 255, 0.16); }
-
-.process-dock__steps {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 14px;
-    /* A steady height, so switching steps never makes the dock grow. */
-    height: 320px;
-}
-.process-step {
-    flex: 2 1 0;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    border-radius: 22px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.07);
-    color: #f2f2f2;
-    overflow: hidden;
-    transition:
-        flex-grow 500ms cubic-bezier(0.2, 0.7, 0.2, 1),
-        background-color 400ms ease,
-        border-color 400ms ease,
-        color 400ms ease;
-}
-.process-step.is-active {
-    flex-grow: 5;
-    background: rgba(242, 238, 230, 0.95);
-    border-color: rgba(255, 255, 255, 0.6);
-    color: var(--color-text-primary);
-}
-.process-step__toggle {
-    flex-grow: 1;
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    align-content: space-between;
-    column-gap: 16px;
-    row-gap: 18px;
-    padding: 26px 26px 0;
-    border: 0;
-    border-radius: 22px;
-    background: none;
-    color: inherit;
-    font: inherit;
-    text-align: left;
-    cursor: pointer;
-    transition: padding 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.process-step:not(.is-active) .process-step__toggle { padding-bottom: 24px; }
-.process-step__toggle:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 3px;
-}
-.process-step__num {
-    font-family: var(--font-family-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: 44px;
-    line-height: 0.8;
-}
-.process-step__label {
-    align-self: baseline;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    line-height: 1.5;
-    color: rgba(237, 232, 221, 0.78);
-}
-.process-step.is-active .process-step__label { color: var(--color-text-muted); }
-.process-step__title {
-    grid-column: 1 / -1;
-    font-family: var(--font-family-display);
-    font-weight: 300;
-    font-size: 26px;
-    line-height: 1.08;
-    letter-spacing: -0.01em;
-    transition: font-size 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.process-step.is-active .process-step__title {
-    font-weight: 400;
-    font-size: clamp(30px, 3vw, 42px);
-    line-height: 1;
-}
-/* The open step's text: its row eases open while the card widens, then
-   the text fades in. It is laid out at the open card's width from the
-   start, so it never re-wraps (and jumps) while the card grows. */
-.process-step__detail {
-    display: grid;
-    grid-template-rows: 0fr;
-    opacity: 0;
-    visibility: hidden;
-    transition:
-        grid-template-rows 500ms cubic-bezier(0.2, 0.7, 0.2, 1),
-        opacity 150ms ease,
-        visibility 0s linear 500ms;
-}
-.process-step.is-active .process-step__detail {
-    grid-template-rows: 1fr;
-    opacity: 1;
-    visibility: visible;
-    transition:
-        grid-template-rows 500ms cubic-bezier(0.2, 0.7, 0.2, 1),
-        opacity 350ms ease 300ms,
-        visibility 0s;
-}
-.process-step__detail-inner {
-    min-height: 0;
-    overflow: hidden;
-    padding: 12px 26px 26px;
-}
-@media (min-width: 1001px) {
-    .process-step__detail-inner { width: 460px; }
-}
-.process-step__text {
-    margin: 0;
-    max-width: 34em;
-    font-weight: 300;
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--color-text-secondary);
-}
-.process-step__receive {
-    display: inline-block;
-    margin: 14px 0 0;
-    padding: 7px 14px;
-    border-radius: 10px;
-    background: #cdd5b8;
-    color: var(--color-text-primary);
-    font-size: 13px;
-}
-.process-dock__foot {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-}
-.process-dock__progress {
-    display: flex;
-    gap: 6px;
-    width: 360px;
-    flex-shrink: 0;
-}
-.process-dock__progress span {
-    flex: 1;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.2);
-    transition: background 300ms ease;
-}
-.process-dock__progress span.is-done { background: var(--color-accent); }
-.process-dock__closing {
-    flex-grow: 1;
-    margin: 0;
-    text-align: center;
-    font-family: var(--font-family-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: 20px;
-    color: rgba(237, 232, 221, 0.85);
-}
-.process-dock__link {
-    flex-shrink: 0;
-    padding-bottom: 3px;
-    border-bottom: 1px solid rgba(237, 232, 221, 0.95);
-    font-family: var(--font-family-display);
-    font-style: italic;
-    font-size: 20px;
-    color: #f2f2f2;
-    text-decoration: none;
-    transition: padding-right 200ms ease;
-}
-.process-dock__link::after { content: " →"; font-style: normal; }
-.process-dock__link:hover { padding-right: 6px; }
-
-@media (max-width: 1000px) {
-    .process-dock { padding: 28px 24px 24px; margin-bottom: 96px; }
-    .process-dock__head { flex-wrap: wrap; row-gap: 8px; }
-    .process-dock__title { order: 3; flex-basis: 100%; }
-    .process-dock__steps { flex-direction: column; height: auto; }
-    .process-step { flex: none; }
-    .process-step__toggle { padding: 20px 20px 0; }
-    .process-step:not(.is-active) .process-step__toggle { padding-bottom: 20px; }
-    .process-step:not(.is-active) .process-step__title { font-size: 22px; }
-    .process-step__detail-inner { padding: 10px 20px 22px; }
-    .process-dock__foot { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .process-dock__progress { width: 100%; }
-    .process-dock__closing { text-align: left; }
 }
 
 /* ---- Collections: single featured project spread ---- */

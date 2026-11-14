@@ -307,13 +307,17 @@
         {% endif %}
 
         <header id="siteHeader">
-            <a href="/{% if sectionTop %}#top{% endif %}" id="topLogo" class="top-left-logo">
-                <img
-                    src="/assets/images/logos/{{ topLogo | default('logo_no_text_on_transparent.svg') }}"
-                    alt="{{ site.settings.studioName }}"
-                />
-            </a>
-
+            <div class="header-brand">
+                <a href="/" id="topLogo" class="top-left-logo">
+                    <img
+                        src="/assets/images/logos/{{ topLogo | default('logo_no_text_on_transparent.svg') }}"
+                        alt="{{ site.settings.studioName }}"
+                    />
+                </a>
+                <div class="header-studio-menu pillmenu">
+                    <a href="/studio/" class="pill"{% if page.url == "/studio/" %} aria-current="page"{% endif %}>Studio</a>
+                </div>
+            </div>
             {% include "partials/nav.njk" %}
         </header>
 
@@ -322,6 +326,7 @@
         {% include "partials/footer.njk" %}
 
         {% set defaultScripts = ['/assets/js/navigation.js', '/assets/js/carousels.js', '/assets/js/scroll-effects.js'] %}
+        {% if page.url == "/" %}<script src="/assets/js/process-timeline.js?v={{ site.jsVersion }}" defer></script>{% endif %}
         {% for script in scripts | default(defaultScripts) %}
         <script src="{{ script }}?v={{ site.jsVersion }}" defer></script>
         {% endfor %}

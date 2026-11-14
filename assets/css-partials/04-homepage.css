@@ -185,16 +185,6 @@ body.chrome-scrolling .pills-panel {
     padding: 80px 0;
 }
 
-/* Index only: extend Design Philosophy so the floating pills remain over
-   this final dark band near page bottom across viewport sizes. */
-body:not(.projects-page):not(.about-page):not(.contact-page):not(.concept-page):not(
-        .project-page
-    )
-    #about.section {
-    min-height: max(520px, calc(100svh - 120px));
-    padding-bottom: clamp(88px, 12svh, 160px);
-}
-
 /*
    Section inner container:
    - Centers content and constrains width.

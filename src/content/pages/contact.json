@@ -1,9 +1,10 @@
 {
   "title": "Contact – Curated Design Studio",
   "metaDescription": "Share a few details and we’ll respond shortly — based in London, working on residential and hospitality interiors across the UK and beyond.",
-  "heading": "Every brief begins with a conversation.",
-  "lead": "Share a few details and we’ll respond shortly. Based in London, working on residential and hospitality interiors across the UK and beyond.",
+  "heading": "Tell us about your project.",
+  "lead": "Whether you are furnishing a single room, developing a complete interior or exploring the potential of a property, we would be pleased to discuss your requirements.",
   "note": "For press, collaborations, or speaking enquiries, please note this in your message.",
   "submitLabel": "Send enquiry",
-  "submitMeta": "Response within two working days"
+  "submitMeta": "Response within two working days",
+  "details": "Share a few details about your space, location, budget and timescale, and we will outline how Curated Design may be able to assist."
 }

@@ -10,7 +10,10 @@ const outputRoot = path.join(root, "_site");
 const axePath = require.resolve("axe-core/axe.min.js");
 
 const scans = [
-  { label: "Homepage mobile", route: "/", width: 390, height: 844, processCarousel: true },
+  { label: "Homepage desktop", route: "/", width: 1440, height: 900, processTimeline: true },
+  { label: "CGI service mobile", route: "/services/cgi-visualisation/", width: 390, height: 844 },
+  { label: "Procurement desktop", route: "/services/procurement/", width: 1440, height: 900 },
+  { label: "Homepage mobile", route: "/", width: 390, height: 844, processTimeline: true },
   { label: "Homepage mobile menu", route: "/", width: 390, height: 844, openMenu: true },
   { label: "Work mobile", route: "/work/", width: 390, height: 844 },
   { label: "Services index mobile", route: "/services/", width: 390, height: 844 },
@@ -302,7 +305,7 @@ async function checkViewportLayout(page) {
   const state = await page.evaluate(() => {
     const viewportWidth = document.documentElement.clientWidth;
     const fullWidthSections = Array.from(
-      document.querySelectorAll(".home-section, .home-philosophy, .home-cta"),
+      document.querySelectorAll(".home-section, .home-cta"),
     ).map((element) => {
       const rect = element.getBoundingClientRect();
       return {
@@ -333,52 +336,25 @@ async function checkViewportLayout(page) {
   }
 }
 
-async function checkProcessCarousel(page) {
-  const readState = () =>
-    page.evaluate(() => {
-      const carousel = document.querySelector("#process[data-process-carousel]");
-      const toggles = Array.from(document.querySelectorAll("#process [data-process-toggle]"));
-      const details = Array.from(document.querySelectorAll("#process .process-step__detail"));
-      return {
-        carouselLabel: carousel?.getAttribute("aria-label"),
-        stepCount: toggles.length,
-        buttonToggles: toggles.filter((toggle) => toggle.tagName === "BUTTON").length,
-        expanded: toggles.map((toggle) => toggle.getAttribute("aria-expanded")),
-        visibleDetails: details.filter((detail) => getComputedStyle(detail).visibility === "visible").length,
-        arrows: document.querySelectorAll("#process [data-process-prev], #process [data-process-next]").length,
-        count: document.querySelector("#process [data-process-count]")?.textContent.trim(),
-      };
-    });
+async function checkProcessTimeline(page) {
+  const expectStage = (stage) =>
+    page.waitForFunction((activeStage) => {
+      const buttons = [...document.querySelectorAll("#process h3 button")];
+      const details = [...document.querySelectorAll("#process .process-timeline__detail")];
+      return buttons.length === 4 &&
+        buttons.every((button, index) => button.getAttribute("aria-expanded") === String(index === activeStage - 1)) &&
+        details.every((detail, index) => detail.inert === (index !== activeStage - 1)) &&
+        document.querySelector("[data-process-count]").textContent === `0${activeStage} / 04`;
+    }, { timeout: 3000 }, stage);
 
-  const state = await readState();
-  if (
-    !state.carouselLabel ||
-    state.stepCount < 2 ||
-    state.buttonToggles !== state.stepCount ||
-    state.expanded[0] !== "true" ||
-    state.expanded.filter((value) => value === "true").length !== 1 ||
-    state.visibleDetails !== 1 ||
-    state.arrows !== 2 ||
-    !state.count
-  ) {
-    throw new Error(`Homepage process carousel contract failed: ${JSON.stringify(state)}`);
-  }
-
-  await page.click("#process [data-process-next]");
-  // The previous step's text fades out over the transition; wait for it.
-  await page.waitForFunction(() => {
-    const details = Array.from(document.querySelectorAll("#process .process-step__detail"));
-    return details.filter((detail) => getComputedStyle(detail).visibility === "visible").length === 1;
-  });
-  const afterNext = await readState();
-  if (afterNext.expanded[1] !== "true" || afterNext.visibleDetails !== 1) {
-    throw new Error(`Process carousel did not advance: ${JSON.stringify(afterNext)}`);
-  }
-  await page.click("#process [data-process-toggle]");
-  // Switching steps fades each card's background and text colour. Axe runs
-  // straight after this, so let those transitions finish first: scanning
-  // mid-fade measures a half-light card against half-dark text and reports
-  // a colour-contrast failure no visitor sees once the switch has settled.
+  await expectStage(1);
+  await page.focus("#process li:nth-child(2) button");
+  await page.keyboard.press("Enter");
+  await expectStage(2);
+  await page.click("#process li:nth-child(4) button");
+  await expectStage(4);
+  await page.click("#process li:first-child button");
+  await expectStage(1);
   await page.waitForFunction(
     () => document.querySelector("#process").getAnimations({ subtree: true }).length === 0,
   );
@@ -574,7 +550,7 @@ async function main() {
         waitUntil: "domcontentloaded",
       });
       await checkViewportLayout(page);
-      if (scan.processCarousel) await checkProcessCarousel(page);
+      if (scan.processTimeline) await checkProcessTimeline(page);
       if (scan.projectCarousel) await checkProjectCarousel(page);
       if (scan.openMenu) {
         await page.click("[aria-controls='floatingPillMenu']");
@@ -651,7 +627,7 @@ async function main() {
   }
 
   console.log(
-    `Accessibility check passed: ${scans.length} representative Axe and viewport-layout scans plus navigation, process-carousel, project-carousel, and enquiry-form interaction smoke tests; no critical/serious violations, ${nonBlockingViolationCount} non-blocking violation(s).`,
+    `Accessibility check passed: ${scans.length} representative Axe and viewport-layout scans plus navigation, process-timeline, project-carousel, and enquiry-form interaction smoke tests; no critical/serious violations, ${nonBlockingViolationCount} non-blocking violation(s).`,
   );
 }
 

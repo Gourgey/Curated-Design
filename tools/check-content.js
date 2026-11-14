@@ -230,10 +230,6 @@ validateRelationList(
   "home.servicesSection.featuredServices",
   { requiredStatus: "published" },
 );
-validateLocalImage(home.philosophy && home.philosophy.image, "home.philosophy.image");
-if (home.philosophy && home.philosophy.image && !home.philosophy.imageAlt) {
-  warn("home.philosophy.imageAlt is empty; confirm whether the image is decorative");
-}
 
 const publishedProjects = projects.filter((entry) => entry.data.status === "published");
 if (publishedProjects.length < 3) {

@@ -1,5 +1,5 @@
 /* GENERATED FILE -- do not edit directly.
-   Source partials: assets/css-partials/ (01-tokens.css, 02-base.css, 03-navigation.css, 04-homepage.css, 05-legacy-pages.css, 06-project-template.css, 07-misc-pages.css, 08-homepage-redesign.css, 09-project-redesign.css, 10-projects-listing-redesign.css, 11-service-redesign.css, 12-carousels.css, 13-buttons-cta.css, 14-form-fields.css, 15-backlink.css, 16-card.css, 17-footer.css, 18-services-page.css)
+   Source partials: assets/css-partials/ (01-tokens.css, 02-base.css, 03-navigation.css, 04-homepage.css, 05-legacy-pages.css, 06-project-template.css, 07-misc-pages.css, 08-homepage-redesign.css, 09-project-redesign.css, 10-projects-listing-redesign.css, 11-service-redesign.css, 12-carousels.css, 13-buttons-cta.css, 14-form-fields.css, 15-backlink.css, 16-card.css, 17-footer.css, 18-services-page.css, 19-design-studio-update.css)
    Rebuild with: node tools/build-css.js (also runs automatically as part of npm run build
    and npm start) */
 
@@ -284,6 +284,21 @@ main.page-main {
 }
 
 
+/* The logo and desktop Studio link share the left side of the header. */
+.header-brand {
+    position: fixed;
+    top: var(--pills-gap);
+    left: clamp(16px, 4vw, 40px);
+    z-index: 650;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+@media (max-width: 1280px) {
+    #siteHeader .header-studio-menu { display: none; }
+}
+
 /* ===== Mobile nav panel ===== */
 
 
@@ -292,10 +307,6 @@ main.page-main {
    - Mirrors the style of the floating right-hand pill for consistency.
 */
 .top-left-logo {
-    position: fixed;
-    top: var(--pills-gap); /* vertically aligned with floating nav pill */
-    left: clamp(16px, 4vw, 40px);
-    z-index: 650; /* above background, under floating pill */
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -617,7 +628,8 @@ body.nav-open {
 }
 
 /* Inner pill menu styling when floating nav is in desktop mode */
-.nav-pill .pillmenu {
+.nav-pill .pillmenu,
+.header-studio-menu {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -633,9 +645,9 @@ body.nav-open {
 /* ===== Desktop-only behaviour (>= 1280px) =====
    - Show inline floating pills.
    - Hide burger toggle.
-   - Hide the Home item inside the overlay list (logo acts as Home on desktop).
+   - Use the Studio link beside the logo.
 */
-@media (min-width: 1280px) {
+@media (width > 1280px) {
     .pillmenu-toggle {
         display: none !important;
     }
@@ -644,7 +656,7 @@ body.nav-open {
         display: inline-flex !important;
     }
 
-    #floatingPillMenu .overlay-home-only {
+    #floatingPillMenu .primary-studio-mobile {
         display: none;
     }
 }
@@ -654,7 +666,7 @@ body.nav-open {
    - Burger button appears in the top-right.
    - Top-left logo shrinks to icon-only.
    - When nav has .is-open, it becomes a full-screen black overlay
-     with centred navigation items (Home, Work, Studio, Contact).
+     with centred navigation items (Studio, Work, Services, Contact).
 */
 @media (max-width: 1280px) {
     /* Hide inline floating pills under the header; burger takes over */
@@ -668,6 +680,8 @@ body.nav-open {
     .pillmenu-toggle {
         display: inline-flex;
     }
+
+    #floatingNavPill .pillmenu-toggle { flex-direction: column; }
 
     /* When overlay is open, pin the X in the top-right of the screen */
     #floatingNavPill.is-open .pillmenu-toggle {
@@ -712,12 +726,7 @@ body.nav-open {
         padding: 12px 24px;
     }
 
-    /* Ensure the Home item (overlay-home-only) is visible in the overlay */
-    #floatingNavPill.is-open .overlay-home-only {
-        display: block;
-    }
 }
-
 /* ===== Hero ===== */
 
 .hero-brand {
@@ -903,16 +912,6 @@ body.chrome-scrolling .pills-panel {
     position: relative;
     z-index: 1; /* above the fixed bg image */
     padding: 80px 0;
-}
-
-/* Index only: extend Design Philosophy so the floating pills remain over
-   this final dark band near page bottom across viewport sizes. */
-body:not(.projects-page):not(.about-page):not(.contact-page):not(.concept-page):not(
-        .project-page
-    )
-    #about.section {
-    min-height: max(520px, calc(100svh - 120px));
-    padding-bottom: clamp(88px, 12svh, 160px);
 }
 
 /*
@@ -3229,7 +3228,7 @@ body.recovery-page {
     height: 48px;
 }
 /* ============================================================
-   Homepage redesign — Featured Projects + Design Philosophy + CTA
+   Homepage redesign — Featured Projects + CTA
    Prototype: Website Redesign : Stage X / Homepage - Standalone.
    Tokens scoped to wrappers so they don't leak into the rest of
    the site (notably the global --ink remains #f2f2f2).
@@ -3317,16 +3316,23 @@ body.recovery-page {
 /* ---- Curated Services grid (mirrors Featured Projects with summary text) ---- */
 .home-services__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
     gap: 64px 48px;
     border-top: 1px solid var(--color-border-soft);
     padding-top: 56px;
 }
+@media (min-width: 761px) {
+    .home-services__grid .card__media {
+        height: clamp(220px, 29vw, 440px);
+        aspect-ratio: auto;
+    }
+}
+
 /* .home-service-card and its descendants moved to
    assets/css-partials/16-card.css as the shared .card/.card--service
    component (P2.2 follow-up). */
 
-/* Dark void variant — matches Design Philosophy band */
+/* Dark services band */
 .home-services {
     background: var(--color-surface-inverse);
     color: var(--color-text-inverse);
@@ -3479,74 +3485,7 @@ body.recovery-page {
     padding-right: 6px;
 }
 
-/* ---- Design Philosophy band (dark, 50/50) ---- */
-.home-philosophy {
-    position: relative;
-    z-index: 1;
-    background: var(--color-surface-inverse);
-    color: var(--color-text-inverse);
-    padding: 144px 80px;
-    font-family: var(--font-family-body);
-}
-.home-philosophy__inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-}
-.home-philosophy__media {
-    aspect-ratio: 4 / 5;
-    background-color: var(--color-canvas-light);
-    margin: 0;
-    overflow: hidden;
-}
-.home-philosophy__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-.home-philosophy__body {
-    display: flex;
-    flex-direction: column;
-}
-.home-philosophy__eyebrow {
-    font-family: var(--font-family-body);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(237, 232, 221, 0.55);
-    margin: 0 0 32px;
-}
-.home-philosophy__title {
-    font-family: var(--font-family-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(40px, 4.6vw, 60px);
-    line-height: 1.06;
-    letter-spacing: -0.014em;
-    color: rgba(237, 232, 221, 0.96);
-    margin: 0 0 40px;
-    text-wrap: balance;
-    max-width: 18ch;
-}
-.home-philosophy__title em { font-style: italic; }
-.home-philosophy__text {
-    font-family: var(--font-family-body);
-    font-weight: 300;
-    font-size: 17px;
-    line-height: 1.65;
-    color: rgba(237, 232, 221, 0.78);
-    margin: 0 0 24px;
-    max-width: 32em;
-    text-wrap: pretty;
-}
-.home-philosophy__text:last-child { margin-bottom: 0; }
-
-/* ---- CTA band (dark, centred — continues from Philosophy) ---- */
+/* ---- Contact invitation ---- */
 .home-cta {
     position: relative;
     z-index: 1;
@@ -3621,9 +3560,6 @@ body.recovery-page {
 /* ---- Responsive (from prototype) ---- */
 @media (max-width: 1120px) {
     .home-section { padding: 96px 40px; }
-    .home-philosophy { padding: 96px 40px; }
-    .home-philosophy__inner { grid-template-columns: 1fr; gap: 48px; }
-    .home-philosophy__media { aspect-ratio: 16 / 10; }
     .home-cta { padding: 80px 40px 48px; }
 }
 @media (max-width: 760px) {
@@ -3633,268 +3569,7 @@ body.recovery-page {
     .home-services__grid { grid-template-columns: 1fr; gap: 48px; }
     .home-collections__more { flex-direction: column; gap: 12px; align-items: flex-start; }
     .home-services__more { flex-direction: column; gap: 12px; align-items: flex-start; }
-    .home-philosophy { padding: 72px 24px; }
     .home-cta { padding: 64px 24px 40px; }
-}
-
-/* ---- The Process — step carousel in the hero dock ----
-   Replaces the old featured-work dock. Sits on the fixed interior
-   background, so the dock is dark frosted glass; the open step is a
-   light card, the others stay as quiet frosted tabs. */
-.process-dock {
-    position: relative;
-    z-index: 1;
-    width: min(1280px, calc(100% - 48px));
-    margin: 28px auto 140px;
-    padding: 36px 40px 30px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 26px;
-    border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    background: rgba(24, 23, 19, 0.42);
-    backdrop-filter: blur(24px) saturate(1.1);
-    -webkit-backdrop-filter: blur(24px) saturate(1.1);
-    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45);
-    color: #f2f2f2;
-    font-family: var(--font-family-body);
-}
-.process-dock__head {
-    display: flex;
-    align-items: baseline;
-    gap: 20px;
-}
-.process-dock__kicker {
-    margin: 0;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-}
-.process-dock__title {
-    margin: 0;
-    font-family: var(--font-family-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: 26px;
-    letter-spacing: -0.01em;
-}
-.process-dock__controls {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    align-self: center;
-}
-.process-dock__count {
-    margin-right: 4px;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    color: rgba(237, 232, 221, 0.78);
-    font-variant-numeric: tabular-nums;
-}
-.process-dock__arrow {
-    width: 44px;
-    height: 44px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    background: rgba(255, 255, 255, 0.08);
-    color: #f2f2f2;
-    cursor: pointer;
-    transition: background 200ms ease;
-}
-.process-dock__arrow:hover { background: rgba(255, 255, 255, 0.16); }
-
-.process-dock__steps {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 14px;
-    /* A steady height, so switching steps never makes the dock grow. */
-    height: 320px;
-}
-.process-step {
-    flex: 2 1 0;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    border-radius: 22px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.07);
-    color: #f2f2f2;
-    overflow: hidden;
-    transition:
-        flex-grow 500ms cubic-bezier(0.2, 0.7, 0.2, 1),
-        background-color 400ms ease,
-        border-color 400ms ease,
-        color 400ms ease;
-}
-.process-step.is-active {
-    flex-grow: 5;
-    background: rgba(242, 238, 230, 0.95);
-    border-color: rgba(255, 255, 255, 0.6);
-    color: var(--color-text-primary);
-}
-.process-step__toggle {
-    flex-grow: 1;
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    align-content: space-between;
-    column-gap: 16px;
-    row-gap: 18px;
-    padding: 26px 26px 0;
-    border: 0;
-    border-radius: 22px;
-    background: none;
-    color: inherit;
-    font: inherit;
-    text-align: left;
-    cursor: pointer;
-    transition: padding 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.process-step:not(.is-active) .process-step__toggle { padding-bottom: 24px; }
-.process-step__toggle:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 3px;
-}
-.process-step__num {
-    font-family: var(--font-family-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: 44px;
-    line-height: 0.8;
-}
-.process-step__label {
-    align-self: baseline;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    line-height: 1.5;
-    color: rgba(237, 232, 221, 0.78);
-}
-.process-step.is-active .process-step__label { color: var(--color-text-muted); }
-.process-step__title {
-    grid-column: 1 / -1;
-    font-family: var(--font-family-display);
-    font-weight: 300;
-    font-size: 26px;
-    line-height: 1.08;
-    letter-spacing: -0.01em;
-    transition: font-size 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.process-step.is-active .process-step__title {
-    font-weight: 400;
-    font-size: clamp(30px, 3vw, 42px);
-    line-height: 1;
-}
-/* The open step's text: its row eases open while the card widens, then
-   the text fades in. It is laid out at the open card's width from the
-   start, so it never re-wraps (and jumps) while the card grows. */
-.process-step__detail {
-    display: grid;
-    grid-template-rows: 0fr;
-    opacity: 0;
-    visibility: hidden;
-    transition:
-        grid-template-rows 500ms cubic-bezier(0.2, 0.7, 0.2, 1),
-        opacity 150ms ease,
-        visibility 0s linear 500ms;
-}
-.process-step.is-active .process-step__detail {
-    grid-template-rows: 1fr;
-    opacity: 1;
-    visibility: visible;
-    transition:
-        grid-template-rows 500ms cubic-bezier(0.2, 0.7, 0.2, 1),
-        opacity 350ms ease 300ms,
-        visibility 0s;
-}
-.process-step__detail-inner {
-    min-height: 0;
-    overflow: hidden;
-    padding: 12px 26px 26px;
-}
-@media (min-width: 1001px) {
-    .process-step__detail-inner { width: 460px; }
-}
-.process-step__text {
-    margin: 0;
-    max-width: 34em;
-    font-weight: 300;
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--color-text-secondary);
-}
-.process-step__receive {
-    display: inline-block;
-    margin: 14px 0 0;
-    padding: 7px 14px;
-    border-radius: 10px;
-    background: #cdd5b8;
-    color: var(--color-text-primary);
-    font-size: 13px;
-}
-.process-dock__foot {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-}
-.process-dock__progress {
-    display: flex;
-    gap: 6px;
-    width: 360px;
-    flex-shrink: 0;
-}
-.process-dock__progress span {
-    flex: 1;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.2);
-    transition: background 300ms ease;
-}
-.process-dock__progress span.is-done { background: var(--color-accent); }
-.process-dock__closing {
-    flex-grow: 1;
-    margin: 0;
-    text-align: center;
-    font-family: var(--font-family-display);
-    font-style: italic;
-    font-weight: 300;
-    font-size: 20px;
-    color: rgba(237, 232, 221, 0.85);
-}
-.process-dock__link {
-    flex-shrink: 0;
-    padding-bottom: 3px;
-    border-bottom: 1px solid rgba(237, 232, 221, 0.95);
-    font-family: var(--font-family-display);
-    font-style: italic;
-    font-size: 20px;
-    color: #f2f2f2;
-    text-decoration: none;
-    transition: padding-right 200ms ease;
-}
-.process-dock__link::after { content: " →"; font-style: normal; }
-.process-dock__link:hover { padding-right: 6px; }
-
-@media (max-width: 1000px) {
-    .process-dock { padding: 28px 24px 24px; margin-bottom: 96px; }
-    .process-dock__head { flex-wrap: wrap; row-gap: 8px; }
-    .process-dock__title { order: 3; flex-basis: 100%; }
-    .process-dock__steps { flex-direction: column; height: auto; }
-    .process-step { flex: none; }
-    .process-step__toggle { padding: 20px 20px 0; }
-    .process-step:not(.is-active) .process-step__toggle { padding-bottom: 20px; }
-    .process-step:not(.is-active) .process-step__title { font-size: 22px; }
-    .process-step__detail-inner { padding: 10px 20px 22px; }
-    .process-dock__foot { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .process-dock__progress { width: 100%; }
-    .process-dock__closing { text-align: left; }
 }
 
 /* ---- Collections: single featured project spread ---- */
@@ -5983,13 +5658,7 @@ body.project-page .pill:hover,
     margin: 0;
     text-wrap: pretty;
 }
-/* ===== Global site footer (P3.1) =====
-   Appears on every page via src/_includes/layouts/base.njk. Dark, matching
-   the tone of the .about-cta-band/.project-cta-band that most pages
-   already end on. Content per docs/overhaul/DECISIONS.md (16 July 2026):
-   contact route, the three primary-nav routes (no Services link), all
-   existing legal/company pages, app-support links shown visibly, no
-   social links (none exist to add). */
+/* Global contact invitation, site navigation and legal links. */
 
 .site-footer {
     position: relative;
@@ -6005,9 +5674,9 @@ body.project-page .pill:hover,
 .site-footer__inner {
     width: min(1280px, calc(100% - 64px));
     margin: 0 auto;
-    padding: var(--space-7xl) 0 var(--space-3xl);
+    padding: var(--space-3xl) 0 var(--space-3xl);
     display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    grid-template-columns: 1.4fr 1fr 1fr;
     gap: var(--space-4xl) var(--space-lg);
 }
 
@@ -6036,14 +5705,6 @@ body.project-page .pill:hover,
     font-size: var(--font-size-body-small);
     line-height: var(--line-height-body);
     color: rgba(237, 232, 221, 0.72);
-}
-
-.site-footer__email {
-    font-family: var(--font-family-body);
-    font-size: var(--font-size-body-small);
-    font-weight: 500;
-    color: var(--color-text-inverse);
-    text-underline-offset: 3px;
 }
 
 .site-footer__heading {
@@ -6214,4 +5875,245 @@ body.services-page .label-small {
     .services-faq__list {
         grid-template-columns: 1fr;
     }
+}
+.process-timeline {
+    --process-progress: 0.25;
+    --process-green: #c4d69a;
+    color: #f2eee6;
+    position: relative;
+    z-index: 1;
+    --photo-bottom-space: clamp(96px, 10vw, 140px);
+    padding: 0 clamp(16px, 3.2vw, 48px) var(--photo-bottom-space);
+}
+
+.process-timeline::after {
+    position: absolute;
+    inset: auto 0 0;
+    height: var(--photo-bottom-space);
+    background: linear-gradient(to bottom, transparent, var(--color-surface-inverse));
+    content: "";
+    pointer-events: none;
+}
+
+.process-timeline__inner {
+    box-sizing: border-box;
+    max-width: 1160px;
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 22px clamp(24px, 5vw, 72px);
+    padding: clamp(18px, 3.4vw, 44px);
+    border: 1px solid rgb(255 255 255 / 24%);
+    border-radius: clamp(22px, 3vw, 40px);
+    background: linear-gradient(145deg, rgb(255 255 255 / 10%), transparent 44%), rgb(24 22 18 / 64%);
+    -webkit-backdrop-filter: blur(4px) saturate(1.12);
+    backdrop-filter: blur(4px) saturate(1.12);
+    box-shadow:
+        inset 0 1px 0 rgb(255 255 255 / 26%),
+        inset 0 -1px 0 rgb(255 255 255 / 10%),
+        0 18px 48px rgb(12 11 8 / 22%);
+}
+
+.process-timeline .home-section__title,
+.process-timeline .home-section__eyebrow {
+    color: inherit;
+}
+
+.process-timeline .home-section__eyebrow { margin: 0 0 14px; }
+.process-timeline .home-section__title {
+    margin-bottom: 14px;
+    font-size: clamp(32px, 4vw, 56px);
+}
+.process-timeline__intro > p:last-child { max-width: 36ch; }
+.process-timeline__intro > p:last-child,
+.process-timeline__detail p,
+.process-timeline__offer { line-height: 1.55; }
+
+.process-timeline__meter {
+    display: none;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 12px;
+    color: var(--process-green);
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.is-enhanced .process-timeline__meter { display: flex; }
+.process-timeline__track {
+    position: relative;
+    flex: 1;
+    height: 2px;
+    background: rgb(255 255 255 / 25%);
+}
+
+.process-timeline__track::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background: var(--process-green);
+    transform: scaleX(var(--process-progress));
+    transform-origin: left;
+    transition: transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.process-timeline__steps {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    border-bottom: 1px solid rgb(255 255 255 / 28%);
+}
+
+.process-timeline__step { border-top: 1px solid rgb(255 255 255 / 28%); }
+.process-timeline__step h3 { margin: 0; }
+.process-timeline__step button {
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+    padding: 10px 0;
+    min-height: 44px;
+    gap: 14px;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    font: 400 clamp(22px, 2.4vw, 32px) / 1.05 var(--font-family-display);
+}
+
+.process-timeline__step button:enabled { cursor: pointer; }
+.process-timeline__step button:enabled:hover,
+.process-timeline__step.is-active button { color: var(--process-green); }
+.process-timeline__number { font: 500 0.75rem var(--font-family-body); }
+
+.process-timeline__detail {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.is-enhanced .process-timeline__step:not(.is-active) .process-timeline__detail { grid-template-rows: 0fr; }
+.process-timeline__detail > div { min-height: 0; overflow: hidden; }
+.process-timeline__detail p { margin: 0 0 8px 29px; }
+.process-timeline__detail .process-timeline__receive { margin-bottom: 14px; color: var(--process-green); }
+.process-timeline__subtitle { font-weight: 600; }
+.process-timeline__offer {
+    grid-column: 1 / -1;
+    margin: 0;
+    font-size: var(--font-size-body-small);
+    max-width: 66ch;
+}
+
+#pills { margin-bottom: clamp(44px, 6vw, 84px); }
+#pills ~ section[id] { scroll-margin-top: 88px; }
+
+#pills .pills-desktop { background: rgb(24 22 18 / 78%); }
+.pills-on-light #pills .pills-desktop { background: rgb(239 235 226 / 93%); }
+#pills .pills-desktop .pill { padding-inline: clamp(8px, 0.85vw, 14px); }
+
+@media (1280px < width <= 1480px) {
+    #pills .pills-desktop { gap: 4px; }
+    #pills .pills-desktop .pill { padding-inline: 8px; font-size: 0.8rem; }
+}
+#pills .pills-panel { border-radius: 24px; }
+#pills .pills-panel .pill { white-space: normal; }
+
+.home-services__head { margin-bottom: clamp(24px, 3vw, 42px); }
+.home-services__head .home-section__eyebrow { margin: 0 0 12px; }
+.home-services__head .home-section__title {
+    max-width: none;
+    margin: 0;
+    font-size: clamp(34px, 4.3vw, 68px);
+    text-wrap: wrap;
+}
+
+.home-specification {
+    background: var(--color-surface-inverse);
+    color: var(--color-text-inverse);
+}
+
+.home-specification .home-section__title,
+.home-specification .home-section__intro { color: inherit; }
+.home-specification__intro { margin-bottom: 36px; }
+.home-specification__spread,
+.home-specification__products {
+    display: grid;
+    gap: clamp(16px, 2vw, 24px);
+}
+
+.home-specification__spread { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.home-specification__products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 24px;
+}
+
+.home-specification figure { margin: 0; }
+.home-specification figcaption {
+    margin-top: 12px;
+    font-size: var(--font-size-body-small);
+}
+
+.home-specification img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.asset-placeholder {
+    display: grid;
+    place-items: center;
+    margin: 0;
+    padding: 12px;
+    min-height: 96px;
+    border: 1px dashed rgb(55 51 44 / 32%);
+    background: rgb(55 51 44 / 5%);
+    color: #544d41;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.service-group,
+#furnishing-design { scroll-margin-top: 78px; }
+.service-group__head { margin-bottom: 30px; }
+.service-group__capabilities { margin-top: 0; }
+.property-professionals p:not(.label-small),
+.cgi-demonstration__copy { max-width: 65ch; }
+.property-professionals a,
+.service-group a:not(.card) { text-decoration: underline; text-underline-offset: 4px; }
+
+.cgi-demonstration__video {
+    display: grid;
+    width: min(100%, 960px);
+    aspect-ratio: 16 / 9;
+    margin-block: 20px 32px;
+    height: auto;
+}
+
+.site-footer__invitation.home-cta {
+    padding-block: clamp(48px, 7vw, 88px);
+    background: var(--color-canvas-light);
+    color: var(--color-text-primary);
+    border: 0;
+}
+
+.site-footer__invitation .home-cta__title,
+.site-footer__invitation .home-cta__link { color: inherit; }
+.site-footer__invitation .home-cta__subline { color: var(--color-text-secondary); }
+.site-footer__invitation .home-cta__link { border-color: currentColor; }
+.site-footer__invitation .home-cta__dot { background: #63743d; }
+.site-footer__col .site-footer__tagline { margin-top: 8px; }
+.site-footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-size: 0.75rem;
+}
+
+.site-footer__legal a { color: inherit; text-underline-offset: 3px; }
+
+@media (max-width: 760px) {
+    .process-timeline__inner,
+    .home-specification__spread { grid-template-columns: minmax(0, 1fr); }
+
 }

@@ -4,8 +4,33 @@
     {
       "name": "site-preview",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "4173", "-d", "_site"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "4173",
+        "-d",
+        "_site"
+      ],
       "port": 4173
+    },
+    {
+      "name": "site-preview-headers",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "tools/preview-server.js",
+        "4174"
+      ],
+      "port": 4174
+    },
+    {
+      "name": "site-preview-offline",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "tools/preview-server.js",
+        "4175",
+        "--offline"
+      ],
+      "port": 4175
     }
   ]
 }

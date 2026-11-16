@@ -3095,9 +3095,10 @@ body.legal-page .hero-brand {
     gap: 12px;
 }
 
-/* ===== ProcureCore recovery fallback =====
-   This route is deliberately independent from the shared site shell: it has
-   no client-side JavaScript, form, or dynamic URL handling. */
+/* ===== ProcureCore account-link pages (/auth/*) =====
+   These routes are deliberately independent from the shared site shell (no
+   nav, no site scripts). Shared by /auth/recovery, /auth/confirm and
+   /auth/link-problem via layouts/procurecore-auth.njk. */
 html.recovery-page,
 body.recovery-page {
     min-height: 100%;
@@ -3135,10 +3136,10 @@ body.recovery-page {
 }
 
 .recovery-title {
-    max-width: 12ch;
+    max-width: 14ch;
     margin: 0 0 var(--space-md);
     font-family: var(--font-family-display);
-    font-size: clamp(42px, 8vw, 72px);
+    font-size: clamp(36px, 7vw, 64px);
     font-weight: var(--font-weight-regular);
     letter-spacing: var(--letter-spacing-tight);
     line-height: 0.98;
@@ -3154,6 +3155,10 @@ body.recovery-page {
 
 .recovery-support-link {
     display: inline-flex;
+    color: var(--color-text-primary);
+    background: transparent;
+    font-family: inherit;
+    cursor: pointer;
     min-height: var(--control-target-min);
     align-items: center;
     justify-content: center;
@@ -3177,10 +3182,113 @@ body.recovery-page {
     outline-offset: 4px;
 }
 
+.recovery-title:focus {
+    outline: none;
+}
+
+.recovery-title--quiet {
+    max-width: none;
+    margin: 0;
+    font-size: clamp(30px, 5vw, 44px);
+}
+
+.recovery-steps {
+    max-width: 58ch;
+    margin: 0 0 var(--space-lg);
+    padding-left: 1.4em;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-relaxed);
+}
+
+.recovery-steps li + li {
+    margin-top: var(--space-2xs);
+}
+
+.recovery-steps li::marker {
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-medium);
+}
+
+.recovery-steps strong,
+.recovery-copy strong {
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-medium);
+}
+
+.recovery-note {
+    margin: 0 0 var(--space-lg);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-body-small);
+}
+
+.recovery-checking {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.recovery-spinner {
+    flex: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid rgba(27, 26, 23, 0.14);
+    border-top-color: var(--color-text-secondary);
+    border-radius: 50%;
+    animation: recovery-spin 0.9s linear infinite;
+}
+
+@keyframes recovery-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .recovery-spinner {
+        animation-duration: 2.4s;
+    }
+}
+
+.recovery-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    margin-top: var(--space-lg);
+    padding-top: var(--space-md);
+    border-top: var(--border-width-hairline) solid rgba(27, 26, 23, 0.12);
+    font-size: var(--font-size-body-small);
+}
+
+.recovery-footer a {
+    color: var(--color-text-secondary);
+    text-decoration: underline;
+    text-decoration-color: rgba(27, 26, 23, 0.3);
+    text-underline-offset: 3px;
+}
+
+.recovery-footer a:hover {
+    color: var(--color-text-primary);
+    text-decoration-color: currentcolor;
+}
+
+.recovery-footer a:focus-visible {
+    outline: 2px solid var(--color-text-primary);
+    outline-offset: 3px;
+}
+
+.recovery-state > :last-child {
+    margin-bottom: 0;
+}
+
 @media (max-width: 480px) {
     .recovery-card {
         padding: 28px 22px;
         border-radius: 16px;
+    }
+
+    .recovery-main {
+        padding: 24px 16px;
     }
 }
 

@@ -70,6 +70,18 @@ const scans = [
     height: 844,
   },
   {
+    label: "ProcureCore confirm mobile",
+    route: "/auth/confirm",
+    width: 390,
+    height: 844,
+  },
+  {
+    label: "ProcureCore link problem mobile",
+    route: "/auth/link-problem",
+    width: 390,
+    height: 844,
+  },
+  {
     label: "concinnity landing mobile",
     route: "/apps/concinnity/",
     width: 390,
@@ -175,6 +187,18 @@ const scans = [
   {
     label: "ProcureCore recovery fallback desktop",
     route: "/auth/recovery",
+    width: 1440,
+    height: 1000,
+  },
+  {
+    label: "ProcureCore confirm desktop",
+    route: "/auth/confirm",
+    width: 1440,
+    height: 1000,
+  },
+  {
+    label: "ProcureCore link problem desktop",
+    route: "/auth/link-problem",
     width: 1440,
     height: 1000,
   },

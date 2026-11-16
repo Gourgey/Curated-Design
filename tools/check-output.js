@@ -129,60 +129,152 @@ const sitemapPath = path.join(outputRoot, "sitemap.xml");
 const sitemap = fs.readFileSync(sitemapPath, "utf8");
 const procureCoreAppID = "5865Y52YG7.studio.curateddesign.ProcureCore";
 const recoveryRoute = "/auth/recovery";
-const recoveryPath = path.join(outputRoot, recoveryRoute.slice(1));
+const confirmRoute = "/auth/confirm";
+const linkProblemRoute = "/auth/link-problem";
 const aasaPath = path.join(outputRoot, ".well-known/apple-app-site-association");
 const netlifyConfigPath = path.join(root, "netlify.toml");
+const supabaseJsUrl =
+  "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js";
 
-if (!fs.existsSync(recoveryPath) || !fs.statSync(recoveryPath).isFile()) {
-  fail(recoveryPath, `recovery fallback was not generated at ${recoveryRoute}`);
-} else {
-  const recoveryHtml = fs.readFileSync(recoveryPath, "utf8");
-  if (!/<h1\b[^>]*>\s*Open this link in ProcureCore\s*<\/h1>/i.test(recoveryHtml)) {
-    fail(recoveryPath, "missing the recovery fallback heading");
+// ProcureCore account-link pages: shared requirements.
+const authPages = [
+  {
+    route: recoveryRoute,
+    title: "Reset your password – ProcureCore",
+    headings: ["Reset your password in ProcureCore", "This reset link has expired"],
+    scripts: ["/assets/js/procurecore-auth-recovery.js"],
+  },
+  {
+    route: confirmRoute,
+    title: "Confirm your email – ProcureCore",
+    headings: [
+      "Confirming your email…",
+      "Your email is confirmed",
+      "This link has already been used or has expired",
+      "Confirm your ProcureCore email",
+      "We couldn&#39;t reach ProcureCore|We couldn't reach ProcureCore",
+    ],
+    scripts: ["/assets/js/procurecore-auth-confirm.js"],
+  },
+  {
+    route: linkProblemRoute,
+    title: "Link didn't work – ProcureCore|Link didn&#39;t work – ProcureCore",
+    headings: ["This ProcureCore link didn't work|This ProcureCore link didn&#39;t work"],
+    scripts: [],
+  },
+];
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function anyOf(alternatives) {
+  return alternatives.split("|").map(escapeRegExp).join("|");
+}
+
+const authHtml = {};
+authPages.forEach((page) => {
+  const file = path.join(outputRoot, page.route.slice(1));
+  if (!fs.existsSync(file) || !fs.statSync(file).isFile()) {
+    fail(file, `ProcureCore link page was not generated at ${page.route}`);
+    return;
   }
-  if (
-    !recoveryHtml.includes(
-      "This password-reset universal link is currently for iPhone or iPad.",
-    )
-  ) {
-    fail(recoveryPath, "must identify the current universal-link flow as iPhone/iPad-only");
+  const html = fs.readFileSync(file, "utf8");
+  authHtml[page.route] = html;
+
+  if (!new RegExp(`<title>\\s*(${anyOf(page.title)})\\s*</title>`).test(html)) {
+    fail(file, `missing <title>${page.title.split("|")[0]}</title>`);
   }
-  if (!/<main\b[^>]*\bid=["']main-content["']/i.test(recoveryHtml)) {
-    fail(recoveryPath, "main landmark must provide the #main-content skip-link target");
+  page.headings.forEach((heading) => {
+    if (!new RegExp(`<h1\\b[^>]*>\\s*(${anyOf(heading)})\\s*</h1>`).test(html)) {
+      fail(file, `missing heading "${heading.split("|")[0]}"`);
+    }
+  });
+  if (!/<meta\s+name=["']robots["']\s+content=["']noindex["']/i.test(html)) {
+    fail(file, 'must carry <meta name="robots" content="noindex">');
   }
-  if (!/<meta\s+name=["']referrer["']\s+content=["']no-referrer["']/i.test(recoveryHtml)) {
-    fail(recoveryPath, "must prevent the recovery URL from being sent as a referrer");
+  if (!/<meta\s+name=["']referrer["']\s+content=["']no-referrer["']/i.test(html)) {
+    fail(file, "must prevent the link URL from being sent as a referrer");
   }
-  if (/<script\b/i.test(recoveryHtml)) {
-    fail(recoveryPath, "must not contain client-side scripts");
+  if (!/<main\b[^>]*\bid=["']main-content["']/i.test(html)) {
+    fail(file, "main landmark must provide the #main-content skip-link target");
   }
-  if (/<form\b/i.test(recoveryHtml)) {
-    fail(recoveryPath, "must not contain a form");
-  }
-  const recoveryLinks = Array.from(
-    recoveryHtml.matchAll(/<a\b[^>]*\bhref=["']([^"']+)["']/gi),
+  if (/<form\b/i.test(html)) fail(file, "must not contain a form");
+
+  const scriptSrcs = Array.from(
+    html.matchAll(/<script\b[^>]*\bsrc=["']([^"']+)["']/gi),
     (match) => match[1],
   );
-  if (!recoveryLinks.includes("/apps/procurecore/support/")) {
-    fail(recoveryPath, "missing the ProcureCore support link");
+  const inlineScripts = Array.from(html.matchAll(/<script\b(?![^>]*\bsrc=)[^>]*>/gi));
+  if (inlineScripts.length) fail(file, "must not contain inline scripts");
+  if (JSON.stringify(scriptSrcs) !== JSON.stringify(page.scripts)) {
+    fail(
+      file,
+      `scripts must be exactly ${JSON.stringify(page.scripts)}, found ${JSON.stringify(scriptSrcs)}`,
+    );
   }
-  recoveryLinks.forEach((href) => {
+
+  const links = Array.from(html.matchAll(/<a\b[^>]*\bhref=["']([^"']+)["']/gi), (m) => m[1]);
+  if (!links.includes("/apps/procurecore/support/")) {
+    fail(file, "missing the ProcureCore support link");
+  }
+  if (!links.some((href) => /^https:\/\/apps\.apple\.com\/.+\/id\d+$/.test(href))) {
+    fail(file, "missing the ProcureCore App Store link");
+  }
+  links.forEach((href) => {
     if (href.includes("?") || href.includes("#TEST_VALUE")) {
-      fail(recoveryPath, `link must not include recovery parameters or probe values: "${href}"`);
+      fail(file, `link must not include link parameters or probe values: "${href}"`);
     }
   });
+  ["token", "OTP", "universal link", "error_code", "otp_expired"].forEach((word) => {
+    const visibleText = html
+      .replace(/<script[\s\S]*?<\/script>/gi, "")
+      .replace(/<!--[\s\S]*?-->/g, "")
+      .replace(/<[^>]+>/g, " ");
+    if (new RegExp(`\\b${escapeRegExp(word)}\\b`, "i").test(visibleText)) {
+      fail(file, `visible copy must not use the technical word "${word}"`);
+    }
+  });
+});
+
+// The recovery page must never use up the one-time link: its script may only
+// read the URL for an error, never make a request.
+const recoveryScriptPath = path.join(outputRoot, "assets/js/procurecore-auth-recovery.js");
+if (fs.existsSync(recoveryScriptPath)) {
+  const recoveryScript = fs.readFileSync(recoveryScriptPath, "utf8");
+  ["supabase", "fetch(", "XMLHttpRequest", "sendBeacon", "verifyOtp", "import("].forEach(
+    (unsafe) => {
+      if (recoveryScript.toLowerCase().includes(unsafe.toLowerCase())) {
+        fail(recoveryScriptPath, `must not contact any server ("${unsafe}" found)`);
+      }
+    },
+  );
+} else {
+  fail(recoveryScriptPath, "recovery script was not copied to the output");
+}
+
+const confirmScriptPath = path.join(outputRoot, "assets/js/procurecore-auth-confirm.js");
+if (fs.existsSync(confirmScriptPath)) {
+  const confirmScript = fs.readFileSync(confirmScriptPath, "utf8");
   [
-    "TEST_VALUE",
-    "URLSearchParams",
-    "location.search",
-    "location.hash",
-    "document.URL",
-    "document.referrer",
-  ].forEach((unsafeValue) => {
-    if (recoveryHtml.includes(unsafeValue)) {
-      fail(recoveryPath, `must not read or render URL data: "${unsafeValue}"`);
-    }
+    [supabaseJsUrl, "the pinned supabase-js URL"],
+    ["SUPABASE_JS_INTEGRITY", "a Subresource Integrity hash"],
+    ["persistSession: false", "persistSession: false"],
+    ["autoRefreshToken: false", "autoRefreshToken: false"],
+    ["detectSessionInUrl: false", "detectSessionInUrl: false"],
+    ['signOut({ scope: "local" })', "a local sign-out after confirming"],
+    ["history.replaceState", "removal of the link from the address bar"],
+  ].forEach(([needle, label]) => {
+    if (!confirmScript.includes(needle)) fail(confirmScriptPath, `must include ${label}`);
   });
+  if (!/SUPABASE_PUBLISHABLE_KEY = "sb_publishable_[A-Za-z0-9_-]+"/.test(confirmScript)) {
+    fail(confirmScriptPath, "must contain the project's publishable key");
+  }
+  if (/sb_secret_|service_role/.test(confirmScript)) {
+    fail(confirmScriptPath, "must never contain a secret or service_role key");
+  }
+} else {
+  fail(confirmScriptPath, "confirm script was not copied to the output");
 }
 
 if (!fs.existsSync(aasaPath) || !fs.statSync(aasaPath).isFile()) {
@@ -224,23 +316,35 @@ if (!fs.existsSync(aasaPath) || !fs.statSync(aasaPath).isFile()) {
 
 const netlifyConfig = fs.readFileSync(netlifyConfigPath, "utf8");
 const netlifyHeaderBlocks = netlifyConfig.split(/(?=\[\[headers\]\])/);
-const recoveryHeaderBlock = netlifyHeaderBlocks.find((block) =>
-  /^\s*for\s*=\s*["']\/auth\/recovery["']/m.test(block),
-);
-if (!recoveryHeaderBlock) {
-  fail(netlifyConfigPath, "missing the /auth/recovery header configuration");
-} else {
+[recoveryRoute, confirmRoute, linkProblemRoute].forEach((route) => {
+  const block = netlifyHeaderBlocks.find((candidate) =>
+    new RegExp(`^\\s*for\\s*=\\s*["']${route}["']`, "m").test(candidate),
+  );
+  if (!block) {
+    fail(netlifyConfigPath, `missing the ${route} header configuration`);
+    return;
+  }
   [
     [/Content-Type\s*=\s*"text\/html;\s*charset=UTF-8"/, "text/html content type"],
     [/Cache-Control\s*=\s*"no-store"/, "no-store cache policy"],
     [/Referrer-Policy\s*=\s*"no-referrer"/, "no-referrer policy"],
     [/X-Robots-Tag\s*=\s*"noindex,\s*nofollow,\s*noarchive"/, "noindex policy"],
+    [/Content-Security-Policy\s*=\s*"default-src 'none';/, "default-deny CSP"],
   ].forEach(([pattern, label]) => {
-    if (!pattern.test(recoveryHeaderBlock)) {
-      fail(netlifyConfigPath, `/auth/recovery is missing its ${label}`);
-    }
+    if (!pattern.test(block)) fail(netlifyConfigPath, `${route} is missing its ${label}`);
   });
-}
+  const csp = (block.match(/Content-Security-Policy\s*=\s*"([^"]*)"/) || [])[1] || "";
+  if (route === confirmRoute) {
+    if (!csp.includes(`script-src 'self' ${supabaseJsUrl};`)) {
+      fail(netlifyConfigPath, `${route} CSP must allow only itself and ${supabaseJsUrl}`);
+    }
+    if (!csp.includes("connect-src https://keplgxmiazyzdetgvzxc.supabase.co;")) {
+      fail(netlifyConfigPath, `${route} CSP must allow connections only to the Supabase project`);
+    }
+  } else if (/https?:/.test(csp)) {
+    fail(netlifyConfigPath, `${route} CSP must not allow any other origin`);
+  }
+});
 
 const procureCoreRoutes = [
   "/apps/procurecore/",
@@ -587,14 +691,12 @@ localFirstApps.forEach((app) => {
   }
 });
 if (
-  appsIndexHtml.indexOf('id="app-curatedledger"') <
-  appsIndexHtml.indexOf('id="app-concinnity"')
+  appsIndexHtml.indexOf('id="app-curatedledger"') < appsIndexHtml.indexOf('id="app-concinnity"')
 ) {
   fail(appsIndexPath, "the CuratedLedger card must come after concinnity");
 }
 if (
-  appsIndexHtml.indexOf('id="app-mythos-log"') <
-  appsIndexHtml.indexOf('id="app-curatedledger"')
+  appsIndexHtml.indexOf('id="app-mythos-log"') < appsIndexHtml.indexOf('id="app-curatedledger"')
 ) {
   fail(appsIndexPath, "the Mythos Log card must come after CuratedLedger");
 }
@@ -682,14 +784,12 @@ htmlFiles.forEach((file) => {
   });
 });
 
-[path.join(outputRoot, "thank-you/index.html")].forEach(
-  (file) => {
-    const html = fs.readFileSync(file, "utf8");
-    if (!/<meta\s+name=["']robots["']\s+content=["']noindex,\s*follow["']/i.test(html)) {
-      fail(file, "support page must be noindex, follow");
-    }
-  },
-);
+[path.join(outputRoot, "thank-you/index.html")].forEach((file) => {
+  const html = fs.readFileSync(file, "utf8");
+  if (!/<meta\s+name=["']robots["']\s+content=["']noindex,\s*follow["']/i.test(html)) {
+    fail(file, "support page must be noindex, follow");
+  }
+});
 
 if (errors.length) {
   errors.forEach((message) => console.error(`ERROR: ${message}`));

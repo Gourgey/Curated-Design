@@ -21,6 +21,7 @@ module.exports = [
       "tools/**/*.js",
       "src/_data/**/*.js",
       "src/_includes/**/*.js",
+      "src/**/*.11tydata.js",
       ".eleventy.js",
       "eslint.config.js",
     ],

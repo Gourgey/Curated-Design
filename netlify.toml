@@ -77,14 +77,42 @@
   [headers.values]
     Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
 
-# ProcureCore recovery fallback. This is emitted as an extension-less HTML
-# file so the exact universal-link callback can be served directly without
-# Netlify's Pretty URLs adding a trailing slash. The page is fully static and
-# contains no scripts or forms. no-referrer prevents the callback URL (and any
-# query string it carries) from becoming the Referer when support is opened;
-# no-store avoids retaining a response under a credential-bearing request URL.
+# ProcureCore account-link pages (/auth/*). Each is emitted as an
+# extension-less HTML file so the exact universal-link paths are served
+# directly, without Netlify's Pretty URLs adding a trailing slash. A
+# route-specific Content-Security-Policy here replaces the general "/*" one
+# (verified on the live /auth/recovery response: only this rule's CSP is sent).
+# no-referrer keeps the link (and any query string it carries) out of the
+# Referer when support or the App Store is opened; no-store avoids retaining a
+# response under a link-bearing request URL.
+
+# Password-reset fallback. The app uses the one-time link itself, so this page
+# must never contact Supabase: connect-src stays 'none'. Its one same-origin
+# script only swaps to the "expired" message when the URL reports an error.
 [[headers]]
   for = "/auth/recovery"
+  [headers.values]
+    Cache-Control = "no-store"
+    Content-Type = "text/html; charset=UTF-8"
+    Content-Security-Policy = "default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+    Referrer-Policy = "no-referrer"
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+
+# Email confirmation. Allows exactly the pinned supabase-js build (also
+# checked by Subresource Integrity in assets/js/procurecore-auth-confirm.js)
+# and connections to the ProcureCore Supabase project.
+[[headers]]
+  for = "/auth/confirm"
+  [headers.values]
+    Cache-Control = "no-store"
+    Content-Type = "text/html; charset=UTF-8"
+    Content-Security-Policy = "default-src 'none'; script-src 'self' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js; style-src 'self'; font-src 'self'; img-src 'self'; connect-src https://keplgxmiazyzdetgvzxc.supabase.co; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+    Referrer-Policy = "no-referrer"
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+
+# Catch-all for any ProcureCore email link that didn't work. Fully static.
+[[headers]]
+  for = "/auth/link-problem"
   [headers.values]
     Cache-Control = "no-store"
     Content-Type = "text/html; charset=UTF-8"

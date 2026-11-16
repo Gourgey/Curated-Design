@@ -1,0 +1,72 @@
+---
+permalink: auth/confirm
+title: Confirm your email
+description: Confirms the email address for a new ProcureCore account.
+canonicalPath: /auth/confirm
+pageScripts:
+  - src: /assets/js/procurecore-auth-confirm.js
+---
+{#
+  Shown only when ProcureCore isn't installed or the link opened in a
+  browser. The script confirms the email itself (see
+  assets/js/procurecore-auth-confirm.js) and shows exactly one state.
+  Without JavaScript only the <noscript> message shows.
+#}
+<section class="recovery-state" data-state="checking" aria-labelledby="confirm-checking-title" hidden>
+  <div class="recovery-checking" role="status">
+    <span class="recovery-spinner" aria-hidden="true"></span>
+    <h1 id="confirm-checking-title" class="recovery-title recovery-title--quiet" tabindex="-1">
+      Confirming your email…
+    </h1>
+  </div>
+</section>
+
+<section class="recovery-state" data-state="confirmed" aria-labelledby="confirm-done-title" hidden>
+  <h1 id="confirm-done-title" class="recovery-title" tabindex="-1">Your email is confirmed</h1>
+  <p class="recovery-copy">Your ProcureCore account is ready.</p>
+  <ol class="recovery-steps">
+    <li>Open ProcureCore on your iPhone, iPad or Mac.</li>
+    <li>Sign in with this email and the password you chose.</li>
+  </ol>
+  <a class="recovery-support-link" href="{{ procurecoreAppStoreUrl }}" rel="noreferrer">Open ProcureCore</a>
+</section>
+
+<section class="recovery-state" data-state="expired" aria-labelledby="confirm-expired-title" hidden>
+  <h1 id="confirm-expired-title" class="recovery-title" tabindex="-1">
+    This link has already been used or has expired
+  </h1>
+  <p class="recovery-copy">If you've already confirmed your email, you can sign in to ProcureCore now.</p>
+  <ol class="recovery-steps">
+    <li>Open ProcureCore and try signing in.</li>
+    <li>
+      If it says your email isn't confirmed, choose <strong>New here? Create an account</strong>
+      with the same email to get a fresh link.
+    </li>
+  </ol>
+  <p class="recovery-note">Confirmation links last one hour.</p>
+</section>
+
+<section class="recovery-state" data-state="missing" aria-labelledby="confirm-missing-title" hidden>
+  <h1 id="confirm-missing-title" class="recovery-title" tabindex="-1">Confirm your ProcureCore email</h1>
+  <p class="recovery-copy">
+    This page confirms new ProcureCore accounts. Open the email we sent you and tap the
+    <strong>Confirm</strong> button. If you can't find it, check your spam or junk folder.
+  </p>
+</section>
+
+<section class="recovery-state" data-state="offline" aria-labelledby="confirm-offline-title" hidden>
+  <h1 id="confirm-offline-title" class="recovery-title" tabindex="-1">We couldn't reach ProcureCore</h1>
+  <p class="recovery-copy">Check your connection and try again.</p>
+  <button type="button" class="recovery-support-link" data-action="retry">Try again</button>
+</section>
+
+<noscript>
+  <section class="recovery-state" aria-labelledby="confirm-noscript-title">
+    <h1 id="confirm-noscript-title" class="recovery-title">Confirm your ProcureCore email</h1>
+    <p class="recovery-copy">
+      This page needs JavaScript to confirm your email. Turn it on and reload, or open the email on
+      the iPhone, iPad or Mac where ProcureCore is installed and tap the <strong>Confirm</strong>
+      button there.
+    </p>
+  </section>
+</noscript>

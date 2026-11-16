@@ -170,6 +170,10 @@ module.exports = function (eleventyConfig) {
     return (items || []).filter((item) => item.data && item.data[key] === value);
   });
 
+  eleventyConfig.addFilter("whereNot", (items, key, value) => {
+    return (items || []).filter((item) => item.data && item.data[key] !== value);
+  });
+
   // Order-based, wrap-around "next project" lookup for the project-detail
   // template's related-work link (see build plan P3.4). Returns null when
   // there is nothing to link to (fewer than two listed projects, or the

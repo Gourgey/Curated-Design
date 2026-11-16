@@ -1995,7 +1995,8 @@ body.concept-page .hero-brand {
 body.concept-page .button,
 body.contact-page .button,
 body.about-page .button,
-body.projects-page .button {
+body.projects-page .button,
+body.project-page .project-article .button {
     color: #000;
     border-color: rgba(0, 0, 0, 0.35);
     background: rgba(0, 0, 0, 0.04);
@@ -2004,7 +2005,8 @@ body.projects-page .button {
 body.concept-page .button:hover,
 body.contact-page .button:hover,
 body.about-page .button:hover,
-body.projects-page .button:hover {
+body.projects-page .button:hover,
+body.project-page .project-article .button:hover {
     background: rgba(0, 0, 0, 0.08);
 }
 

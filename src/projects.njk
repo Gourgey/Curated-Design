@@ -25,8 +25,10 @@ topLogo: logo_no_text_on_transparent.svg
     </div>
 
     {% set listedProjects = collections.publishedProject | sortByOrder | where("showInProjects", true) %}
-    {% set completedProjects = listedProjects | where("status", "published") %}
-    {% set conceptProjects = listedProjects | where("status", "coming_soon") %}
+    {# A published project flagged concept: true has a full page but is not
+       completed work, so it is listed with the concepts. #}
+    {% set completedProjects = listedProjects | where("status", "published") | whereNot("concept", true) %}
+    {% set conceptProjects = (listedProjects | where("status", "coming_soon")).concat(listedProjects | where("concept", true)) | sortByOrder %}
     {% set visibleCategories = site.projectsPage.categories | groupByCategory(conceptProjects) %}
 
     {# Completed work leads the listing — see build plan P3.3. #}

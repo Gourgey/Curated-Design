@@ -69,6 +69,20 @@ function headersFor(pathname) {
   return result;
 }
 
+// Exact-path rules from the built _redirects file (this site uses no splats
+// or placeholders), matched with or without a trailing slash as Netlify does.
+function redirectFor(pathname) {
+  const file = path.join(siteRoot, "_redirects");
+  if (!fs.existsSync(file)) return null;
+  const strip = (value) => (value.length > 1 ? value.replace(/\/$/, "") : value);
+  for (const line of fs.readFileSync(file, "utf8").split("\n")) {
+    const [from, to, status] = line.trim().split(/\s+/);
+    if (!from || from.startsWith("#") || !to) continue;
+    if (strip(from) === strip(pathname)) return { to, status: Number(status) || 301 };
+  }
+  return null;
+}
+
 function resolveFile(pathname) {
   const decoded = decodeURIComponent(pathname);
   const candidate = path.normalize(path.join(siteRoot, decoded));
@@ -82,6 +96,12 @@ function resolveFile(pathname) {
 http
   .createServer((req, res) => {
     const { pathname } = new URL(req.url, "http://localhost");
+    const redirect = redirectFor(pathname);
+    if (redirect) {
+      res.writeHead(redirect.status, { Location: redirect.to });
+      res.end();
+      return;
+    }
     const file = resolveFile(pathname);
     const headers = headersFor(pathname);
     if (!file) {

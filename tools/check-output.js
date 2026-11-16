@@ -52,7 +52,14 @@ if (!fs.existsSync(outputRoot)) {
 
 const files = walk(outputRoot);
 const htmlFiles = files.filter((file) => file.endsWith(".html")).sort();
-const publicHtmlFiles = htmlFiles;
+// Standalone pages copied as-is from public/ that don't use the site layout
+// (no site header, skip link or main landmark), so the per-page structure
+// checks below don't apply. Their links and images are still checked.
+const standaloneHtmlPrefixes = ["98pp/"];
+const publicHtmlFiles = htmlFiles.filter(
+  (file) =>
+    !standaloneHtmlPrefixes.some((prefix) => path.relative(outputRoot, file).startsWith(prefix)),
+);
 let imageCount = 0;
 let formCount = 0;
 let internalLinkCount = 0;

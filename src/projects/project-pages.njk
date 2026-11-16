@@ -56,6 +56,11 @@ sectionTop: true
                 {% if heroSrc %}
                 <div class="project-hero-slide" role="group"{% if hasHeroCarousel %} aria-roledescription="slide" aria-label="1 of {{ mediaCount }}" aria-current="true"{% endif %}>
                     {% image heroSrc, heroAlt, "100vw", "eager" %}
+                    {% if project.data.heroImageType %}
+                    <p class="project-hero-slide__caption">
+                        <span class="project-hero-slide__caption-type">{{ project.data.heroImageType }}</span>
+                    </p>
+                    {% endif %}
                 </div>
                 {% endif %}
                 {% if hasHeroCarousel %}
@@ -85,7 +90,10 @@ sectionTop: true
 
                 <h1 class="project-title">
                     <span>{{ project.data.title }}</span>
-                    {% if isComingSoon %}
+                    {# Published concepts (concept: true) carry the same status
+                       badge, so finished visualisations never read as
+                       completed work. #}
+                    {% if isComingSoon or project.data.concept %}
                     <span class="coming-soon-badge" aria-label="Status">{{ comingSoonLabel }}</span>
                     {% endif %}
                 </h1>
@@ -143,6 +151,16 @@ sectionTop: true
 
                     {% if (not isComingSoon) and project.data.body %}
                     {{ project.data.body | markdownify | safe }}
+                    {% endif %}
+
+                    {% if (not isComingSoon) and project.data.previewLink and project.data.previewLink.href %}
+                    <p>
+                        {% set previewLabel = project.data.previewLink.label or "View preview" %}
+                        <a class="button about-cta-button" href="{{ project.data.previewLink.href }}" target="_blank" rel="noopener" aria-label="{{ previewLabel }} (opens in a new tab)">
+                            <span class="dot" aria-hidden="true"></span>
+                            {{ previewLabel }}
+                        </a>
+                    </p>
                     {% endif %}
 
                     {% if hasCallout %}

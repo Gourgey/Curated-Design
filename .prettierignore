@@ -7,3 +7,4 @@ tests/visual/reference
 
 # Generated from assets/css-partials/ by tools/build-css.js
 assets/css/styles.css
+brochure-src

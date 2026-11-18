@@ -5,7 +5,7 @@ const globals = require("globals");
 
 module.exports = [
   {
-    ignores: ["_site/**", "_site 2/**", "node_modules/**", "assets/_generated/**"],
+    ignores: ["_site/**", "_site 2/**", "node_modules/**", "assets/_generated/**", "brochure-src/**"],
   },
   js.configs.recommended,
   {

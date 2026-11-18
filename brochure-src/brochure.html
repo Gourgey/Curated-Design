@@ -1,0 +1,157 @@
+<!doctype html><html><head><meta charset="utf-8">
+<!-- Apartment 5, 98 Portland Place – sales brochure source.
+     Each <div class="page"> is one A4 landscape page (1123 x 794 px). build.py screenshots each page.
+     Images live in renders/. Change a background-image or text below, then run: python3 build.py -->
+<style>
+@font-face{font-family:Corm;src:url(fonts/cormorant-garamond-latin-300-normal.woff2);font-weight:300}
+@font-face{font-family:Corm;src:url(fonts/cormorant-garamond-latin-300-italic.woff2);font-weight:300;font-style:italic}
+@font-face{font-family:Corm;src:url(fonts/cormorant-garamond-latin-500-normal.woff2);font-weight:500}
+@font-face{font-family:Jost;src:url(fonts/jost-latin-300-normal.woff2);font-weight:300}
+@font-face{font-family:Jost;src:url(fonts/jost-latin-400-normal.woff2);font-weight:400}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--char:#262320;--bronze:#b08d57;--stone:#f3eee7;--ink:#2c2925;--muted:#7d756b}
+body{background:#888}
+.page{width:1123px;height:794px;position:relative;overflow:hidden;background:var(--stone);font-family:Jost;font-weight:300;color:var(--ink);margin-bottom:20px}
+.disp{font-family:Corm;font-weight:300;line-height:1.02}
+.disp i{font-style:italic;color:var(--bronze)}
+.num{color:var(--bronze);font-feature-settings:'lnum' 1}
+.eb{font-family:Jost;font-weight:400;font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--bronze)}
+p{font-size:12.6px;line-height:1.9;color:#4a443d}
+.ph{position:absolute;background-size:cover;background-position:50% 50%;background-repeat:no-repeat}
+.pn{position:absolute;bottom:34px;font-size:9.5px;letter-spacing:.3em;color:var(--muted)}
+.rule{width:44px;height:1px;background:var(--bronze);margin:22px 0}
+.frame{position:absolute;inset:22px;border:1px solid rgba(176,141,87,.6);pointer-events:none}
+.box{position:absolute;width:390px;background:rgba(38,35,32,.9);padding:40px 42px}
+.box h2{font-size:42px;color:#fff;margin:14px 0 16px}
+.box p{color:#d8cdbd}
+.mono{width:84px;height:84px;border:1px solid var(--bronze);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#f3eadc;font-family:Corm;font-size:34px}
+.feat{display:flex;border-top:1px solid #d8cfc2}
+.feat div{flex:1;padding-top:18px}
+.feat b{display:block;font-family:Corm;font-weight:500;font-size:20px;color:var(--ink);margin-bottom:4px}
+.feat span{font-size:11px;color:var(--muted);letter-spacing:.04em}
+</style></head><body>
+
+<!-- 01 COVER -->
+<div class="page" id="p1">
+ <div class="ph" style="inset:0;background-image:url(renders/01-living-dining.png)"></div>
+ <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(24,21,18,.86) 0%,rgba(24,21,18,.62) 45%,rgba(24,21,18,.15) 72%,rgba(24,21,18,0) 85%)"></div>
+ <div class="frame"></div>
+ <div class="eb" style="position:absolute;left:72px;top:70px;color:#d9c29a">Marylebone · London W1</div>
+ <div style="position:absolute;left:72px;bottom:78px;color:#fff">
+  <h1 class="disp" style="font-size:92px">Apartment <span class="num" style="color:#e2c48e;text-shadow:0 2px 18px rgba(0,0,0,.45)">5</span></h1>
+  <div style="margin-top:22px;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#e6dccb">98 Portland Place</div>
+ </div>
+ <div class="mono" style="position:absolute;right:62px;bottom:62px;background:rgba(24,21,18,.35)">98</div>
+</div>
+
+<!-- 02 THE RESIDENCE -->
+<div class="page" id="p2">
+ <div class="ph" style="left:0;top:0;width:500px;height:794px;background-image:url(renders/05-entrance-lounge.png);background-position:72% 50%"></div>
+ <div style="position:absolute;left:572px;top:92px;width:470px">
+  <div class="eb">The Residence</div><div class="rule"></div>
+  <h2 class="disp" style="font-size:52px">Quiet grandeur, moments from <i>Regent's Park</i></h2>
+  <div style="height:26px"></div>
+  <p>Set on one of London's most elegant addresses, Apartment 5 pairs generous volume with a calm, considered interior. Beneath dramatic pitched ceilings and tall arched windows, warm polished plaster and light oak herringbone parquet run throughout, with bespoke joinery and brass detailing giving every space a sense of occasion.</p>
+ </div>
+ <div class="feat" style="position:absolute;left:572px;right:80px;bottom:110px">
+  <div><b>Volume</b><span>Dramatic pitched ceilings</span></div>
+  <div><b>Warmth</b><span>Polished plaster walls</span></div>
+  <div><b>Craft</b><span>Oak herringbone parquet</span></div>
+ </div>
+ <div class="pn" style="right:80px">02</div>
+</div>
+
+<!-- 03 RECEPTION -->
+<div class="page" id="p3">
+ <div class="ph" style="inset:0;background-image:url(renders/03-reception.png);background-position:50% 60%"></div>
+ <div class="box" style="right:56px;bottom:56px">
+  <div class="eb">Reception</div><h2 class="disp">Made for <i>gathering</i></h2>
+  <p>A generous reception room arranged around a sculptural curved sofa, with statement art and warm, layered textures beneath the soaring ceiling.</p>
+ </div>
+ <div class="pn" style="left:56px;color:#fff">03</div>
+</div>
+
+<!-- 04 LIVING & DINING -->
+<div class="page" id="p4" style="background:#fff">
+ <div class="ph" style="left:0;top:0;width:1123px;height:470px;background-image:url(renders/09-living.png);background-position:50% 62%"></div>
+ <div style="position:absolute;left:72px;top:520px;width:400px">
+  <div class="eb">Living &amp; Dining</div><div class="rule" style="margin:16px 0"></div>
+  <h2 class="disp" style="font-size:46px">Light, volume <i>and calm</i></h2><div style="height:14px"></div>
+  <p>The open-plan space flows from relaxed seating to a travertine dining table beneath the chandelier, with a quiet corner for reading by the window.</p>
+ </div>
+ <div class="ph" style="left:532px;top:510px;width:250px;height:230px;background-image:url(renders/01-living-dining.png);background-size:auto 520px;background-position:38% 88%"></div>
+ <div class="ph" style="left:800px;top:510px;width:251px;height:230px;background-image:url(renders/03-reception.png);background-size:auto 520px;background-position:62% 80%"></div>
+ <div class="pn" style="right:72px;bottom:24px">04</div>
+</div>
+
+<!-- 05 KITCHEN -->
+<div class="page" id="p5">
+ <div class="ph" style="right:0;top:0;width:640px;height:794px;background-image:url(renders/07-kitchen-bronze.png);background-size:auto 794px;background-position:48% 50%"></div>
+ <div style="position:absolute;left:72px;top:110px;width:350px">
+  <div class="eb">Kitchen</div><div class="rule"></div>
+  <h2 class="disp" style="font-size:52px">The heart of <i>the home</i></h2><div style="height:22px"></div>
+  <p>A waterfall marble island anchors the kitchen, set against tall units in hand-patinated bronze framed by mirrored glass and brass. A light oak staircase rises to the floor above.</p>
+ </div>
+ <div class="pn" style="left:72px">05</div>
+</div>
+
+<!-- 06 PRINCIPAL BEDROOM -->
+<div class="page" id="p6">
+ <div class="ph" style="inset:0;background-image:url(renders/20-principal-bedroom.png);background-position:40% 55%"></div>
+ <div class="box" style="left:56px;bottom:56px">
+  <div class="eb">Principal Suite</div><h2 class="disp">A private <i>retreat</i></h2>
+  <p>A serene principal bedroom with an upholstered headboard wall and bespoke storage, opening through to its own sitting room and bathroom.</p>
+ </div>
+ <div class="pn" style="right:56px;color:#fff">06</div>
+</div>
+
+<!-- 07 SITTING ROOM -->
+<div class="page" id="p7">
+ <div class="ph" style="inset:0;background-image:url(renders/terrace-sitting-room.png);background-position:50% 62%"></div>
+ <div class="box" style="right:56px;bottom:56px">
+  <div class="eb">Principal Suite</div><h2 class="disp">A light-filled <i>sitting room</i></h2>
+  <p>Beneath a generous skylight, a quiet sitting room for reading, relaxing and morning coffee, with the oak parquet continuing throughout.</p>
+ </div>
+ <div class="pn" style="left:56px;color:#fff">07</div>
+</div>
+
+<!-- 08 PRINCIPAL BATHROOM -->
+<div class="page" id="p8">
+ <div class="ph" style="right:0;top:0;width:640px;height:794px;background-image:url(renders/21-principal-bathroom.png);background-size:auto 794px;background-position:62% 50%"></div>
+ <div style="position:absolute;left:72px;top:110px;width:350px">
+  <div class="eb">Principal Bathroom</div><div class="rule"></div>
+  <h2 class="disp" style="font-size:52px">Calm, <i>spa-like</i> luxury</h2><div style="height:22px"></div>
+  <p>Smoky taupe Venetian plaster sits against white marble, with a generous walk-in shower and a freestanding bath. A bathroom designed for slow mornings.</p>
+ </div>
+ <div class="pn" style="left:72px">08</div>
+</div>
+
+<!-- 09 STUDY & GUEST EN SUITE -->
+<div class="page" id="p9" style="background:#fff">
+ <div class="ph" style="left:0;top:0;width:561px;height:600px;background-image:url(renders/22-study.png);background-size:auto 600px;background-position:40% 50%"></div>
+ <div class="ph" style="left:562px;top:0;width:561px;height:600px;background-image:url(renders/14-guest-ensuite.png);background-size:auto 600px;background-position:62% 50%"></div>
+ <div style="position:absolute;left:72px;top:636px;width:440px">
+  <div class="eb">Study</div>
+  <p style="margin-top:10px">A quiet study landing wrapped in a hand-painted ink-wash landscape wallcovering.</p>
+ </div>
+ <div style="position:absolute;left:634px;top:636px;width:420px">
+  <div class="eb">Guest En Suite</div>
+  <p style="margin-top:10px">Each bedroom has its own en suite, including a walk-in shower in warm, large-format marble.</p>
+ </div>
+ <div class="pn" style="right:72px;bottom:24px">09</div>
+</div>
+
+<!-- 10 BACK -->
+<div class="page" id="p10" style="background:var(--char);color:#efe7da">
+ <div class="frame" style="border-color:rgba(176,141,87,.45)"></div>
+ <div class="ph" style="left:72px;top:72px;width:470px;height:650px;background-image:url(renders/01-living-dining.png);background-size:auto 1300px;background-position:46% 4%"></div>
+ <div style="position:absolute;left:620px;top:150px;width:420px">
+  <div class="eb">Arrange a Viewing</div><div class="rule"></div>
+  <h2 class="disp" style="font-size:60px;color:#fff">An address of <i>distinction</i></h2><div style="height:26px"></div>
+  <p style="color:#cfc4b4">Apartment 5, 98 Portland Place, London W1B.<br>Viewings strictly by appointment.</p>
+  <div class="mono" style="margin-top:60px;width:72px;height:72px;font-size:30px">98</div>
+ </div>
+ <div class="pn" style="left:620px;bottom:72px;color:#a89c8b">10</div>
+</div>
+
+</body></html>

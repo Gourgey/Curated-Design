@@ -12,10 +12,10 @@ subtitle: "A refurbishment scheme and sales visualisations for an apartment on o
 metaDescription: "A refurbishment scheme and sales visualisations for an apartment on one of Marylebone's grandest streets, moments from Regent's Park."
 statusLabel: Concept
 showInProjects: true
-cardImage: /assets/images/projects/apartment_5_98_portland_place/apartment_5_98_portland_place_living_dining.webp
-cardAlt: Open-plan living and dining area at Apartment 5, 98 Portland Place, with warm polished plaster walls, light oak herringbone parquet and a gold chandelier
-heroImage: /assets/images/projects/apartment_5_98_portland_place/apartment_5_98_portland_place_living_dining.webp
-heroAlt: Open-plan living and dining area at Apartment 5, 98 Portland Place, with warm polished plaster walls, light oak herringbone parquet and a gold chandelier
+cardImage: /assets/images/projects/apartment_5_98_portland_place/apartment_5_98_portland_place_01_living_dining.webp
+cardAlt: Open-plan living and dining area at Apartment 5, 98 Portland Place, with warm polished plaster walls, light oak herringbone parquet, a round travertine dining table and a gold chandelier
+heroImage: /assets/images/projects/apartment_5_98_portland_place/apartment_5_98_portland_place_01_living_dining.webp
+heroAlt: Open-plan living and dining area at Apartment 5, 98 Portland Place, with warm polished plaster walls, light oak herringbone parquet, a round travertine dining table and a gold chandelier
 heroImageType: Design visualisation
 projectTags:
   - Interior design scheme
@@ -37,9 +37,10 @@ extraSections:
     text: |
       - Warm polished plaster
       - Oak herringbone parquet
+      - Patinated bronze
       - Smoky taupe Venetian plaster
-      - Taupe oak veneer
-      - Marble
+      - Ink-wash wallcovering
+      - Travertine
 facts:
   - label: Status
     value: Concept (visualisations of the proposed scheme)
@@ -55,13 +56,25 @@ asideText: Planning a similar refresh? Send a short note and I’ll reply with t
 asideCta: Make an enquiry
 gallery:
   images:
-    - image: /assets/images/projects/apartment_5_98_portland_place/apartment_5_98_portland_place_sitting_room.webp
+    - image: /assets/images/projects/apartment_5_98_portland_place/apartment_5_98_portland_place_03_reception.webp
+      alt: Reception room at Apartment 5, 98 Portland Place, with a curved bouclé sofa, walnut-framed armchairs and a large abstract painting, with the dining area and chandelier beyond
+      imageType: Design visualisation
+    - image: /assets/images/projects/apartment_5_98_portland_place/apartment_5_98_portland_place_07_kitchen_bronze.webp
+      alt: Kitchen at Apartment 5, 98 Portland Place, with a white stone waterfall island, navy velvet bar stools, patinated bronze wall panels and oak herringbone parquet
+      imageType: Design visualisation
+    - image: /assets/images/projects/apartment_5_98_portland_place/apartment_5_98_portland_place_20_principal_bedroom.webp
+      alt: Principal bedroom at Apartment 5, 98 Portland Place, with a full-height upholstered panelled wall behind the bed, a sculptural wall piece and a view through to the sitting room beyond
+      imageType: Design visualisation
+    - image: /assets/images/projects/apartment_5_98_portland_place/apartment_5_98_portland_place_terrace_sitting_room.webp
       alt: Principal suite sitting room beneath a skylight at Apartment 5, 98 Portland Place, with oak herringbone parquet and warm neutral furnishings
       imageType: Design visualisation
-    - image: /assets/images/projects/apartment_5_98_portland_place/apartment_5_98_portland_place_principal_bathroom.webp
+    - image: /assets/images/projects/apartment_5_98_portland_place/apartment_5_98_portland_place_21_principal_bathroom.webp
       alt: Principal bathroom at Apartment 5, 98 Portland Place, with smoky taupe Venetian plaster, a taupe oak vanity, white marble walk-in shower and freestanding bath
       imageType: Design visualisation
-    - image: /assets/images/projects/apartment_5_98_portland_place/apartment_5_98_portland_place_guest_en_suite.webp
+    - image: /assets/images/projects/apartment_5_98_portland_place/apartment_5_98_portland_place_22_study.webp
+      alt: Study at Apartment 5, 98 Portland Place, with an ink-wash landscape wallcovering, a black lacquered desk and an olive velvet chair
+      imageType: Design visualisation
+    - image: /assets/images/projects/apartment_5_98_portland_place/apartment_5_98_portland_place_14_guest_ensuite.webp
       alt: Guest en suite at Apartment 5, 98 Portland Place, with a walk-in shower in warm marble and a frameless glass screen
       imageType: Design visualisation
 ctaHeading: Have a space that needs clarity?

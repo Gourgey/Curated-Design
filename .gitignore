@@ -8,3 +8,7 @@ assets/_generated/
 
 # Local Claude Code session artifacts
 .claude/scheduled_tasks.lock
+
+# Brochure build output and local Python env (see brochure-src/README.md)
+brochure-src/out/
+brochure-src/.venv/

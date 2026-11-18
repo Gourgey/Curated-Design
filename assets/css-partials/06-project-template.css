@@ -91,6 +91,14 @@ body.project-page .top-left-logo:hover {
     padding: 0 0 clamp(52px, 7vw, 96px);
 }
 
+/* With a carousel, the dot row (bottom: 34px, 44px-tall tap targets in
+   12-carousels.css) occupies the band 34-78px above the hero's bottom edge.
+   Keep the hero text clear of it at every width, or the project tags sit
+   on top of the dots once a gallery has enough images to span the tags. */
+.project-hero:has(.project-hero-carousel) .project-hero-inner {
+    padding-bottom: clamp(88px, 7vw, 96px);
+}
+
 .project-kicker {
     text-transform: uppercase;
     margin: 0 0 16px;

@@ -228,6 +228,7 @@
     margin: 0;
     overflow: hidden;
     min-height: clamp(620px, 100svh, 980px);
+    background: #1d1a17;
 }
 
 .project-hero-media {
@@ -249,7 +250,8 @@
 
 .project-hero-media img {
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    background: #1d1a17;
     display: block;
     filter: saturate(0.98);
     height: clamp(620px, 100svh, 980px);
@@ -361,4 +363,54 @@
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+}
+
+/* Show each hero image whole instead of cropping it to fill the screen.
+   Images are fitted inside the hero (object-fit: contain, set on
+   .project-hero-media img above) on a warm charcoal ground, so any space the image doesn't cover reads as a quiet
+   band rather than a crop.
+   - Wide, landscape screens keep the title over the image.
+   - Narrower or portrait screens, where a full-height hero could only
+     show a vertical slice of a landscape render, stack instead: the image
+     at its own 3:2 shape, the dots under it, and the title block below on
+     the same charcoal. The top padding clears the back link
+     (.project-topbar: top clamp(92px, 9vw, 150px), 96px at <=760px, 44px
+     tall). These rules come after 11-service-redesign.css's <=760px hero
+     sizing, so they replace it. */
+@media (max-width: 1023px), (orientation: portrait) {
+    .project-hero {
+        min-height: 0;
+        height: auto;
+        padding-top: calc(clamp(96px, 9vw, 150px) + 56px);
+    }
+
+    .project-hero-media {
+        position: relative;
+    }
+
+    .project-hero-media img {
+        height: auto;
+        min-height: 0;
+        aspect-ratio: 3 / 2;
+    }
+
+    .project-hero-overlay {
+        position: static;
+        background: none;
+    }
+
+    .project-hero-inner,
+    .project-hero:has(.project-hero-carousel) .project-hero-inner {
+        padding: 28px 0 56px;
+    }
+
+    .project-hero-control {
+        top: calc(50% - 22px);
+    }
+
+    .project-hero-dots {
+        position: static;
+        justify-content: center;
+        transform: none;
+    }
 }

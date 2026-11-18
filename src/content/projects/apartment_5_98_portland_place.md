@@ -24,9 +24,9 @@ projectTags:
 articleHeading: Overview
 lead: "Apartment 5 sits on Portland Place, moments from Regent's Park. Ahead of the apartment's return to the sales market, Curated Design developed a refurbishment scheme and a set of visualisations showing the home as it will be finished."
 body: |
-  In the open-plan living, dining and kitchen space, the grey wallpaper gives way to warm polished plaster and light oak herringbone parquet, which continues into a new sitting room created by enclosing the principal bedroom terrace beneath a skylight. In the principal bathroom, smoky taupe Venetian plaster and a taupe oak vanity replace the original light oak panelling. The guest en suite gains a walk-in shower in warm marble.
+  Throughout the apartment, the grey wallpaper gives way to warm polished plaster and light oak herringbone parquet. The reception is arranged around a curved sofa beneath the pitched ceiling, and the dining area centres on a travertine table beneath the chandelier. In the kitchen, new hand-patinated bronze doors on the tall units keep the original mirrored glass, behind a waterfall marble island.
 
-  The wider scheme includes new kitchen doors that keep the original mirrored glass, a refreshed study and updated furniture throughout.
+  The principal bedroom gains an upholstered headboard wall and a new sitting room, created by enclosing the bedroom terrace beneath a skylight. In the principal bathroom, smoky taupe Venetian plaster and a taupe oak vanity replace the original light oak panelling, alongside white marble, a walk-in shower and a freestanding bath. The study landing is wrapped in a hand-painted ink-wash landscape wallcovering, and the guest en suite gains a walk-in shower in warm, large-format marble.
 
   We also designed the digital sales brochure, an interactive page-turning edition styled to suit the apartment.
 previewLink:

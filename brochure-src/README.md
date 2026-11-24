@@ -17,7 +17,8 @@ python3 build.py
 ```
 Output:
 - `out/98pp/` – copy this over the website's `98pp/` folder (served as-is at /98pp/, keep the noindex tag).
-- `out/98PP Brochure.pdf` – print/email version.
+- `out/98PP Brochure.pdf` – email/screen version (192 dpi).
+- `out/98PP Brochure - Print.pdf` – print version, A4 landscape at 300 dpi.
 
 ## Editing tips
 - Open `brochure.html` in a browser to preview all pages stacked.

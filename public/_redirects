@@ -11,7 +11,7 @@
 # Project detail pages
 /projects/botanical_residence.html            /work/botanical_residence/            301
 /projects/sandbanks_residence.html            /work/sandbanks_residence/            301
-/projects/marylebone_terrace.html             /work/apartment_5_98_portland_place/  301
+/projects/marylebone_terrace.html             /work/the_byron_penthouse/            301
 /projects/shoreditch_office.html              /work/shoreditch_office/              301
 /projects/garden_restaurant.html              /work/garden_restaurant/              301
 /projects/marylebone_residence_lobby.html     /work/marylebone_residence_lobby/     301
@@ -34,9 +34,11 @@
 # rather than to an intermediate .html route that no longer exists.
 /projects/sandbanks_residence_coming_soon.html         /work/sandbanks_residence/            301
 /projects/botanical_residence_coming_soon.html         /work/botanical_residence/            301
-/projects/marylebone_terrace_coming_soon.html          /work/apartment_5_98_portland_place/  301
+/projects/marylebone_terrace_coming_soon.html          /work/the_byron_penthouse/            301
 /projects/marylebone_residence_lobby_coming_soon.html  /work/marylebone_residence_lobby/     301
 
 # Marylebone Terrace was converted into Apartment 5, 98 Portland Place
-# (November 2026). The old clean URL points straight at the new page.
-/work/marylebone_terrace/    /work/apartment_5_98_portland_place/    301
+# (November 2026), since renamed The Byron Penthouse. Both old clean URLs
+# point straight at the current page, so neither chains through the other.
+/work/marylebone_terrace/                /work/the_byron_penthouse/    301
+/work/apartment_5_98_portland_place/     /work/the_byron_penthouse/    301

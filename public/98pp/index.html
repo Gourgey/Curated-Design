@@ -34,7 +34,9 @@ body{position:relative;height:100vh;min-height:620px;overflow:hidden}
 <div class="page"><img src="pages/p7.jpg" alt="Sitting room"></div>
 <div class="page"><img src="pages/p8.jpg" alt="Principal bathroom"></div>
 <div class="page"><img src="pages/p9.jpg" alt="Study and guest en suite"></div>
-<div class="page"><img src="pages/p10.jpg" alt="Arrange a viewing"></div>
+<div class="page"><img src="pages/p10.jpg" alt="The outlook"></div>
+<div class="page"><img src="pages/p11.jpg" alt="The Park Crescent Club"></div>
+<div class="page"><img src="pages/p12.jpg" alt="Arrange a viewing"></div>
 </div></template></div>
 <button class="nav" id="next" aria-label="Next page">›</button>
 <div class="count" id="count"></div>
@@ -43,10 +45,10 @@ body{position:relative;height:100vh;min-height:620px;overflow:hidden}
 const stage=document.querySelector('.stage'),holder=document.getElementById('holder'),tpl=document.getElementById('tpl');
 const prev=document.getElementById('prev'),next=document.getElementById('next'),count=document.getElementById('count');
 let pf=null,s=null,cur=0;
-function size(){const r=stage.getBoundingClientRect();const portrait=r.width<760;let h=Math.max(r.height,200),w=h*1.4144;const per=portrait?1:2;if(w*per>r.width){w=r.width/per;h=w/1.4144}return{w:Math.floor(w),h:Math.floor(h),portrait}}
-function upd(){if(!pf)return;const i=pf.getCurrentPageIndex(),n=pf.getPageCount();cur=i;prev.disabled=i===0;const last=s.portrait?n-1:(n%2===0?n-1:n-2);next.disabled=i>=last||(!s.portrait&&i>=n-2&&i!==0);const view=s.portrait||i===0||i===n-1?`${i+1}`:`${i+1}–${i+2}`;count.textContent=`Page ${view} of ${n}`}
-function build(){try{if(pf){pf.destroy();pf=null}}catch(e){}holder.innerHTML='';holder.appendChild(tpl.content.cloneNode(true));s=size();
- pf=new St.PageFlip(document.getElementById('book'),{width:s.w,height:s.h,size:'fixed',showCover:true,usePortrait:s.portrait,maxShadowOpacity:0.5,mobileScrollSupport:false,flippingTime:900,startPage:cur});
+function size(){const r=stage.getBoundingClientRect();let h=Math.max(r.height,200),w=h*1.4144;if(w>r.width){w=r.width;h=w/1.4144}return{w:Math.floor(w),h:Math.floor(h)}}
+function upd(){if(!pf)return;const i=pf.getCurrentPageIndex(),n=pf.getPageCount();cur=i;prev.disabled=i===0;next.disabled=i>=n-1;count.textContent=`Page ${i+1} of ${n}`}
+function build(){try{if(pf){pf.destroy();pf=null}}catch(e){}holder.innerHTML='';holder.appendChild(tpl.content.cloneNode(true));s=size();holder.style.width=s.w+'px';
+ pf=new St.PageFlip(document.getElementById('book'),{width:s.w,height:s.h,size:'fixed',showCover:false,usePortrait:true,maxShadowOpacity:0.5,mobileScrollSupport:false,flippingTime:900,startPage:cur});
  pf.loadFromHTML(document.querySelectorAll('#book .page'));pf.on('flip',upd);upd()}
 prev.onclick=()=>pf&&pf.flipPrev();next.onclick=()=>pf&&pf.flipNext();
 document.addEventListener('keydown',e=>{if(!pf)return;if(e.key==='ArrowRight')pf.flipNext();if(e.key==='ArrowLeft')pf.flipPrev()});

@@ -1,4 +1,4 @@
-"""Build the Apartment 5 brochure.
+"""Build The Byron Penthouse brochure.
 Usage:  python3 build.py
 Needs:  pip install playwright pillow && python3 -m playwright install chromium
 Output: out/98pp/   (upload this folder to the website as /98pp/)

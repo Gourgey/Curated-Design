@@ -1,4 +1,4 @@
-# Apartment 5, 98 Portland Place – brochure source
+# The Byron Penthouse, 98 Portland Place – brochure source
 
 This folder builds the page-turning brochure at curateddesign.studio/98pp/ and a matching PDF.
 

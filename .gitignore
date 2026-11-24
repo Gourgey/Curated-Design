@@ -12,3 +12,4 @@ assets/_generated/
 # Brochure build output and local Python env (see brochure-src/README.md)
 brochure-src/out/
 brochure-src/.venv/
+brochure-src/reference/

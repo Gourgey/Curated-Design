@@ -23,10 +23,10 @@ Output:
 ## Editing tips
 - Open `brochure.html` in a browser to preview all pages stacked.
 - Image crops: adjust `background-position` (and `background-size` where set) on the `.ph` element.
-- Add or remove a page by adding or deleting a `<div class="page" id="...">` block; the build picks up any number of pages. Keep an even total so the flipbook ends on a single back cover.
+- Add or remove a page by adding or deleting a `<div class="page" id="...">` block; the build picks up any number of pages. Keep an even total. The viewer shows one full page per turn on every screen size.
 - Palette: charcoal `#262320`, stone `#f3eee7`, bronze `#b08d57`.
 
 ## Pages
-1 Cover · 2 The residence · 3 Reception · 4 Living & dining · 5 Kitchen · 6 Principal bedroom · 7 Sitting room · 8 Principal bathroom · 9 Study & guest en suite · 10 Arrange a viewing
+1 Cover · 2 The residence · 3 Reception · 4 Living & dining · 5 Kitchen · 6 Principal bedroom · 7 Sitting room · 8 Principal bathroom · 9 Study & guest en suite · 10 The outlook · 11 The Park Crescent Club · 12 Arrange a viewing
 
 Note: `renders/07-kitchen-marquetry.png` is the alternative straw-marquetry kitchen option. To use it, change `07-kitchen-bronze.png` to `07-kitchen-marquetry.png` on page 5 and update the kitchen text.

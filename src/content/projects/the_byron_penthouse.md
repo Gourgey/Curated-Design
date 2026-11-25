@@ -13,9 +13,9 @@ metaDescription: "A refurbishment scheme and sales visualisations for an apartme
 statusLabel: Concept
 showInProjects: true
 cardImage: /assets/images/projects/apartment_5_98_portland_place/apartment_5_98_portland_place_01_living_dining_final.webp
-cardAlt: Open-plan living and dining area at The Byron Penthouse, 98 Portland Place, with warm polished plaster walls, light oak herringbone parquet, a round travertine dining table and a gold chandelier
+cardAlt: Open-plan living and dining area at The Byron Penthouse, 98 Portland Place, with warm plaster walls, light oak herringbone parquet, a round travertine dining table and a gold chandelier
 heroImage: /assets/images/projects/apartment_5_98_portland_place/apartment_5_98_portland_place_01_living_dining_final.webp
-heroAlt: Open-plan living and dining area at The Byron Penthouse, 98 Portland Place, with warm polished plaster walls, light oak herringbone parquet, a round travertine dining table and a gold chandelier
+heroAlt: Open-plan living and dining area at The Byron Penthouse, 98 Portland Place, with warm plaster walls, light oak herringbone parquet, a round travertine dining table and a gold chandelier
 heroImageType: Design visualisation
 projectTags:
   - Interior design scheme
@@ -24,7 +24,7 @@ projectTags:
 articleHeading: Overview
 lead: "The Byron Penthouse sits on Portland Place, moments from Regent's Park. Ahead of the apartment's return to the sales market, Curated Design developed a refurbishment scheme and a set of visualisations showing the home as it will be finished."
 body: |
-  Throughout the apartment, the grey wallpaper gives way to warm polished plaster and light oak herringbone parquet. The reception is arranged around a curved sofa beneath the pitched ceiling, and the dining area centres on a travertine table beneath the chandelier. In the kitchen, new hand-patinated bronze doors on the tall units keep the original mirrored glass, behind a waterfall marble island.
+  Throughout the apartment, the grey wallpaper gives way to warm plaster and light oak herringbone parquet. The reception is arranged around a curved sofa beneath the pitched ceiling, and the dining area centres on a travertine table beneath the chandelier. In the kitchen, new hand-patinated bronze doors on the tall units keep the original mirrored glass, behind a waterfall marble island.
 
   The principal bedroom gains an upholstered headboard wall and a new sitting room, created by enclosing the bedroom terrace beneath a skylight. In the principal bathroom, smoky taupe Venetian plaster and a taupe oak vanity replace the original light oak panelling, alongside white marble, a walk-in shower and a freestanding bath. The study landing's walls are traced with flowing gilded lines beneath a striking figurative artwork, and the guest en suite gains a walk-in shower in warm, large-format marble.
 
@@ -35,11 +35,10 @@ previewLink:
 extraSections:
   - heading: Material palette
     text: |
-      - Warm polished plaster
+      - Warm plaster
       - Oak herringbone parquet
       - Patinated bronze
       - Smoky taupe Venetian plaster
-      - Ink-wash wallcovering
       - Travertine
 facts:
   - label: Status

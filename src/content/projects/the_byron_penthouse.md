@@ -2,7 +2,7 @@
 tags: project
 permalink: false
 title: The Byron Penthouse, 98 Portland Place
-slug: apartment_5_98_portland_place
+slug: the_byron_penthouse
 status: published
 concept: true
 order: 3

@@ -27,6 +27,6 @@ Output:
 - Palette: charcoal `#262320`, stone `#f3eee7`, bronze `#b08d57`.
 
 ## Pages
-1 Cover (exterior) · 2 Living & dining (full-bleed) · 3 The residence · 4 Reception · 5 Living & dining · 6 Kitchen · 7 Principal bedroom · 8 Principal suite retreat · 9 Principal bathroom · 10 Study & guest en suite · 11 The outlook · 12 The Park Crescent Club · 13 Club: games room & gym
+1 Cover (exterior) · 2 Living & dining (full-bleed) · 3 The residence · 4 Reception · 5 Living & dining · 6 Kitchen · 7 Principal bedroom · 8 Principal suite retreat · 9 Principal bathroom · 10 Study & guest en suite · 11 The outlook · 12 Floor plan & EPC · 13 The Park Crescent Club · 14 Club: games room & gym
 
 Note: `renders/07-kitchen-marquetry.png` is the alternative straw-marquetry kitchen option. To use it, change `07-kitchen-bronze.png` to `07-kitchen-marquetry.png` on page 5 and update the kitchen text.
